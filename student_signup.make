@@ -1,5 +1,6 @@
-; Make file for videola profile.
+; Make file for student_signup profile.
 
+projects[drupal][type] = core
 core = 7.x
 api = 2
 
@@ -10,246 +11,149 @@ api = 2
 ;libraries[profiler][destination] = "libraries/profiler"
 
 ; Contrib Modules
-"projects[auto_nodetitle][subdir] = "contrib"
-projects[auto_nodetitle][version] = "7.x-1.0-alpha1"
+projects[auto_nodetitle][subdir] = "contrib"
+projects[auto_nodetitle][version] = "1.0-alpha1"
 
 projects[better_exposed_filters][subdir] = "contrib"
-projects[better_exposed_filters][version] = "7.x-1.x-dev"
+projects[better_exposed_filters][version] = "1.x-dev"
 
 projects[boxes][subdir] = "contrib"
-projects[boxes][version] = "7.x-1.0-beta2"
+projects[boxes][version] = "1.0-beta2"
 
 projects[cck][subdir] = "contrib"
-projects[cck][version] = "7.x-2.x-dev"
+projects[cck][version] = "2.x-dev"
 
 projects[cck_blocks][subdir] = "contrib"
-projects[cck_blocks][version] = "7.x-1.0"
+projects[cck_blocks][version] = "1.0"
 
 projects[cck_phone][subdir] = "contrib"
-projects[cck_phone][version] = "7.x-1.x-dev"
+projects[cck_phone][version] = "1.x-dev"
 
 projects[context][subdir] = "contrib"
-projects[context][version] = "7.x-3.0-beta1"
-
-projects[context_layouts][subdir] = "contrib"
-projects[context_layouts][version] = "7.x-3.0-beta1"
-
-projects[context_ui][subdir] = "contrib"
-projects[context_ui][version] = "7.x-3.0-beta1"
+projects[context][version] = "3.0-beta1"
 
 projects[ctools][subdir] = "contrib"
-projects[ctools][version] = "7.x-1.x-dev"
+projects[ctools][version] = "1.x-dev"
 
 projects[date][subdir] = "contrib"
-projects[date][version] = "7.x-2.0-alpha1"
-
-projects[date_api][subdir] = "contrib"
-projects[date_api][version] = "7.x-2.0-alpha1"
-
-projects[date_popup][subdir] = "contrib"
-projects[date_popup][version] = "7.x-2.0-alpha1"
-
-projects[date_tools][subdir] = "contrib"
-projects[date_tools][version] = "7.x-2.0-alpha1"
-
-projects[date_views][subdir] = "contrib"
-projects[date_views][version] = "7.x-2.0-alpha1"
-
-projects[devel][subdir] = "contrib"
-projects[devel][version] = "7.x-1.0"
-
-projects[devel_generate][subdir] = "contrib"
-projects[devel_generate][version] = "7.x-1.0"
+projects[date][version] = "2.0-alpha3"
 
 projects[email][subdir] = "contrib"
-projects[email][version] = "7.x-1.0-beta1"
+projects[email][version] = "1.0-beta1"
 
 projects[entity][subdir] = "contrib"
-projects[entity][version] = "7.x-1.0-beta9"
+projects[entity][version] = "1.0-beta9"
 
 projects[fancybox][subdir] = "contrib"
-projects[fancybox][version] = "7.x-1.x-dev"
+projects[fancybox][version] = "1.x-dev"
 
 projects[features][subdir] = "contrib"
-projects[features][version] = "7.x-1.0-beta3"
+projects[features][version] = "1.0-beta3"
 
 projects[feeds][subdir] = "contrib"
-projects[feeds][version] = "7.x-2.0-alpha3"
-
-projects[feeds_import][subdir] = "contrib"
-projects[feeds_import][version] = "7.x-2.0-alpha3"
-
-projects[feeds_ui][subdir] = "contrib"
-projects[feeds_ui][version] = "7.x-2.0-alpha3"
+projects[feeds][version] = "2.0-alpha3"
 
 projects[field_group][subdir] = "contrib"
-projects[field_group][version] = "7.x-1.0"
+projects[field_group][version] = "1.0"
 
 projects[flag][subdir] = "contrib"
-projects[flag][version] = "7.x-2.0-beta5"
-
-projects[flag_actions][subdir] = "contrib"
-projects[flag_actions][version] = "7.x-2.0-beta5"
+projects[flag][version] = "2.0-beta5"
 
 projects[gmap][subdir] = "contrib"
-projects[gmap][version] = "7.x-1.x-dev"
-
-projects[gmap_location][subdir] = "contrib"
-projects[gmap_location][version] = "7.x-1.x-dev"
-
-projects[gmap_macro_builder][subdir] = "contrib"
-projects[gmap_macro_builder][version] = "7.x-1.x-dev"
+projects[gmap][version] = "1.x-dev"
 
 projects[imce][subdir] = "contrib"
-projects[imce][version] = "7.x-1.4"
+projects[imce][version] = "1.4"
 
 projects[imce_wysiwyg][subdir] = "contrib"
-projects[imce_wysiwyg][version] = "7.x-1.x-dev"
+projects[imce_wysiwyg][version] = "1.x-dev"
 
 projects[insert][subdir] = "contrib"
-projects[insert][version] = "7.x-1.0"
+projects[insert][version] = "1.0"
 
 projects[job_scheduler][subdir] = "contrib"
-projects[job_scheduler][version] = "7.x-2.0-alpha2"
+projects[job_scheduler][version] = "2.0-alpha2"
 
 projects[link][subdir] = "contrib"
-projects[link][version] = "7.x-1.0-alpha3"
-
-projects[location][subdir] = "contrib"
-projects[location][version] = "7.x-3.x-dev"
-
-projects[location_cck][subdir] = "contrib"
-projects[location_cck][version] = "7.x-3.x-dev"
-
-projects[location_fax][subdir] = "contrib"
-projects[location_fax][version] = "7.x-3.x-dev"
-
-projects[location_generate][subdir] = "contrib"
-projects[location_generate][version] = "7.x-3.x-dev"
-
-projects[location_node][subdir] = "contrib"
-projects[location_node][version] = "7.x-3.x-dev"
-
-projects[location_phone][subdir] = "contrib"
-projects[location_phone][version] = "7.x-3.x-dev"
-
-projects[location_search][subdir] = "contrib"
-projects[location_search][version] = "7.x-3.x-dev"
+projects[link][version] = "1.0-alpha3"
 
 projects[messaging][subdir] = "contrib"
-projects[messaging][version] = "7.x-1.0-alpha1"
-
-projects[messaging_htmlmail][subdir] = "contrib"
-projects[messaging_htmlmail][version] = "7.x-1.0-alpha1"
-
-projects[messaging_mail][subdir] = "contrib"
-projects[messaging_mail][version] = "7.x-1.0-alpha1"
-
-projects[messaging_template][subdir] = "contrib"
-projects[messaging_template][version] = "7.x-1.0-alpha1"
+projects[messaging][version] = "1.0-alpha1"
 
 projects[nodeaccess_nodereference][subdir] = "contrib"
-projects[nodeaccess_nodereference][version] = "7.x-1.12"
+projects[nodeaccess_nodereference][version] = "1.12"
 
 projects[nodeaccess_userreference][subdir] = "contrib"
-projects[nodeaccess_userreference][version] = "7.x-3.2"
+projects[nodeaccess_userreference][version] = "3.2"
 
 projects[nodeformcols][subdir] = "contrib"
-projects[nodeformcols][version] = "7.x-1.x-dev"
+projects[nodeformcols][version] = "1.x-dev"
 
 projects[nodereference_count][subdir] = "contrib"
-projects[nodereference_count][version] = "7.x-1.x-dev"
+projects[nodereference_count][version] = "1.x-dev"
 
 projects[nodereference_url][subdir] = "contrib"
-projects[nodereference_url][version] = "7.x-1.11"
-
-projects[node_reference][subdir] = "contrib"
-projects[node_reference][version] = "7.x-2.x-dev"
+projects[nodereference_url][version] = "1.11"
 
 projects[notifications][subdir] = "contrib"
-projects[notifications][version] = "7.x-1.0-alpha1"
-
-projects[notifications_account][subdir] = "contrib"
-projects[notifications_account][version] = "7.x-1.0-alpha1"
-
-projects[notifications_content][subdir] = "contrib"
-projects[notifications_content][version] = "7.x-1.0-alpha1"
-
-projects[notifications_ui][subdir] = "contrib"
-projects[notifications_ui][version] = "7.x-1.0-alpha1"
-
-projects[page_manager][subdir] = "contrib"
-projects[page_manager][version] = "7.x-1.x-dev"
+projects[notifications][version] = "1.0-alpha1"
 
 projects[pathauto][subdir] = "contrib"
-projects[pathauto][version] = "7.x-1.0-beta1"
-
-projects[references][subdir] = "contrib"
-projects[references][version] = "7.x-2.x-dev"
-
-projects[s4][subdir] = "contrib"
-projects[s4][version] = ""
-
-projects[s4_core][subdir] = "contrib"
-projects[s4_core][version] = ""
-
-projects[s4_courses][subdir] = "contrib"
-projects[s4_courses][version] = "7.x-1.0"
-
-projects[s4_editor][subdir] = "contrib"
-projects[s4_editor][version] = "7.x-1.0"
-
-projects[s4_news][subdir] = "contrib"
-projects[s4_news][version] = "7.x-1.0"
-
-projects[s4_pages][subdir] = "contrib"
-projects[s4_pages][version] = "1.0"
-
-projects[s4_reporting][subdir] = "contrib"
-projects[s4_reporting][version] = "7.x-1.0"
-
-projects[s4_sites][subdir] = "contrib"
-projects[s4_sites][version] = "7.x-1.0"
-
-projects[s4_users][subdir] = "contrib"
-projects[s4_users][version] = "7.x-1.0"
+projects[pathauto][version] = "1.0-beta1"
 
 projects[save_draft][subdir] = "contrib"
-projects[save_draft][version] = "7.x-1.4"
+projects[save_draft][version] = "1.4"
 
 projects[strongarm][subdir] = "contrib"
-projects[strongarm][version] = "7.x-2.0-beta2"
+projects[strongarm][version] = "2.0-beta2"
 
 projects[token][subdir] = "contrib"
-projects[token][version] = ""
-
-projects[user_reference][subdir] = "contrib"
-projects[user_reference][version] = "7.x-2.x-dev"
+projects[token][version] = "1.0-beta2"
 
 projects[views][subdir] = "contrib"
-projects[views][version] = "7.x-3.x-dev"
+projects[views][version] = "3.x-dev"
 
 projects[views_bulk_operations][subdir] = "contrib"
-projects[views_bulk_operations][version] = "7.x-3.x-dev"
+projects[views_bulk_operations][version] = "3.x-dev"
 
 projects[views_calc][subdir] = "contrib"
-projects[views_calc][version] = "7.x-1.x-dev"
+projects[views_calc][version] = "1.x-dev"
 
 projects[views_data_export][subdir] = "contrib"
-projects[views_data_export][version] = "7.x-3.0-beta4"
-
-projects[views_savedsearches][subdir] = "contrib"
-projects[views_savedsearches][version] = "7.x-1.0-dev"
-
-projects[views_ui][subdir] = "contrib"
-projects[views_ui][version] = "7.x-3.x-dev"
+projects[views_data_export][version] = "3.0-beta4"
 
 projects[webform][subdir] = "contrib"
-projects[webform][version] = "7.x-3.11"
+projects[webform][version] = "3.11"
 
+;Modules still in development
+
+projects[location][type] = module
+projects[location][subdir] = "contrib"
+projects[location][version] = "3.x-dev"
+projects[location][download][type] = "git"
+projects[location][download][url] = "http://git.drupal.org/project/location.git"
+projects[location][download][branch] = "7.x-3.x"
+
+projects[references][type] = module
+projects[references][subdir] = "contrib"
+projects[references][version] = "2.x-dev"
+projects[references][download][type] = "git"
+projects[references][download][url] = "http://git.drupal.org/project/references.git"
+projects[references][download][branch] = "7.x-2.x"
+
+projects[views_savedsearches][type] = module
+projects[views_savedsearches][subdir] = "contrib"
+projects[views_savedsearches][version] = "7.x-dev"
+projects[views_savedsearches][download][type] = "git"
+projects[views_savedsearches][download][url] = "http://git.drupal.org/project/views_savedsearches.git"
+projects[views_savedsearches][download][branch] = "master"
+
+projects[wysiwyg][type] = module
 projects[wysiwyg][subdir] = "contrib"
-projects[wysiwyg][version] = "7.x-2.x-dev"
-
+projects[wysiwyg][version] = "2.x-dev"
+projects[wysiwyg][download][type] = "git"
+projects[wysiwyg][download][url] = "http://git.drupal.org/project/wysiwyg.git"
+projects[wysiwyg][download][branch] = "7.x-2.0"
 
 ; Libraries
 ; Download fancybox as a library
@@ -271,4 +175,7 @@ libraries[tinymce][destination] = "modules/contrib/gmap/thirdparty"
 
 ; Patches
 projects[cck_blocks][patch][] = "http://drupal.org/files/issues/cck_blocks_conten_view-833730-24.patch"
+
+projects[views_savedsearches][patch][] = "http://drupal.org/files/issues/views_savedsearches_d7_0.patch"
+
 projects[wysiwyg][patch][] = "http://drupal.org/files/issues/wysiwyg-entity-exportables-624018-176_1.patch"

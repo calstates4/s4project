@@ -9,7 +9,7 @@ core = 7.x
 projects[drupal][type] = core
 projects[drupal][version] = "7"
 
-; Add Commerce Kickstart to the full distribution build.
+; Add Student Signup to the full distribution build.
 projects[student_signup][type] = profile
 projects[student_signup][version] = 1.x-dev
 projects[student_signup][download][type] = git
