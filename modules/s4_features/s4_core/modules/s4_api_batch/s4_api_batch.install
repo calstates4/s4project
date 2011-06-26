@@ -1,66 +1,66 @@
 <?php
 
 function s4_api_batch_schema() {
-	$schema = array();
-	
-	$schema['s4_api_batch_terms'] = array(
-		'description' => 'Batch storage table for term information',
-		'fields' => array(
-			'term_title' => array('type' => 'varchar', 'length' => 255, 'default' => ''), 
-			'term_code'  => array('type' => 'varchar', 'length' => 255, 'default' => ''), 
-			'start_date' => array('type' => 'int', 'not null' => TRUE, 'default' => 0), 
-			'end_date'   => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
-		),	
-	);
-	
-	$schema['s4_api_batch_courses'] = array(
-		'description' => 'Batch storage table for course information',
-		'fields' => array(
-			'term' => array('type' => 'varchar', 'length' => 255, 'default' => ''), 
-			'subject'  => array('type' => 'varchar', 'length' => 255, 'default' => ''), 
-			'catalog_number' => array('type' => 'varchar', 'length' => 255, 'default' => ''), 
-			'section'   => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
-			'title' => array('type' => 'varchar', 'length' => 255, 'default' => ''), 
+  $schema = array();
+  
+  $schema['s4_api_batch_terms'] = array(
+    'description' => 'Batch storage table for term information',
+    'fields' => array(
+      'term_title' => array('type' => 'varchar', 'length' => 255, 'default' => ''), 
+      'term_code'  => array('type' => 'varchar', 'length' => 255, 'default' => ''), 
+      'start_date' => array('type' => 'int', 'not null' => TRUE, 'default' => 0), 
+      'end_date'   => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+    ),  
+  );
+  
+  $schema['s4_api_batch_courses'] = array(
+    'description' => 'Batch storage table for course information',
+    'fields' => array(
+      'term' => array('type' => 'varchar', 'length' => 255, 'default' => ''), 
+      'subject'  => array('type' => 'varchar', 'length' => 255, 'default' => ''), 
+      'catalog_number' => array('type' => 'varchar', 'length' => 255, 'default' => ''), 
+      'section'   => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'title' => array('type' => 'varchar', 'length' => 255, 'default' => ''), 
 
-		),	
-	);
-	
-	$schema['s4_api_batch_courses'] = array(
-		'description' => 'Batch storage table for course information',
-		'fields' => array(
-			'term' => array('type' => 'varchar', 'length' => 255, 'default' => ''), 
-			'subject'  => array('type' => 'varchar', 'length' => 255, 'default' => ''), 
-			'catalog_number' => array('type' => 'varchar', 'length' => 255, 'default' => ''), 
-			'section'   => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
-		),	
-	);
+    ),  
+  );
+  
+  $schema['s4_api_batch_courses'] = array(
+    'description' => 'Batch storage table for course information',
+    'fields' => array(
+      'term' => array('type' => 'varchar', 'length' => 255, 'default' => ''), 
+      'subject'  => array('type' => 'varchar', 'length' => 255, 'default' => ''), 
+      'catalog_number' => array('type' => 'varchar', 'length' => 255, 'default' => ''), 
+      'section'   => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+    ),  
+  );
 
-	$schema['s4_api_batch_users'] = array(
-		'description' => 'Batch storage table for user information',
-		'fields' => array(
-			'login_id' => array('type' => 'varchar', 'length' => 255, 'default' => ''), 
-			'user_id'  => array('type' => 'varchar', 'length' => 255, 'default' => ''), 
-			'email'    => array('type' => 'varchar', 'length' => 255, 'default' => ''), 
-			'first_name' => array('type' => 'varchar', 'length' => 255, 'default' => ''),
-			'last_name' => array('type' => 'varchar', 'length' => 255, 'default' => ''),
-			'restrictions' => array('type' => 'varchar', 'length' => 255, 'default' => ''),
-			'constant_registration' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
-			'data' => array('type' => 'blob', 'not null' => FALSE),
-		),	
-	);
-	
-	$schema['s4_api_batch_user_courses'] = array(
-		'description' => 'Relationships between users and courses',
-		'fields' => array(
-			'role' => array('type' => 'varchar', 'length' => 10, 'not null' => TRUE, ),
-			'term' => array('type' => 'varchar', 'length' => 255, 'not null' => TRUE, ), 
-			'user_id'  => array('type' => 'varchar', 'length' => 255, 'not null' => TRUE, ), 
-			'subject'  => array('type' => 'varchar', 'length' => 255, 'not null' => TRUE, ), 
-			'catalog_number' => array('type' => 'varchar', 'length' => 255, 'not null' => TRUE, ), 
-			'section'   => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
-			'status'   => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
-		),
-	);
-	
-	return $schema;
+  $schema['s4_api_batch_users'] = array(
+    'description' => 'Batch storage table for user information',
+    'fields' => array(
+      'login_id' => array('type' => 'varchar', 'length' => 255, 'default' => ''), 
+      'user_id'  => array('type' => 'varchar', 'length' => 255, 'default' => ''), 
+      'email'    => array('type' => 'varchar', 'length' => 255, 'default' => ''), 
+      'first_name' => array('type' => 'varchar', 'length' => 255, 'default' => ''),
+      'last_name' => array('type' => 'varchar', 'length' => 255, 'default' => ''),
+      'restrictions' => array('type' => 'varchar', 'length' => 255, 'default' => ''),
+      'constant_registration' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'data' => array('type' => 'blob', 'not null' => FALSE),
+    ),  
+  );
+  
+  $schema['s4_api_batch_user_courses'] = array(
+    'description' => 'Relationships between users and courses',
+    'fields' => array(
+      'role' => array('type' => 'varchar', 'length' => 10, 'not null' => TRUE, ),
+      'term' => array('type' => 'varchar', 'length' => 255, 'not null' => TRUE, ), 
+      'user_id'  => array('type' => 'varchar', 'length' => 255, 'not null' => TRUE, ), 
+      'subject'  => array('type' => 'varchar', 'length' => 255, 'not null' => TRUE, ), 
+      'catalog_number' => array('type' => 'varchar', 'length' => 255, 'not null' => TRUE, ), 
+      'section'   => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'status'   => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+    ),
+  );
+  
+  return $schema;
 }

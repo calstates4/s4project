@@ -1,15 +1,15 @@
 <?php
 
 /**
-*	Add more body classes for the toolbar
+*  Add more body classes for the toolbar
 */
 function s4_preprocess_html(&$vars) {
-	if(!$vars['page']['content_right']) {
-		$vars['classes_array'][] = 'no-content-sidebar';
-	}
-	if(!$vars['page']['content_top_right']) {
-		$vars['classes_array'][] = 'no-content-top-right';
-	}
+  if(!$vars['page']['content_right']) {
+    $vars['classes_array'][] = 'no-content-sidebar';
+  }
+  if(!$vars['page']['content_top_right']) {
+    $vars['classes_array'][] = 'no-content-top-right';
+  }
 }
 
 /**
@@ -23,23 +23,23 @@ function s4_process_html(&$variables) {
 }
 
 /**
-*	Override & remove the filter guidelines
+*  Override & remove the filter guidelines
 */
 function s4_filter_guidelines($variables) {
-	return '';
+  return '';
 }
 
 /**
-*	Override & remove the filter tips
+*  Override & remove the filter tips
 */
 function s4_filter_tips($variables) {
-	return '';
+  return '';
 }
 
 /**
-*	Override & remove the filter tips more info link
+*  Override & remove the filter tips more info link
 */
 function s4_filter_tips_more_info($variables) {
-	return '';
+  return '';
 }
 

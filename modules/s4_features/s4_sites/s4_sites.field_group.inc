@@ -99,7 +99,7 @@ function s4_sites_field_group_info() {
   $field_group->parent_name = 'group_site_tabs';
   $field_group->data = array(
     'label' => 'Student Instructions',
-    'weight' => '25',
+    'weight' => '23',
     'children' => array(
       0 => 'field_site_instructions_required',
       1 => 'field_site_instructions',

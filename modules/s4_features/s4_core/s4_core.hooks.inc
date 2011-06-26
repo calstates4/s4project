@@ -2,18 +2,18 @@
 
 
 function hook_s4_get_term($start_date, $end_date) {
-	return array(
-		array('term_title' => 'Fall 2010',
-			  'term_code'  => '2104',
-			  'start_date' => strtotime('2011-09-01'),
-			  'end_date'   => strtotime('2011-12-01'),
-		),
-		array('term_title' => 'Spring 2010',
-			  'term_code'  => '2102',
-			  'start_date' => strtotime('2011-02-01'),
-			  'end_date'   => strtotime('2011-06-01'),
-		),
-	);
+  return array(
+    array('term_title' => 'Fall 2010',
+        'term_code'  => '2104',
+        'start_date' => strtotime('2011-09-01'),
+        'end_date'   => strtotime('2011-12-01'),
+    ),
+    array('term_title' => 'Spring 2010',
+        'term_code'  => '2102',
+        'start_date' => strtotime('2011-02-01'),
+        'end_date'   => strtotime('2011-06-01'),
+    ),
+  );
 }
 
 /**
@@ -33,39 +33,39 @@ function hook_s4_get_term($start_date, $end_date) {
 *  title - The course title
 *  status - Boolean value - either 1 for "open or active" and 0 for "cancelled"
 *  faculty - A listing of all faculty assigned to the course:
-*			login_id - the authentication username used to login
-*			user_id - the unique ID used to look up other info in your sis
+*      login_id - the authentication username used to login
+*      user_id - the unique ID used to look up other info in your sis
 */
 function hook_s4_get_courses($term) {
-	return array(
-		array('subject' => 'SBS',
-			  'catalog_number' => '300',
-			  'section' => 3,
-			  'title' => 'Introduction to pedantism',
-			  'status' => 1,
-			  'faculty' => array(
-			  		array(
-			  			'login_id' => 'jose1000',
-			  			'user_id' => '000123472',
-			  			'email' => 'joseph@campus.edu',
-			  			'first_name' => 'Joseph',
-			  			'last_name' => 'Conrad',
-			  			'restrictions' => array(),
-			  			'constant_registration' => FALSE,
-			  		),
-			  ),
-			  'students' => array(
-			  		array(
-			  			'login_id' => 'student1234',
-			  			'user_id' => '000123472',
-			  			'email' => 'student@campus.edu',
-			  			'first_name' => 'Joey',
-			  			'last_name' => 'Student',
-			  			'restrictions' => array(),
-			  			'constant_registration' => FALSE,
-			  		),
-			  ),
-	);
+  return array(
+    array('subject' => 'SBS',
+        'catalog_number' => '300',
+        'section' => 3,
+        'title' => 'Introduction to pedantism',
+        'status' => 1,
+        'faculty' => array(
+            array(
+              'login_id' => 'jose1000',
+              'user_id' => '000123472',
+              'email' => 'joseph@campus.edu',
+              'first_name' => 'Joseph',
+              'last_name' => 'Conrad',
+              'restrictions' => array(),
+              'constant_registration' => FALSE,
+            ),
+        ),
+        'students' => array(
+            array(
+              'login_id' => 'student1234',
+              'user_id' => '000123472',
+              'email' => 'student@campus.edu',
+              'first_name' => 'Joey',
+              'last_name' => 'Student',
+              'restrictions' => array(),
+              'constant_registration' => FALSE,
+            ),
+        ),
+  );
 }
 
 /**
@@ -94,13 +94,13 @@ function hook_s4_get_courses($term) {
 *  want to include some logic saying "students who are teacher ed students can always register."  
 */
 function hook_s4_get_user($login_id) {
-	return array(
-		'login_id' => 'jose1000',
-		'user_id' => '000123472',
-		'email' => 'joseph@campus.edu',
-		'first_name' => 'Joseph',
-		'last_name' => 'Conrad',
-		'restrictions' => array(),
-		'constant_registration' => FALSE,
-	);
+  return array(
+    'login_id' => 'jose1000',
+    'user_id' => '000123472',
+    'email' => 'joseph@campus.edu',
+    'first_name' => 'Joseph',
+    'last_name' => 'Conrad',
+    'restrictions' => array(),
+    'constant_registration' => FALSE,
+  );
 }

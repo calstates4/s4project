@@ -51,7 +51,7 @@ class Notification_Document_Expires_Event extends Notifications_Event {
     $node = $this->get_node();
     if ($result = parent::trigger()) {
       watchdog('action', 'Triggered notifications for document expiration on %title..', 
-      	array('%title' => $node->title));
+        array('%title' => $node->title));
     }
     return $result;
   }

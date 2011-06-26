@@ -1,377 +1,377 @@
 <?php
 
 function s4_api_devel_menu() {
-	$items = array();
-	
-	$items['admin/config/s4/api-devel'] = array(
-		'title' => 'SIS API Development',
-		'description' => 'Test your SIS integration module.',
-		'page callback' => 'drupal_get_form',
-		'page arguments' => array('s4_api_devel_form'),
-		'access arguments' => array('administer site configuration'),
-	);
-	
-	return $items;
+  $items = array();
+  
+  $items['admin/config/s4/api-devel'] = array(
+    'title' => 'SIS API Development',
+    'description' => 'Test your SIS integration module.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('s4_api_devel_form'),
+    'access arguments' => array('administer site configuration'),
+  );
+  
+  return $items;
 }
 
 function s4_api_devel_form($form, $form_state) {
-	$defaults = cache_get('s4_api_devel_test_values');
-	$defaults = ($defaults === false)
-				? array()
-				: $defaults->data;
-	$form = array();
-	
-	$form['term'] = array(
-		'#type' => 'fieldset',
-		'#title' => 'Test term API calls',
-		'#collapsible' => TRUE,
-		'#collapsed' => TRUE,
-	);
-	
-	$form['term']['term_enable'] = array(
-		'#type' => 'checkbox',
-		'#title' => 'Test term API call',
-		'#default_value' => $defaults['term_enable'],
-	);
-	
-	$form['term']['term_module'] = array(
-		'#type' => 'select',
-		'#title' => 'Module',
-		'#options' => array(),
-		'#default_value' => $defaults['term_module'],
-	);
+  $defaults = cache_get('s4_api_devel_test_values');
+  $defaults = ($defaults === false)
+        ? array()
+        : $defaults->data;
+  $form = array();
+  
+  $form['term'] = array(
+    '#type' => 'fieldset',
+    '#title' => 'Test term API calls',
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  
+  $form['term']['term_enable'] = array(
+    '#type' => 'checkbox',
+    '#title' => 'Test term API call',
+    '#default_value' => $defaults['term_enable'],
+  );
+  
+  $form['term']['term_module'] = array(
+    '#type' => 'select',
+    '#title' => 'Module',
+    '#options' => array(),
+    '#default_value' => $defaults['term_module'],
+  );
 
-	$modules = module_implements('s4_get_term');
-	foreach($modules as $module) {
-		$form['term']['term_module']['#options'][$module] = $module;
-	}
-	
-	$form['term']['term_start_date'] = array( 
-		'#type' => 'textfield',
-		'#title' => 'Start date',
-		'#description' => 'In YYYY-MM-DD format',
-		'#default_value' => $defaults['term_start_date'],
-	);
+  $modules = module_implements('s4_get_term');
+  foreach($modules as $module) {
+    $form['term']['term_module']['#options'][$module] = $module;
+  }
+  
+  $form['term']['term_start_date'] = array( 
+    '#type' => 'textfield',
+    '#title' => 'Start date',
+    '#description' => 'In YYYY-MM-DD format',
+    '#default_value' => $defaults['term_start_date'],
+  );
 
-	$form['term']['term_end_date'] = array( 
-		'#type' => 'textfield',
-		'#title' => 'End date',
-		'#description' => 'In YYYY-MM-DD format',
-		'#default_value' => $defaults['term_end_date'],
-	);
-	
-	$form['course'] = array(
-		'#type' => 'fieldset',
-		'#title' => 'Test course API calls',
-		'#collapsible' => TRUE,
-		'#collapsed' => TRUE,
-	);
-	
-	$form['course']['course_enable'] = array(
-		'#type' => 'checkbox',
-		'#title' => 'Test course API call',
-		'#default_value' => $defaults['course_enable'],
-	);
-	
-	$form['course']['course_module'] = array(
-		'#type' => 'select',
-		'#title' => 'Module',
-		'#options' => array(),
-		'#default_value' => $defaults['course_module'],
-	);
+  $form['term']['term_end_date'] = array( 
+    '#type' => 'textfield',
+    '#title' => 'End date',
+    '#description' => 'In YYYY-MM-DD format',
+    '#default_value' => $defaults['term_end_date'],
+  );
+  
+  $form['course'] = array(
+    '#type' => 'fieldset',
+    '#title' => 'Test course API calls',
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  
+  $form['course']['course_enable'] = array(
+    '#type' => 'checkbox',
+    '#title' => 'Test course API call',
+    '#default_value' => $defaults['course_enable'],
+  );
+  
+  $form['course']['course_module'] = array(
+    '#type' => 'select',
+    '#title' => 'Module',
+    '#options' => array(),
+    '#default_value' => $defaults['course_module'],
+  );
 
-	$modules = module_implements('s4_get_courses');
-	foreach($modules as $module) {
-		$form['course']['course_module']['#options'][$module] = $module;
-	}
-	
-	$form['course']['course_term'] = array( 
-		'#type' => 'textfield',
-		'#title' => 'Term ID',
-		'#description' => 'The unique Term ID',
-		'#default_value' => $defaults['course_term'],
-	);
+  $modules = module_implements('s4_get_courses');
+  foreach($modules as $module) {
+    $form['course']['course_module']['#options'][$module] = $module;
+  }
+  
+  $form['course']['course_term'] = array( 
+    '#type' => 'textfield',
+    '#title' => 'Term ID',
+    '#description' => 'The unique Term ID',
+    '#default_value' => $defaults['course_term'],
+  );
 
-	$form['user'] = array(
-		'#type' => 'fieldset',
-		'#title' => 'Test user API calls',
-		'#collapsible' => TRUE,
-		'#collapsed' => TRUE,
-	);
-	
-	$form['user']['user_enable'] = array(
-		'#type' => 'checkbox',
-		'#title' => 'Test user API call',
-		'#default_value' => $defaults['user_enable'],
-	);
-	
-	$form['user']['user_module'] = array(
-		'#type' => 'select',
-		'#title' => 'Module',
-		'#options' => array(),
-		'#default_value' => $defaults['user_module'],
-	);
+  $form['user'] = array(
+    '#type' => 'fieldset',
+    '#title' => 'Test user API calls',
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  
+  $form['user']['user_enable'] = array(
+    '#type' => 'checkbox',
+    '#title' => 'Test user API call',
+    '#default_value' => $defaults['user_enable'],
+  );
+  
+  $form['user']['user_module'] = array(
+    '#type' => 'select',
+    '#title' => 'Module',
+    '#options' => array(),
+    '#default_value' => $defaults['user_module'],
+  );
 
-	$modules = module_implements('s4_get_user');
-	foreach($modules as $module) {
-		$form['user']['user_module']['#options'][$module] = $module;
-	}
-	
-	$form['user']['user_login_id'] = array( 
-		'#type' => 'textfield',
-		'#title' => 'Login ID',
-		'#description' => 'The user\'s authentication ID',
-		'#default_value' => $defaults['user_login_id'],
-	);
-	
-	$form['enrollment'] = array(
-		'#type' => 'fieldset',
-		'#title' => 'Test user enrollment API calls',
-		'#collapsible' => TRUE,
-		'#collapsed' => TRUE,
-	);
-	
-	$form['enrollment']['enrollment_enable'] = array(
-		'#type' => 'checkbox',
-		'#title' => 'Test user enrollment API call',
-		'#default_value' => $defaults['enrollment_enable'],
-	);
-	
-	$form['enrollment']['enrollment_module'] = array(
-		'#type' => 'select',
-		'#title' => 'Module',
-		'#options' => array(),
-		'#default_value' => $defaults['enrollment_module'],
-	);
+  $modules = module_implements('s4_get_user');
+  foreach($modules as $module) {
+    $form['user']['user_module']['#options'][$module] = $module;
+  }
+  
+  $form['user']['user_login_id'] = array( 
+    '#type' => 'textfield',
+    '#title' => 'Login ID',
+    '#description' => 'The user\'s authentication ID',
+    '#default_value' => $defaults['user_login_id'],
+  );
+  
+  $form['enrollment'] = array(
+    '#type' => 'fieldset',
+    '#title' => 'Test user enrollment API calls',
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  
+  $form['enrollment']['enrollment_enable'] = array(
+    '#type' => 'checkbox',
+    '#title' => 'Test user enrollment API call',
+    '#default_value' => $defaults['enrollment_enable'],
+  );
+  
+  $form['enrollment']['enrollment_module'] = array(
+    '#type' => 'select',
+    '#title' => 'Module',
+    '#options' => array(),
+    '#default_value' => $defaults['enrollment_module'],
+  );
 
-	$modules = module_implements('s4_get_user_enrollment');
-	foreach($modules as $module) {
-		$form['enrollment']['enrollment_module']['#options'][$module] = $module;
-	}
-	
-	$form['enrollment']['enrollment_user_id'] = array( 
-		'#type' => 'textfield',
-		'#title' => 'User ID',
-		'#description' => 'The user\'s unique ID',
-		'#default_value' => $defaults['enrollment_user_id'],
-	);
-	
-	$form['enrollment']['enrollment_term_code'] = array( 
-		'#type' => 'textfield',
-		'#title' => 'Term code',
-		'#description' => 'The term code',
-		'#default_value' => $defaults['enrollment_term_code'],
-	);
-	
-		$form['faculty_course'] = array(
-		'#type' => 'fieldset',
-		'#title' => 'Test faculty course API calls',
-		'#collapsible' => TRUE,
-		'#collapsed' => TRUE,
-	);
-	
-	$form['faculty_course']['faculty_course_enable'] = array(
-		'#type' => 'checkbox',
-		'#title' => 'Test faculty course API call',
-		'#default_value' => $defaults['faculty_course_enable'],
-	);
-	
-	$form['faculty_course']['faculty_course_module'] = array(
-		'#type' => 'select',
-		'#title' => 'Module',
-		'#options' => array(),
-		'#default_value' => $defaults['faculty_course_module'],
-	);
+  $modules = module_implements('s4_get_user_enrollment');
+  foreach($modules as $module) {
+    $form['enrollment']['enrollment_module']['#options'][$module] = $module;
+  }
+  
+  $form['enrollment']['enrollment_user_id'] = array( 
+    '#type' => 'textfield',
+    '#title' => 'User ID',
+    '#description' => 'The user\'s unique ID',
+    '#default_value' => $defaults['enrollment_user_id'],
+  );
+  
+  $form['enrollment']['enrollment_term_code'] = array( 
+    '#type' => 'textfield',
+    '#title' => 'Term code',
+    '#description' => 'The term code',
+    '#default_value' => $defaults['enrollment_term_code'],
+  );
+  
+    $form['faculty_course'] = array(
+    '#type' => 'fieldset',
+    '#title' => 'Test faculty course API calls',
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  
+  $form['faculty_course']['faculty_course_enable'] = array(
+    '#type' => 'checkbox',
+    '#title' => 'Test faculty course API call',
+    '#default_value' => $defaults['faculty_course_enable'],
+  );
+  
+  $form['faculty_course']['faculty_course_module'] = array(
+    '#type' => 'select',
+    '#title' => 'Module',
+    '#options' => array(),
+    '#default_value' => $defaults['faculty_course_module'],
+  );
 
-	$modules = module_implements('s4_get_faculty_courses');
-	foreach($modules as $module) {
-		$form['faculty_course']['faculty_course_module']['#options'][$module] = $module;
-	}
-	
-	$form['faculty_course']['faculty_course_user_id'] = array( 
-		'#type' => 'textfield',
-		'#title' => 'User ID',
-		'#description' => 'The user\'s unique ID',
-		'#default_value' => $defaults['faculty_course_user_id'],
-	);
-	
-	$form['faculty_course']['faculty_course_term_code'] = array( 
-		'#type' => 'textfield',
-		'#title' => 'Term code',
-		'#description' => 'The term code',
-		'#default_value' => $defaults['faculty_course_term_code'],
-	);
+  $modules = module_implements('s4_get_faculty_courses');
+  foreach($modules as $module) {
+    $form['faculty_course']['faculty_course_module']['#options'][$module] = $module;
+  }
+  
+  $form['faculty_course']['faculty_course_user_id'] = array( 
+    '#type' => 'textfield',
+    '#title' => 'User ID',
+    '#description' => 'The user\'s unique ID',
+    '#default_value' => $defaults['faculty_course_user_id'],
+  );
+  
+  $form['faculty_course']['faculty_course_term_code'] = array( 
+    '#type' => 'textfield',
+    '#title' => 'Term code',
+    '#description' => 'The term code',
+    '#default_value' => $defaults['faculty_course_term_code'],
+  );
 
-	
-	$form['submit'] = array(
-		'#type' => 'submit',
-		'#value' => 'Start test',
-	);
-	
-	if($_SESSION['batch_results']) {
-		drupal_add_css(drupal_get_path('module', 's4_api_devel') .'/css/s4_api_devel.css');
-		$markup = '';
-		foreach($_SESSION['batch_results'] as $test_name => $test) {
-			$markup .= t('<h3 class="@pass">@title (@pass)</h3>', array('@title' => $test_name,
-														  '@pass' => ($test['success'])
-														  			 ? 'pass'
-														  			 : 'fail'));
-			if(is_array($test['values'])) {
-				foreach($test['values'] as $key => $row) {
-					foreach($row as $column => $row_values) {
-						if(is_array($row_values)) {
-							$test['values'][$key][$column] = _s4_api_devel_create_tree($row_values);
-						}
-					}
-				}
-				$markup .= theme('table', array('header' => array_keys($test['values'][0]), 'rows' => $test['values']));
-			}
-		}
-		$form['markup']['#markup'] = $markup;
-	}
-	
-	return $form;
+  
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => 'Start test',
+  );
+  
+  if($_SESSION['batch_results']) {
+    drupal_add_css(drupal_get_path('module', 's4_api_devel') .'/css/s4_api_devel.css');
+    $markup = '';
+    foreach($_SESSION['batch_results'] as $test_name => $test) {
+      $markup .= t('<h3 class="@pass">@title (@pass)</h3>', array('@title' => $test_name,
+                              '@pass' => ($test['success'])
+                                     ? 'pass'
+                                     : 'fail'));
+      if(is_array($test['values'])) {
+        foreach($test['values'] as $key => $row) {
+          foreach($row as $column => $row_values) {
+            if(is_array($row_values)) {
+              $test['values'][$key][$column] = _s4_api_devel_create_tree($row_values);
+            }
+          }
+        }
+        $markup .= theme('table', array('header' => array_keys($test['values'][0]), 'rows' => $test['values']));
+      }
+    }
+    $form['markup']['#markup'] = $markup;
+  }
+  
+  return $form;
 }
 
 /**
-*	For some results that are sub-arrays, it's best
-*	to format them as an unordered list to appear
-*	under a single table cell. This function prepares
-*	a UL based on arracy contents.
+*  For some results that are sub-arrays, it's best
+*  to format them as an unordered list to appear
+*  under a single table cell. This function prepares
+*  a UL based on arracy contents.
 */
 function _s4_api_devel_create_tree($list) {
-	$items = array();
-	foreach($list as $key => $value) {
-		if(is_array($value)) {
-			$items[] = _s4_api_devel_create_tree($value);
-		}
-		else {
-			$items[] = '<strong>'. $key .': </strong>'. $value;
-		}
-	}
-	
-	return theme('item_list', array('items' => $items));
+  $items = array();
+  foreach($list as $key => $value) {
+    if(is_array($value)) {
+      $items[] = _s4_api_devel_create_tree($value);
+    }
+    else {
+      $items[] = '<strong>'. $key .': </strong>'. $value;
+    }
+  }
+  
+  return theme('item_list', array('items' => $items));
 }
 
 /**
-*	Basic form validation
+*  Basic form validation
 */
 function s4_api_devel_form_validate($form, $form_state) {
-	if($form_state['values']['term_enable']) {
-		foreach(array('term_start_date', 'term_end_date') as $field) {
-			if(trim($form_state['values'][$field]) == '' ||
-			   !strtotime($form_state['values'][$field])) {
-			   form_set_error($field, 'Not a valid date');
-			}
-		}
-		if(strtotime($form_state['values']['term_end_date']) <= strtotime($form_state['values']['term_start_date'])) {
-			form_set_error('term_start_date', 'The start date must be later than the end date');
-		}
-	}
+  if($form_state['values']['term_enable']) {
+    foreach(array('term_start_date', 'term_end_date') as $field) {
+      if(trim($form_state['values'][$field]) == '' ||
+         !strtotime($form_state['values'][$field])) {
+         form_set_error($field, 'Not a valid date');
+      }
+    }
+    if(strtotime($form_state['values']['term_end_date']) <= strtotime($form_state['values']['term_start_date'])) {
+      form_set_error('term_start_date', 'The start date must be later than the end date');
+    }
+  }
 }
 
 /**
-*	Setup batch api to run integration tests
+*  Setup batch api to run integration tests
 */
 function s4_api_devel_form_submit($form, $form_state) {
-	cache_set('s4_api_devel_test_values', $form_state['values'], 'cache', CACHE_PERMANENT);
-	$batch = array(
-		'operations' => array(
-			array('_s4_api_devel_batch_init_hooks', array($form_state['values'])),
-		),
-		'finished' => '_s4_api_devel_batch_finished',
-		'title' => t('Running integration tester'),
-		'init_message' => t('Test starting'),
-		'progress_message' => t('Processed @current out of @total.'),
-		'error_message' => t('Development tester has encountered an error.'),
-	);
-	batch_set($batch);
+  cache_set('s4_api_devel_test_values', $form_state['values'], 'cache', CACHE_PERMANENT);
+  $batch = array(
+    'operations' => array(
+      array('_s4_api_devel_batch_init_hooks', array($form_state['values'])),
+    ),
+    'finished' => '_s4_api_devel_batch_finished',
+    'title' => t('Running integration tester'),
+    'init_message' => t('Test starting'),
+    'progress_message' => t('Processed @current out of @total.'),
+    'error_message' => t('Development tester has encountered an error.'),
+  );
+  batch_set($batch);
 }
 
 /**
-*	Goes through all hooks for S4 integration and runs them.
-*	All results get stored in the context variable and then returned to the
-*	results argument in the "finished" function.
+*  Goes through all hooks for S4 integration and runs them.
+*  All results get stored in the context variable and then returned to the
+*  results argument in the "finished" function.
 */
 function _s4_api_devel_batch_init_hooks($input, &$context) {
-	module_load_include('inc', 's4_core', 's4_core.api');
-	if(!isset($context['sandbox']['hooks'])) {
-		if($input['term_enable']) {
-			$context['sandbox']['hooks']['term'] = array(
-				'type' => 'term',
-				'hook' => 's4_get_term',
-				'module' => $input['term_module'],
-				'params' => array('start_date' => $input['term_start_date'],
-								  'end_date'   => $input['term_end_date']),
-			);
-		}
-		if($input['course_enable']) {
-			$context['sandbox']['hooks']['course'] = array(
-				'type' => 'course',
-				'hook' => 's4_get_courses',
-				'module' => $input['course_module'],
-				'params' => array('term' =>  $input['course_term']),
-			);
-		}
-		if($input['user_enable']) {
-			$context['sandbox']['hooks']['user'] = array(
-				'type' => 'user',
-				'hook' => 's4_get_user',
-				'module' => $input['user_module'],
-				'params' => array('login_id' =>  $input['user_login_id']),
-			);
-		}
-		if($input['enrollment_enable']) {
-			$context['sandbox']['hooks']['enrollment'] = array(
-				'type' => 'enrollment',
-				'hook' => 's4_get_user_enrollment',
-				'module' => $input['enrollment_module'],
-				'params' => array('login_id' =>  $input['enrollment_user_id'],
-								  'term' => $input['enrollment_term_code']),
-			);
-		}
-		if($input['faculty_course_enable']) {
-			$context['sandbox']['hooks']['faculty'] = array(
-				'type' => 'faculty',
-				'hook' => 's4_get_faculty_courses',
-				'module' => $input['faculty_course_module'],
-				'params' => array('login_id' =>  $input['faculty_course_user_id'],
-								  'term' => $input['faculty_course_term_code']),
-			);
-		}
+  module_load_include('inc', 's4_core', 's4_core.api');
+  if(!isset($context['sandbox']['hooks'])) {
+    if($input['term_enable']) {
+      $context['sandbox']['hooks']['term'] = array(
+        'type' => 'term',
+        'hook' => 's4_get_term',
+        'module' => $input['term_module'],
+        'params' => array('start_date' => $input['term_start_date'],
+                  'end_date'   => $input['term_end_date']),
+      );
+    }
+    if($input['course_enable']) {
+      $context['sandbox']['hooks']['course'] = array(
+        'type' => 'course',
+        'hook' => 's4_get_courses',
+        'module' => $input['course_module'],
+        'params' => array('term' =>  $input['course_term']),
+      );
+    }
+    if($input['user_enable']) {
+      $context['sandbox']['hooks']['user'] = array(
+        'type' => 'user',
+        'hook' => 's4_get_user',
+        'module' => $input['user_module'],
+        'params' => array('login_id' =>  $input['user_login_id']),
+      );
+    }
+    if($input['enrollment_enable']) {
+      $context['sandbox']['hooks']['enrollment'] = array(
+        'type' => 'enrollment',
+        'hook' => 's4_get_user_enrollment',
+        'module' => $input['enrollment_module'],
+        'params' => array('login_id' =>  $input['enrollment_user_id'],
+                  'term' => $input['enrollment_term_code']),
+      );
+    }
+    if($input['faculty_course_enable']) {
+      $context['sandbox']['hooks']['faculty'] = array(
+        'type' => 'faculty',
+        'hook' => 's4_get_faculty_courses',
+        'module' => $input['faculty_course_module'],
+        'params' => array('login_id' =>  $input['faculty_course_user_id'],
+                  'term' => $input['faculty_course_term_code']),
+      );
+    }
 
-		$context['sandbox']['requests'] = count($context['sandbox']['hooks']);
-	}
-	$test = array_shift($context['sandbox']['hooks']);
-	$args = array_merge(array($test['module'], $test['hook']), $test['params']);
-	$context['results']['values'][$test['type']] = call_user_func_array('module_invoke', $args);
-	$context['results']['check'][$test['type']] = 
-					call_user_func('_s4_core_check_'. $test['hook'],
-								   $context['results']['values'][$test['type']],
-								   true);
-	$context['message'] = t('Finished processing @type', array('@type' => $test['type']));
-	$context['finished'] = (count($context['sandbox']['hooks']) == 0)
-							? 1
-							: count($context['sandbox']['hooks']) / $context['sandbox']['requests'];
+    $context['sandbox']['requests'] = count($context['sandbox']['hooks']);
+  }
+  $test = array_shift($context['sandbox']['hooks']);
+  $args = array_merge(array($test['module'], $test['hook']), $test['params']);
+  $context['results']['values'][$test['type']] = call_user_func_array('module_invoke', $args);
+  $context['results']['check'][$test['type']] = 
+          call_user_func('_s4_core_check_'. $test['hook'],
+                   $context['results']['values'][$test['type']],
+                   true);
+  $context['message'] = t('Finished processing @type', array('@type' => $test['type']));
+  $context['finished'] = (count($context['sandbox']['hooks']) == 0)
+              ? 1
+              : count($context['sandbox']['hooks']) / $context['sandbox']['requests'];
 }
 
 /**
-*	Finished callback. Render out result tables.
+*  Finished callback. Render out result tables.
 */
 function _s4_api_devel_batch_finished($success, $results, $operations) {
-	$session_result = array();
-	foreach($results['values'] as $type => $result) {
-		if($type == 'user') {
-			$result = array($result);
-		}
-		if(is_array($result)) {
-			$first_results = array_chunk($result, 10);
-			$session_results[$type] = array('values' => $first_results[0],
-											'success' => $results['check'][$type]);
-		}
-		else {
-			$session_results[$type]['success'] = false;
-		}
-	}
-	$_SESSION['batch_results'] = $session_results;
+  $session_result = array();
+  foreach($results['values'] as $type => $result) {
+    if($type == 'user') {
+      $result = array($result);
+    }
+    if(is_array($result)) {
+      $first_results = array_chunk($result, 10);
+      $session_results[$type] = array('values' => $first_results[0],
+                      'success' => $results['check'][$type]);
+    }
+    else {
+      $session_results[$type]['success'] = false;
+    }
+  }
+  $_SESSION['batch_results'] = $session_results;
 }

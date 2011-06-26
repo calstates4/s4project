@@ -125,6 +125,9 @@ projects[views_data_export][version] = "3.0-beta4"
 projects[webform][subdir] = "contrib"
 projects[webform][version] = "3.11"
 
+projects[wysiwyg][subdir] = "contrib"
+projects[wysiwyg][version] = "2.1"
+
 ;Modules still in development
 
 projects[location][type] = module
@@ -147,13 +150,6 @@ projects[views_savedsearches][version] = "7.x-dev"
 projects[views_savedsearches][download][type] = "git"
 projects[views_savedsearches][download][url] = "http://git.drupal.org/project/views_savedsearches.git"
 projects[views_savedsearches][download][branch] = "master"
-
-projects[wysiwyg][type] = module
-projects[wysiwyg][subdir] = "contrib"
-projects[wysiwyg][version] = "2.x-dev"
-projects[wysiwyg][download][type] = "git"
-projects[wysiwyg][download][url] = "http://git.drupal.org/project/wysiwyg.git"
-projects[wysiwyg][download][branch] = "7.x-2.0"
 
 ; Libraries
 ; Download fancybox as a library

@@ -1,241 +1,241 @@
 <?php
 
 function s4_api_batch_menu() {
-	$items = array();
-	
-	$items['admin/config/s4/batch-api'] = array(
-		'title' => 'Batch Files',
-		'description' => 'Configure batch file integration with your Student Information System.',
-		'page callback' => 'drupal_get_form',
-		'page arguments' => array('s4_api_batch_admin_form'),
-		'access arguments' => array('administer site configuration'),
-		'weight' => 4
-	);
-	
-	return $items;
+  $items = array();
+  
+  $items['admin/config/s4/batch-api'] = array(
+    'title' => 'Batch Files',
+    'description' => 'Configure batch file integration with your Student Information System.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('s4_api_batch_admin_form'),
+    'access arguments' => array('administer site configuration'),
+    'weight' => 4
+  );
+  
+  return $items;
 }
 
 function s4_api_batch_admin_form() {
-	$form = array();
-	
-	$form['s4_api_batch_location'] = array(
-		'#type' => 'textfield',
-		'#title' => 'Batch file location',
-		'#description' => 'The absolute path to where all batch files will be stored. Make sure that your web server has read-only access to these files.',
-		'#default_value' => variable_get('s4_api_batch_location', ''),
-	);
-	
-	return system_settings_form($form);
+  $form = array();
+  
+  $form['s4_api_batch_location'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Batch file location',
+    '#description' => 'The absolute path to where all batch files will be stored. Make sure that your web server has read-only access to these files.',
+    '#default_value' => variable_get('s4_api_batch_location', ''),
+  );
+  
+  return system_settings_form($form);
 }
 
 function s4_api_batch_admin_form_validate($form, &$form_state) {
-	if(!@opendir($form_state['values']['s4_api_batch_location'])) {
-		form_set_error('s4_api_batch_location', 'Could not read that directory');
-	}
+  if(!@opendir($form_state['values']['s4_api_batch_location'])) {
+    form_set_error('s4_api_batch_location', 'Could not read that directory');
+  }
 }
 
 function s4_api_batch_get_batch($file) {
-	$times = variable_get('s4_api_batch_update_times', array());
-	$file_path = rtrim(variable_get('s4_api_batch_location', '/')) .'/'. $file;
-	if(!file_exists($file_path) || $times[$file] >= filemtime($file_path)) {
-		return false;
-	}
-	$file_handle = fopen($file_path, 'r');
-	$headers = fgetcsv($file_handle);
-	$results = array();
-	while(($row = fgetcsv($file_handle)) !== FALSE) {
-		if(count($headers) == count($row)) {
-			$results[] = array_combine($headers, $row);
-		}
-	}
-	$times[$file] = time();
-	variable_set('s4_api_batch_update_times', $times);
-	return $results;
+  $times = variable_get('s4_api_batch_update_times', array());
+  $file_path = rtrim(variable_get('s4_api_batch_location', '/')) .'/'. $file;
+  if(!file_exists($file_path) || $times[$file] >= filemtime($file_path)) {
+    return false;
+  }
+  $file_handle = fopen($file_path, 'r');
+  $headers = fgetcsv($file_handle);
+  $results = array();
+  while(($row = fgetcsv($file_handle)) !== FALSE) {
+    if(count($headers) == count($row)) {
+      $results[] = array_combine($headers, $row);
+    }
+  }
+  $times[$file] = time();
+  variable_set('s4_api_batch_update_times', $times);
+  return $results;
 }
 
 function s4_api_batch_cron() {
-	$terms = s4_api_batch_get_batch('terms.txt');
-	if($terms) {
-		foreach($terms as $term) {
-			db_delete('s4_api_batch_terms')
-				->condition('term_code', $term['term_code'])
-				->execute();
-			db_insert('s4_api_batch_terms')
-				->fields(array(
-							'term_title' => $term['term_title'],
-							'term_code'  => $term['term_code'],
-							'start_date' => strtotime($term['start_date']),
-							'end_date'   => strtotime($term['end_date'])
-				))
-				->execute();
-		
-		}
-		return null;
-	}
-	$users = s4_api_batch_get_batch('users.txt');
-	if($users) {
-		foreach($users as $user) {
-			db_delete('s4_api_batch_users')
-				->condition('user_id', $user['user_id'])
-				->execute();
-			db_insert('s4_api_batch_users')
-				->fields(array(
-							'login_id' => $user['login_id'],
-							'user_id'  => $user['user_id'],
-							'email'    => $user['email'],
-							'first_name' => $user['first_name'],
-							'last_name'  => $user['last_name'],
-							'restrictions' => $user['restrictions'],
-							'constant_registration' => $user['constant_registration'],
-							'data' => serialize($user),
-				))
-				->execute();
-		}
-		return null;
-	}
-	$courses = s4_api_batch_get_batch('courses.txt');
-	if($courses) {
-		foreach($courses as $course) {
-			db_delete('s4_api_batch_courses')
-				->condition('term', $course['term'])
-				->condition('subject', $course['subject'])
-				->condition('catalog_number', $course['catalog_number'])
-				->condition('section', $course['section'])
-				->execute();
-			db_insert('s4_api_batch_courses')
-				->fields(array(
-							'term' => $course['term'],
-							'subject' => $course['subject'],
-							'catalog_number' => $course['catalog_number'],
-							'section' => $course['section'],
-							'title' => $course['title'],
-				))
-				->execute();
-		}
-		return null;
-	}
-	if(_s4_api_batch_cron_update_user_courses('enrollment.txt', 'students')) {
-		return null;
-	}
-	if(_s4_api_batch_cron_update_user_courses('faculty.txt', 'faculty')) {
-		return null;
-	}
+  $terms = s4_api_batch_get_batch('terms.txt');
+  if($terms) {
+    foreach($terms as $term) {
+      db_delete('s4_api_batch_terms')
+        ->condition('term_code', $term['term_code'])
+        ->execute();
+      db_insert('s4_api_batch_terms')
+        ->fields(array(
+              'term_title' => $term['term_title'],
+              'term_code'  => $term['term_code'],
+              'start_date' => strtotime($term['start_date']),
+              'end_date'   => strtotime($term['end_date'])
+        ))
+        ->execute();
+    
+    }
+    return null;
+  }
+  $users = s4_api_batch_get_batch('users.txt');
+  if($users) {
+    foreach($users as $user) {
+      db_delete('s4_api_batch_users')
+        ->condition('user_id', $user['user_id'])
+        ->execute();
+      db_insert('s4_api_batch_users')
+        ->fields(array(
+              'login_id' => $user['login_id'],
+              'user_id'  => $user['user_id'],
+              'email'    => $user['email'],
+              'first_name' => $user['first_name'],
+              'last_name'  => $user['last_name'],
+              'restrictions' => $user['restrictions'],
+              'constant_registration' => $user['constant_registration'],
+              'data' => serialize($user),
+        ))
+        ->execute();
+    }
+    return null;
+  }
+  $courses = s4_api_batch_get_batch('courses.txt');
+  if($courses) {
+    foreach($courses as $course) {
+      db_delete('s4_api_batch_courses')
+        ->condition('term', $course['term'])
+        ->condition('subject', $course['subject'])
+        ->condition('catalog_number', $course['catalog_number'])
+        ->condition('section', $course['section'])
+        ->execute();
+      db_insert('s4_api_batch_courses')
+        ->fields(array(
+              'term' => $course['term'],
+              'subject' => $course['subject'],
+              'catalog_number' => $course['catalog_number'],
+              'section' => $course['section'],
+              'title' => $course['title'],
+        ))
+        ->execute();
+    }
+    return null;
+  }
+  if(_s4_api_batch_cron_update_user_courses('enrollment.txt', 'students')) {
+    return null;
+  }
+  if(_s4_api_batch_cron_update_user_courses('faculty.txt', 'faculty')) {
+    return null;
+  }
 }
 
 function _s4_api_batch_cron_update_user_courses($file, $role) {
-	$users = s4_api_batch_get_batch($file);
-	if(!$users) {
-		return false;
-	}
-	foreach($users as $user) {
-		db_delete('s4_api_batch_user_courses')
-			->condition('role', $role)
-			->condition('term', $user['term'])
-			->condition('user_id', $user['user_id'])
-			->condition('subject', $user['subject'])
-			->condition('catalog_number', $user['catalog_number'])
-			->condition('section', $user['section'])
-			->execute();
-		db_insert('s4_api_batch_user_courses')
-			->fields(array(
-						'role' => $role,
-						'user_id' => $user['user_id'],
-						'term' => $user['term'],
-						'subject' => $user['subject'],
-						'catalog_number' => $user['catalog_number'],
-						'section' => $user['section'],
-			))
-			->execute();
-	}
-	return true;
+  $users = s4_api_batch_get_batch($file);
+  if(!$users) {
+    return false;
+  }
+  foreach($users as $user) {
+    db_delete('s4_api_batch_user_courses')
+      ->condition('role', $role)
+      ->condition('term', $user['term'])
+      ->condition('user_id', $user['user_id'])
+      ->condition('subject', $user['subject'])
+      ->condition('catalog_number', $user['catalog_number'])
+      ->condition('section', $user['section'])
+      ->execute();
+    db_insert('s4_api_batch_user_courses')
+      ->fields(array(
+            'role' => $role,
+            'user_id' => $user['user_id'],
+            'term' => $user['term'],
+            'subject' => $user['subject'],
+            'catalog_number' => $user['catalog_number'],
+            'section' => $user['section'],
+      ))
+      ->execute();
+  }
+  return true;
 }
 
 function s4_api_batch_s4_get_term($start_date, $end_date) {
-	$terms = db_query('SELECT term_title, term_code, start_date, end_date
-					   FROM {s4_api_batch_terms} WHERE start_date >= :start_date
-					   AND end_date <= :end_date',
-					   array(':start_date' => strtotime($start_date),
-					   		 ':end_date'   => strtotime($end_date)));
-	$result = array();
-	while($term = $terms->fetchAssoc()) {
-		$term['start_date'] = date('Y-m-d', $term['start_date']);
-		$term['end_date'] = date('Y-m-d', $term['end_date']);
-		$result[] = $term;
-	}
-	return $result;
+  $terms = db_query('SELECT term_title, term_code, start_date, end_date
+             FROM {s4_api_batch_terms} WHERE start_date >= :start_date
+             AND end_date <= :end_date',
+             array(':start_date' => strtotime($start_date),
+                  ':end_date'   => strtotime($end_date)));
+  $result = array();
+  while($term = $terms->fetchAssoc()) {
+    $term['start_date'] = date('Y-m-d', $term['start_date']);
+    $term['end_date'] = date('Y-m-d', $term['end_date']);
+    $result[] = $term;
+  }
+  return $result;
 }
 
 function s4_api_batch_s4_get_courses($term) {
-	$courses = db_query('SELECT term, subject, catalog_number, section, status, title FROM
-					   {s4_api_batch_courses} WHERE term = :term',
-					   array(':term' => $term));
-	$result = array();
-	while($course = $courses->fetchAssoc()) {
-		$course['restrictions'] = ($course['restrictions'])
-								  ? explode(',', $course['restrictions'])
-								  : array();
-		$user_courses = array('students' => array(),
-							  'faculty' => array());
-		$users = db_query('SELECT c.role, u.login_id, u.user_id, u.email, u.first_name, 
-					   u.last_name, u.restrictions, u.constant_registration, 
-					   data FROM {s4_api_batch_users} u 
-					   LEFT JOIN {s4_api_batch_user_courses} c ON c.user_id = u.user_id
-					   WHERE c.term = :term 
-					   AND c.subject = :subject AND c.catalog_number = :catalog_number 
-					   AND c.section = :section',
-					   array(
-					   	':term' 		  => $course['term'],
-					   	':subject' 		  => $course['subject'],
-					   	':catalog_number' => $course['catalog_number'],
-					   	':section' 		  => $course['section'],
-					   ));
-		while($user = $users->fetchAssoc()) {
-			unset($user['data']);
-			$user['restrictions'] = ($user['restrictions'])
-									? explode(',', $user['restrictions'])
-									: array();
-			$user_courses[$user['role']][] = $user;
-		}
-		$result[] = array_merge($course, $user_courses);
-	}
-	return $result;
+  $courses = db_query('SELECT term, subject, catalog_number, section, status, title FROM
+             {s4_api_batch_courses} WHERE term = :term',
+             array(':term' => $term));
+  $result = array();
+  while($course = $courses->fetchAssoc()) {
+    $course['restrictions'] = ($course['restrictions'])
+                  ? explode(',', $course['restrictions'])
+                  : array();
+    $user_courses = array('students' => array(),
+                'faculty' => array());
+    $users = db_query('SELECT c.role, u.login_id, u.user_id, u.email, u.first_name, 
+             u.last_name, u.restrictions, u.constant_registration, 
+             data FROM {s4_api_batch_users} u 
+             LEFT JOIN {s4_api_batch_user_courses} c ON c.user_id = u.user_id
+             WHERE c.term = :term 
+             AND c.subject = :subject AND c.catalog_number = :catalog_number 
+             AND c.section = :section',
+             array(
+               ':term'       => $course['term'],
+               ':subject'       => $course['subject'],
+               ':catalog_number' => $course['catalog_number'],
+               ':section'       => $course['section'],
+             ));
+    while($user = $users->fetchAssoc()) {
+      unset($user['data']);
+      $user['restrictions'] = ($user['restrictions'])
+                  ? explode(',', $user['restrictions'])
+                  : array();
+      $user_courses[$user['role']][] = $user;
+    }
+    $result[] = array_merge($course, $user_courses);
+  }
+  return $result;
 }
 
 function s4_api_batch_s4_get_user_enrollment($user_id, $term) {
-	return _s4_api_batch_get_user_course_relationship($user_id, $term, 'students');
+  return _s4_api_batch_get_user_course_relationship($user_id, $term, 'students');
 }
 
 function s4_api_batch_s4_get_faculty_courses($user_id, $term) {
-	return _s4_api_batch_get_user_course_relationship($user_id, $term, 'faculty');
+  return _s4_api_batch_get_user_course_relationship($user_id, $term, 'faculty');
 }
 
 function _s4_api_batch_get_user_course_relationship($user_id, $term, $role) {
-	$courses = db_query('select c.term, c.subject, c.catalog_number, 
-						c.section, c.status, c.title FROM {s4_api_batch_courses} c 
-						LEFT JOIN {s4_api_batch_user_courses} u 
-							ON u.subject = c.subject 
-							   AND u.catalog_number = c.catalog_number 
-							   AND u.section = c.section
-						WHERE c.term = :term AND u.user_id = :user_id AND u.role = :role',
-						array(':term' => $term,
-							  ':user_id' => $user_id,
-							  ':role' => $role));
-	$result = array();
-	while($course = $courses->fetchAssoc()) {
-		$result[] = $course;
-	}
-	return $result;
+  $courses = db_query('select c.term, c.subject, c.catalog_number, 
+            c.section, c.status, c.title FROM {s4_api_batch_courses} c 
+            LEFT JOIN {s4_api_batch_user_courses} u 
+              ON u.subject = c.subject 
+                 AND u.catalog_number = c.catalog_number 
+                 AND u.section = c.section
+            WHERE c.term = :term AND u.user_id = :user_id AND u.role = :role',
+            array(':term' => $term,
+                ':user_id' => $user_id,
+                ':role' => $role));
+  $result = array();
+  while($course = $courses->fetchAssoc()) {
+    $result[] = $course;
+  }
+  return $result;
 }
 
 function s4_api_batch_s4_get_user($login_id) {
-	$user = db_query('SELECT login_id, user_id, email, first_name, 
-					   last_name, restrictions, constant_registration, 
-					   data FROM {s4_api_batch_users} 
-					   WHERE login_id = :login_id',
-					   array(':login_id' => $login_id));
-	$user = $user->fetchAssoc();
-	$user = array_merge(unserialize($user['data']), $user);
-	$user['restrictions'] = explode(',', $user['restrictions']);
-	unset($user['data']);
-	return $user;
+  $user = db_query('SELECT login_id, user_id, email, first_name, 
+             last_name, restrictions, constant_registration, 
+             data FROM {s4_api_batch_users} 
+             WHERE login_id = :login_id',
+             array(':login_id' => $login_id));
+  $user = $user->fetchAssoc();
+  $user = array_merge(unserialize($user['data']), $user);
+  $user['restrictions'] = explode(',', $user['restrictions']);
+  unset($user['data']);
+  return $user;
 }

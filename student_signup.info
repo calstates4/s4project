@@ -75,7 +75,6 @@ dependencies[] = link
 dependencies[] = location
 dependencies[] = location_cck
 dependencies[] = location_fax
-dependencies[] = location_generate
 dependencies[] = location_node
 dependencies[] = location_phone
 dependencies[] = location_search
