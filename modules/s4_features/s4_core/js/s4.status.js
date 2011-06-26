@@ -3,7 +3,7 @@
     /*$('.signup a').click(function() {
       var link = $(this);
       $.getJSON($(this).attr('href') + '?js=1', function(data) {
-        if(data.success && data.action == 'add') {
+        if (data.success && data.action == 'add') {
           link.parent('.signup')
               .addClass('signed-up')
               .after('<div class="fineprint">Click again to cancel</div>');
@@ -13,7 +13,7 @@
             $(this).fadeIn('normal');
           });
         }
-        if(data.success && data.action == 'remove') {
+        if (data.success && data.action == 'remove') {
           link.parent('.signup')
             .removeClass('signed-up')
             .parent('div')
@@ -26,7 +26,7 @@
           });
         }
       });
-      return false;
+      return FALSE;
     });*/
   });
 })(jQuery);

@@ -5,20 +5,20 @@
 */
 function s4_core_block_user_progress() {
   global $user;
-  if(!s4_core_user_can_signup($user)) {
-    return null;
+  if (!s4_core_user_can_signup($user)) {
+    return NULL;
   }
   drupal_add_css(drupal_get_path('module', 's4_core') .'/css/status.css');
   $status = array();
   
-  if(isset($_SESSION['s4_signup_site'])) {
+  if (isset($_SESSION['s4_signup_site'])) {
     $site = node_load($_SESSION['s4_signup_site']);
   }
-  if(isset($_SESSION['s4_signup_coordinator'])) {
+  if (isset($_SESSION['s4_signup_coordinator'])) {
     $coordinator = node_load($_SESSION['s4_signup_coordinator']);
   }
   
-  if(isset($site)) {
+  if (isset($site)) {
     $site_selection = '<div class="selection">'. l($site->title, 'node/'. $site->nid) .'</div>';
   }
   $status['site'] = array('data'  => 'Site',
@@ -27,54 +27,54 @@ function s4_core_block_user_progress() {
             'href'  => (isset($course))
                     ? _s4_core_get_course_site_arguments($course)
                     : 'site-list',
-            'selection' => (isset($site_selection)) ? $site_selection : false,
+            'selection' => (isset($site_selection)) ? $site_selection : FALSE,
             );
   
-  if(variable_get('s4_core_signup_require_coordinator', 1)) {
-    if($site && module_exists('views')) {
+  if (variable_get('s4_core_signup_require_coordinator', 1)) {
+    if ($site && module_exists('views')) {
       $site_coordinators = views_get_view_result('site_coordinators', 'block', $site->nid);
     }
-    if(isset($coordinator)) {
+    if (isset($coordinator)) {
       $coordinator_selection = '<div class="selection">'. 
             l($coordinator->title, 'node/'. $coordinator->nid) .'</div>';
     }
-    if(!$site || count($site_coordinators)) {
+    if (!$site || count($site_coordinators)) {
       $status['coordinator'] = array('data' => 'Coordinator',
               'id'   => 'status-coordinator',
                 'class'   => (isset($coordinator)) ? array('done') : array(),
               'href' => 'sites/'. $site->nid .'/coordinators',
               'selection' => (isset($coordinator_selection))
                          ? $coordinator_selection
-                         : false
+                         : FALSE
               );
     }
   }
-  if(isset($site)) {
+  if (isset($site)) {
     $form = field_get_items('node', $site, 'field_site_form');
-    if($form !== false && count($form)) {
+    if ($form !== FALSE && count($form)) {
       $status['form'] = array('data' => 'Form',
               'id'   => 'status-form',
                 'class'   => (isset($form_done)) ? array('done') : array(),
               'href' => 'node/'. $form[0]['nid'],
-              'selection' => false
+              'selection' => FALSE
               );
     }
   }
-  foreach(module_implements('s4_user_status') as $module) {
+  foreach (module_implements('s4_user_status') as $module) {
     //Iterate over modules and pass status by reference
     $function_name = $module .'_s4_user_status';
     $function_name($status);
   }
   
   $number = 1;
-  foreach($status as $key => $stat) {
+  foreach ($status as $key => $stat) {
     $status[$key]['data'] = '<div><span class="number">'. ($number) .'</span>'. $stat['data'] .'</div>';
-    if(isset($stat['href'])) {
-      $status[$key]['data'] = l($status[$key]['data'], $stat['href'], array('html' => true));
+    if (isset($stat['href'])) {
+      $status[$key]['data'] = l($status[$key]['data'], $stat['href'], array('html' => TRUE));
       $status[$key]['class'][] = 'clickable';
       unset($status[$key]['href']);
     }
-    if(isset($stat['selection'])) {
+    if (isset($stat['selection'])) {
       $status[$key]['data'] .= $stat['selection'];
       unset($status[$key]['selection']);
     }
@@ -95,12 +95,12 @@ function s4_core_block_user_progress() {
 */
 function _s4_core_get_course_site_arguments($course) {
   $sites = field_get_items('node', $course, 'field_sites');
-  if(!$sites || !count($sites)) {
+  if (!$sites || !count($sites)) {
     return 'site-list';
   }
   
   $site_arguments = array();
-  foreach($sites as $site) {
+  foreach ($sites as $site) {
     $site_arguments[] = $site['nid'];
   }
   return 'site-list/'. implode('+', $site_arguments);
@@ -113,12 +113,12 @@ function _s4_core_get_course_site_arguments($course) {
 function s4_core_block_user_site_signup() {
   global $user;
   $node = menu_get_object();
-  if(!$node ||   $node->type != 'site' || !s4_core_user_can_signup($user)) {
-    return null;
+  if (!$node ||   $node->type != 'site' || !s4_core_user_can_signup($user)) {
+    return NULL;
   }
   
   
-  if(!s4_core_signup_access($node, $user)) {
+  if (!s4_core_signup_access($node, $user)) {
     $output = '<div class="signup denied"><div class="icon"></div>You can\'t sign up for this site.</div>';
   }
   else {
@@ -134,14 +134,14 @@ function s4_core_block_user_site_signup() {
 *  Note to students about the site list being either restrictive or non-restrictive
 */
 function s4_core_block_site_list_course_restriction() {
-  if(!isset($_SESSION['s4_signup_course']) || arg(0) != 'site-list') {
-    return null;
+  if (!isset($_SESSION['s4_signup_course']) || arg(0) != 'site-list') {
+    return NULL;
   }
   $course = node_load($_SESSION['s4_signup_course']);
   $restrict = field_get_items('node', $course, 'field_site_restrict_to_list');
-  if($restrict[0]['value']) {
+  if ($restrict[0]['value']) {
     
-    if(!arg(1)) {
+    if (!arg(1)) {
       $output = t('This is a list of all sites; however, you are restricted by @course to sign up for only a few sites. !link', 
           array('@course' => $course->title,
                 '!link' => l('View list of allowed sites.', _s4_core_get_course_site_arguments($course))));
@@ -166,8 +166,8 @@ function s4_core_block_site_list_course_restriction() {
 function s4_core_block_s4_user_login_message() {
   $directions = variable_get('s4_core_auth_directions', '');
   $directions = check_markup($directions['value'], $directions['format']);
-  if(!strlen(trim($directions))) {
-    return null;
+  if (!strlen(trim($directions))) {
+    return NULL;
   }
   return array('subject' => 'Account help',
          'content' => $directions);
@@ -187,13 +187,13 @@ function s4_core_block_s4_user_login() {
                 'cas'  => 'cas/login');
   
   $login_options = array();
-  foreach($auth_types as $audience => $method) {
-    if($method != 'none') {
+  foreach ($auth_types as $audience => $method) {
+    if ($method != 'none') {
       $login_options[$method][] = $audience;
     }
   }
-  foreach($login_options as $option => $audience) {
-    if(count($audience) > 2) {
+  foreach ($login_options as $option => $audience) {
+    if (count($audience) > 2) {
       end($audience);
       $audience[key($audience)] = '&amp; '. current($audience);
       $join_list = ',';
@@ -203,7 +203,7 @@ function s4_core_block_s4_user_login() {
           l('Login', $login_destinations[$option], 
               array('query' => array('destination' => 'dashboard')));
   }
-  return array('subject' => null,
+  return array('subject' => NULL,
          'content' => '<p class="intro">'. implode('<br/>', $output) .'</p>');
 }
 
@@ -233,9 +233,9 @@ function s4_core_block_s4_page_notifications() {
   $list = notifications_subscription_list('page subscriptions')
       ->filter_option('subscriptions_block');
   $links = array();
-  foreach($list->get_instances() as $notification) { 
+  foreach ($list->get_instances() as $notification) { 
     $link = $notification->element_link();
-    if($notification->is_stored()) {
+    if ($notification->is_stored()) {
       $link['#title'] = t('<span class="hover">Unsubscribe</span><span class="nohover">Subscribed</span>');
       $link['#options']['attributes']['class'] = 'subscribed';
     }
@@ -252,7 +252,7 @@ function s4_core_block_s4_page_notifications() {
           'content' => theme('item_list', array('items' => $links))
          );
   }
-  return null;
+  return NULL;
 }
 
 /**
@@ -266,13 +266,13 @@ function _s4_core_block_webform($field) {
   $form = field_get_items('node', $site, 'field_site_form');
   $form = node_load($form[0]['nid']);
   $output = '';
-  if(count($form)) {
+  if (count($form)) {
     module_load_include('inc', 'webform', 'includes/webform.submissions');
     $submission = webform_get_submission($form->nid, $sid[0]['value']);
-      if(!$submission) {
-        return null;
+      if (!$submission) {
+        return NULL;
       }
-      foreach($form->webform['components'] as $k => $component) {
+      foreach ($form->webform['components'] as $k => $component) {
         $output .= '<p><span class="form-label">'. $component['name'] .':</span>';
         $output .= '<span class="form-value">'. implode("\n", $submission->data[$k]['value']) .'</span></p>';
       }
@@ -286,7 +286,7 @@ function _s4_core_block_webform($field) {
 *  Button block for creating a site
 */
 function s4_core_block_s4_add_new_site() {
-  if(user_access('create site content')) {
+  if (user_access('create site content')) {
     return array('content' => l('<span class="add"></span>Add new site', 
                   'node/add/site', 
                   array('html' => TRUE,
@@ -296,7 +296,7 @@ function s4_core_block_s4_add_new_site() {
                   )
           );
   }
-  return null;
+  return NULL;
 }
 
 /**
@@ -304,7 +304,7 @@ function s4_core_block_s4_add_new_site() {
 *  Note we add the referenced site's nid to the end of the URL
 */
 function s4_core_block_s4_add_new_coordinator() {
-  if(user_access('create site content')) {
+  if (user_access('create site content')) {
     $node = menu_get_object();
     return array('content' => l('<span class="add"></span>'. t('Add new coordinator'), 
                   'node/add/coordinator/'. $node->nid, 
@@ -316,7 +316,7 @@ function s4_core_block_s4_add_new_coordinator() {
                   )
           );
   }
-  return null;
+  return NULL;
 }
 
 /**
@@ -335,8 +335,8 @@ function s4_core_block_s4_report_export_link() {
 *  Link to subscribe to file expiration notices
 */
 function s4_core_block_s4_subscribe_file_expiration() {
-  if(!user_access('get file expiration notifications')) {
-    return null;
+  if (!user_access('get file expiration notifications')) {
+    return NULL;
   }
   drupal_add_css(drupal_get_path('module', 's4_core') .'/css/subscriptions.css');
   global $user;
@@ -346,17 +346,17 @@ function s4_core_block_s4_subscribe_file_expiration() {
       ->fields('n', array('sid'));
   $result = $query->execute();
   $sid = $result->fetchField();
-  if($sid) {
+  if ($sid) {
     $link = l('<span class="hover">Unsubscribe to file expiration notifications</span><span class="nohover">Subscribed to file expiration notifications</span>',
           'notifications/unsubscribe/'. $sid,
-          array('html' => true,
+          array('html' => TRUE,
               'attributes' => array('class' => 'subscription-button subscribed'),
               'query' => array('destination' => $_GET['q'])));
   }
   else {
     $link = l('Subscribe to file expiration notifications',
           'notifications/subscribe/document_expiration',
-          array('html' => true,
+          array('html' => TRUE,
               'attributes' => array('class' => 'subscription-button not-subscribed'),
               'query' => array('destination' => $_GET['q'])));
   }

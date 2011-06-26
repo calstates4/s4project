@@ -29,22 +29,22 @@ function s4_api_batch_admin_form() {
 }
 
 function s4_api_batch_admin_form_validate($form, &$form_state) {
-  if(!@opendir($form_state['values']['s4_api_batch_location'])) {
+  if (!@opendir($form_state['values']['s4_api_batch_location'])) {
     form_set_error('s4_api_batch_location', 'Could not read that directory');
   }
 }
 
 function s4_api_batch_get_batch($file) {
   $times = variable_get('s4_api_batch_update_times', array());
-  $file_path = rtrim(variable_get('s4_api_batch_location', '/')) .'/'. $file;
-  if(!file_exists($file_path) || $times[$file] >= filemtime($file_path)) {
-    return false;
+  $file_path = rtrim(variable_get('s4_api_batch_location', '/')) . '/' . $file;
+  if (!file_exists($file_path) || $times[$file] >= filemtime($file_path)) {
+    return FALSE;
   }
   $file_handle = fopen($file_path, 'r');
   $headers = fgetcsv($file_handle);
   $results = array();
-  while(($row = fgetcsv($file_handle)) !== FALSE) {
-    if(count($headers) == count($row)) {
+  while (($row = fgetcsv($file_handle)) !== FALSE) {
+    if (count($headers) == count($row)) {
       $results[] = array_combine($headers, $row);
     }
   }
@@ -55,8 +55,8 @@ function s4_api_batch_get_batch($file) {
 
 function s4_api_batch_cron() {
   $terms = s4_api_batch_get_batch('terms.txt');
-  if($terms) {
-    foreach($terms as $term) {
+  if ($terms) {
+    foreach ($terms as $term) {
       db_delete('s4_api_batch_terms')
         ->condition('term_code', $term['term_code'])
         ->execute();
@@ -70,11 +70,11 @@ function s4_api_batch_cron() {
         ->execute();
     
     }
-    return null;
+    return NULL;
   }
   $users = s4_api_batch_get_batch('users.txt');
-  if($users) {
-    foreach($users as $user) {
+  if ($users) {
+    foreach ($users as $user) {
       db_delete('s4_api_batch_users')
         ->condition('user_id', $user['user_id'])
         ->execute();
@@ -91,11 +91,11 @@ function s4_api_batch_cron() {
         ))
         ->execute();
     }
-    return null;
+    return NULL;
   }
   $courses = s4_api_batch_get_batch('courses.txt');
-  if($courses) {
-    foreach($courses as $course) {
+  if ($courses) {
+    foreach ($courses as $course) {
       db_delete('s4_api_batch_courses')
         ->condition('term', $course['term'])
         ->condition('subject', $course['subject'])
@@ -112,22 +112,22 @@ function s4_api_batch_cron() {
         ))
         ->execute();
     }
-    return null;
+    return NULL;
   }
-  if(_s4_api_batch_cron_update_user_courses('enrollment.txt', 'students')) {
-    return null;
+  if (_s4_api_batch_cron_update_user_courses('enrollment.txt', 'students')) {
+    return NULL;
   }
-  if(_s4_api_batch_cron_update_user_courses('faculty.txt', 'faculty')) {
-    return null;
+  if (_s4_api_batch_cron_update_user_courses('faculty.txt', 'faculty')) {
+    return NULL;
   }
 }
 
 function _s4_api_batch_cron_update_user_courses($file, $role) {
   $users = s4_api_batch_get_batch($file);
-  if(!$users) {
-    return false;
+  if (!$users) {
+    return FALSE;
   }
-  foreach($users as $user) {
+  foreach ($users as $user) {
     db_delete('s4_api_batch_user_courses')
       ->condition('role', $role)
       ->condition('term', $user['term'])
@@ -147,7 +147,7 @@ function _s4_api_batch_cron_update_user_courses($file, $role) {
       ))
       ->execute();
   }
-  return true;
+  return TRUE;
 }
 
 function s4_api_batch_s4_get_term($start_date, $end_date) {
@@ -157,7 +157,7 @@ function s4_api_batch_s4_get_term($start_date, $end_date) {
              array(':start_date' => strtotime($start_date),
                   ':end_date'   => strtotime($end_date)));
   $result = array();
-  while($term = $terms->fetchAssoc()) {
+  while ($term = $terms->fetchAssoc()) {
     $term['start_date'] = date('Y-m-d', $term['start_date']);
     $term['end_date'] = date('Y-m-d', $term['end_date']);
     $result[] = $term;
@@ -170,7 +170,7 @@ function s4_api_batch_s4_get_courses($term) {
              {s4_api_batch_courses} WHERE term = :term',
              array(':term' => $term));
   $result = array();
-  while($course = $courses->fetchAssoc()) {
+  while ($course = $courses->fetchAssoc()) {
     $course['restrictions'] = ($course['restrictions'])
                   ? explode(',', $course['restrictions'])
                   : array();
@@ -189,7 +189,7 @@ function s4_api_batch_s4_get_courses($term) {
                ':catalog_number' => $course['catalog_number'],
                ':section'       => $course['section'],
              ));
-    while($user = $users->fetchAssoc()) {
+    while ($user = $users->fetchAssoc()) {
       unset($user['data']);
       $user['restrictions'] = ($user['restrictions'])
                   ? explode(',', $user['restrictions'])
@@ -221,7 +221,7 @@ function _s4_api_batch_get_user_course_relationship($user_id, $term, $role) {
                 ':user_id' => $user_id,
                 ':role' => $role));
   $result = array();
-  while($course = $courses->fetchAssoc()) {
+  while ($course = $courses->fetchAssoc()) {
     $result[] = $course;
   }
   return $result;

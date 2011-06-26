@@ -1,6 +1,8 @@
 <?php
 
-
+/**
+*	Admin form for general site settings
+*/
 function s4_core_admin_form() {
   $form = array();
   
@@ -31,15 +33,15 @@ function s4_core_admin_form() {
     '#description' => 'Select the types of authentication users should use',
   );
   
-  $auth_options = array('none' => t(' - Cannot login - '),
-              'user' => t('Custom S4-only account'),);
-  if(module_exists('cas')) {
+  $auth_options = array('none' => t('- Cannot login -'),
+              'user' => t('Custom S4-only account'));
+  if (module_exists('cas')) {
     $auth_options['cas'] = t('CAS Single-sign on');
   }
-  if(module_exists('ldap')) {
+  if (module_exists('ldap')) {
     $auth_options['ldap'] = t('LDAP');
   }
-  if(module_exists('shibboleth')) {
+  if (module_exists('shibboleth')) {
     $auth_options['ldap'] = t('Shibboleth');
   }
   
@@ -113,21 +115,21 @@ function s4_core_admin_user_attributes_list() {
   $attributes = variable_get('s4_core_user_attribute_mappings', array());
   $header = array('Argument from SIS', 'User attribute', 'Options');
   $data = array();
-  foreach($attributes as $sis => $attribute) {
+  foreach ($attributes as $sis => $attribute) {
     $data[] = array($sis, 
             $attribute, 
-            l('Edit', 'admin/config/s4/user-attributes/edit/'. $sis) .' '. 
-            l('Delete', 'admin/config/s4/user-attributes/delete/'. $sis)
+            l(t('Edit'), 'admin/config/s4/user-attributes/edit/' . $sis) . ' ' . 
+            l(t('Delete'), 'admin/config/s4/user-attributes/delete/' . $sis)
             );
                     
   }
   return theme('table', array('header' => $header, 'rows' => $data));
 }
 
-function s4_core_admin_user_attributes_edit($form_state, $form, $attribute = false) {
+function s4_core_admin_user_attributes_edit($form_state, $form, $attribute = FALSE) {
   $form = array();
   
-  if($attribute) {
+  if ($attribute) {
     $attributes = variable_get('s4_core_user_attribute_mappings', array());
     $field = $attributes[$attribute];
   }
@@ -136,7 +138,7 @@ function s4_core_admin_user_attributes_edit($form_state, $form, $attribute = fal
   }
   $user_fields = array();
   $bundle = field_extract_bundle('user', 'user');
-  foreach(field_info_instances('user', $bundle) as $field_key => $field) {
+  foreach (field_info_instances('user', $bundle) as $field_key => $field) {
     $user_fields[$field_key] = $field['label'];
   }
   
@@ -166,7 +168,7 @@ function s4_core_admin_user_attributes_edit_submit($form, $form_state) {
   $attributes = variable_get('s4_core_user_attribute_mappings', array());
   $attributes[$form_state['values']['sis_field']] = $form_state['values']['field'];
   variable_set('s4_core_user_attribute_mappings', $attributes);
-  drupal_set_message('User attribute mapping saved.');
+  drupal_set_message(t('User attribute mapping saved.'));
   drupal_goto('admin/config/s4/user-attributes');
 }
 
@@ -189,7 +191,7 @@ function s4_core_admin_user_attributes_test($form, &$form_state) {
     '#value' => 'Test user',
   );
   
-  if($form_state['storage']['user']) {
+  if ($form_state['storage']['user']) {
     $header = array('SIS Field', 'User attribute', 'Value');
     $form['results'] = array(
       '#type' => 'item',
@@ -205,7 +207,7 @@ function s4_core_admin_user_attributes_test_submit($form, &$form_state) {
   $user = module_invoke_all('s4_get_user', $form_state['values']['login_id']);
   $mapping = _s4_core_map_user_attributes();
   $form_state['storage'] = array();
-  foreach($mapping as $sis_field => $field) {
+  foreach ($mapping as $sis_field => $field) {
     $form_state['storage']['user'][] = array($sis_field,
                        $field,
                        $user[$sis_field]);

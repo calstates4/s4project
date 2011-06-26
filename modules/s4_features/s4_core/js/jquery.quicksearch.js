@@ -3,9 +3,9 @@
 		
 		var timeout, cache, rowcache, jq_results, val = '', e = this, options = $.extend({ 
 			delay: 100,
-			selector: null,
-			stripeRows: null,
-			loader: null,
+			selector: NULL,
+			stripeRows: NULL,
+			loader: NULL,
 			noResults: '',
 			bind: 'keyup',
 			onBefore: function () { 
@@ -26,37 +26,37 @@
 			testQuery: function (query, txt, _row) {
 				for (var i = 0; i < query.length; i += 1) {
 					if (txt.indexOf(query[i]) === -1) {
-						return false;
+						return FALSE;
 					}
 				}
-				return true;
+				return TRUE;
 			}
 		}, opt);
 		
 		this.go = function () {
 			
 			var i = 0, 
-			noresults = true, 
+			noresults = TRUE, 
 			query = options.prepareQuery(val),
 			val_empty = (val.replace(' ', '').length === 0);
 			
 			for (var i = 0, len = rowcache.length; i < len; i++) {
 				if (val_empty || options.testQuery(query, cache[i], rowcache[i])) {
 					options.show.apply(rowcache[i]);
-					noresults = false;
+					noresults = FALSE;
 				} else {
 					options.hide.apply(rowcache[i]);
 				}
 			}
 			
 			if (noresults) {
-				this.results(false);
+				this.results(FALSE);
 			} else {
-				this.results(true);
+				this.results(TRUE);
 				this.stripe();
 			}
 			
-			this.loader(false);
+			this.loader(FALSE);
 			options.onAfter();
 			
 			return this;
@@ -64,7 +64,7 @@
 		
 		this.stripe = function () {
 			
-			if (typeof options.stripeRows === "object" && options.stripeRows !== null)
+			if (typeof options.stripeRows === "object" && options.stripeRows !== NULL)
 			{
 				var joined = options.stripeRows.join(' ');
 				var stripeRows_length = options.stripeRows.length;
@@ -122,7 +122,7 @@
 		};
 		
 		this.trigger = function () {
-			this.loader(true);
+			this.loader(TRUE);
 			options.onBefore();
 			
 			window.clearTimeout(timeout);
@@ -134,9 +134,9 @@
 		};
 		
 		this.cache();
-		this.results(true);
+		this.results(TRUE);
 		this.stripe();
-		this.loader(false);
+		this.loader(FALSE);
 		
 		return this.each(function () {
 			$(this).bind(options.bind, function () {

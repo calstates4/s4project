@@ -1,5 +1,9 @@
 <?php
 
+/**
+*	@file This sets up some tables to store data from the batch process
+*		  temporarily until the cron job starts to run.
+*/
 function s4_api_batch_schema() {
   $schema = array();
   
@@ -8,8 +12,8 @@ function s4_api_batch_schema() {
     'fields' => array(
       'term_title' => array('type' => 'varchar', 'length' => 255, 'default' => ''), 
       'term_code'  => array('type' => 'varchar', 'length' => 255, 'default' => ''), 
-      'start_date' => array('type' => 'int', 'not null' => TRUE, 'default' => 0), 
-      'end_date'   => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'start_date' => array('type' => 'int', 'not NULL' => TRUE, 'default' => 0), 
+      'end_date'   => array('type' => 'int', 'not NULL' => TRUE, 'default' => 0),
     ),  
   );
   
@@ -19,7 +23,7 @@ function s4_api_batch_schema() {
       'term' => array('type' => 'varchar', 'length' => 255, 'default' => ''), 
       'subject'  => array('type' => 'varchar', 'length' => 255, 'default' => ''), 
       'catalog_number' => array('type' => 'varchar', 'length' => 255, 'default' => ''), 
-      'section'   => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'section'   => array('type' => 'int', 'not NULL' => TRUE, 'default' => 0),
       'title' => array('type' => 'varchar', 'length' => 255, 'default' => ''), 
 
     ),  
@@ -31,7 +35,7 @@ function s4_api_batch_schema() {
       'term' => array('type' => 'varchar', 'length' => 255, 'default' => ''), 
       'subject'  => array('type' => 'varchar', 'length' => 255, 'default' => ''), 
       'catalog_number' => array('type' => 'varchar', 'length' => 255, 'default' => ''), 
-      'section'   => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'section'   => array('type' => 'int', 'not NULL' => TRUE, 'default' => 0),
     ),  
   );
 
@@ -44,21 +48,21 @@ function s4_api_batch_schema() {
       'first_name' => array('type' => 'varchar', 'length' => 255, 'default' => ''),
       'last_name' => array('type' => 'varchar', 'length' => 255, 'default' => ''),
       'restrictions' => array('type' => 'varchar', 'length' => 255, 'default' => ''),
-      'constant_registration' => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
-      'data' => array('type' => 'blob', 'not null' => FALSE),
+      'constant_registration' => array('type' => 'int', 'not NULL' => TRUE, 'default' => 0),
+      'data' => array('type' => 'blob', 'not NULL' => FALSE),
     ),  
   );
   
   $schema['s4_api_batch_user_courses'] = array(
     'description' => 'Relationships between users and courses',
     'fields' => array(
-      'role' => array('type' => 'varchar', 'length' => 10, 'not null' => TRUE, ),
-      'term' => array('type' => 'varchar', 'length' => 255, 'not null' => TRUE, ), 
-      'user_id'  => array('type' => 'varchar', 'length' => 255, 'not null' => TRUE, ), 
-      'subject'  => array('type' => 'varchar', 'length' => 255, 'not null' => TRUE, ), 
-      'catalog_number' => array('type' => 'varchar', 'length' => 255, 'not null' => TRUE, ), 
-      'section'   => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
-      'status'   => array('type' => 'int', 'not null' => TRUE, 'default' => 0),
+      'role' => array('type' => 'varchar', 'length' => 10, 'not NULL' => TRUE, ),
+      'term' => array('type' => 'varchar', 'length' => 255, 'not NULL' => TRUE, ), 
+      'user_id'  => array('type' => 'varchar', 'length' => 255, 'not NULL' => TRUE, ), 
+      'subject'  => array('type' => 'varchar', 'length' => 255, 'not NULL' => TRUE, ), 
+      'catalog_number' => array('type' => 'varchar', 'length' => 255, 'not NULL' => TRUE, ), 
+      'section'   => array('type' => 'int', 'not NULL' => TRUE, 'default' => 0),
+      'status'   => array('type' => 'int', 'not NULL' => TRUE, 'default' => 0),
     ),
   );
   

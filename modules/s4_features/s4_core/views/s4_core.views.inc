@@ -1,12 +1,19 @@
 <?php
 
+/**
+*  @file Views hooks
+*/
+
+/**
+*  Implementation of hook_views_data
+*/
 function s4_core_views_data() {
   $data['s4_signup']['table']['group'] = t('Signup');
   $data['s4_signup']['table']['join'] = array(
-	'node' => array(
-	  'left_field' => 'nid',
-	  'field' => 'nid',
-	),
+    'node' => array(
+      'left_field' => 'nid',
+      'field' => 'nid',
+    ),
   );
 
 
@@ -61,8 +68,11 @@ function s4_core_views_data() {
   return $data;
 }
 
+/**
+*  Implementation of hook_views_plugins_alter
+*/
 function s4_core_views_plugins_alter(&$plugins) {
-	$plugins['style']['views_data_export_csv']['export feed icon'] = drupal_get_path('module', 's4_core') .'/images/export_csv.png';
-	$plugins['style']['views_data_export_doc']['export feed icon'] = drupal_get_path('module', 's4_core') .'/images/export_word.png';
-	$plugins['style']['views_data_export_xls']['export feed icon'] = drupal_get_path('module', 's4_core') .'/images/export_excel.png';
+  $plugins['style']['views_data_export_csv']['export feed icon'] = drupal_get_path('module', 's4_core') . '/images/export_csv.png';
+  $plugins['style']['views_data_export_doc']['export feed icon'] = drupal_get_path('module', 's4_core') . '/images/export_word.png';
+  $plugins['style']['views_data_export_xls']['export feed icon'] = drupal_get_path('module', 's4_core') . '/images/export_excel.png';
 }

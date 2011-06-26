@@ -1,5 +1,8 @@
 <?php
 
+/**
+*	Implementation of hook_menu
+*/
 function s4_api_rest_menu() {
   $items = array();
   
@@ -15,6 +18,9 @@ function s4_api_rest_menu() {
   return $items;
 }
 
+/**
+*	Admin form for the REST API
+*/
 function s4_api_rest_admin_form() {
   $form = array();
   
@@ -165,16 +171,22 @@ function s4_api_rest_admin_form() {
   return $form;
 }
 
+/**
+*	Validation callback for the admin form
+*/
 function s4_api_rest_admin_form_validate($form, $form_state) {
   $url_fields = array('term_url', 'course_url');
-  foreach($url_fields as $url) {
-    if(!valid_url($form_state['values'][$url], true)) {
+  foreach ($url_fields as $url) {
+    if (!valid_url($form_state['values'][$url], TRUE)) {
       form_set_error($url, t('This is not a valid URL: @url', 
                 array('@url' => $form_state['values'][$url])));
     }
   }
 }
 
+/**
+*	Submit handler for admin form
+*/
 function s4_api_rest_admin_form_submit($form, $form_state) {
   variable_set('s4_api_rest_http_authentication', 
          $form_state['values']['s4_api_rest_http_authentication']);
@@ -222,35 +234,37 @@ function s4_api_rest_admin_form_submit($form, $form_state) {
 *  Helper function. Returns the actual request
 */
 function _s4_api_rest_get_data($url, $arguments) {
-  if(!valid_url($url, true)) {
-    return false;
+  if (!valid_url($url, TRUE)) {
+    return FALSE;
   }
   $headers = array();
-  if(variable_set('s4_api_rest_http_authentication', FALSE)) {
+  if (variable_set('s4_api_rest_http_authentication', FALSE)) {
     $headers['Authorization'] = base64_encode(
-      variable_get('s4_api_rest_http_authentication_username', '') .':'. 
+      variable_get('s4_api_rest_http_authentication_username', '') . ':' . 
       variable_get('s4_api_rest_http_authentication_password', '')
     );
   }
   $result = drupal_http_request(url($url, array('query' => $arguments, 'headers' => $headers)));
-  if($result && $result->code == 200) {
+  if ($result && $result->code == 200) {
     $xml = new SimpleXMLElement(str_replace('s4:', '', $result->data));
     return $xml;
   }
-  return false;
+  return FALSE;
 }
 
-
+/**
+*	Implementation of hook_s4_get_term
+*/
 function s4_api_rest_s4_get_term($start_date, $end_date) {
   $term = variable_get('s4_api_rest_term', array());
   $xml = _s4_api_rest_get_data($term['url'],
                   array($term['start_argument'] => $start_date,
                       $term['end_argument'] => $end_date));
-  if(!$xml) {
-    return false;
+  if (!$xml) {
+    return FALSE;
   }
   $terms = array();
-  foreach($xml->entry as $entry) {
+  foreach ($xml->entry as $entry) {
     $terms[] = array('term_title' => (string)$entry->title,
                'term_code'  => (string)$entry->id,
                'start_date' => date('Y-m-d', strtotime($entry->start_date)),
@@ -260,46 +274,58 @@ function s4_api_rest_s4_get_term($start_date, $end_date) {
   return $terms;
 }
 
+/**
+*	Implementation of hook_s4_get_courses
+*/
 function s4_api_rest_s4_get_courses($term) {
   $course = variable_get('s4_api_rest_course', array());
   $xml = _s4_api_rest_get_data($course['url'],
                   array($course['course_term_argument'] => $term));
-  if(!$xml) {
-    return false;
+  if (!$xml) {
+    return FALSE;
   }
   
   return _s4_api_rest_parse_courses($xml);
 }
 
+/**
+*	Implementation of hook_s4_get_user_enrollment
+*/
 function s4_api_rest_s4_get_user_enrollment($user_id, $term) {
   $enrollment = variable_get('s4_api_rest_enrollment', array());
   $xml = _s4_api_rest_get_data($enrollment['url'],
                   array($enrollment['user_id_argument'] => $user_id,
                         $enrollment['term_argument'] => $term));
-  if(!$xml) {
-    return false;
+  if (!$xml) {
+    return FALSE;
   }
   
   return _s4_api_rest_parse_courses($xml);
 }
 
+/**
+*	Implementation of hook_s4_get_faculty_courses
+*/
 function s4_api_rest_s4_get_faculty_courses($user_id, $term) {
   $faculty = variable_get('s4_api_rest_faculty_courses', array());
   $xml = _s4_api_rest_get_data($faculty['url'],
                   array($faculty['user_id_argument'] => $user_id,
                         $faculty['term_argument'] => $term));
-  if(!$xml) {
-    return false;
+  if (!$xml) {
+    return FALSE;
   }
   return _s4_api_rest_parse_courses($xml);
 }
 
+/**
+*	Implementation of hook_s4_get_user
+*/
 function s4_api_rest_s4_get_user($login_id) {
   $user = variable_get('s4_api_rest_user', array());
   $xml = _s4_api_rest_get_data($user['url'],
                   array($user['login_id_argument'] => $login_id));
-  if(!$xml) {
-    return false;
+  if (!$xml) {
+    return FALSE;
   }
   return array(
     'login_id'         => (string)$xml->entry->user->attributes()->{'login_id'},
@@ -315,9 +341,12 @@ function s4_api_rest_s4_get_user($login_id) {
   );
 }
 
+/**
+*	Helper function to parse courses
+*/
 function _s4_api_rest_parse_courses($xml) {
   $courses = array();
-  foreach($xml->entry as $entry) {
+  foreach ($xml->entry as $entry) {
     $status_attributes = $entry->status->attributes();
     $course = array(
       'subject'      => (string)$entry->subject,
@@ -328,11 +357,11 @@ function _s4_api_rest_parse_courses($xml) {
       'faculty'     => array(),
       'students'     => array(),
     );
-    foreach(array('faculty', 'students') as $type) {
-      if(!is_array($entry->{$type}->user)) {
+    foreach (array('faculty', 'students') as $type) {
+      if (!is_array($entry->{$type}->user)) {
         continue;
       }
-      foreach($entry->{$type}->user as $user_type) {
+      foreach ($entry->{$type}->user as $user_type) {
         $course[$type][] = array(
           'login_id'         => (string)$user_type->attributes()->{'login_id'},
             'user_id'         => (string)$user_type->attributes()->{'user_id'},

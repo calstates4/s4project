@@ -18,7 +18,7 @@ function s4_core_views_default_views() {
   $view->human_name = 's4 search';
   $view->core = 7;
   $view->api_version = '3.0-alpha1';
-  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+  $view->disabled = FALSE; /* Edit this to TRUE to make a default view disabled initially */
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
