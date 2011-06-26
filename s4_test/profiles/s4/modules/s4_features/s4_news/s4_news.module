@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the S4 News feature.
+ */
+
+include_once('s4_news.features.inc');

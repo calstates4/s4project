@@ -1,0 +1,2 @@
+"term_title", "term_code", "start_date", "end_date"
+"Fall 2010", "2104", "2010-09-01", "2010-12-20"

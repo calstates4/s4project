@@ -1,0 +1,19 @@
+body { background-color: #558095; }
+
+#branding, #footer {
+  background-color: #6aa4c2;
+  background-image: -moz-linear-gradient(top, #6aa4c2, #558095);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #6aa4c2), color-stop(1, #558095));
+  background-image: -webkit-linear-gradient(#6aa4c2, #558095);
+  background-image: linear-gradient(top, #6aa4c2, #558095);
+}
+
+#navigation {
+  background-color: #e26140;
+  background-image: -moz-linear-gradient(top, #e26140, #ca433c);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #e26140), color-stop(1, #ca433c));
+  background-image: -webkit-linear-gradient(#e26140, #ca433c);
+  background-image: linear-gradient(top, #e26140, #ca433c);
+}
+
+#footer a, #tools a, #tools h2 { color: #fff; }

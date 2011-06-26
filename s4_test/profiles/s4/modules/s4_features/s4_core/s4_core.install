@@ -1,0 +1,52 @@
+<?php
+
+function s4_core_schema() {
+	$schema = array();
+	
+	$schema['s4_core_entity_data'] = array(
+		'description' => 'Maintains a list of distinct record IDs brought over from an SIS to ensure data is not duplicated',
+		'fields' => array(
+			'entity_id' => array(
+		        'description' => 'The primary identifier for the entity.', 
+		        'type' => 'serial', 
+		        'unsigned' => TRUE, 
+		        'not null' => TRUE,
+		     ),
+		     'entity_type' => array(
+		     	'description' => 'The type of entity.', 
+		        'type' => 'varchar', 
+		        'length' => 32, 
+		        'not null' => TRUE, 
+		        'default' => '',
+		     ),
+		     'unique_id' => array(
+		     	'description' => 'The unique ID computed for this type of import',
+		     	'type' => 'varchar',
+		     	'length' => 255,
+		     	'not null' => TRUE,
+		     	'default' => '',
+		     ),
+		),
+		'unique keys' => array(
+	      'nid_type' => array('entity_id', 'entity_type'), 
+	      'unique_id' => array('unique_id'),
+	    ), 
+	);
+	
+	return $schema;
+}
+
+/**
+*	Implementation of hook_install
+*/
+function s4_core_install() {
+	
+	//Register our trigger for course signup notifications
+	db_insert('trigger_assignments')
+    ->fields(array(
+      'hook' => 'document_expiration',
+      'aid' => 's4_core_document_about_to_expire_action',
+    ))
+    ->execute();
+
+}

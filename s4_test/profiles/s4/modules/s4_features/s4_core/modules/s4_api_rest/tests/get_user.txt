@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+	<!-- The time you are rendering this, or if the DB is only refreshed periodically, when that was. If S4 finds the updated is the same as the last try, it will stop here. -->
+	<updated>2011-08-14T01:46:11.041Z</updated>
+	
+	<!-- Ignored, just here for ATOM compliance -->
+	<title>User information</title>
+	
+	<!-- Each term should be a "entry" -->
+	<entry>
+		<!-- Unique ID - should be user ID in your SIS that can be used to find other information.
+		In CMS/PeopleSoft, this is the emplid. -->
+		<id>USER_ID</id>
+		
+		<!-- Published & updated can be today's date, just here for ATOM compliance. -->
+		<published>2011-08-14T01:46:11.041Z</published>
+		<updated>2011-08-14T01:46:11.041Z</updated>
+		
+		<title>USER_ID</title>
+		
+		<s4:user user_id="123456789" login_id="faculty1234" constant_registration="0">
+			<s4:email>joe@somewhere.edu</s4:email>
+			<s4:name first_name="Joseph" last_name="Faculty" />
+			<s4:restrictions />
+		</s4:user>
+		
+	</entry>
+</feed>

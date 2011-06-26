@@ -1,0 +1,1157 @@
+<?php
+
+include_once('s4_core.features.inc');
+
+/**
+*	Implementation of hook_init()
+*/
+function s4_core_init() {
+	drupal_add_js(drupal_get_path('module', 's4_core') .'/js/jquery.quicksearch.js');
+	drupal_add_js(drupal_get_path('module', 's4_core') .'/js/s4.quicksearch.js');
+	drupal_add_css(drupal_get_path('module', 's4_core') .'/css/quicksearch.css');
+	drupal_add_css(drupal_get_path('module', 's4_core') .'/css/status.css');
+	drupal_add_css(drupal_get_path('module', 's4_core') .'/css/export.css');
+	drupal_add_js(drupal_get_path('module', 's4_core') .'/js/s4.status.js');
+}
+
+/**
+*	Implementation of hook_block_info()
+*/
+function s4_core_block_info() {
+	$blocks['user_progress'] = array('info' => 'User progress bar');
+	$blocks['jump_to_node'] = array('info' => 'Jump to node');
+	$blocks['user_site_signup'] = array('info' => 'User site sign-up');
+	$blocks['site_list_course_restriction'] = array('info' => 'Site list course restrictions');
+	$blocks['s4_user_login'] = array('info' => 'S4 Login options');
+	$blocks['s4_user_login_message'] = array('info' => 'S4 Login message');
+	$blocks['s4_signup_webform_signup'] = array('info' => 'Signup site signup form submission');
+	$blocks['s4_page_notifications'] = array('info' => 'Pretty page subscriptions');
+	$blocks['s4_add_new_site'] = array('info' => 'Add new site button');
+	$blocks['s4_add_new_coordinator'] = array('info' => 'Add new coordinator button');
+	$blocks['s4_report_export_link'] = array('info' => 'Export report link');
+	$blocks['s4_subscribe_file_expiration'] = array('info' => 'Subscribe to file expiration link');
+	return $blocks;
+}
+
+/**
+*	Implementation of hook_block_view
+*/
+function s4_core_block_view($delta) {
+	module_load_include('inc', 's4_core', 's4_core.blocks');
+	$function_name = 's4_core_block_'. $delta;
+	if(function_exists($function_name)) {
+		return $function_name();
+	}
+	return null;
+}
+
+/**
+*	Compares the access restrictions of any object to the user's access
+*	vis-a-vis a course or their individual settings.
+*/
+function s4_core_signup_access($node, $user) {
+	$user = user_load($user->uid);
+	$user_access = field_get_items('user', $user, 'field_site_restrict');
+	$node_access = field_get_items('node', $node, 'field_site_restrict');
+	if(!count($node_access)) {
+		return true;
+	}
+	foreach($node_access as $key => $value) {
+		$node_access[$key] = $value['tid'];
+	}
+	$user_access = ($user_access) ? $user_access : array();
+	
+	if(isset($_SESSION['s4_signup_course'])) {
+		$course = node_load($_SESSION['s4_signup_course']);
+		$course_access = field_get_items('node', $node, 'field_site_restrict');
+		foreach($course_access as $key => $access) {
+			$user_access[] = $access;
+		}
+	}
+	
+	if(!$user_access || !count($user_access)) {
+		return false;
+	}
+	foreach($user_access as $access) {
+		if(in_array($access['tid'], $node_access)) {
+			return true;
+		}
+	}
+	return false;
+}
+
+function s4_core_block_jump_form() {
+	$form = array();
+	
+	$form['#attributes']['class'] = 'jump';
+	
+	$form['nid'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Jump to a page',
+		'#attributes' => array('placeholder' => 'Enter a number'),
+		'#default_value' => '',
+	);
+	
+	$form['submit'] = array(
+		'#type' => 'submit',
+		'#value' => 'Jump',
+		'#attributes' => array('class' => array('element-invisible')),
+	);
+	
+	return $form;
+}
+
+/*function s4_core_block_jump_form_validate($form, &$form_state) {
+	if(!node_load($form_state['values']['nid'])) {
+		drupal_set_message('Could not find that number', 'error');
+	}
+}*/
+
+function s4_core_block_jump_form_submit($form, &$form_state) {
+	drupal_goto('node/'. $form_state['values']['nid']);
+}
+
+function s4_core_menu() {
+	$items = array();
+	
+	$items['admin/config/s4'] = array(
+		'title' => 'S4 configuration',
+		'description' => 'General site configuration for S4',
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('s4_core_admin_form'),
+		'file' => 's4_core.admin.inc',
+		'position' => 'right',
+		'access arguments' => array('administer site configuration'),
+	);
+	
+	$items['admin/config/s4/settings'] = array(
+		'title' => 'General configuration',
+		'description' => 'General site configuration for S4',
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('s4_core_admin_form'),
+		'file' => 's4_core.admin.inc',
+		'access arguments' => array('administer site configuration'),
+		'weight' => -10,
+	);
+	
+	$items['admin/config/s4/user-attributes'] = array(
+		'title' => 'User attributes',
+		'description' => 'Map additional user attributes like major to a profile field.',
+		'page callback' => 's4_core_admin_user_attributes_list',
+		'file' => 's4_core.admin.inc',
+		'access arguments' => array('administer site configuration'),
+		'weight' => -9,
+	);
+	
+	$items['admin/config/s4/user-attributes/list'] = array(
+		'title' => 'User attributes',
+		'description' => 'Map additional user attributes like major to a profile field.',
+		'page callback' => 's4_core_admin_user_attributes_list',
+		'file' => 's4_core.admin.inc',
+		'access arguments' => array('administer site configuration'),
+		'type' => MENU_DEFAULT_LOCAL_TASK,
+		'weight' => -3,
+	);
+	
+	$items['admin/config/s4/user-attributes/add'] = array(
+		'title' => 'Add attribute',
+		'description' => 'Add a new user attribute',
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('s4_core_admin_user_attributes_edit'),
+		'file' => 's4_core.admin.inc',
+		'access arguments' => array('administer site configuration'),
+		'type' => MENU_LOCAL_TASK,
+	);
+	
+	$items['admin/config/s4/user-attributes/test'] = array(
+		'title' => 'Test attributes',
+		'description' => 'Test user attributes',
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('s4_core_admin_user_attributes_test'),
+		'file' => 's4_core.admin.inc',
+		'access arguments' => array('administer site configuration'),
+		'type' => MENU_LOCAL_TASK,
+	);
+	
+	$items['admin/config/s4/user-attributes/edit/%'] = array(
+		'title' => 'Edit attribute',
+		'description' => 'Edit user attribute',
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('s4_core_admin_user_attributes_edit', 5),
+		'file' => 's4_core.admin.inc',
+		'access arguments' => array('administer site configuration')
+	);
+	
+	$items['admin/config/s4/user-attributes/delete/%'] = array(
+		'title' => 'Delete attribute',
+		'description' => 'Delete user attribute',
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('s4_core_admin_user_attributes_delete', 5),
+		'file' => 's4_core.admin.inc',
+		'access arguments' => array('administer site configuration')
+	);
+	
+	$items['s4/signup/%/%'] = array(
+		'title' => 'Signup',
+		'description' => 'User signup callback',
+		'page callback' => 's4_core_signup',
+		'page arguments' => array(2, 3),
+		'access arguments' => array('signup for service'),
+	);
+	
+	$items['s4/course-list/%/%/%'] = array(
+		'title' => 'Add to course',
+		'description' => 'Adding a site to a course list',
+		'page callback' => 's4_core_add_site_to_course',
+		'page arguments' => array(2, 3, 4),
+		'access callback' => 's4_core_add_site_to_course_access',
+		'access arguments' => array(3),
+	);
+	
+	$items['s4/evaluation/%node'] = array(
+		'title' => 'Complete evaluation',
+		'description' => 'Complete an evaluation of a site',
+		'page callback' => 's4_core_signup_evaluation',
+		'page arguments' => array(2),
+		'access callback' => 's4_core_signup_evaluation_access',
+		'access arguments' => array(2),
+	);
+	
+	return $items;
+}
+
+/**
+*	Menu callback to handle the student doing their site evaluations
+*/
+function s4_core_signup_evaluation($node) {
+	$eval_date = field_get_items('node', $node, 'field_signup_last_date');
+	if(strtotime($eval_date[0]['value']) >= time()) {
+		drupal_set_message(t('You cannot complete your evaluation until @date',
+						  array('@date' => format_date(strtotime($eval_date[0]['value'])))), 'error');
+		return '';
+	}
+	$site = field_get_items('node', $node, 'field_site');
+	$site = node_load($site[0]['nid']);
+	$eval_form = field_get_items('node', $site, 'field_site_eval_form');
+	$eval_form = node_load($eval_form[0]['nid']);
+	if(!$eval_form) {
+		drupal_set_message(t('The site @site does not require an evaluation', 
+						   array('@site' => $site->title)), 'error');
+		return '';
+	}
+	$_SESSION['s4_core_site_eval_signup'] = $node->nid;
+	drupal_goto('node/'. $eval_form->nid);
+}
+
+/**
+*	Indicates if the user is allowed to do an evaluation on a signup
+*/
+function s4_core_signup_evaluation_access($node) {
+	global $user;
+	$student = field_get_items('node', $node, 'field_user');
+	return ($student[0]['uid'] == $user->uid);
+}
+
+/**
+*	Menu callback to handle when a user has added a site to 
+*	a course.
+*/
+function s4_core_add_site_to_course($op = 'add', $course, $site) {
+	$course = node_load($course);
+	$site = node_load($site);
+	if(!$sites = field_get_items('node', $course, 'field_sites')) {
+		$sites = array();
+	}
+	if($op == 'add') {
+		$sites[] = array('nid' => $site->nid);
+		$message = 'Site added';
+	}
+	if($op == 'remove') {
+		foreach($sites as $key => $course_site) {
+			if($course_site['nid'] == $site->nid) {
+				unset($sites[$key]);
+			}
+		}
+		$message = 'Site removed';
+	}
+	$course->field_sites[$course->language] = $sites;
+	node_save($course);
+	if($_GET['js']) {
+		print json_encode(array('success' => 1, 'action' => $op, 'message' => $message));
+		die();
+	}
+	drupal_goto('node/'. $site->nid);
+	return '';
+}
+
+/**
+*	Checks whether the user is allowed to add a site to a course list
+*/
+function s4_core_add_site_to_course_access($course) {
+	global $user;
+	$course = node_load($course);
+	$faculty_list = field_get_items('node', $course, 'field_course_faculty');
+	foreach($faculty_list as $faculty) {
+		if($faculty['uid'] == $user->uid) {
+			return true;
+		}
+	}
+	return false;
+}
+
+/**
+*	Menu callback to handle signup actions by users
+*	This should handle all links which add additional data
+*	to the current user's signup record
+*/
+function s4_core_signup($type, $nid) {
+	module_invoke_all('s4_signup', $type, $nid);
+	if($type == 'site') {
+		$site = node_load($nid);
+		if($site->type == 'site') {
+			$instructions = field_get_items('node', $site, 'field_site_instructions_required');
+			$instruction_text = field_get_items('node', $site, 'field_site_instructions');
+			if($instructions[0]['value'] && strip_tags($instruction_text[0]['value']) != '' && !$_GET['agreed']) {
+				drupal_set_title('Site instructions');
+				return $instruction_text[0]['value'] . 
+						'<p>'. l('Return to site', 'node/'. $site->nid) .
+							   l('Agree', 's4/signup/'. $type .'/'. $site->nid,
+							   	array('query' => array('agreed' => 1))) .
+						'</p>';
+			}
+			else {
+				$_SESSION['s4_signup_site'] = check_plain($nid);
+				$form = field_get_items('node', $site, 'field_site_form');
+				if($form) {
+					drupal_set_message(t('This site requires an additional form to be completed after you select your coordinator'));
+				}
+				drupal_set_message(t('Site @site selected.', array('@site' => $site->title)));
+				if(module_exists('views')) {
+					$site_coordinators = views_get_view_result('site_coordinators', 'block', $site->nid);
+					if(!count($site_coordinators)) {
+						drupal_set_message(t('This site does not have any coordinators, so we\'re skipping this step.'));
+						$site_skip_coordinator = true;
+					}
+					else {
+						drupal_goto('sites/'. $site->nid .'/coordinators');
+					}
+				}
+			}
+		}
+	}
+	
+	if($type == 'coordinator') {
+		$site = node_load($_SESSION['s4_signup_site']);
+		$coordinator = node_load($nid);
+		if($coordinator && $coordinator->type == 'coordinator') {
+			$_SESSION['s4_signup_coordinator'] = check_plain($nid);
+		}
+		else {
+			drupal_set_message('That is not a coordinator');
+		}
+	}
+	if($type == 'coordinator' || ($type == 'site' && $site_skip_coordinator)) {
+		$form = field_get_items('node', $site, 'field_site_form');		
+		if($form !== false && count($form)) {
+			drupal_goto('node/'. $form[0]['nid']);
+		}
+		else {
+			s4_core_user_signup_completed();
+		}
+	}
+	
+	drupal_set_message($message);
+	drupal_goto('node/'. $nid);
+}	
+
+/**
+*	Implementation of hook_permission
+*/
+function s4_core_permission() {
+	return array(
+		'signup for service' => array(
+			'title' => t('Sign up for service'),
+			'description' => t('If unchecked, users of this role will never be able to register for sites regardless of any other settings.'),
+		),
+		'show input filter select menu' => array(
+			'title' => t('Show input filter options'),
+			'description' => t('Show the input filter options, normally these options are hidden from users.'),
+		),
+		'get file expiration notifications' => array(
+			'title' => t('Sign up for file expiration notifications'),
+			'description' => t('Allow the user to receive notifications about files close to expiring'),
+		),
+	);
+}
+
+/**
+*	Function to test if the user is allowed to signup for service
+*	This can be used to hide the signup process block
+*/
+function s4_core_user_can_signup($user) {
+	if(!user_access('signup for service', $user)) {
+		return false;
+	}
+	$ignore_courses = field_get_items('user', $user, 'field_course_ignore');
+	if($ignore_courses[0]['value'] || !module_exists('s4_courses')) {
+		return true;
+	}
+	if(module_exists('views') 
+	   && module_exists('s4_courses')
+	   && $view = views_get_view_result('user_courses', 'block_2', $user->uid)) {
+		$courses = array();
+		$result = db_query('select f.entity_id, c.field_course_nid FROM field_data_field_user f LEFT JOIN node n ON n.nid = f.entity_id LEFT JOIN field_data_field_course c ON c.entity_id = f.entity_id WHERE f.field_user_uid = :uid AND n.type = :type AND n.status = 1',
+			  array(':uid' =>  $user->uid,
+			  	    ':type' => 'signup'));
+		foreach($result as $row) {
+			$courses[$row->field_course_nid] = $row->field_course_nid;
+		}
+		foreach($view as $row) {
+			if(!$courses[$row->nid]) {
+				return true;
+			}
+		}
+		return false;
+	}
+	return false;
+}
+
+function s4_core_get_user_status() {
+	
+}
+
+/**
+*	Retrieves a list of the given uid's signup
+*/
+function s4_core_get_user_signups($uid) {
+	$result = db_query('SELECT f.entity_id FROM {field_data_field_user} f '.
+					  'LEFT JOIN {node} n ON n.nid = f.entity_id  '.
+					  'WHERE f.field_user_uid = :uid AND n.status = 1', 
+					  array(':uid' => $uid));
+	$signups = array();
+	foreach($result as $record) {
+		$signups[$record->entity_id] = node_load($record->entity_id);
+	}
+	return $signups;
+}
+
+/**
+*	Menu callback when the signup is completed
+*/
+function s4_core_user_signup_completed($sid = 0) {
+	global $user;
+	$signup = array('user' => $user->uid,
+					'site' => $_SESSION['s4_signup_site'], 
+					'course' => $_SESSION['s4_signup_course'],
+					'coordinator' => $_SESSION['s4_signup_coordinator'],
+					'signup_sid' => $sid);
+	_s4_core_create_signup($user->uid, $signup);
+	unset($_SESSION['s4_signup_course']);
+	unset($_SESSION['s4_signup_site']);
+	unset($_SESSION['s4_signup_coordinator']);
+	drupal_set_message('Congratulations, you are signed up!');
+	drupal_goto('dashboard', array('query' => array('finished' => 'finished')));
+}
+
+/**
+*	Helper function to create a signup node
+*/
+function _s4_core_create_signup($uid = 0, $signup = array()) {
+	global $user;
+	// backfill some default values;
+	$signup += array('user' => $user->uid,
+					 'site' => 0,
+					 'course' => 0,
+					 'coordinator' => 0,
+					 'signup_sid' => 0);
+	$node = new stdClass();
+	$node->type = 'signup';
+	node_object_prepare($node);
+	$node->uid = ($uid)
+				   ? $uid
+				   : $user->uid;
+	$node->language = LANGUAGE_NONE;
+	$node->field_user[$node->language][0]['uid'] = $signup['user'];
+	$node->field_site[$node->language][0]['nid'] = $signup['site'];
+	$node->field_course[$node->language][0]['nid'] = $signup['course'];
+	$node->field_coordinator[$node->language][0]['nid'] = $signup['coordinator'];
+	$node->field_form_signup_sid[$node->language][0]['value'] = $signup['signup_sid'];
+	$dates = array();
+	foreach(module_invoke_all('s4_signup_dates', $node) as $date) {
+		$dates[$date['weight']] = $date['date'];
+	}
+	ksort($dates);
+	$last_date = count($dates)
+				 ? array_pop($dates)
+				 : time() + ((24 * 60 * 60) * variable_get('s4_core_default_service_length', 100));
+	$node->field_signup_last_date[$node->language][0]['value'] = date('Y-m-d', $last_date);
+	node_save($node);
+	return $node;
+}
+
+
+/**
+*	Implementation of hook_webform_submission_insert
+*	Here we check that this is the last step of the signup
+*	process and if so, fire off the completed function
+*/
+function s4_core_webform_submission_insert($node, $submission) {
+	if(isset($_SESSION['s4_signup_site'])) {
+		$site = node_load($_SESSION['s4_signup_site']);
+		$form = field_get_items('node', $site, 'field_site_form');
+		if($node->nid == $form[0]['nid']) {
+			s4_core_user_signup_completed($submission->sid);
+		}
+	}
+	if(isset($_SESSION['s4_core_site_eval_signup'])) {
+		$signup = node_load($_SESSION['s4_core_site_eval_signup']);
+		if($signup) {
+			$signup->field_form_evaluation_sid[$node->language][0]['value'] = $submission->sid;
+			node_save($signup);
+		}
+		unset($_SESSION['s4_core_site_eval_signup']);
+		drupal_set_message('Thanks for your evaluation. We will be using this to improve the experience for future students.');
+		drupal_goto('dashboard');
+	}
+}
+
+/**
+*	Implementation of hook_user_login
+*/
+function s4_core_user_login(&$edit, $account) {
+	$sis_user = module_invoke_all('s4_get_user', $account->name);
+	s4_core_create_user($sis_user, $account);
+}
+
+/**
+*	Callback to create a user account
+*/
+function s4_core_create_user($sis_user, $user = false) {
+	if(!$sis_user) {
+		return false;
+	}
+	if(!$user) {
+		$user = new stdClass();
+		$user->name = $sis_user['login_id'];
+	}
+	$values = _s4_core_map_user_attributes();
+	$save = false;
+	foreach($values as $sis_field => $field) {
+		$current = field_get_items('user', $user, $field);
+		if(isset($sis_user[$sis_field]) && $current[0]['value'] != $sis_user[$sis_field]) {
+			$save[$field]['und'][0]['value'] = $sis_user[$sis_field];
+		}
+	}
+	if($user->mail != $sis_user['email']) {
+		$save['mail'] = $sis_user['email'];
+	}
+	if($save) {
+		watchdog('s4', 'User @user updated with new information', array('@user' => $user->name));
+		$user = user_save($user, $save);
+	}
+	return $user;
+}
+
+/**
+*	Helper function to find an entity using it's unique hash
+*	This is helpful when processing SIS integration data
+*/
+function s4_core_get_entity($data, $type, $id_only = FALSE) {
+	$hash = s4_core_make_hash($data, $type);
+	$entity = db_query('SELECT entity_id, entity_type from {s4_core_entity_data}
+						WHERE unique_id = :hash',
+						array(':hash' => $hash));
+	$entity_id = $entity->fetchField();
+	if(!$entity_id) {
+		return false;
+	}
+	if($id_only) {
+		return $entity_id;
+	}
+	if($type == 'user') {
+		return user_load($entity_id);
+	}
+	return node_load($entity_id);
+}
+
+/**
+*	Implementation of hook_node_insert
+*/
+function s4_core_node_insert($node) {
+	if(isset($node->s4_unique_id)) {
+		db_insert('s4_core_entity_data')
+				->fields(array(
+							'entity_id'   => $node->nid,
+							'entity_type' => 'node',
+							'unique_id'   => $node->s4_unique_id
+				))
+				->execute();
+	}
+}
+
+/**
+*	Implementation of hook_node_delete
+*/
+function s4_core_node_delete($node) {
+	db_delete('s4_core_entity_data')
+			  ->condition('entity_id', $node->nid)
+			  ->condition('entity_type', 'node')
+			  ->execute();
+}
+
+/**
+*	Returns a unique hash code for a given object
+*/
+function s4_core_make_hash($object, $type) {
+	switch($type) {
+		case 'term':
+			return md5($object['term_code']);
+		case 'course':
+			return md5($object['term'] . $object['subject'] . $object['catalog_number'] . $object['section']);
+		case 'user':
+			return md5($object['user_id']);
+	}
+}
+
+function _s4_core_map_user_attributes() {
+	$mapping = array(
+				'first_name' 			=> 'field_first_name',
+				'last_name'				=>'field_last_name',
+				'user_id'				=> 'field_sis_user_id',
+				'constant_registration' => 'field_course_ignore',
+	);
+	return array_merge($mapping, variable_get('s4_core_user_attribute_mappings', array()));
+}
+
+/**
+*  Implementation of hook_views_api()
+*/
+function s4_core_views_api() {
+	return array('api' => 3,
+				 'path' => drupal_get_path('module', 's4_core') .'/views',);
+}
+
+/**
+*	Implementation of hoook_element_info_alter
+*	So we can go ahead and remove input filter notices
+*/
+function s4_core_element_info_alter(&$type) {
+  // Change text format processing on elements to our version.
+  if (isset($type['text_format']['#process'])) {
+    foreach ($type['text_format']['#process'] as &$callback) {
+      if ($callback === 'filter_process_format') {
+        $callback = 's4_core_filter_process_format';
+      }
+    }
+  }
+}
+
+/**
+*	Callback to hide some of the input filter formatting
+*/
+function s4_core_filter_process_format($element) {
+  global $user;
+
+  $show_selection = TRUE;
+  if (isset($element['#entity_type'])) {
+    $show_selection  = user_access('show input filter select menu');
+  }
+  $show_tips       = FALSE;
+  $show_tips_link  = FALSE;
+
+  // Ensure that children appear as subkeys of this element.
+  $element['#tree'] = TRUE;
+  $blacklist = array(
+    // Make form_builder() regenerate child properties.
+    '#parents',
+    '#id',
+    '#name',
+    // Do not copy this #process function to prevent form_builder() from
+    // recursing infinitely.
+    '#process',
+    // Description is handled by theme_text_format_wrapper().
+    '#description',
+    // Ensure proper ordering of children.
+    '#weight',
+    // Properties already processed for the parent element.
+    '#prefix',
+    '#suffix',
+    '#attached',
+    '#processed',
+    '#theme_wrappers',
+  );
+  // Move this element into sub-element 'value'.
+  unset($element['value']);
+  foreach (element_properties($element) as $key) {
+    if (!in_array($key, $blacklist)) {
+      $element['value'][$key] = $element[$key];
+    }
+  }
+
+  $element['value']['#type'] = $element['#base_type'];
+  $element['value'] += element_info($element['#base_type']);
+
+  // Turn original element into a text format wrapper.
+  $path = drupal_get_path('module', 'filter');
+  $element['#attached']['js'][] = $path . '/filter.js';
+  $element['#attached']['css'][] = $path . '/filter.css';
+
+  // Setup child container for the text format widget.
+  $element['format'] = array(
+    '#type' => 'fieldset',
+    '#attributes' => array('class' => array('filter-wrapper')),
+  );
+
+  // Use the default format for this user if none was selected.
+  if (!isset($element['#format'])) {
+    $element['#format'] = filter_default_format($user);
+  }
+
+  // Prepare text format guidelines.
+  $element['format']['guidelines'] = array(
+    '#type' => 'container',
+    '#attributes' => array('class' => array('filter-guidelines')),
+    '#weight' => 20,
+  );
+  // Get a list of formats that the current user has access to.
+  $formats = filter_formats($user);
+  $options = array();
+  foreach ($formats as $format) {
+    // If not showing selection remove all formats except default.
+    if ($format->format !== $element['#format'] && !$show_selection) {
+      continue;
+    }
+    $options[$format->format] = $format->name;
+    if ($show_tips) {
+      $element['format']['guidelines'][$format->format] = array(
+        '#theme' => 'filter_guidelines',
+        '#format' => $format,
+      );
+    }
+  }
+
+  $element['format']['format'] = array(
+    '#type' => 'select',
+    '#title' => t('Text format'),
+    '#options' => $options,
+    '#default_value' => $element['#format'],
+    '#access' => $show_selection ? count($formats) > 1 : FALSE,
+    '#weight' => 10,
+    '#attributes' => array('class' => array('filter-list')),
+    '#parents' => array_merge($element['#parents'], array('format')),
+  );
+
+  if ($show_tips_link) {
+    $element['format']['help'] = array(
+      '#type' => 'container',
+      '#theme' => 'filter_tips_more_info',
+      '#attributes' => array('class' => array('filter-help')),
+      '#weight' => 0,
+    );
+  }
+
+  // Hide fieldset if not showing selector or tips.
+  if (!$show_selection) {
+    $element['format']['#attributes']['class'][] = 'element-invisible';
+  }
+
+  $all_formats = filter_formats();
+  $format_exists = isset($all_formats[$element['#format']]);
+  $user_has_access = isset($formats[$element['#format']]);
+  $user_is_admin = user_access('administer filters');
+
+  // If the stored format does not exist, administrators have to assign a new
+  // format.
+  if (!$format_exists && $user_is_admin) {
+    $element['format']['format']['#required'] = TRUE;
+    $element['format']['format']['#default_value'] = NULL;
+    // Force access to the format selector (it may have been denied above if
+    // the user only has access to a single format).
+    $element['format']['format']['#access'] = TRUE;
+  }
+  // Disable this widget, if the user is not allowed to use the stored format,
+  // or if the stored format does not exist. The 'administer filters' permission
+  // only grants access to the filter administration, not to all formats.
+  elseif (!$user_has_access || !$format_exists) {
+    // Overload default values into #value to make them unalterable.
+    $element['value']['#value'] = $element['value']['#default_value'];
+    $element['format']['format']['#value'] = $element['format']['format']['#default_value'];
+
+    // Prepend #pre_render callback to replace field value with user notice
+    // prior to rendering.
+    $element['value'] += array('#pre_render' => array());
+    array_unshift($element['value']['#pre_render'], 'filter_form_access_denied');
+
+    // Cosmetic adjustments.
+    if (isset($element['value']['#rows'])) {
+      $element['value']['#rows'] = 3;
+    }
+    $element['value']['#disabled'] = TRUE;
+    $element['value']['#resizable'] = FALSE;
+
+    // Hide the text format selector and any other child element (such as text
+    // field's summary).
+    foreach (element_children($element) as $key) {
+      if ($key != 'value') {
+        $element[$key]['#access'] = FALSE;
+      }
+    }
+  }
+
+  return $element;
+}
+
+/**
+*	Implementation of hook_action_info
+*/
+function s4_core_action_info() {
+	return array(
+		's4_core_email_site_coordinator_action' => array(
+	      'type' => 'system',
+	      'label' => t('Send coordinator e-mail'),
+	      'configurable' => TRUE,
+	      'triggers' => array('any'),
+	    ),
+	    's4_core_email_user_action' => array(
+	      'type' => 'system',
+	      'label' => t('Send user e-mail'),
+	      'configurable' => TRUE,
+	      'triggers' => array('any'),
+	    ),
+	    's4_core_document_about_to_expire_action' => array(
+	      'type' => 'notifications',
+	      'label' => t('Send notifications about document close to expiration date'),
+	      'configurable' => FALSE,
+	      'behavior' => array('sends_notification'),
+	      'triggers' => array('document_expiration'),
+	    ),
+	);
+}
+
+/**
+*	Action to send an email to the selected user
+*/
+function s4_core_email_user_action($entity, $context) {
+	drupal_mail('s4_core', 'action_send_email', $entity->mail, language_default(), $context);
+}
+
+/**
+*	Form callback for s4_core_email_user_action
+*/
+function s4_core_email_user_action_form($context) {
+	return s4_core_email_site_coordinator_action_form($context);
+}
+
+/**
+*	Form submit callback for s4_core_email_user_action
+*/
+function s4_core_email_user_action_submit($form, $form_state) {
+	return s4_core_email_site_coordinator_action_submit($form, $form_state);
+}
+
+/**
+*	Action to send an email to the selected site coordinator
+*/
+function s4_core_email_site_coordinator_action($entity, $context) {
+	$email = field_get_items('node', $entity, 'field_email');
+	if(!$email[0]['email']) {
+		return null;
+	}
+	drupal_mail('s4_core', 'action_send_email', $email[0]['email'], language_default(), $context);
+}
+
+/**
+*	Form callback for s4_core_email_site_coordinator_action
+*/
+function s4_core_email_site_coordinator_action_form($context) {
+  // Set default values for form.
+  if (!isset($context['recipient'])) {
+    $context['recipient'] = '';
+  }
+  if (!isset($context['subject'])) {
+    $context['subject'] = '';
+  }
+  if (!isset($context['message'])) {
+    $context['message'] = '';
+  }
+  $form['subject'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Subject'),
+    '#default_value' => $context['subject'],
+    '#maxlength' => '254',
+    '#description' => t('The subject of the message.'),
+  );
+  $form['message'] = array(
+    '#type' => 'text_format',
+    '#title' => t('Message'),
+    '#default_value' => $context['message'],
+    '#format' => null,
+    '#cols' => '80',
+    '#rows' => '15',
+  );
+  return $form;
+}
+
+/**
+ * Process s4_core_email_site_coordinator_action form submissions.
+ */
+function s4_core_email_site_coordinator_action_submit($form, $form_state) {
+  $params = array(
+    'subject'   => $form_state['values']['subject'],
+    'message'   => $form_state['values']['message'],
+  );
+  return $params;
+}
+
+/**
+*	Implementation of hook_mail
+*/
+function s4_core_mail($key, &$message, $params) {
+	$message['headers']['Content-type'] = 'text/html; charset=ISO-8859-1';
+	switch($key) {
+		case('action_send_email'): 
+			$message['subject'] = $params['subject'];
+			$message['body'] = $params['message'];
+			break;
+	}
+}
+
+/**
+*	Implementation of hook_form_alter()
+*	We are overriding the views bulk operations to change the display of the fieldset
+*/
+function s4_core_form_alter(&$form, $form_state, $form_id) {
+	if(strpos($form_id, 'views_form_') !== false && isset($form['views_bulk_operations'])) {
+		$form['#pre_render'][] = 's4_core_views_bulk_operations_pre_render';
+	}
+}
+
+/**
+*	Add some JavaScript to the node file form page
+*	to support different default dates and also
+*	disable ceratin fields
+*/
+function s4_core_form_file_node_form_alter(&$form, $form_state) {
+	drupal_add_js(drupal_get_path('module', 's4_core') .'/js/s4.node-file.js');
+	foreach($form['field_file_category'][$form['#node']->language]['#options'] as $tid => $taxonomy) {
+		$term = taxonomy_term_load($tid);
+		$days = field_get_items('taxonomy_term', $term, 'field_type_reminder_days');
+		$reminders[$tid] = $days[0]['value'];
+	}
+	drupal_add_js(array('file_category_reminders' => array('days' => $reminders,
+						'node_exists' => ($form['#node']->nid) ? TRUE : FALSE)), 
+				  'setting');	
+}
+
+/**
+*	Addes an additional class to hide the bulk operations fieldset
+*/
+function s4_core_views_bulk_operations_pre_render(&$form, $form_state = null) {
+	if(isset($form['select'])) {
+		$form['select']['#attributes']['class'][] = 'view-bulk-operations-wrapper';
+	}
+	return $form;
+}
+
+/**
+*	Implementation of hook_form_*_alter()
+*	Altering the views exposed form on the serach
+*	view to add placeholders as well as hiding the search button.
+*/
+function s4_core_form_views_exposed_form_alter(&$form, $form_state) {
+	if($form['#id'] == 'views-exposed-form-s4-search-page') {
+		$form['keys']['#attributes']['placeholder'] = 'Search';
+		$form['submit']['#attributes']['class'][] = 'element-invisible';
+	}
+}
+
+/**
+*	Implementation of hook_theme_registry_alter()
+*/
+function s4_core_theme_registry_alter(&$items) {
+	$items['views_savedsearches_list'] = array(
+      'arguments' => array('view', 'current_view_matches_sid'),
+      'function' => 'theme_s4_core_views_savedsearches_list',
+    );
+}
+
+/**
+*	Override the views saved searches form to remove the fieldset on certain
+*	pages and also rewrite the output
+*/
+function theme_s4_core_views_savedsearches_list($variables) {
+  global $user;
+  $view = $variables['view'];
+  $current_view_matches_sid = $variables['current_view_matches_sid'];
+  $output = '';
+
+  // Load saved searches for the current user, to use them as form options.
+  if(user_access('use all savedsearches')){
+    $saved_searches = views_savedsearches_load_multiple(NULL, $view->vid, $view->name);
+  }
+  else{
+    $saved_searches = views_savedsearches_load_multiple($user->uid, $view->vid, $view->name);
+  }
+  $options = _views_savedsearches_saved_searches_to_form_options($saved_searches, $view->get_path(), $current_view_matches_sid);
+
+  // Display a list of saved searches (if there are any) and allow the user to
+  // delete any of them.
+  if (count($options)) {
+    $output .= drupal_render(drupal_get_form('views_savedsearches_delete_search_form', $view, $options, $current_view_matches_sid));
+  }
+  else {
+    $output .= '<p>' . t('You have not saved any searches yet - when you perform a search, you will have the option to save it for the future here.') . '</p>';
+  }
+
+  return $output;
+}
+
+/**
+*	Implementation of hook_cron()
+*	Here we check on any signups which have expired and send out emails
+*/
+function s4_core_cron() {
+	$last_date = variable_get('s4_core_file_expiration_last_notice', time() - (7 * 24 * 60 * 60));
+	$query = db_select('field_data_field_expiration_reminder', 'r')
+		     ->fields('r', array('entity_id'))
+		     ->condition('field_expiration_reminder_value', 1);
+	$query->leftJoin('field_data_field_expiration_reminder_date', 'd', 'd.entity_id = r.entity_id');
+	$query->fields('d', array('field_expiration_reminder_date_value'))
+		  ->condition('field_expiration_reminder_date_value', date('Y-m-d', $last_date), '>=')
+		  ->condition('field_expiration_reminder_date_value', date('Y-m-d'), '<=')
+		  ->orderBy('field_expiration_reminder_date_value', 'DESC');
+	
+	$result = $query->execute();
+	foreach($result as $r) {
+		$node = node_load($r->entity_id);
+		_trigger_node($node, 'document_expiration');
+	}
+	variable_set('s4_core_file_expiration_last_notice', time());
+}
+
+function s4_core_tokens($type, $tokens, array $data = array(), array $options = array()) {
+  if ($type == 's4_signup') {
+    $signup = $object;
+    $tokens['site'] = 'your site';
+    return $tokens;
+  }
+}
+
+function s4_core_token_info() {
+	$type = array(
+		'name' => t('Student signup record'),
+		'description' => t('Tokens related to a student\'s signup record.'),
+	);
+	
+	$tokens['site'] = array('name' => 'Site name',
+    									 'description' => t('The name of the site'));
+    $tokens['coordinator'] = array('name' => 'Site coordinator',
+    									 'description' => t('The name of the coordinator'));
+    $tokens['evaluation_link'] = array('name' => 'Evaluation link',
+    									 'description' => t('A link to the user\'s site evaluation'));
+    return array(
+    	'types' => array('s4_signup' => $type),
+    	'tokens' => array('s4_signup' => $tokens),
+    );
+}
+
+/**
+*	Implementation of hook_notifications
+*/
+function s4_core_notifications($op) {
+  switch ($op) {
+    case 'subscription types':
+      $types['document_expiration'] = array(
+        'title' => t('Document expiration'),
+        'class' => 'Notifications_Document_Expiration',
+        'object_types' => array('node_type'),
+        'access' => array('subscribe to content'),
+        'description' => t('Subscribe to notifications when documents are about to expire.'),
+        'display_options' => array('node_links'),
+      );
+      return $types;
+
+    case 'field types':
+      return array();
+
+    case 'object types':
+      $types['document'] = array(
+        'title' => t('Signup'),
+        'class' => 'Notifications_Document',
+      );
+      return $types;
+
+    case 'event types':
+      $types['document_expiration'] = array(
+        'object' => 'node',
+        'action' => 'document_expiration',
+        'title' => t('Document is about to expire'),
+        'class' => 'Notification_Document_Expires_Event',
+        'template' => 's4_core-document-about-to-expire',
+        'triggers' => array('node' => array('document_expiration')),
+        'actions' => array('s4_core_document_about_to_expire_action'),
+      );
+      return $types;
+
+    case 'message templates':
+      $types['s4_core-document-about-to-expire'] = array(
+        'object' => 'node',
+        'title' => t('Document about to expire'),
+        'class' => 'Notification_Document_Expires_Template',
+      );
+      return $types;
+
+    case 'display options':
+      $options['node_links'] = array(
+        '#title' => t('Full node links'),
+        '#description' => t('Subscription links will be displayed for full node pages.'),
+      );
+      return $options;
+      
+    case 'event classes':
+      return array('node' => t('Node'));
+      
+    case 'event actions':
+      return array(
+        'document_expiration' => t('Document expiration'),
+      );
+  }
+}
+
+function s4_core_document_about_to_expire_action($node, $context = array()) {
+  $node = $context['node'];
+  if ($node->type == 'file') { 
+  	 s4_core_node_event('document_expiration', $node)->trigger();
+  }
+}
+
+function s4_core_notifications_subscription($op, $subscription = NULL) {
+  switch ($op) {
+    case 'page objects':
+      $objects = array();
+      // Return objects on current page to which we can subscribe
+      if (arg(0) == 'node' && is_numeric(arg(1)) && ($node = menu_get_object('file')) && $node->type == 'file') {
+        $objects[] = notifications_object('file', $node);  
+      }
+      return $objects;
+      break;
+  }  
+}
+
+function s4_core_node_event($action, $node) {
+  $page = &drupal_static(__FUNCTION__);
+  if (!isset($page[$action][$node->nid])) {
+    $page[$action][$node->nid] = notifications_event('document_expiration', $action)->add_object('node', $node);
+  }
+  return $page[$action][$node->nid];
+}
+
+function s4_core_trigger_info() {
+  return array(
+    'node' => array(
+      'document_expiration' => array(
+        'label' => t('A document is about to expire'),
+      ),
+    ),
+  );
+}

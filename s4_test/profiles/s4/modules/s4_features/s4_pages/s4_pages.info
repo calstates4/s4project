@@ -1,0 +1,5 @@
+name=S4 Pages
+description=Custom pages like the homepage for the S4 project
+package=S4 Project
+core=7.x
+version=1.0

@@ -1,0 +1,506 @@
+<?php
+/**
+ * @file
+ * Code for the S4 Courses feature.
+ */
+
+include_once('s4_courses.features.inc');
+
+/**
+*	Implementation of hook_menu
+*/
+function s4_courses_menu() {
+	$items = array();
+	
+	$items['admin/config/s4/courses'] = array(
+		'title' => 'Course Integration',
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('s4_courses_admin_form'),
+		'file' => 's4_courses.admin.inc',
+		'access arguments' => array('administer site configuration'),
+		'type' => MENU_LOCAL_TASK
+	);
+	
+	return $items;
+}
+
+function s4_courses_get_term_codes($requested_code = false) {
+	
+	return $term_codes;
+}
+
+/**
+*	Returns allowed term codes
+*/
+function s4_courses_get_allowed_term_codes() {
+	$year = date('Y', strtotime('-1 year'));
+	$codes = s4_courses_get_term_codes();
+	$values = array();
+	while(intval($year) < date('Y', strtotime('+3 years'))) {
+		$year_format = str_split($year, 1);
+		foreach($codes as $code => $value) {
+			$values[$year_format[0] . $year_format[2] . $year_format[3] . $code] = $value .' '. $year;
+		}
+		$year = date('Y', strtotime('+1 year', strtotime($year. '-1-1')));
+	}
+	return $values;
+}
+
+/**
+*	Implementation of hook_cron
+*	On cron we check courses periodically and create new course or
+*	term nodes.
+*/
+function s4_courses_cron() {
+	if(time() > variable_get('s4_term_cron_last_update', 0) + variable_get('s4_courses_update_frequency', (2 * 60 * 60))) {
+		$terms = module_invoke_all('s4_get_term', date('Y-m-d', strtotime('-1 year')),
+												   date('Y-m-d', strtotime('+1 year')));
+		foreach($terms as $term) {
+			s4_courses_create_term($term);
+		}
+		variable_set('s4_term_cron_last_update', time());
+		return null;
+	}
+	if(time() > variable_get('s4_courses_cron_last_update', 0) + variable_get('s4_courses_update_frequency', (2 * 60 * 60))) {
+		
+		variable_set('s4_courses_cron_last_update', time());
+	}
+	
+	
+}
+
+/**
+*	Implementation of hook_user_login
+*	On login, we cal user enrollment and faculty
+*	enrollment hooks to see what courses are assigned
+*	to the current user.
+*/
+function s4_courses_user_login(&$edit, $account) {
+	$user_id = field_get_items('user', $account, 'field_sis_user_id');
+	if(!$user_id) {
+		return null;
+	}
+	$user_id = $user_id[0]['value'];
+	$hooks = array('s4_get_user_enrollment' => 'students', 
+				   's4_get_faculty_courses' => 'faculty');
+	foreach(_s4_courses_get_current_terms() as $term) {
+		
+		foreach($hooks as $hook => $course_role) {
+			$courses = module_invoke_all($hook, $user_id, $term);
+			foreach($courses as $course) {
+				s4_courses_create_course($course, $account->uid, $course_role);
+			} 
+		}
+	}
+}
+
+/**
+*	Creates a term node using information from the SIS hooks
+*/
+function s4_courses_create_term($term) {
+	$term_node = s4_core_get_entity($term, 'term');
+	if(!$term_node) {
+		$term_node = new stdClass();
+		$term_node->type = 'course_term';
+		$term_node->language = language_default()->language;
+		$term_node->s4_unique_id = s4_core_make_hash($term, 'term');
+	}
+	$term_node->title = $term['term_title'];
+	$term_node->field_term_code[$term_node->language][0]['value'] = $term['term_code'];
+	$term_node->field_term_date_start[$term_node->language][0] = array(
+								'value'  => date('Y-m-d', strtotime($term['start_date'])),
+								'value2' => date('Y-m-d', strtotime($term['end_date']))
+							);
+	node_save($term_node);
+}
+
+/**
+*	Creates a course node using information from the SIS hooks.
+*	@param course The course array returned from the hook
+*	@param add_user An additional user ID to add, useful if this is
+*					being called as part of a known user's enrollment
+*	@param add_user If a user is set above, also set the role -
+				    either "students" or "faculty"
+*/
+function s4_courses_create_course($course, $add_user= FALSE, $add_role = FALSE) {
+	$course_node = s4_core_get_entity($course, 'course');
+	if(!$course_node) {
+		$course_node = new stdClass();
+		$course_node->type = 'course';
+		$course_node->language = language_default()->language;
+		$course_node->s4_unique_id = s4_core_make_hash($course, 'course');
+		foreach(_s4_courses_get_field_mapping() as $field => $key) {
+			$course_node->{$field} = array($course_node->language => array(
+									       array('value' => $course[$key],)
+									       ));
+		}
+		node_save($course_node);
+	}
+	if($course_node->nid && $add_user) {
+		$course[$add_role][] = $add_user;
+	}
+	if(count($course['students']) || count($course['faculty'])) {
+		foreach(array('students', 'faculty') as $role) {
+			$field_name = 'field_course_'. $role;
+			$users = field_get_items('node', $course_node, $field_name);
+			$existing = array();
+			if($users) {
+				foreach($users as $user) {
+					$existing[$user['uid']] = $user['uid'];
+				}
+			}
+			else {
+				$users = array();
+			}
+			foreach($course[$role] as $user) {
+				if(is_numeric($user) && !$existing[$user]) {
+					//This is a user ID, just add it
+					$users[] = array('uid' => $user);
+				}
+				elseif(is_array($user)) {
+					//This is a user object, create or load them
+					$user = s4_core_create_user($user);
+					$users[] = array('uid' => $user->uid);
+				}
+			}
+			$course_node->{$field_name}[$course_node->language] = $users;
+		}
+		node_save($course_node);
+	}
+}
+
+/**
+*	Retrieves all field mappings from Drupal fields to
+*	the array keys returned by S4 hooks.
+*	@todo - This should probably be a bit smarter than a 
+*	single array.
+*/
+function _s4_courses_get_field_mapping($type = 'course') {
+	if($type == 'course') {
+		return array(
+			'field_course_subject' => 'subject',
+			'field_course_catalog_number' => 'catalog_number',
+			'field_course_section' => 'section',
+			'field_course_title' => 'title',
+			'field_course_status' => 'status'
+		);
+	}
+}
+
+/**
+*	Returns all terms that cover the current time.
+*	This is primarily used when making API calls to see what
+*	courses are available generally or for a user.
+*/
+function _s4_courses_get_current_terms() {
+	if($cache = cache_get('s4_core_current_terms', FALSE)) {
+		return $cache->data;
+	}
+	$terms = db_query('SELECT entity_id FROM {field_data_field_term_date_start} WHERE 
+					   field_term_date_start_value <= NOW() 
+					   AND field_term_date_start_value2 >= NOW()
+					   ORDER BY field_term_date_start_value');
+	$term_results = array();
+	foreach($terms as $term) {
+		$term = node_load($term->entity_id);
+		$term_code = field_get_items('node', $term, 'field_term_code');
+		$term_results[$term_code[0]['value']] = $term_code[0]['value'];
+	}
+	cache_set('s4_core_current_terms', $term_results, 'cache', time() + (4 * 60 * 60));
+	return $term_results;
+}
+
+
+/**
+*	Implementation of hook_s4_user_status
+*/
+function s4_courses_s4_user_status(&$status) {
+	if(isset($_SESSION['s4_signup_course'])) {
+		$course = node_load($_SESSION['s4_signup_course']);	
+	}
+	if(isset($course)) {
+		$selection = '<div class="selection">'. l($course->title, 'node/'. $course->nid) .'</div>';
+	}
+	$status = array('course' => array('data' 	=> 'Course',
+					  'id' 		=> 'status-course',
+					  'href'	=> 'my-courses',
+					  'class'	=> (isset($_SESSION['s4_signup_course'])) ? array('done') : array(),
+					  'selection' => (isset($selection)) ? $selection : false)) + $status;
+}
+
+/**
+*	Implementation of hook_s4_signup
+*/
+function s4_courses_s4_signup($type, $nid) {
+	if($type == 'course') {
+		$course = node_load($nid);
+		if($course->type == 'course') {
+			$_SESSION['s4_signup_course'] = check_plain($nid);
+			drupal_set_message(t('Course @course selected.', array('@course' => $course->title)));
+			$sites = field_get_items('node', $course, 'field_sites');
+			if(!count($sites)) {
+				drupal_goto('site-list');
+			}
+			else {
+				
+				$argument = array();
+				foreach($sites as $site) {
+					$argument[] = $site['nid'];
+				}
+				drupal_goto('site-list/'. implode('+', $argument));
+			}
+		}
+		else {
+			$success = false;
+			drupal_set_message('That is not a course', 'error');
+		}
+	}
+}
+
+function s4_courses_s4_signup_dates($node) {
+	$course = node_load($node->field_course[$node->language][0]['nid']);
+	if(!$course) {
+		return array('date' => 0, 'weight' => 0);
+	}
+	$course_date = field_get_items('node', $course, 'field_service_end');
+	if($course_date[0]['value']) {
+		return array('date' => strtotime($course_date[0]['value']),
+					 'weight' => 50);
+	}
+	$term = field_get_items('node', $course, 'field_term');
+	$term = node_load($term[0]['value']);
+	if($term) {
+		$term_date = field_get_items('node', $term, 'field_term_date_start');
+		return array('date' => strtotime($term_date[0]['value2']),
+					 'weight' => 50);
+	}
+	return 0;
+}
+
+/**
+*  Implementation of hook_views_api()
+*/
+function s4_courses_views_api() {
+	return array('api' => 3,
+				 'path' => drupal_get_path('module', 's4_courses') .'/views',);
+}
+
+/**
+*	Implementation of hook_block_info
+*/
+function s4_courses_block_info() {
+	$blocks['s4_courses_add_course'] = array('info' => 'Add new course button');
+	$blocks['s4_courses_subscriptions'] = array('info' => 'Subscribe to new signups');
+	return $blocks;
+}
+
+/**
+*	Implementation of hook_block_view
+*/
+function s4_courses_block_view($delta) {
+	switch($delta) {
+		case 's4_courses_add_course':
+			if(user_access('create course content')) {
+				return array('content' => l('<span class="add"></span>Add new course', 
+									'node/add/course', 
+									array('html' => TRUE,
+									 	  'attributes' => 
+										  array('class' => 'button add')
+									)
+									)
+					);
+			}
+			break;
+		case 's4_courses_subscriptions':
+			global $user;
+			$node = menu_get_object();
+			$faculty = field_get_items('node', $node, 'field_course_faculty');
+			foreach($faculty as $uid) {
+				if($uid['uid'] == $user->uid) {
+					$query = db_select('notifications_subscription', 's');
+					$query->leftJoin('notifications_subscription_fields', 'f', 's.sid = f.sid');
+					$query->condition('s.uid', $user->uid)
+						  ->condition('s.type', 'course_signup')
+						  ->condition('f.type', 'node:nid')
+						  ->condition('f.value', $node->nid)
+						  ->fields('s', array('sid'));
+					$subscription = $query->execute()->fetchField();
+					if($subscription) {
+						$text = '<span class="hover">Unsubscribe</span><span class="nohover">Subscribed</span>';
+						$url = 'notifications/unsubscribe/'. $subscription;
+						$query = array(0 => $node->nid, 'destination' => 'node/'. $node->nid);
+						$class = 'subscribed';
+					}
+					else {
+						$text = 'Subscribe to signups';
+						$url = 'notifications/subscribe/course_signup';
+						$query = array(0 => $node->nid, 'destination' => 'node/'. $node->nid);
+						$class = 'not-subscribed';
+					}
+					return array('content' => l($text, $url, 
+												array('query' => $query, 
+													  'html' => true,
+													  'attributes' => 
+													  	array('class' => 'subscription-button '. $class)
+													  )
+												)
+								);
+				}
+			}
+			break;
+	}
+}
+
+/**
+*	Implementation of hook_notifications
+*/
+function s4_courses_notifications($op) {
+  switch ($op) {
+    case 'subscription types':
+      $types['course_signup'] = array(
+        'title' => t('Course signups'),
+        'class' => 'Notifications_Course_Subscription',
+        'field_types' => array('node:nid'),
+        'object_types' => array('node'),
+        'access' => array('subscribe to content'),
+        'description' => t('Subscribe to all signups for this course.'),
+        'display_options' => array('node_links'),
+      );
+      return $types;
+
+    case 'field types':
+      return array();
+
+    case 'object types':
+      $types['signup'] = array(
+        'title' => t('Signup'),
+        'class' => 'Notifications_Signup',
+      );
+      return $types;
+
+    case 'event types':
+      $types['course_signup'] = array(
+        'object' => 'node',
+        'action' => 'course_signup',
+        'title' => t('Signup created'),
+        'class' => 'Notifications_Course_Signup_Post_Event',
+        'template' => 's4_courses-singup-created',
+        'triggers' => array('node' => array('course_signup')),
+        'actions' => array('s4_courses_signup_post_action'),
+      );
+      return $types;
+
+    case 'message templates':
+      $types['s4_courses-singup-created'] = array(
+        'object' => 'node',
+        'title' => t('Signup created'),
+        'class' => 'Notifications_Course_Signup_Post_Event',
+      );
+      return $types;
+
+    case 'display options':
+      $options['node_links'] = array(
+        '#title' => t('Full node links'),
+        '#description' => t('Subscription links will be displayed for full node pages.'),
+      );
+      return $options;
+      
+    case 'event classes':
+      return array('node' => t('Node'));
+      
+    case 'event actions':
+      return array(
+        'course_signup' => t('Creation'),
+      );
+  }
+}
+
+function s4_courses_signup_post_action($node, $context = array()) {
+  $node = $context['node'];
+  if ($node->type == 'course') { 
+  	 s4_courses_node_event('course_signup', $node)->trigger();
+  }
+}
+
+function s4_courses_action_info() {
+  return array(
+    's4_courses_signup_post_action' => array(
+      'type' => 'notifications',
+      'label' => t('Send notifications for new signups'),
+      'configurable' => FALSE,
+      'behavior' => array('sends_notification'),
+      'triggers' => array('course_signup'),
+    ),
+  );
+}
+
+function s4_courses_notifications_subscription($op, $subscription = NULL) {
+  switch ($op) {
+    case 'page objects':
+      $objects = array();
+      // Return objects on current page to which we can subscribe
+      if (arg(0) == 'node' && is_numeric(arg(1)) && ($node = menu_get_object('node')) && $node->type == 'course') {
+        $objects[] = notifications_object('signup', $node);  
+      }
+      return $objects;
+      break;
+  }  
+}
+
+function s4_courses_node_event($action, $node) {
+  $page = &drupal_static(__FUNCTION__);
+  if (!isset($page[$action][$node->nid])) {
+    $page[$action][$node->nid] = notifications_event('course_signup', $action)->add_object('node', $node);
+  }
+  return $page[$action][$node->nid];
+}
+
+function s4_courses_node_insert($node) {
+  if($node->type == 'signup') {
+  	$course = field_get_items('node', $node, 'field_course');
+  	$course = node_load($course[0]['nid']);
+  	_trigger_node($course, 'course_signup');
+  }
+}
+
+function s4_courses_trigger_info() {
+  return array(
+    'node' => array(
+      'course_signup' => array(
+        'label' => t('A signup is registered for a course'),
+      ),
+    ),
+  );
+}
+
+function s4_courses_tokens($type, $tokens, array $data = array(), array $options = array()) {
+  if ($type == 's4_signup') {
+    $signup = $object;
+    $tokens['site'] = 'your site';
+    return $tokens;
+  }
+}
+
+function s4_courses_token_info() {
+	$type = array(
+		'name' => t('Student course'),
+		'description' => t('Tokens related to a student\'s course that they used to signup with.'),
+	);
+	
+	$tokens['course_short'] = array('name' => 'Short course name',
+    									 'description' => t('The subject, catalog number, and section'));
+    $tokens['course_long'] = array('name' => 'Long course name',
+    									 'description' => t('The full subject, catalog number, section, and title of the course'));
+    $tokens['course_link'] = array('name' => 'Course link',
+    									 'description' => t('A link to the course'));
+    $tokens['course_term'] = array('name' => 'Term',
+    									 'description' => t('The term (i.e "Fall 2011")'));
+    $tokens['course_faculty'] = array('name' => 'Faculty',
+    									 'description' => t('A list of the course faculty names'));
+    
+    
+    return array(
+    	'types' => array('s4_signup' => $type),
+    	'tokens' => array('s4_signup' => $tokens),
+    );
+}

@@ -1,0 +1,68 @@
+<?php
+/**
+ * @file
+ * Code for the S4 Sites feature.
+ */
+
+include_once('s4_sites.features.inc');
+
+/**
+*	Implementation of hook_menu_alter()
+*/
+
+function s4_sites_menu_alter(&$items) {
+	$items['node/%/contact-records']['access callback'] = '_s4_sites_site_admin_view_access';
+	$items['node/%/contact-records']['access arguments'] = array(1);
+}
+
+/**
+*	Menu access test for site contact records
+*/
+function _s4_sites_site_admin_view_access($nid) {
+	$node = node_load($nid);
+	return (node_access('update', $node) && $node->type == 'site');
+}
+
+/**
+*	Implementation of hook_init
+*/
+function s4_sites_init() {
+	drupal_add_js(drupal_get_path('module', 's4_sites') .'/js/s4_map.js');
+}
+
+/**
+*	Implementation of hook_block_info()
+*/
+function s4_sites_block_info() {
+	$blocks['s4_sites_search_help'] = array('info' => 'Site list help');
+	$blocks['s4_sites_search_map'] = array('info' => 'Site list map');
+	return $blocks;
+}
+
+function s4_sites_block_view($delta) {
+	switch($delta) {
+		case 's4_sites_search_help':
+			return array('subject' => '',
+						 'content' => t('<p>Use this search form to find a site that meets your specific needs. Clicking on the <strong>Map link</strong> will show the location of that site on the map to the right.</p>'));
+			break;
+		case 's4_sites_search_map':
+			if(!module_exists('gmap')) {
+				return null;
+			}
+			$map = array(
+				 '#type' => 'gmap',
+				 '#gmap_settings' => array(
+					'zoom' => 10,
+					'width' => '100%',
+					'height' => '300px',
+					'id' => 'site-map',
+					'maptype' => 'world-light',
+					'controltype' => 'Small'
+				),
+			);
+			return array('subject' => '',
+						 'content' => drupal_render($map) . t('<h4>!link</h4>', array('!link' => l('View large map', 'map'))));
+			break;
+	}
+	
+}
