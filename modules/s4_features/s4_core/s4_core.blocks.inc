@@ -8,7 +8,7 @@ function s4_core_block_user_progress() {
   if (!s4_core_user_can_signup($user)) {
     return NULL;
   }
-  drupal_add_css(drupal_get_path('module', 's4_core') .'/css/status.css');
+  drupal_add_css(drupal_get_path('module', 's4_core') . '/css/status.css');
   $status = array();
   
   if (isset($_SESSION['s4_signup_site'])) {
@@ -19,7 +19,7 @@ function s4_core_block_user_progress() {
   }
   
   if (isset($site)) {
-    $site_selection = '<div class="selection">'. l($site->title, 'node/'. $site->nid) .'</div>';
+    $site_selection = '<div class="selection">' . l($site->title, 'node/' . $site->nid) . '</div>';
   }
   $status['site'] = array('data'  => 'Site',
             'id'     => 'status-site',
@@ -35,14 +35,14 @@ function s4_core_block_user_progress() {
       $site_coordinators = views_get_view_result('site_coordinators', 'block', $site->nid);
     }
     if (isset($coordinator)) {
-      $coordinator_selection = '<div class="selection">'. 
-            l($coordinator->title, 'node/'. $coordinator->nid) .'</div>';
+      $coordinator_selection = '<div class="selection">' . 
+            l($coordinator->title, 'node/' . $coordinator->nid) . '</div>';
     }
     if (!$site || count($site_coordinators)) {
       $status['coordinator'] = array('data' => 'Coordinator',
               'id'   => 'status-coordinator',
                 'class'   => (isset($coordinator)) ? array('done') : array(),
-              'href' => 'sites/'. $site->nid .'/coordinators',
+              'href' => 'sites/' . $site->nid . '/coordinators',
               'selection' => (isset($coordinator_selection))
                          ? $coordinator_selection
                          : FALSE
@@ -55,20 +55,20 @@ function s4_core_block_user_progress() {
       $status['form'] = array('data' => 'Form',
               'id'   => 'status-form',
                 'class'   => (isset($form_done)) ? array('done') : array(),
-              'href' => 'node/'. $form[0]['nid'],
+              'href' => 'node/' . $form[0]['nid'],
               'selection' => FALSE
               );
     }
   }
   foreach (module_implements('s4_user_status') as $module) {
     //Iterate over modules and pass status by reference
-    $function_name = $module .'_s4_user_status';
+    $function_name = $module . '_s4_user_status';
     $function_name($status);
   }
   
   $number = 1;
   foreach ($status as $key => $stat) {
-    $status[$key]['data'] = '<div><span class="number">'. ($number) .'</span>'. $stat['data'] .'</div>';
+    $status[$key]['data'] = '<div><span class="number">' . ($number) . '</span>' . $stat['data'] . '</div>';
     if (isset($stat['href'])) {
       $status[$key]['data'] = l($status[$key]['data'], $stat['href'], array('html' => TRUE));
       $status[$key]['class'][] = 'clickable';
@@ -78,7 +78,7 @@ function s4_core_block_user_progress() {
       $status[$key]['data'] .= $stat['selection'];
       unset($status[$key]['selection']);
     }
-    $status[$key]['class'][] = 'items-'. count($status);
+    $status[$key]['class'][] = 'items-' . count($status);
     $number++;
   }
   $finished = ($_GET['finished'] == 'finished')
@@ -87,7 +87,7 @@ function s4_core_block_user_progress() {
   $status[] = array('data' => '<div>Done!</div>',
             'class' => array('complete', $finished));
   return array('subject' => 'Follow these steps to sign up for service:',
-         'content' => theme('item_list', array('items' => $status, 'attributes' => array('class' => 'user-signup-status'))) .'<div class="clearfix"></div>');
+         'content' => theme('item_list', array('items' => $status, 'attributes' => array('class' => 'user-signup-status'))) . '<div class="clearfix"></div>');
 }
 
 /**
@@ -103,7 +103,7 @@ function _s4_core_get_course_site_arguments($course) {
   foreach ($sites as $site) {
     $site_arguments[] = $site['nid'];
   }
-  return 'site-list/'. implode('+', $site_arguments);
+  return 'site-list/' . implode('+', $site_arguments);
 }
 
 /**
@@ -122,9 +122,9 @@ function s4_core_block_user_site_signup() {
     $output = '<div class="signup denied"><div class="icon"></div>You can\'t sign up for this site.</div>';
   }
   else {
-    $output = '<div class="signup"><div class="icon"></div>'. 
-          l('Signup for this site', 's4/signup/site/'. $node->nid,
-           array('attributes' => array('data-target' => 'status-site'))) .'</div>';
+    $output = '<div class="signup"><div class="icon"></div>' . 
+          l(t('Signup for this site'), 's4/signup/site/' . $node->nid,
+           array('attributes' => array('data-target' => 'status-site'))) . '</div>';
   }
   return array('subject' => '',
          'content' => $output);
@@ -144,7 +144,7 @@ function s4_core_block_site_list_course_restriction() {
     if (!arg(1)) {
       $output = t('This is a list of all sites; however, you are restricted by @course to sign up for only a few sites. !link', 
           array('@course' => $course->title,
-                '!link' => l('View list of allowed sites.', _s4_core_get_course_site_arguments($course))));
+                '!link' => l(t('View list of allowed sites.'), _s4_core_get_course_site_arguments($course))));
     }
     else {
       $output = t('You are restricted to selecting from the following sites for @course.', 
@@ -154,10 +154,10 @@ function s4_core_block_site_list_course_restriction() {
   else {
     $output = t('Your faculty for @course suggest the following sites; however, you are allowed to select a !link.', 
           array('@course' => $course->title,
-              '!link' => l('site not included on this list', 'site-list')));
+              '!link' => l(t('site not included on this list'), 'site-list')));
   }
   return array('subject' => '',
-         'content' => '<p class="intro">'. $output .'</p>');
+         'content' => '<p class="intro">' . $output . '</p>');
 }
 
 /**
@@ -195,16 +195,16 @@ function s4_core_block_s4_user_login() {
   foreach ($login_options as $option => $audience) {
     if (count($audience) > 2) {
       end($audience);
-      $audience[key($audience)] = '&amp; '. current($audience);
+      $audience[key($audience)] = '&amp; ' . current($audience);
       $join_list = ',';
     }
     $audience = ucfirst(implode(((isset($join_list)) ? $join_list : ' &amp;') . ' ', $audience));
-    $output[] = t('<strong>!audience:</strong> ', array('!audience' => $audience)) .
-          l('Login', $login_destinations[$option], 
+    $output[] = t('<strong>!audience:</strong>', array('!audience' => $audience)) . ' ' .
+          l(t('Login'), $login_destinations[$option], 
               array('query' => array('destination' => 'dashboard')));
   }
   return array('subject' => NULL,
-         'content' => '<p class="intro">'. implode('<br/>', $output) .'</p>');
+         'content' => '<p class="intro">' . implode('<br/>', $output) . '</p>');
 }
 
 
@@ -213,7 +213,7 @@ function s4_core_block_s4_user_login() {
 *  Simple form to let managers jump to a node by it's number
 */
 function s4_core_block_jump_to_node() {
-  drupal_add_js(drupal_get_path('module', 's4_core') .'/css/jump_form.css');
+  drupal_add_js(drupal_get_path('module', 's4_core') . '/css/jump_form.css');
   return array('subject' => '',
          'content' => drupal_get_form('s4_core_block_jump_form'));
 }
@@ -247,7 +247,7 @@ function s4_core_block_s4_page_notifications() {
     $links[] = drupal_render($link);
   }
   if (count($links)) {
-    drupal_add_css(drupal_get_path('module', 's4_core') .'/css/subscriptions.css');
+    drupal_add_css(drupal_get_path('module', 's4_core') . '/css/subscriptions.css');
     return array('subject' => 'Subscriptions',
           'content' => theme('item_list', array('items' => $links))
          );
@@ -273,8 +273,8 @@ function _s4_core_block_webform($field) {
         return NULL;
       }
       foreach ($form->webform['components'] as $k => $component) {
-        $output .= '<p><span class="form-label">'. $component['name'] .':</span>';
-        $output .= '<span class="form-value">'. implode("\n", $submission->data[$k]['value']) .'</span></p>';
+        $output .= '<p><span class="form-label">' . $component['name'] . ':</span>';
+        $output .= '<span class="form-value">' . implode("\n", $submission->data[$k]['value']) . '</span></p>';
       }
       
           return array('subject' => 'Signup form',
@@ -287,7 +287,7 @@ function _s4_core_block_webform($field) {
 */
 function s4_core_block_s4_add_new_site() {
   if (user_access('create site content')) {
-    return array('content' => l('<span class="add"></span>Add new site', 
+    return array('content' => l(t('<span class="add"></span>Add new site'), 
                   'node/add/site', 
                   array('html' => TRUE,
                        'attributes' => 
@@ -306,10 +306,10 @@ function s4_core_block_s4_add_new_site() {
 function s4_core_block_s4_add_new_coordinator() {
   if (user_access('create site content')) {
     $node = menu_get_object();
-    return array('content' => l('<span class="add"></span>'. t('Add new coordinator'), 
-                  'node/add/coordinator/'. $node->nid, 
+    return array('content' => l('<span class="add"></span>' . t('Add new coordinator'), 
+                  'node/add/coordinator/' . $node->nid, 
                   array('html' => TRUE,
-                      'query' => array('destination' => 'node/'. $node->nid),
+                      'query' => array('destination' => 'node/' . $node->nid),
                        'attributes' => 
                       array('class' => 'button add')
                   )
@@ -326,7 +326,7 @@ function s4_core_block_s4_report_export_link() {
   $arguments = $_GET;
   $url = $_GET['q'];
   unset($arguments['q']);
-  return array('content' => l('Export data', $url .'/export', 
+  return array('content' => l(t('Export data'), $url . '/export', 
                 array('query' => $arguments,
                     'attributes' => array('class' => 'button export-link'))));
 }
@@ -338,7 +338,7 @@ function s4_core_block_s4_subscribe_file_expiration() {
   if (!user_access('get file expiration notifications')) {
     return NULL;
   }
-  drupal_add_css(drupal_get_path('module', 's4_core') .'/css/subscriptions.css');
+  drupal_add_css(drupal_get_path('module', 's4_core') . '/css/subscriptions.css');
   global $user;
   $query = db_select('notifications_subscription', 'n');
   $query->condition('n.uid', $user->uid)
@@ -347,14 +347,14 @@ function s4_core_block_s4_subscribe_file_expiration() {
   $result = $query->execute();
   $sid = $result->fetchField();
   if ($sid) {
-    $link = l('<span class="hover">Unsubscribe to file expiration notifications</span><span class="nohover">Subscribed to file expiration notifications</span>',
-          'notifications/unsubscribe/'. $sid,
+    $link = l(t('<span class="hover">Unsubscribe to file expiration notifications</span><span class="nohover">Subscribed to file expiration notifications</span>'),
+          'notifications/unsubscribe/' . $sid,
           array('html' => TRUE,
               'attributes' => array('class' => 'subscription-button subscribed'),
               'query' => array('destination' => $_GET['q'])));
   }
   else {
-    $link = l('Subscribe to file expiration notifications',
+    $link = l(t('Subscribe to file expiration notifications'),
           'notifications/subscribe/document_expiration',
           array('html' => TRUE,
               'attributes' => array('class' => 'subscription-button not-subscribed'),

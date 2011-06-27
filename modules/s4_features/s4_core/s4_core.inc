@@ -120,7 +120,7 @@ class Notification_Document_Expires_Template extends Notifications_Node_Event_Te
         return array(
           '#tokens' => TRUE,
           'title' => '[node:title] is about to expire',
-          'more' =>t('view the file [node:url]', array(), $options),
+          'more' => t('view the file [node:url]', array(), $options),
         );
       default:
         return parent::default_text($type, $options);
