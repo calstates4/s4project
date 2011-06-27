@@ -27,7 +27,7 @@ function _s4_sites_site_admin_view_access($nid) {
 *  Implementation of hook_init
 */
 function s4_sites_init() {
-  drupal_add_js(drupal_get_path('module', 's4_sites') .'/js/s4_map.js');
+  drupal_add_js(drupal_get_path('module', 's4_sites') . '/js/s4_map.js');
 }
 
 /**
@@ -40,14 +40,14 @@ function s4_sites_block_info() {
 }
 
 function s4_sites_block_view($delta) {
-  switch($delta) {
+  switch ($delta) {
     case 's4_sites_search_help':
       return array('subject' => '',
              'content' => t('<p>Use this search form to find a site that meets your specific needs. Clicking on the <strong>Map link</strong> will show the location of that site on the map to the right.</p>'));
       break;
     case 's4_sites_search_map':
-      if(!module_exists('gmap')) {
-        return null;
+      if (!module_exists('gmap')) {
+        return NULL;
       }
       $map = array(
          '#type' => 'gmap',

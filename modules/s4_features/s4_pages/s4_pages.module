@@ -75,8 +75,8 @@ function s4_pages_block_info() {
 *  Implementation of hook_block_view
 */
 function s4_pages_block_view($delta) {
-  $function_name = 's4_pages_'. $delta;
-  if(function_exists($function_name)) {
+  $function_name = 's4_pages_' . $delta;
+  if (function_exists($function_name)) {
     return $function_name();
   }
 }
@@ -87,15 +87,15 @@ function s4_pages_block_view($delta) {
 
 function s4_pages_add_contact_record() {
   $node = menu_get_object();
-  return array('subject' => null,
-         'content' => '<h2>Contact records</h2><div class="spacer-30">'.
+  return array('subject' => NULL,
+         'content' => '<h2>Contact records</h2><div class="spacer-30">' .
                  l('<span class="add"></span>Add new record', 
-                 'node/add/contact-record/'. $node->nid,
-                 array('html' => true,
+                 'node/add/contact-record/' . $node->nid,
+                 array('html' => TRUE,
                      'attributes' => array('class' => 'button add'),
                      'query' => array('destination' => 
-                       'node/'. $node->nid .'/contact-files')))
-                  .'</div>');
+                       'node/' . $node->nid . '/contact-files')))
+                  . '</div>');
 }
 
 /**
@@ -103,15 +103,15 @@ function s4_pages_add_contact_record() {
 */
 function s4_pages_add_site_file() {
   $node = menu_get_object();
-  return array('subject' => null,
-         'content' => '<h2>Site files</h2><div class="spacer-30">'.
+  return array('subject' => NULL,
+         'content' => '<h2>Site files</h2><div class="spacer-30">' .
                  l('<span class="add"></span>Add new file', 
-                 'node/add/file/'. $node->nid,
-                 array('html' => true,
+                 'node/add/file/' . $node->nid,
+                 array('html' => TRUE,
                      'attributes' => array('class' => 'button add'),
                      'query' => array('destination' => 
-                       'node/'. $node->nid .'/contact-files')))
-                  .'</div>');
+                       'node/' . $node->nid . '/contact-files')))
+                  . '</div>');
 }
 
 /**
@@ -130,8 +130,8 @@ function s4_pages_theme() {
 *  Overview paragraph;
 */
 function s4_pages_overview_paragraph() {
-  drupal_add_css(drupal_get_path('module', 's4_pages') .'/css/overview.css');
-  if($cache = cache_get('s4_pages_overview_data')) {
+  drupal_add_css(drupal_get_path('module', 's4_pages') . '/css/overview.css');
+  if ($cache = cache_get('s4_pages_overview_data')) {
     $data = $cache->data;
   }
   else {
@@ -156,7 +156,7 @@ function s4_pages_overview_paragraph() {
     $data['students'] = $query->countQuery()->execute()->fetchField();
     cache_set('s4_pages_overview_data', $data, 'cache', time() + (1 * 60 * 60));
   }
-  return array('subject' => null,
+  return array('subject' => NULL,
          'content' => theme('overview_paragraph', array('data' => $data)));
 }
 
@@ -175,6 +175,6 @@ function s4_pages_dashboard_title() {
                  array('@name' => $name))
        : t('Hi, @name, what would you like to do?',
                  array('@name' => $name));
-  return array('subject' => null,
-         'content' => '<h1>'. $title .'</h1>');
+  return array('subject' => NULL,
+         'content' => '<h1>' . $title . '</h1>');
 }

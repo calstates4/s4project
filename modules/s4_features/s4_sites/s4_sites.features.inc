@@ -60,7 +60,7 @@ function s4_sites_node_info() {
     'file' => array(
       'name' => t('File'),
       'base' => 'node_content',
-      'description' => t('A file is a record of a file for a site. '),
+      'description' => t('A file is a record of a file for a site.'),
       'has_title' => '1',
       'title_label' => t('File name'),
       'help' => t('Use files to store service agreements, workers\' comp paperwork, or other files that need to be tracked and possibly remind others when they expire.'),

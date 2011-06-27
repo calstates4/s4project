@@ -3776,7 +3776,7 @@ function s4_sites_field_default_fields() {
   t('Additional users');
   t('Attach a few photos of the site. The first image will be used in the site preview.');
   t('Body');
-  t('Check off who is allowed to sign up with this site. ');
+  t('Check off who is allowed to sign up with this site.');
   t('Contact email');
   t('Contact tags');
   t('Contact type');
@@ -3787,7 +3787,7 @@ function s4_sites_field_default_fields() {
   t('Enter information about the physical location of this site.');
   t('Enter information that you need to show students regarding the health or safety of this site. This information will be repeated on the signup form.');
   t('Enter the URL to this site\'s website.');
-  t('Enter the number of days before a file of this type expires that an email reminder should be sent to department staff. ');
+  t('Enter the number of days before a file of this type expires that an email reminder should be sent to department staff.');
   t('Evaluation Form');
   t('Expiration date');
   t('Facility type');

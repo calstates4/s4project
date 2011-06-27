@@ -4,8 +4,8 @@ function s4_courses_admin_form() {
   $form = array();
   
   $values = variable_get('s4_courses_term_codes', array());
-  foreach($values as $key => $value) {
-    $term_values[] = $key .'|'. $value;
+  foreach ($values as $key => $value) {
+    $term_values[] = $key . '|' . $value;
   }
   
   $form['s4_courses_term_codes'] = array(
@@ -46,9 +46,9 @@ function s4_courses_admin_form() {
 }
 
 function s4_courses_admin_form_submit($form, $form_state) {
-  foreach(explode("\n", $form_state['input']['s4_courses_term_codes']) as $code) {
+  foreach (explode("\n", $form_state['input']['s4_courses_term_codes']) as $code) {
     $code = explode('|', trim($code));
-    if($code[0] == $requested_code) {
+    if ($code[0] == $requested_code) {
       return $code[1];
     }
     $term_codes[$code[0]] = $code[1];
