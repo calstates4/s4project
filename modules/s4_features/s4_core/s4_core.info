@@ -96,6 +96,7 @@ features[variable][] = "notifications_option_subscription_types_document_expirat
 features[variable][] = "notifications_option_unsubscribe_links"
 features[variable][] = "notifications_sender"
 features[variable][] = "notifications_sendself"
+features[variable][] = "location_geocode_us"
 features[views_view][] = "s4_search"
 files[] = "s4_core.inc"
 files[] = "views/views_handler_s4_faculty_site_select.inc"
