@@ -23,9 +23,6 @@ projects[boxes][version] = "1.0-beta2"
 projects[cck][subdir] = "contrib"
 projects[cck][version] = "2.x-dev"
 
-projects[cck_blocks][subdir] = "contrib"
-projects[cck_blocks][version] = "1.0"
-
 projects[cck_phone][subdir] = "contrib"
 projects[cck_phone][version] = "1.x-dev"
 
@@ -130,6 +127,12 @@ projects[wysiwyg][version] = "2.1"
 
 ;Modules still in development
 
+projects[cck_blocks][type] = module
+projects[cck_blocks][subdir] = "contrib"
+projects[cck_blocks][version] = "1.x-dev"
+projects[cck_blocks][download][type] = "file"
+projects[cck_blocks][download][url] = "http://s4.csumb.edu/hosted_modules/cck_blocks.tar.gz"
+
 projects[location][type] = module
 projects[location][subdir] = "contrib"
 projects[location][version] = "3.x-dev"
@@ -147,9 +150,8 @@ projects[references][download][branch] = "7.x-2.x"
 projects[views_savedsearches][type] = module
 projects[views_savedsearches][subdir] = "contrib"
 projects[views_savedsearches][version] = "7.x-dev"
-projects[views_savedsearches][download][type] = "git"
-projects[views_savedsearches][download][url] = "http://git.drupal.org/project/views_savedsearches.git"
-projects[views_savedsearches][download][branch] = "master"
+projects[views_savedsearches][download][type] = "file"
+projects[views_savedsearches][download][url] = "http://s4.csumb.edu/hosted_modules/views_savedsearches.tar.gz"
 
 ; Libraries
 ; Download fancybox as a library
@@ -170,8 +172,4 @@ libraries[tinymce][download][url] = "http://gmaps-utility-library-dev.googlecode
 libraries[tinymce][destination] = "modules/contrib/gmap/thirdparty"
 
 ; Patches
-projects[cck_blocks][patch][] = "http://drupal.org/files/issues/cck_blocks_conten_view-833730-24.patch"
-
-projects[views_savedsearches][patch][] = "http://drupal.org/files/issues/views_savedsearches_d7_0.patch"
-
 projects[wysiwyg][patch][] = "http://drupal.org/files/issues/wysiwyg-entity-exportables-624018-176_1.patch"
