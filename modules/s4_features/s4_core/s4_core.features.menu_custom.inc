@@ -10,6 +10,12 @@
 function s4_core_menu_default_menu_custom() {
   $menus = array();
 
+  // Exported menu: menu-add-content
+  $menus['menu-add-content'] = array(
+    'menu_name' => 'menu-add-content',
+    'title' => 'Add Content',
+    'description' => '',
+  );
   // Exported menu: menu-staff-options
   $menus['menu-staff-options'] = array(
     'menu_name' => 'menu-staff-options',
@@ -18,6 +24,7 @@ function s4_core_menu_default_menu_custom() {
   );
   // Translatables
   // Included for use with string extractors like potx.
+  t('Add Content');
   t('Options for department staff and administrators.');
   t('Staff Options');
 

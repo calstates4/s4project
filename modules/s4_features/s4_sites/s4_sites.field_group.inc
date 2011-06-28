@@ -110,7 +110,7 @@ function s4_sites_field_group_info() {
       'formatter' => 'closed',
       'instance_settings' => array(
         'classes' => '',
-        'required_fields' => 1,
+        'required_fields' => 0,
       ),
     ),
   );

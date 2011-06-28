@@ -60,6 +60,42 @@ function s4_core_menu_default_menu_links() {
     'expanded' => '0',
     'weight' => '-50',
   );
+  // Exported menu link: menu-add-content:node/add/news
+  $menu_links['menu-add-content:node/add/news'] = array(
+    'menu_name' => 'menu-add-content',
+    'link_path' => 'node/add/news',
+    'router_path' => 'node/add/news',
+    'link_title' => 'News',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+    ),
+    'module' => 'menu',
+    'hidden' => '0',
+    'external' => '0',
+    'has_children' => '0',
+    'expanded' => '0',
+    'weight' => '0',
+  );
+  // Exported menu link: menu-add-content:node/add/site
+  $menu_links['menu-add-content:node/add/site'] = array(
+    'menu_name' => 'menu-add-content',
+    'link_path' => 'node/add/site',
+    'router_path' => 'node/add/site',
+    'link_title' => 'Site or Community Partner',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+    ),
+    'module' => 'menu',
+    'hidden' => '0',
+    'external' => '0',
+    'has_children' => '0',
+    'expanded' => '0',
+    'weight' => '0',
+  );
   // Exported menu link: menu-staff-options:admin/appearance/settings/s4
   $menu_links['menu-staff-options:admin/appearance/settings/s4'] = array(
     'menu_name' => 'menu-staff-options',
