@@ -148,7 +148,7 @@ variables[cck_blocks_field_site_instructions_block_availability] = 2
 variables[cck_blocks_field_site_restrict_block_availability] = 2
 variables[cck_blocks_field_tags_block_availability] = 2
 variables[cck_blocks_field_user_block_availability] = 2
-variables[cck_blocks_field_website_block_availability
+variables[cck_blocks_field_website_block_availability] = 2
 
 ;users
 users[admin][uid] = 1

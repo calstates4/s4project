@@ -78,10 +78,10 @@ projects[messaging][subdir] = "contrib"
 projects[messaging][version] = "1.0-alpha1"
 
 projects[nodeaccess_nodereference][subdir] = "contrib"
-projects[nodeaccess_nodereference][version] = "1.12"
+projects[nodeaccess_nodereference][version] = "1.15"
 
 projects[nodeaccess_userreference][subdir] = "contrib"
-projects[nodeaccess_userreference][version] = "3.2"
+projects[nodeaccess_userreference][version] = "3.5"
 
 projects[nodeformcols][subdir] = "contrib"
 projects[nodeformcols][version] = "1.x-dev"
