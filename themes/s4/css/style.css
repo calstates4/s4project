@@ -722,9 +722,18 @@ ul.pager .pager-next a, ul.pager .pager-last a {
 }
 /** MESSAGES **/
 .messages {
-  border-radius: 4px;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+}
+div.messages.status {
+  background-image: url(../images/message-ok.png);
+}
+div.messages.warning {
+  background-image: url(../images/message-warning.png);
+}
+div.messages.error {
+  background-image: url(../images/message-error.png);
 }
 /** TWEAKS FOR VIEWS **/
 .bookmarks ul {
