@@ -20,12 +20,12 @@ function s4_sites_field_group_info() {
   $field_group->parent_name = 'group_site_tabs';
   $field_group->data = array(
     'label' => 'Contact',
-    'weight' => '22',
+    'weight' => '21',
     'children' => array(
       0 => 'field_location',
-      1 => 'field_website',
+      1 => 'field_phone',
       2 => 'field_site_email',
-      3 => 'field_phone',
+      3 => 'field_website',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -99,11 +99,11 @@ function s4_sites_field_group_info() {
   $field_group->parent_name = 'group_site_tabs';
   $field_group->data = array(
     'label' => 'Student Instructions',
-    'weight' => '23',
+    'weight' => '22',
     'children' => array(
-      0 => 'field_site_instructions_required',
+      0 => 'field_health_safety',
       1 => 'field_site_instructions',
-      2 => 'field_health_safety',
+      2 => 'field_site_instructions_required',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -128,10 +128,10 @@ function s4_sites_field_group_info() {
     'label' => 'Site tabs',
     'weight' => '0',
     'children' => array(
-      0 => 'group_instructions',
+      0 => 'group_site_contact',
       1 => 'group_site_general',
       2 => 'group_site_images',
-      3 => 'group_site_contact',
+      3 => 'group_site_instructions',
     ),
     'format_type' => 'htabs',
     'format_settings' => array(
