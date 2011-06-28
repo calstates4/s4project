@@ -167,9 +167,9 @@ libraries[tinymce][directory_name] = "tinymce"
 libraries[tinymce][destination] = "libraries"
 
 ; Download the marker manager for gmap
-libraries[tinymce][download][type] = "get"
-libraries[tinymce][download][url] = "http://gmaps-utility-library-dev.googlecode.com/svn/tags/markerclusterer/1.0/src/markerclusterer_packed.js"
-libraries[tinymce][destination] = "modules/contrib/gmap/thirdparty"
+libraries[markerclusterer][download][type] = "get"
+libraries[markerclusterer][download][url] = "http://gmaps-utility-library-dev.googlecode.com/svn/tags/markerclusterer/1.0/src/markerclusterer_packed.js"
+libraries[markerclusterer][destination] = "modules/contrib/gmap/thirdparty"
 
 ; Patches
 projects[wysiwyg][patch][] = "http://drupal.org/files/issues/wysiwyg-entity-exportables-624018-176_1.patch"
