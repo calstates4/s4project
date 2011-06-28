@@ -421,6 +421,12 @@ a, a:visited {
   color: #046;
   background-color: #efaa99;
 }
+.page-node-edit .field-type-taxonomy-term-reference  a {
+  background: transparent;
+  border: 0px;
+  text-decoration: underline;
+  color: #0084b4;
+}
 /** LINKS **/#content .links a {
   color: #fff;
   background: #558095;
