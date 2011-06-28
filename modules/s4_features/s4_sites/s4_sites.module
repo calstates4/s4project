@@ -88,7 +88,6 @@ function s4_sites_form_site_node_form_alter(&$form, $form_state, $form_id) {
   foreach($fields as $field_name) {
     $field = field_info_field($field_name);
     $term = $terms[$field['settings']['allowed_values'][0]['vocabulary']];
-    dpm($term);
     if(user_access('edit terms in ' . $term->vid)) {
       $form[$field_name][$form['#node']->language]['#description'] .=
         l('Add new values to this list.', 'admin/structure/taxonomy/' . $term->machine_name, array('attributes' => array('target' => '_blank')));
