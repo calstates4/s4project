@@ -295,7 +295,7 @@ function s4_sites_strongarm() {
       'markerMaxZoom' => '0',
     ),
     'markerclusterer' => array(
-      'filename' => 'markerclusterer_packed.js',
+      'filename' => 'markerclusterer/markerclusterer_packed.js',
       'gridSize' => '30',
       'maxZoom' => '17',
     ),

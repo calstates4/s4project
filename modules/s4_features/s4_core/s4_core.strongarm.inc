@@ -337,5 +337,13 @@ function s4_core_strongarm() {
   $strongarm->name = 'location_geocode_us';
   $strongarm->value = 'google';
   $export['location_geocode_us'] = $strongarm;
+  
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'location_usegmap';
+  $strongarm->value = 1;
+  $export['location_usegmap'] = $strongarm;
+  
   return $export;
 }
