@@ -2128,7 +2128,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'module' => 'taxonomy',
           'settings' => array(),
-          'type' => 'taxonomy_term_reference_link',
+          'type' => 'hidden',
           'weight' => 6,
         ),
         'full' => array(
@@ -2212,7 +2212,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'module' => 'taxonomy',
           'settings' => array(),
-          'type' => 'taxonomy_term_reference_link',
+          'type' => 'hidden',
           'weight' => 7,
         ),
         'full' => array(
@@ -2503,7 +2503,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'module' => 'cck_phone',
           'settings' => array(),
-          'type' => 'global_phone_number',
+          'type' => 'hidden',
           'weight' => 13,
         ),
         'full' => array(
@@ -2808,7 +2808,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'module' => 'link',
           'settings' => array(),
-          'type' => 'default',
+          'type' => 'hidden',
           'weight' => 12,
         ),
         'full' => array(
@@ -3309,7 +3309,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'module' => 'list',
           'settings' => array(),
-          'type' => 'list_default',
+          'type' => 'hidden',
           'weight' => 15,
         ),
         'full' => array(

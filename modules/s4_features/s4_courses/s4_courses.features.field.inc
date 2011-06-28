@@ -408,7 +408,7 @@ function s4_courses_field_default_fields() {
           'label' => 'above',
           'module' => NULL,
           'settings' => array(),
-          'type' => 'nodereference_count_formatter_default',
+          'type' => 'hidden',
           'weight' => 12,
         ),
         'notifications' => array(
