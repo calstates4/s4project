@@ -13,6 +13,27 @@ function s4_sites_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'ant_coordinator';
+  $strongarm->value = '1';
+  $export['ant_coordinator'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'ant_pattern_coordinator';
+  $strongarm->value = '[node:field-first-name:value] [node:field-last-name:value]';
+  $export['ant_pattern_coordinator'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'ant_php_coordinator';
+  $strongarm->value = 0;
+  $export['ant_php_coordinator'] = $strongarm;
+  
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'comment_anonymous_contact_record';
   $strongarm->value = 0;
   $export['comment_anonymous_contact_record'] = $strongarm;
