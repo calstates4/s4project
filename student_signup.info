@@ -121,6 +121,7 @@ dependencies[] = s4_users
 ;Variables
 variables[admin_theme] = seven
 variables[site_frontpage] = homepage
+variables[error_level] = 0
 
 variables[cck_blocks_body_block_availability] = 2
 variables[cck_blocks_field_contact_block_availability] = 2
@@ -149,6 +150,7 @@ variables[cck_blocks_field_site_restrict_block_availability] = 2
 variables[cck_blocks_field_tags_block_availability] = 2
 variables[cck_blocks_field_user_block_availability] = 2
 variables[cck_blocks_field_website_block_availability] = 2
+
 
 ;users
 users[admin][uid] = 1

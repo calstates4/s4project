@@ -173,3 +173,4 @@ libraries[markerclusterer][destination] = "modules/contrib/gmap/thirdparty"
 
 ; Patches
 projects[wysiwyg][patch][] = "http://drupal.org/files/issues/wysiwyg-entity-exportables-624018-176_1.patch"
+projects[token][patch][] = "http://drupal.org/files/issues/modules_token.92.patch"
