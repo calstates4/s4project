@@ -683,16 +683,6 @@ function s4_core_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: delete terms in 7
-  $permissions['delete terms in 7'] = array(
-    'name' => 'delete terms in 7',
-    'roles' => array(
-      0 => 'administrator',
-      1 => 'staff',
-    ),
-    'module' => 'taxonomy',
-  );
-
   // Exported permission: edit all webform submissions
   $permissions['edit all webform submissions'] = array(
     'name' => 'edit all webform submissions',
@@ -790,16 +780,6 @@ function s4_core_user_default_permissions() {
       1 => 'staff',
     ),
     'module' => 'webform',
-  );
-
-  // Exported permission: edit terms in 7
-  $permissions['edit terms in 7'] = array(
-    'name' => 'edit terms in 7',
-    'roles' => array(
-      0 => 'administrator',
-      1 => 'staff',
-    ),
-    'module' => 'taxonomy',
   );
 
   // Exported permission: get file expiration notifications
@@ -1028,15 +1008,6 @@ function s4_core_user_default_permissions() {
       0 => 'administrator',
     ),
     'module' => 'page_manager',
-  );
-
-  // Exported permission: use text format filtered_html
-  $permissions['use text format filtered_html'] = array(
-    'name' => 'use text format filtered_html',
-    'roles' => array(
-      0 => 'authenticated user',
-    ),
-    'module' => 'filter',
   );
 
   // Exported permission: use views savedsearch

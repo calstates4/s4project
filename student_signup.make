@@ -33,7 +33,7 @@ projects[ctools][subdir] = "contrib"
 projects[ctools][version] = "1.x-dev"
 
 projects[date][subdir] = "contrib"
-projects[date][version] = "2.0-alpha3"
+projects[date][version] = "2.0-alpha1"
 
 projects[email][subdir] = "contrib"
 projects[email][version] = "1.0-beta1"
@@ -132,7 +132,7 @@ projects[cck_blocks][subdir] = "contrib"
 projects[cck_blocks][version] = "1.x-dev"
 projects[cck_blocks][download][type] = "file"
 projects[cck_blocks][download][url] = "http://s4.csumb.edu/hosted_modules/cck_blocks.tar.gz"
-
+	
 projects[location][type] = module
 projects[location][subdir] = "contrib"
 projects[location][version] = "3.x-dev"
@@ -174,4 +174,3 @@ libraries[markerclusterer][destination] = "modules/contrib/gmap/thirdparty"
 ; Patches
 projects[wysiwyg][patch][] = "http://drupal.org/files/issues/wysiwyg-entity-exportables-624018-176_1.patch"
 projects[token][patch][] = "http://drupal.org/files/issues/modules_token.92.patch"
-projects[cck_phone][patch][] = "http://drupal.org/files/issues/cck_phone_testing-1165464-2.patch"

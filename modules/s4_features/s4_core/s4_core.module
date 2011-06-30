@@ -390,6 +390,7 @@ function s4_core_permission() {
 */
 function s4_core_user_can_signup($user) {
   if (!user_access('signup for service', $user)) {
+    
     return FALSE;
   }
   $ignore_courses = field_get_items('user', $user, 'field_course_ignore');
