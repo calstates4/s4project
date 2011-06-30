@@ -228,6 +228,7 @@ function s4_api_rest_admin_form_submit($form, $form_state) {
     'term_argument' => $form_state['values']['faculty_term_argument'],
   );
   variable_set('s4_api_rest_faculty_courses', $faculty);
+  drupal_set_message(t('REST API settings updated'));
 }
 
 /**
