@@ -164,7 +164,10 @@ function s4_core_block_site_list_course_restriction() {
 *  Displays the help message on the top of the login form
 */
 function s4_core_block_s4_user_login_message() {
-  $directions = variable_get('s4_core_auth_directions', '');
+  $directions = variable_get('s4_core_auth_directions', FALSE);
+  if(!$directions) {
+  	return null;
+  }
   $directions = check_markup($directions['value'], $directions['format']);
   if (!strlen(trim($directions))) {
     return NULL;

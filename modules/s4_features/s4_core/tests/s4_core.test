@@ -1,0 +1,20 @@
+<?php
+
+require_once(drupal_get_path('module', 's4_core') .'/tests/s4_core_base_test.php');
+
+class S4CoreTestCase extends s4WebTestCase {
+	
+	public static function getInfo() {
+    return array(
+      'name' => 'S4 Basic Content Test',
+      'description' => 'Test basic content creation and access control.',
+      'group' => 'Student Signup',
+    );
+  }
+  
+  public function testAnonymousUserSeesHomepage() {
+  	$this->drupalLogout();
+		$this->drupalGet('<front>');
+		$this->assertNoText(t('Access denied'));
+  }
+}
