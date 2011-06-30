@@ -74,6 +74,9 @@ projects[job_scheduler][version] = "2.0-alpha2"
 projects[link][subdir] = "contrib"
 projects[link][version] = "1.0-alpha3"
 
+projects[location_feeds][subdir] = "contrib"
+projects[location_feeds][version] = "1.0"
+
 projects[messaging][subdir] = "contrib"
 projects[messaging][version] = "1.0-alpha1"
 
