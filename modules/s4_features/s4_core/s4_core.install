@@ -47,5 +47,4 @@ function s4_core_install() {
       'aid' => 's4_core_document_about_to_expire_action',
     ))
     ->execute();
-  //drupal_set_message(t('Your site has been installed. You will need to get a Google API key and !link to be able to view maps.', array('!link' => l('enter it in this form', 'admin/config/services/gmap'))));
 }

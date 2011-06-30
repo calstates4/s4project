@@ -12,6 +12,10 @@ function s4_core_init() {
   drupal_add_css(drupal_get_path('module', 's4_core') . '/css/status.css');
   drupal_add_css(drupal_get_path('module', 's4_core') . '/css/export.css');
   drupal_add_js(drupal_get_path('module', 's4_core') . '/js/s4.status.js');
+  if(!variable_get('s4_core_install_message', FALSE) && user_access('administer site configuration')) {
+  	drupal_set_message(t('Your site has been installed. You will need to get a Google API key and !link to be able to view maps.', array('!link' => l('enter it in this form', 'admin/config/services/gmap'))));
+  	variable_set('s4_core_install_message', TRUE);
+  }
 }
 
 /**
