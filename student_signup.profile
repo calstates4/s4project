@@ -4,7 +4,7 @@ if(!function_exists('profiler_v2')) {
 }
 
 profiler_v2('student_signup');
-
+/*
 function student_signup_install_tasks() {
 	return array(
 		'student_signup_install_change_block_titles' => array(
@@ -46,4 +46,4 @@ function student_signup_install_change_block_titles() {
       ->condition('delta', $block)
       ->execute();
   }
-}
+}*/

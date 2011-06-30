@@ -148,6 +148,9 @@ a, a:visited {
 #page .block h2 {
   color: #666666;
 }
+#page .block.block-cck-blocks h2.block-title {
+  display: none;
+}
 /** NAVIGATION & BRANDING **/
 #branding, #footer {
   border-bottom: 1px solid #000;
