@@ -47,9 +47,6 @@ projects[fancybox][version] = "1.x-dev"
 projects[features][subdir] = "contrib"
 projects[features][version] = "1.0-beta3"
 
-projects[feeds][subdir] = "contrib"
-projects[feeds][version] = "2.0-alpha3"
-
 projects[field_group][subdir] = "contrib"
 projects[field_group][version] = "1.0"
 
@@ -73,9 +70,6 @@ projects[job_scheduler][version] = "2.0-alpha2"
 
 projects[link][subdir] = "contrib"
 projects[link][version] = "1.0-alpha3"
-
-projects[location_feeds][subdir] = "contrib"
-projects[location_feeds][version] = "1.0"
 
 projects[messaging][subdir] = "contrib"
 projects[messaging][version] = "1.0-alpha1"
