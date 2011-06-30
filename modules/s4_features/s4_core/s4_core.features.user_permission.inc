@@ -241,15 +241,6 @@ function s4_core_user_default_permissions() {
     'module' => 'features',
   );
 
-  // Exported permission: administer feeds
-  $permissions['administer feeds'] = array(
-    'name' => 'administer feeds',
-    'roles' => array(
-      0 => 'administrator',
-    ),
-    'module' => 'feeds',
-  );
-
   // Exported permission: administer fieldgroups
   $permissions['administer fieldgroups'] = array(
     'name' => 'administer fieldgroups',
@@ -501,24 +492,6 @@ function s4_core_user_default_permissions() {
       0 => 'administrator',
     ),
     'module' => 'user',
-  );
-
-  // Exported permission: clear node feeds
-  $permissions['clear node feeds'] = array(
-    'name' => 'clear node feeds',
-    'roles' => array(
-      0 => 'administrator',
-    ),
-    'module' => 'feeds',
-  );
-
-  // Exported permission: clear user feeds
-  $permissions['clear user feeds'] = array(
-    'name' => 'clear user feeds',
-    'roles' => array(
-      0 => 'administrator',
-    ),
-    'module' => 'feeds',
   );
 
   // Exported permission: create gmap macro
@@ -789,24 +762,6 @@ function s4_core_user_default_permissions() {
       0 => 'authenticated user',
     ),
     'module' => 's4_core',
-  );
-
-  // Exported permission: import node feeds
-  $permissions['import node feeds'] = array(
-    'name' => 'import node feeds',
-    'roles' => array(
-      0 => 'administrator',
-    ),
-    'module' => 'feeds',
-  );
-
-  // Exported permission: import user feeds
-  $permissions['import user feeds'] = array(
-    'name' => 'import user feeds',
-    'roles' => array(
-      0 => 'administrator',
-    ),
-    'module' => 'feeds',
   );
 
   // Exported permission: maintain own subscriptions
