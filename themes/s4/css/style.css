@@ -724,19 +724,32 @@ ul.pager .pager-next a, ul.pager .pager-last a {
   width: 70px;
 }
 /** MESSAGES **/
-.messages {
-  border-radius: 6px;
-  -moz-border-radius: 6px;
-  -webkit-border-radius: 6px;
+#messages .messages {
+  border-left: 0px;
+  border-right: 0px;
+  background-image: none;
+  margin: 0;
 }
-div.messages.status {
-  background-image: url(../images/message-ok.png);
+#messages .messages .container {
+  font-size: 16px;
+  position: relative;
+  padding-left: 32px;
 }
-div.messages.warning {
-  background-image: url(../images/message-warning.png);
+#messages .messages .message-icon {
+  width: 23px;
+  height: 23px;
+  position: absolute;
+  left: 0px;
+  background: #666666 url(../images/message-sprites.png) no-repeat 2px 4px;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
 }
-div.messages.error {
-  background-image: url(../images/message-error.png);
+#messages .messages.warning .message-icon {
+  background-position-y: -17px;
+}
+#messages .messages.error .message-icon {
+  background-position-y: -42px;
 }
 /** TWEAKS FOR VIEWS **/
 .bookmarks ul {

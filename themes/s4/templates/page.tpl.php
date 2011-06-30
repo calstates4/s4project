@@ -71,6 +71,11 @@
 		</div>
 	</div>
 <?php endif; ?>
+<?php if ($messages): ?>
+	    <div id="messages">
+		      <?php print $messages; ?>
+	    </div>
+	<?php endif; ?>
 <div id="page">
 	
 	<div class="container">
@@ -82,11 +87,7 @@
 				<?php print render($page['content_subscriptions']); ?>
 			</div>
 		<?php endif; ?>
-		<?php if ($messages): ?>
-		    <div id="messages">
-		      <?php print $messages; ?>
-		    </div>
-		<?php endif; ?>
+		
 
 		<?php if(!$is_front && $title): ?>
 			<h1 class="title" id="page-title"><?php print $title; ?></h1>
