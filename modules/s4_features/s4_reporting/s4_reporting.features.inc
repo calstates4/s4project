@@ -10,7 +10,7 @@
 function s4_reporting_ctools_plugin_api() {
   list($module, $api) = func_get_args();
   if ($module == "context" && $api == "context") {
-    return array("version" => 3);
+    return array("version" => "3");
   }
 }
 
@@ -20,6 +20,6 @@ function s4_reporting_ctools_plugin_api() {
 function s4_reporting_views_api() {
   list($module, $api) = func_get_args();
   if ($module == "views" && $api == "views_default") {
-    return array("version" => 3.0);
+    return array("version" => "3.0");
   }
 }

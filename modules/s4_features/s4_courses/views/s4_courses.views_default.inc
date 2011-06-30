@@ -68,7 +68,7 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['relationships']['field_course_students_uid']['field'] = 'field_course_students_uid';
   $handler->display->display_options['relationships']['field_course_students_uid']['required'] = 0;
   $handler->display->display_options['relationships']['field_course_students_uid']['delta'] = '-1';
-  /* Field: Fields: First Name */
+  /* Field: Field: First Name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -89,7 +89,7 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['fields']['field_first_name']['hide_empty'] = 0;
   $handler->display->display_options['fields']['field_first_name']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_first_name']['field_api_classes'] = 0;
-  /* Field: Fields: Last Name */
+  /* Field: Field: Last Name */
   $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
   $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
   $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
@@ -252,15 +252,17 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['fields']['views_bulk_operations']['hide_empty'] = 0;
   $handler->display->display_options['fields']['views_bulk_operations']['empty_zero'] = 0;
   $handler->display->display_options['fields']['views_bulk_operations']['hide_alter_empty'] = 0;
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['selected_operations'] = array(
-    's4_core_email_user_action' => 's4_core_email_user_action',
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['operations'] = array(
+    's4_core_email_user_action' => array(
+      'selected' => TRUE,
+      'skip_confirmation' => 1,
+    ),
   );
   $handler->display->display_options['fields']['views_bulk_operations']['vbo']['execution_type'] = '2';
   $handler->display->display_options['fields']['views_bulk_operations']['vbo']['display_type'] = '1';
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['skip_confirmation'] = 1;
   $handler->display->display_options['fields']['views_bulk_operations']['vbo']['display_result'] = 1;
   $handler->display->display_options['fields']['views_bulk_operations']['vbo']['merge_single_action'] = 0;
-  /* Field: Fields: First Name */
+  /* Field: Field: First Name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -283,7 +285,7 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['fields']['field_first_name']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_first_name']['hide_alter_empty'] = 0;
   $handler->display->display_options['fields']['field_first_name']['field_api_classes'] = 0;
-  /* Field: Fields: Last Name */
+  /* Field: Field: Last Name */
   $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
   $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
   $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
@@ -451,7 +453,6 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['filters']['field_course_subject_value']['expose']['label'] = 'Subject code';
   $handler->display->display_options['filters']['field_course_subject_value']['expose']['operator'] = 'field_course_subject_value_op';
   $handler->display->display_options['filters']['field_course_subject_value']['expose']['identifier'] = 'field_course_subject_value';
-  $handler->display->display_options['filters']['field_course_subject_value']['expose']['required'] = FALSE;
   $handler->display->display_options['filters']['field_course_subject_value']['expose']['remember'] = 1;
   $handler->display->display_options['filters']['field_course_subject_value']['expose']['multiple'] = FALSE;
   /* Filter criterion: Content: Term (field_term) */
@@ -1177,7 +1178,7 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['fields']['title_1']['hide_empty'] = 0;
   $handler->display->display_options['fields']['title_1']['empty_zero'] = 0;
   $handler->display->display_options['fields']['title_1']['link_to_node'] = 0;
-  /* Field: Fields: Last Name */
+  /* Field: Field: Last Name */
   $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
   $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
   $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
@@ -1199,7 +1200,7 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['fields']['field_last_name']['hide_empty'] = 0;
   $handler->display->display_options['fields']['field_last_name']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_last_name']['field_api_classes'] = 0;
-  /* Field: Fields: First Name */
+  /* Field: Field: First Name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -1288,7 +1289,6 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['filters']['field_course_subject_value']['expose']['label'] = 'Subject';
   $handler->display->display_options['filters']['field_course_subject_value']['expose']['operator'] = 'field_course_subject_value_op';
   $handler->display->display_options['filters']['field_course_subject_value']['expose']['identifier'] = 'field_course_subject_value';
-  $handler->display->display_options['filters']['field_course_subject_value']['expose']['required'] = FALSE;
   $handler->display->display_options['filters']['field_course_subject_value']['expose']['multiple'] = FALSE;
   /* Filter criterion: Content: Catalog number (field_course_catalog_number) */
   $handler->display->display_options['filters']['field_course_catalog_number_value']['id'] = 'field_course_catalog_number_value';
@@ -1301,7 +1301,6 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['filters']['field_course_catalog_number_value']['expose']['label'] = 'Catalog number';
   $handler->display->display_options['filters']['field_course_catalog_number_value']['expose']['operator'] = 'field_course_catalog_number_value_op';
   $handler->display->display_options['filters']['field_course_catalog_number_value']['expose']['identifier'] = 'field_course_catalog_number_value';
-  $handler->display->display_options['filters']['field_course_catalog_number_value']['expose']['required'] = FALSE;
   $handler->display->display_options['filters']['field_course_catalog_number_value']['expose']['multiple'] = FALSE;
   /* Filter criterion: Content: Section number (field_course_section) */
   $handler->display->display_options['filters']['field_course_section_value']['id'] = 'field_course_section_value';

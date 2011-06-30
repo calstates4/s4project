@@ -160,7 +160,7 @@ function s4_reporting_views_default_views() {
   $handler->display->display_options['fields']['nid']['hide_empty'] = 0;
   $handler->display->display_options['fields']['nid']['empty_zero'] = 0;
   $handler->display->display_options['fields']['nid']['link_to_node'] = 0;
-  /* Field: Fields: Last Name */
+  /* Field: Field: Last Name */
   $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
   $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
   $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
@@ -181,7 +181,7 @@ function s4_reporting_views_default_views() {
   $handler->display->display_options['fields']['field_last_name']['hide_empty'] = 0;
   $handler->display->display_options['fields']['field_last_name']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_last_name']['field_api_classes'] = 0;
-  /* Field: Fields: First Name */
+  /* Field: Field: First Name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
@@ -394,7 +394,6 @@ function s4_reporting_views_default_views() {
   $handler->display->display_options['filters']['title']['expose']['label'] = 'Site name';
   $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
-  $handler->display->display_options['filters']['title']['expose']['required'] = FALSE;
   $handler->display->display_options['filters']['title']['expose']['multiple'] = FALSE;
 
   /* Display: Page */
@@ -454,7 +453,7 @@ function s4_reporting_views_default_views() {
     t('field_user'),
     t('field_term'),
     t('field_coordinator'),
-    t('user'),
+    t('author'),
     t('ID'),
     t('Last Name'),
     t('First Name'),
@@ -745,7 +744,6 @@ function s4_reporting_views_default_views() {
   $handler->display->display_options['filters']['field_course_subject_value']['expose']['label'] = 'Subject';
   $handler->display->display_options['filters']['field_course_subject_value']['expose']['operator'] = 'field_course_subject_value_op';
   $handler->display->display_options['filters']['field_course_subject_value']['expose']['identifier'] = 'field_course_subject_value';
-  $handler->display->display_options['filters']['field_course_subject_value']['expose']['required'] = FALSE;
   $handler->display->display_options['filters']['field_course_subject_value']['expose']['remember'] = 1;
   $handler->display->display_options['filters']['field_course_subject_value']['expose']['multiple'] = FALSE;
 
@@ -1069,7 +1067,6 @@ function s4_reporting_views_default_views() {
   $handler->display->display_options['filters']['city']['expose']['label'] = 'City';
   $handler->display->display_options['filters']['city']['expose']['operator'] = 'city_op';
   $handler->display->display_options['filters']['city']['expose']['identifier'] = 'city';
-  $handler->display->display_options['filters']['city']['expose']['required'] = FALSE;
   $handler->display->display_options['filters']['city']['expose']['multiple'] = FALSE;
 
   /* Display: Page */
