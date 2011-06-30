@@ -597,6 +597,26 @@ function s4_core_node_delete($node) {
         ->condition('entity_id', $node->nid)
         ->condition('entity_type', 'node')
         ->execute();
+  if($node->type == 'signup') {
+  	$signup_sid = field_get_items('node', $node, 'field_form_signup_sid');
+  	$eval_sid = field_get_items('node', $node, 'field_form_evaluation_sid');
+  	
+  	$site = field_get_items('node', $node, 'field_site');
+  	$site = node_load($site[0]['nid']);
+  	
+  	$site_form = field_get_items('node', $site, 'field_site_form');
+  	if($site_form) {
+  		$site_form = node_load($site_form[0]['nid']);
+  		webform_submission_delete($site_node, $signup_sid);
+  	}
+  	
+  	$eval_form = field_get_items('node', $site, 'field_site_eval_form');
+  	if($eval_form) {
+  		$eval_form = node_load($eval_form[0]['nid']);
+  		webform_submission_delete($eval_form, $eval_sid);
+  	}
+  	
+  }
 }
 
 /**
