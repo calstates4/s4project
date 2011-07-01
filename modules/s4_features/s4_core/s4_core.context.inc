@@ -297,6 +297,72 @@ function s4_core_context_default_contexts() {
   $context = new stdClass;
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
+  $context->name = 'signup_page';
+  $context->description = 'User is on a signup page';
+  $context->tag = 'signup';
+  $context->conditions = array(
+    'node' => array(
+      'values' => array(
+        'signup' => 'signup',
+      ),
+      'options' => array(
+        'node_form' => '0',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        's4_core-s4_signup_webform_signup' => array(
+          'module' => 's4_core',
+          'delta' => 's4_signup_webform_signup',
+          'region' => 'content',
+          'weight' => '-10',
+        ),
+        'cck_blocks-field_user' => array(
+          'module' => 'cck_blocks',
+          'delta' => 'field_user',
+          'region' => 'content_right',
+          'weight' => '-10',
+        ),
+        'cck_blocks-field_signup_hours' => array(
+          'module' => 'cck_blocks',
+          'delta' => 'field_signup_hours',
+          'region' => 'content_right',
+          'weight' => '-10',
+        ),
+        'cck_blocks-field_site' => array(
+          'module' => 'cck_blocks',
+          'delta' => 'field_site',
+          'region' => 'content_right',
+          'weight' => '-9',
+        ),
+        'cck_blocks-field_coordinator' => array(
+          'module' => 'cck_blocks',
+          'delta' => 'field_coordinator',
+          'region' => 'content_right',
+          'weight' => '-8',
+        ),
+        'cck_blocks-field_course' => array(
+          'module' => 'cck_blocks',
+          'delta' => 'field_course',
+          'region' => 'content_right',
+          'weight' => '-7',
+        ),
+      ),
+    ),
+  );
+  $context->condition_mode = 0;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('User is on a signup page');
+  t('signup');
+  $export['signup_page'] = $context;
+
+  $context = new stdClass;
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
   $context->name = 'sitewide';
   $context->description = '';
   $context->tag = 'sitewide';
