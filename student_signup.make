@@ -92,11 +92,17 @@ projects[nodereference_url][version] = "1.11"
 projects[notifications][subdir] = "contrib"
 projects[notifications][version] = "1.0-alpha1"
 
+projects[options_element][subdir] = "contrib"
+projects[options_element][version] = "1.4"
+
 projects[pathauto][subdir] = "contrib"
 projects[pathauto][version] = "1.0-beta1"
 
 projects[save_draft][subdir] = "contrib"
 projects[save_draft][version] = "1.4"
+
+projects[select_or_other][subdir] = "contrib"
+projects[select_or_other][version] = "2.0"
 
 projects[strongarm][subdir] = "contrib"
 projects[strongarm][version] = "2.0-beta2"
