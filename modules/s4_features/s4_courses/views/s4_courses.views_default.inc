@@ -1030,10 +1030,8 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Courses';
   $handler->display->display_options['defaults']['access'] = FALSE;
-  $handler->display->display_options['access']['type'] = 'role';
-  $handler->display->display_options['access']['role'] = array(
-    5 => '5',
-  );
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['perm'] = 'create course content';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Content: Faculty (field_course_faculty) */
   $handler->display->display_options['relationships']['field_course_faculty_uid']['id'] = 'field_course_faculty_uid';
