@@ -216,7 +216,7 @@ function s4_core_block_s4_user_login() {
 *  Simple form to let managers jump to a node by it's number
 */
 function s4_core_block_jump_to_node() {
-  drupal_add_js(drupal_get_path('module', 's4_core') . '/css/jump_form.css');
+  drupal_add_css(drupal_get_path('module', 's4_core') . '/css/jump_form.css');
   return array('subject' => '',
          'content' => drupal_get_form('s4_core_block_jump_form'));
 }
