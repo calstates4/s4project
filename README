@@ -8,4 +8,6 @@ http://drupal.org/requirements
 
 In addition, you should increase your web server PHP memory limit to at least 80M.
 
+If you are checking out from GIT, this is not a complete site, it requires using Drush to build the make file. If you have downloaded the packaged version of the app, just put it in your app server, and visit mysite.edu/install.php and make sure to select the S4 install profile on the first screen.
+
 We're tracking the project at the Project Site: http://s4.csumb.edu/project
