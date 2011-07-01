@@ -534,6 +534,100 @@ function s4_sites_strongarm() {
   );
   $export['nodeformscols_field_placements_coordinator_default'] = $strongarm;
 
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nodeformscols_field_placements_file_default';
+  $strongarm->value = array(
+    'title' => array(
+      'region' => 'main',
+      'weight' => '0',
+      'has_required' => TRUE,
+      'title' => 'File name',
+    ),
+    'additional_settings' => array(
+      'region' => 'main',
+      'weight' => '5',
+      'has_required' => FALSE,
+      'title' => 'Vertical tabs',
+      'hidden' => 0,
+    ),
+    'actions' => array(
+      'region' => 'right',
+      'weight' => '0',
+      'has_required' => FALSE,
+      'title' => 'Publish',
+      'hidden' => 0,
+    ),
+    'body' => array(
+      'region' => 'main',
+      'weight' => '1',
+      'has_required' => FALSE,
+      'title' => 'File description or notes',
+      'hidden' => 0,
+    ),
+    'field_expiration_date' => array(
+      'region' => 'right',
+      'weight' => '3',
+      'has_required' => FALSE,
+      'title' => 'Expiration date',
+      'hidden' => 0,
+    ),
+    'field_expiration_reminder' => array(
+      'region' => 'right',
+      'weight' => '4',
+      'has_required' => FALSE,
+      'title' => 'Enable expiration reminder',
+      'hidden' => 0,
+    ),
+    'field_expiration_reminder_date' => array(
+      'region' => 'right',
+      'weight' => '5',
+      'has_required' => FALSE,
+      'title' => 'Reminder date',
+      'hidden' => 0,
+    ),
+    'field_file_category' => array(
+      'region' => 'right',
+      'weight' => '1',
+      'has_required' => FALSE,
+      'title' => 'File category',
+      'hidden' => 0,
+    ),
+    'field_file_tags' => array(
+      'region' => 'right',
+      'weight' => '2',
+      'has_required' => FALSE,
+      'title' => 'Tags',
+      'hidden' => 0,
+    ),
+    'field_files' => array(
+      'region' => 'main',
+      'weight' => '2',
+      'has_required' => FALSE,
+      'title' => 'Files',
+      'hidden' => 0,
+    ),
+    'field_site' => array(
+      'region' => 'main',
+      'weight' => '3',
+      'has_required' => FALSE,
+      'title' => 'Site',
+      'hidden' => 0,
+    ),
+    'notifications' => array(
+      'region' => 'main',
+      'weight' => '6',
+      'has_required' => FALSE,
+      'title' => 'Notifications',
+      'collapsed' => 0,
+      'hidden' => 0,
+    ),
+  );
+  $export['nodeformscols_field_placements_file_default'] = $strongarm;
+
+
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
