@@ -9,9 +9,6 @@ stylesheets[all][] = css/colors.css
 scripts[] = js/s4.js
 scripts[] = js/placeholder.js
 
-stylesheets-conditional[IE 7][all][] = css/ie7.css
-stylesheets-conditional[IE 6][all][] = css/ie6.css
-
 ;Overriding the core css files
 ;stylesheets[all][] = system.menus.css
 
