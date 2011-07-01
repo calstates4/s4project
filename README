@@ -2,4 +2,10 @@ Students need to sign up for lots of things besides courses. Things like service
 
 This project is a collaboration between the CSUMB Web Services department and the Center for Community Engagement
 
+INSTALLATION
+You should ensure that you have a system supported by Drupal version 7. Learn more about these minimum install requirements here:
+http://drupal.org/requirements
+
+In addition, you should increase your web server PHP memory limit to at least 80M.
+
 We're tracking the project at the Project Site: http://s4.csumb.edu/project
