@@ -11,7 +11,7 @@ function s4_core_context_default_contexts() {
   $export = array();
 
   $context = new stdClass;
-  $context->disabled = FALSE; /* Edit this to TRUE to make a default context disabled initially */
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'anonymous-site';
   $context->description = 'Anonymous user is viewing a site';
@@ -52,7 +52,7 @@ function s4_core_context_default_contexts() {
   $export['anonymous-site'] = $context;
 
   $context = new stdClass;
-  $context->disabled = FALSE; /* Edit this to TRUE to make a default context disabled initially */
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'authenticated';
   $context->description = 'User is authenticated';
@@ -85,7 +85,7 @@ function s4_core_context_default_contexts() {
   $export['authenticated'] = $context;
 
   $context = new stdClass;
-  $context->disabled = FALSE; /* Edit this to TRUE to make a default context disabled initially */
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'basic-page';
   $context->description = '';
@@ -109,7 +109,7 @@ function s4_core_context_default_contexts() {
   $export['basic-page'] = $context;
 
   $context = new stdClass;
-  $context->disabled = FALSE; /* Edit this to TRUE to make a default context disabled initially */
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'dashboard-main';
   $context->description = 'User is on the dashboard';
@@ -142,6 +142,12 @@ function s4_core_context_default_contexts() {
           'region' => 'content',
           'weight' => '-9',
         ),
+        'views-65656e1f5a12cde25f0722f735fe7969' => array(
+          'module' => 'views',
+          'delta' => '65656e1f5a12cde25f0722f735fe7969',
+          'region' => 'content_right',
+          'weight' => '-26',
+        ),
         'views-bookmarked_sites-block' => array(
           'module' => 'views',
           'delta' => 'bookmarked_sites-block',
@@ -160,7 +166,7 @@ function s4_core_context_default_contexts() {
   $export['dashboard-main'] = $context;
 
   $context = new stdClass;
-  $context->disabled = FALSE; /* Edit this to TRUE to make a default context disabled initially */
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'dashboard-staff';
   $context->description = 'Staff member is on a the dashboard';
@@ -205,7 +211,7 @@ function s4_core_context_default_contexts() {
   $export['dashboard-staff'] = $context;
 
   $context = new stdClass;
-  $context->disabled = FALSE; /* Edit this to TRUE to make a default context disabled initially */
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'frontpage';
   $context->description = 'Any user is viewing the frontpage';
@@ -251,7 +257,7 @@ function s4_core_context_default_contexts() {
   $export['frontpage'] = $context;
 
   $context = new stdClass;
-  $context->disabled = FALSE; /* Edit this to TRUE to make a default context disabled initially */
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'frontpage-anonymous';
   $context->description = '';
@@ -289,7 +295,7 @@ function s4_core_context_default_contexts() {
   $export['frontpage-anonymous'] = $context;
 
   $context = new stdClass;
-  $context->disabled = FALSE; /* Edit this to TRUE to make a default context disabled initially */
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'sitewide';
   $context->description = '';
@@ -333,7 +339,7 @@ function s4_core_context_default_contexts() {
   $export['sitewide'] = $context;
 
   $context = new stdClass;
-  $context->disabled = FALSE; /* Edit this to TRUE to make a default context disabled initially */
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'staff';
   $context->description = 'User has the "staff" role and can manage content';
@@ -378,7 +384,7 @@ function s4_core_context_default_contexts() {
   $export['staff'] = $context;
 
   $context = new stdClass;
-  $context->disabled = FALSE; /* Edit this to TRUE to make a default context disabled initially */
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'user-login-page';
   $context->description = 'User is on the login screen and is not authenticated';
