@@ -226,7 +226,7 @@ function s4_core_block_jump_to_node() {
 *  associated with the signup node.
 */
 function s4_core_block_s4_signup_webform_signup() {
-  return _s4_core_block_webform('field_form_signup_sid');
+  return s4_webform_render_submission('field_form_signup_sid');
 }
 
 /**
@@ -256,33 +256,6 @@ function s4_core_block_s4_page_notifications() {
          );
   }
   return NULL;
-}
-
-/**
-*  Block helper for rendering a given webform submission
-*/
-function _s4_core_block_webform($field) {
-  $node = menu_get_object();
-  $sid = field_get_items('node', $node, $field);
-  $site = field_get_items('node', $node, 'field_site');
-  $site = node_load($site[0]['nid']);
-  $form = field_get_items('node', $site, 'field_site_form');
-  $form = node_load($form[0]['nid']);
-  $output = '';
-  if (count($form)) {
-    module_load_include('inc', 'webform', 'includes/webform.submissions');
-    $submission = webform_get_submission($form->nid, $sid[0]['value']);
-      if (!$submission) {
-        return NULL;
-      }
-      foreach ($form->webform['components'] as $k => $component) {
-        $output .= '<p><span class="form-label">' . $component['name'] . ':</span>';
-        $output .= '<span class="form-value">' . implode("\n", $submission->data[$k]['value']) . '</span></p>';
-      }
-      
-          return array('subject' => 'Signup form',
-                'content' => $output);
-  }
 }
 
 /**

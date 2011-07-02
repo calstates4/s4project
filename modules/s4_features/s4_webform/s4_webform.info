@@ -1,0 +1,9 @@
+core = "7.x"
+dependencies[] = "features"
+dependencies[] = "webform"
+description = "Tweaks and updates to web forms"
+
+name = "S4 Web Forms"
+package = "S4"
+project = "s4_webform"
+version = "7.x-1.0"

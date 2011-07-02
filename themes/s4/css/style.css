@@ -814,3 +814,6 @@ li.horizontal-tab-button.selected, li.horizontal-tab-button.selected a {
 #content .horizontal-tabs fieldset.horizontal-tabs-pane {
   padding-bottom: 15px;
 }
+table#webform-components {
+  width: 100%;
+}
