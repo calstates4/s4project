@@ -33,4 +33,19 @@ function s4_webform_render_submission($field) {
 function s4_webform_menu_alter(&$items) {
 	$items['node/%webform_menu/webform']['title'] = 'Edit form';
 	$items['node/%webform_menu/webform/components']['title'] = 'Edit questions';
+	$items['node/%webform_menu/webform/components/%webform_menu_component']['title'] = 'Edit/Add question';
+}
+
+function s4_webform_form_webform_components_form_alter(&$form, $form_state) {
+	$form['add']['type']['#options']['markup'] = 'Additional directions';
+	$form['add']['type']['#options']['fieldset'] = 'Collection of questions';
+	$form['add']['type']['#options']['textfield'] = 'Single-line text';
+	$form['add']['type']['#options']['textarea'] = 'Paragraph text';
+	$form['add']['type']['#options']['select'] = 'Drop-down list';
+	unset($form['add']['type']['#options']['hidden']);	
+}
+
+function s4_webform_form_webform_component_edit_form_alter(&$form, $form_state) {
+	$form['form_key']['#title'] = t('Short machine name');
+	$form['form_key']['#description'] = t('Enter a computer-readable version of this question. This can only contain letters, numbers, and underscores (_).');
 }
