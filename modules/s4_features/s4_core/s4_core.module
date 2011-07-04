@@ -316,11 +316,14 @@ function s4_core_signup($type, $nid) {
       $instructions = field_get_items('node', $site, 'field_site_instructions_required');
       $instruction_text = field_get_items('node', $site, 'field_site_instructions');
       if ($instructions[0]['value'] && strip_tags($instruction_text[0]['value']) != '' && !$_GET['agreed']) {
+        drupal_set_message('This site requires that you read and agree to these additional instructions');
         drupal_set_title(t('Site instructions'));
         return $instruction_text[0]['value'] . 
-            '<p>' . l('Return to site', 'node/' . $site->nid) .
+            '<p>' .
                  l('Agree', 's4/signup/' . $type . '/' . $site->nid,
-                   array('query' => array('agreed' => 1))) .
+                   array('query' => array('agreed' => 1),
+                   			 'attributes' => array('class' => array('button')))) .
+                 ' ' . l('Return to site', 'node/' . $site->nid) . 
             '</p>';
       }
       else {
@@ -393,8 +396,7 @@ function s4_core_permission() {
 *  This can be used to hide the signup process block
 */
 function s4_core_user_can_signup($user) {
-  if (!user_access('signup for service', $user)) {
-    
+  if (!user_access('signup for service', $user)) {    
     return FALSE;
   }
   $ignore_courses = field_get_items('user', $user, 'field_course_ignore');
