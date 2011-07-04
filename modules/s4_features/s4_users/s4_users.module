@@ -3,4 +3,10 @@
  * @file
  */
 
-// Drupal needs this blank file.
+/**
+*	Implementation of hook_user_view
+*/
+function s4_users_user_view($account, $view_mode, $langcode) {
+	dpm($account);
+	return $account;
+}
