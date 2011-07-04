@@ -11,7 +11,7 @@ function s4_core_default_box() {
   $export = array();
 
   $box = new stdClass;
-  $box->disabled = FALSE; /* Edit this to TRUE to make a default box disabled initially */
+  $box->disabled = FALSE; /* Edit this to true to make a default box disabled initially */
   $box->api_version = 1;
   $box->delta = 's4_mission';
   $box->plugin_key = 'simple';
