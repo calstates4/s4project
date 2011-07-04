@@ -73,13 +73,13 @@ function s4_sites_context_default_contexts() {
           'module' => 's4_core',
           'delta' => 's4_add_new_coordinator',
           'region' => 'content',
-          'weight' => '-10',
+          'weight' => '-9',
         ),
         'views-site_coordinators-block' => array(
           'module' => 'views',
           'delta' => 'site_coordinators-block',
           'region' => 'content',
-          'weight' => '-9',
+          'weight' => '-8',
         ),
         's4_core-user_site_signup' => array(
           'module' => 's4_core',
