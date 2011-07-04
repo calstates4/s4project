@@ -297,6 +297,87 @@ function s4_core_context_default_contexts() {
   $context = new stdClass;
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
+  $context->name = 'search';
+  $context->description = 'User is on the site-wide search page';
+  $context->tag = 'search';
+  $context->conditions = array(
+    'views' => array(
+      'values' => array(
+        's4_search' => 's4_search',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        'views--exp-s4_search-page' => array(
+          'module' => 'views',
+          'delta' => '-exp-s4_search-page',
+          'region' => 'content_top_left',
+          'weight' => '-10',
+        ),
+      ),
+    ),
+    'theme_html' => array(
+      'class' => 'site-search',
+    ),
+  );
+  $context->condition_mode = 0;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('User is on the site-wide search page');
+  t('search');
+  $export['search'] = $context;
+
+  $context = new stdClass;
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
+  $context->name = 'search-staff';
+  $context->description = 'A staff member is on the search page';
+  $context->tag = 'search';
+  $context->conditions = array(
+    'user' => array(
+      'values' => array(
+        'administrator' => 'administrator',
+        'staff' => 'staff',
+      ),
+    ),
+    'views' => array(
+      'values' => array(
+        's4_search:page' => 's4_search:page',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        'views-s4_search-block_1' => array(
+          'module' => 'views',
+          'delta' => 's4_search-block_1',
+          'region' => 'content_right',
+          'weight' => '-10',
+        ),
+        'views-s4_search_students-block' => array(
+          'module' => 'views',
+          'delta' => 's4_search_students-block',
+          'region' => 'content_right',
+          'weight' => '-10',
+        ),
+      ),
+    ),
+  );
+  $context->condition_mode = 1;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('A staff member is on the search page');
+  t('search');
+  $export['search-staff'] = $context;
+
+  $context = new stdClass;
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
   $context->name = 'signup_page';
   $context->description = 'User is on a signup page';
   $context->tag = 'signup';

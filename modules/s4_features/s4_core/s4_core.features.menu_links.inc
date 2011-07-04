@@ -194,8 +194,10 @@ function s4_core_menu_default_menu_links() {
   t('Home');
   t('Logout');
   t('Map');
+  t('News');
   t('Reports');
   t('Send emails');
+  t('Site or Community Partner');
 
 
   return $menu_links;
