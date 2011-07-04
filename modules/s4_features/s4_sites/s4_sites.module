@@ -9,10 +9,28 @@ include_once('s4_sites.features.inc');
 /**
 *  Implementation of hook_menu_alter()
 */
-
 function s4_sites_menu_alter(&$items) {
   $items['node/%/contact-records']['access callback'] = '_s4_sites_site_admin_view_access';
   $items['node/%/contact-records']['access arguments'] = array(1);
+}
+
+/**
+*	Implementation of hook_menu
+*/
+function s4_sites_menu() {
+	$items = array();
+	
+	$items['admin/config/s4/site-import'] = array(
+    'title' => 'Import site information',
+    'description' => 'Import sites from another database',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('s4_sites_import_sites_form'),
+    'file' => 's4_sites.admin.inc',
+    'access arguments' => array('administer site configuration'),
+    'weight' => -10,
+  );
+	
+	return $items;
 }
 
 /**
