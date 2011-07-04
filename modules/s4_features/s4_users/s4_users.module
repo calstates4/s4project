@@ -7,6 +7,14 @@
 *	Implementation of hook_user_view
 */
 function s4_users_user_view($account, $view_mode, $langcode) {
-	dpm($account);
+	$account->content['#pre_render'][] = '_s4_users_user_view_pre_render';
 	return $account;
+}
+
+/**
+*	Prerender callback to remove the history summary from a user profile page
+*/
+function _s4_users_user_view_pre_render($user) {
+	unset($user['summary']);
+	return $user;
 }
