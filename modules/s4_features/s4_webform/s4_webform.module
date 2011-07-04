@@ -36,6 +36,9 @@ function s4_webform_menu_alter(&$items) {
 	$items['node/%webform_menu/webform/components/%webform_menu_component']['title'] = 'Edit/Add question';
 }
 
+/**
+*	Alter the name of the question options to be more user-friendly
+*/
 function s4_webform_form_webform_components_form_alter(&$form, $form_state) {
 	$form['add']['type']['#options']['markup'] = 'Additional directions';
 	$form['add']['type']['#options']['fieldset'] = 'Collection of questions';
@@ -45,7 +48,21 @@ function s4_webform_form_webform_components_form_alter(&$form, $form_state) {
 	unset($form['add']['type']['#options']['hidden']);	
 }
 
+/**
+*	Altering the add-component form to make it more user-friendly
+*/
 function s4_webform_form_webform_component_edit_form_alter(&$form, $form_state) {
-	$form['form_key']['#title'] = t('Short machine name');
+	$form['form_key']['#title'] = t('Short computer name');
 	$form['form_key']['#description'] = t('Enter a computer-readable version of this question. This can only contain letters, numbers, and underscores (_).');
+	if(isset($form['display']['title_display'])) {
+		$form['display']['title_display']['#title'] = t('Hide the question text');
+		$form['display']['title_display']['#description'] = t('Do not display the question over this field.');
+	}	
+	if(isset($form['display']['aslist'])) {
+		$form['display']['aslist']['#description'] = t('Check this box if you want this question\'s options to be a drop-down menu instead of a list of check boxes or radio buttons.');
+	}
+	if(isset($form['extra']['savelocation']) && !$form['cid']['#value']) {
+		$form['extra']['savelocation']['#default_value'] = 'form-files';
+	}
+	$form['submit']['#value'] = 'Save question';
 }
