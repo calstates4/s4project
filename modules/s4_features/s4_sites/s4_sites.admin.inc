@@ -48,12 +48,32 @@ function s4_sites_import_sites_form() {
 		'#upload_validators' => array('file_validate_extensions' => array('csv')),
 	);
 	
+	
+	$restrict = false;
+	foreach(taxonomy_get_vocabularies() as $vid => $vocabulary) {
+		if($vocabulary->machine_name == 'site_restrictions') {
+			$restrict = taxonomy_get_tree($vid);
+		}
+	}
+	
+	if($restrict) {
+		$restrict_options = array();
+		foreach($restrict as $tid => $term) {
+			$restrict_options[$tid] = $term->name;
+		}
+		$form['default_restrict'] = array(
+			'#type' => 'checkboxes',
+			'#title' => 'Default site restrictions',
+			'#options' => $restrict_options,
+			'#default_value' => $restrict_options,
+		);
+	}
+	
 	$form['mapping'] = array(
 		'#type' => 'fieldset',
 		'#title' => 'Field mapping',
 	);
 	
-
 	
 	foreach(s4_sites_import_field_mapping() as $name => $field) {
 		$form['mapping'][$name] = array(
@@ -103,6 +123,11 @@ function s4_sites_import_sites_form_submit($form, $form_state) {
 			}
 		}
 	}
+	
+	$extra = array();
+	if($form_state['values']['default_restrict']) {
+		$extra['default_restrict'] = $form_state['values']['default_restrict'];
+	}
 	while($row = fgetcsv($file)) {
 		$batch['operations'][] = array('s4_sites_batch_import_node', array($row, $headers, $fields));
 	}
@@ -110,7 +135,7 @@ function s4_sites_import_sites_form_submit($form, $form_state) {
   batch_set($batch);
 }
 
-function s4_sites_batch_import_node($row, $headers, $fields, &$context) {
+function s4_sites_batch_import_node($row, $headers, $fields, $extra, &$context) {
 	global $user;
 	$new_row = array();
 	foreach($fields as $name => $field) {
@@ -122,16 +147,15 @@ function s4_sites_batch_import_node($row, $headers, $fields, &$context) {
   $node->uid = $user->uid;
   $node->language = LANGUAGE_NONE;
 	$node->title = check_plain($new_row['title']);
-	$node->location[$node->language] = array(
-		0 => array(
+	$location = array(
 			'street' => $new_row['location_street'],
 			'additional' => $new_row['location_additional'],
 			'city' => $new_row['location_city'],
 			'province' => $new_row['location_state'],
 			'postal_code' => $new_row['location_postal_code'],
 			
-		),
-	);
+		);
+	$node->field_location[$node->language][0]['lid'] = location_save($location);
 	$node->body[$node->language][0]['value'] = $new_row['body'];
 	$node->field_phone[$node->language][0]['number'] = intval($new_row['field_phone']);
 	if(valid_email_address($new_row['field_site_email'])) {
@@ -139,6 +163,9 @@ function s4_sites_batch_import_node($row, $headers, $fields, &$context) {
 	}
 	if(valid_url($new_row['field_website'], true)) {
 		$node->field_website[$node->language][0]['url'] = $new_row['field_website'];
+	}
+	if($extra['default_restrict']) {
+		$node->field_site_restrict[$node->language][0]['tid'] = $extra['default_restrict'];
 	}
 	node_save($node);
 	$context['message'] = t('Now processing %node', array('%node' => $new_row['title']));
