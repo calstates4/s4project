@@ -114,7 +114,7 @@ function s4_sites_batch_import_node($row, $headers, $fields, &$context) {
 	global $user;
 	$new_row = array();
 	foreach($fields as $name => $field) {
-		$new_row[$name] = $row[$field['key']];
+		$new_row[$name] = filter_xss($row[$field['key']]);
 	}
 	$node = new stdClass();
 	$node->type = 'site';
