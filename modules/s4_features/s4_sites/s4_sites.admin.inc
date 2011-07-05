@@ -175,12 +175,13 @@ function s4_sites_batch_import_node($row, $headers, $fields, $extra, &$context) 
 	}
 	node_save($node);
 	$context['message'] = t('Now processing %node', array('%node' => $new_row['title']));
+	$context['results'][] = check_plain($node->title);
 }
 
 function s4_sites_import_batch_finished($success, $results, $operations) {
   if ($success) {
     // Here we do something meaningful with the results.
-    $message = count($results) .' processed.';
+    $message = count($results) .' sites imported.';
     $message .= theme('item_list', $results);
   }
   else {
