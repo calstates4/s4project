@@ -46,6 +46,8 @@ function _s4_sites_site_admin_view_access($nid) {
 */
 function s4_sites_init() {
   drupal_add_js(drupal_get_path('module', 's4_sites') . '/js/s4_map.js');
+  drupal_add_js(drupal_get_path('module', 's4_sites') . '/js/s4_fancybox.js');
+
 }
 
 /**
