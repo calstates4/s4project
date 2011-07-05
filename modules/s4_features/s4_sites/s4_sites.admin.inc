@@ -59,13 +59,12 @@ function s4_sites_import_sites_form() {
 	if($restrict) {
 		$restrict_options = array();
 		foreach($restrict as $tid => $term) {
-			$restrict_options[$tid] = $term->name;
+			$restrict_options[$term->tid] = $term->name;
 		}
 		$form['default_restrict'] = array(
 			'#type' => 'checkboxes',
 			'#title' => 'Default site restrictions',
 			'#options' => $restrict_options,
-			'#default_value' => $restrict_options,
 		);
 	}
 	
@@ -126,10 +125,17 @@ function s4_sites_import_sites_form_submit($form, $form_state) {
 	
 	$extra = array();
 	if($form_state['values']['default_restrict']) {
-		$extra['default_restrict'] = $form_state['values']['default_restrict'];
+		$i = 0;
+		foreach($form_state['values']['default_restrict'] as $tid => $value) {
+			if($value) {
+				$extra['default_restrict'][$i]['tid'] = $value;
+				$i++;
+			}
+		}
+		
 	}
 	while($row = fgetcsv($file)) {
-		$batch['operations'][] = array('s4_sites_batch_import_node', array($row, $headers, $fields));
+		$batch['operations'][] = array('s4_sites_batch_import_node', array($row, $headers, $fields, $extra));
 	}
 	fclose($file);
   batch_set($batch);
@@ -165,7 +171,7 @@ function s4_sites_batch_import_node($row, $headers, $fields, $extra, &$context) 
 		$node->field_website[$node->language][0]['url'] = $new_row['field_website'];
 	}
 	if($extra['default_restrict']) {
-		$node->field_site_restrict[$node->language][0]['tid'] = $extra['default_restrict'];
+		$node->field_site_restrict[$node->language] = $extra['default_restrict'];
 	}
 	node_save($node);
 	$context['message'] = t('Now processing %node', array('%node' => $new_row['title']));
