@@ -1,5 +1,8 @@
 <?php
 
+/**
+*	Field mappings so that users can use different headers than what is defined here.
+*/
 function s4_sites_import_field_mapping() {
 	return array('title' => array(
 										'description' => 'Title',
@@ -37,6 +40,9 @@ function s4_sites_import_field_mapping() {
 							);
 }
 
+/**
+*	Form to import sites via a CSV file using the Batch API
+*/
 function s4_sites_import_sites_form() {
 	$form = array();
 	
@@ -91,6 +97,9 @@ function s4_sites_import_sites_form() {
 
 }
 
+/**
+*	Import sites form validation callback
+*/
 function s4_sites_import_sites_form_validate($form, $form_state) {
 	foreach(s4_sites_import_field_mapping() as $name => $field) {
 		if(!$form_state['values'][$name]) {
@@ -102,6 +111,9 @@ function s4_sites_import_sites_form_validate($form, $form_state) {
   }
 }
 
+/**
+*	Submit callback for importing sites. We go through each row of the CSV and setup a Batch API call.
+*/
 function s4_sites_import_sites_form_submit($form, $form_state) {
 	$file = file_load($form_state['values']['csv_file_fid']);
 	$file = fopen(file_stream_wrapper_get_instance_by_uri($file->uri)->realpath(), 'r');
@@ -141,6 +153,9 @@ function s4_sites_import_sites_form_submit($form, $form_state) {
   batch_set($batch);
 }
 
+/**
+*	Batch callback where we take each row in the CSV and create a new node
+*/
 function s4_sites_batch_import_node($row, $headers, $fields, $extra, &$context) {
 	global $user;
 	$new_row = array();
@@ -178,6 +193,9 @@ function s4_sites_batch_import_node($row, $headers, $fields, $extra, &$context) 
 	$context['results'][] = check_plain($node->title);
 }
 
+/**
+*	Finished callback for the batch import
+*/
 function s4_sites_import_batch_finished($success, $results, $operations) {
   if ($success) {
     // Here we do something meaningful with the results.
