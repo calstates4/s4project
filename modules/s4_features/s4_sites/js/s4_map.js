@@ -5,16 +5,16 @@
 		}
 	};
 	$(document).ready(function() {
-		if(!$('.map-link').length) {
+		if($('.map-link').length == 0 ) {
 			return null;
 		}
 		$(document).scroll(function() {
 			var columnTop = $('#content_middle .column').position();
 			if($(document).scrollTop() > columnTop.top) {
-				$('#block-boxes-site-search-map').css('position', 'fixed').css('top', 0);
+				$('#site-list-map').css('position', 'fixed').css('top', 0);
 			}
 			else {
-				$('#block-boxes-site-search-map').css('position', 'relative');
+				$('#site-list-map').css('position', 'relative');
 			}
 		});
 		

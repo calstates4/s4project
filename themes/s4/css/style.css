@@ -686,7 +686,7 @@ input.form-button-disabled, input.form-button-disabled:active {
   display: block;
 }
 /** MAP **/
-#block-boxes-site-search-map {
+#site-list-map {
   margin: 0;
   width: 370px;
 }

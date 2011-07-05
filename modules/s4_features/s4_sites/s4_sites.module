@@ -82,7 +82,7 @@ function s4_sites_block_view($delta) {
         ),
       );
       return array('subject' => '',
-             'content' => drupal_render($map) . t('<h4>!link</h4>', array('!link' => l('View large map', 'map'))));
+             'content' => '<div id="site-list-map">'. drupal_render($map) . t('<h4>!link</h4>', array('!link' => l('View large map', 'map'))) . '</div>');
       break;
   }
   
