@@ -820,3 +820,7 @@ li.horizontal-tab-button.selected, li.horizontal-tab-button.selected a {
 table#webform-components {
   width: 100%;
 }
+#autocomplete li {
+  margin: 0;
+  padding: 3px;
+}

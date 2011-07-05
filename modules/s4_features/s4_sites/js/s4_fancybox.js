@@ -5,10 +5,12 @@
  */
 Drupal.behaviors.initFancybox = {
   attach : function() {
-    $('.imagefield-fancybox').each(function() {
-    	$(this).attr('rel', 'fancybox_group');
-    });
-    $('.imagefield-fancybox').fancybox();
+    if($('.imagefield-fancybox').length) {
+	    $('.imagefield-fancybox').each(function() {
+	    	$(this).attr('rel', 'fancybox_group');
+	    });
+	    $('.imagefield-fancybox').fancybox();
+	}
   }
 }
 
