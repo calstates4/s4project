@@ -151,14 +151,6 @@ variables[cck_blocks_field_tags_block_availability] = 2
 variables[cck_blocks_field_user_block_availability] = 2
 variables[cck_blocks_field_website_block_availability] = 2
 
-
-;users
-users[admin][uid] = 1
-users[admin][name] = admin
-users[admin][mail] = admin@example.com
-users[admin][roles] = administrator,staff
-users[admin][status] = 1
-
 ;Vocabularies - site restrictions
 terms[service_learning][name] = Service Learning
 terms[service_learning][vocabulary_machine_name] = site_restrictions
