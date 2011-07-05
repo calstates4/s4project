@@ -157,6 +157,53 @@ function s4_core_strongarm() {
   $strongarm->value = '0';
   $export['comment_webform'] = $strongarm;
 
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'fancybox_files';
+  $strongarm->value = array(
+    'js' => 'jquery.fancybox-1.3.4.js',
+    'css' => 'jquery.fancybox-1.3.4.css',
+  );
+  $export['fancybox_files'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'fancybox_path';
+  $strongarm->value = 'sites/all/libraries/fancybox/fancybox';
+  $export['fancybox_path'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'fancybox_settings';
+  $strongarm->value = array(
+    'activation' => array(
+      'selector' => '.imagefield-fancybox',
+      'activation_type' => 'exclude',
+      'activation_pages' => 'admin*
+img_assist*
+node/add/*
+node/*/edit',
+    ),
+    'imagefield' => array(
+      'grouping' => '1',
+      'imagecache_preset' => '0',
+      'use_node_title' => 0,
+    ),
+    'options' => array(
+      'margin' => 0,
+      'padding' => 0,
+      'speedIn' => 0,
+      'speedOut' => 0,
+      'changeSpeed' => 0,
+    ),
+  );
+  $export['fancybox_settings'] = $strongarm;
+
+
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to TRUE to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
