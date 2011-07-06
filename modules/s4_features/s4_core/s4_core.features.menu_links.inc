@@ -24,6 +24,24 @@ function s4_core_menu_default_menu_links() {
     'expanded' => '0',
     'weight' => '-44',
   );
+  // Exported menu link: main-menu:students
+  $menu_links['main-menu:students'] = array(
+    'menu_name' => 'main-menu',
+    'link_path' => 'students',
+    'router_path' => 'students',
+    'link_title' => 'Students',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+    ),
+    'module' => 'menu',
+    'hidden' => '0',
+    'external' => '0',
+    'has_children' => '0',
+    'expanded' => '0',
+    'weight' => '-48',
+  );
   // Exported menu link: main-menu:dashboard
   $menu_links['main-menu:dashboard'] = array(
     'menu_name' => 'main-menu',
