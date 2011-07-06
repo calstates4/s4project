@@ -14,4 +14,4 @@ projects[student_signup][type] = profile
 projects[student_signup][version] = 1.x-dev
 projects[student_signup][download][type] = git
 projects[student_signup][download][url] = git://github.com/kevee/csu_student_signup.git 
-projects[student_signup][download][branch] = main
+projects[student_signup][download][branch] = master
