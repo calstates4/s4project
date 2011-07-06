@@ -115,3 +115,12 @@ function s4_sites_form_site_node_form_alter(&$form, $form_state, $form_id) {
     
   }
 }
+
+/**
+*  Implementation of hook_node_insert.
+*/
+function s4_sites_node_insert($node) {
+  if($node->type == 'site') {
+     cache_set('s4_pages_overview_data', false, 'cache', CACHE_TEMPORARY);
+  }
+}
