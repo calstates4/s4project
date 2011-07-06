@@ -172,7 +172,7 @@ function s4_core_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'fancybox_path';
-  $strongarm->value = 'sites/all/libraries/fancybox/fancybox';
+  $strongarm->value = 'profiles/student_signup/fancybox/fancybox';
   $export['fancybox_path'] = $strongarm;
 
   $strongarm = new stdClass;
