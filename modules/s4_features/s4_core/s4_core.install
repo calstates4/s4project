@@ -48,3 +48,22 @@ function s4_core_install() {
     ))
     ->execute();
 }
+
+/**
+*	Implementation of hook_requirements
+*/
+function s4_core_requirements() {
+	$t = get_t();
+	if(intval(ini_get('memory_limit')) < 80) {
+		return array('student_signup_memory' => array(
+			'title' => $t('Memory limit is at least 80M'),
+			'description' => $t('The memory is currently %memory, it should be at least 80M to install the Student Signup install profile. !link', 
+				array('%memory' => ini_get('memory_limit'), 
+					  '!link' => l($t('Learn how to change your memory limit'), 
+					  				  'http://drupal.org/node/207036',
+					  				  array('attributes' => array('target' => '_blank'))))),
+			'severity' => REQUIREMENT_ERROR,
+		));
+	}
+	return array();
+}
