@@ -657,180 +657,178 @@ function s4_sites_views_default_views() {
   $export['email_site_contacts'] = $view;
 
   $view = new view;
-	$view->name = 'location_gmap';
-	$view->description = '';
-	$view->tag = 'default';
-	$view->base_table = 'node';
-	$view->human_name = 'Site Locations Map';
-	$view->core = 7;
-	$view->api_version = '3.0-alpha1';
-	$view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
-	
-	/* Display: Master */
-	$handler = $view->new_display('default', 'Master', 'default');
-	$handler->display->display_options['title'] = 'Map';
-	$handler->display->display_options['access']['type'] = 'perm';
-	$handler->display->display_options['cache']['type'] = 'none';
-	$handler->display->display_options['query']['type'] = 'views_query';
-	$handler->display->display_options['query']['options']['query_comment'] = FALSE;
-	$handler->display->display_options['exposed_form']['type'] = 'basic';
-	$handler->display->display_options['pager']['type'] = 'full';
-	$handler->display->display_options['pager']['options']['items_per_page'] = '10';
-	$handler->display->display_options['style_plugin'] = 'gmap';
-	$handler->display->display_options['style_options']['macro'] = '[gmap width=462px |height=270px ]';
-	$handler->display->display_options['style_options']['markertype'] = '';
-	$handler->display->display_options['style_options']['latfield'] = 'title';
-	$handler->display->display_options['style_options']['lonfield'] = 'title';
-	$handler->display->display_options['style_options']['markerfield'] = 'title';
-	$handler->display->display_options['style_options']['enablermt'] = 0;
-	$handler->display->display_options['style_options']['rmtfield'] = 'title';
-	$handler->display->display_options['style_options']['tooltipfield'] = 'title';
-	$handler->display->display_options['row_plugin'] = 'fields';
-	$handler->display->display_options['exposed_block'] = TRUE;
-	/* Field: Content: Title */
-	$handler->display->display_options['fields']['title']['id'] = 'title';
-	$handler->display->display_options['fields']['title']['table'] = 'node';
-	$handler->display->display_options['fields']['title']['field'] = 'title';
-	$handler->display->display_options['fields']['title']['label'] = '';
-	$handler->display->display_options['fields']['title']['alter']['alter_text'] = 0;
-	$handler->display->display_options['fields']['title']['alter']['make_link'] = 0;
-	$handler->display->display_options['fields']['title']['alter']['absolute'] = 0;
-	$handler->display->display_options['fields']['title']['alter']['external'] = 0;
-	$handler->display->display_options['fields']['title']['alter']['replace_spaces'] = 0;
-	$handler->display->display_options['fields']['title']['alter']['nl2br'] = 0;
-	$handler->display->display_options['fields']['title']['alter']['word_boundary'] = 0;
-	$handler->display->display_options['fields']['title']['alter']['ellipsis'] = 0;
-	$handler->display->display_options['fields']['title']['alter']['strip_tags'] = 0;
-	$handler->display->display_options['fields']['title']['alter']['trim'] = 0;
-	$handler->display->display_options['fields']['title']['alter']['html'] = 0;
-	$handler->display->display_options['fields']['title']['element_type'] = 'h3';
-	$handler->display->display_options['fields']['title']['element_label_colon'] = 1;
-	$handler->display->display_options['fields']['title']['element_default_classes'] = 0;
-	$handler->display->display_options['fields']['title']['hide_empty'] = 0;
-	$handler->display->display_options['fields']['title']['empty_zero'] = 0;
-	$handler->display->display_options['fields']['title']['link_to_node'] = 1;
-	/* Field: Content: Edit link */
-	$handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
-	$handler->display->display_options['fields']['edit_node']['table'] = 'node';
-	$handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
-	$handler->display->display_options['fields']['edit_node']['label'] = '';
-	$handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = 0;
-	$handler->display->display_options['fields']['edit_node']['alter']['make_link'] = 0;
-	$handler->display->display_options['fields']['edit_node']['alter']['absolute'] = 0;
-	$handler->display->display_options['fields']['edit_node']['alter']['external'] = 0;
-	$handler->display->display_options['fields']['edit_node']['alter']['replace_spaces'] = 0;
-	$handler->display->display_options['fields']['edit_node']['alter']['nl2br'] = 0;
-	$handler->display->display_options['fields']['edit_node']['alter']['word_boundary'] = 1;
-	$handler->display->display_options['fields']['edit_node']['alter']['ellipsis'] = 1;
-	$handler->display->display_options['fields']['edit_node']['alter']['strip_tags'] = 0;
-	$handler->display->display_options['fields']['edit_node']['alter']['trim'] = 0;
-	$handler->display->display_options['fields']['edit_node']['alter']['html'] = 0;
-	$handler->display->display_options['fields']['edit_node']['element_label_colon'] = 0;
-	$handler->display->display_options['fields']['edit_node']['element_default_classes'] = 1;
-	$handler->display->display_options['fields']['edit_node']['hide_empty'] = 0;
-	$handler->display->display_options['fields']['edit_node']['empty_zero'] = 0;
-	/* Sort criterion: Content: Post date */
-	$handler->display->display_options['sorts']['created']['id'] = 'created';
-	$handler->display->display_options['sorts']['created']['table'] = 'node';
-	$handler->display->display_options['sorts']['created']['field'] = 'created';
-	$handler->display->display_options['sorts']['created']['order'] = 'DESC';
-	/* Filter criterion: Content: Published */
-	$handler->display->display_options['filters']['status']['id'] = 'status';
-	$handler->display->display_options['filters']['status']['table'] = 'node';
-	$handler->display->display_options['filters']['status']['field'] = 'status';
-	$handler->display->display_options['filters']['status']['value'] = 1;
-	$handler->display->display_options['filters']['status']['group'] = 0;
-	$handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-	/* Filter criterion: Content: Type */
-	$handler->display->display_options['filters']['type']['id'] = 'type';
-	$handler->display->display_options['filters']['type']['table'] = 'node';
-	$handler->display->display_options['filters']['type']['field'] = 'type';
-	$handler->display->display_options['filters']['type']['value'] = array(
-	  'site' => 'site',
-	);
-	/* Filter criterion: Location: City */
-	$handler->display->display_options['filters']['city']['id'] = 'city';
-	$handler->display->display_options['filters']['city']['table'] = 'location';
-	$handler->display->display_options['filters']['city']['field'] = 'city';
-	$handler->display->display_options['filters']['city']['operator'] = 'contains';
-	$handler->display->display_options['filters']['city']['exposed'] = TRUE;
-	$handler->display->display_options['filters']['city']['expose']['operator_id'] = 'city_op';
-	$handler->display->display_options['filters']['city']['expose']['label'] = 'City';
-	$handler->display->display_options['filters']['city']['expose']['operator'] = 'city_op';
-	$handler->display->display_options['filters']['city']['expose']['identifier'] = 'city';
-	$handler->display->display_options['filters']['city']['expose']['multiple'] = FALSE;
-	/* Filter criterion: Search: Search Terms */
-	$handler->display->display_options['filters']['keys']['id'] = 'keys';
-	$handler->display->display_options['filters']['keys']['table'] = 'search_index';
-	$handler->display->display_options['filters']['keys']['field'] = 'keys';
-	$handler->display->display_options['filters']['keys']['exposed'] = TRUE;
-	$handler->display->display_options['filters']['keys']['expose']['operator_id'] = 'keys_op';
-	$handler->display->display_options['filters']['keys']['expose']['label'] = 'Search';
-	$handler->display->display_options['filters']['keys']['expose']['operator'] = 'keys_op';
-	$handler->display->display_options['filters']['keys']['expose']['identifier'] = 'keys';
-	$handler->display->display_options['filters']['keys']['expose']['multiple'] = FALSE;
-	
-	/* Display: Page */
-	$handler = $view->new_display('page', 'Page', 'page');
-	$handler->display->display_options['defaults']['style_plugin'] = FALSE;
-	$handler->display->display_options['style_plugin'] = 'gmap';
-	$handler->display->display_options['style_options']['macro'] = '[gmap width=100% |height=600px ]';
-	$handler->display->display_options['style_options']['markertype'] = '';
-	$handler->display->display_options['style_options']['latfield'] = 'title';
-	$handler->display->display_options['style_options']['lonfield'] = 'title';
-	$handler->display->display_options['style_options']['markerfield'] = 'title';
-	$handler->display->display_options['style_options']['enablermt'] = 0;
-	$handler->display->display_options['style_options']['rmtfield'] = 'title';
-	$handler->display->display_options['style_options']['tooltipfield'] = 'title';
-	$handler->display->display_options['defaults']['style_options'] = FALSE;
-	$handler->display->display_options['defaults']['row_plugin'] = FALSE;
-	$handler->display->display_options['row_plugin'] = 'fields';
-	$handler->display->display_options['defaults']['row_options'] = FALSE;
-	$handler->display->display_options['path'] = 'map';
-	
-	/* Display: Site Map */
-	$handler = $view->new_display('block', 'Site Map', 'block_1');
-	$handler->display->display_options['defaults']['title'] = FALSE;
-	$handler->display->display_options['defaults']['pager'] = FALSE;
-	$handler->display->display_options['pager']['type'] = 'some';
-	$handler->display->display_options['pager']['options']['items_per_page'] = '500';
-	$handler->display->display_options['pager']['options']['offset'] = '0';
-	
-	/* Display: Site Small Map */
-	$handler = $view->new_display('block', 'Site Small Map', 'block_2');
-	$handler->display->display_options['defaults']['title'] = FALSE;
-	$handler->display->display_options['defaults']['style_plugin'] = FALSE;
-	$handler->display->display_options['style_plugin'] = 'gmap';
-	$handler->display->display_options['style_options']['macro'] = '[gmap width=100% |height=270px ]';
-	$handler->display->display_options['style_options']['markertype'] = '';
-	$handler->display->display_options['style_options']['latfield'] = 'title';
-	$handler->display->display_options['style_options']['lonfield'] = 'title';
-	$handler->display->display_options['style_options']['markerfield'] = 'title';
-	$handler->display->display_options['style_options']['enablermt'] = 0;
-	$handler->display->display_options['style_options']['rmtfield'] = 'title';
-	$handler->display->display_options['style_options']['tooltipfield'] = 'title';
-	$handler->display->display_options['defaults']['style_options'] = FALSE;
-	$handler->display->display_options['defaults']['row_plugin'] = FALSE;
-	$handler->display->display_options['row_plugin'] = 'fields';
-	$handler->display->display_options['defaults']['row_options'] = FALSE;
-	$translatables['location_gmap'] = array(
-	  t('Master'),
-	  t('Map'),
-	  t('more'),
-	  t('Apply'),
-	  t('Reset'),
-	  t('Sort by'),
-	  t('Asc'),
-	  t('Desc'),
-	  t('Items per page'),
-	  t('- All -'),
-	  t('Offset'),
-	  t('City'),
-	  t('Search'),
-	  t('Page'),
-	  t('Site Map'),
-	  t('Site Small Map'),
-	);
+  $view->name = 'location_gmap';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'node';
+  $view->human_name = 'Site Locations Map';
+  $view->core = 7;
+  $view->api_version = '3.0-alpha1';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+  
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'Map';
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['query_comment'] = FALSE;
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '500';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['style_plugin'] = 'gmap';
+  $handler->display->display_options['style_options']['macro'] = '[gmap width=462px |height=270px ]';
+  $handler->display->display_options['style_options']['markertype'] = '';
+  $handler->display->display_options['style_options']['latfield'] = 'title';
+  $handler->display->display_options['style_options']['lonfield'] = 'title';
+  $handler->display->display_options['style_options']['markerfield'] = 'title';
+  $handler->display->display_options['style_options']['enablermt'] = 0;
+  $handler->display->display_options['style_options']['rmtfield'] = 'title';
+  $handler->display->display_options['style_options']['tooltipfield'] = 'title';
+  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['exposed_block'] = TRUE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['title']['element_type'] = 'h3';
+  $handler->display->display_options['fields']['title']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['title']['element_default_classes'] = 0;
+  $handler->display->display_options['fields']['title']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['title']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['title']['link_to_node'] = 1;
+  /* Field: Content: Edit link */
+  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['table'] = 'node';
+  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['label'] = '';
+  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['edit_node']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['edit_node']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['edit_node']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['edit_node']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['edit_node']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['edit_node']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['edit_node']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['edit_node']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['edit_node']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['edit_node']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['edit_node']['element_label_colon'] = 0;
+  $handler->display->display_options['fields']['edit_node']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['edit_node']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['edit_node']['empty_zero'] = 0;
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 0;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'site' => 'site',
+  );
+  /* Filter criterion: Location: City */
+  $handler->display->display_options['filters']['city']['id'] = 'city';
+  $handler->display->display_options['filters']['city']['table'] = 'location';
+  $handler->display->display_options['filters']['city']['field'] = 'city';
+  $handler->display->display_options['filters']['city']['operator'] = 'contains';
+  $handler->display->display_options['filters']['city']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['city']['expose']['operator_id'] = 'city_op';
+  $handler->display->display_options['filters']['city']['expose']['label'] = 'City';
+  $handler->display->display_options['filters']['city']['expose']['operator'] = 'city_op';
+  $handler->display->display_options['filters']['city']['expose']['identifier'] = 'city';
+  $handler->display->display_options['filters']['city']['expose']['multiple'] = FALSE;
+  /* Filter criterion: Search: Search Terms */
+  $handler->display->display_options['filters']['keys']['id'] = 'keys';
+  $handler->display->display_options['filters']['keys']['table'] = 'search_index';
+  $handler->display->display_options['filters']['keys']['field'] = 'keys';
+  $handler->display->display_options['filters']['keys']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['keys']['expose']['operator_id'] = 'keys_op';
+  $handler->display->display_options['filters']['keys']['expose']['label'] = 'Search';
+  $handler->display->display_options['filters']['keys']['expose']['operator'] = 'keys_op';
+  $handler->display->display_options['filters']['keys']['expose']['identifier'] = 'keys';
+  $handler->display->display_options['filters']['keys']['expose']['multiple'] = FALSE;
+  
+  /* Display: Page */
+  $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'gmap';
+  $handler->display->display_options['style_options']['macro'] = '[gmap width=100% |height=600px ]';
+  $handler->display->display_options['style_options']['markertype'] = '';
+  $handler->display->display_options['style_options']['latfield'] = 'title';
+  $handler->display->display_options['style_options']['lonfield'] = 'title';
+  $handler->display->display_options['style_options']['markerfield'] = 'title';
+  $handler->display->display_options['style_options']['enablermt'] = 0;
+  $handler->display->display_options['style_options']['rmtfield'] = 'title';
+  $handler->display->display_options['style_options']['tooltipfield'] = 'title';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['path'] = 'map';
+  
+  /* Display: Site Map */
+  $handler = $view->new_display('block', 'Site Map', 'block_1');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '500';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  
+  /* Display: Site Small Map */
+  $handler = $view->new_display('block', 'Site Small Map', 'block_2');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'gmap';
+  $handler->display->display_options['style_options']['macro'] = '[gmap width=100% |height=270px ]';
+  $handler->display->display_options['style_options']['markertype'] = '';
+  $handler->display->display_options['style_options']['latfield'] = 'title';
+  $handler->display->display_options['style_options']['lonfield'] = 'title';
+  $handler->display->display_options['style_options']['markerfield'] = 'title';
+  $handler->display->display_options['style_options']['enablermt'] = 0;
+  $handler->display->display_options['style_options']['rmtfield'] = 'title';
+  $handler->display->display_options['style_options']['tooltipfield'] = 'title';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $translatables['location_gmap'] = array(
+    t('Master'),
+    t('Map'),
+    t('more'),
+    t('Apply'),
+    t('Reset'),
+    t('Sort by'),
+    t('Asc'),
+    t('Desc'),
+    t('City'),
+    t('Search'),
+    t('Page'),
+    t('Site Map'),
+    t('Site Small Map'),
+  );
 
   $export['location_gmap'] = $view;
 
