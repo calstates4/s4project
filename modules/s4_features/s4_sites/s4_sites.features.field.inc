@@ -2494,9 +2494,9 @@ function s4_sites_field_default_fields() {
       'display' => array(
         'cck_blocks' => array(
           'label' => 'above',
-          'module' => 'cck_phone',
+          'module' => 's4_sites',
           'settings' => array(),
-          'type' => 'local_phone_number',
+          'type' => 's4_sites_local_phone_number',
           'weight' => '0',
         ),
         'default' => array(

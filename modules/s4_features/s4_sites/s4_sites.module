@@ -124,3 +124,44 @@ function s4_sites_node_insert($node) {
      cache_clear_all('s4_pages_overview_data', 'cache');
   }
 }
+
+/**
+*	Implementation of hook_field_formatter_info_alter
+*/
+function s4_sites_field_formatter_info() {
+	return array(
+		's4_sites_local_phone_number' => array(
+	      'label' => t('Student Signup phone number'),
+	      'field types' => array('phone_number'),
+	      'multiple values' => FIELD_BEHAVIOR_DEFAULT,
+	    ),
+	);
+}
+
+/**
+*	Implementation of hook_field_formatter_view
+*/
+function s4_sites_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  $element = array();
+  $settings = $display['settings'];
+  $formatter = $display['type'];
+  module_load_include('inc', 'cck_phone', 'includes/phone.us');
+  foreach ($items as $delta => $item) {
+    $regex = '/^
+    ([2-9][0-8]\d)  # area code (Allowed range of [2-9] for the first digit, [0-8] for the second, and [0-9] for the third digit)
+    ([2-9]\d{2})    # 3-digit prefix (cannot start with 0 or 1)
+    (\d{4})         # 4-digit line number
+    /x';
+
+	$result = preg_match($regex, $item['number'], $matches);
+	
+	if ($result) {
+		$phone =  $cc['code'] . ' (' . $matches[1] . ') ' . $matches[2] . ' ' . $matches[3];
+	}
+    $element[$delta] = array(
+      '#markup' => $phone
+    );
+  }
+
+  return $element;
+}
