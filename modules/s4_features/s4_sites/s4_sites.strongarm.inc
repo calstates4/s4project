@@ -30,7 +30,7 @@ function s4_sites_strongarm() {
   $strongarm->name = 'ant_php_coordinator';
   $strongarm->value = 0;
   $export['ant_php_coordinator'] = $strongarm;
-  
+
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
@@ -534,7 +534,6 @@ function s4_sites_strongarm() {
   );
   $export['nodeformscols_field_placements_coordinator_default'] = $strongarm;
 
-
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
@@ -626,7 +625,6 @@ function s4_sites_strongarm() {
     ),
   );
   $export['nodeformscols_field_placements_file_default'] = $strongarm;
-
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */

@@ -135,6 +135,10 @@ function s4_sites_field_formatter_info() {
 	      'field types' => array('phone_number'),
 	      'multiple values' => FIELD_BEHAVIOR_DEFAULT,
 	    ),
+	    's4_sites_address' => array(
+	      'label' => t('Student Signup'),
+	      'field types' => array('location'),
+	    ),
 	);
 }
 
@@ -142,26 +146,42 @@ function s4_sites_field_formatter_info() {
 *	Implementation of hook_field_formatter_view
 */
 function s4_sites_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  
   $element = array();
   $settings = $display['settings'];
-  $formatter = $display['type'];
-  module_load_include('inc', 'cck_phone', 'includes/phone.us');
-  foreach ($items as $delta => $item) {
-    $regex = '/^
-    ([2-9][0-8]\d)  # area code (Allowed range of [2-9] for the first digit, [0-8] for the second, and [0-9] for the third digit)
-    ([2-9]\d{2})    # 3-digit prefix (cannot start with 0 or 1)
-    (\d{4})         # 4-digit line number
-    /x';
-
-	$result = preg_match($regex, $item['number'], $matches);
+  if($display['type'] == 's4_sites_local_phone_number') {
+	  foreach ($items as $delta => $item) {
+	    $regex = '/^
+	    ([2-9][0-8]\d)  # area code (Allowed range of [2-9] for the first digit, [0-8] for the second, and [0-9] for the third digit)
+	    ([2-9]\d{2})    # 3-digit prefix (cannot start with 0 or 1)
+	    (\d{4})         # 4-digit line number
+	    /x';
 	
-	if ($result) {
-		$phone =  $cc['code'] . ' (' . $matches[1] . ') ' . $matches[2] . ' ' . $matches[3];
-	}
-    $element[$delta] = array(
-      '#markup' => $phone
-    );
+		$result = preg_match($regex, $item['number'], $matches);
+		
+		if ($result) {
+			$phone =  $cc['code'] . ' (' . $matches[1] . ') ' . $matches[2] . ' ' . $matches[3];
+		}
+	    $element[$delta] = array(
+	      '#markup' => $phone
+	    );
+	  }
   }
+  if($display['type'] == 's4_sites_address') {
+  	 foreach ($items as $delta => $item) {
+	    $output = array();
+	    if($item['street']) {
+	    	$output[] = $item['street'];
+	    }
+	    if($item['additional']) {
+	    	$output[] = $item['additional'];
+	    }
+	    $output[] = $item['city'] .', '. $item['province'] . '&nbsp;&nbsp;' . $item['postal_code'];
+	    $element[$delta] = array(
+	      '#markup' => implode('<br />', $output),
+	    );
+	  }
 
+  }
   return $element;
 }

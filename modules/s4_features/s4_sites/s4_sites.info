@@ -90,7 +90,6 @@ features[taxonomy][] = "file_tags"
 features[taxonomy][] = "organization_type"
 features[taxonomy][] = "site_restrictions"
 features[taxonomy][] = "tags"
-
 features[user_permission][] = "create contact_record content"
 features[user_permission][] = "create coordinator content"
 features[user_permission][] = "create file content"

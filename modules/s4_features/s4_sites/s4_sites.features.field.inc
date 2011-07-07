@@ -424,6 +424,11 @@ function s4_sites_field_default_fields() {
           'site' => 'site',
           'webform' => 0,
         ),
+        'view' => array(
+          'args' => array(),
+          'display_name' => '',
+          'view_name' => '',
+        ),
       ),
       'translatable' => '1',
       'type' => 'node_reference',
@@ -1085,6 +1090,11 @@ function s4_sites_field_default_fields() {
           'signup' => 0,
           'site' => 'site',
           'webform' => 0,
+        ),
+        'view' => array(
+          'args' => array(),
+          'display_name' => '',
+          'view_name' => '',
         ),
       ),
       'translatable' => '1',
@@ -1920,6 +1930,11 @@ function s4_sites_field_default_fields() {
           'site' => 'site',
           'webform' => 0,
         ),
+        'view' => array(
+          'args' => array(),
+          'display_name' => '',
+          'view_name' => '',
+        ),
       ),
       'translatable' => '1',
       'type' => 'node_reference',
@@ -2143,6 +2158,12 @@ function s4_sites_field_default_fields() {
           'type' => 'hidden',
           'weight' => 0,
         ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
       ),
       'entity_type' => 'node',
       'field_name' => 'field_csu_facility',
@@ -2227,6 +2248,12 @@ function s4_sites_field_default_fields() {
           'type' => 'hidden',
           'weight' => 0,
         ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
       ),
       'entity_type' => 'node',
       'field_name' => 'field_csu_org_type',
@@ -2298,6 +2325,12 @@ function s4_sites_field_default_fields() {
           'weight' => 0,
         ),
         'notifications' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
@@ -2427,10 +2460,10 @@ function s4_sites_field_default_fields() {
       'description' => 'Enter information about the physical location of this site.',
       'display' => array(
         'cck_blocks' => array(
-          'label' => 'hidden',
-          'module' => 'location_cck',
+          'label' => 'above',
+          'module' => 's4_sites',
           'settings' => array(),
-          'type' => 'location_default',
+          'type' => 's4_sites_address',
           'weight' => '1',
         ),
         'default' => array(
@@ -2446,6 +2479,12 @@ function s4_sites_field_default_fields() {
           'weight' => '3',
         ),
         'notifications' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
@@ -2513,6 +2552,12 @@ function s4_sites_field_default_fields() {
           'weight' => 0,
         ),
         'notifications' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
@@ -2823,6 +2868,12 @@ function s4_sites_field_default_fields() {
           'type' => 'hidden',
           'weight' => 0,
         ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
       ),
       'entity_type' => 'node',
       'field_name' => 'field_site_email',
@@ -2909,6 +2960,11 @@ function s4_sites_field_default_fields() {
           'site' => 0,
           'webform' => 'webform',
         ),
+        'view' => array(
+          'args' => array(),
+          'display_name' => '',
+          'view_name' => '',
+        ),
       ),
       'translatable' => '1',
       'type' => 'node_reference',
@@ -2923,7 +2979,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => 0,
+          'weight' => '0',
         ),
         'default' => array(
           'label' => 'above',
@@ -2939,6 +2995,12 @@ function s4_sites_field_default_fields() {
           'weight' => 0,
         ),
         'notifications' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
@@ -3028,6 +3090,11 @@ function s4_sites_field_default_fields() {
           'site' => 0,
           'webform' => 'webform',
         ),
+        'view' => array(
+          'args' => array(),
+          'display_name' => '',
+          'view_name' => '',
+        ),
       ),
       'translatable' => '1',
       'type' => 'node_reference',
@@ -3058,6 +3125,12 @@ function s4_sites_field_default_fields() {
           'weight' => 0,
         ),
         'notifications' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
@@ -3136,6 +3209,12 @@ function s4_sites_field_default_fields() {
           'weight' => '4',
         ),
         'notifications' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
@@ -3239,6 +3318,12 @@ function s4_sites_field_default_fields() {
           'type' => 'hidden',
           'weight' => 0,
         ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
       ),
       'entity_type' => 'node',
       'field_name' => 'field_site_instructions',
@@ -3303,7 +3388,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => 0,
+          'weight' => '0',
         ),
         'default' => array(
           'label' => 'above',
@@ -3319,6 +3404,12 @@ function s4_sites_field_default_fields() {
           'weight' => 0,
         ),
         'notifications' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
@@ -3408,6 +3499,12 @@ function s4_sites_field_default_fields() {
           'type' => 'hidden',
           'weight' => 0,
         ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
       ),
       'entity_type' => 'node',
       'field_name' => 'field_site_restrict',
@@ -3476,6 +3573,11 @@ function s4_sites_field_default_fields() {
           0 => 0,
           1 => '1',
         ),
+        'view' => array(
+          'args' => array(),
+          'display_name' => '',
+          'view_name' => '',
+        ),
       ),
       'translatable' => '1',
       'type' => 'user_reference',
@@ -3506,6 +3608,12 @@ function s4_sites_field_default_fields() {
           'weight' => 0,
         ),
         'notifications' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
@@ -3599,6 +3707,12 @@ function s4_sites_field_default_fields() {
           'type' => 'hidden',
           'weight' => 0,
         ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
       ),
       'entity_type' => 'node',
       'field_name' => 'field_tags',
@@ -3675,6 +3789,12 @@ function s4_sites_field_default_fields() {
           'weight' => '2',
         ),
         'notifications' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
@@ -3776,7 +3896,7 @@ function s4_sites_field_default_fields() {
   t('Additional users');
   t('Attach a few photos of the site. The first image will be used in the site preview.');
   t('Body');
-  t('Check off who is allowed to sign up with this site.');
+  t('Check off who is allowed to sign up with this site. ');
   t('Contact email');
   t('Contact tags');
   t('Contact type');
@@ -3787,7 +3907,7 @@ function s4_sites_field_default_fields() {
   t('Enter information about the physical location of this site.');
   t('Enter information that you need to show students regarding the health or safety of this site. This information will be repeated on the signup form.');
   t('Enter the URL to this site\'s website.');
-  t('Enter the number of days before a file of this type expires that an email reminder should be sent to department staff.');
+  t('Enter the number of days before a file of this type expires that an email reminder should be sent to department staff. ');
   t('Evaluation Form');
   t('Expiration date');
   t('Facility type');
