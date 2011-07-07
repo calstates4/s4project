@@ -469,12 +469,6 @@ function s4_core_context_default_contexts() {
           'region' => 'content',
           'weight' => '-10',
         ),
-        'views-sites-block_1' => array(
-          'module' => 'views',
-          'delta' => 'sites-block_1',
-          'region' => 'footer_middle',
-          'weight' => '-10',
-        ),
       ),
     ),
   );
