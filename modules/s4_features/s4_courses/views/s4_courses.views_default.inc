@@ -817,7 +817,7 @@ function s4_courses_views_default_views() {
   $view->core = 7;
   $view->api_version = '3.0-alpha1';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
-
+  
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Sign up for service';
@@ -959,11 +959,11 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['filters']['field_term_date_start_value2']['default_date'] = 'now';
   $handler->display->display_options['filters']['field_term_date_start_value2']['default_to_date'] = '';
   $handler->display->display_options['filters']['field_term_date_start_value2']['year_range'] = '-3:+3';
-
+  
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['path'] = 'user-courses';
-
+  
   /* Display: Faculty Course List */
   $handler = $view->new_display('block', 'Faculty Course List', 'block');
   $handler->display->display_options['defaults']['title'] = FALSE;
@@ -979,14 +979,6 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['empty'] = FALSE;
-  /* No results behavior: Global: Text area */
-  $handler->display->display_options['empty']['area']['id'] = 'area';
-  $handler->display->display_options['empty']['area']['table'] = 'views';
-  $handler->display->display_options['empty']['area']['field'] = 'area';
-  $handler->display->display_options['empty']['area']['label'] = 'No courses';
-  $handler->display->display_options['empty']['area']['empty'] = FALSE;
-  $handler->display->display_options['empty']['area']['content'] = '<p class="intro">You aren\'t listed as faculty for any courses this semester.</p>';
-  $handler->display->display_options['empty']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
@@ -1024,7 +1016,7 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['filters']['field_term_date_start_value2']['default_date'] = 'now';
   $handler->display->display_options['filters']['field_term_date_start_value2']['default_to_date'] = '';
   $handler->display->display_options['filters']['field_term_date_start_value2']['year_range'] = '-3:+3';
-
+  
   /* Display: Staff course listing */
   $handler = $view->new_display('page', 'Staff course listing', 'page_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
@@ -1312,9 +1304,10 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['filters']['field_course_section_value']['expose']['identifier'] = 'field_course_section_value';
   $handler->display->display_options['filters']['field_course_section_value']['expose']['multiple'] = FALSE;
   $handler->display->display_options['path'] = 'courses';
-
+  
   /* Display: Student course list */
   $handler = $view->new_display('page', 'Student course list', 'page_2');
+  $handler->display->display_options['defaults']['empty'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
@@ -1394,7 +1387,7 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['arguments']['field_course_students_uid']['break_phrase'] = 0;
   $handler->display->display_options['arguments']['field_course_students_uid']['not'] = 0;
   $handler->display->display_options['path'] = 'my-courses';
-
+  
   /* Display: Add to course list */
   $handler = $view->new_display('block', 'Add to course list', 'block_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
@@ -1559,7 +1552,7 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['filters']['field_term_date_start_value2']['default_date'] = 'now';
   $handler->display->display_options['filters']['field_term_date_start_value2']['default_to_date'] = '';
   $handler->display->display_options['filters']['field_term_date_start_value2']['year_range'] = '-3:+3';
-
+  
   /* Display: Student course block */
   $handler = $view->new_display('block', 'Student course block', 'block_2');
   $handler->display->display_options['defaults']['header'] = FALSE;
@@ -1571,6 +1564,7 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['header']['area']['empty'] = FALSE;
   $handler->display->display_options['header']['area']['content'] = '<p class="intro">To begin looking for a site, click the <strong>Select this Course</strong> link near the course you are taking for this service.</p>';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
+  $handler->display->display_options['defaults']['empty'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
@@ -1668,7 +1662,6 @@ function s4_courses_views_default_views() {
     t('Page'),
     t('Faculty Course List'),
     t('Courses you are teaching'),
-    t('<p class="intro">You aren\'t listed as faculty for any courses this semester.</p>'),
     t('Staff course listing'),
     t('Courses'),
     t('field_course_faculty'),
