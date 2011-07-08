@@ -164,10 +164,15 @@ function s4_pages_overview_paragraph() {
 }
 
 /**
-*  Overview paragraph;
+*  Homepage welcome message
 */
 function s4_pages_dashboard_title() {
   global $user;
+  foreach($user->roles as $role) {
+  	if($role == 'staff') {
+  		return null;
+  	}
+  }
   $user = user_load($user->uid);
   $values = field_get_items('user', $user, 'field_first_name');
   $name = ($values[0]['value'])

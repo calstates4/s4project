@@ -16,10 +16,6 @@ scripts[] = js/placeholder.js
 regions[search] 			= Search
 regions[site_navigation]	= Site Navigation
 
-regions[tools_left]			= Tools Left
-regions[tools_middle]		= Tools Middle
-regions[tools_right]		= Tools Right
-
 regions[content_subscriptions] = Content subscriptions
 regions[content_top_wide]	= Content Top Wide
 regions[content_top_left] 	= Content Top Left

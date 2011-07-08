@@ -204,7 +204,7 @@ function s4_core_block_s4_user_login() {
     $audience = ucfirst(implode(((isset($join_list)) ? $join_list : ' &amp;') . ' ', $audience));
     $output[] = t('<strong>!audience:</strong>', array('!audience' => $audience)) . ' ' .
           l(t('Login'), $login_destinations[$option], 
-              array('query' => array('destination' => 'dashboard')));
+              array('query' => array('destination' => '<front>')));
   }
   return array('subject' => NULL,
          'content' => '<p class="intro">' . implode('<br/>', $output) . '</p>');

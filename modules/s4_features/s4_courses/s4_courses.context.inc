@@ -189,14 +189,14 @@ function s4_courses_context_default_contexts() {
   $context = new stdClass;
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
-  $context->name = 'dashboard-courses';
-  $context->description = 'Dashboard course information';
-  $context->tag = 'dashboard';
+  $context->name = 'frontpage-courses';
+  $context->description = 'Frontpage course information';
+  $context->tag = 'frontpage';
   $context->conditions = array(
     'path' => array(
       'values' => array(
-        'dashboard' => 'dashboard',
-        'dashboard/*' => 'dashboard/*',
+        'dashboard' => '<front>',
+        'dashboard/*' => 'homepage',
       ),
     ),
     'user' => array(
@@ -227,9 +227,9 @@ function s4_courses_context_default_contexts() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Dashboard course information');
-  t('dashboard');
-  $export['dashboard-courses'] = $context;
+  t('Frontpage course information');
+  t('frontpage');
+  $export['frontpage-courses'] = $context;
 
   return $export;
 }

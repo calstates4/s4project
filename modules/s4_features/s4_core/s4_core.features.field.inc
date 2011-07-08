@@ -359,6 +359,11 @@ function s4_core_field_default_fields() {
           'site' => 0,
           'webform' => 0,
         ),
+        'view' => array(
+          'args' => array(),
+          'display_name' => '',
+          'view_name' => '',
+        ),
       ),
       'translatable' => '1',
       'type' => 'node_reference',
@@ -488,6 +493,11 @@ function s4_core_field_default_fields() {
           'signup' => 0,
           'site' => 0,
           'webform' => 0,
+        ),
+        'view' => array(
+          'args' => array(),
+          'display_name' => '',
+          'view_name' => '',
         ),
       ),
       'translatable' => '1',
@@ -925,6 +935,11 @@ function s4_core_field_default_fields() {
           'site' => 'site',
           'webform' => 0,
         ),
+        'view' => array(
+          'args' => array(),
+          'display_name' => '',
+          'view_name' => '',
+        ),
       ),
       'translatable' => '1',
       'type' => 'node_reference',
@@ -1037,6 +1052,11 @@ function s4_core_field_default_fields() {
         'referenceable_status' => array(
           0 => 0,
           1 => 0,
+        ),
+        'view' => array(
+          'args' => array(),
+          'display_name' => '',
+          'view_name' => '',
         ),
       ),
       'translatable' => '1',

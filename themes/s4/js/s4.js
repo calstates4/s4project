@@ -3,16 +3,7 @@
 		$('#search input[type=text]').placeholder();
 		
 		/** BINDING THE TOOLS SLIDE **/
-		$('#tool-menu').click(function() {
-			if($('#tools').css('display') == 'none') {
-				$(this).addClass('active');
-			}
-			else {
-				$(this).removeClass('active');
-			}
-			$('#tools').slideToggle();
-			return false;
-		});
+		
 		$('.bookmarks .flag-bookmarks').each(function() {
 			$(this).hide();
 		});

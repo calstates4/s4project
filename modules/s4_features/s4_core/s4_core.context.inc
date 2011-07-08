@@ -111,14 +111,14 @@ function s4_core_context_default_contexts() {
   $context = new stdClass;
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
-  $context->name = 'dashboard-main';
-  $context->description = 'User is on the dashboard';
-  $context->tag = 'dashboard';
+  $context->name = 'frontpage';
+  $context->description = 'A logged-in, non-staff user is on the frontpage';
+  $context->tag = 'frontpage';
   $context->conditions = array(
     'path' => array(
       'values' => array(
-        'dashboard' => 'dashboard',
-        'dashboard*' => 'dashboard*',
+        '<front>' => '<front>',
+        'homepage' => 'homepage',
       ),
     ),
     'user' => array(
@@ -134,7 +134,7 @@ function s4_core_context_default_contexts() {
           'module' => 's4_pages',
           'delta' => 'dashboard_title',
           'region' => 'content_top_wide',
-          'weight' => '28',
+          'weight' => '-10',
         ),
         'views-user_signups-block' => array(
           'module' => 'views',
@@ -146,113 +146,22 @@ function s4_core_context_default_contexts() {
           'module' => 'views',
           'delta' => '65656e1f5a12cde25f0722f735fe7969',
           'region' => 'content_right',
-          'weight' => '-26',
+          'weight' => '-10',
         ),
         'views-bookmarked_sites-block' => array(
           'module' => 'views',
           'delta' => 'bookmarked_sites-block',
           'region' => 'content_right',
-          'weight' => '-9',
-        ),
-      ),
-    ),
-  );
-  $context->condition_mode = 1;
-
-  // Translatables
-  // Included for use with string extractors like potx.
-  t('User is on the dashboard');
-  t('dashboard');
-  $export['dashboard-main'] = $context;
-
-  $context = new stdClass;
-  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
-  $context->api_version = 3;
-  $context->name = 'dashboard-staff';
-  $context->description = 'Staff member is on a the dashboard';
-  $context->tag = 'dashboard';
-  $context->conditions = array(
-    'path' => array(
-      'values' => array(
-        'dashboard' => 'dashboard',
-        'dashboard*' => 'dashboard*',
-      ),
-    ),
-    'user' => array(
-      'values' => array(
-        'staff' => 'staff',
-      ),
-    ),
-  );
-  $context->reactions = array(
-    'block' => array(
-      'blocks' => array(
-        'views-contact_records-block_3' => array(
-          'module' => 'views',
-          'delta' => 'contact_records-block_3',
-          'region' => 'content',
-          'weight' => '-49',
-        ),
-        's4_core-s4_subscribe_file_expiration' => array(
-          'module' => 's4_core',
-          'delta' => 's4_subscribe_file_expiration',
-          'region' => 'content',
-          'weight' => '-48',
-        ),
-      ),
-    ),
-  );
-  $context->condition_mode = 1;
-
-  // Translatables
-  // Included for use with string extractors like potx.
-  t('Staff member is on a the dashboard');
-  t('dashboard');
-  $export['dashboard-staff'] = $context;
-
-  $context = new stdClass;
-  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
-  $context->api_version = 3;
-  $context->name = 'frontpage';
-  $context->description = 'Any user is viewing the frontpage';
-  $context->tag = 'frontpage';
-  $context->conditions = array(
-    'path' => array(
-      'values' => array(
-        '<front>' => '<front>',
-        'homepage' => 'homepage',
-      ),
-    ),
-  );
-  $context->reactions = array(
-    'block' => array(
-      'blocks' => array(
-        's4_pages-overview_paragraph' => array(
-          'module' => 's4_pages',
-          'delta' => 'overview_paragraph',
-          'region' => 'content_top_left',
           'weight' => '-10',
         ),
-        'boxes-s4_mission' => array(
-          'module' => 'boxes',
-          'delta' => 's4_mission',
-          'region' => 'content_top_left',
-          'weight' => '-8',
-        ),
-        'views-location_gmap-block_1' => array(
-          'module' => 'views',
-          'delta' => 'location_gmap-block_1',
-          'region' => 'content_top_right',
-          'weight' => '-9',
-        ),
       ),
     ),
   );
-  $context->condition_mode = 0;
+  $context->condition_mode = 1;
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Any user is viewing the frontpage');
+  t('A logged-in, non-staff user is on the frontpage');
   t('frontpage');
   $export['frontpage'] = $context;
 
@@ -260,7 +169,7 @@ function s4_core_context_default_contexts() {
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'frontpage-anonymous';
-  $context->description = '';
+  $context->description = 'An anonymous user use viewing the homepage';
   $context->tag = 'frontpage';
   $context->conditions = array(
     'path' => array(
@@ -278,10 +187,28 @@ function s4_core_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
+        's4_pages-overview_paragraph' => array(
+          'module' => 's4_pages',
+          'delta' => 'overview_paragraph',
+          'region' => 'content_top_left',
+          'weight' => '-47',
+        ),
         's4_core-s4_user_login' => array(
           'module' => 's4_core',
           'delta' => 's4_user_login',
           'region' => 'content_top_left',
+          'weight' => '-46',
+        ),
+        'boxes-s4_mission' => array(
+          'module' => 'boxes',
+          'delta' => 's4_mission',
+          'region' => 'content_top_left',
+          'weight' => '-45',
+        ),
+        'views-location_gmap-block_1' => array(
+          'module' => 'views',
+          'delta' => 'location_gmap-block_1',
+          'region' => 'content_top_right',
           'weight' => '-10',
         ),
       ),
@@ -291,8 +218,54 @@ function s4_core_context_default_contexts() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('An anonymous user use viewing the homepage');
   t('frontpage');
   $export['frontpage-anonymous'] = $context;
+
+  $context = new stdClass;
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
+  $context->name = 'frontpage-staff';
+  $context->description = 'A staff member is on the front page';
+  $context->tag = 'frontpage';
+  $context->conditions = array(
+    'path' => array(
+      'values' => array(
+        '<front>' => '<front>',
+        'homepage' => 'homepage',
+      ),
+    ),
+    'user' => array(
+      'values' => array(
+        'staff' => 'staff',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        'views-contact_records-block_3' => array(
+          'module' => 'views',
+          'delta' => 'contact_records-block_3',
+          'region' => 'content',
+          'weight' => '-10',
+        ),
+        's4_core-s4_subscribe_file_expiration' => array(
+          'module' => 's4_core',
+          'delta' => 's4_subscribe_file_expiration',
+          'region' => 'content',
+          'weight' => '-10',
+        ),
+      ),
+    ),
+  );
+  $context->condition_mode = 1;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('A staff member is on the front page');
+  t('frontpage');
+  $export['frontpage-staff'] = $context;
 
   $context = new stdClass;
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
@@ -492,30 +465,7 @@ function s4_core_context_default_contexts() {
       ),
     ),
   );
-  $context->reactions = array(
-    'block' => array(
-      'blocks' => array(
-        'menu-menu-add-content' => array(
-          'module' => 'menu',
-          'delta' => 'menu-add-content',
-          'region' => 'tools_left',
-          'weight' => '-10',
-        ),
-        'menu-menu-staff-options' => array(
-          'module' => 'menu',
-          'delta' => 'menu-staff-options',
-          'region' => 'tools_middle',
-          'weight' => '-10',
-        ),
-        's4_core-jump_to_node' => array(
-          'module' => 's4_core',
-          'delta' => 'jump_to_node',
-          'region' => 'tools_right',
-          'weight' => '-10',
-        ),
-      ),
-    ),
-  );
+  $context->reactions = array();
   $context->condition_mode = 0;
 
   // Translatables

@@ -23,38 +23,12 @@
 				<a href="<?php print $base_path; ?>dashboard">Dashboard</a>
 			</div>
 		<?php endif;*/ ?>
-		<?php if($page['tools_left'] || $page['tools_middle'] || $page['tools_right']): ?>
-
-			<div id="tool-menu" class="tool-link">
-				<span class="icon"></span>
-				<a href="#tools">Staff Tools</a>
-			</div>
-		<?php endif; ?>
 	</div>
 	<div class="clear"></div>
-<?php if($page['tools_left'] || $page['tools_middle'] || $page['tools_right']): ?>
-	<div id="tools">
-		<div class="container">
-		<a name="tools"></a>
-		<div class="triptych column-first">
-			<?php print render($page['tools_left']); ?>
-		</div>
-		<div class="triptych">
-			<?php print render($page['tools_middle']); ?>
-		</div>
-		<div class="triptych column-last">
-			<?php print render($page['tools_right']); ?>
-		</div>
-		<div class="clear"></div>
-		</div>
-	</div>
-<?php endif; ?>
 
 </div>
 <div id="navigation">
 	<div class="container">
-		<?php print $breadcrumb; ?>
-		
 		<?php print theme('links__system_main_menu', array(
           'links' => $main_menu,
           'attributes' => array(
