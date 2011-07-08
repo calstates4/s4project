@@ -773,8 +773,7 @@ function s4_sites_views_default_views() {
     t('Items per page'),
     t('- All -'),
     t('Offset'),
-    t('<p class="intro empty">No files found.</p>
-	<p class="intro empty">You can add the first file using the button above.</p>'),
+    t('<p class="intro empty">No files found.</p>'),
     t('Date'),
     t('Contact tags'),
     t('Contact type'),
