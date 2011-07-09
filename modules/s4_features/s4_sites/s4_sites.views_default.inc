@@ -1186,7 +1186,7 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['filters']['tid_1']['expose']['reduce'] = 0;
   $handler->display->display_options['filters']['tid_1']['reduce_duplicates'] = 0;
   $handler->display->display_options['filters']['tid_1']['type'] = 'select';
-  $handler->display->display_options['filters']['tid_1']['vocabulary'] = 'facility_type';
+  $handler->display->display_options['filters']['tid_1']['vocabulary'] = 'issues_addressed';
   $handler->display->display_options['filters']['tid_1']['error_message'] = 1;
 
   /* Display: Page */
