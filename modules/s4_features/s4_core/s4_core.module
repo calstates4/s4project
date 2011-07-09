@@ -51,6 +51,19 @@ function s4_core_block_view($delta) {
 }
 
 /**
+*	Alter the masquerade form to be more user-friendly
+*/
+function s4_core_form_masquerade_block_1_alter(&$form, $form_state) {
+	$form['masquerade_desc']['#markup'] = 'Enter the login ID of the user you want to switch to';
+}
+
+function s4_core_block_view_alter(&$data, $block) {
+	if($block->module == 'masquerade' && $block->delta == 'masquerade') {
+		$data['subject'] = 'Switch users';
+	}
+}
+
+/**
 *  Compares the access restrictions of any object to the user's access
 *  vis-a-vis a course or their individual settings.
 */
