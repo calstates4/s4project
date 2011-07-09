@@ -360,6 +360,10 @@ function s4_core_block_s4_current_user_link() {
 	if(!$user->uid) {
 		return null;
 	}
-	return array('content' => l(t('Hello <strong>@username</strong>', array('@username' => format_username($user))), 'user/'. $user->uid, array('html' => TRUE)));
+	$masquerade_switch = '';
+	if(isset($_SESSION['masquerading'])) {
+		$masquerade_switch = '('. l('switch back', 'masquerade/unswitch') .')';
+	}
+	return array('content' => l(t('Hello <strong>@username</strong>', array('@username' => format_username($user))), 'user/'. $user->uid, array('html' => TRUE)) . $masquerade_switch);
 	
 }

@@ -295,6 +295,15 @@ function s4_core_user_default_permissions() {
     'module' => 'locale',
   );
 
+  // Exported permission: administer masquerade
+  $permissions['administer masquerade'] = array(
+    'name' => 'administer masquerade',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'masquerade',
+  );
+
   // Exported permission: administer menu
   $permissions['administer menu'] = array(
     'name' => 'administer menu',
@@ -799,6 +808,22 @@ function s4_core_user_default_permissions() {
       0 => 'authenticated user',
     ),
     'module' => 'notifications_account',
+  );
+
+  // Exported permission: masquerade as admin
+  $permissions['masquerade as admin'] = array(
+    'name' => 'masquerade as admin',
+    'roles' => array(),
+  );
+
+  // Exported permission: masquerade as user
+  $permissions['masquerade as user'] = array(
+    'name' => 'masquerade as user',
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'staff',
+    ),
+    'module' => 'masquerade',
   );
 
   // Exported permission: notify of path changes

@@ -244,16 +244,22 @@ function s4_core_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
+        's4_core-s4_subscribe_file_expiration' => array(
+          'module' => 's4_core',
+          'delta' => 's4_subscribe_file_expiration',
+          'region' => 'content',
+          'weight' => '-10',
+        ),
         'views-contact_records-block_3' => array(
           'module' => 'views',
           'delta' => 'contact_records-block_3',
           'region' => 'content',
           'weight' => '-10',
         ),
-        's4_core-s4_subscribe_file_expiration' => array(
-          'module' => 's4_core',
-          'delta' => 's4_subscribe_file_expiration',
-          'region' => 'content',
+        'masquerade-masquerade' => array(
+          'module' => 'masquerade',
+          'delta' => 'masquerade',
+          'region' => 'content_right',
           'weight' => '-10',
         ),
       ),
@@ -452,11 +458,10 @@ function s4_core_context_default_contexts() {
     ),
   );
   $context->condition_mode = 0;
-  
+
   // Translatables
   // Included for use with string extractors like potx.
   t('sitewide');
-  
   $export['sitewide'] = $context;
 
   $context = new stdClass;
