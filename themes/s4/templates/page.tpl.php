@@ -12,6 +12,7 @@
 				</a>
 			</h1>
 		<?php endif; ?>
+		
 		<?php if($page['search']): ?>
 			<div id="search">
 				<?php print render($page['search']); ?>

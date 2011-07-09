@@ -34,6 +34,7 @@ function s4_core_block_info() {
   $blocks['s4_add_new_coordinator'] = array('info' => 'Add new coordinator button');
   $blocks['s4_report_export_link'] = array('info' => 'Export report link');
   $blocks['s4_subscribe_file_expiration'] = array('info' => 'Subscribe to file expiration link');
+  $blocks['s4_current_user_link'] = array('info' => 'Logged-in user link');
   return $blocks;
 }
 

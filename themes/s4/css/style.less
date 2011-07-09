@@ -91,7 +91,7 @@ a, a:visited { color: @link-color; }
 	#branding h1 { float: left; color: #fff; font-size: 1.4em; margin: 0; font-weight: bold;}
 		#branding h1 a { color: #fff; text-decoration: none; .text-shadow(2px, 2px, 2px, rgba(0,0,0,0.6)); }
 	#search { float: right; }
-		#search .block { margin: 0; }
+		#search .block { margin: 0; float: right; }
 		#search .views-exposed-widget { padding: 2px; }
 		#search label { position:absolute; top:0; left:-9999px; }
 		#search input, .tool-link { padding: 4px 5px;}
@@ -132,19 +132,10 @@ a, a:visited { color: @link-color; }
 	.no-content-sidebar #content { width: 100%; }
 #content_middle .column, body .node-form .form-region-right, { width: (@container-width / 3) - @column-padding; float: right; }
 	.no-content-top-right #content_top .column-equal { width: 100%; }
-/** TOOLS **/
-#branding .tool-link { float: right; margin: 2px 10px 0 0; font-size: 15px; cursor: pointer; padding: 3px 5px;}
-	#branding .tool-link .icon { display: block; float: left; height: 20px; width: 20px; background: url(../images/tools.png) no-repeat 0px 2px; margin-right: 5px;}
-		#branding .tool-link.active .icon, #branding .tool-link:hover .icon { background-position-y: -22px; }
-	#branding .tool-link.active, #branding .tool-link:hover { background-color: #000; color: #fff; }
-	#branding .tool-link a { color: #000; text-decoration: none;}
-		#branding .tool-link.active a, #branding .tool-link:hover a { color: #fff; }
-
-	#branding #dashboard-link .icon { background-position-x: -21px; }
-#tools { display: none; padding: 5px 0; }
-	#tools .block { margin: 0; }
-		#tools .block h2 { margin: 2px 0; font-size: 1.3em;}
-	#tools ul.menu, #tools ul li { list-style-type: none; list-style-image: none; }
+/** USER LINK **/
+#search #block-s4-core-s4-current-user-link { margin: 2px 10px 0 0; font-size: 15px; cursor: pointer; padding: 3px 5px;  }
+	#block-s4-core-s4-current-user-link a { color: #000; text-decoration: none;}
+	#block-s4-core-s4-current-user-link:hover a { text-decoration: underline; }
 
 /** USER PROGRESS **/
 #user-progress { background: @body-background;  padding: 5px 0 2px 0; }

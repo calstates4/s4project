@@ -351,3 +351,12 @@ function s4_core_block_s4_subscribe_file_expiration() {
   return array('title' => '',
          'content' => $link);
 }
+
+function s4_core_block_s4_current_user_link() {
+	global $user;
+	if(!$user->uid) {
+		return null;
+	}
+	return array('content' => l(t('Hello <strong>@username</strong>', array('@username' => format_username($user))), 'user/'. $user->uid, array('html' => TRUE)));
+	
+}

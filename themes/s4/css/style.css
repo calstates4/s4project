@@ -175,6 +175,7 @@ a, a:visited {
 }
 #search .block {
   margin: 0;
+  float: right;
 }
 #search .views-exposed-widget {
   padding: 2px;
@@ -314,53 +315,19 @@ a, a:visited {
 .no-content-top-right #content_top .column-equal {
   width: 100%;
 }
-/** TOOLS **/
-#branding .tool-link {
-  float: right;
+/** USER LINK **/
+#search #block-s4-core-s4-current-user-link {
   margin: 2px 10px 0 0;
   font-size: 15px;
   cursor: pointer;
   padding: 3px 5px;
 }
-#branding .tool-link .icon {
-  display: block;
-  float: left;
-  height: 20px;
-  width: 20px;
-  background: url(../images/tools.png) no-repeat 0px 2px;
-  margin-right: 5px;
-}
-#branding .tool-link.active .icon, #branding .tool-link:hover .icon {
-  background-position-y: -22px;
-}
-#branding .tool-link.active, #branding .tool-link:hover {
-  background-color: #000;
-  color: #fff;
-}
-#branding .tool-link a {
+#block-s4-core-s4-current-user-link a {
   color: #000;
   text-decoration: none;
 }
-#branding .tool-link.active a, #branding .tool-link:hover a {
-  color: #fff;
-}
-#branding #dashboard-link .icon {
-  background-position-x: -21px;
-}
-#tools {
-  display: none;
-  padding: 5px 0;
-}
-#tools .block {
-  margin: 0;
-}
-#tools .block h2 {
-  margin: 2px 0;
-  font-size: 1.3em;
-}
-#tools ul.menu, #tools ul li {
-  list-style-type: none;
-  list-style-image: none;
+#block-s4-core-s4-current-user-link:hover a {
+  text-decoration: underline;
 }
 /** USER PROGRESS **/
 #user-progress {

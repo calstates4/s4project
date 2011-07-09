@@ -25,6 +25,25 @@ function s4_core_menu_default_menu_links() {
     'weight' => '-44',
   );
   
+  // Exported menu link: main-menu:students
+  $menu_links['main-menu:students'] = array(
+    'menu_name' => 'main-menu',
+    'link_path' => 'students',
+    'router_path' => 'students',
+    'link_title' => 'Students',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+    ),
+    'module' => 'menu',
+    'hidden' => '0',
+    'external' => '0',
+    'has_children' => '0',
+    'expanded' => '0',
+    'weight' => '-46',
+  );
+  
   // Exported menu link: main-menu:reports
   $menu_links['main-menu:reports'] = array(
     'menu_name' => 'main-menu',
@@ -44,24 +63,7 @@ function s4_core_menu_default_menu_links() {
     'weight' => '-47',
   );
   
-  // Exported menu link: main-menu:students
-  $menu_links['main-menu:students'] = array(
-    'menu_name' => 'main-menu',
-    'link_path' => 'students',
-    'router_path' => 'students',
-    'link_title' => 'Students',
-    'options' => array(
-      'attributes' => array(
-        'title' => '',
-      ),
-    ),
-    'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '-48',
-  );
+
   // Exported menu link: main-menu:user/logout
   $menu_links['main-menu:user/logout'] = array(
     'menu_name' => 'main-menu',
