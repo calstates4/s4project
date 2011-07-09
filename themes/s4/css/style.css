@@ -326,7 +326,7 @@ a, a:visited {
   color: #000;
   text-decoration: none;
 }
-#block-s4-core-s4-current-user-link:hover a {
+#block-s4-core-s4-current-user-link a:hover {
   text-decoration: underline;
 }
 /** USER PROGRESS **/

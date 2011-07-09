@@ -362,7 +362,7 @@ function s4_core_block_s4_current_user_link() {
 	}
 	$masquerade_switch = '';
 	if(isset($_SESSION['masquerading'])) {
-		$masquerade_switch = '('. l('switch back', 'masquerade/unswitch') .')';
+		$masquerade_switch = ' ('. l('switch back', 'masquerade/unswitch', array('query' => array('token' => drupal_get_token('masquerade/unswitch')))) .')';
 	}
 	return array('content' => l(t('Hello <strong>@username</strong>', array('@username' => format_username($user))), 'user/'. $user->uid, array('html' => TRUE)) . $masquerade_switch);
 	
