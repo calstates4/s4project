@@ -2119,7 +2119,7 @@ function s4_sites_field_default_fields() {
         'allowed_values' => array(
           0 => array(
             'parent' => '0',
-            'vocabulary' => 'facility_type',
+            'vocabulary' => 'issues_addressed',
           ),
         ),
       ),

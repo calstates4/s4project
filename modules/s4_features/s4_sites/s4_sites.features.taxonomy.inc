@@ -32,10 +32,10 @@ function s4_sites_taxonomy_default_vocabularies() {
         ),
       ),
     ),
-    'facility_type' => array(
-      'name' => 'Facility Type',
-      'machine_name' => 'facility_type',
-      'description' => 'A CSU-wide Facility Type',
+    'issues_addressed' => array(
+      'name' => 'Issues addressed',
+      'machine_name' => 'issues_addressed',
+      'description' => 'The issues this site addresses',
       'hierarchy' => '1',
       'module' => 'taxonomy',
       'weight' => '0',
