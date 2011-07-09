@@ -434,7 +434,13 @@ function s4_core_context_default_contexts() {
           'module' => 'views',
           'delta' => '-exp-s4_search-page',
           'region' => 'search',
-          'weight' => '-10',
+          'weight' => '-47',
+        ),
+        's4_core-s4_current_user_link' => array(
+          'module' => 's4_core',
+          'delta' => 's4_current_user_link',
+          'region' => 'search',
+          'weight' => '-46',
         ),
         'system-main' => array(
           'module' => 'system',
@@ -446,10 +452,11 @@ function s4_core_context_default_contexts() {
     ),
   );
   $context->condition_mode = 0;
-
+  
   // Translatables
   // Included for use with string extractors like potx.
   t('sitewide');
+  
   $export['sitewide'] = $context;
 
   $context = new stdClass;

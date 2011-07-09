@@ -352,6 +352,9 @@ function s4_core_block_s4_subscribe_file_expiration() {
          'content' => $link);
 }
 
+/*
+*  Provides a link to the currnet user's informaiton
+*/
 function s4_core_block_s4_current_user_link() {
 	global $user;
 	if(!$user->uid) {
