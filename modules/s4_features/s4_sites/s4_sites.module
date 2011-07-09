@@ -151,25 +151,24 @@ function s4_sites_field_formatter_view($entity_type, $entity, $field, $instance,
   $settings = $display['settings'];
   if($display['type'] == 's4_sites_local_phone_number') {
 	  foreach ($items as $delta => $item) {
-	    $regex = '/^
-	    ([2-9][0-8]\d)  # area code (Allowed range of [2-9] for the first digit, [0-8] for the second, and [0-9] for the third digit)
-	    ([2-9]\d{2})    # 3-digit prefix (cannot start with 0 or 1)
-	    (\d{4})         # 4-digit line number
-	    /x';
-	
-		$result = preg_match($regex, $item['number'], $matches);
-		
-		if ($result) {
-			$phone =  $cc['code'] . ' (' . $matches[1] . ') ' . $matches[2] . ' ' . $matches[3];
-		}
+	    
 	    $element[$delta] = array(
-	      '#markup' => $phone
+	      '#markup' => _s4_sites_format_phone($item['number']),
 	    );
 	  }
   }
   if($display['type'] == 's4_sites_address') {
   	 foreach ($items as $delta => $item) {
 	    $output = array();
+	    if($item['name']) {
+	    	$output[] = '<strong>'. $item['name'] .'</strong>';
+	    }
+	    if($item['phone']) {
+	    	$output[] = _s4_sites_format_phone($item['phone']);
+	    }
+	    if($item['fax']) {
+	    	$output[] = '<strong>Fax:</strong> ' . _s4_sites_format_phone($item['fax']);
+	    }
 	    if($item['street']) {
 	    	$output[] = $item['street'];
 	    }
@@ -178,10 +177,25 @@ function s4_sites_field_formatter_view($entity_type, $entity, $field, $instance,
 	    }
 	    $output[] = $item['city'] .', '. $item['province'] . '&nbsp;&nbsp;' . $item['postal_code'];
 	    $element[$delta] = array(
-	      '#markup' => implode('<br />', $output),
+	      '#markup' => '<address>'. implode('<br />', $output) .'</address>',
 	    );
 	  }
 
   }
   return $element;
+}
+
+function _s4_sites_format_phone($number) {
+	$regex = '/^
+    ([2-9][0-8]\d)  # area code (Allowed range of [2-9] for the first digit, [0-8] for the second, and [0-9] for the third digit)
+    ([2-9]\d{2})    # 3-digit prefix (cannot start with 0 or 1)
+    (\d{4})         # 4-digit line number
+    /x';
+
+	$result = preg_match($regex, $number, $matches);
+	
+	if ($result) {
+		return $cc['code'] . ' (' . $matches[1] . ') ' . $matches[2] . '-' . $matches[3];
+	}
+	return '';
 }

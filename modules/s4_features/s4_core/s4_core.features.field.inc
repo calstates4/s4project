@@ -868,6 +868,151 @@ function s4_core_field_default_fields() {
     ),
   );
 
+  // Exported field: 'node-signup-field_signup_location'
+  $fields['node-signup-field_signup_location'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_signup_location',
+      'foreign keys' => array(),
+      'global_block_settings' => '1',
+      'indexes' => array(
+        'lid' => array(
+          0 => 'lid',
+        ),
+      ),
+      'module' => 'location_cck',
+      'settings' => array(
+        'gmap_macro' => '[gmap ]',
+        'gmap_marker' => 'drupal',
+        'location_settings' => array(
+          'display' => array(
+            'hide' => array(
+              'additional' => 0,
+              'city' => 0,
+              'coords' => 0,
+              'country' => 0,
+              'country_name' => 0,
+              'fax' => 0,
+              'locpick' => 0,
+              'map_link' => 0,
+              'name' => 0,
+              'phone' => 0,
+              'postal_code' => 0,
+              'province' => 0,
+              'province_name' => 0,
+              'street' => 0,
+            ),
+          ),
+          'form' => array(
+            'fields' => array(
+              'additional' => array(
+                'collect' => '1',
+                'default' => '',
+                'weight' => '6',
+              ),
+              'city' => array(
+                'collect' => '2',
+                'default' => '',
+                'weight' => '8',
+              ),
+              'country' => array(
+                'collect' => '1',
+                'default' => 'us',
+                'weight' => '14',
+              ),
+              'fax' => array(
+                'collect' => '0',
+                'default' => '',
+                'weight' => '30',
+              ),
+              'locpick' => array(
+                'collect' => '0',
+                'weight' => '20',
+              ),
+              'name' => array(
+                'collect' => '2',
+                'default' => '',
+                'weight' => '2',
+              ),
+              'phone' => array(
+                'collect' => '0',
+                'default' => '',
+                'weight' => '25',
+              ),
+              'postal_code' => array(
+                'collect' => '2',
+                'default' => '',
+                'weight' => '12',
+              ),
+              'province' => array(
+                'collect' => '2',
+                'default' => '',
+                'weight' => '10',
+              ),
+              'street' => array(
+                'collect' => '2',
+                'default' => '',
+                'weight' => '4',
+              ),
+            ),
+          ),
+        ),
+      ),
+      'translatable' => '1',
+      'type' => 'location',
+    ),
+    'field_instance' => array(
+      'bundle' => 'signup',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'cck_blocks' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'default' => array(
+          'label' => 'above',
+          'module' => 'location_cck',
+          'settings' => array(),
+          'type' => 'location_default',
+          'weight' => 8,
+        ),
+        'notifications' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_signup_location',
+      'label' => 'Location',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 0,
+        'module' => 'location_cck',
+        'settings' => array(),
+        'type' => 'location',
+        'weight' => '5',
+      ),
+    ),
+  );
+
   // Exported field: 'node-signup-field_site'
   $fields['node-signup-field_site'] = array(
     'field_config' => array(
@@ -1214,6 +1359,7 @@ function s4_core_field_default_fields() {
   t('Images');
   t('Last expected date of service');
   t('Let us know the last date you will be working on this site. This can be an approximation, and if you are singing up as part of a course, this will be automatically the last day of the semester.');
+  t('Location');
   t('Signup Form Results');
   t('Site');
   t('Total hours worked at the site');

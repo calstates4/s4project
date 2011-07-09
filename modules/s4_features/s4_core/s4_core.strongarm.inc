@@ -182,11 +182,8 @@ function s4_core_strongarm() {
   $strongarm->value = array(
     'activation' => array(
       'selector' => '.imagefield-fancybox',
-      'activation_type' => 'exclude',
-      'activation_pages' => 'admin*
-img_assist*
-node/add/*
-node/*/edit',
+      'activation_type' => 'include',
+      'activation_pages' => 'sites/*',
     ),
     'imagefield' => array(
       'grouping' => '1',

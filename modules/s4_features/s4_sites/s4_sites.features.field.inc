@@ -2177,7 +2177,7 @@ function s4_sites_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '5',
+        'weight' => '4',
       ),
     ),
   );
@@ -2267,7 +2267,7 @@ function s4_sites_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '6',
+        'weight' => '5',
       ),
     ),
   );
@@ -2361,7 +2361,7 @@ function s4_sites_field_default_fields() {
   $fields['node-site-field_location'] = array(
     'field_config' => array(
       'active' => '1',
-      'cardinality' => '1',
+      'cardinality' => '-1',
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_location',
@@ -2413,7 +2413,7 @@ function s4_sites_field_default_fields() {
                 'weight' => '-92',
               ),
               'fax' => array(
-                'collect' => '0',
+                'collect' => '1',
                 'default' => '',
                 'weight' => '-98',
               ),
@@ -2422,12 +2422,12 @@ function s4_sites_field_default_fields() {
                 'weight' => '-91',
               ),
               'name' => array(
-                'collect' => '0',
+                'collect' => '1',
                 'default' => '',
                 'weight' => '-100',
               ),
               'phone' => array(
-                'collect' => '0',
+                'collect' => '1',
                 'default' => '',
                 'weight' => '-99',
               ),
@@ -2457,7 +2457,7 @@ function s4_sites_field_default_fields() {
       'bundle' => 'site',
       'default_value' => NULL,
       'deleted' => '0',
-      'description' => 'Enter information about the physical location of this site.',
+      'description' => 'Enter information about the physical location of this site. You can have multiple locations, in which case it is important to provide names to differentiate each one.',
       'display' => array(
         'cck_blocks' => array(
           'label' => 'above',
@@ -2503,7 +2503,7 @@ function s4_sites_field_default_fields() {
         'module' => 'location_cck',
         'settings' => array(),
         'type' => 'location',
-        'weight' => '15',
+        'weight' => '1',
       ),
     ),
   );
@@ -3019,7 +3019,7 @@ function s4_sites_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '9',
+        'weight' => '8',
       ),
     ),
   );
@@ -3149,7 +3149,7 @@ function s4_sites_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '8',
+        'weight' => '7',
       ),
     ),
   );
@@ -3518,7 +3518,7 @@ function s4_sites_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_buttons',
-        'weight' => '4',
+        'weight' => '3',
       ),
     ),
   );
@@ -3636,7 +3636,7 @@ function s4_sites_field_default_fields() {
           'size' => '40',
         ),
         'type' => 'user_reference_autocomplete',
-        'weight' => '7',
+        'weight' => '6',
       ),
     ),
   );
@@ -3729,7 +3729,7 @@ function s4_sites_field_default_fields() {
           'size' => 60,
         ),
         'type' => 'taxonomy_autocomplete',
-        'weight' => '3',
+        'weight' => '2',
       ),
     ),
   );
@@ -3904,7 +3904,7 @@ function s4_sites_field_default_fields() {
   t('Enable expiration reminder');
   t('Enter a few tags to describe this site.');
   t('Enter a few tags to help categorize this type of contact');
-  t('Enter information about the physical location of this site.');
+  t('Enter information about the physical location of this site. You can have multiple locations, in which case it is important to provide names to differentiate each one.');
   t('Enter information that you need to show students regarding the health or safety of this site. This information will be repeated on the signup form.');
   t('Enter the URL to this site\'s website.');
   t('Enter the number of days before a file of this type expires that an email reminder should be sent to department staff. ');

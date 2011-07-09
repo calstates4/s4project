@@ -22,10 +22,9 @@ function s4_sites_field_group_info() {
     'label' => 'Contact',
     'weight' => '21',
     'children' => array(
-      0 => 'field_location',
-      1 => 'field_phone',
-      2 => 'field_site_email',
-      3 => 'field_website',
+      0 => 'field_phone',
+      1 => 'field_site_email',
+      2 => 'field_website',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -99,7 +98,7 @@ function s4_sites_field_group_info() {
   $field_group->parent_name = 'group_site_tabs';
   $field_group->data = array(
     'label' => 'Student Instructions',
-    'weight' => '22',
+    'weight' => '23',
     'children' => array(
       0 => 'field_health_safety',
       1 => 'field_site_instructions',
@@ -118,6 +117,31 @@ function s4_sites_field_group_info() {
 
   $field_group = new stdClass;
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_site_locations|node|site|form';
+  $field_group->group_name = 'group_site_locations';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'site';
+  $field_group->mode = 'form';
+  $field_group->parent_name = 'group_site_tabs';
+  $field_group->data = array(
+    'label' => 'Locations',
+    'weight' => '22',
+    'children' => array(
+      0 => 'field_location',
+    ),
+    'format_type' => 'htab',
+    'format_settings' => array(
+      'formatter' => 'closed',
+      'instance_settings' => array(
+        'classes' => '',
+        'required_fields' => 1,
+      ),
+    ),
+  );
+  $export['group_site_locations|node|site|form'] = $field_group;
+
+  $field_group = new stdClass;
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_site_tabs|node|site|form';
   $field_group->group_name = 'group_site_tabs';
   $field_group->entity_type = 'node';
@@ -128,10 +152,11 @@ function s4_sites_field_group_info() {
     'label' => 'Site tabs',
     'weight' => '0',
     'children' => array(
-      0 => 'group_site_contact',
-      1 => 'group_site_general',
-      2 => 'group_site_images',
-      3 => 'group_site_instructions',
+      0 => 'group_site_locations',
+      1 => 'group_site_contact',
+      2 => 'group_site_general',
+      3 => 'group_site_images',
+      4 => 'group_site_instructions',
     ),
     'format_type' => 'htabs',
     'format_settings' => array(

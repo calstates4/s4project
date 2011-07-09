@@ -368,8 +368,9 @@ a, a:visited {
   color: #666666;
   font-style: italic;
 }
-.postal-address {
+.postal-address, address {
   margin: 15px 0;
+  font-style: normal;
 }
 /** TAGS **/
 .field-type-taxonomy-term-reference .field-items {
