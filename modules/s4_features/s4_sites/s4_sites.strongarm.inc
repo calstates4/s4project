@@ -696,7 +696,7 @@ function s4_sites_strongarm() {
       'region' => 'right',
       'weight' => '4',
       'has_required' => FALSE,
-      'title' => 'Facility type',
+      'title' => 'Issues addressed',
       'hidden' => 0,
     ),
     'field_csu_org_type' => array(

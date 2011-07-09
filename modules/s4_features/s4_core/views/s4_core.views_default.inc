@@ -372,7 +372,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['row_options']['hide_empty'] = 0;
   $handler->display->display_options['row_options']['default_field_elements'] = 1;
   $handler->display->display_options['exposed_block'] = TRUE;
-  /* Field: Content: Facility type */
+  /* Field: Content: Issues addressed */
   $handler->display->display_options['fields']['field_csu_facility']['id'] = 'field_csu_facility';
   $handler->display->display_options['fields']['field_csu_facility']['table'] = 'field_data_field_csu_facility';
   $handler->display->display_options['fields']['field_csu_facility']['field'] = 'field_csu_facility';

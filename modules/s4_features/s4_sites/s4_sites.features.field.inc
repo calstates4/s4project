@@ -2167,7 +2167,7 @@ function s4_sites_field_default_fields() {
       ),
       'entity_type' => 'node',
       'field_name' => 'field_csu_facility',
-      'label' => 'Facility type',
+      'label' => 'Issues addressed',
       'required' => 0,
       'settings' => array(
         'user_register_form' => FALSE,
@@ -3910,7 +3910,7 @@ function s4_sites_field_default_fields() {
   t('Enter the number of days before a file of this type expires that an email reminder should be sent to department staff. ');
   t('Evaluation Form');
   t('Expiration date');
-  t('Facility type');
+  t('Issues addressed');
   t('File category');
   t('File description or notes');
   t('Files');

@@ -1180,7 +1180,7 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['filters']['tid_1']['relationship'] = 'field_site_nid';
   $handler->display->display_options['filters']['tid_1']['exposed'] = TRUE;
   $handler->display->display_options['filters']['tid_1']['expose']['operator_id'] = 'tid_1_op';
-  $handler->display->display_options['filters']['tid_1']['expose']['label'] = 'Facility type';
+  $handler->display->display_options['filters']['tid_1']['expose']['label'] = 'Issues addressed';
   $handler->display->display_options['filters']['tid_1']['expose']['operator'] = 'tid_1_op';
   $handler->display->display_options['filters']['tid_1']['expose']['identifier'] = 'tid_1';
   $handler->display->display_options['filters']['tid_1']['expose']['reduce'] = 0;
@@ -1226,7 +1226,7 @@ function s4_sites_views_default_views() {
     t('Service restrictions'),
     t('With students in'),
     t('Who had at least one student since'),
-    t('Facility type'),
+    t('Issues addressed'),
     t('Page'),
   );
   $export['email_site_contacts'] = $view;
@@ -2247,7 +2247,7 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['fields']['title']['hide_empty'] = 0;
   $handler->display->display_options['fields']['title']['empty_zero'] = 0;
   $handler->display->display_options['fields']['title']['link_to_node'] = 1;
-  /* Field: Content: Facility type */
+  /* Field: Content: Issues addressed */
   $handler->display->display_options['fields']['field_csu_facility']['id'] = 'field_csu_facility';
   $handler->display->display_options['fields']['field_csu_facility']['table'] = 'field_data_field_csu_facility';
   $handler->display->display_options['fields']['field_csu_facility']['field'] = 'field_csu_facility';
