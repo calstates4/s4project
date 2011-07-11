@@ -1085,7 +1085,7 @@ function s4_sites_field_default_fields() {
         'max' => '',
         'min' => '0',
         'prefix' => '',
-        'suffix' => 'students',
+        'suffix' => ' students',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -2962,7 +2962,7 @@ function s4_sites_field_default_fields() {
         'max' => '',
         'min' => '0',
         'prefix' => '',
-        'suffix' => 'students',
+        'suffix' => ' students',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
