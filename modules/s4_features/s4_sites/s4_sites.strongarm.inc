@@ -462,12 +462,6 @@ function s4_sites_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'nodeformscols_field_placements_coordinator_default';
   $strongarm->value = array(
-    'title' => array(
-      'region' => 'main',
-      'weight' => '0',
-      'has_required' => TRUE,
-      'title' => 'Coordinator Name',
-    ),
     'additional_settings' => array(
       'region' => 'main',
       'weight' => '5',
@@ -490,7 +484,7 @@ function s4_sites_strongarm() {
     ),
     'field_site_restrict' => array(
       'region' => 'right',
-      'weight' => '2',
+      'weight' => '3',
       'has_required' => FALSE,
       'title' => 'Restrict to',
       'hidden' => 0,
@@ -529,6 +523,13 @@ function s4_sites_strongarm() {
       'has_required' => FALSE,
       'title' => 'Notifications',
       'collapsed' => 0,
+      'hidden' => 0,
+    ),
+    'field_signups_max' => array(
+      'region' => 'right',
+      'weight' => '2',
+      'has_required' => FALSE,
+      'title' => 'Maximum number of students',
       'hidden' => 0,
     ),
   );

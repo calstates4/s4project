@@ -103,6 +103,7 @@ function s4_sites_field_group_info() {
       0 => 'field_health_safety',
       1 => 'field_site_instructions',
       2 => 'field_site_instructions_required',
+      3 => 'field_signups_max',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -152,11 +153,11 @@ function s4_sites_field_group_info() {
     'label' => 'Site tabs',
     'weight' => '0',
     'children' => array(
-      0 => 'group_site_locations',
-      1 => 'group_site_contact',
-      2 => 'group_site_general',
-      3 => 'group_site_images',
-      4 => 'group_site_instructions',
+      0 => 'group_site_contact',
+      1 => 'group_site_general',
+      2 => 'group_site_images',
+      3 => 'group_site_instructions',
+      4 => 'group_site_locations',
     ),
     'format_type' => 'htabs',
     'format_settings' => array(

@@ -773,7 +773,6 @@ function s4_sites_views_default_views() {
     t('Items per page'),
     t('- All -'),
     t('Offset'),
-    t('<p class="intro empty">No files found.</p>'),
     t('Date'),
     t('Contact tags'),
     t('Contact type'),
@@ -2208,7 +2207,7 @@ function s4_sites_views_default_views() {
   $view->core = 7;
   $view->api_version = '3.0-alpha1';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
-  
+
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Sites';
@@ -2412,11 +2411,11 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['filters']['city']['expose']['operator'] = 'city_op';
   $handler->display->display_options['filters']['city']['expose']['identifier'] = 'city';
   $handler->display->display_options['filters']['city']['expose']['multiple'] = FALSE;
-  
+
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['path'] = 'site-list';
-  
+
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'block_1');
   $handler->display->display_options['defaults']['pager'] = FALSE;
@@ -2483,7 +2482,6 @@ function s4_sites_views_default_views() {
     t('Block'),
     t('Newest Sites'),
   );
-
   $export['sites'] = $view;
 
   return $export;

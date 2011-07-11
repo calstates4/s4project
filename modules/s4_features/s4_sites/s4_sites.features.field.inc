@@ -553,7 +553,7 @@ function s4_sites_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'email_textfield',
-        'weight' => '5',
+        'weight' => '6',
       ),
     ),
   );
@@ -1019,7 +1019,81 @@ function s4_sites_field_default_fields() {
           'size' => 15,
         ),
         'type' => 'phone_number',
-        'weight' => '6',
+        'weight' => '7',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-coordinator-field_signups_max'
+  $fields['node-coordinator-field_signups_max'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_signups_max',
+      'foreign keys' => array(),
+      'global_block_settings' => '2',
+      'indexes' => array(),
+      'module' => 'number',
+      'settings' => array(),
+      'translatable' => '1',
+      'type' => 'number_integer',
+    ),
+    'field_instance' => array(
+      'bundle' => 'coordinator',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => 'Leave blank or enter zero (0) for no limit',
+      'display' => array(
+        'cck_blocks' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'default' => array(
+          'label' => 'above',
+          'module' => 'number',
+          'settings' => array(
+            'decimal_separator' => '.',
+            'prefix_suffix' => TRUE,
+            'scale' => 0,
+            'thousand_separator' => ' ',
+          ),
+          'type' => 'number_integer',
+          'weight' => 7,
+        ),
+        'notifications' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_signups_max',
+      'label' => 'Maximum number of students',
+      'required' => 0,
+      'settings' => array(
+        'max' => '',
+        'min' => '0',
+        'prefix' => '',
+        'suffix' => 'students',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 0,
+        'module' => 'number',
+        'settings' => array(),
+        'type' => 'number',
+        'weight' => '3',
       ),
     ),
   );
@@ -1155,7 +1229,7 @@ function s4_sites_field_default_fields() {
           ),
         ),
         'type' => 'nodereference_url',
-        'weight' => '3',
+        'weight' => '4',
       ),
     ),
   );
@@ -2037,7 +2111,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '5',
+          'weight' => '16',
         ),
         'default' => array(
           'label' => 'hidden',
@@ -2137,7 +2211,7 @@ function s4_sites_field_default_fields() {
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_link',
-          'weight' => '0',
+          'weight' => '1',
         ),
         'default' => array(
           'label' => 'above',
@@ -2227,7 +2301,7 @@ function s4_sites_field_default_fields() {
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_link',
-          'weight' => '0',
+          'weight' => '3',
         ),
         'default' => array(
           'label' => 'above',
@@ -2309,7 +2383,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '0',
+          'weight' => '12',
         ),
         'default' => array(
           'label' => 'above',
@@ -2352,7 +2426,7 @@ function s4_sites_field_default_fields() {
           'rows' => '5',
         ),
         'type' => 'text_textarea',
-        'weight' => '3',
+        'weight' => '18',
       ),
     ),
   );
@@ -2464,7 +2538,7 @@ function s4_sites_field_default_fields() {
           'module' => 's4_sites',
           'settings' => array(),
           'type' => 's4_sites_address',
-          'weight' => '1',
+          'weight' => '4',
         ),
         'default' => array(
           'label' => 'above',
@@ -2536,7 +2610,7 @@ function s4_sites_field_default_fields() {
           'module' => 's4_sites',
           'settings' => array(),
           'type' => 's4_sites_local_phone_number',
-          'weight' => '0',
+          'weight' => '2',
         ),
         'default' => array(
           'label' => 'above',
@@ -2821,6 +2895,86 @@ function s4_sites_field_default_fields() {
     ),
   );
 
+  // Exported field: 'node-site-field_signups_max'
+  $fields['node-site-field_signups_max'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_signups_max',
+      'foreign keys' => array(),
+      'global_block_settings' => '2',
+      'indexes' => array(),
+      'module' => 'number',
+      'settings' => array(),
+      'translatable' => '1',
+      'type' => 'number_integer',
+    ),
+    'field_instance' => array(
+      'bundle' => 'site',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'cck_blocks' => array(
+          'label' => 'above',
+          'module' => 'number',
+          'settings' => array(
+            'decimal_separator' => '.',
+            'prefix_suffix' => TRUE,
+            'scale' => 0,
+            'thousand_separator' => ' ',
+          ),
+          'type' => 'number_integer',
+          'weight' => '7',
+        ),
+        'default' => array(
+          'label' => 'above',
+          'module' => 'number',
+          'settings' => array(
+            'decimal_separator' => '.',
+            'prefix_suffix' => TRUE,
+            'scale' => 0,
+            'thousand_separator' => ' ',
+          ),
+          'type' => 'number_integer',
+          'weight' => 16,
+        ),
+        'notifications' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_signups_max',
+      'label' => 'Maximum number of students',
+      'required' => 0,
+      'settings' => array(
+        'max' => '',
+        'min' => '0',
+        'prefix' => '',
+        'suffix' => 'students',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 0,
+        'module' => 'number',
+        'settings' => array(),
+        'type' => 'number',
+        'weight' => '15',
+      ),
+    ),
+  );
+
   // Exported field: 'node-site-field_site_email'
   $fields['node-site-field_site_email'] = array(
     'field_config' => array(
@@ -2847,7 +3001,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '0',
+          'weight' => '14',
         ),
         'default' => array(
           'label' => 'above',
@@ -2979,7 +3133,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '0',
+          'weight' => '13',
         ),
         'default' => array(
           'label' => 'above',
@@ -3109,7 +3263,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '0',
+          'weight' => '11',
         ),
         'default' => array(
           'label' => 'above',
@@ -3297,7 +3451,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '0',
+          'weight' => '10',
         ),
         'default' => array(
           'label' => 'above',
@@ -3340,7 +3494,7 @@ function s4_sites_field_default_fields() {
           'rows' => '5',
         ),
         'type' => 'text_textarea',
-        'weight' => '2',
+        'weight' => '17',
       ),
     ),
   );
@@ -3388,7 +3542,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '0',
+          'weight' => '8',
         ),
         'default' => array(
           'label' => 'above',
@@ -3430,7 +3584,7 @@ function s4_sites_field_default_fields() {
           'display_label' => 1,
         ),
         'type' => 'options_onoff',
-        'weight' => '1',
+        'weight' => '16',
       ),
     ),
   );
@@ -3479,7 +3633,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '4',
+          'weight' => '15',
         ),
         'default' => array(
           'label' => 'above',
@@ -3592,7 +3746,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '0',
+          'weight' => '9',
         ),
         'default' => array(
           'label' => 'above',
@@ -3686,7 +3840,7 @@ function s4_sites_field_default_fields() {
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_link',
-          'weight' => '3',
+          'weight' => '6',
         ),
         'default' => array(
           'label' => 'above',
@@ -3774,7 +3928,7 @@ function s4_sites_field_default_fields() {
           'module' => 'link',
           'settings' => array(),
           'type' => 'default',
-          'weight' => '2',
+          'weight' => '5',
         ),
         'default' => array(
           'label' => 'above',
@@ -3910,16 +4064,18 @@ function s4_sites_field_default_fields() {
   t('Enter the number of days before a file of this type expires that an email reminder should be sent to department staff. ');
   t('Evaluation Form');
   t('Expiration date');
-  t('Issues addressed');
   t('File category');
   t('File description or notes');
   t('Files');
   t('First Name');
   t('Give an overview of the mission and goals of this site. This might include the mission statement of the organization, but the first paragraph should be a more inviting and clear description of the organization.');
   t('Health & Safety Information');
+  t('Issues addressed');
   t('Last Name');
+  t('Leave blank or enter zero (0) for no limit');
   t('Location');
   t('Main phone number');
+  t('Maximum number of students');
   t('Organization type');
   t('Phone number');
   t('Reminder date');

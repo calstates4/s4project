@@ -394,6 +394,10 @@ function s4_core_permission() {
       'title' => t('Sign up for service'),
       'description' => t('If unchecked, users of this role will never be able to register for sites regardless of any other settings.'),
     ),
+    'ignore maximum limits on site' => array(
+      'title' => t('Ignore max limits on sites'),
+      'description' => t('If this user is creating a signup record, they can ignore the max limit on the site.'),
+    ),
     'show input filter select menu' => array(
       'title' => t('Show input filter options'),
       'description' => t('Show the input filter options, normally these options are hidden from users.'),
