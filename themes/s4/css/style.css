@@ -623,8 +623,14 @@ input.form-button-disabled, input.form-button-disabled:active {
 .site-listing li .site-restrictions span {
   font-weight: bold;
 }
-.site-listing li div.map-link-wrapper {
+.site-listing li .item-list {
   float: right;
+}
+.site-listing li .item-list li {
+  border: 0px;
+  margin: 3px 0;
+}
+.site-listing li div.map-link-wrapper {
   position: relative;
 }
 .site-listing .map-link {

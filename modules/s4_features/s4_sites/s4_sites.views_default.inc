@@ -2208,7 +2208,7 @@ function s4_sites_views_default_views() {
   $view->core = 7;
   $view->api_version = '3.0-alpha1';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
-
+  
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Sites';
@@ -2340,71 +2340,28 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['fields']['field_site_restrict']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_site_restrict']['delta_reversed'] = 0;
   $handler->display->display_options['fields']['field_site_restrict']['field_api_classes'] = 0;
-  /* Field: Location: Latitude */
-  $handler->display->display_options['fields']['latitude']['id'] = 'latitude';
-  $handler->display->display_options['fields']['latitude']['table'] = 'location';
-  $handler->display->display_options['fields']['latitude']['field'] = 'latitude';
-  $handler->display->display_options['fields']['latitude']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['latitude']['alter']['alter_text'] = 0;
-  $handler->display->display_options['fields']['latitude']['alter']['make_link'] = 0;
-  $handler->display->display_options['fields']['latitude']['alter']['absolute'] = 0;
-  $handler->display->display_options['fields']['latitude']['alter']['external'] = 0;
-  $handler->display->display_options['fields']['latitude']['alter']['replace_spaces'] = 0;
-  $handler->display->display_options['fields']['latitude']['alter']['nl2br'] = 0;
-  $handler->display->display_options['fields']['latitude']['alter']['word_boundary'] = 1;
-  $handler->display->display_options['fields']['latitude']['alter']['ellipsis'] = 1;
-  $handler->display->display_options['fields']['latitude']['alter']['strip_tags'] = 0;
-  $handler->display->display_options['fields']['latitude']['alter']['trim'] = 0;
-  $handler->display->display_options['fields']['latitude']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['latitude']['element_label_colon'] = 1;
-  $handler->display->display_options['fields']['latitude']['element_default_classes'] = 1;
-  $handler->display->display_options['fields']['latitude']['hide_empty'] = 0;
-  $handler->display->display_options['fields']['latitude']['empty_zero'] = 0;
-  $handler->display->display_options['fields']['latitude']['style'] = 'dd';
-  /* Field: Location: Longitude */
-  $handler->display->display_options['fields']['longitude']['id'] = 'longitude';
-  $handler->display->display_options['fields']['longitude']['table'] = 'location';
-  $handler->display->display_options['fields']['longitude']['field'] = 'longitude';
-  $handler->display->display_options['fields']['longitude']['label'] = '';
-  $handler->display->display_options['fields']['longitude']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['longitude']['alter']['alter_text'] = 0;
-  $handler->display->display_options['fields']['longitude']['alter']['make_link'] = 0;
-  $handler->display->display_options['fields']['longitude']['alter']['absolute'] = 0;
-  $handler->display->display_options['fields']['longitude']['alter']['external'] = 0;
-  $handler->display->display_options['fields']['longitude']['alter']['replace_spaces'] = 0;
-  $handler->display->display_options['fields']['longitude']['alter']['nl2br'] = 0;
-  $handler->display->display_options['fields']['longitude']['alter']['word_boundary'] = 1;
-  $handler->display->display_options['fields']['longitude']['alter']['ellipsis'] = 1;
-  $handler->display->display_options['fields']['longitude']['alter']['strip_tags'] = 0;
-  $handler->display->display_options['fields']['longitude']['alter']['trim'] = 0;
-  $handler->display->display_options['fields']['longitude']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['longitude']['element_label_colon'] = 0;
-  $handler->display->display_options['fields']['longitude']['element_default_classes'] = 1;
-  $handler->display->display_options['fields']['longitude']['hide_empty'] = 0;
-  $handler->display->display_options['fields']['longitude']['empty_zero'] = 0;
-  $handler->display->display_options['fields']['longitude']['style'] = 'dd';
-  /* Field: Global: Custom text */
-  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
-  $handler->display->display_options['fields']['nothing']['table'] = 'views';
-  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
-  $handler->display->display_options['fields']['nothing']['label'] = '';
-  $handler->display->display_options['fields']['nothing']['alter']['make_link'] = 0;
-  $handler->display->display_options['fields']['nothing']['alter']['absolute'] = 0;
-  $handler->display->display_options['fields']['nothing']['alter']['external'] = 0;
-  $handler->display->display_options['fields']['nothing']['alter']['replace_spaces'] = 0;
-  $handler->display->display_options['fields']['nothing']['alter']['nl2br'] = 0;
-  $handler->display->display_options['fields']['nothing']['alter']['word_boundary'] = 1;
-  $handler->display->display_options['fields']['nothing']['alter']['ellipsis'] = 1;
-  $handler->display->display_options['fields']['nothing']['alter']['strip_tags'] = 0;
-  $handler->display->display_options['fields']['nothing']['alter']['trim'] = 0;
-  $handler->display->display_options['fields']['nothing']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['nothing']['element_label_colon'] = 0;
-  $handler->display->display_options['fields']['nothing']['element_wrapper_type'] = 'div';
-  $handler->display->display_options['fields']['nothing']['element_wrapper_class'] = 'map-link-wrapper';
-  $handler->display->display_options['fields']['nothing']['element_default_classes'] = 0;
-  $handler->display->display_options['fields']['nothing']['empty'] = '<div class="map-pointer"></div><a href="#" class="map-link" lat="[latitude]" lon="[longitude]"></a>';
-  $handler->display->display_options['fields']['nothing']['hide_empty'] = 0;
-  $handler->display->display_options['fields']['nothing']['empty_zero'] = 0;
+  /* Field: Signup: Site location links */
+  $handler->display->display_options['fields']['site_location_links']['id'] = 'site_location_links';
+  $handler->display->display_options['fields']['site_location_links']['table'] = 's4_signup';
+  $handler->display->display_options['fields']['site_location_links']['field'] = 'site_location_links';
+  $handler->display->display_options['fields']['site_location_links']['label'] = '';
+  $handler->display->display_options['fields']['site_location_links']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['site_location_links']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['site_location_links']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['site_location_links']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['site_location_links']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['site_location_links']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['site_location_links']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['site_location_links']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['site_location_links']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['site_location_links']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['site_location_links']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['site_location_links']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['site_location_links']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['site_location_links']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['site_location_links']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['site_location_links']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['site_location_links']['hide_alter_empty'] = 0;
   /* Sort criterion: Content: Title */
   $handler->display->display_options['sorts']['title']['id'] = 'title';
   $handler->display->display_options['sorts']['title']['table'] = 'node';
@@ -2455,11 +2412,11 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['filters']['city']['expose']['operator'] = 'city_op';
   $handler->display->display_options['filters']['city']['expose']['identifier'] = 'city';
   $handler->display->display_options['filters']['city']['expose']['multiple'] = FALSE;
-
+  
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['path'] = 'site-list';
-
+  
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'block_1');
   $handler->display->display_options['defaults']['pager'] = FALSE;
@@ -2519,8 +2476,6 @@ function s4_sites_views_default_views() {
     t('Offset'),
     t('<h4>[title]</h4><div class="meta">[field_csu_facility] - [field_csu_org_type]</div>'),
     t('Restricted to'),
-    t('Latitude'),
-    t('<div class="map-pointer"></div><a href="#" class="map-link" lat="[latitude]" lon="[longitude]"></a>'),
     t('All'),
     t('Search'),
     t('City'),
@@ -2528,6 +2483,7 @@ function s4_sites_views_default_views() {
     t('Block'),
     t('Newest Sites'),
   );
+
   $export['sites'] = $view;
 
   return $export;

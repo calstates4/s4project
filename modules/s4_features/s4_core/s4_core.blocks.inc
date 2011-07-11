@@ -233,6 +233,10 @@ function s4_core_block_s4_signup_webform_signup() {
 *  Subscription links block
 */
 function s4_core_block_s4_page_notifications() {
+  global $user;
+  if(!$user->uid) {
+  	return null;
+  }
   $list = notifications_subscription_list('page subscriptions')
       ->filter_option('subscriptions_block');
   $links = array();

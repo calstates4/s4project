@@ -65,6 +65,18 @@ function s4_core_views_data() {
     ),
   );
   
+  $data['s4_signup']['site_location_links'] = array(
+    'title' => t('Site location links'),
+    'help' => t('Links to all site locations'),
+    'field' => array(
+      'handler' => 'views_handler_s4_site_locations',
+      'click sortable' => FALSE,
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort',
+    ),
+  );
+  
   return $data;
 }
 
