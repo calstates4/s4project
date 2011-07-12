@@ -116,6 +116,7 @@ WHERE n.created > :start AND d.field_signup_last_date_value > :end AND s.field_s
 		$count = db_query('select count(n.nid) as count FROM node n LEFT JOIN field_data_field_signup_last_date d ON d.revision_id = n.vid
 LEFT JOIN field_data_field_coordinator s ON s.revision_id = n.vid
 WHERE n.created > :start AND d.field_signup_last_date_value > :end AND s.field_coordinator_nid = :site_nid', array(':start' => time, ':end' => date('Y-m-d'), ':site_nid' => $node->nid));
+		return false;
 	}
 	$count = $count->fetchAssoc();
 	if($count['count'] >= $max[0]['value']) {

@@ -778,6 +778,9 @@ ul.pager .pager-next a, ul.pager .pager-last a {
   background-position-y: 6px;
 }
 /** TWEAKS FOR FORMS **/
+#edit-field-signups-max input {
+  width: 75px;
+}
 .field-name-field-course-subject, .field-name-field-course-catalog-number, .field-name-field-course-section {
   float: left;
   margin-right: 25px;
