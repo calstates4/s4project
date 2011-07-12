@@ -42,6 +42,24 @@ function s4_core_menu_default_menu_links() {
     'expanded' => '0',
     'weight' => '-47',
   );
+  // Exported menu link: main-menu:forms
+  $menu_links['main-menu:forms'] = array(
+    'menu_name' => 'main-menu',
+    'link_path' => 'forms',
+    'router_path' => 'forms',
+    'link_title' => 'Forms',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+    ),
+    'module' => 'menu',
+    'hidden' => '0',
+    'external' => '0',
+    'has_children' => '0',
+    'expanded' => '0',
+    'weight' => '-46',
+  );
   // Exported menu link: main-menu:students
   $menu_links['main-menu:students'] = array(
     'menu_name' => 'main-menu',
