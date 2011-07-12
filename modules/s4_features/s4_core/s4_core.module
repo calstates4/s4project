@@ -101,15 +101,22 @@ function s4_core_signup_access($node, $user) {
   return FALSE;
 }
 
-function _s4_core_object_is_full($site, $type = 'site') {
-	$max = field_get_items('node', $site, 'field_signups_max');
+function _s4_core_object_is_full($node) {
+	$max = field_get_items('node', $node, 'field_signups_max');
 	if(!$max[0]['value'] || $max[0]['value'] === 0) {
 		return false;
 	}
 	//@todo - change this to a dynamic query
-	$count = db_query('select count(n.nid) as count FROM node n LEFT JOIN field_data_field_signup_last_date d ON d.revision_id = n.vid
+	if($node->type == 'site') {
+		$count = db_query('select count(n.nid) as count FROM node n LEFT JOIN field_data_field_signup_last_date d ON d.revision_id = n.vid
 LEFT JOIN field_data_field_site s ON s.revision_id = n.vid
-WHERE n.created > :start AND d.field_signup_last_date_value > :end AND s.field_site_nid = :site_nid', array(':start' => time, ':end' => date('Y-m-d'), ':site_nid' => $site->nid));
+WHERE n.created > :start AND d.field_signup_last_date_value > :end AND s.field_site_nid = :site_nid', array(':start' => time, ':end' => date('Y-m-d'), ':site_nid' => $node->nid));
+	}
+	if($node->type == 'coordinator') {
+		$count = db_query('select count(n.nid) as count FROM node n LEFT JOIN field_data_field_signup_last_date d ON d.revision_id = n.vid
+LEFT JOIN field_data_field_coordinator s ON s.revision_id = n.vid
+WHERE n.created > :start AND d.field_signup_last_date_value > :end AND s.field_coordinator_nid = :site_nid', array(':start' => time, ':end' => date('Y-m-d'), ':site_nid' => $node->nid));
+	}
 	$count = $count->fetchAssoc();
 	if($count['count'] >= $max[0]['value']) {
 		return true;

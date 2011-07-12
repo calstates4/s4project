@@ -1225,7 +1225,7 @@ function s4_core_views_default_views() {
   $view->core = 7;
   $view->api_version = '3.0-alpha1';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
-
+  
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Your sites';
@@ -1359,9 +1359,29 @@ function s4_core_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'signup' => 'signup',
   );
-
+  
   /* Display: Current users sites */
   $handler = $view->new_display('block', 'Current users sites', 'block');
+  
+  /* Display: User profile sites */
+  $handler = $view->new_display('block', 'User profile sites', 'block_1');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Sites';
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: User (field_user) */
+  $handler->display->display_options['arguments']['field_user_uid']['id'] = 'field_user_uid';
+  $handler->display->display_options['arguments']['field_user_uid']['table'] = 'field_data_field_user';
+  $handler->display->display_options['arguments']['field_user_uid']['field'] = 'field_user_uid';
+  $handler->display->display_options['arguments']['field_user_uid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['field_user_uid']['default_argument_type'] = 'user';
+  $handler->display->display_options['arguments']['field_user_uid']['default_argument_options']['user'] = FALSE;
+  $handler->display->display_options['arguments']['field_user_uid']['default_argument_skip_url'] = 0;
+  $handler->display->display_options['arguments']['field_user_uid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_user_uid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_user_uid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['field_user_uid']['break_phrase'] = 0;
+  $handler->display->display_options['arguments']['field_user_uid']['not'] = 0;
+  $handler->display->display_options['block_description'] = 'User profile sites';
   $translatables['user_signups'] = array(
     t('Master'),
     t('Your sites'),
@@ -1383,7 +1403,10 @@ function s4_core_views_default_views() {
     t('Date'),
     t('All'),
     t('Current users sites'),
+    t('User profile sites'),
+    t('Sites'),
   );
+
   $export['user_signups'] = $view;
 
   return $export;
