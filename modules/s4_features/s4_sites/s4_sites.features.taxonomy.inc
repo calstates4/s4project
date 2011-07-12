@@ -32,29 +32,6 @@ function s4_sites_taxonomy_default_vocabularies() {
         ),
       ),
     ),
-    'issues_addressed' => array(
-      'name' => 'Issues addressed',
-      'machine_name' => 'issues_addressed',
-      'description' => 'The issues this site addresses',
-      'hierarchy' => '1',
-      'module' => 'taxonomy',
-      'weight' => '0',
-      'rdf_mapping' => array(
-        'rdftype' => array(
-          0 => 'skos:ConceptScheme',
-        ),
-        'name' => array(
-          'predicates' => array(
-            0 => 'dc:title',
-          ),
-        ),
-        'description' => array(
-          'predicates' => array(
-            0 => 'rdfs:comment',
-          ),
-        ),
-      ),
-    ),
     'file_category' => array(
       'name' => 'File category',
       'machine_name' => 'file_category',
@@ -83,6 +60,29 @@ function s4_sites_taxonomy_default_vocabularies() {
       'machine_name' => 'file_tags',
       'description' => '',
       'hierarchy' => '0',
+      'module' => 'taxonomy',
+      'weight' => '0',
+      'rdf_mapping' => array(
+        'rdftype' => array(
+          0 => 'skos:ConceptScheme',
+        ),
+        'name' => array(
+          'predicates' => array(
+            0 => 'dc:title',
+          ),
+        ),
+        'description' => array(
+          'predicates' => array(
+            0 => 'rdfs:comment',
+          ),
+        ),
+      ),
+    ),
+    'issues_addressed' => array(
+      'name' => 'Issues addressed',
+      'machine_name' => 'issues_addressed',
+      'description' => 'The issues this site addresses',
+      'hierarchy' => '1',
       'module' => 'taxonomy',
       'weight' => '0',
       'rdf_mapping' => array(

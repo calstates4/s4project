@@ -659,6 +659,9 @@ input.form-button-disabled, input.form-button-disabled:active {
 .map-link-wraper:hover .map-pointer {
   display: block;
 }
+.site-listing address {
+  margin: 0px;
+}
 /** MAP **/
 #site-list-map {
   margin: 0;

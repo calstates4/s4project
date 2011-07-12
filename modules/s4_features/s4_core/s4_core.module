@@ -362,7 +362,11 @@ function s4_core_signup($type, $nid) {
     if ($site->type == 'site') {
       $instructions = field_get_items('node', $site, 'field_site_instructions_required');
       $instruction_text = field_get_items('node', $site, 'field_site_instructions');
-      if ($instructions[0]['value'] && strip_tags($instruction_text[0]['value']) != '' && !$_GET['agreed']) {
+      $locations = field_get_items('node', $site, 'field_location');
+      if(!$_SESSION['s4_signup_location'] && count($locations) > 1) {
+      	drupal_goto('sites/'. $site->nid .'/locations');
+      }
+      elseif ($instructions[0]['value'] && strip_tags($instruction_text[0]['value']) != '' && !$_GET['agreed']) {
         drupal_set_message('This site requires that you read and agree to these additional instructions');
         drupal_set_title(t('Site instructions'));
         return $instruction_text[0]['value'] . 
@@ -392,6 +396,11 @@ function s4_core_signup($type, $nid) {
         }
       }
     }
+  }
+  
+  if($type == 'location') {
+  	$_SESSION['s4_signup_location'] = check_plain($nid);
+  	drupal_goto('s4/signup/site/'. check_plain(arg(4)));
   }
   
   if ($type == 'coordinator') {
@@ -502,13 +511,14 @@ function s4_core_user_signup_completed($sid = 0) {
           'site' => $_SESSION['s4_signup_site'], 
           'course' => $_SESSION['s4_signup_course'],
           'coordinator' => $_SESSION['s4_signup_coordinator'],
+          'location' => $_SESSION['s4_signup_location'],
           'signup_sid' => $sid);
   _s4_core_create_signup($user->uid, $signup);
   unset($_SESSION['s4_signup_course']);
   unset($_SESSION['s4_signup_site']);
   unset($_SESSION['s4_signup_coordinator']);
   drupal_set_message(t('Congratulations, you are signed up!'));
-  drupal_goto('dashboard', array('query' => array('finished' => 'finished')));
+  drupal_goto('<front>', array('query' => array('finished' => 'finished')));
 }
 
 /**
@@ -521,6 +531,7 @@ function _s4_core_create_signup($uid = 0, $signup = array()) {
            'site' => 0,
            'course' => 0,
            'coordinator' => 0,
+           'location' => 0,
            'signup_sid' => 0);
   $node = new stdClass();
   $node->type = 'signup';
@@ -534,6 +545,7 @@ function _s4_core_create_signup($uid = 0, $signup = array()) {
   $node->field_course[$node->language][0]['nid'] = $signup['course'];
   $node->field_coordinator[$node->language][0]['nid'] = $signup['coordinator'];
   $node->field_form_signup_sid[$node->language][0]['value'] = $signup['signup_sid'];
+  $node->field_signup_location[$node->language][0]['lid'] = $signup['location'];
   $dates = array();
   foreach (module_invoke_all('s4_signup_dates', $node) as $date) {
     $dates[$date['weight']] = $date['date'];
@@ -569,7 +581,7 @@ function s4_core_webform_submission_insert($node, $submission) {
     }
     unset($_SESSION['s4_core_site_eval_signup']);
     drupal_set_message(t('Thanks for your evaluation. We will be using this to improve the experience for future students.'));
-    drupal_goto('dashboard');
+    drupal_goto('<front>');
   }
 }
 
@@ -1232,4 +1244,80 @@ function s4_core_trigger_info() {
       ),
     ),
   );
+}
+
+/**
+*	Implementation of hook_field_formatter_info
+*/
+function s4_core_field_formatter_info() {
+	return array(
+		's4_sites_address_select' => array(
+	      'label' => t('Student Signup Select Location'),
+	      'field types' => array('location'),
+	    ),
+	);
+}
+
+/**
+*  Formatter for locations that are in the user signup for a site location screen
+*/
+function s4_core_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  
+  $element = array();
+  $settings = $display['settings'];
+  if($display['type'] == 's4_sites_address_select') {
+  	 foreach ($items as $delta => $item) {
+	    $output = array();
+	    // @todo - the map link wrapper should move out to a theme
+		$output[] = '<div class="map-link-wrapper item-list">';
+		$output[] = '<span>';
+		$output[] = '<div class="map-pointer"></div>';
+		$output[] = '<a href="#" class="map-link" lat="'. $item['latitude'] .'" lon="'. $item['longitude'] .'"></a>';
+		$output[] = '</span>';
+		$output[] = '</div>';
+	    $output[] = '<div class="location-signup-location">';
+	    if($item['name']) {
+	    	$output[] = '<strong>'. $item['name'] .'</strong>';
+	    }
+	    if($item['phone']) {
+	    	$output[] = _s4_sites_format_phone($item['phone']);
+	    }
+	    if($item['fax']) {
+	    	$output[] = '<strong>Fax:</strong> ' . _s4_sites_format_phone($item['fax']);
+	    }
+	    if($item['street']) {
+	    	$output[] = $item['street'];
+	    }
+	    if($item['additional']) {
+	    	$output[] = $item['additional'];
+	    }
+	    $output[] = $item['city'] .', '. $item['province'] . '&nbsp;&nbsp;' . $item['postal_code'];
+	    $output[] = '</div>';
+	    $output[] = '<div class="location-signup-wrapper">';
+	    $site = node_load(arg(1));
+	    if (!isset($_SESSION['s4_signup_location']) && !$site->nid) {
+	      $output[] = '<div class="signup denied"><div class="icon"></div>' .
+	        t('Select a site first.')
+	        . '</div>';
+	    }
+	    else {
+		    if (isset($_SESSION['s4_signup_location']) && $_SESSION['s4_signup_location'] == $item['lid']) {
+		      $output[] = '<div class="signup signed-up"><div class="icon"></div>Coordinator selected</div>';
+		    }
+		    else {
+		      $output[] = '<div class="signup"><div class="icon"></div>' .
+		      l(t('Select this location'), 's4/signup/location/' . $item['lid'] .'/'. $site->nid,
+		        array('attributes' => array('data-target' => 'signup-course')))
+		      . '</div>';
+		    }
+		}
+		$output[] = '</div>';
+		
+	    $element[$delta] = array(
+	      '#markup' => '<address>'. implode('<br />', $output) .'</address>',
+	    );
+	  }
+
+  }
+  return $element;
 }

@@ -313,6 +313,42 @@ function s4_sites_context_default_contexts() {
   $context = new stdClass;
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
+  $context->name = 'site-location-list';
+  $context->description = 'User is on the site location listing';
+  $context->tag = 'sites';
+  $context->conditions = array(
+    'path' => array(
+      'values' => array(
+        'sites/*/locations' => 'sites/*/locations',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        's4_sites-s4_sites_search_map' => array(
+          'module' => 's4_sites',
+          'delta' => 's4_sites_search_map',
+          'region' => 'content_right',
+          'weight' => '-10',
+        ),
+      ),
+    ),
+    'theme_html' => array(
+      'class' => 'site-list',
+    ),
+  );
+  $context->condition_mode = 0;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('User is on the site location listing');
+  t('sites');
+  $export['site-location-list'] = $context;
+
+  $context = new stdClass;
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
   $context->name = 'site-students';
   $context->description = 'User is on the site students list';
   $context->tag = 'site';

@@ -27,3 +27,5 @@
 	.signup.remove .icon { background-position-y: 5px; }
 	.signup.denied .icon { background-position-y: -99px; }
 	.signup.add    .icon { background-position-y: -154px; }
+.location-signup-location { float: left; width: 30%; }
+.location-signup-wrapper { float: left; width: 200px; }
