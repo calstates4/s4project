@@ -101,7 +101,13 @@ function s4_core_signup_access($node, $user) {
   return FALSE;
 }
 
-function _s4_core_object_is_full($node) {
+function _s4_core_object_is_full($node, $user = false) {
+	if(!$user) {
+		global $user;
+	}
+	if(user_access('ignore maximum limits on site', $user)) {
+		return false;
+	}
 	$max = field_get_items('node', $node, 'field_signups_max');
 	if(!$max[0]['value'] || $max[0]['value'] === 0) {
 		return false;

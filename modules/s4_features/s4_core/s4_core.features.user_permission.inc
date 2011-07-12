@@ -774,6 +774,16 @@ function s4_core_user_default_permissions() {
     'module' => 's4_core',
   );
 
+  // Exported permission: ignore maximum limits on site
+  $permissions['ignore maximum limits on site'] = array(
+    'name' => 'ignore maximum limits on site',
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'staff',
+    ),
+    'module' => 's4_core',
+  );
+
   // Exported permission: maintain own subscriptions
   $permissions['maintain own subscriptions'] = array(
     'name' => 'maintain own subscriptions',
