@@ -53,8 +53,14 @@ projects[field_group][version] = "1.0"
 projects[flag][subdir] = "contrib"
 projects[flag][version] = "2.0-beta5"
 
+projects[front][subdir] = "contrib"
+projects[front][version] = "2.0-rc1"
+
 projects[gmap][subdir] = "contrib"
 projects[gmap][version] = "1.x-dev"
+
+projects[homebox][subdir] = "contrib"
+projects[homebox][version] = "2.0-beta3"
 
 projects[imce][subdir] = "contrib"
 projects[imce][version] = "1.4"

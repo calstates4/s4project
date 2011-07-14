@@ -23,6 +23,89 @@ function s4_core_ctools_plugin_api() {
 }
 
 /**
+ * Implementation of hook_homebox().
+ */
+function s4_core_homebox() {
+  $homeboxes = array();
+
+  $homeboxes['home'] = array (
+    'regions' => 3,
+    'cache' => 0,
+    'color' => 0,
+    'colors' => 
+    array (
+    ),
+    'blocks' => 
+    array (
+      'search_form' => 
+      array (
+        'module' => 'search',
+        'delta' => 'form',
+        'region' => 1,
+        'movable' => 1,
+        'status' => 1,
+        'open' => 1,
+        'closable' => 1,
+        'title' => '',
+        'weight' => -50,
+      ),
+      'devel_switch_user' => 
+      array (
+        'module' => 'devel',
+        'delta' => 'switch_user',
+        'region' => 3,
+        'movable' => 1,
+        'status' => 1,
+        'open' => 1,
+        'closable' => 1,
+        'title' => '',
+        'weight' => -48,
+      ),
+      'views_bookmarked_sites-block' => 
+      array (
+        'module' => 'views',
+        'delta' => 'bookmarked_sites-block',
+        'region' => 2,
+        'movable' => 1,
+        'status' => 1,
+        'open' => 1,
+        'closable' => 1,
+        'title' => '',
+        'weight' => -49,
+      ),
+      'views_65656e1f5a12cde25f0722f735fe7969' => 
+      array (
+        'module' => 'views',
+        'delta' => '65656e1f5a12cde25f0722f735fe7969',
+        'region' => 2,
+        'movable' => 1,
+        'status' => 1,
+        'open' => 1,
+        'closable' => 1,
+        'title' => '',
+        'weight' => 29,
+      ),
+    ),
+    'widths' => 
+    array (
+    ),
+    'title' => 'Home',
+    'path' => 'home',
+    'menu' => 0,
+    'enabled' => 1,
+    'auto_save' => 1,
+    'full' => 0,
+    'roles' => 
+    array (
+      0 => 'authenticated user',
+    ),
+  );
+
+
+  return $homeboxes;
+}
+
+/**
  * Implementation of hook_node_info().
  */
 function s4_core_node_info() {

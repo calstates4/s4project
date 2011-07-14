@@ -242,27 +242,8 @@ function s4_core_context_default_contexts() {
     ),
   );
   $context->reactions = array(
-    'block' => array(
-      'blocks' => array(
-        's4_core-s4_subscribe_file_expiration' => array(
-          'module' => 's4_core',
-          'delta' => 's4_subscribe_file_expiration',
-          'region' => 'content',
-          'weight' => '-10',
-        ),
-        'views-contact_records-block_3' => array(
-          'module' => 'views',
-          'delta' => 'contact_records-block_3',
-          'region' => 'content',
-          'weight' => '-10',
-        ),
-        'masquerade-masquerade' => array(
-          'module' => 'masquerade',
-          'delta' => 'masquerade',
-          'region' => 'content_right',
-          'weight' => '-10',
-        ),
-      ),
+    'theme_html' => array(
+      'class' => 'staff-frontpage',
     ),
   );
   $context->condition_mode = 1;
