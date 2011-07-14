@@ -50,7 +50,8 @@ function s4_sites_field_group_info() {
     'weight' => '19',
     'children' => array(
       0 => 'body',
-      1 => 'title',
+      1 => 'field_site_projects',
+      2 => 'title',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -104,6 +105,8 @@ function s4_sites_field_group_info() {
       1 => 'field_site_instructions',
       2 => 'field_site_instructions_required',
       3 => 'field_signups_max',
+      4 => 'field_site_hours_minimum',
+      5 => 'field_site_hours',
     ),
     'format_type' => 'htab',
     'format_settings' => array(

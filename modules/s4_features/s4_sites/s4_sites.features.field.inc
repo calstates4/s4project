@@ -2160,7 +2160,7 @@ function s4_sites_field_default_fields() {
           'summary_rows' => 5,
         ),
         'type' => 'text_textarea_with_summary',
-        'weight' => '2',
+        'weight' => '-4',
       ),
       'widget_type' => 'text_textarea_with_summary',
     ),
@@ -2426,7 +2426,7 @@ function s4_sites_field_default_fields() {
           'rows' => '5',
         ),
         'type' => 'text_textarea',
-        'weight' => '18',
+        'weight' => '19',
       ),
     ),
   );
@@ -3308,6 +3308,226 @@ function s4_sites_field_default_fields() {
     ),
   );
 
+  // Exported field: 'node-site-field_site_hours'
+  $fields['node-site-field_site_hours'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '-1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_site_hours',
+      'foreign keys' => array(),
+      'global_block_settings' => '1',
+      'indexes' => array(
+        'col' => array(
+          0 => 'col',
+        ),
+        'row' => array(
+          0 => 'row',
+        ),
+        'value' => array(
+          0 => 'value',
+        ),
+      ),
+      'module' => 'matrix',
+      'settings' => array(
+        'cols_count' => '7',
+        'define' => 'cols',
+        'preview' => array(
+          'cols' => array(
+            1 => array(
+              'button' => 'Change settings',
+            ),
+            2 => array(
+              'button' => 'Change settings',
+            ),
+            3 => array(
+              'button' => 'Change settings',
+            ),
+            4 => array(
+              'button' => 'Change settings',
+            ),
+            5 => array(
+              'button' => 'Change settings',
+            ),
+            6 => array(
+              'button' => 'Change settings',
+            ),
+            7 => array(
+              'button' => 'Change settings',
+            ),
+          ),
+          'define' => 'cols',
+          'rows' => array(
+            1 => array(
+              'button' => 'Change settings',
+            ),
+            2 => array(
+              'button' => 'Change settings',
+            ),
+            3 => array(
+              'button' => 'Change settings',
+            ),
+            4 => array(
+              'button' => 'Change settings',
+            ),
+            5 => array(
+              'button' => 'Change settings',
+            ),
+            6 => array(
+              'button' => 'Change settings',
+            ),
+            7 => array(
+              'button' => 'Change settings',
+            ),
+            8 => array(
+              'button' => 'Change settings',
+            ),
+          ),
+        ),
+        'rows_count' => '8',
+        'settings' => 'a:6:{i:0;b:0;s:10:"old_define";s:4:"cols";s:14:"old_rows_count";s:1:"8";s:14:"old_cols_count";s:1:"7";s:4:"cols";a:7:{i:1;a:8:{s:10:"field_type";s:10:"checkboxes";s:5:"title";s:6:"Monday";s:9:"textfield";a:3:{s:4:"size";s:0:"";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";}s:6:"select";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:6:"radios";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:10:"checkboxes";a:2:{s:14:"allowed_values";s:7:"Monday|";s:23:"allowed_values_function";s:1:"0";}s:11:"calculation";a:4:{s:11:"calculation";s:3:"sum";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";s:8:"rounding";s:0:"";}s:6:"custom";a:1:{s:6:"custom";s:32:"matrix_custom_processing_example";}}i:2;a:8:{s:10:"field_type";s:10:"checkboxes";s:5:"title";s:7:"Tuesday";s:9:"textfield";a:3:{s:4:"size";s:0:"";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";}s:6:"select";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:6:"radios";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:10:"checkboxes";a:2:{s:14:"allowed_values";s:8:"Tuesday|";s:23:"allowed_values_function";s:1:"0";}s:11:"calculation";a:4:{s:11:"calculation";s:3:"sum";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";s:8:"rounding";s:0:"";}s:6:"custom";a:1:{s:6:"custom";s:32:"matrix_custom_processing_example";}}i:3;a:8:{s:10:"field_type";s:10:"checkboxes";s:5:"title";s:9:"Wednesday";s:9:"textfield";a:3:{s:4:"size";s:0:"";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";}s:6:"select";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:6:"radios";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:10:"checkboxes";a:2:{s:14:"allowed_values";s:10:"Wednesday|";s:23:"allowed_values_function";s:1:"0";}s:11:"calculation";a:4:{s:11:"calculation";s:3:"sum";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";s:8:"rounding";s:0:"";}s:6:"custom";a:1:{s:6:"custom";s:32:"matrix_custom_processing_example";}}i:4;a:8:{s:10:"field_type";s:10:"checkboxes";s:5:"title";s:8:"Thursday";s:9:"textfield";a:3:{s:4:"size";s:0:"";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";}s:6:"select";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:6:"radios";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:10:"checkboxes";a:2:{s:14:"allowed_values";s:9:"Thursday|";s:23:"allowed_values_function";s:1:"0";}s:11:"calculation";a:4:{s:11:"calculation";s:3:"sum";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";s:8:"rounding";s:0:"";}s:6:"custom";a:1:{s:6:"custom";s:32:"matrix_custom_processing_example";}}i:5;a:8:{s:10:"field_type";s:10:"checkboxes";s:5:"title";s:6:"Friday";s:9:"textfield";a:3:{s:4:"size";s:0:"";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";}s:6:"select";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:6:"radios";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:10:"checkboxes";a:2:{s:14:"allowed_values";s:7:"Friday|";s:23:"allowed_values_function";s:1:"0";}s:11:"calculation";a:4:{s:11:"calculation";s:3:"sum";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";s:8:"rounding";s:0:"";}s:6:"custom";a:1:{s:6:"custom";s:32:"matrix_custom_processing_example";}}i:6;a:8:{s:10:"field_type";s:10:"checkboxes";s:5:"title";s:8:"Saturday";s:9:"textfield";a:3:{s:4:"size";s:0:"";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";}s:6:"select";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:6:"radios";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:10:"checkboxes";a:2:{s:14:"allowed_values";s:9:"Saturday|";s:23:"allowed_values_function";s:1:"0";}s:11:"calculation";a:4:{s:11:"calculation";s:3:"sum";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";s:8:"rounding";s:0:"";}s:6:"custom";a:1:{s:6:"custom";s:32:"matrix_custom_processing_example";}}i:7;a:8:{s:10:"field_type";s:10:"checkboxes";s:5:"title";s:6:"Sunday";s:9:"textfield";a:3:{s:4:"size";s:0:"";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";}s:6:"select";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:6:"radios";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:10:"checkboxes";a:2:{s:14:"allowed_values";s:7:"Sunday|";s:23:"allowed_values_function";s:1:"0";}s:11:"calculation";a:4:{s:11:"calculation";s:3:"sum";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";s:8:"rounding";s:0:"";}s:6:"custom";a:1:{s:6:"custom";s:32:"matrix_custom_processing_example";}}}s:4:"rows";a:8:{i:1;a:8:{s:10:"field_type";s:4:"none";s:5:"title";s:21:"6:00 a.m. - 8:00 a.m.";s:9:"textfield";a:3:{s:4:"size";s:0:"";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";}s:6:"select";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:6:"radios";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:10:"checkboxes";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:11:"calculation";a:4:{s:11:"calculation";s:3:"sum";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";s:8:"rounding";s:0:"";}s:6:"custom";a:1:{s:6:"custom";s:32:"matrix_custom_processing_example";}}i:2;a:8:{s:10:"field_type";s:4:"none";s:5:"title";s:22:"8:00 a.m. - 10:00 a.m.";s:9:"textfield";a:3:{s:4:"size";s:0:"";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";}s:6:"select";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:6:"radios";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:10:"checkboxes";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:11:"calculation";a:4:{s:11:"calculation";s:3:"sum";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";s:8:"rounding";s:0:"";}s:6:"custom";a:1:{s:6:"custom";s:32:"matrix_custom_processing_example";}}i:3;a:8:{s:10:"field_type";s:4:"none";s:5:"title";s:17:"10:00 a.m. - Noon";s:9:"textfield";a:3:{s:4:"size";s:0:"";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";}s:6:"select";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:6:"radios";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:10:"checkboxes";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:11:"calculation";a:4:{s:11:"calculation";s:3:"sum";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";s:8:"rounding";s:0:"";}s:6:"custom";a:1:{s:6:"custom";s:32:"matrix_custom_processing_example";}}i:4;a:8:{s:10:"field_type";s:4:"none";s:5:"title";s:18:"Noon – 2:00 p.m.";s:9:"textfield";a:3:{s:4:"size";s:0:"";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";}s:6:"select";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:6:"radios";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:10:"checkboxes";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:11:"calculation";a:4:{s:11:"calculation";s:3:"sum";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";s:8:"rounding";s:0:"";}s:6:"custom";a:1:{s:6:"custom";s:32:"matrix_custom_processing_example";}}i:5;a:8:{s:10:"field_type";s:4:"none";s:5:"title";s:23:"2:00 p.m. – 4:00 p.m.";s:9:"textfield";a:3:{s:4:"size";s:0:"";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";}s:6:"select";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:6:"radios";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:10:"checkboxes";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:11:"calculation";a:4:{s:11:"calculation";s:3:"sum";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";s:8:"rounding";s:0:"";}s:6:"custom";a:1:{s:6:"custom";s:32:"matrix_custom_processing_example";}}i:6;a:8:{s:10:"field_type";s:4:"none";s:5:"title";s:23:"4:00 p.m. – 6:00 p.m.";s:9:"textfield";a:3:{s:4:"size";s:0:"";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";}s:6:"select";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:6:"radios";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:10:"checkboxes";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:11:"calculation";a:4:{s:11:"calculation";s:3:"sum";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";s:8:"rounding";s:0:"";}s:6:"custom";a:1:{s:6:"custom";s:32:"matrix_custom_processing_example";}}i:7;a:8:{s:10:"field_type";s:4:"none";s:5:"title";s:23:"6:00 p.m. – 8:00 p.m.";s:9:"textfield";a:3:{s:4:"size";s:0:"";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";}s:6:"select";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:6:"radios";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:10:"checkboxes";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:11:"calculation";a:4:{s:11:"calculation";s:3:"sum";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";s:8:"rounding";s:0:"";}s:6:"custom";a:1:{s:6:"custom";s:32:"matrix_custom_processing_example";}}i:8;a:8:{s:10:"field_type";s:4:"none";s:5:"title";s:24:"8:00 p.m. – 10:00 p.m.";s:9:"textfield";a:3:{s:4:"size";s:0:"";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";}s:6:"select";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:6:"radios";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:10:"checkboxes";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:11:"calculation";a:4:{s:11:"calculation";s:3:"sum";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";s:8:"rounding";s:0:"";}s:6:"custom";a:1:{s:6:"custom";s:32:"matrix_custom_processing_example";}}}}',
+      ),
+      'translatable' => '1',
+      'type' => 'matrix_custom',
+    ),
+    'field_instance' => array(
+      'bundle' => 'site',
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'cck_blocks' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'default' => array(
+          'label' => 'above',
+          'module' => 'matrix',
+          'settings' => array(),
+          'type' => 'matrix_default',
+          'weight' => 19,
+        ),
+        'notifications' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_site_hours',
+      'label' => 'Available hours',
+      'required' => FALSE,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 0,
+        'module' => 'matrix',
+        'settings' => array(),
+        'type' => 'matrix_custom',
+        'weight' => '20',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-site-field_site_hours_minimum'
+  $fields['node-site-field_site_hours_minimum'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_site_hours_minimum',
+      'foreign keys' => array(),
+      'global_block_settings' => '2',
+      'indexes' => array(
+        'value' => array(
+          0 => 'value',
+        ),
+      ),
+      'module' => 'list',
+      'settings' => array(
+        'allowed_values' => array(
+          1 => '1-10',
+          10 => '11-20',
+          20 => '21-30',
+          30 => '31-40',
+          40 => '41-50',
+          50 => '51-60',
+          60 => '61-70',
+          70 => '71-80',
+          80 => 'More than 80',
+        ),
+        'allowed_values_function' => '',
+        'allowed_values_php' => '',
+      ),
+      'translatable' => '1',
+      'type' => 'list_integer',
+    ),
+    'field_instance' => array(
+      'bundle' => 'site',
+      'default_value' => array(
+        0 => array(
+          'value' => '30',
+        ),
+      ),
+      'default_value_function' => '',
+      'default_value_php' => '',
+      'deleted' => '0',
+      'description' => 'Enter the minimum number of hours this site would require of a student in service per term',
+      'display' => array(
+        'cck_blocks' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'default' => array(
+          'label' => 'above',
+          'module' => 'list',
+          'settings' => array(),
+          'type' => 'list_default',
+          'weight' => 17,
+        ),
+        'notifications' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_site_hours_minimum',
+      'label' => 'Minimum service hours',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(),
+        'type' => 'options_select',
+        'weight' => '16',
+      ),
+    ),
+  );
+
   // Exported field: 'node-site-field_site_images'
   $fields['node-site-field_site_images'] = array(
     'field_config' => array(
@@ -3494,7 +3714,7 @@ function s4_sites_field_default_fields() {
           'rows' => '5',
         ),
         'type' => 'text_textarea',
-        'weight' => '17',
+        'weight' => '18',
       ),
     ),
   );
@@ -3584,7 +3804,86 @@ function s4_sites_field_default_fields() {
           'display_label' => 1,
         ),
         'type' => 'options_onoff',
-        'weight' => '16',
+        'weight' => '17',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-site-field_site_projects'
+  $fields['node-site-field_site_projects'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_site_projects',
+      'foreign keys' => array(
+        'format' => array(
+          'columns' => array(
+            'format' => 'format',
+          ),
+          'table' => 'filter_format',
+        ),
+      ),
+      'global_block_settings' => '1',
+      'indexes' => array(
+        'format' => array(
+          0 => 'format',
+        ),
+      ),
+      'module' => 'text',
+      'settings' => array(),
+      'translatable' => '1',
+      'type' => 'text_long',
+    ),
+    'field_instance' => array(
+      'bundle' => 'site',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => 'Briefly describe any ongoing needs or special projects with which students can assist agency staff.',
+      'display' => array(
+        'cck_blocks' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'default' => array(
+          'label' => 'above',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => 18,
+        ),
+        'notifications' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_site_projects',
+      'label' => 'Project options',
+      'required' => 0,
+      'settings' => array(
+        'text_processing' => '1',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'text',
+        'settings' => array(
+          'rows' => '5',
+        ),
+        'type' => 'text_textarea',
+        'weight' => '-3',
       ),
     ),
   );
@@ -4049,7 +4348,9 @@ function s4_sites_field_default_fields() {
   t('Additional signup instructions');
   t('Additional users');
   t('Attach a few photos of the site. The first image will be used in the site preview.');
+  t('Available hours');
   t('Body');
+  t('Briefly describe any ongoing needs or special projects with which students can assist agency staff.');
   t('Check off who is allowed to sign up with this site. ');
   t('Contact email');
   t('Contact tags');
@@ -4061,6 +4362,7 @@ function s4_sites_field_default_fields() {
   t('Enter information about the physical location of this site. You can have multiple locations, in which case it is important to provide names to differentiate each one.');
   t('Enter information that you need to show students regarding the health or safety of this site. This information will be repeated on the signup form.');
   t('Enter the URL to this site\'s website.');
+  t('Enter the minimum number of hours this site would require of a student in service per term');
   t('Enter the number of days before a file of this type expires that an email reminder should be sent to department staff. ');
   t('Evaluation Form');
   t('Expiration date');
@@ -4076,8 +4378,10 @@ function s4_sites_field_default_fields() {
   t('Location');
   t('Main phone number');
   t('Maximum number of students');
+  t('Minimum service hours');
   t('Organization type');
   t('Phone number');
+  t('Project options');
   t('Reminder date');
   t('Reminder period (days)');
   t('Require students to agree to signup instructions');
