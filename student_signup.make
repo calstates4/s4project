@@ -152,6 +152,12 @@ projects[location][download][type] = "git"
 projects[location][download][url] = "http://git.drupal.org/project/location.git"
 projects[location][download][branch] = "7.x-3.x"
 
+projects[matrix][type] = module
+projects[matrix][subdir] = "contrib"
+projects[matrix][version] = "1.x-dev"
+projects[matrix][download][type] = "file"
+projects[matrix][download][url] = "http://s4.csumb.edu/hosted_modules/matrix.tar.gz"
+
 projects[references][type] = module
 projects[references][subdir] = "contrib"
 projects[references][version] = "2.x-dev"
