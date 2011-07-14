@@ -282,7 +282,7 @@ function _s4_sites_format_hours_matrix($entity_type, $entity, $field, $instance,
 		array_unshift($headers, ''); //cell 0,0	 
 		
 		for ($row = 1; $row <= $rows_count; $row++) {
-			$cell = array('data' => $row, 'class' => 'matrix-col-header');
+			$cell = array('data' => $row, 'scope' => 'row', 'header' => true, 'class' => 'matrix-col-header');
 			array_unshift($rows[$row], $cell);
 		}		 
 	}
@@ -303,7 +303,7 @@ function _s4_sites_format_hours_matrix($entity_type, $entity, $field, $instance,
 		
 		if (!empty($settings['rows'])) {
 			foreach ($settings['rows'] as $row_id => $row) {
-				$cell = array('data' => $row['title'], 'class' => 'matrix-col-header');
+				$cell = array('data' => $row['title'], 'scope' => 'row', 'header' => true, 'class' => 'matrix-col-header');
 				if (isset($rows[$row_id])) {
 					array_unshift($rows[$row_id], $cell);
 				}
