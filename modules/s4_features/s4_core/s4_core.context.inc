@@ -117,7 +117,6 @@ function s4_core_context_default_contexts() {
   $context->conditions = array(
     'path' => array(
       'values' => array(
-        '<front>' => '<front>',
         'homepage' => 'homepage',
       ),
     ),
@@ -145,12 +144,6 @@ function s4_core_context_default_contexts() {
         'views-65656e1f5a12cde25f0722f735fe7969' => array(
           'module' => 'views',
           'delta' => '65656e1f5a12cde25f0722f735fe7969',
-          'region' => 'content_right',
-          'weight' => '-10',
-        ),
-        'views-bookmarked_sites-block' => array(
-          'module' => 'views',
-          'delta' => 'bookmarked_sites-block',
           'region' => 'content_right',
           'weight' => '-10',
         ),

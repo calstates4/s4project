@@ -22,7 +22,25 @@ function s4_core_menu_default_menu_links() {
     'external' => '1',
     'has_children' => '0',
     'expanded' => '0',
-    'weight' => '-44',
+    'weight' => '-43',
+  );
+  // Exported menu link: main-menu:email/coordinators
+  $menu_links['main-menu:email/coordinators'] = array(
+    'menu_name' => 'main-menu',
+    'link_path' => 'email/coordinators',
+    'router_path' => 'email/coordinators',
+    'link_title' => 'Emails',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+    ),
+    'module' => 'menu',
+    'hidden' => '0',
+    'external' => '0',
+    'has_children' => '0',
+    'expanded' => '0',
+    'weight' => '-48',
   );
   // Exported menu link: main-menu:forms
   $menu_links['main-menu:forms'] = array(
@@ -58,7 +76,7 @@ function s4_core_menu_default_menu_links() {
     'external' => '0',
     'has_children' => '0',
     'expanded' => '0',
-    'weight' => '-47',
+    'weight' => '-49',
   );
   // Exported menu link: main-menu:students
   $menu_links['main-menu:students'] = array(
@@ -76,7 +94,7 @@ function s4_core_menu_default_menu_links() {
     'external' => '0',
     'has_children' => '0',
     'expanded' => '0',
-    'weight' => '-46',
+    'weight' => '-45',
   );
   // Exported menu link: main-menu:user/logout
   $menu_links['main-menu:user/logout'] = array(
@@ -134,6 +152,7 @@ function s4_core_menu_default_menu_links() {
   );
   // Translatables
   // Included for use with string extractors like potx.
+  t('Emails');
   t('Forms');
   t('Home');
   t('Logout');
