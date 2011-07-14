@@ -139,6 +139,10 @@ function s4_sites_field_formatter_info() {
 	      'label' => t('Student Signup'),
 	      'field types' => array('location'),
 	    ),
+	    's4_sites_hours_matrix' => array(
+	      'label' => t('Site hours'),
+	      'field types' => array('matrix_text', 'matrix_custom'),
+	    ),
 	);
 }
 
@@ -149,6 +153,10 @@ function s4_sites_field_formatter_view($entity_type, $entity, $field, $instance,
   
   $element = array();
   $settings = $display['settings'];
+  if($display['type'] == 's4_sites_hours_matrix') {
+  	drupal_add_css(drupal_get_path('module', 's4_sites') .'/css/s4_sites.css');
+  	$element = _s4_sites_format_hours_matrix($entity_type, $entity, $field, $instance, $langcode, $items, $display);
+  }
   if($display['type'] == 's4_sites_local_phone_number') {
 	  foreach ($items as $delta => $item) {
 	    
@@ -198,4 +206,118 @@ function _s4_sites_format_phone($number) {
 		return $cc['code'] . ' (' . $matches[1] . ') ' . $matches[2] . '-' . $matches[3];
 	}
 	return '';
+}
+
+function _s4_sites_format_hours_matrix($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+	if (count($items[0]) == 1) { //if a single value is passed in from views
+		$element[0] = array(
+			'#markup' => field_filter_xss($items[0]['value']), 
+		);
+	}
+	
+	//transpose the $items array into a [$row][$col] = value arangement
+	foreach ($items as $delta => $item) {
+		$items[$item['row']][$item['col']][] = matrix_cell_value($item, $field);
+	}
+
+	//work out how many rows and columns to show
+	// For rows this is rows_count if rows_count > 0, else the number of rows with at least some data in the row.
+	if ($field['settings']['rows_count'] > 0) {
+		$rows_count = $field['settings']['rows_count'];
+	}
+	else {
+		foreach ($items as $row_id => $row) {
+			foreach ($row as $col_id => $value) {
+				if ($value != '') {
+					$rows_count = $row_id;
+				}
+			}
+		}
+	}
+
+	if ($cols_count = $field['settings']['cols_count'] > 0) {
+		$cols_count = $field['settings']['cols_count'];
+	}
+	else {
+		foreach ($items as $row_id => $row) {
+			foreach ($row as $col_id => $value) {
+				if (!empty($value)) {
+					$max_cols[$col_id] = $col_id;
+				}
+			}
+		}
+		$cols_count = max($max_cols);
+	}
+
+	//populate the data part of the table rows
+	$rows = array();
+	for ($row = 1; $row <= $rows_count; $row++) {
+		for ($col = 1; $col <= $cols_count; $col++) {
+			$value = array('');
+			if (isset($items[$row][$col])) {
+				$value = $items[$row][$col];
+			}
+			$rows[$row][$col] = $value;
+		}
+	}
+	
+	//collapse any multi-valued results into a list
+	foreach ($rows as $row_id => $row) {
+		foreach ($row as $col_id => $values) {
+			if (count($values) > 1) {
+				$values = theme('item_list', array('items' => $values));
+			}
+			else { 
+				$values = $values[0];
+			}
+			$yes_class = ($values) ? 'hours-yes' : 'hours-no';
+			$rows[$row_id][$col_id] = array('data' => ($values) ? 'available' : 'not available', 'class' => $yes_class . ' 	matrix-col-'. $col_id .' matrix-row-'. $row_id .' matrix-cell-'. $row_id .'-'. $col_id);
+		}
+	}
+
+	if ($field['type'] == 'matrix_text' && $field['settings']['spreadsheet_style'] == TRUE) {
+		for ($col = 1; $col <= $cols_count; $col++) {
+			$headers[$col] = matrix_make_letter($col);
+		}
+		array_unshift($headers, ''); //cell 0,0	 
+		
+		for ($row = 1; $row <= $rows_count; $row++) {
+			$cell = array('data' => $row, 'class' => 'matrix-col-header');
+			array_unshift($rows[$row], $cell);
+		}		 
+	}
+	elseif ($field['type'] == 'matrix_custom') {
+		$headers = array();
+		$headers = array_fill(1, $cols_count, '&nbsp;'); //initialize the headers with spaces (in case headers have not title set)
+		$settings = unserialize($field['settings']['settings']);
+
+		if (isset($settings['cols'])) {
+			foreach ($settings['cols'] as $col_id => $col) {
+				$headers[$col_id] = $col['title'];
+			}
+		}
+
+		if ($field['settings']['rows_count'] > 0) { //had left lables so translate the headers one to the right
+			array_unshift($headers, ''); //cell 0,0
+		}
+		
+		if (!empty($settings['rows'])) {
+			foreach ($settings['rows'] as $row_id => $row) {
+				$cell = array('data' => $row['title'], 'class' => 'matrix-col-header');
+				if (isset($rows[$row_id])) {
+					array_unshift($rows[$row_id], $cell);
+				}
+			}
+		}
+	}
+	else {
+		$headers = NULL;
+	}
+
+	$element[0] = array(
+		'#theme' => 'table', 
+		'#header' => $headers, 
+		'#rows' => $rows,
+	);
+	return $element;
 }

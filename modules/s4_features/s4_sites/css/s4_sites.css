@@ -1,0 +1,3 @@
+td.hours-yes { background: #6AA4C2; color: #6AA4C2; }
+tr.odd td.hours-no { color: #F2F2F2; }
+tr.even td.hours-no { color: #FFF; }
