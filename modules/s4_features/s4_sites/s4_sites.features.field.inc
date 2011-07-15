@@ -2105,13 +2105,13 @@ function s4_sites_field_default_fields() {
       'bundle' => 'site',
       'default_value' => NULL,
       'deleted' => '0',
-      'description' => 'Give an overview of the mission and goals of this site. This might include the mission statement of the organization, but the first paragraph should be a more inviting and clear description of the organization.',
+      'description' => 'Provide an overview description of your organization, i.e. who you are, what you do, and who you serve.',
       'display' => array(
         'cck_blocks' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '16',
+          'weight' => '25',
         ),
         'default' => array(
           'label' => 'hidden',
@@ -2217,7 +2217,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '6',
+          'weight' => '17',
         ),
         'full' => array(
           'label' => 'above',
@@ -2306,7 +2306,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '7',
+          'weight' => '18',
         ),
         'full' => array(
           'label' => 'above',
@@ -2344,14 +2344,14 @@ function s4_sites_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-site-field_health_safety'
-  $fields['node-site-field_health_safety'] = array(
+  // Exported field: 'node-site-field_health_risk'
+  $fields['node-site-field_health_risk'] = array(
     'field_config' => array(
       'active' => '1',
       'cardinality' => '1',
       'deleted' => '0',
       'entity_types' => array(),
-      'field_name' => 'field_health_safety',
+      'field_name' => 'field_health_risk',
       'foreign keys' => array(
         'format' => array(
           'columns' => array(
@@ -2375,25 +2375,20 @@ function s4_sites_field_default_fields() {
       'bundle' => 'site',
       'default_value' => NULL,
       'deleted' => '0',
-      'description' => 'Enter information that you need to show students regarding the health or safety of this site. This information will be repeated on the signup form.',
+      'description' => '',
       'display' => array(
         'cck_blocks' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '12',
+          'weight' => '15',
         ),
         'default' => array(
           'label' => 'above',
+          'module' => 'text',
           'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '10',
-        ),
-        'full' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
+          'type' => 'text_default',
+          'weight' => '5',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -2409,8 +2404,8 @@ function s4_sites_field_default_fields() {
         ),
       ),
       'entity_type' => 'node',
-      'field_name' => 'field_health_safety',
-      'label' => 'Health & Safety Information',
+      'field_name' => 'field_health_risk',
+      'label' => 'Risk Identification',
       'required' => 0,
       'settings' => array(
         'text_processing' => '1',
@@ -2423,7 +2418,7 @@ function s4_sites_field_default_fields() {
           'rows' => '5',
         ),
         'type' => 'text_textarea',
-        'weight' => '19',
+        'weight' => '22',
       ),
     ),
   );
@@ -2528,7 +2523,7 @@ function s4_sites_field_default_fields() {
       'bundle' => 'site',
       'default_value' => NULL,
       'deleted' => '0',
-      'description' => 'Enter information about the physical location of this site. You can have multiple locations, in which case it is important to provide names to differentiate each one.',
+      'description' => 'If you have multiple location sites that you would like students to be placed at, please provide specific location information. (You may add additional locations using the \'Add another\' button below.)',
       'display' => array(
         'cck_blocks' => array(
           'label' => 'above',
@@ -2541,7 +2536,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '4',
+          'weight' => '15',
         ),
         'full' => array(
           'label' => 'above',
@@ -2613,7 +2608,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '13',
+          'weight' => '23',
         ),
         'full' => array(
           'label' => 'above',
@@ -2886,7 +2881,7 @@ function s4_sites_field_default_fields() {
           'size' => 15,
         ),
         'type' => 'phone_number',
-        'weight' => '12',
+        'weight' => '-2',
       ),
     ),
   );
@@ -2911,7 +2906,7 @@ function s4_sites_field_default_fields() {
       'bundle' => 'site',
       'default_value' => NULL,
       'deleted' => '0',
-      'description' => '',
+      'description' => 'Once this number is reached, students will not be able to register with your site.',
       'display' => array(
         'cck_blocks' => array(
           'label' => 'above',
@@ -2927,15 +2922,9 @@ function s4_sites_field_default_fields() {
         ),
         'default' => array(
           'label' => 'above',
-          'module' => 'number',
-          'settings' => array(
-            'decimal_separator' => '.',
-            'prefix_suffix' => TRUE,
-            'scale' => 0,
-            'thousand_separator' => ' ',
-          ),
-          'type' => 'number_integer',
-          'weight' => '16',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '7',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -2952,7 +2941,7 @@ function s4_sites_field_default_fields() {
       ),
       'entity_type' => 'node',
       'field_name' => 'field_signups_max',
-      'label' => 'Maximum number of students',
+      'label' => 'Maximum number of students your site can accept at any given time',
       'required' => 0,
       'settings' => array(
         'max' => '',
@@ -2967,6 +2956,119 @@ function s4_sites_field_default_fields() {
         'settings' => array(),
         'type' => 'number',
         'weight' => '15',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-site-field_site_demographics'
+  $fields['node-site-field_site_demographics'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '-1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_site_demographics',
+      'foreign keys' => array(),
+      'global_block_settings' => '2',
+      'indexes' => array(
+        'col' => array(
+          0 => 'col',
+        ),
+        'row' => array(
+          0 => 'row',
+        ),
+        'value' => array(
+          0 => 'value',
+        ),
+      ),
+      'module' => 'matrix',
+      'settings' => array(
+        'cols_count' => '1',
+        'define' => 'cols',
+        'preview' => array(
+          'cols' => array(
+            1 => array(
+              'button' => 'Change settings',
+            ),
+          ),
+          'define' => 'cols',
+          'rows' => array(
+            1 => array(
+              'button' => 'Change settings',
+            ),
+            2 => array(
+              'button' => 'Change settings',
+            ),
+            3 => array(
+              'button' => 'Change settings',
+            ),
+            4 => array(
+              'button' => 'Change settings',
+            ),
+            5 => array(
+              'button' => 'Change settings',
+            ),
+            6 => array(
+              'button' => 'Change settings',
+            ),
+            7 => array(
+              'button' => 'Change settings',
+            ),
+            8 => array(
+              'button' => 'Change settings',
+            ),
+          ),
+        ),
+        'rows_count' => '8',
+        'settings' => 'a:6:{i:0;b:0;s:10:"old_define";s:4:"cols";s:14:"old_rows_count";s:1:"8";s:14:"old_cols_count";s:1:"1";s:4:"cols";a:1:{i:1;a:8:{s:10:"field_type";s:9:"textfield";s:5:"title";s:7:"Percent";s:9:"textfield";a:3:{s:4:"size";s:1:"3";s:6:"prefix";s:0:"";s:6:"suffix";s:1:"%";}s:6:"select";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:6:"radios";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:10:"checkboxes";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:11:"calculation";a:4:{s:11:"calculation";s:3:"sum";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";s:8:"rounding";s:0:"";}s:6:"custom";a:1:{s:6:"custom";s:32:"matrix_custom_processing_example";}}}s:4:"rows";a:8:{i:1;a:8:{s:10:"field_type";s:4:"none";s:5:"title";s:16:"African American";s:9:"textfield";a:3:{s:4:"size";s:0:"";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";}s:6:"select";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:6:"radios";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:10:"checkboxes";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:11:"calculation";a:4:{s:11:"calculation";s:3:"sum";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";s:8:"rounding";s:0:"";}s:6:"custom";a:1:{s:6:"custom";s:32:"matrix_custom_processing_example";}}i:2;a:8:{s:10:"field_type";s:4:"none";s:5:"title";s:14:"Asian American";s:9:"textfield";a:3:{s:4:"size";s:0:"";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";}s:6:"select";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:6:"radios";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:10:"checkboxes";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:11:"calculation";a:4:{s:11:"calculation";s:3:"sum";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";s:8:"rounding";s:0:"";}s:6:"custom";a:1:{s:6:"custom";s:32:"matrix_custom_processing_example";}}i:3;a:8:{s:10:"field_type";s:4:"none";s:5:"title";s:22:"Biracial/Multicultural";s:9:"textfield";a:3:{s:4:"size";s:0:"";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";}s:6:"select";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:6:"radios";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:10:"checkboxes";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:11:"calculation";a:4:{s:11:"calculation";s:3:"sum";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";s:8:"rounding";s:0:"";}s:6:"custom";a:1:{s:6:"custom";s:32:"matrix_custom_processing_example";}}i:4;a:8:{s:10:"field_type";s:4:"none";s:5:"title";s:9:"Caucasian";s:9:"textfield";a:3:{s:4:"size";s:0:"";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";}s:6:"select";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:6:"radios";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:10:"checkboxes";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:11:"calculation";a:4:{s:11:"calculation";s:3:"sum";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";s:8:"rounding";s:0:"";}s:6:"custom";a:1:{s:6:"custom";s:32:"matrix_custom_processing_example";}}i:5;a:8:{s:10:"field_type";s:4:"none";s:5:"title";s:8:"Latino/a";s:9:"textfield";a:3:{s:4:"size";s:0:"";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";}s:6:"select";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:6:"radios";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:10:"checkboxes";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:11:"calculation";a:4:{s:11:"calculation";s:3:"sum";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";s:8:"rounding";s:0:"";}s:6:"custom";a:1:{s:6:"custom";s:32:"matrix_custom_processing_example";}}i:6;a:8:{s:10:"field_type";s:4:"none";s:5:"title";s:15:"Native American";s:9:"textfield";a:3:{s:4:"size";s:0:"";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";}s:6:"select";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:6:"radios";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:10:"checkboxes";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:11:"calculation";a:4:{s:11:"calculation";s:3:"sum";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";s:8:"rounding";s:0:"";}s:6:"custom";a:1:{s:6:"custom";s:32:"matrix_custom_processing_example";}}i:7;a:8:{s:10:"field_type";s:4:"none";s:5:"title";s:16:"Pacific Islander";s:9:"textfield";a:3:{s:4:"size";s:0:"";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";}s:6:"select";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:6:"radios";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:10:"checkboxes";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:11:"calculation";a:4:{s:11:"calculation";s:3:"sum";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";s:8:"rounding";s:0:"";}s:6:"custom";a:1:{s:6:"custom";s:32:"matrix_custom_processing_example";}}i:8;a:8:{s:10:"field_type";s:4:"none";s:5:"title";s:5:"Other";s:9:"textfield";a:3:{s:4:"size";s:0:"";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";}s:6:"select";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:6:"radios";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:10:"checkboxes";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:11:"calculation";a:4:{s:11:"calculation";s:3:"sum";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";s:8:"rounding";s:0:"";}s:6:"custom";a:1:{s:6:"custom";s:32:"matrix_custom_processing_example";}}}}',
+      ),
+      'translatable' => '1',
+      'type' => 'matrix_custom',
+    ),
+    'field_instance' => array(
+      'bundle' => 'site',
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'cck_blocks' => array(
+          'label' => 'above',
+          'module' => 's4_sites',
+          'settings' => array(),
+          'type' => 's4_sites_population_matrix',
+          'weight' => '8',
+        ),
+        'default' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '8',
+        ),
+        'notifications' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_site_demographics',
+      'label' => 'By percentage, what is the demographic of the population you serve?',
+      'required' => FALSE,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 0,
+        'module' => 'matrix',
+        'settings' => array(),
+        'type' => 'matrix_custom',
+        'weight' => '3',
       ),
     ),
   );
@@ -2997,13 +3099,13 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '14',
+          'weight' => '23',
         ),
         'default' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '12',
+          'weight' => '22',
         ),
         'full' => array(
           'label' => 'above',
@@ -3038,7 +3140,7 @@ function s4_sites_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'email_textfield',
-        'weight' => '13',
+        'weight' => '-1',
       ),
     ),
   );
@@ -3128,13 +3230,13 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '13',
+          'weight' => '22',
         ),
         'default' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '14',
+          'weight' => '24',
         ),
         'full' => array(
           'label' => 'above',
@@ -3168,6 +3270,96 @@ function s4_sites_field_default_fields() {
         'settings' => array(),
         'type' => 'options_select',
         'weight' => '8',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-site-field_site_facebook_page'
+  $fields['node-site-field_site_facebook_page'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_site_facebook_page',
+      'foreign keys' => array(),
+      'global_block_settings' => '2',
+      'indexes' => array(),
+      'module' => 'link',
+      'settings' => array(
+        'attributes' => array(
+          'class' => '',
+          'rel' => '',
+          'target' => 'default',
+        ),
+        'display' => array(
+          'url_cutoff' => 80,
+        ),
+        'enable_tokens' => 1,
+        'title' => 'optional',
+        'title_value' => '',
+        'url' => 0,
+      ),
+      'translatable' => '1',
+      'type' => 'link_field',
+    ),
+    'field_instance' => array(
+      'bundle' => 'site',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => 'If your organization has a presence on Facebook, Twitter, or another social network, please provide the address.',
+      'display' => array(
+        'cck_blocks' => array(
+          'label' => 'above',
+          'module' => 'link',
+          'settings' => array(),
+          'type' => 'default',
+          'weight' => '9',
+        ),
+        'default' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '9',
+        ),
+        'notifications' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_site_facebook_page',
+      'label' => 'Social network page',
+      'required' => 0,
+      'settings' => array(
+        'attributes' => array(
+          'class' => 'social-link',
+          'rel' => '',
+          'target' => '_blank',
+        ),
+        'display' => array(
+          'url_cutoff' => '80',
+        ),
+        'enable_tokens' => 0,
+        'title' => 'none',
+        'title_value' => '',
+        'url' => 0,
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 0,
+        'module' => 'link',
+        'settings' => array(),
+        'type' => 'link_field',
+        'weight' => '1',
       ),
     ),
   );
@@ -3257,13 +3449,13 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '11',
+          'weight' => '21',
         ),
         'default' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '9',
+          'weight' => '20',
         ),
         'full' => array(
           'label' => 'above',
@@ -3297,6 +3489,85 @@ function s4_sites_field_default_fields() {
         'settings' => array(),
         'type' => 'options_select',
         'weight' => '7',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-site-field_site_health_training'
+  $fields['node-site-field_site_health_training'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_site_health_training',
+      'foreign keys' => array(
+        'format' => array(
+          'columns' => array(
+            'format' => 'format',
+          ),
+          'table' => 'filter_format',
+        ),
+      ),
+      'global_block_settings' => '1',
+      'indexes' => array(
+        'format' => array(
+          0 => 'format',
+        ),
+      ),
+      'module' => 'text',
+      'settings' => array(),
+      'translatable' => '1',
+      'type' => 'text_long',
+    ),
+    'field_instance' => array(
+      'bundle' => 'site',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'cck_blocks' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '14',
+        ),
+        'default' => array(
+          'label' => 'above',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => '3',
+        ),
+        'notifications' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_site_health_training',
+      'label' => 'Training and orientation information',
+      'required' => 0,
+      'settings' => array(
+        'text_processing' => '1',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'text',
+        'settings' => array(
+          'rows' => '5',
+        ),
+        'type' => 'text_textarea',
+        'weight' => '20',
       ),
     ),
   );
@@ -3393,14 +3664,14 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => 0,
+          'weight' => '13',
         ),
         'default' => array(
           'label' => 'above',
           'module' => 's4_sites',
           'settings' => array(),
           'type' => 's4_sites_hours_matrix',
-          'weight' => '19',
+          'weight' => '2',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -3417,8 +3688,8 @@ function s4_sites_field_default_fields() {
       ),
       'entity_type' => 'node',
       'field_name' => 'field_site_hours',
-      'label' => 'Available hours',
-      'required' => FALSE,
+      'label' => 'Days and hours will you accept students for service (check all that apply)',
+      'required' => 0,
       'settings' => array(
         'user_register_form' => FALSE,
       ),
@@ -3427,7 +3698,7 @@ function s4_sites_field_default_fields() {
         'module' => 'matrix',
         'settings' => array(),
         'type' => 'matrix_custom',
-        'weight' => '20',
+        'weight' => '18',
       ),
     ),
   );
@@ -3476,20 +3747,20 @@ function s4_sites_field_default_fields() {
       'default_value_function' => '',
       'default_value_php' => '',
       'deleted' => '0',
-      'description' => 'Enter the minimum number of hours this site would require of a student in service per term',
+      'description' => '',
       'display' => array(
         'cck_blocks' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
-        'default' => array(
           'label' => 'above',
           'module' => 'list',
           'settings' => array(),
           'type' => 'list_default',
-          'weight' => '17',
+          'weight' => '12',
+        ),
+        'default' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '6',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -3506,7 +3777,7 @@ function s4_sites_field_default_fields() {
       ),
       'entity_type' => 'node',
       'field_name' => 'field_site_hours_minimum',
-      'label' => 'Minimum service hours',
+      'label' => 'What is the minimum number of hours you would require of a student in service per term',
       'required' => 0,
       'settings' => array(
         'user_register_form' => FALSE,
@@ -3567,7 +3838,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '3',
+          'weight' => '14',
         ),
         'full' => array(
           'label' => 'above',
@@ -3658,19 +3929,19 @@ function s4_sites_field_default_fields() {
       'bundle' => 'site',
       'default_value' => NULL,
       'deleted' => '0',
-      'description' => 'This information will be displayed to users before they sign up. This could contain additional information the user needs to know after they sign up, like a note about site hours or special signup requirements.',
+      'description' => '',
       'display' => array(
         'cck_blocks' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '10',
+          'weight' => '20',
         ),
         'default' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '11',
+          'weight' => '21',
         ),
         'full' => array(
           'label' => 'above',
@@ -3693,7 +3964,7 @@ function s4_sites_field_default_fields() {
       ),
       'entity_type' => 'node',
       'field_name' => 'field_site_instructions',
-      'label' => 'Additional signup instructions',
+      'label' => 'Special site instructions',
       'required' => 0,
       'settings' => array(
         'text_processing' => '1',
@@ -3748,19 +4019,19 @@ function s4_sites_field_default_fields() {
       'default_value_function' => '',
       'default_value_php' => '',
       'deleted' => '0',
-      'description' => '',
+      'description' => 'This information will be displayed to students before they sign up. This could contain additional information the student needs to know when they sign up for issues like TB testing, background checks, or specialized training',
       'display' => array(
         'cck_blocks' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '8',
+          'weight' => '18',
         ),
         'default' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '15',
+          'weight' => '25',
         ),
         'full' => array(
           'label' => 'above',
@@ -3783,7 +4054,7 @@ function s4_sites_field_default_fields() {
       ),
       'entity_type' => 'node',
       'field_name' => 'field_site_instructions_required',
-      'label' => 'Require students to agree to signup instructions',
+      'label' => 'Site has special requirements',
       'required' => 0,
       'settings' => array(
         'user_register_form' => FALSE,
@@ -3796,6 +4067,92 @@ function s4_sites_field_default_fields() {
         ),
         'type' => 'options_onoff',
         'weight' => '17',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-site-field_site_language'
+  $fields['node-site-field_site_language'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_site_language',
+      'foreign keys' => array(
+        'tid' => array(
+          'columns' => array(
+            'tid' => 'tid',
+          ),
+          'table' => 'taxonomy_term_data',
+        ),
+      ),
+      'global_block_settings' => '2',
+      'indexes' => array(
+        'tid' => array(
+          0 => 'tid',
+        ),
+      ),
+      'module' => 'taxonomy',
+      'settings' => array(
+        'allowed_values' => array(
+          0 => array(
+            'parent' => '0',
+            'vocabulary' => 'language',
+          ),
+        ),
+      ),
+      'translatable' => '1',
+      'type' => 'taxonomy_term_reference',
+    ),
+    'field_instance' => array(
+      'bundle' => 'site',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'cck_blocks' => array(
+          'label' => 'above',
+          'module' => 'taxonomy',
+          'settings' => array(),
+          'type' => 'taxonomy_term_reference_link',
+          'weight' => '10',
+        ),
+        'default' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '10',
+        ),
+        'notifications' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_site_language',
+      'label' => 'What languages would you like students to speak other than English?',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 0,
+        'module' => 'taxonomy',
+        'settings' => array(
+          'autocomplete_path' => 'taxonomy/autocomplete',
+          'size' => 60,
+        ),
+        'type' => 'taxonomy_autocomplete',
+        'weight' => '25',
       ),
     ),
   );
@@ -3831,20 +4188,20 @@ function s4_sites_field_default_fields() {
       'bundle' => 'site',
       'default_value' => NULL,
       'deleted' => '0',
-      'description' => 'Briefly describe any ongoing needs or special projects with which students can assist agency staff.',
+      'description' => '',
       'display' => array(
         'cck_blocks' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => 0,
+          'weight' => '17',
         ),
         'default' => array(
           'label' => 'above',
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => '18',
+          'weight' => '1',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -3861,7 +4218,7 @@ function s4_sites_field_default_fields() {
       ),
       'entity_type' => 'node',
       'field_name' => 'field_site_projects',
-      'label' => 'Project options',
+      'label' => 'Briefly describe any ongoing needs or special projects with which students can assist agency staff',
       'required' => 0,
       'settings' => array(
         'text_processing' => '1',
@@ -3875,6 +4232,89 @@ function s4_sites_field_default_fields() {
         ),
         'type' => 'text_textarea',
         'weight' => '-3',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-site-field_site_requirements'
+  $fields['node-site-field_site_requirements'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '-1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_site_requirements',
+      'foreign keys' => array(
+        'tid' => array(
+          'columns' => array(
+            'tid' => 'tid',
+          ),
+          'table' => 'taxonomy_term_data',
+        ),
+      ),
+      'global_block_settings' => '2',
+      'indexes' => array(
+        'tid' => array(
+          0 => 'tid',
+        ),
+      ),
+      'module' => 'taxonomy',
+      'settings' => array(
+        'allowed_values' => array(
+          0 => array(
+            'parent' => '0',
+            'vocabulary' => 'special_requirements',
+          ),
+        ),
+      ),
+      'translatable' => '1',
+      'type' => 'taxonomy_term_reference',
+    ),
+    'field_instance' => array(
+      'bundle' => 'site',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'cck_blocks' => array(
+          'label' => 'above',
+          'module' => 'taxonomy',
+          'settings' => array(),
+          'type' => 'taxonomy_term_reference_link',
+          'weight' => '11',
+        ),
+        'default' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '11',
+        ),
+        'notifications' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_site_requirements',
+      'label' => 'Site special requirements',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(),
+        'type' => 'options_buttons',
+        'weight' => '19',
       ),
     ),
   );
@@ -3923,13 +4363,13 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '15',
+          'weight' => '24',
         ),
         'default' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '5',
+          'weight' => '16',
         ),
         'full' => array(
           'label' => 'above',
@@ -3963,6 +4403,85 @@ function s4_sites_field_default_fields() {
         'settings' => array(),
         'type' => 'options_buttons',
         'weight' => '3',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-site-field_site_tour'
+  $fields['node-site-field_site_tour'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_site_tour',
+      'foreign keys' => array(
+        'format' => array(
+          'columns' => array(
+            'format' => 'format',
+          ),
+          'table' => 'filter_format',
+        ),
+      ),
+      'global_block_settings' => '1',
+      'indexes' => array(
+        'format' => array(
+          0 => 'format',
+        ),
+      ),
+      'module' => 'text',
+      'settings' => array(),
+      'translatable' => '1',
+      'type' => 'text_long',
+    ),
+    'field_instance' => array(
+      'bundle' => 'site',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'cck_blocks' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '16',
+        ),
+        'default' => array(
+          'label' => 'above',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => '4',
+        ),
+        'notifications' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_site_tour',
+      'label' => 'Site Tour',
+      'required' => 0,
+      'settings' => array(
+        'text_processing' => '1',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'text',
+        'settings' => array(
+          'rows' => '5',
+        ),
+        'type' => 'text_textarea',
+        'weight' => '21',
       ),
     ),
   );
@@ -4036,13 +4555,13 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '9',
+          'weight' => '19',
         ),
         'default' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '8',
+          'weight' => '19',
         ),
         'full' => array(
           'label' => 'above',
@@ -4135,7 +4654,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '1',
+          'weight' => '12',
         ),
         'full' => array(
           'label' => 'above',
@@ -4172,7 +4691,7 @@ function s4_sites_field_default_fields() {
           'size' => 60,
         ),
         'type' => 'taxonomy_autocomplete',
-        'weight' => '2',
+        'weight' => '1',
       ),
     ),
   );
@@ -4223,7 +4742,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '2',
+          'weight' => '13',
         ),
         'full' => array(
           'label' => 'above',
@@ -4268,7 +4787,7 @@ function s4_sites_field_default_fields() {
         'module' => 'link',
         'settings' => array(),
         'type' => 'link_field',
-        'weight' => '14',
+        'weight' => '0',
       ),
     ),
   );
@@ -4335,24 +4854,21 @@ function s4_sites_field_default_fields() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Additional signup instructions');
   t('Additional users');
   t('Attach a few photos of the site. The first image will be used in the site preview.');
-  t('Available hours');
   t('Body');
-  t('Briefly describe any ongoing needs or special projects with which students can assist agency staff.');
+  t('Briefly describe any ongoing needs or special projects with which students can assist agency staff');
+  t('By percentage, what is the demographic of the population you serve?');
   t('Check off who is allowed to sign up with this site. ');
   t('Contact email');
   t('Contact tags');
   t('Contact type');
+  t('Days and hours will you accept students for service (check all that apply)');
   t('Email address');
   t('Enable expiration reminder');
   t('Enter a few tags to describe this site.');
   t('Enter a few tags to help categorize this type of contact');
-  t('Enter information about the physical location of this site. You can have multiple locations, in which case it is important to provide names to differentiate each one.');
-  t('Enter information that you need to show students regarding the health or safety of this site. This information will be repeated on the signup form.');
   t('Enter the URL to this site\'s website.');
-  t('Enter the minimum number of hours this site would require of a student in service per term');
   t('Enter the number of days before a file of this type expires that an email reminder should be sent to department staff. ');
   t('Evaluation Form');
   t('Expiration date');
@@ -4360,36 +4876,45 @@ function s4_sites_field_default_fields() {
   t('File description or notes');
   t('Files');
   t('First Name');
-  t('Give an overview of the mission and goals of this site. This might include the mission statement of the organization, but the first paragraph should be a more inviting and clear description of the organization.');
-  t('Health & Safety Information');
+  t('If you have multiple location sites that you would like students to be placed at, please provide specific location information. (You may add additional locations using the \'Add another\' button below.)');
+  t('If your organization has a presence on Facebook, Twitter, or another social network, please provide the address.');
   t('Issues addressed');
   t('Last Name');
   t('Leave blank or enter zero (0) for no limit');
   t('Location');
   t('Main phone number');
   t('Maximum number of students');
-  t('Minimum service hours');
+  t('Maximum number of students your site can accept at any given time');
+  t('Once this number is reached, students will not be able to register with your site.');
   t('Organization type');
   t('Phone number');
-  t('Project options');
+  t('Provide an overview description of your organization, i.e. who you are, what you do, and who you serve.');
   t('Reminder date');
   t('Reminder period (days)');
-  t('Require students to agree to signup instructions');
   t('Restrict site to');
   t('Restrict this coordinator to the following types of students.');
   t('Restrict to');
+  t('Risk Identification');
   t('Select the signup form students should fill out when selecting this site.');
   t('Select the site this coordinator belongs to.');
   t('Signup form');
   t('Site');
   t('Site Images');
+  t('Site Tour');
   t('Site description');
+  t('Site has special requirements');
+  t('Site special requirements');
+  t('Social network page');
+  t('Special site instructions');
   t('Tags');
   t('The date when a reminder to check on this file will be sent out.');
   t('These are other users (besides department staff) who can edit this site\'s information, along with information about associated coordinators.');
-  t('This information will be displayed to users before they sign up. This could contain additional information the user needs to know after they sign up, like a note about site hours or special signup requirements.');
+  t('This information will be displayed to students before they sign up. This could contain additional information the student needs to know when they sign up for issues like TB testing, background checks, or specialized training');
   t('This will be shown to the public, so only include a generic email contact for the site.');
+  t('Training and orientation information');
   t('Website');
+  t('What is the minimum number of hours you would require of a student in service per term');
+  t('What languages would you like students to speak other than English?');
   t('When checked, users who have opted to receive notifications about expiring files will get a weekly email when this file is about to expire.');
 
   return $fields;

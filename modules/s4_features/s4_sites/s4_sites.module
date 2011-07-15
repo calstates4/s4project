@@ -143,6 +143,10 @@ function s4_sites_field_formatter_info() {
 	      'label' => t('Site hours'),
 	      'field types' => array('matrix_text', 'matrix_custom'),
 	    ),
+	    's4_sites_population_matrix' => array(
+	      'label' => t('Site population'),
+	      'field types' => array('matrix_text', 'matrix_custom'),
+	    ),
 	);
 }
 
@@ -156,6 +160,9 @@ function s4_sites_field_formatter_view($entity_type, $entity, $field, $instance,
   if($display['type'] == 's4_sites_hours_matrix') {
   	drupal_add_css(drupal_get_path('module', 's4_sites') .'/css/s4_sites.css');
   	$element = _s4_sites_format_hours_matrix($entity_type, $entity, $field, $instance, $langcode, $items, $display);
+  }
+  if($display['type'] == 's4_sites_population_matrix') {
+  	$element = _s4_sites_format_site_population_matrix($entity_type, $entity, $field, $instance, $langcode, $items, $display);
   }
   if($display['type'] == 's4_sites_local_phone_number') {
 	  foreach ($items as $delta => $item) {
@@ -318,6 +325,24 @@ function _s4_sites_format_hours_matrix($entity_type, $entity, $field, $instance,
 		'#theme' => 'table', 
 		'#header' => $headers, 
 		'#rows' => $rows,
+	);
+	return $element;
+}
+
+function _s4_sites_format_site_population_matrix($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+	$settings = unserialize($field['settings']['settings']);
+	$data = array();
+	foreach($settings['rows'] as $k => $row) {
+		$data[$row['title']] = $items[$k]['value'];
+	}
+	$element[0] = array(
+		'#theme' => 's4_reporting_chart_pie',
+		'#id' => 'demographics-pie',
+		'#label' => 'Population',
+		'#title' => '',
+		'#width' => 240,
+		'#height' => 220,
+		'#data' => $data,
 	);
 	return $element;
 }

@@ -5,3 +5,40 @@
  */
 
 include_once('s4_reporting.features.inc');
+
+/**
+*	Implementation of hook_theme
+*/
+function s4_reporting_theme($existing, $type, $theme, $path) {
+	return array(
+		's4_reporting_chart_pie' => array(
+			'variables' => array('data' => array(), 'width' => '', 'height' => '', 'label' => '', 'title' => '','id' => ''),
+		),
+	);
+}
+
+function theme_s4_reporting_chart_pie($data) {
+	drupal_add_js('https://www.google.com/jsapi');
+	$script = 'google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = new google.visualization.DataTable();
+		%s
+        var chart = new google.visualization.PieChart(document.getElementById("'. $data['id'] .'"));
+        chart.draw(data, {pieSliceText : "label", legend : "none", width: '. $data['width'] .', height: '. $data['height'] .', title: "'. $data['title'] .'", chartArea : {height: '. $data['height'] .', width: '. $data['width'] .'}});
+      }';
+    $values = array();
+	$values[] = 'data.addColumn("string", "'. $data['label'] .'");';
+	$values[] = 'data.addColumn("number", "Values");';
+	$values[] = 'data.addRows('. count($data['data']) .');';
+	$i = 0;
+	foreach($data['data'] as $type => $value) {
+		if($value) {
+			$values[] = 'data.setValue('. $i .',0,"'. $type .'");';
+			$values[] = 'data.setValue('. $i .',1,'. $value .');';
+			$i++;
+		}
+	}
+	drupal_add_js(sprintf($script, implode("\n", $values)), 'inline');
+	return '<div class="chart-pie" id="'. $data['id'] .'"></div>';
+}

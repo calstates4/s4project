@@ -101,6 +101,29 @@ function s4_sites_taxonomy_default_vocabularies() {
         ),
       ),
     ),
+    'language' => array(
+      'name' => 'Language',
+      'machine_name' => 'language',
+      'description' => 'Site languages',
+      'hierarchy' => '0',
+      'module' => 'taxonomy',
+      'weight' => '0',
+      'rdf_mapping' => array(
+        'rdftype' => array(
+          0 => 'skos:ConceptScheme',
+        ),
+        'name' => array(
+          'predicates' => array(
+            0 => 'dc:title',
+          ),
+        ),
+        'description' => array(
+          'predicates' => array(
+            0 => 'rdfs:comment',
+          ),
+        ),
+      ),
+    ),
     'organization_type' => array(
       'name' => 'Organization Type',
       'machine_name' => 'organization_type',
@@ -128,6 +151,29 @@ function s4_sites_taxonomy_default_vocabularies() {
       'name' => 'Site restrictions',
       'machine_name' => 'site_restrictions',
       'description' => 'Useful to control who can sign up for a site.',
+      'hierarchy' => '0',
+      'module' => 'taxonomy',
+      'weight' => '0',
+      'rdf_mapping' => array(
+        'rdftype' => array(
+          0 => 'skos:ConceptScheme',
+        ),
+        'name' => array(
+          'predicates' => array(
+            0 => 'dc:title',
+          ),
+        ),
+        'description' => array(
+          'predicates' => array(
+            0 => 'rdfs:comment',
+          ),
+        ),
+      ),
+    ),
+    'special_requirements' => array(
+      'name' => 'Special requirements',
+      'machine_name' => 'special_requirements',
+      'description' => 'Special requirements for students',
       'hierarchy' => '0',
       'module' => 'taxonomy',
       'weight' => '0',

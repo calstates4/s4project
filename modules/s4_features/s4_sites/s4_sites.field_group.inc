@@ -21,11 +21,7 @@ function s4_sites_field_group_info() {
   $field_group->data = array(
     'label' => 'Contact',
     'weight' => '21',
-    'children' => array(
-      0 => 'field_phone',
-      1 => 'field_site_email',
-      2 => 'field_website',
-    ),
+    'children' => array(),
     'format_type' => 'htab',
     'format_settings' => array(
       'formatter' => 'closed',
@@ -50,8 +46,12 @@ function s4_sites_field_group_info() {
     'weight' => '19',
     'children' => array(
       0 => 'body',
-      1 => 'field_site_projects',
-      2 => 'title',
+      1 => 'field_phone',
+      2 => 'field_site_email',
+      3 => 'field_website',
+      4 => 'field_site_projects',
+      5 => 'field_site_facebook_page',
+      6 => 'title',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -66,6 +66,36 @@ function s4_sites_field_group_info() {
 
   $field_group = new stdClass;
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_site_health_safety|node|site|form';
+  $field_group->group_name = 'group_site_health_safety';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'site';
+  $field_group->mode = 'form';
+  $field_group->parent_name = 'group_site_tabs';
+  $field_group->data = array(
+    'label' => 'Health & Safety',
+    'weight' => '23',
+    'children' => array(
+      0 => 'field_site_instructions',
+      1 => 'field_site_instructions_required',
+      2 => 'field_site_health_training',
+      3 => 'field_site_tour',
+      4 => 'field_health_risk',
+      5 => 'field_site_requirements',
+    ),
+    'format_type' => 'htab',
+    'format_settings' => array(
+      'formatter' => 'closed',
+      'instance_settings' => array(
+        'classes' => '',
+        'required_fields' => 1,
+      ),
+    ),
+  );
+  $export['group_site_health_safety|node|site|form'] = $field_group;
+
+  $field_group = new stdClass;
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_site_images|node|site|form';
   $field_group->group_name = 'group_site_images';
   $field_group->entity_type = 'node';
@@ -74,7 +104,7 @@ function s4_sites_field_group_info() {
   $field_group->parent_name = 'group_site_tabs';
   $field_group->data = array(
     'label' => 'Images',
-    'weight' => '20',
+    'weight' => '26',
     'children' => array(
       0 => 'field_site_images',
     ),
@@ -98,23 +128,22 @@ function s4_sites_field_group_info() {
   $field_group->mode = 'form';
   $field_group->parent_name = 'group_site_tabs';
   $field_group->data = array(
-    'label' => 'Student Instructions',
-    'weight' => '23',
+    'label' => 'Service Hours',
+    'weight' => '22',
     'children' => array(
-      0 => 'field_health_safety',
-      1 => 'field_site_instructions',
-      2 => 'field_site_instructions_required',
-      3 => 'field_signups_max',
-      4 => 'field_site_hours_minimum',
-      5 => 'field_site_hours',
+      0 => 'field_signups_max',
+      1 => 'field_site_hours_minimum',
+      2 => 'field_site_hours',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
-      'formatter' => 'closed',
+      'label' => 'Service Hours',
       'instance_settings' => array(
-        'classes' => '',
         'required_fields' => 0,
+        'classes' => '',
+        'description' => '',
       ),
+      'formatter' => 'closed',
     ),
   );
   $export['group_site_instructions|node|site|form'] = $field_group;
@@ -129,7 +158,7 @@ function s4_sites_field_group_info() {
   $field_group->parent_name = 'group_site_tabs';
   $field_group->data = array(
     'label' => 'Locations',
-    'weight' => '22',
+    'weight' => '20',
     'children' => array(
       0 => 'field_location',
     ),
@@ -146,6 +175,31 @@ function s4_sites_field_group_info() {
 
   $field_group = new stdClass;
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_site_population|node|site|form';
+  $field_group->group_name = 'group_site_population';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'site';
+  $field_group->mode = 'form';
+  $field_group->parent_name = 'group_site_tabs';
+  $field_group->data = array(
+    'label' => 'Population',
+    'weight' => '24',
+    'children' => array(
+      0 => 'field_site_demographics',
+    ),
+    'format_type' => 'htab',
+    'format_settings' => array(
+      'formatter' => 'closed',
+      'instance_settings' => array(
+        'classes' => '',
+        'required_fields' => 1,
+      ),
+    ),
+  );
+  $export['group_site_population|node|site|form'] = $field_group;
+
+  $field_group = new stdClass;
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_site_tabs|node|site|form';
   $field_group->group_name = 'group_site_tabs';
   $field_group->entity_type = 'node';
@@ -156,11 +210,14 @@ function s4_sites_field_group_info() {
     'label' => 'Site tabs',
     'weight' => '0',
     'children' => array(
-      0 => 'group_site_contact',
+      0 => 'field_site_language',
       1 => 'group_site_general',
       2 => 'group_site_images',
       3 => 'group_site_instructions',
       4 => 'group_site_locations',
+      5 => 'group_site_contact',
+      6 => 'group_site_health_safety',
+      7 => 'group_site_population',
     ),
     'format_type' => 'htabs',
     'format_settings' => array(

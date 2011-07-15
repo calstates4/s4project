@@ -70,11 +70,11 @@ function s4_sites_flag_default_flags() {
     'show_on_form' => 0,
     'access_author' => '',
     'i18n' => 0,
-    'api_version' => 2,
     'module' => 's4_sites',
     'locked' => array(
       0 => 'name',
     ),
+    'api_version' => 2,
   );
   return $flags;
 }
@@ -114,7 +114,7 @@ function s4_sites_node_info() {
       'description' => t('A site is a location or project which students sign up with for community service, service learning, internships, and the like.'),
       'has_title' => '1',
       'title_label' => t('Site Name'),
-      'help' => t('A site is a location or project which students sign up with for community service, service learning, internships, and the like.'),
+      'help' => t('Many organizations find that working with college students allows them to expand the capacity of their organization or agency while allowing them to provide students with an opportunity to have positive learning experiences. Through service learning, students are able to examine the role of community organizations and contribute to them while also enhancing their understanding of course content.'),
     ),
   );
   return $items;

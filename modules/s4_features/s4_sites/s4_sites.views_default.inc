@@ -1136,33 +1136,6 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'coordinator' => 'coordinator',
   );
-  /* Filter criterion: Content: Has taxonomy term */
-  $handler->display->display_options['filters']['tid']['id'] = 'tid';
-  $handler->display->display_options['filters']['tid']['table'] = 'taxonomy_index';
-  $handler->display->display_options['filters']['tid']['field'] = 'tid';
-  $handler->display->display_options['filters']['tid']['relationship'] = 'field_site_nid';
-  $handler->display->display_options['filters']['tid']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['tid']['expose']['operator_id'] = 'tid_op';
-  $handler->display->display_options['filters']['tid']['expose']['label'] = 'Service restrictions';
-  $handler->display->display_options['filters']['tid']['expose']['operator'] = 'tid_op';
-  $handler->display->display_options['filters']['tid']['expose']['identifier'] = 'tid';
-  $handler->display->display_options['filters']['tid']['expose']['multiple'] = 1;
-  $handler->display->display_options['filters']['tid']['expose']['reduce'] = 0;
-  $handler->display->display_options['filters']['tid']['reduce_duplicates'] = 0;
-  $handler->display->display_options['filters']['tid']['type'] = 'select';
-  $handler->display->display_options['filters']['tid']['vocabulary'] = 'site_restrictions';
-  $handler->display->display_options['filters']['tid']['error_message'] = 1;
-  /* Filter criterion: Content: Term (field_term) */
-  $handler->display->display_options['filters']['field_term_nid']['id'] = 'field_term_nid';
-  $handler->display->display_options['filters']['field_term_nid']['table'] = 'field_data_field_term';
-  $handler->display->display_options['filters']['field_term_nid']['field'] = 'field_term_nid';
-  $handler->display->display_options['filters']['field_term_nid']['relationship'] = 'field_course_nid';
-  $handler->display->display_options['filters']['field_term_nid']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_term_nid']['expose']['operator_id'] = 'field_term_nid_op';
-  $handler->display->display_options['filters']['field_term_nid']['expose']['label'] = 'With students in';
-  $handler->display->display_options['filters']['field_term_nid']['expose']['operator'] = 'field_term_nid_op';
-  $handler->display->display_options['filters']['field_term_nid']['expose']['identifier'] = 'field_term_nid';
-  $handler->display->display_options['filters']['field_term_nid']['expose']['reduce'] = 0;
   /* Filter criterion: Content: Post date */
   $handler->display->display_options['filters']['created']['id'] = 'created';
   $handler->display->display_options['filters']['created']['table'] = 'node';
@@ -1175,21 +1148,6 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['filters']['created']['expose']['operator'] = 'created_op';
   $handler->display->display_options['filters']['created']['expose']['identifier'] = 'created';
   $handler->display->display_options['filters']['created']['expose']['multiple'] = FALSE;
-  /* Filter criterion: Content: Has taxonomy term */
-  $handler->display->display_options['filters']['tid_1']['id'] = 'tid_1';
-  $handler->display->display_options['filters']['tid_1']['table'] = 'taxonomy_index';
-  $handler->display->display_options['filters']['tid_1']['field'] = 'tid';
-  $handler->display->display_options['filters']['tid_1']['relationship'] = 'field_site_nid';
-  $handler->display->display_options['filters']['tid_1']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['tid_1']['expose']['operator_id'] = 'tid_1_op';
-  $handler->display->display_options['filters']['tid_1']['expose']['label'] = 'Issues addressed';
-  $handler->display->display_options['filters']['tid_1']['expose']['operator'] = 'tid_1_op';
-  $handler->display->display_options['filters']['tid_1']['expose']['identifier'] = 'tid_1';
-  $handler->display->display_options['filters']['tid_1']['expose']['reduce'] = 0;
-  $handler->display->display_options['filters']['tid_1']['reduce_duplicates'] = 0;
-  $handler->display->display_options['filters']['tid_1']['type'] = 'select';
-  $handler->display->display_options['filters']['tid_1']['vocabulary'] = 'issues_addressed';
-  $handler->display->display_options['filters']['tid_1']['error_message'] = 1;
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -1225,10 +1183,7 @@ function s4_sites_views_default_views() {
     t('Site'),
     t('Operations'),
     t('[title_1] | [edit_node]'),
-    t('Service restrictions'),
-    t('With students in'),
     t('Who had at least one student since'),
-    t('Issues addressed'),
     t('Page'),
   );
   $export['email_site_contacts'] = $view;
