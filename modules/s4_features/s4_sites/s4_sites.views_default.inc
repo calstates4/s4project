@@ -1375,7 +1375,7 @@ function s4_sites_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Site Coordinators';
+  $handler->display->display_options['title'] = 'Site Staff';
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -1502,26 +1502,6 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['header']['area']['content'] = '<p class="intro">Select a coordinator who will be working with you during your service.</p>';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Broken/missing handler */
-  $handler->display->display_options['fields']['field_headshot']['id'] = 'field_headshot';
-  $handler->display->display_options['fields']['field_headshot']['table'] = 'field_data_field_headshot';
-  $handler->display->display_options['fields']['field_headshot']['field'] = 'field_headshot';
-  $handler->display->display_options['fields']['field_headshot']['label'] = 'Headshot';
-  $handler->display->display_options['fields']['field_headshot']['alter']['alter_text'] = 0;
-  $handler->display->display_options['fields']['field_headshot']['alter']['make_link'] = 0;
-  $handler->display->display_options['fields']['field_headshot']['alter']['absolute'] = 0;
-  $handler->display->display_options['fields']['field_headshot']['alter']['external'] = 0;
-  $handler->display->display_options['fields']['field_headshot']['alter']['replace_spaces'] = 0;
-  $handler->display->display_options['fields']['field_headshot']['alter']['nl2br'] = 0;
-  $handler->display->display_options['fields']['field_headshot']['alter']['word_boundary'] = 1;
-  $handler->display->display_options['fields']['field_headshot']['alter']['ellipsis'] = 1;
-  $handler->display->display_options['fields']['field_headshot']['alter']['strip_tags'] = 0;
-  $handler->display->display_options['fields']['field_headshot']['alter']['trim'] = 0;
-  $handler->display->display_options['fields']['field_headshot']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['field_headshot']['element_label_colon'] = 1;
-  $handler->display->display_options['fields']['field_headshot']['element_default_classes'] = 1;
-  $handler->display->display_options['fields']['field_headshot']['hide_empty'] = 0;
-  $handler->display->display_options['fields']['field_headshot']['empty_zero'] = 0;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -1618,9 +1598,16 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['arguments']['field_site_nid']['break_phrase'] = 0;
   $handler->display->display_options['arguments']['field_site_nid']['not'] = 0;
   $handler->display->display_options['path'] = 'sites/%/coordinators';
+
+  /* Display: Site staff tab */
+  $handler = $view->new_display('page', 'Site staff tab', 'page_2');
+  $handler->display->display_options['path'] = 'node/%/site-staff';
+  $handler->display->display_options['menu']['type'] = 'tab';
+  $handler->display->display_options['menu']['title'] = 'Site Staff';
+  $handler->display->display_options['menu']['weight'] = '0';
   $translatables['site_coordinators'] = array(
     t('Master'),
-    t('Site Coordinators'),
+    t('Site Staff'),
     t('more'),
     t('Apply'),
     t('Reset'),
@@ -1637,8 +1624,8 @@ function s4_sites_views_default_views() {
     t('Block'),
     t('Page'),
     t('<p class="intro">Select a coordinator who will be working with you during your service.</p>'),
-    t('Headshot'),
     t('Select'),
+    t('Site staff tab'),
   );
   $export['site_coordinators'] = $view;
 

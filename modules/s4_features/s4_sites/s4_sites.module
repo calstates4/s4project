@@ -12,6 +12,8 @@ include_once('s4_sites.features.inc');
 function s4_sites_menu_alter(&$items) {
   $items['node/%/contact-records']['access callback'] = '_s4_sites_site_admin_view_access';
   $items['node/%/contact-records']['access arguments'] = array(1);
+  $items['node/%/site-staff']['access callback'] = '_s4_sites_site_admin_view_access';
+  $items['node/%/site-staff']['access arguments'] = array(1);
 }
 
 /**

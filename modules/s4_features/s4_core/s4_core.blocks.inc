@@ -297,11 +297,11 @@ function s4_core_block_s4_add_new_site() {
 */
 function s4_core_block_s4_add_new_coordinator() {
   if (user_access('create site content')) {
-    $node = menu_get_object();
-    return array('content' => l('<span class="add"></span>' . t('Add new coordinator'), 
+    $node = node_load(check_plain(arg(1)));
+    return array('content' => l('<span class="add"></span>' . t('Add new site staff'), 
                   'node/add/coordinator/' . $node->nid, 
                   array('html' => TRUE,
-                      'query' => array('destination' => 'node/' . $node->nid),
+                      'query' => array('destination' => 'node/' . $node->nid .'/site-staff'),
                        'attributes' => 
                       array('class' => 'button add')
                   )

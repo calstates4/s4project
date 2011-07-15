@@ -69,18 +69,6 @@ function s4_sites_context_default_contexts() {
           'region' => 'content_subscriptions',
           'weight' => '-10',
         ),
-        's4_core-s4_add_new_coordinator' => array(
-          'module' => 's4_core',
-          'delta' => 's4_add_new_coordinator',
-          'region' => 'content',
-          'weight' => '-9',
-        ),
-        'views-site_coordinators-block' => array(
-          'module' => 'views',
-          'delta' => 'site_coordinators-block',
-          'region' => 'content',
-          'weight' => '-8',
-        ),
         's4_core-user_site_signup' => array(
           'module' => 's4_core',
           'delta' => 'user_site_signup',
@@ -123,9 +111,27 @@ function s4_sites_context_default_contexts() {
           'region' => 'content_right',
           'weight' => '-48',
         ),
-        'cck_blocks-field_signups_max' => array(
+        'cck_blocks-field_site_images' => array(
           'module' => 'cck_blocks',
-          'delta' => 'field_signups_max',
+          'delta' => 'field_site_images',
+          'region' => 'content_right',
+          'weight' => '-41',
+        ),
+        'cck_blocks-field_site_requirements' => array(
+          'module' => 'cck_blocks',
+          'delta' => 'field_site_requirements',
+          'region' => 'content_right',
+          'weight' => '-10',
+        ),
+        'cck_blocks-field_site_language' => array(
+          'module' => 'cck_blocks',
+          'delta' => 'field_site_language',
+          'region' => 'content_right',
+          'weight' => '-10',
+        ),
+        'cck_blocks-field_site_demographics' => array(
+          'module' => 'cck_blocks',
+          'delta' => 'field_site_demographics',
           'region' => 'content_right',
           'weight' => '-10',
         ),
@@ -141,29 +147,11 @@ function s4_sites_context_default_contexts() {
           'region' => 'content_right',
           'weight' => '-10',
         ),
-        'cck_blocks-field_site_demographics' => array(
+        'cck_blocks-field_signups_max' => array(
           'module' => 'cck_blocks',
-          'delta' => 'field_site_demographics',
+          'delta' => 'field_signups_max',
           'region' => 'content_right',
           'weight' => '-10',
-        ),
-        'cck_blocks-field_site_language' => array(
-          'module' => 'cck_blocks',
-          'delta' => 'field_site_language',
-          'region' => 'content_right',
-          'weight' => '-10',
-        ),
-        'cck_blocks-field_site_requirements' => array(
-          'module' => 'cck_blocks',
-          'delta' => 'field_site_requirements',
-          'region' => 'content_right',
-          'weight' => '-10',
-        ),
-        'cck_blocks-field_site_images' => array(
-          'module' => 'cck_blocks',
-          'delta' => 'field_site_images',
-          'region' => 'content_right',
-          'weight' => '-41',
         ),
       ),
     ),
@@ -381,6 +369,45 @@ function s4_sites_context_default_contexts() {
   t('User is on the site location listing');
   t('sites');
   $export['site-location-list'] = $context;
+
+  $context = new stdClass;
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
+  $context->name = 'site-staff';
+  $context->description = 'User is on the site staff page';
+  $context->tag = 'sites';
+  $context->conditions = array(
+    'path' => array(
+      'values' => array(
+        'node/*/site-staff' => 'node/*/site-staff',
+      ),
+    ),
+    'user' => array(
+      'values' => array(
+        'administrator' => 'administrator',
+        'staff' => 'staff',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        's4_core-s4_add_new_coordinator' => array(
+          'module' => 's4_core',
+          'delta' => 's4_add_new_coordinator',
+          'region' => 'content',
+          'weight' => '-10',
+        ),
+      ),
+    ),
+  );
+  $context->condition_mode = 1;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('User is on the site staff page');
+  t('sites');
+  $export['site-staff'] = $context;
 
   $context = new stdClass;
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
