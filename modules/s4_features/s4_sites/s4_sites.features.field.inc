@@ -3895,7 +3895,7 @@ function s4_sites_field_default_fields() {
           'progress_indicator' => 'throbber',
         ),
         'type' => 'image_image',
-        'weight' => '13',
+        'weight' => '26',
       ),
     ),
   );
@@ -4154,7 +4154,7 @@ function s4_sites_field_default_fields() {
           'size' => 60,
         ),
         'type' => 'taxonomy_autocomplete',
-        'weight' => '25',
+        'weight' => '2',
       ),
     ),
   );

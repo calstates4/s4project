@@ -1321,3 +1321,12 @@ function s4_core_field_formatter_view($entity_type, $entity, $field, $instance, 
   }
   return $element;
 }
+
+function s4_core_views_check_node_type_roles($rids, $type, $view, $account = NULL) {
+  $node = menu_get_object();
+  global $user;
+  $account = isset($account) ? $account : $user;
+  $roles = array_keys($account->roles);
+  $roles[] = $account->uid ? DRUPAL_AUTHENTICATED_RID : DRUPAL_ANONYMOUS_RID;
+  return (array_intersect(array_filter($rids), $roles) && $node->type == $type);
+}
