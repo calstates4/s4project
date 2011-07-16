@@ -47,7 +47,7 @@ function s4_core_menu_default_menu_links() {
     'menu_name' => 'main-menu',
     'link_path' => 'forms',
     'router_path' => 'forms',
-    'link_title' => 'Forms',
+    'link_title' => 'Form Templates',
     'options' => array(
       'attributes' => array(
         'title' => '',
@@ -153,7 +153,7 @@ function s4_core_menu_default_menu_links() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Emails');
-  t('Forms');
+  t('Form Templates');
   t('Home');
   t('Logout');
   t('News');
