@@ -641,7 +641,7 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['path'] = 'node/%/notes';
   $handler->display->display_options['menu']['type'] = 'tab';
   $handler->display->display_options['menu']['title'] = 'Notes';
-  $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['weight'] = '2';
 
   /* Display: Site forms */
   $handler = $view->new_display('page', 'Site forms', 'page_2');
@@ -799,7 +799,7 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['path'] = 'node/%/forms';
   $handler->display->display_options['menu']['type'] = 'tab';
   $handler->display->display_options['menu']['title'] = 'Forms';
-  $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['weight'] = '3';
   $translatables['contact_records'] = array(
     t('Master'),
     t('Files close to expiration'),
