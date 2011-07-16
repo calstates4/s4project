@@ -1,5 +1,6 @@
-td.hours-yes { background: #6AA4C2; color: #6AA4C2; }
+td.hours-yes, .hours-sample { background: #3E7285; color: #3E7285; }
 td.hours-no, td.hours-yes { font-size: 80%; }
 tr.odd td.hours-no { color: #F2F2F2; }
 tr.even td.hours-no { color: #FFF; }
 .matrix-col-header { font-size: 80%; }
+.hours-sample { color: #fff; padding: 3px; }

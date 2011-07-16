@@ -114,8 +114,10 @@ function s4_sites_field_default_fields() {
       'module' => 'list',
       'settings' => array(
         'allowed_values' => array(
-          'Paperwork' => 'Paperwork',
-          'Phone call' => 'Phone call',
+          'Email' => 'Email',
+          'In-person' => 'In-person',
+          'Internal' => 'Internal',
+          'Phone' => 'Phone',
           'Site visit' => 'Site visit',
         ),
         'allowed_values_function' => '',

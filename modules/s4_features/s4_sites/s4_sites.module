@@ -10,10 +10,12 @@ include_once('s4_sites.features.inc');
 *  Implementation of hook_menu_alter()
 */
 function s4_sites_menu_alter(&$items) {
-  $items['node/%/contact-records']['access callback'] = '_s4_sites_site_admin_view_access';
-  $items['node/%/contact-records']['access arguments'] = array(1);
   $items['node/%/site-staff']['access callback'] = '_s4_sites_site_admin_view_access';
   $items['node/%/site-staff']['access arguments'] = array(1);
+  $items['node/%/notes']['access callback'] = '_s4_sites_site_admin_view_access';
+  $items['node/%/notes']['access arguments'] = array(1);
+  $items['node/%/files']['access callback'] = '_s4_sites_site_admin_view_access';
+  $items['node/%/files']['access arguments'] = array(1);
 }
 
 /**
@@ -23,16 +25,16 @@ function s4_sites_menu() {
 	$items = array();
 	
 	$items['admin/config/s4/site-import'] = array(
-    'title' => 'Import site information',
-    'description' => 'Import sites from another database',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('s4_sites_import_sites_form'),
-    'file' => 's4_sites.admin.inc',
-    'access arguments' => array('administer site configuration'),
-    'weight' => -10,
-  );
-	
-	return $items;
+		'title' => 'Import site information',
+		'description' => 'Import sites from another database',
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('s4_sites_import_sites_form'),
+		'file' => 's4_sites.admin.inc',
+		'access arguments' => array('administer site configuration'),
+		'weight' => -10,
+	);
+  	
+  	return $items;
 }
 
 /**
@@ -327,6 +329,7 @@ function _s4_sites_format_hours_matrix($entity_type, $entity, $field, $instance,
 		'#theme' => 'table', 
 		'#header' => $headers, 
 		'#rows' => $rows,
+		'#caption' => 'Available times are <span class="hours-sample">marked in dark blue</span>.',
 	);
 	return $element;
 }
