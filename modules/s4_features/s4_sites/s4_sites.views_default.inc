@@ -1898,7 +1898,7 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['header']['area']['content'] = '<p class="intro">This site has multiple locations. Please select the location you will be working at.</p>';
   $handler->display->display_options['header']['area']['format'] = 'filtered_html';
   $handler->display->display_options['header']['area']['tokenize'] = 0;
-  /* Field: Content: Location */
+  /* Field: Content: Location(s) */
   $handler->display->display_options['fields']['field_location']['id'] = 'field_location';
   $handler->display->display_options['fields']['field_location']['table'] = 'field_data_field_location';
   $handler->display->display_options['fields']['field_location']['field'] = 'field_location';

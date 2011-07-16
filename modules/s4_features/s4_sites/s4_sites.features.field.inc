@@ -2561,7 +2561,7 @@ function s4_sites_field_default_fields() {
       ),
       'entity_type' => 'node',
       'field_name' => 'field_location',
-      'label' => 'Location',
+      'label' => 'Location(s)',
       'required' => 0,
       'settings' => array(
         'user_register_form' => FALSE,
@@ -4883,7 +4883,7 @@ function s4_sites_field_default_fields() {
   t('Issues addressed');
   t('Last Name');
   t('Leave blank or enter zero (0) for no limit');
-  t('Location');
+  t('Location(s)');
   t('Main phone number');
   t('Maximum number of students');
   t('Maximum number of students your site can accept at any given time');

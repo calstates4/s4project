@@ -157,18 +157,20 @@ function s4_sites_field_group_info() {
   $field_group->mode = 'form';
   $field_group->parent_name = 'group_site_tabs';
   $field_group->data = array(
-    'label' => 'Locations',
+    'label' => 'Location(s)',
     'weight' => '20',
     'children' => array(
       0 => 'field_location',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
-      'formatter' => 'closed',
+      'label' => 'Location(s)',
       'instance_settings' => array(
-        'classes' => '',
         'required_fields' => 1,
+        'classes' => '',
+        'description' => '',
       ),
+      'formatter' => 'closed',
     ),
   );
   $export['group_site_locations|node|site|form'] = $field_group;
