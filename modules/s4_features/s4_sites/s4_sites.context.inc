@@ -263,64 +263,6 @@ function s4_sites_context_default_contexts() {
   $context = new stdClass;
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
-  $context->name = 'site-history-files';
-  $context->description = 'User is on the site history & files page';
-  $context->tag = 'sites';
-  $context->conditions = array(
-    'path' => array(
-      'values' => array(
-        'node/*/contact-files' => 'node/*/contact-files',
-      ),
-    ),
-  );
-  $context->reactions = array(
-    'block' => array(
-      'blocks' => array(
-        's4_core-s4_subscribe_file_expiration' => array(
-          'module' => 's4_core',
-          'delta' => 's4_subscribe_file_expiration',
-          'region' => 'content_subscriptions',
-          'weight' => '-10',
-        ),
-        's4_pages-add_contact_record' => array(
-          'module' => 's4_pages',
-          'delta' => 'add_contact_record',
-          'region' => 'content_top_left',
-          'weight' => '-10',
-        ),
-        'views-contact_records-block_1' => array(
-          'module' => 'views',
-          'delta' => 'contact_records-block_1',
-          'region' => 'content_top_left',
-          'weight' => '-8',
-        ),
-        's4_pages-add_site_file' => array(
-          'module' => 's4_pages',
-          'delta' => 'add_site_file',
-          'region' => 'content_top_right',
-          'weight' => '-10',
-        ),
-        'views-contact_records-block_2' => array(
-          'module' => 'views',
-          'delta' => 'contact_records-block_2',
-          'region' => 'content_top_right',
-          'weight' => '-8',
-        ),
-      ),
-    ),
-    'menu' => 'site-list',
-  );
-  $context->condition_mode = 0;
-
-  // Translatables
-  // Included for use with string extractors like potx.
-  t('User is on the site history & files page');
-  t('sites');
-  $export['site-history-files'] = $context;
-
-  $context = new stdClass;
-  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
-  $context->api_version = 3;
   $context->name = 'site-list';
   $context->description = 'User is on the site list and search page';
   $context->tag = 'sites';

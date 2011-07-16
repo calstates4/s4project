@@ -4,3 +4,5 @@ tr.odd td.hours-no { color: #F2F2F2; }
 tr.even td.hours-no { color: #FFF; }
 .matrix-col-header { font-size: 80%; }
 .hours-sample { color: #fff; padding: 3px; }
+#demographic-total { font-weight: bold; }
+	.field-name-field-site-demographics .error { background: #d6473e; color: #fff;  }
