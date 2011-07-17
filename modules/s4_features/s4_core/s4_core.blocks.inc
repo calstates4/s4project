@@ -267,13 +267,25 @@ function s4_core_block_s4_page_notifications() {
 */
 function s4_core_block_s4_add_new_site() {
   if (user_access('create site content')) {
-  	$add_link = l(t('<span class="add"></span>Add new site'), 
+  	if(user_access('moderate site information')) {
+  		$add_link = l(t('<span class="add"></span>Add new site'), 
                   'node/add/site', 
                   array('html' => TRUE,
                        'attributes' => 
                       array('class' => 'button add')
                   )
                   );
+    }
+    else {
+    	$add_link = l(t('<span class="add"></span>Add your site to this list'), 
+                  'node/add/site', 
+                  array('html' => TRUE,
+                  		'query' => array('destination' => 'site-list'),
+                       'attributes' => 
+                      array('class' => 'button add')
+                  )
+                  );
+    }
     if(user_access('administer site configuration')) {
     	$import_link = l(t('<span class="add"></span>Import sites'), 
                   'admin/config/s4/site-import', 

@@ -214,7 +214,7 @@ legend { font-weight: bold; color: darken(@branding-bottom, 20%);}
 a .add { background: url(../images/add.png) no-repeat 0 0; width: 9px; height: 9px; display: inline-block; margin-right: 5px; }
 a.add { margin: 10px 0; }
 /** Shamelessly stolen from the Seven theme in Drupal. **/
-input.form-submit,
+input.form-submit, input[type=button],
 a.button { cursor: pointer; padding: 4px 17px; margin-bottom: 1em; margin-right: 1em; color: #5a5a5a; text-align: center; font-weight: normal; font-size: 1.077em; font-family: "Lucida Grande", Verdana, sans-serif; border: 1px solid #e4e4e4; border-bottom: 1px solid #b4b4b4; border-left-color: #D2D2D2; border-right-color: #D2D2D2; background: url(../images/buttons.png) 0 0 repeat-x; .round-corner(20px);
 }
 a.button:link,
@@ -295,3 +295,13 @@ ul.pager { margin: 15px 0; }
 	#content .horizontal-tabs fieldset.horizontal-tabs-pane { padding-bottom: 15px; }
 	table#webform-components { width: 100%; }
 	#autocomplete li { margin: 0; padding: 3px;}
+
+/** Form accordions **/
+#page .field-group-accordion-wrapper {font-family:"Helvetica Neue",Arial,Helvetica,sans-serif; font-size:1em; line-height:1.4; }
+#page .ui-accordion-header { background: @branding-bottom; color: #fff; font-weight: bold; padding: 5px; border-color: @branding-bottom; }
+	#page .ui-accordion-header .ui-icon { display: none; }
+	#page .ui-accordion-header .number { margin: 0 10px 0 0; }
+	#page .ui-accordion-content { border-color: @branding-bottom; }
+	#page input[type=button].continue { border: 1px solid #00ae3e; background: #00ae3e; color: #fff; margin: 10px;}
+	#page .ui-accordion-header.ui-state-active { background: #00ae3e; border-color: #00ae3e; }
+	#page .ui-accordion-content-active { border-color: #00ae3e; }
