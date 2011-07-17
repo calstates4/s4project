@@ -29,37 +29,31 @@ function s4_core_homebox() {
   $homeboxes = array();
 
   $homeboxes['home'] = array (
-    'regions' => 3,
+    'regions' => 2,
     'cache' => 0,
     'color' => 0,
     'colors' => 
     array (
+      0 => '#E4F0F8',
+      1 => '#E4F0F8',
+      2 => '#E4F0F8',
+      3 => '#E4F0F8',
+      4 => '#E4F0F8',
+      5 => '#E4F0F8',
     ),
     'blocks' => 
     array (
-      'search_form' => 
+      'views_site_moderation-block' => 
       array (
-        'module' => 'search',
-        'delta' => 'form',
+        'module' => 'views',
+        'delta' => 'site_moderation-block',
         'region' => 1,
         'movable' => 1,
         'status' => 1,
         'open' => 1,
         'closable' => 1,
         'title' => '',
-        'weight' => -50,
-      ),
-      'devel_switch_user' => 
-      array (
-        'module' => 'devel',
-        'delta' => 'switch_user',
-        'region' => 3,
-        'movable' => 1,
-        'status' => 1,
-        'open' => 1,
-        'closable' => 1,
-        'title' => '',
-        'weight' => -48,
+        'weight' => -51,
       ),
       'views_bookmarked_sites-block' => 
       array (
@@ -71,7 +65,7 @@ function s4_core_homebox() {
         'open' => 1,
         'closable' => 1,
         'title' => '',
-        'weight' => -49,
+        'weight' => -51,
       ),
       'views_65656e1f5a12cde25f0722f735fe7969' => 
       array (
@@ -83,7 +77,19 @@ function s4_core_homebox() {
         'open' => 1,
         'closable' => 1,
         'title' => '',
-        'weight' => 29,
+        'weight' => -50,
+      ),
+      'devel_switch_user' => 
+      array (
+        'module' => 'devel',
+        'delta' => 'switch_user',
+        'region' => 2,
+        'movable' => 1,
+        'status' => 1,
+        'open' => 1,
+        'closable' => 1,
+        'title' => '',
+        'weight' => -49,
       ),
     ),
     'widths' => 
