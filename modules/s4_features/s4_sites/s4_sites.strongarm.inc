@@ -350,6 +350,13 @@ function s4_sites_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'language_content_type_coordinator';
+  $strongarm->value = '0';
+  $export['language_content_type_coordinator'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'language_content_type_file';
   $strongarm->value = '0';
   $export['language_content_type_file'] = $strongarm;
@@ -491,7 +498,7 @@ function s4_sites_strongarm() {
     ),
     'field_site_restrict' => array(
       'region' => 'right',
-      'weight' => '3',
+      'weight' => '5',
       'has_required' => FALSE,
       'title' => 'Restrict to',
       'hidden' => 0,
@@ -534,9 +541,23 @@ function s4_sites_strongarm() {
     ),
     'field_signups_max' => array(
       'region' => 'right',
-      'weight' => '2',
+      'weight' => '4',
       'has_required' => FALSE,
       'title' => 'Maximum number of students',
+      'hidden' => 0,
+    ),
+    'field_staff_role' => array(
+      'region' => 'right',
+      'weight' => '2',
+      'has_required' => FALSE,
+      'title' => 'Role',
+      'hidden' => 0,
+    ),
+    'field_staff_signup_available' => array(
+      'region' => 'right',
+      'weight' => '3',
+      'has_required' => FALSE,
+      'title' => 'Student can register with this staff',
       'hidden' => 0,
     ),
   );

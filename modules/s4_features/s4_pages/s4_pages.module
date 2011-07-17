@@ -80,8 +80,8 @@ function s4_pages_block_view($delta) {
 function s4_pages_add_contact_record() {
   $node = menu_get_object();
   return array('subject' => NULL,
-         'content' => '<h2>Contact records</h2><div class="spacer-30">' .
-                 l('<span class="add"></span>Add new record', 
+         'content' => '<div class="spacer-30">' .
+                 l('<span class="add"></span>Add new note', 
                  'node/add/contact-record/' . $node->nid,
                  array('html' => TRUE,
                      'attributes' => array('class' => 'button add'),
@@ -96,8 +96,8 @@ function s4_pages_add_contact_record() {
 function s4_pages_add_site_file() {
   $node = menu_get_object();
   return array('subject' => NULL,
-         'content' => '<h2>Site files</h2><div class="spacer-30">' .
-                 l('<span class="add"></span>Add new file', 
+         'content' => '<div class="spacer-30">' .
+                 l('<span class="add"></span>Add new form', 
                  'node/add/file/' . $node->nid,
                  array('html' => TRUE,
                      'attributes' => array('class' => 'button add'),

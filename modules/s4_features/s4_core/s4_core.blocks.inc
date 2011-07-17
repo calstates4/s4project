@@ -339,14 +339,14 @@ function s4_core_block_s4_subscribe_file_expiration() {
   $result = $query->execute();
   $sid = $result->fetchField();
   if ($sid) {
-    $link = l(t('<span class="hover">Unsubscribe to file expiration notifications</span><span class="nohover">Subscribed to file expiration notifications</span>'),
+    $link = l(t('<span class="hover">Cancel email subscription</span><span class="nohover">Email me when a form will expire</span>'),
           'notifications/unsubscribe/' . $sid,
           array('html' => TRUE,
               'attributes' => array('class' => 'subscription-button subscribed'),
               'query' => array('destination' => $_GET['q'])));
   }
   else {
-    $link = l(t('Subscribe to file expiration notifications'),
+    $link = l(t('Email me when a form expires'),
           'notifications/subscribe/document_expiration',
           array('html' => TRUE,
               'attributes' => array('class' => 'subscription-button not-subscribed'),

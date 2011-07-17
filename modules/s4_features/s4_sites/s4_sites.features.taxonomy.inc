@@ -170,6 +170,29 @@ function s4_sites_taxonomy_default_vocabularies() {
         ),
       ),
     ),
+    'site_staff_role' => array(
+      'name' => 'Staff role',
+      'machine_name' => 'site_staff_role',
+      'description' => 'The role of a site staff',
+      'hierarchy' => '0',
+      'module' => 'taxonomy',
+      'weight' => '0',
+      'rdf_mapping' => array(
+        'rdftype' => array(
+          0 => 'skos:ConceptScheme',
+        ),
+        'name' => array(
+          'predicates' => array(
+            0 => 'dc:title',
+          ),
+        ),
+        'description' => array(
+          'predicates' => array(
+            0 => 'rdfs:comment',
+          ),
+        ),
+      ),
+    ),
     'special_requirements' => array(
       'name' => 'Special requirements',
       'machine_name' => 'special_requirements',

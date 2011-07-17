@@ -1323,7 +1323,7 @@ function s4_core_field_formatter_view($entity_type, $entity, $field, $instance, 
 }
 
 function s4_core_views_check_node_type_roles($rids, $type, $view, $account = NULL) {
-  $node = menu_get_object();
+  $node = node_load(arg(1));
   global $user;
   $account = isset($account) ? $account : $user;
   $roles = array_keys($account->roles);

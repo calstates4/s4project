@@ -243,11 +243,17 @@ function s4_sites_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
+        's4_core-s4_subscribe_file_expiration' => array(
+          'module' => 's4_core',
+          'delta' => 's4_subscribe_file_expiration',
+          'region' => 'content_right',
+          'weight' => '-10',
+        ),
         's4_pages-add_site_file' => array(
           'module' => 's4_pages',
           'delta' => 'add_site_file',
           'region' => 'content_right',
-          'weight' => '-10',
+          'weight' => '-9',
         ),
       ),
     ),
@@ -416,7 +422,7 @@ function s4_sites_context_default_contexts() {
           'module' => 's4_core',
           'delta' => 's4_add_new_coordinator',
           'region' => 'content',
-          'weight' => '-10',
+          'weight' => '-18',
         ),
       ),
     ),

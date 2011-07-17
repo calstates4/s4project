@@ -666,3 +666,11 @@ terms[zhuang][name] = Zhuang
 terms[zhuang][vocabulary_machine_name] = language
 terms[zulu][name] = Zulu
 terms[zulu][vocabulary_machine_name] = language
+
+;Vocabularies - site staff role
+terms[executive_director][name] = Executive Director
+terms[executive_director][vocabulary_machine_name] = site_staff_role
+terms[site_supervisor][name] = Site supervisor
+terms[site_supervisor][vocabulary_machine_name] = site_staff_role
+terms[other][name] = Other
+terms[other][vocabulary_machine_name] = site_staff_role

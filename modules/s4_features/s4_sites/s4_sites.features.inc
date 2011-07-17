@@ -93,9 +93,9 @@ function s4_sites_node_info() {
       'help' => t('Leave a note or file about a contact with a site.'),
     ),
     'coordinator' => array(
-      'name' => t('Coordinator'),
+      'name' => t('Site staff'),
       'base' => 'node_content',
-      'description' => t('A site coordinator is someone who students sign up with for service.'),
+      'description' => t('A site staff person is a contact or site coordinator with a site.'),
       'has_title' => '1',
       'title_label' => t('Coordinator Name'),
       'help' => t('A site coordinator is someone who students sign up with for service.'),
