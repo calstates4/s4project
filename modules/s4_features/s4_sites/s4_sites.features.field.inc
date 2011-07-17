@@ -1180,7 +1180,7 @@ function s4_sites_field_default_fields() {
       'bundle' => 'coordinator',
       'default_value' => NULL,
       'deleted' => '0',
-      'description' => 'Select the site this coordinator belongs to.',
+      'description' => '',
       'display' => array(
         'cck_blocks' => array(
           'label' => 'above',
@@ -1274,7 +1274,7 @@ function s4_sites_field_default_fields() {
       'bundle' => 'coordinator',
       'default_value' => NULL,
       'deleted' => '0',
-      'description' => 'Restrict this coordinator to the following types of students.',
+      'description' => 'Restrict this site staff to the following types of students.',
       'display' => array(
         'cck_blocks' => array(
           'label' => 'above',
@@ -5061,13 +5061,12 @@ function s4_sites_field_default_fields() {
   t('Reminder date');
   t('Reminder period (days)');
   t('Restrict site to');
-  t('Restrict this coordinator to the following types of students.');
+  t('Restrict this site staff to the following types of students.');
   t('Restrict to');
   t('Risk Identification');
   t('Role');
   t('Select the role of this staff person.');
   t('Select the signup form students should fill out when selecting this site.');
-  t('Select the site this coordinator belongs to.');
   t('Signup form');
   t('Site');
   t('Site Images');
