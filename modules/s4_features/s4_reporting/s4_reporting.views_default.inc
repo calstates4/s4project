@@ -834,7 +834,7 @@ function s4_reporting_views_default_views() {
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
     3 => '3',
-    5 => '5',
+    4 => '4',
   );
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -905,7 +905,7 @@ function s4_reporting_views_default_views() {
   $handler->display->display_options['fields']['field_site_email']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_site_email']['type'] = 'email_default';
   $handler->display->display_options['fields']['field_site_email']['field_api_classes'] = 0;
-  /* Field: Content: Main phone number */
+  /* Field: Content: Phone number */
   $handler->display->display_options['fields']['field_phone']['id'] = 'field_phone';
   $handler->display->display_options['fields']['field_phone']['table'] = 'field_data_field_phone';
   $handler->display->display_options['fields']['field_phone']['field'] = 'field_phone';

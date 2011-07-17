@@ -38,6 +38,17 @@ function s4_sites_menu() {
 }
 
 /**
+*	Implementation of hook_permission
+*/
+function s4_sites_permission() {
+	return array(
+		'moderate site information' => array(
+		  'title' => t('Moderate site information'),
+		  'description' => t('If checked, users with this role will be able to create site and site staff content without moderation.'),
+		),
+    );
+}
+/**
 *  Menu access test for site contact records
 */
 function _s4_sites_site_admin_view_access($nid) {
@@ -118,7 +129,6 @@ function s4_sites_form_site_node_form_alter(&$form, $form_state, $form_id) {
       $form[$field_name][$form['#node']->language]['#description'] .=
         l('Add new values to this list.', 'admin/structure/taxonomy/' . $term->machine_name, array('attributes' => array('target' => '_blank')));
     }
-    
   }
 }
 

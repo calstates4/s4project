@@ -25,7 +25,8 @@ function s4_sites_user_default_permissions() {
     'name' => 'create coordinator content',
     'roles' => array(
       0 => 'administrator',
-      1 => 'staff',
+      1 => 'authenticated user',
+      2 => 'staff',
     ),
     'module' => 'node',
   );
@@ -45,7 +46,8 @@ function s4_sites_user_default_permissions() {
     'name' => 'create site content',
     'roles' => array(
       0 => 'administrator',
-      1 => 'staff',
+      1 => 'authenticated user',
+      2 => 'staff',
     ),
     'module' => 'node',
   );
@@ -348,6 +350,16 @@ function s4_sites_user_default_permissions() {
       1 => 'staff',
     ),
     'module' => 'taxonomy',
+  );
+
+  // Exported permission: moderate site information
+  $permissions['moderate site information'] = array(
+    'name' => 'moderate site information',
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'staff',
+    ),
+    'module' => 's4_sites',
   );
 
   return $permissions;
