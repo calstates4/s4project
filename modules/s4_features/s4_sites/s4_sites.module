@@ -111,7 +111,6 @@ function s4_sites_block_view($delta) {
 * stright from the admin settings.
 */
 function s4_sites_form_site_node_form_alter(&$form, $form_state, $form_id) {
-  dpm($form);
   $terms = taxonomy_get_vocabularies();
   drupal_add_js(drupal_get_path('module', 's4_sites') .'/js/s4_site_form.js');
   drupal_add_css(drupal_get_path('module', 's4_sites') .'/css/s4_sites.css');
@@ -142,7 +141,8 @@ function s4_sites_form_site_node_form_alter(&$form, $form_state, $form_id) {
     $form['field_site_users']['#access'] = false;
     $form['field_site_eval_form']['#access'] = false;
     $form['field_site_form']['#access'] = false;
-
+    $form['field_workflow_status']['#access'] = false;
+	drupal_set_title(t('Request a new site'));
     drupal_add_js(drupal_get_path('module', 's4_sites') .'/js/s4_sites_accordion.js');
   }
 }

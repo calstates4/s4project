@@ -674,3 +674,13 @@ terms[site_supervisor][name] = Site supervisor
 terms[site_supervisor][vocabulary_machine_name] = site_staff_role
 terms[other][name] = Other
 terms[other][vocabulary_machine_name] = site_staff_role
+
+;Vocabularies - workflow_status
+terms[pending][name] = "Pending"
+terms[pending][vocabulary_machine_name] = workflow_status
+terms[more_info][name] = "Needs more information"
+terms[more_info][vocabulary_machine_name] = workflow_status
+terms[declined][name] = "Declined"
+terms[declined][vocabulary_machine_name] = workflow_status
+terms[approved][name] = "Approved"
+terms[approved][vocabulary_machine_name] = workflow_status

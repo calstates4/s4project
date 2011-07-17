@@ -2386,7 +2386,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '17',
+          'weight' => '18',
         ),
         'full' => array(
           'label' => 'above',
@@ -2475,7 +2475,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '18',
+          'weight' => '19',
         ),
         'full' => array(
           'label' => 'above',
@@ -2705,7 +2705,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '15',
+          'weight' => '16',
         ),
         'full' => array(
           'label' => 'above',
@@ -2777,7 +2777,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '23',
+          'weight' => '24',
         ),
         'full' => array(
           'label' => 'above',
@@ -3093,7 +3093,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '7',
+          'weight' => '8',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -3210,7 +3210,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '8',
+          'weight' => '9',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -3274,7 +3274,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '22',
+          'weight' => '23',
         ),
         'full' => array(
           'label' => 'above',
@@ -3405,7 +3405,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '24',
+          'weight' => '25',
         ),
         'full' => array(
           'label' => 'above',
@@ -3489,7 +3489,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '9',
+          'weight' => '10',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -3624,7 +3624,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '20',
+          'weight' => '21',
         ),
         'full' => array(
           'label' => 'above',
@@ -3929,7 +3929,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '6',
+          'weight' => '7',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -4007,7 +4007,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '14',
+          'weight' => '15',
         ),
         'full' => array(
           'label' => 'above',
@@ -4110,7 +4110,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '21',
+          'weight' => '22',
         ),
         'full' => array(
           'label' => 'above',
@@ -4200,7 +4200,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '25',
+          'weight' => '26',
         ),
         'full' => array(
           'label' => 'above',
@@ -4291,7 +4291,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '10',
+          'weight' => '11',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -4456,7 +4456,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '11',
+          'weight' => '12',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -4538,7 +4538,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '16',
+          'weight' => '17',
         ),
         'full' => array(
           'label' => 'above',
@@ -4730,7 +4730,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '19',
+          'weight' => '20',
         ),
         'full' => array(
           'label' => 'above',
@@ -4823,7 +4823,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '12',
+          'weight' => '13',
         ),
         'full' => array(
           'label' => 'above',
@@ -4911,7 +4911,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '13',
+          'weight' => '14',
         ),
         'full' => array(
           'label' => 'above',
@@ -4957,6 +4957,92 @@ function s4_sites_field_default_fields() {
         'settings' => array(),
         'type' => 'link_field',
         'weight' => '0',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-site-field_workflow_status'
+  $fields['node-site-field_workflow_status'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_workflow_status',
+      'foreign keys' => array(
+        'tid' => array(
+          'columns' => array(
+            'tid' => 'tid',
+          ),
+          'table' => 'taxonomy_term_data',
+        ),
+      ),
+      'global_block_settings' => '1',
+      'indexes' => array(
+        'tid' => array(
+          0 => 'tid',
+        ),
+      ),
+      'module' => 'taxonomy',
+      'settings' => array(
+        'allowed_values' => array(
+          0 => array(
+            'parent' => '0',
+            'vocabulary' => 'workflow_status',
+          ),
+        ),
+      ),
+      'translatable' => '1',
+      'type' => 'taxonomy_term_reference',
+    ),
+    'field_instance' => array(
+      'bundle' => 'site',
+      'default_value' => array(
+        0 => array(
+          'tid' => '67',
+        ),
+      ),
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'cck_blocks' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'default' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '6',
+        ),
+        'notifications' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_workflow_status',
+      'label' => 'Status',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(),
+        'type' => 'options_select',
+        'weight' => '27',
       ),
     ),
   );
@@ -5076,6 +5162,7 @@ function s4_sites_field_default_fields() {
   t('Site special requirements');
   t('Social network page');
   t('Special site instructions');
+  t('Status');
   t('Students can register with this staff');
   t('Tags');
   t('The date when a reminder to check on this file will be sent out.');
