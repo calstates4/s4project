@@ -46,7 +46,7 @@ function s4_editor_filter_default_formats() {
       ),
     ),
   );
-  
+
   // Exported format: Full HTML
   $formats['full_html'] = array(
     'format' => 'full_html',
