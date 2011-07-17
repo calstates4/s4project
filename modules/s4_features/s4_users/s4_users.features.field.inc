@@ -9,7 +9,7 @@
  */
 function s4_users_field_default_fields() {
   $fields = array();
-  
+
   // Exported field: 'user-user-field_course_ignore'
   $fields['user-user-field_course_ignore'] = array(
     'field_config' => array(
@@ -75,7 +75,7 @@ function s4_users_field_default_fields() {
       ),
     ),
   );
-  
+
   // Exported field: 'user-user-field_first_name'
   $fields['user-user-field_first_name'] = array(
     'field_config' => array(
@@ -270,8 +270,10 @@ function s4_users_field_default_fields() {
   // Translatables
   // Included for use with string extractors like potx.
   t('First Name');
+  t('If checked, the user will always be able to register with a site regardless of any membership in a course.');
   t('Last Name');
   t('Restricted to');
+  t('User is not restricted to a course');
 
   return $fields;
 }

@@ -2,6 +2,7 @@
 /**
  * @file
  */
+include_once('s4_users.features.inc');
 
 /**
 *	Implementation of hook_user_view
