@@ -12,5 +12,6 @@
 		$('.ui-accordion-header').each(function(index, element) {
 			$(this).prepend('<span class="number">' + (index + 1) +'.</span>');
 		});
+		
 	});
 })(jQuery);
