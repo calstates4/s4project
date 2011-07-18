@@ -1093,5 +1093,40 @@ function s4_sites_strongarm() {
   );
   $export['nodeformscols_field_placements_site_default'] = $strongarm;
 
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 's4_sites_workflow_67';
+  $strongarm->value = 'none';
+  $export['s4_sites_workflow_67'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 's4_sites_workflow_68';
+  $strongarm->value = 'none';
+  $export['s4_sites_workflow_68'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 's4_sites_workflow_69';
+  $strongarm->value = 'unpublish';
+  $export['s4_sites_workflow_69'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 's4_sites_workflow_70';
+  $strongarm->value = 'publish';
+  $export['s4_sites_workflow_70'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 's4_workflow_default_state';
+  $strongarm->value = '67';
+  $export['s4_workflow_default_state'] = $strongarm;
+
   return $export;
 }

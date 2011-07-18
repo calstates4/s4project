@@ -24,6 +24,15 @@ function s4_sites_menu_alter(&$items) {
 function s4_sites_menu() {
 	$items = array();
 	
+	$items['admin/config/s4/workflow'] = array(
+		'title' => 'Manage site workflow',
+		'description' => 'Mange how sites are proposed and approved',
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('s4_sites_admin_form'),
+		'file' => 's4_sites.admin.inc',
+		'access arguments' => array('administer site configuration'),
+	);
+	
 	$items['admin/config/s4/site-import'] = array(
 		'title' => 'Import site information',
 		'description' => 'Import sites from another database',
@@ -142,6 +151,8 @@ function s4_sites_form_site_node_form_alter(&$form, $form_state, $form_id) {
     $form['field_site_eval_form']['#access'] = false;
     $form['field_site_form']['#access'] = false;
     $form['field_workflow_status']['#access'] = false;
+	
+	drupal_add_js(array('wysiwyg' => array()), 'setting');
 	drupal_set_title(t('Request a new site'));
     drupal_add_js(drupal_get_path('module', 's4_sites') .'/js/s4_sites_accordion.js');
   }
@@ -156,6 +167,7 @@ function s4_sites_node_presave($node) {
      $user = user_load($node->uid);
      if(!user_access('moderate site information', $user)) {
        $node->status = 0;
+       $node->field_workflow_status[$node->language][0]['tid'] = variable_get('s4_sites_workflow_default_state', 0);
        drupal_set_message('Thanks for your site recommendation. We will be contacting you shortly.');
      }
   }

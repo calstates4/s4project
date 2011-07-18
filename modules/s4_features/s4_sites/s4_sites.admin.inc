@@ -210,3 +210,43 @@ function s4_sites_import_batch_finished($success, $results, $operations) {
   }
   drupal_set_message($message);
 }
+
+/**
+*  General administration form
+*/
+function s4_sites_admin_form() {
+	$form = array();
+	$workflow_status = false;
+	foreach(taxonomy_get_vocabularies() as $vid => $vocabulary) {
+		if($vocabulary->machine_name == 'workflow_status') {
+			$workflow_status = taxonomy_get_tree($vid);
+		}
+	}
+	
+	$default_options = array();
+	foreach($workflow_status as $status) {
+		$default_options[$status->tid] = $status->name;
+	}
+	
+	$form['s4_sites_workflow_default_state'] = array(
+		'#type' => 'radios',
+		'#title' => 'Select the default state when non-staff members create a site',
+		'#options' => $default_options,
+		'#default_value' => variable_get('s4_sites_workflow_default_state', 0),
+	);
+	
+	foreach($workflow_status as $status) {
+		$form['s4_sites_workflow_'. $status->tid] = array(
+			'#type' => 'select',
+			'#title' => t('Action to perform on @name', array('@name' => $status->name)),
+			'#options' => array(
+				'none' => 'Do nothing',
+				'publish' => 'Make site available (publish)',
+				'unpublish' => 'Remove site (unpublish)',
+			),
+			'#default_value' => variable_get('s4_sites_workflow_'. $status->tid, 'none'),
+		);
+	}
+	
+	return system_settings_form($form);
+}
