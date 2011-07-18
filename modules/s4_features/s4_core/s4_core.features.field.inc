@@ -720,7 +720,7 @@ function s4_core_field_default_fields() {
       'bundle' => 'signup',
       'default_value' => NULL,
       'deleted' => '0',
-      'description' => 'Enter the number of hours you worked at the site.',
+      'description' => 'Estimate the total number of hours you have worked at this site.',
       'display' => array(
         'cck_blocks' => array(
           'label' => 'above',
@@ -755,7 +755,7 @@ function s4_core_field_default_fields() {
       ),
       'entity_type' => 'node',
       'field_name' => 'field_signup_hours',
-      'label' => 'Total hours worked at the site',
+      'label' => 'Service hours',
       'required' => 0,
       'settings' => array(
         'max' => '',
@@ -1352,7 +1352,7 @@ function s4_core_field_default_fields() {
   t('Body');
   t('Coordinator');
   t('Course');
-  t('Enter the number of hours you worked at the site.');
+  t('Estimate the total number of hours you have worked at this site.');
   t('Evaluation Form Results');
   t('Files');
   t('Form instructions');
@@ -1360,9 +1360,9 @@ function s4_core_field_default_fields() {
   t('Last expected date of service');
   t('Let us know the last date you will be working on this site. This can be an approximation, and if you are singing up as part of a course, this will be automatically the last day of the semester.');
   t('Location');
+  t('Service hours');
   t('Signup Form Results');
   t('Site');
-  t('Total hours worked at the site');
   t('Type the name of the user who you will be signing up for.');
   t('User');
 

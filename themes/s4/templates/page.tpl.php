@@ -70,6 +70,11 @@
 		<?php if ($tabs = render($tabs)): ?>
        		<div class="tabs"><?php print $tabs; ?></div>
       	<?php endif; ?>
+      	<?php if ($page['help']): ?>
+			<div id="help">
+			  <?php print render($page['help']); ?>
+			</div>
+      	<?php endif; ?>
 	</div>
 		<?php if($page['content_top_left'] || $page['content_top_right']): ?>
 			<div id="content_top">

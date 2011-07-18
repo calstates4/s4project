@@ -422,6 +422,12 @@ function s4_core_context_default_contexts() {
           'region' => 'search',
           'weight' => '-46',
         ),
+        'system-help' => array(
+          'module' => 'system',
+          'delta' => 'help',
+          'region' => 'help',
+          'weight' => '-10',
+        ),
         'system-main' => array(
           'module' => 'system',
           'delta' => 'main',
