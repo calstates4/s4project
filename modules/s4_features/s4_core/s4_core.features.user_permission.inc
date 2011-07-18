@@ -1011,6 +1011,16 @@ function s4_core_user_default_permissions() {
     'module' => 'views_savedsearches',
   );
 
+  // Exported permission: view any unpublished content
+  $permissions['view any unpublished content'] = array(
+    'name' => 'view any unpublished content',
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'staff',
+    ),
+    'module' => 'view_unpublished',
+  );
+
   // Exported permission: view date repeats
   $permissions['view date repeats'] = array(
     'name' => 'view date repeats',

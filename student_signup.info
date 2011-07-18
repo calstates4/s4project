@@ -102,6 +102,7 @@ dependencies[] = select_or_other
 dependencies[] = strongarm
 dependencies[] = token
 dependencies[] = user_reference
+dependencies[] = view_unpublished
 dependencies[] = views
 dependencies[] = views_bulk_operations
 dependencies[] = views_calc

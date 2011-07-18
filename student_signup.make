@@ -119,6 +119,9 @@ projects[strongarm][version] = "2.0-beta2"
 projects[token][subdir] = "contrib"
 projects[token][version] = "1.0-beta2"
 
+projects[view_unpublished][subdir] = "contrib"
+projects[view_unpublished][version] = "1.0"
+
 projects[views][subdir] = "contrib"
 projects[views][version] = "3.x-dev"
 
