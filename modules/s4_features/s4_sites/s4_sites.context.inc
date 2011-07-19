@@ -69,89 +69,95 @@ function s4_sites_context_default_contexts() {
           'region' => 'content_subscriptions',
           'weight' => '-10',
         ),
+        's4_sites-s4_sites_site_status' => array(
+          'module' => 's4_sites',
+          'delta' => 's4_sites_site_status',
+          'region' => 'content_right',
+          'weight' => '-10',
+        ),
         's4_core-user_site_signup' => array(
           'module' => 's4_core',
           'delta' => 'user_site_signup',
           'region' => 'content_right',
-          'weight' => '-54',
+          'weight' => '-9',
         ),
         'views-user_courses-block_1' => array(
           'module' => 'views',
           'delta' => 'user_courses-block_1',
           'region' => 'content_right',
-          'weight' => '-53',
+          'weight' => '-8',
         ),
         'cck_blocks-field_csu_facility' => array(
           'module' => 'cck_blocks',
           'delta' => 'field_csu_facility',
           'region' => 'content_right',
-          'weight' => '-52',
+          'weight' => '-7',
         ),
         'cck_blocks-field_csu_org_type' => array(
           'module' => 'cck_blocks',
           'delta' => 'field_csu_org_type',
           'region' => 'content_right',
-          'weight' => '-51',
+          'weight' => '-6',
         ),
         'cck_blocks-field_website' => array(
           'module' => 'cck_blocks',
           'delta' => 'field_website',
           'region' => 'content_right',
-          'weight' => '-50',
+          'weight' => '-5',
         ),
         'cck_blocks-field_phone' => array(
           'module' => 'cck_blocks',
           'delta' => 'field_phone',
           'region' => 'content_right',
-          'weight' => '-49',
+          'weight' => '-4',
         ),
         'cck_blocks-field_location' => array(
           'module' => 'cck_blocks',
           'delta' => 'field_location',
           'region' => 'content_right',
-          'weight' => '-48',
+          'weight' => '-3',
         ),
         'cck_blocks-field_site_images' => array(
           'module' => 'cck_blocks',
           'delta' => 'field_site_images',
           'region' => 'content_right',
-          'weight' => '-41',
-        ),
-        'cck_blocks-field_site_requirements' => array(
-          'module' => 'cck_blocks',
-          'delta' => 'field_site_requirements',
-          'region' => 'content_right',
-          'weight' => '-10',
-        ),
-        'cck_blocks-field_site_language' => array(
-          'module' => 'cck_blocks',
-          'delta' => 'field_site_language',
-          'region' => 'content_right',
-          'weight' => '-10',
-        ),
-        'cck_blocks-field_site_demographics' => array(
-          'module' => 'cck_blocks',
-          'delta' => 'field_site_demographics',
-          'region' => 'content_right',
-          'weight' => '-10',
-        ),
-        'cck_blocks-field_site_hours_minimum' => array(
-          'module' => 'cck_blocks',
-          'delta' => 'field_site_hours_minimum',
-          'region' => 'content_right',
-          'weight' => '-10',
+          'weight' => '-2',
         ),
         'cck_blocks-field_site_facebook_page' => array(
           'module' => 'cck_blocks',
           'delta' => 'field_site_facebook_page',
           'region' => 'content_right',
-          'weight' => '-10',
+          'weight' => '-1',
         ),
         'cck_blocks-field_signups_max' => array(
           'module' => 'cck_blocks',
           'delta' => 'field_signups_max',
           'region' => 'content_right',
-          'weight' => '-10',
+          'weight' => '0',
+        ),
+        'cck_blocks-field_site_hours_minimum' => array(
+          'module' => 'cck_blocks',
+          'delta' => 'field_site_hours_minimum',
+          'region' => 'content_right',
+          'weight' => '1',
+        ),
+        'cck_blocks-field_site_demographics' => array(
+          'module' => 'cck_blocks',
+          'delta' => 'field_site_demographics',
+          'region' => 'content_right',
+          'weight' => '2',
+        ),
+        'cck_blocks-field_site_requirements' => array(
+          'module' => 'cck_blocks',
+          'delta' => 'field_site_requirements',
+          'region' => 'content_right',
+          'weight' => '3',
+        ),
+        'cck_blocks-field_site_language' => array(
+          'module' => 'cck_blocks',
+          'delta' => 'field_site_language',
+          'region' => 'content_right',
+          'weight' => '4',
         ),
       ),
     ),
@@ -473,6 +479,45 @@ function s4_sites_context_default_contexts() {
   t('User is on the site students list');
   t('site');
   $export['site-students'] = $context;
+
+  $context = new stdClass;
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
+  $context->name = 'sites-talk-page';
+  $context->description = 'User is on the talk page';
+  $context->tag = 'sites';
+  $context->conditions = array(
+    'path' => array(
+      'values' => array(
+        'node/*/talk' => 'node/*/talk',
+      ),
+    ),
+    'user' => array(
+      'values' => array(
+        'administrator' => 'administrator',
+        'staff' => 'staff',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        's4_sites-s4_sites_site_comment' => array(
+          'module' => 's4_sites',
+          'delta' => 's4_sites_site_comment',
+          'region' => 'content_right',
+          'weight' => '-10',
+        ),
+      ),
+    ),
+  );
+  $context->condition_mode = 1;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('User is on the talk page');
+  t('sites');
+  $export['sites-talk-page'] = $context;
 
   $context = new stdClass;
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */

@@ -369,11 +369,121 @@ a, a:visited {
 .submitted {
   margin: 10px 0;
   color: #666666;
-  font-style: italic;
 }
 .postal-address, address {
   margin: 15px 0;
   font-style: normal;
+}
+/** COMMENTS **/
+.comment {
+  margin-bottom: 20px;
+  display: table;
+  vertical-align: top;
+}
+.comment h2.title {
+  margin-bottom: 1em;
+}
+.comment div.user-picture img {
+  margin-left: 0;
+  /* LTR */
+}
+.comment .attribution {
+  display: table-cell;
+  padding: 0 30px 0 0;
+  /* LTR */
+
+  vertical-align: top;
+  overflow: hidden;
+}
+.comment .attribution img {
+  margin: 0;
+  border: 1px solid #d3d7d9;
+}
+.comment .attribution .username {
+  white-space: nowrap;
+}
+.comment .submitted p {
+  margin: 4px 0;
+  font-size: 1.071em;
+  line-height: 1.2;
+}
+.comment .submitted .comment-time {
+  font-size: 0.786em;
+  color: #68696b;
+}
+.comment .submitted .comment-permalink {
+  font-size: 0.786em;
+  text-transform: lowercase;
+}
+.comment .content {
+  font-size: 0.929em;
+  line-height: 1.6;
+}
+.comment .comment-arrow {
+  background: url(../images/comment-arrow.gif) no-repeat 0 center transparent;
+  /* LTR */
+
+  border-left: 1px solid #fff;
+  border-right: 1px solid #fff;
+  height: 40px;
+  margin-left: -47px;
+  /* LTR */
+
+  margin-top: 10px;
+  position: absolute;
+  width: 20px;
+}
+.comment .comment-text {
+  padding: 10px 25px;
+  border: 1px solid #d3d7d9;
+  display: table-cell;
+  vertical-align: top;
+  position: relative;
+  width: 100%;
+}
+.comment .indented {
+  margin-left: 40px;
+  /* LTR */
+}
+.comment ul.links {
+  padding: 0 0 0.25em 0;
+}
+.comment ul.links li {
+  padding: 0 0.5em 0 0;
+  /* LTR */
+}
+.comment-unpublished {
+  margin-right: 5px;
+  /* LTR */
+
+  padding: 5px 2px 5px 5px;
+  /* LTR */
+}
+.comment-unpublished .comment-text .comment-arrow {
+  border-left: 1px solid #fff4f4;
+  border-right: 1px solid #fff4f4;
+}
+#content .comment .links a {
+  background: #b2d0e0;
+  border: none;
+  color: #fff;
+  border-radius: 0px;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+}
+#content .comment ul.links.inline li {
+  margin: 0px;
+  padding: 0px;
+}
+#content .comment ul.links.inline li.first a {
+  border-radius: 4px 0 0 4px;
+  -moz-border-radius: 4px 0 0 4px;
+  -webkit-border-radius: 4px 0 0 4px;
+}
+#content .comment ul.links.inline li.last a {
+  border-radius: 0 4px 4px 0;
+  -moz-border-radius: 0 4px 4px 0;
+  -webkit-border-radius: 0 4px 4px 0;
 }
 /** TAGS **/
 .field-type-taxonomy-term-reference .field-items {
@@ -523,6 +633,9 @@ legend {
 }
 .form-region-right input[type=text], .form-region-right fieldset {
   width: 298.3333333333333px;
+}
+.region-content-right input[type=text] {
+  width: 100%;
 }
 .form-region-right table input[type=text] {
   width: 150px;

@@ -100,6 +100,7 @@ dependencies[] = references
 dependencies[] = save_draft
 dependencies[] = select_or_other
 dependencies[] = strongarm
+dependencies[] = talk
 dependencies[] = token
 dependencies[] = user_reference
 dependencies[] = view_unpublished

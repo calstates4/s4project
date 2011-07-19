@@ -189,14 +189,14 @@ function s4_sites_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'comment_preview_site';
-  $strongarm->value = '1';
+  $strongarm->value = '0';
   $export['comment_preview_site'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'comment_site';
-  $strongarm->value = '0';
+  $strongarm->value = '2';
   $export['comment_site'] = $strongarm;
 
   $strongarm = new stdClass;
@@ -226,6 +226,13 @@ function s4_sites_strongarm() {
   $strongarm->name = 'comment_subject_field_site';
   $strongarm->value = 1;
   $export['comment_subject_field_site'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'comment_talk_site';
+  $strongarm->value = 1;
+  $export['comment_talk_site'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -1127,6 +1134,34 @@ function s4_sites_strongarm() {
   $strongarm->name = 's4_workflow_default_state';
   $strongarm->value = '67';
   $export['s4_workflow_default_state'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'talk_link';
+  $strongarm->value = '';
+  $export['talk_link'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'talk_page';
+  $strongarm->value = 'Approval status';
+  $export['talk_page'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'talk_page_no_comments';
+  $strongarm->value = 1;
+  $export['talk_page_no_comments'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'talk_tab';
+  $strongarm->value = 'Approval';
+  $export['talk_tab'] = $strongarm;
 
   return $export;
 }

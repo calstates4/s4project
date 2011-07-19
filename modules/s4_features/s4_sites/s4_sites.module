@@ -16,6 +16,24 @@ function s4_sites_menu_alter(&$items) {
   $items['node/%/notes']['access arguments'] = array(1);
   $items['node/%/files']['access callback'] = '_s4_sites_site_admin_view_access';
   $items['node/%/files']['access arguments'] = array(1);
+  $items['node/%node/talk']['access callback'] = 's4_sites_talk_access';
+  $items['node/%node/talk']['title callback'] = 's4_sites_talk_title';
+}
+
+/**
+*  Talk page title 
+*  @todo Add a counter for unread content
+*/
+function s4_sites_talk_title() {
+	global $user;
+	return variable_get('talk_tab', '') . $count;
+}
+
+/**
+*  Access callback for the talk page
+*/
+function s4_sites_talk_access($node) {
+	return ($node->type == 'site' && user_access('moderate site information'));
 }
 
 /**
@@ -80,6 +98,8 @@ function s4_sites_init() {
 function s4_sites_block_info() {
   $blocks['s4_sites_search_help'] = array('info' => 'Site list help');
   $blocks['s4_sites_search_map'] = array('info' => 'Site list map');
+  $blocks['s4_sites_site_status'] = array('info' => 'Site status indicator');
+  $blocks['s4_sites_site_comment'] = array('info' => 'Site comment form');
   return $blocks;
 }
 
@@ -109,6 +129,21 @@ function s4_sites_block_view($delta) {
       );
       return array('subject' => '',
              'content' => '<div id="site-list-map">'. drupal_render($map) . t('<h4>!link</h4>', array('!link' => l('View large map', 'map'))) . '</div>');
+      break;
+    case 's4_sites_site_status':
+      $node = menu_get_object();
+      $status = field_get_items('node', $node, 'field_workflow_status');
+      if(!user_access('moderate site information') || !$status[0]['tid'] || $node->status) {
+      	return null;
+      }
+      $term = taxonomy_term_load($status[0]['tid']);
+      return array('subject' => null,
+      			   'content' => t('<div class="signup">Approval status: <strong>@status</strong></div>', array('@status' => $term->name)));
+      break;
+    case 's4_sites_site_comment':
+      $node = menu_get_object();
+      return array('subject' => 'Add a new note',
+      			   'content' => drupal_get_form("comment_node_{$node->type}_form", (object) array('nid' => $node->nid)));
       break;
   }
   
@@ -394,4 +429,25 @@ function _s4_sites_format_site_population_matrix($entity_type, $entity, $field, 
 		'#data' => $data,
 	);
 	return $element;
+}
+
+function s4_sites_node_update($node) {
+	if($node->type == 'site') {
+		$status = field_get_items('node', $node, 'field_workflow_status');
+		if(variable_get('s4_sites_workflow_'. $status[0]['tid']) == 'publish') {
+			$node->status = 1;
+		}
+		if(variable_get('s4_sites_workflow_'. $status[0]['tid']) == 'unpublish') {
+			$node->status = 0;
+		}
+	}
+}
+
+function s4_sites_comment_presave($comment) {
+	$target = node_load($comment->nid);
+	if($target->type == 'site') {
+		$status = field_get_items('comment', $comment, 'field_workflow_status');
+		$target->field_workflow_status[$node->langauge][0]['tid'] = $status[0]['tid'];
+		node_save($target);
+	}
 }
