@@ -25,5 +25,6 @@
 				$('#demographic-total').removeClass('error');
 			}
 		});
+		$('.field-name-field-site-demographics input[type=text]:first').trigger('keyup');
 	});
 })(jQuery);

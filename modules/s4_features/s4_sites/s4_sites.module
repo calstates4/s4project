@@ -142,7 +142,7 @@ function s4_sites_block_view($delta) {
       break;
     case 's4_sites_site_comment':
       $node = menu_get_object();
-      return array('subject' => 'Add a new note',
+      return array('subject' => 'Post new update',
       			   'content' => drupal_get_form("comment_node_{$node->type}_form", (object) array('nid' => $node->nid)));
       break;
   }
@@ -447,7 +447,8 @@ function s4_sites_comment_presave($comment) {
 	$target = node_load($comment->nid);
 	if($target->type == 'site') {
 		$status = field_get_items('comment', $comment, 'field_workflow_status');
-		$target->field_workflow_status[$node->langauge][0]['tid'] = $status[0]['tid'];
+		$target->field_workflow_status[$target->language] = $status;
+		$target->revision = true;
 		node_save($target);
 	}
 }

@@ -2055,6 +2055,372 @@ function s4_sites_views_default_views() {
   $export['site_coordinators'] = $view;
 
   $view = new view;
+  $view->name = 'site_fields';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'node';
+  $view->human_name = 'Site fields';
+  $view->core = 7;
+  $view->api_version = '3.0-alpha1';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['query_comment'] = FALSE;
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '1';
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['row_plugin'] = 'fields';
+  /* Field: Content: Organization type */
+  $handler->display->display_options['fields']['field_csu_org_type']['id'] = 'field_csu_org_type';
+  $handler->display->display_options['fields']['field_csu_org_type']['table'] = 'field_data_field_csu_org_type';
+  $handler->display->display_options['fields']['field_csu_org_type']['field'] = 'field_csu_org_type';
+  $handler->display->display_options['fields']['field_csu_org_type']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_csu_org_type']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_csu_org_type']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_csu_org_type']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_csu_org_type']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_csu_org_type']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_csu_org_type']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_csu_org_type']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_csu_org_type']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_csu_org_type']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_csu_org_type']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_csu_org_type']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_csu_org_type']['element_label_type'] = 'strong';
+  $handler->display->display_options['fields']['field_csu_org_type']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_csu_org_type']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_csu_org_type']['hide_empty'] = 1;
+  $handler->display->display_options['fields']['field_csu_org_type']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_csu_org_type']['hide_alter_empty'] = 0;
+  $handler->display->display_options['fields']['field_csu_org_type']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_csu_org_type']['field_api_classes'] = 0;
+  /* Field: Content: Issues addressed */
+  $handler->display->display_options['fields']['field_csu_facility']['id'] = 'field_csu_facility';
+  $handler->display->display_options['fields']['field_csu_facility']['table'] = 'field_data_field_csu_facility';
+  $handler->display->display_options['fields']['field_csu_facility']['field'] = 'field_csu_facility';
+  $handler->display->display_options['fields']['field_csu_facility']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_csu_facility']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_csu_facility']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_csu_facility']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_csu_facility']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_csu_facility']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_csu_facility']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_csu_facility']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_csu_facility']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_csu_facility']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_csu_facility']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_csu_facility']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_csu_facility']['element_label_type'] = 'strong';
+  $handler->display->display_options['fields']['field_csu_facility']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_csu_facility']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_csu_facility']['hide_empty'] = 1;
+  $handler->display->display_options['fields']['field_csu_facility']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_csu_facility']['hide_alter_empty'] = 0;
+  $handler->display->display_options['fields']['field_csu_facility']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_csu_facility']['field_api_classes'] = 0;
+  /* Field: Content: Website */
+  $handler->display->display_options['fields']['field_website']['id'] = 'field_website';
+  $handler->display->display_options['fields']['field_website']['table'] = 'field_data_field_website';
+  $handler->display->display_options['fields']['field_website']['field'] = 'field_website';
+  $handler->display->display_options['fields']['field_website']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_website']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_website']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_website']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_website']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_website']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_website']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_website']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_website']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_website']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_website']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_website']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_website']['element_label_type'] = 'strong';
+  $handler->display->display_options['fields']['field_website']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_website']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_website']['hide_empty'] = 1;
+  $handler->display->display_options['fields']['field_website']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_website']['hide_alter_empty'] = 0;
+  $handler->display->display_options['fields']['field_website']['click_sort_column'] = 'url';
+  $handler->display->display_options['fields']['field_website']['type'] = 'url';
+  $handler->display->display_options['fields']['field_website']['field_api_classes'] = 0;
+  /* Field: Content: Social network page */
+  $handler->display->display_options['fields']['field_site_facebook_page']['id'] = 'field_site_facebook_page';
+  $handler->display->display_options['fields']['field_site_facebook_page']['table'] = 'field_data_field_site_facebook_page';
+  $handler->display->display_options['fields']['field_site_facebook_page']['field'] = 'field_site_facebook_page';
+  $handler->display->display_options['fields']['field_site_facebook_page']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_site_facebook_page']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_site_facebook_page']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_site_facebook_page']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_site_facebook_page']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_site_facebook_page']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_site_facebook_page']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_site_facebook_page']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_site_facebook_page']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_site_facebook_page']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_site_facebook_page']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_site_facebook_page']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_site_facebook_page']['element_label_type'] = 'strong';
+  $handler->display->display_options['fields']['field_site_facebook_page']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_site_facebook_page']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_site_facebook_page']['hide_empty'] = 1;
+  $handler->display->display_options['fields']['field_site_facebook_page']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_site_facebook_page']['hide_alter_empty'] = 0;
+  $handler->display->display_options['fields']['field_site_facebook_page']['click_sort_column'] = 'url';
+  $handler->display->display_options['fields']['field_site_facebook_page']['type'] = 'url';
+  $handler->display->display_options['fields']['field_site_facebook_page']['field_api_classes'] = 0;
+  /* Field: Content: Phone number */
+  $handler->display->display_options['fields']['field_phone']['id'] = 'field_phone';
+  $handler->display->display_options['fields']['field_phone']['table'] = 'field_data_field_phone';
+  $handler->display->display_options['fields']['field_phone']['field'] = 'field_phone';
+  $handler->display->display_options['fields']['field_phone']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_phone']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_phone']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_phone']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_phone']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_phone']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_phone']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_phone']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_phone']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_phone']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_phone']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_phone']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_phone']['element_label_type'] = 'strong';
+  $handler->display->display_options['fields']['field_phone']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_phone']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_phone']['hide_empty'] = 1;
+  $handler->display->display_options['fields']['field_phone']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_phone']['hide_alter_empty'] = 0;
+  $handler->display->display_options['fields']['field_phone']['click_sort_column'] = 'number';
+  $handler->display->display_options['fields']['field_phone']['type'] = 's4_sites_local_phone_number';
+  $handler->display->display_options['fields']['field_phone']['field_api_classes'] = 0;
+  /* Field: Content: Location(s) */
+  $handler->display->display_options['fields']['field_location']['id'] = 'field_location';
+  $handler->display->display_options['fields']['field_location']['table'] = 'field_data_field_location';
+  $handler->display->display_options['fields']['field_location']['field'] = 'field_location';
+  $handler->display->display_options['fields']['field_location']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_location']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_location']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_location']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_location']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_location']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_location']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_location']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_location']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_location']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_location']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_location']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_location']['element_label_type'] = 'strong';
+  $handler->display->display_options['fields']['field_location']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_location']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_location']['hide_empty'] = 1;
+  $handler->display->display_options['fields']['field_location']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_location']['hide_alter_empty'] = 0;
+  $handler->display->display_options['fields']['field_location']['type'] = 's4_sites_address';
+  $handler->display->display_options['fields']['field_location']['group_rows'] = 1;
+  $handler->display->display_options['fields']['field_location']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_location']['delta_reversed'] = 0;
+  $handler->display->display_options['fields']['field_location']['field_api_classes'] = 0;
+  /* Field: Content: Site Images */
+  $handler->display->display_options['fields']['field_site_images']['id'] = 'field_site_images';
+  $handler->display->display_options['fields']['field_site_images']['table'] = 'field_data_field_site_images';
+  $handler->display->display_options['fields']['field_site_images']['field'] = 'field_site_images';
+  $handler->display->display_options['fields']['field_site_images']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_site_images']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_site_images']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_site_images']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_site_images']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_site_images']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_site_images']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_site_images']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_site_images']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_site_images']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_site_images']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_site_images']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_site_images']['element_label_type'] = 'strong';
+  $handler->display->display_options['fields']['field_site_images']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_site_images']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_site_images']['hide_empty'] = 1;
+  $handler->display->display_options['fields']['field_site_images']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_site_images']['hide_alter_empty'] = 0;
+  $handler->display->display_options['fields']['field_site_images']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_site_images']['type'] = 'medium_fancybox';
+  $handler->display->display_options['fields']['field_site_images']['settings'] = array(
+    'image_style' => '',
+    'image_link' => '',
+  );
+  $handler->display->display_options['fields']['field_site_images']['group_rows'] = 1;
+  $handler->display->display_options['fields']['field_site_images']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_site_images']['delta_reversed'] = 0;
+  $handler->display->display_options['fields']['field_site_images']['field_api_classes'] = 0;
+  /* Field: Content: What languages would you like students to speak other than English? */
+  $handler->display->display_options['fields']['field_site_language']['id'] = 'field_site_language';
+  $handler->display->display_options['fields']['field_site_language']['table'] = 'field_data_field_site_language';
+  $handler->display->display_options['fields']['field_site_language']['field'] = 'field_site_language';
+  $handler->display->display_options['fields']['field_site_language']['label'] = 'Suggested languages';
+  $handler->display->display_options['fields']['field_site_language']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_site_language']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_site_language']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_site_language']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_site_language']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_site_language']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_site_language']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_site_language']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_site_language']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_site_language']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_site_language']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_site_language']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_site_language']['element_label_type'] = 'strong';
+  $handler->display->display_options['fields']['field_site_language']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_site_language']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_site_language']['hide_empty'] = 1;
+  $handler->display->display_options['fields']['field_site_language']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_site_language']['hide_alter_empty'] = 0;
+  $handler->display->display_options['fields']['field_site_language']['field_api_classes'] = 0;
+  /* Field: Content: By percentage, what is the demographic of the population you serve? */
+  $handler->display->display_options['fields']['field_site_demographics']['id'] = 'field_site_demographics';
+  $handler->display->display_options['fields']['field_site_demographics']['table'] = 'field_data_field_site_demographics';
+  $handler->display->display_options['fields']['field_site_demographics']['field'] = 'field_site_demographics';
+  $handler->display->display_options['fields']['field_site_demographics']['label'] = 'Population served';
+  $handler->display->display_options['fields']['field_site_demographics']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_site_demographics']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_site_demographics']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_site_demographics']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_site_demographics']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_site_demographics']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_site_demographics']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_site_demographics']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_site_demographics']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_site_demographics']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_site_demographics']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_site_demographics']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_site_demographics']['element_label_type'] = 'strong';
+  $handler->display->display_options['fields']['field_site_demographics']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_site_demographics']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_site_demographics']['hide_empty'] = 1;
+  $handler->display->display_options['fields']['field_site_demographics']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_site_demographics']['hide_alter_empty'] = 0;
+  $handler->display->display_options['fields']['field_site_demographics']['type'] = 's4_sites_population_matrix';
+  $handler->display->display_options['fields']['field_site_demographics']['group_rows'] = 1;
+  $handler->display->display_options['fields']['field_site_demographics']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_site_demographics']['delta_reversed'] = 0;
+  $handler->display->display_options['fields']['field_site_demographics']['field_api_classes'] = 0;
+  /* Field: Content: Maximum number of students */
+  $handler->display->display_options['fields']['field_signups_max']['id'] = 'field_signups_max';
+  $handler->display->display_options['fields']['field_signups_max']['table'] = 'field_data_field_signups_max';
+  $handler->display->display_options['fields']['field_signups_max']['field'] = 'field_signups_max';
+  $handler->display->display_options['fields']['field_signups_max']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_signups_max']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_signups_max']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_signups_max']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_signups_max']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_signups_max']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_signups_max']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_signups_max']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_signups_max']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_signups_max']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_signups_max']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_signups_max']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_signups_max']['element_label_type'] = 'strong';
+  $handler->display->display_options['fields']['field_signups_max']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_signups_max']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_signups_max']['hide_empty'] = 1;
+  $handler->display->display_options['fields']['field_signups_max']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_signups_max']['hide_alter_empty'] = 0;
+  $handler->display->display_options['fields']['field_signups_max']['settings'] = array(
+    'thousand_separator' => ' ',
+    'prefix_suffix' => 1,
+  );
+  $handler->display->display_options['fields']['field_signups_max']['field_api_classes'] = 0;
+  /* Field: Content: What is the minimum number of hours you would require of a student in service per term */
+  $handler->display->display_options['fields']['field_site_hours_minimum']['id'] = 'field_site_hours_minimum';
+  $handler->display->display_options['fields']['field_site_hours_minimum']['table'] = 'field_data_field_site_hours_minimum';
+  $handler->display->display_options['fields']['field_site_hours_minimum']['field'] = 'field_site_hours_minimum';
+  $handler->display->display_options['fields']['field_site_hours_minimum']['label'] = 'Minimum hours';
+  $handler->display->display_options['fields']['field_site_hours_minimum']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_site_hours_minimum']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_site_hours_minimum']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_site_hours_minimum']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_site_hours_minimum']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_site_hours_minimum']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_site_hours_minimum']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_site_hours_minimum']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_site_hours_minimum']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_site_hours_minimum']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_site_hours_minimum']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_site_hours_minimum']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_site_hours_minimum']['element_label_type'] = 'strong';
+  $handler->display->display_options['fields']['field_site_hours_minimum']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_site_hours_minimum']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_site_hours_minimum']['hide_empty'] = 1;
+  $handler->display->display_options['fields']['field_site_hours_minimum']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_site_hours_minimum']['hide_alter_empty'] = 0;
+  $handler->display->display_options['fields']['field_site_hours_minimum']['field_api_classes'] = 0;
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Contextual filter: Content: Nid */
+  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['table'] = 'node';
+  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'node';
+  $handler->display->display_options['arguments']['nid']['default_argument_skip_url'] = 0;
+  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['nid']['break_phrase'] = 0;
+  $handler->display->display_options['arguments']['nid']['not'] = 0;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 0;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'site' => 'site',
+  );
+
+  /* Display: Block */
+  $handler = $view->new_display('block', 'Block', 'block');
+  $handler->display->display_options['block_description'] = 'Site fields';
+  $translatables['site_fields'] = array(
+    t('Master'),
+    t('more'),
+    t('Apply'),
+    t('Reset'),
+    t('Sort by'),
+    t('Asc'),
+    t('Desc'),
+    t('Organization type'),
+    t('Issues addressed'),
+    t('Website'),
+    t('Social network page'),
+    t('Phone number'),
+    t('Location(s)'),
+    t('Site Images'),
+    t('Suggested languages'),
+    t('Population served'),
+    t('Maximum number of students'),
+    t('Minimum hours'),
+    t('All'),
+    t('Block'),
+    t('Site fields'),
+  );
+  $export['site_fields'] = $view;
+
+  $view = new view;
   $view->name = 'site_location';
   $view->description = '';
   $view->tag = 'default';
