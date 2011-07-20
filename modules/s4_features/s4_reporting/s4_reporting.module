@@ -39,6 +39,9 @@ function theme_s4_reporting_chart_pie($data) {
 			$i++;
 		}
 	}
+	if(count($values) == 3) {
+		return null;
+	}
 	drupal_add_js(sprintf($script, implode("\n", $values)), 'inline');
 	return '<div class="chart-pie" id="'. $data['id'] .'"></div>';
 }
