@@ -416,6 +416,9 @@ function s4_courses_notifications($op) {
   }
 }
 
+/**
+*	Implementation of hook_signup_post_action
+*/
 function s4_courses_signup_post_action($node, $context = array()) {
   $node = $context['node'];
   if ($node->type == 'course') { 
@@ -423,6 +426,9 @@ function s4_courses_signup_post_action($node, $context = array()) {
   }
 }
 
+/**
+*	Implementation of hook_action_info
+*/
 function s4_courses_action_info() {
   return array(
     's4_courses_signup_post_action' => array(
@@ -435,6 +441,9 @@ function s4_courses_action_info() {
   );
 }
 
+/**
+*	Notification subscriptions
+*/
 function s4_courses_notifications_subscription($op, $subscription = NULL) {
   switch ($op) {
     case 'page objects':
@@ -448,6 +457,9 @@ function s4_courses_notifications_subscription($op, $subscription = NULL) {
   }  
 }
 
+/**
+*	Implementation of hook_node_event
+*/
 function s4_courses_node_event($action, $node) {
   $page = &drupal_static(__FUNCTION__);
   if (!isset($page[$action][$node->nid])) {
@@ -456,6 +468,9 @@ function s4_courses_node_event($action, $node) {
   return $page[$action][$node->nid];
 }
 
+/**
+*	Implementation of hook_node_insert
+*/
 function s4_courses_node_insert($node) {
   if ($node->type == 'signup') {
     $course = field_get_items('node', $node, 'field_course');
@@ -464,6 +479,9 @@ function s4_courses_node_insert($node) {
   }
 }
 
+/**
+*	Implementation of hook_trigger_info
+*/
 function s4_courses_trigger_info() {
   return array(
     'node' => array(
@@ -474,6 +492,9 @@ function s4_courses_trigger_info() {
   );
 }
 
+/**
+*	Course tokens
+*/
 function s4_courses_tokens($type, $tokens, array $data = array(), array $options = array()) {
   if ($type == 's4_signup') {
     $signup = $object;
@@ -482,6 +503,9 @@ function s4_courses_tokens($type, $tokens, array $data = array(), array $options
   }
 }
 
+/**
+*	Implementation of hook_token_info
+*/
 function s4_courses_token_info() {
   $type = array(
     'name' => t('Student course'),
@@ -506,7 +530,10 @@ function s4_courses_token_info() {
     );
 }
 
- function s4_courses_context_plugins() {
+/**
+*	Implementation of hook_context_plugins
+*/
+function s4_courses_context_plugins() {
   $plugins = array();
   $plugins['s4_courses_user_edit_course'] = array(
     'handler' => array(
@@ -519,6 +546,9 @@ function s4_courses_token_info() {
   return $plugins;
 }
 
+/**
+*	Implementation of hook_context_registry
+*/
 function s4_courses_context_registry() {
   return array(
     'conditions' => array(
@@ -530,6 +560,10 @@ function s4_courses_context_registry() {
   );
 }
 
+/**
+*	Implementation of hook_node_view
+*	Here we trigger the user can edit course context
+*/
 function s4_courses_node_view($node, $view_mode) {
   if ($view_mode === 'full') {
     $object = menu_get_object();
