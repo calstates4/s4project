@@ -141,6 +141,12 @@ function s4_core_context_default_contexts() {
           'region' => 'content',
           'weight' => '-9',
         ),
+        'views-course_students-block_1' => array(
+          'module' => 'views',
+          'delta' => 'course_students-block_1',
+          'region' => 'content',
+          'weight' => '-10',
+        ),
         'views-65656e1f5a12cde25f0722f735fe7969' => array(
           'module' => 'views',
           'delta' => '65656e1f5a12cde25f0722f735fe7969',

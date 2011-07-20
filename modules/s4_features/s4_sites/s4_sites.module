@@ -138,7 +138,7 @@ function s4_sites_block_view($delta) {
       }
       $term = taxonomy_term_load($status[0]['tid']);
       return array('subject' => null,
-      			   'content' => t('<div class="signup">Approval status: <strong>@status</strong></div>', array('@status' => $term->name)));
+      			   'content' => t('<div class="signup" style="height: auto;">Approval status: <strong>@status</strong></div>', array('@status' => $term->name)));
       break;
     case 's4_sites_site_comment':
       $node = menu_get_object();
@@ -447,7 +447,7 @@ function s4_sites_comment_presave($comment) {
 	$target = node_load($comment->nid);
 	if($target->type == 'site') {
 		$status = field_get_items('comment', $comment, 'field_workflow_status');
-		$target->field_workflow_status[$target->language] = $status;
+		$target->field_workflow_status[$target->language][0]['tid'] = $status[0]['tid'];
 		$target->revision = true;
 		node_save($target);
 	}

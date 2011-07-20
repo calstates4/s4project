@@ -292,6 +292,7 @@ function s4_courses_views_api() {
 function s4_courses_block_info() {
   $blocks['s4_courses_add_course'] = array('info' => 'Add new course button');
   $blocks['s4_courses_subscriptions'] = array('info' => 'Subscribe to new signups');
+  $blocks['s4_courses_restriction_form'] = array('info' => 'Edit course site restriction');
   return $blocks;
 }
 
@@ -349,7 +350,54 @@ function s4_courses_block_view($delta) {
         }
       }
       break;
+    case 's4_courses_restriction_form': 
+      $node = menu_get_object();
+      global $user;
+      if($node->type != 'course') {
+        return null;
+      }
+      $faculty = array();
+      $course_faculty = field_get_items('node', $node, 'field_course_faculty');
+		if(is_array($course_faculty)) {
+		  foreach($course_faculty as $faculty_uid) {
+		  	$faculty[] = $faculty_uid['uid'];
+		  }
+		}
+	  if(!in_array($user->uid, $faculty) && !node_access('update', $node)) {
+	  	return null;
+	  }
+	  return array('subject' => '',
+	  			   'content' => drupal_get_form('s4_courses_edit_course_restrict_form'));
+      break;
   }
+}
+
+function s4_courses_edit_course_restrict_form() {
+	$node = menu_get_object();
+	$form = array();
+	
+	$default = field_get_items('node', $node, 'field_site_restrict_to_list');
+	
+	$form['field_site_restrict_to_list'] = array(
+		'#type' => 'checkbox', 
+		'#title' => 'Restrict students to only selected sites',
+		'#default_value' => $default[0]['value'],
+	);
+	
+	$form['submit'] = array(
+		'#type' => 'submit',
+		'#value' => 'Update',
+	);
+	
+	return $form;
+}
+
+function s4_courses_edit_course_restrict_form_submit($form, $form_state) {
+	$node = menu_get_object();
+	$node->field_site_restrict_to_list[$node->language][0]['value'] = 
+	   $form_state['values']['field_site_restrict_to_list'];
+	node_save($node);
+	drupal_set_message('Your course has been updated.');
 }
 
 /**
