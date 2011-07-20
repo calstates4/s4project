@@ -126,10 +126,9 @@ function s4_courses_context_default_contexts() {
         'node_form' => '0',
       ),
     ),
-    'user' => array(
+    'user_edit_course' => array(
       'values' => array(
-        'faculty' => 'faculty',
-        'staff' => 'staff',
+        1 => 1,
       ),
     ),
   );

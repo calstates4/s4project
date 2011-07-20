@@ -505,3 +505,38 @@ function s4_courses_token_info() {
       'tokens' => array('s4_signup' => $tokens),
     );
 }
+
+ function s4_courses_context_plugins() {
+  $plugins = array();
+  $plugins['s4_courses_user_edit_course'] = array(
+    'handler' => array(
+      'path' => drupal_get_path('module', 's4_courses') .'/plugins',
+      'file' => 's4_courses_user_edit_course.inc',
+      'class' => 's4_courses_user_edit_course',
+      'parent' => 'context_condition',
+    ),
+  );
+  return $plugins;
+}
+
+function s4_courses_context_registry() {
+  return array(
+    'conditions' => array(
+      'user_edit_course' => array(
+        'title' => t('User can edit course'),
+        'plugin' => 's4_courses_user_edit_course',
+      ),
+    ),
+  );
+}
+
+function s4_courses_node_view($node, $view_mode) {
+  if ($view_mode === 'full') {
+    $object = menu_get_object();
+    if (isset($object->nid) && $object->nid === $node->nid) {
+      if ($plugin = context_get_plugin('condition', 'user_edit_course')) {
+	    $plugin->execute($node);
+      }
+    }
+  }
+}

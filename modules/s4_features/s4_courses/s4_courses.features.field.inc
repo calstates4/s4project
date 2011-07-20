@@ -114,6 +114,27 @@ function s4_courses_field_default_fields() {
       ),
       'module' => 'user_reference',
       'settings' => array(
+        'nodeaccess_userreference' => array(
+          'all' => array(
+            'view' => 0,
+          ),
+          'author' => array(
+            'delete' => 'delete',
+            'update' => 'update',
+            'view' => 'view',
+          ),
+          'priority' => '0',
+          'referenced' => array(
+            'delete' => 0,
+            'update' => 'update',
+            'view' => 'view',
+          ),
+          'unused' => '0',
+          'views' => array(
+            'view' => '',
+            'view_args' => '',
+          ),
+        ),
         'referenceable_roles' => array(
           2 => '2',
           3 => 0,
@@ -1398,15 +1419,96 @@ function s4_courses_field_default_fields() {
     ),
   );
 
+  // Exported field: 'node-course_term-field_term_filter'
+  $fields['node-course_term-field_term_filter'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_term_filter',
+      'foreign keys' => array(
+        'format' => array(
+          'columns' => array(
+            'format' => 'format',
+          ),
+          'table' => 'filter_format',
+        ),
+      ),
+      'global_block_settings' => '1',
+      'indexes' => array(
+        'format' => array(
+          0 => 'format',
+        ),
+      ),
+      'module' => 'text',
+      'settings' => array(),
+      'translatable' => '1',
+      'type' => 'text_long',
+    ),
+    'field_instance' => array(
+      'bundle' => 'course_term',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => 'If your SIS import tool does not filter out service learning courses, you can enter a filter pattern here. If your import tool already does the filtering for you, leave this blank. If you enter content into this field, it will override the default filter.',
+      'display' => array(
+        'cck_blocks' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'default' => array(
+          'label' => 'above',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => 2,
+        ),
+        'notifications' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_term_filter',
+      'label' => 'Course filter',
+      'required' => 0,
+      'settings' => array(
+        'text_processing' => '0',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'text',
+        'settings' => array(
+          'rows' => '10',
+        ),
+        'type' => 'text_textarea',
+        'weight' => '-2',
+      ),
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Catalog number');
   t('Course access permissions');
+  t('Course filter');
   t('Course title');
   t('Date to send evaluations');
   t('Enter the code your student information system uses to refer to this term code.');
   t('Faculty');
   t('If you want only a handful of sites which are recommended or required, select those sites here.');
+  t('If your SIS import tool does not filter out service learning courses, you can enter a filter pattern here. If your import tool already does the filtering for you, leave this blank. If you enter content into this field, it will override the default filter.');
   t('On this date, evaluation forms will start being sent to students via email and also be available on the site itself.');
   t('Restrict students to only these sites');
   t('Section number');
