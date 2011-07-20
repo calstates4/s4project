@@ -205,6 +205,13 @@ function s4_sites_node_presave($node) {
        $node->field_workflow_status[$node->language][0]['tid'] = variable_get('s4_sites_workflow_default_state', 0);
        drupal_set_message('Thanks for your site recommendation. We will be contacting you shortly.');
      }
+	 $status = field_get_items('node', $node, 'field_workflow_status');
+	 if(variable_get('s4_sites_workflow_'. $status[0]['tid']) == 'publish') {
+	   $node->status = 1;
+	 }
+	 if(variable_get('s4_sites_workflow_'. $status[0]['tid']) == 'unpublish') {
+	   $node->status = 0;
+	 }
   }
 }
 
@@ -429,18 +436,6 @@ function _s4_sites_format_site_population_matrix($entity_type, $entity, $field, 
 		'#data' => $data,
 	);
 	return $element;
-}
-
-function s4_sites_node_update($node) {
-	if($node->type == 'site') {
-		$status = field_get_items('node', $node, 'field_workflow_status');
-		if(variable_get('s4_sites_workflow_'. $status[0]['tid']) == 'publish') {
-			$node->status = 1;
-		}
-		if(variable_get('s4_sites_workflow_'. $status[0]['tid']) == 'unpublish') {
-			$node->status = 0;
-		}
-	}
 }
 
 function s4_sites_comment_presave($comment) {
