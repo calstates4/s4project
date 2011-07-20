@@ -78,7 +78,7 @@ function s4_pages_block_view($delta) {
 */
 
 function s4_pages_add_contact_record() {
-  $node = menu_get_object();
+  $node = node_load(arg(1));
   return array('subject' => NULL,
          'content' => '<div class="spacer-30">' .
                  l('<span class="add"></span>Add new note', 
@@ -86,7 +86,7 @@ function s4_pages_add_contact_record() {
                  array('html' => TRUE,
                      'attributes' => array('class' => 'button add'),
                      'query' => array('destination' => 
-                       'node/' . $node->nid . '/contact-files')))
+                       'node/' . $node->nid . '/notes')))
                   . '</div>');
 }
 
@@ -94,7 +94,7 @@ function s4_pages_add_contact_record() {
 *  Add content button for site files (appears in the site contact record & files page)
 */
 function s4_pages_add_site_file() {
-  $node = menu_get_object();
+  $node = node_load(arg(1));
   return array('subject' => NULL,
          'content' => '<div class="spacer-30">' .
                  l('<span class="add"></span>Add new form', 
@@ -102,7 +102,7 @@ function s4_pages_add_site_file() {
                  array('html' => TRUE,
                      'attributes' => array('class' => 'button add'),
                      'query' => array('destination' => 
-                       'node/' . $node->nid . '/contact-files')))
+                       'node/' . $node->nid . '/forms')))
                   . '</div>');
 }
 

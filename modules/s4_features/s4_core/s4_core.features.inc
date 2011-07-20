@@ -53,7 +53,7 @@ function s4_core_homebox() {
         'open' => 1,
         'closable' => 1,
         'title' => '',
-        'weight' => -51,
+        'weight' => -54,
       ),
       'views_bookmarked_sites-block' => 
       array (
@@ -90,6 +90,18 @@ function s4_core_homebox() {
         'closable' => 1,
         'title' => '',
         'weight' => -49,
+      ),
+      'views_recent_activity-block' => 
+      array (
+        'module' => 'views',
+        'delta' => 'recent_activity-block',
+        'region' => 1,
+        'movable' => 1,
+        'status' => 1,
+        'open' => 1,
+        'closable' => 1,
+        'title' => '',
+        'weight' => -54,
       ),
     ),
     'widths' => 

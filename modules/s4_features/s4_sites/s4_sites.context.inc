@@ -436,6 +436,12 @@ function s4_sites_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
+        'views-contact_records-block_1' => array(
+          'module' => 'views',
+          'delta' => 'contact_records-block_1',
+          'region' => 'content_top_left',
+          'weight' => '-10',
+        ),
         's4_sites-s4_sites_site_comment' => array(
           'module' => 's4_sites',
           'delta' => 's4_sites_site_comment',

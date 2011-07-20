@@ -36,7 +36,6 @@ class s4_courses_user_edit_course extends context_condition {
 		  	$faculty[] = $faculty_uid['uid'];
 		  }
 		}
-		dpm($value);
 		if($value->type == 'course' && (node_access('update', $value) || in_array($user->uid, $faculty))) {
 			$this->condition_met($context, $value);
 		}
