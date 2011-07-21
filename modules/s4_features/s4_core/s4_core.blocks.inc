@@ -184,7 +184,7 @@ function s4_core_block_s4_user_login() {
   $auth_types = array('students'       => variable_get('s4_core_auth_students', 'user'),
             'staff'          => variable_get('s4_core_auth_staff', 'user'),
             'faculty'        => variable_get('s4_core_auth_faculty', 'user'),
-            'site members'  => variable_get('s4_core_auth_sites', 'none'));
+            'community members'  => variable_get('s4_core_auth_sites', 'none'));
   $login_destinations = array('user' => 'user',
                 'ldap' => 'user',
                 'cas'  => 'cas/login');
@@ -207,7 +207,7 @@ function s4_core_block_s4_user_login() {
               array('query' => array('destination' => '<front>')));
   }
   return array('subject' => NULL,
-         'content' => '<p class="intro">' . implode('<br/>', $output) . '</p>');
+         'content' => '<p class="intro">' . implode('<br/>', $output) . '</p><p class="intro">Would you like to join our program? '. l('Let us know about your organization.', 'user', array('query' => array('destination' => 'node/add/site?destination=site-list'))) .'</p>');
 }
 
 

@@ -1,5 +1,10 @@
 (function($) {
 	$(document).ready(function () {
+		$('select').each(function() {
+			if($(this).attr('multiple')) {
+				$(this).chosen();
+			}
+		});
 		$('.field-name-field-site-demographics table tbody').append('<tr><td>Total percent</td><td id="demographic-total"></td></tr>');
 		$('.field-name-field-site-demographics input[type=text]').keyup(function() {
 			var total = 0;

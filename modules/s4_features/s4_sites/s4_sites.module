@@ -155,9 +155,17 @@ function s4_sites_block_view($delta) {
 * stright from the admin settings.
 */
 function s4_sites_form_site_node_form_alter(&$form, $form_state, $form_id) {
-  $terms = taxonomy_get_vocabularies();
   drupal_add_js(drupal_get_path('module', 's4_sites') .'/js/s4_site_form.js');
   drupal_add_css(drupal_get_path('module', 's4_sites') .'/css/s4_sites.css');
+  drupal_add_js(drupal_get_path('module', 's4_sites') .'/js/chosen/chosen/chosen.jquery.min.js');
+  drupal_add_css(drupal_get_path('module', 's4_sites') .'/js/chosen/chosen/chosen.css');
+  /*foreach($form as $k => $field) {
+    if(is_array($field) && $field[$form['#node']->language]['#multiple']) {
+    	$form[$k]['#attributes']['class'][] = 'chzn-select';
+    }
+  }*/
+  
+  $terms = taxonomy_get_vocabularies();
   foreach($terms as $k => $term) {
     unset($terms[$k]);
     $terms[$term->machine_name] = $term;

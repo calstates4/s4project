@@ -386,7 +386,7 @@ function s4_core_signup($type, $nid) {
         drupal_set_message(t('Site @site selected.', array('@site' => $site->title)));
         if (module_exists('views')) {
           $site_coordinators = views_get_view_result('site_coordinators', 'block', $site->nid);
-          if (!count($site_coordinators)) {
+          if (false) {
             drupal_set_message(t('This site does not have any coordinators, so we\'re skipping this step.'));
             $site_skip_coordinator = TRUE;
           }
@@ -545,7 +545,9 @@ function _s4_core_create_signup($uid = 0, $signup = array()) {
   $node->field_course[$node->language][0]['nid'] = $signup['course'];
   $node->field_coordinator[$node->language][0]['nid'] = $signup['coordinator'];
   $node->field_form_signup_sid[$node->language][0]['value'] = $signup['signup_sid'];
-  $node->field_signup_location[$node->language][0]['lid'] = $signup['location'];
+  if($signup['location']) {
+  	$node->field_signup_location[$node->language][0]['lid'] = $signup['location'];
+  }
   $dates = array();
   foreach (module_invoke_all('s4_signup_dates', $node) as $date) {
     $dates[$date['weight']] = $date['date'];
@@ -668,6 +670,7 @@ function s4_core_node_delete($node) {
         ->condition('entity_type', 'node')
         ->execute();
   if($node->type == 'signup') {
+  	module_load_include('inc', 'webform', 'includes/webform.submissions');
   	$signup_sid = field_get_items('node', $node, 'field_form_signup_sid');
   	$eval_sid = field_get_items('node', $node, 'field_form_evaluation_sid');
   	
