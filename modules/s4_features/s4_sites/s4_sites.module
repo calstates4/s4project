@@ -149,6 +149,28 @@ function s4_sites_block_view($delta) {
   
 }
 
+function s4_sites_form_field_ui_field_edit_form_alter(&$form, $form_state) {
+	if($form['#instance']['entity_type'] != 'node' || $form['#instance']['bundle'] != 'site') {
+		return null;
+	}
+	
+	$access = variable_get('s4_sites_field_access', array());
+
+	$form['instance']['s4_sites_field_access'] = array(
+		'#type' => 'checkbox',
+		'#title' => 'Non department staff can edit this field',
+		'#default_value' => ($access[$form['#field']['field_name']] !== false),
+	);
+	
+	$form['#submit'][] = 's4_sites_form_field_ui_field_edit_form_alter_submit';
+}
+
+function s4_sites_form_field_ui_field_edit_form_alter_submit($form, $form_state) {
+	$access = variable_get('s4_sites_field_access', array());
+	$access[$form['#field']['field_name']] = ($form_state['values']['s4_sites_field_access']) ? true : false;
+	variable_set('s4_sites_field_access', $access);
+}
+
 /**
 * Implementation of hook_form_FORM_ID_alter
 * Here we're adding links to descriptions as links can't be rendered right
@@ -159,11 +181,6 @@ function s4_sites_form_site_node_form_alter(&$form, $form_state, $form_id) {
   drupal_add_css(drupal_get_path('module', 's4_sites') .'/css/s4_sites.css');
   drupal_add_js(drupal_get_path('module', 's4_sites') .'/js/chosen/chosen/chosen.jquery.min.js');
   drupal_add_css(drupal_get_path('module', 's4_sites') .'/js/chosen/chosen/chosen.css');
-  /*foreach($form as $k => $field) {
-    if(is_array($field) && $field[$form['#node']->language]['#multiple']) {
-    	$form[$k]['#attributes']['class'][] = 'chzn-select';
-    }
-  }*/
   
   $terms = taxonomy_get_vocabularies();
   foreach($terms as $k => $term) {
@@ -189,11 +206,12 @@ function s4_sites_form_site_node_form_alter(&$form, $form_state, $form_id) {
     	$form['#groups'][$k]->format_type = 'accordion-item';
     }
     $form['#groups']['group_site_tabs']->format_type = 'accordion';
-    $form['field_site_restrict']['#access'] = false;
-    $form['field_site_users']['#access'] = false;
-    $form['field_site_eval_form']['#access'] = false;
-    $form['field_site_form']['#access'] = false;
-    $form['field_workflow_status']['#access'] = false;
+	$access = variable_get('s4_sites_field_access', array());
+	foreach($access as $name => $access) {
+		if($access === false) {
+			$form[$name]['#access'] = false;
+		}
+	}
 	
 	drupal_add_js(array('wysiwyg' => array()), 'setting');
 	drupal_set_title(t('Request a new site'));
