@@ -388,9 +388,9 @@ function s4_sites_field_default_fields() {
             'view' => 'view',
           ),
           'author' => array(
-            'delete' => 'delete',
-            'update' => 'update',
-            'view' => 'view',
+            'delete' => 0,
+            'update' => 0,
+            'view' => 0,
           ),
           'priority' => '0',
           'referenced' => array(
@@ -401,7 +401,7 @@ function s4_sites_field_default_fields() {
             ),
             'update' => array(
               'delete' => 0,
-              'update' => 'update',
+              'update' => 0,
               'view' => 0,
             ),
             'view' => array(
@@ -410,15 +410,13 @@ function s4_sites_field_default_fields() {
               'view' => 'view',
             ),
           ),
+          'unused' => '0',
         ),
         'referenceable_types' => array(
-          'article' => 0,
           'contact_record' => 0,
           'coordinator' => 0,
           'course' => 0,
           'course_term' => 0,
-          'feed' => 0,
-          'feed_item' => 0,
           'file' => 0,
           'news' => 0,
           'page' => 0,
@@ -1129,9 +1127,9 @@ function s4_sites_field_default_fields() {
             'view' => 'view',
           ),
           'author' => array(
-            'delete' => 'delete',
-            'update' => 'update',
-            'view' => 'view',
+            'delete' => 0,
+            'update' => 0,
+            'view' => 0,
           ),
           'priority' => '0',
           'referenced' => array(
@@ -1142,7 +1140,7 @@ function s4_sites_field_default_fields() {
             ),
             'update' => array(
               'delete' => 0,
-              'update' => 'update',
+              'update' => 0,
               'view' => 0,
             ),
             'view' => array(
@@ -1151,15 +1149,13 @@ function s4_sites_field_default_fields() {
               'view' => 'view',
             ),
           ),
+          'unused' => '0',
         ),
         'referenceable_types' => array(
-          'article' => 0,
           'contact_record' => 0,
           'coordinator' => 0,
           'course' => 0,
           'course_term' => 0,
-          'feed' => 0,
-          'feed_item' => 0,
           'file' => 0,
           'news' => 0,
           'page' => 0,
@@ -2135,9 +2131,9 @@ function s4_sites_field_default_fields() {
             'view' => 'view',
           ),
           'author' => array(
-            'delete' => 'delete',
-            'update' => 'update',
-            'view' => 'view',
+            'delete' => 0,
+            'update' => 0,
+            'view' => 0,
           ),
           'priority' => '0',
           'referenced' => array(
@@ -2148,7 +2144,7 @@ function s4_sites_field_default_fields() {
             ),
             'update' => array(
               'delete' => 0,
-              'update' => 'update',
+              'update' => 0,
               'view' => 0,
             ),
             'view' => array(
@@ -2157,15 +2153,13 @@ function s4_sites_field_default_fields() {
               'view' => 'view',
             ),
           ),
+          'unused' => '0',
         ),
         'referenceable_types' => array(
-          'article' => 0,
           'contact_record' => 0,
           'coordinator' => 0,
           'course' => 0,
           'course_term' => 0,
-          'feed' => 0,
-          'feed_item' => 0,
           'file' => 0,
           'news' => 0,
           'page' => 0,
@@ -2339,7 +2333,7 @@ function s4_sites_field_default_fields() {
   $fields['node-site-field_csu_facility'] = array(
     'field_config' => array(
       'active' => '1',
-      'cardinality' => '1',
+      'cardinality' => '-1',
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_csu_facility',
@@ -2428,7 +2422,7 @@ function s4_sites_field_default_fields() {
   $fields['node-site-field_csu_org_type'] = array(
     'field_config' => array(
       'active' => '1',
-      'cardinality' => '1',
+      'cardinality' => '-1',
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_csu_org_type',
@@ -4244,7 +4238,7 @@ function s4_sites_field_default_fields() {
   $fields['node-site-field_site_language'] = array(
     'field_config' => array(
       'active' => '1',
-      'cardinality' => '1',
+      'cardinality' => '-1',
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_site_language',
@@ -4314,13 +4308,10 @@ function s4_sites_field_default_fields() {
         'user_register_form' => FALSE,
       ),
       'widget' => array(
-        'active' => 0,
-        'module' => 'taxonomy',
-        'settings' => array(
-          'autocomplete_path' => 'taxonomy/autocomplete',
-          'size' => 60,
-        ),
-        'type' => 'taxonomy_autocomplete',
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(),
+        'type' => 'options_select',
         'weight' => '2',
       ),
     ),
