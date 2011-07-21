@@ -55,42 +55,6 @@ function s4_core_homebox() {
         'title' => '',
         'weight' => -54,
       ),
-      'views_bookmarked_sites-block' => 
-      array (
-        'module' => 'views',
-        'delta' => 'bookmarked_sites-block',
-        'region' => 2,
-        'movable' => 1,
-        'status' => 1,
-        'open' => 1,
-        'closable' => 1,
-        'title' => '',
-        'weight' => -51,
-      ),
-      'views_65656e1f5a12cde25f0722f735fe7969' => 
-      array (
-        'module' => 'views',
-        'delta' => '65656e1f5a12cde25f0722f735fe7969',
-        'region' => 2,
-        'movable' => 1,
-        'status' => 1,
-        'open' => 1,
-        'closable' => 1,
-        'title' => '',
-        'weight' => -50,
-      ),
-      'devel_switch_user' => 
-      array (
-        'module' => 'devel',
-        'delta' => 'switch_user',
-        'region' => 2,
-        'movable' => 1,
-        'status' => 1,
-        'open' => 1,
-        'closable' => 1,
-        'title' => '',
-        'weight' => -49,
-      ),
       'views_recent_activity-block' => 
       array (
         'module' => 'views',
@@ -102,6 +66,42 @@ function s4_core_homebox() {
         'closable' => 1,
         'title' => '',
         'weight' => -54,
+      ),
+      'views_bookmarked_sites-block' => 
+      array (
+        'module' => 'views',
+        'delta' => 'bookmarked_sites-block',
+        'region' => 2,
+        'movable' => 1,
+        'status' => 1,
+        'open' => 1,
+        'closable' => 1,
+        'title' => '',
+        'weight' => -55,
+      ),
+      'views_65656e1f5a12cde25f0722f735fe7969' => 
+      array (
+        'module' => 'views',
+        'delta' => '65656e1f5a12cde25f0722f735fe7969',
+        'region' => 2,
+        'movable' => 1,
+        'status' => 1,
+        'open' => 1,
+        'closable' => 1,
+        'title' => '',
+        'weight' => -54,
+      ),
+      'masquerade_masquerade' => 
+      array (
+        'module' => 'masquerade',
+        'delta' => 'masquerade',
+        'region' => 2,
+        'movable' => 1,
+        'status' => 1,
+        'open' => 1,
+        'closable' => 1,
+        'title' => '',
+        'weight' => -1,
       ),
     ),
     'widths' => 
