@@ -646,6 +646,10 @@ legend {
 .form-region-right table .form-type-textfield .description {
   display: none;
 }
+.form-item input.error {
+  background: #d6473e;
+  color: #fff;
+}
 /** BUTTONS **/
 a .add {
   background: url(../images/add.png) no-repeat 0 0;

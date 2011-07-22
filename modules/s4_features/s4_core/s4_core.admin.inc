@@ -26,6 +26,13 @@ function s4_core_admin_form() {
     '#description' => 'If there are no other options like courses or sites to choose the service length, enter the number of days before users get a site evaluation',
     '#default_value' => variable_get('s4_core_default_service_length', 100),
   );
+  
+  $form['s4_core_collect_service_hours'] = array(
+    '#type' => 'checkbox',
+    '#title' => 'Ask students to provide service hours',
+    '#description' => 'When checked, students will be prompted to enter their estimated number of service hours when they sign up. Students are also asked about hours during their site evaluation, at which time the initial quote is corrected; however, this ensures that even if a student does not complete an evaluation, an estimate for number of hours served still exists.',
+    '#default_value' => variable_get('s4_core_collect_service_hours', TRUE),
+  );
     
   $form['auth'] = array(
     '#type' => 'fieldset',

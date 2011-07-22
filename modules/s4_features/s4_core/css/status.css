@@ -29,3 +29,5 @@
 	.signup.add    .icon { background-position-y: -154px; }
 .location-signup-location { float: left; width: 30%; }
 .location-signup-wrapper { float: left; width: 200px; }
+
+.hours-field { font-size: 150%; margin: 15px 0; }

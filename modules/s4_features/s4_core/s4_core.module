@@ -386,7 +386,7 @@ function s4_core_signup($type, $nid) {
         drupal_set_message(t('Site @site selected.', array('@site' => $site->title)));
         if (module_exists('views')) {
           $site_coordinators = views_get_view_result('site_coordinators', 'block', $site->nid);
-          if (false) {
+          if (!count($site_coordinators)) {
             drupal_set_message(t('This site does not have any coordinators, so we\'re skipping this step.'));
             $site_skip_coordinator = TRUE;
           }
@@ -418,12 +418,16 @@ function s4_core_signup($type, $nid) {
     if ($form !== FALSE && count($form)) {
       drupal_goto('node/' . $form[0]['nid']);
     }
+    elseif(variable_get('s4_core_collect_service_hours', TRUE) && !$_SESSION['s4_signup_hours']) {
+  	   drupal_set_title('Just one more question');
+  	   return drupal_get_form('s4_core_student_signup_hours');
+    }
     else {
       s4_core_user_signup_completed();
     }
   }
   
-  drupal_set_message(c($message));
+  drupal_set_message(t($message));
   drupal_goto('node/' . $nid);
 }  
 
@@ -512,6 +516,7 @@ function s4_core_user_signup_completed($sid = 0) {
           'course' => $_SESSION['s4_signup_course'],
           'coordinator' => $_SESSION['s4_signup_coordinator'],
           'location' => $_SESSION['s4_signup_location'],
+          'hours' => $_SESSION['s4_signup_hours'],
           'signup_sid' => $sid);
   _s4_core_create_signup($user->uid, $signup);
   unset($_SESSION['s4_signup_course']);
@@ -519,6 +524,35 @@ function s4_core_user_signup_completed($sid = 0) {
   unset($_SESSION['s4_signup_coordinator']);
   drupal_set_message(t('Congratulations, you are signed up!'));
   drupal_goto('<front>', array('query' => array('finished' => 'finished')));
+}
+
+function s4_core_student_signup_hours() {
+	drupal_add_js(drupal_get_path('module', 's4_core') .'/js/s4.hours.js');
+	$form = array();
+	
+	$form['hours'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Please estimate the minimum number of hours you will serve at this site',
+		'#description' => 'You will have a chance to correct this when you complete your site evaluation, but it is helpful for us to know a rough estimate before you start your service.',
+		'#attributes' => array('class' => array('hours-field')),
+	);
+	
+	$form['submit'] = array(
+		'#type' => 'submit',
+		'#value' => 'Submit',
+	);
+	
+	return $form;
+}
+
+function s4_core_student_signup_hours_validate($form, $form_state) {
+	if(!is_numeric($form_state['values']['hours'])) {
+		form_set_error('hours', 'You should just enter a number for your hours.');
+	}
+}
+
+function s4_core_student_signup_hours_submit($form, $form_state) {
+	$_SESSION['s4_signup_hours'] = $form_state['values']['hours'];
 }
 
 /**
@@ -532,7 +566,8 @@ function _s4_core_create_signup($uid = 0, $signup = array()) {
            'course' => 0,
            'coordinator' => 0,
            'location' => 0,
-           'signup_sid' => 0);
+           'signup_sid' => 0,
+           'hours' => 0,);
   $node = new stdClass();
   $node->type = 'signup';
   node_object_prepare($node);
@@ -545,6 +580,7 @@ function _s4_core_create_signup($uid = 0, $signup = array()) {
   $node->field_course[$node->language][0]['nid'] = $signup['course'];
   $node->field_coordinator[$node->language][0]['nid'] = $signup['coordinator'];
   $node->field_form_signup_sid[$node->language][0]['value'] = $signup['signup_sid'];
+  $node->field_signup_hours[$node->language][0]['value'] = $signup['hours'];
   if($signup['location']) {
   	$node->field_signup_location[$node->language][0]['lid'] = $signup['location'];
   }
