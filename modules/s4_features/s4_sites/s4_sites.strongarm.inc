@@ -632,6 +632,170 @@ function s4_sites_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'nodeaccess_nodereference';
+  $strongarm->value = array(
+    'coordinator' => array(
+      'field_site' => array(
+        'referenced' => array(
+          'view' => array(
+            'view' => 'view',
+            'update' => 0,
+            'delete' => 0,
+          ),
+          'update' => array(
+            'update' => 0,
+            'view' => 0,
+            'delete' => 0,
+          ),
+          'delete' => array(
+            'delete' => 0,
+            'view' => 0,
+            'update' => 0,
+          ),
+        ),
+        'author' => array(
+          'view' => 0,
+          'update' => 0,
+          'delete' => 0,
+        ),
+        'all' => array(
+          'view' => 'view',
+        ),
+        'unused' => '0',
+        'priority' => '0',
+      ),
+    ),
+    'site' => array(
+      'field_site_form' => array(
+        'referenced' => array(
+          'view' => array(
+            'view' => 0,
+            'update' => 0,
+            'delete' => 0,
+          ),
+          'update' => array(
+            'update' => 0,
+            'view' => 0,
+            'delete' => 0,
+          ),
+          'delete' => array(
+            'delete' => 0,
+            'view' => 0,
+            'update' => 0,
+          ),
+        ),
+        'author' => array(
+          'view' => 0,
+          'update' => 0,
+          'delete' => 0,
+        ),
+        'all' => array(
+          'view' => 0,
+        ),
+        'unused' => '0',
+        'priority' => '0',
+      ),
+      'field_site_eval_form' => array(
+        'referenced' => array(
+          'view' => array(
+            'view' => 0,
+            'update' => 0,
+            'delete' => 0,
+          ),
+          'update' => array(
+            'update' => 0,
+            'view' => 0,
+            'delete' => 0,
+          ),
+          'delete' => array(
+            'delete' => 0,
+            'view' => 0,
+            'update' => 0,
+          ),
+        ),
+        'author' => array(
+          'view' => 0,
+          'update' => 0,
+          'delete' => 0,
+        ),
+        'all' => array(
+          'view' => 0,
+        ),
+        'unused' => '0',
+        'priority' => '0',
+      ),
+    ),
+  );
+  $export['nodeaccess_nodereference'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nodeaccess_nodereference_cross_access';
+  $strongarm->value = array(
+    'view' => FALSE,
+    'update' => FALSE,
+    'delete' => FALSE,
+  );
+  $export['nodeaccess_nodereference_cross_access'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'nodeaccess_userreference';
+  $strongarm->value = array(
+    'course' => array(
+      'field_course_faculty' => array(
+        'referenced' => array(
+          'view' => 'view',
+          'update' => 'update',
+          'delete' => 0,
+        ),
+        'author' => array(
+          'view' => 'view',
+          'update' => 'update',
+          'delete' => 'delete',
+        ),
+        'all' => array(
+          'view' => 0,
+        ),
+        'unused' => '0',
+        'views' => array(
+          'view' => '',
+          'view_args' => '',
+        ),
+        'priority' => '0',
+      ),
+    ),
+    'site' => array(
+      'field_site_users' => array(
+        'referenced' => array(
+          'view' => 'view',
+          'update' => 0,
+          'delete' => 0,
+        ),
+        'author' => array(
+          'view' => 'view',
+          'update' => 'update',
+          'delete' => 'delete',
+        ),
+        'all' => array(
+          'view' => 'view',
+        ),
+        'unused' => '0',
+        'views' => array(
+          'view' => '',
+          'view_args' => '',
+        ),
+        'priority' => '0',
+      ),
+    ),
+  );
+  $export['nodeaccess_userreference'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'nodeformscols_field_placements_contact_record_default';
   $strongarm->value = array(
     'title' => array(

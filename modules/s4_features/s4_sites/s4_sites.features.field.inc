@@ -2570,6 +2570,7 @@ function s4_sites_field_default_fields() {
       'field_name' => 'field_health_risk',
       'label' => 'Risk Identification',
       'required' => 0,
+      's4_sites_field_access' => 0,
       'settings' => array(
         'text_processing' => '1',
         'user_register_form' => FALSE,
@@ -3337,9 +3338,9 @@ function s4_sites_field_default_fields() {
             'view' => 0,
           ),
           'author' => array(
-            'delete' => 'delete',
-            'update' => 'update',
-            'view' => 'view',
+            'delete' => 0,
+            'update' => 0,
+            'view' => 0,
           ),
           'priority' => '0',
           'referenced' => array(
@@ -3356,18 +3357,17 @@ function s4_sites_field_default_fields() {
             'view' => array(
               'delete' => 0,
               'update' => 0,
-              'view' => 'view',
+              'view' => 0,
             ),
           ),
+          'unused' => '0',
         ),
         'referenceable_types' => array(
-          'article' => 0,
           'contact_record' => 0,
           'coordinator' => 0,
           'course' => 0,
           'course_term' => 0,
-          'feed' => 0,
-          'feed_item' => 0,
+          'file' => 0,
           'news' => 0,
           'page' => 0,
           'signup' => 0,
@@ -3424,6 +3424,7 @@ function s4_sites_field_default_fields() {
       'field_name' => 'field_site_eval_form',
       'label' => 'Evaluation Form',
       'required' => 0,
+      's4_sites_field_access' => 0,
       'settings' => array(
         'user_register_form' => FALSE,
       ),
@@ -3556,9 +3557,9 @@ function s4_sites_field_default_fields() {
             'view' => 0,
           ),
           'author' => array(
-            'delete' => 'delete',
-            'update' => 'update',
-            'view' => 'view',
+            'delete' => 0,
+            'update' => 0,
+            'view' => 0,
           ),
           'priority' => '0',
           'referenced' => array(
@@ -3575,18 +3576,17 @@ function s4_sites_field_default_fields() {
             'view' => array(
               'delete' => 0,
               'update' => 0,
-              'view' => 'view',
+              'view' => 0,
             ),
           ),
+          'unused' => '0',
         ),
         'referenceable_types' => array(
-          'article' => 0,
           'contact_record' => 0,
           'coordinator' => 0,
           'course' => 0,
           'course_term' => 0,
-          'feed' => 0,
-          'feed_item' => 0,
+          'file' => 0,
           'news' => 0,
           'page' => 0,
           'signup' => 0,
@@ -3643,6 +3643,7 @@ function s4_sites_field_default_fields() {
       'field_name' => 'field_site_form',
       'label' => 'Signup form',
       'required' => 0,
+      's4_sites_field_access' => 0,
       'settings' => array(
         'user_register_form' => FALSE,
       ),
@@ -4554,6 +4555,7 @@ function s4_sites_field_default_fields() {
       'field_name' => 'field_site_restrict',
       'label' => 'Restrict site to',
       'required' => 1,
+      's4_sites_field_access' => 0,
       'settings' => array(
         'user_register_form' => FALSE,
       ),
@@ -4630,6 +4632,7 @@ function s4_sites_field_default_fields() {
       'field_name' => 'field_site_tour',
       'label' => 'Site Tour',
       'required' => 0,
+      's4_sites_field_access' => 0,
       'settings' => array(
         'text_processing' => '1',
         'user_register_form' => FALSE,
@@ -4682,15 +4685,19 @@ function s4_sites_field_default_fields() {
           'priority' => '0',
           'referenced' => array(
             'delete' => 0,
-            'update' => 'update',
+            'update' => 0,
             'view' => 'view',
+          ),
+          'unused' => '0',
+          'views' => array(
+            'view' => '',
+            'view_args' => '',
           ),
         ),
         'referenceable_roles' => array(
           2 => 0,
           3 => 0,
           4 => 0,
-          5 => 0,
         ),
         'referenceable_status' => array(
           0 => 0,
@@ -4746,6 +4753,7 @@ function s4_sites_field_default_fields() {
       'field_name' => 'field_site_users',
       'label' => 'Additional users',
       'required' => 0,
+      's4_sites_field_access' => 0,
       'settings' => array(
         'user_register_form' => FALSE,
       ),
@@ -5025,6 +5033,7 @@ function s4_sites_field_default_fields() {
       'field_name' => 'field_workflow_status',
       'label' => 'Status',
       'required' => 0,
+      's4_sites_field_access' => 0,
       'settings' => array(
         'user_register_form' => FALSE,
       ),
