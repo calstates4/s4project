@@ -19,5 +19,6 @@
 		function() {
 			$(this).find('.flag-bookmarks').hide();
 		});
+		$('#footer-map .map').css('height', $('#footer-map').height() + 'px');
 	});
 })(jQuery)

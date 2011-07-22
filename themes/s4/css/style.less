@@ -146,7 +146,12 @@ a, a:visited { color: @link-color; }
 #footer { clear: both; border-bottom: none;  }
 	.triptych { width: ((@container-width - (@column-padding * 2)) / 3) - ; float: left; }
 	#footer .margin { margin: 0 0 0 @column-padding; }
-
+#footer-map { height: 550px; width: 100%; margin: 0; background: #ededed; position: relative; }
+	#footer-map .block { margin: 0px; }
+	#footer-map .shadow { background: url(../images/mapshadow.png) 0 0 repeat-x; height: 10px; width: 100%; float: left; position: absolute; z-index: 1; }
+	#map-shadow-top { top: 0px; }
+	#map-shadow-bottom.shadow { bottom: 0px; background-position-y: -10px; }
+.has-footer-map #page { min-height: 200px; }
 /** CONTENT **/
 .intro { font-size: 140%; }
 .spacer-15 { margin: 15px 0; }

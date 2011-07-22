@@ -87,7 +87,6 @@ function _s4_sites_site_admin_view_access($nid) {
 *  Implementation of hook_init
 */
 function s4_sites_init() {
-  drupal_add_js(drupal_get_path('module', 's4_sites') . '/js/s4_map.js');
   drupal_add_js(drupal_get_path('module', 's4_sites') . '/js/s4_fancybox.js');
 
 }
@@ -97,7 +96,6 @@ function s4_sites_init() {
 */
 function s4_sites_block_info() {
   $blocks['s4_sites_search_help'] = array('info' => 'Site list help');
-  $blocks['s4_sites_search_map'] = array('info' => 'Site list map');
   $blocks['s4_sites_site_status'] = array('info' => 'Site status indicator');
   $blocks['s4_sites_site_comment'] = array('info' => 'Site comment form');
   return $blocks;
@@ -111,24 +109,6 @@ function s4_sites_block_view($delta) {
     case 's4_sites_search_help':
       return array('subject' => '',
              'content' => t('<p>Use this search form to find a site that meets your specific needs. Clicking on the <strong>Map link</strong> will show the location of that site on the map to the right.</p>'));
-      break;
-    case 's4_sites_search_map':
-      if (!module_exists('gmap')) {
-        return NULL;
-      }
-      $map = array(
-         '#type' => 'gmap',
-         '#gmap_settings' => array(
-          'zoom' => 10,
-          'width' => '100%',
-          'height' => '300px',
-          'id' => 'site-map',
-          'maptype' => 'world-light',
-          'controltype' => 'Small'
-        ),
-      );
-      return array('subject' => '',
-             'content' => '<div id="site-list-map">'. drupal_render($map) . t('<h4>!link</h4>', array('!link' => l('View large map', 'map'))) . '</div>');
       break;
     case 's4_sites_site_status':
       $node = menu_get_object();

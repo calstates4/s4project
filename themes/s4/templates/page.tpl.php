@@ -109,6 +109,13 @@
 	</div>
 	<div class="clear"></div>
 </div>
+<?php if($page['footer_map']): ?>
+<div id="footer-map">
+	<div id="map-shadow-top" class="shadow"></div>
+	<?php print render($page['footer_map']); ?>
+	<div id="map-shadow-bottom" class="shadow"></div>
+</div>
+<?php endif; ?>
 
 <div id="footer">
 	<div class="container">

@@ -5,3 +5,45 @@
  */
 
 include_once('s4_map.features.inc');
+
+function s4_map_views_query_alter(&$view, &$query) {
+  if($view->name == 'site_map'){
+    $query->where[0]['conditions'][] = array('field' => 'location.latitude',
+    									    'value' => floatval($_GET['lat_min']),
+    									    'operator' => '>=');
+    $query->where[0]['conditions'][] = array('field' => 'location.latitude',
+    									    'value' => floatval($_GET['lat_max']),
+    									    'operator' => '<=');
+    $query->where[0]['conditions'][] = array('field' => 'location.longitude',
+    									    'value' => floatval($_GET['lon_min']),
+    									    'operator' => '>=');									    
+    $query->where[0]['conditions'][] = array('field' => 'location.longitude',
+    									    'value' => floatval($_GET['lon_max']),
+    									    'operator' => '<=');
+  }
+}
+
+function s4_map_block_info() {
+	$blocks['s4_map_site_map'] = array('info' => 'General site map');
+	$blocks['s4_map_site_list_map'] = array('info' => 'Site list map');
+
+	return $blocks;
+}
+
+function s4_map_block_view($delta) {
+	drupal_add_js('http://maps.google.com/maps/api/js?libraries=geometry&sensor=false');
+	drupal_add_js(drupal_get_path('module', 's4_map') . '/js/s4_map.js');
+	drupal_add_css(drupal_get_path('module', 's4_map') . '/css/s4_map.css');
+	switch($delta) {
+		case 's4_map_site_map':
+			return array('subject' => null,
+						 'content' => '<div class="map autofill" id="site-map"></div>',
+						 );
+			break;
+		case 's4_map_site_list_map':
+			return array('subject' => null,
+						 'content' => '<div class="map" id="site-list-map"></div>',
+						 );
+			break;
+	}
+}

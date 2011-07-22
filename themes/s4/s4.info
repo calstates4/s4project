@@ -25,6 +25,7 @@ regions[content] 			= Content
 regions[content_right] 		= Content Right
 regions[content_bottom] 	= Content Bottom
 
+regions[footer_map]			= Footer Map
 regions[footer_left]		= Footer Left
 regions[footer_middle]		= Footer Middle
 regions[footer_right]		= Footer Right

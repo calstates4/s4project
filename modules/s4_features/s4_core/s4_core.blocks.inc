@@ -207,7 +207,7 @@ function s4_core_block_s4_user_login() {
               array('query' => array('destination' => '<front>')));
   }
   return array('subject' => NULL,
-         'content' => '<p class="intro">' . implode('<br/>', $output) . '</p><p class="intro">Would you like to join our program? '. l('Let us know about your organization.', 'user', array('query' => array('destination' => 'node/add/site?destination=site-list'))) .'</p>');
+         'content' => '<p class="intro">' . implode('<br/>', $output) . '</p>');
 }
 
 

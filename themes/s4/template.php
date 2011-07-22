@@ -10,6 +10,9 @@ function s4_preprocess_html(&$vars) {
   if(!$vars['page']['content_top_right']) {
     $vars['classes_array'][] = 'no-content-top-right';
   }
+  if($vars['page']['footer_map']) {
+    $vars['classes_array'][] = 'has-footer-map';
+  }
   drupal_add_css(path_to_theme() . '/css/ie7.css', array('group' => CSS_THEME, 'browsers' => array('IE' => 'lte IE 8', '!IE' => FALSE), 'preprocess' => FALSE));
 }
 
