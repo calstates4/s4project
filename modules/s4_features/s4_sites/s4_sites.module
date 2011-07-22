@@ -138,7 +138,7 @@ function s4_sites_block_view($delta) {
       }
       $term = taxonomy_term_load($status[0]['tid']);
       return array('subject' => null,
-      			   'content' => t('<div class="signup" style="height: auto;">Approval status: <strong>@status</strong></div>', array('@status' => $term->name)));
+      			   'content' => '<div class="signup" style="height: auto;">'. l(t('Approval status: <strong>@status</strong>', array('@status' => $term->name)), 'node/'. $node->nid .'/talk', array('html' => true)) .'</div>');
       break;
     case 's4_sites_site_comment':
       $node = menu_get_object();
@@ -226,7 +226,7 @@ function s4_sites_node_presave($node) {
   if($node->type == 'site') {
      cache_clear_all('s4_pages_overview_data', 'cache');
      $user = user_load($node->uid);
-     if(!user_access('moderate site information', $user)) {
+     if(!user_access('moderate site information')) {
        $node->status = 0;
        $node->field_workflow_status[$node->language][0]['tid'] = variable_get('s4_sites_workflow_default_state', 0);
        drupal_set_message('Thanks for your site recommendation. We will be contacting you shortly.');
@@ -316,6 +316,9 @@ function s4_sites_field_formatter_view($entity_type, $entity, $field, $instance,
   return $element;
 }
 
+/**
+*	Field formatter for phone numbers
+*/
 function _s4_sites_format_phone($number) {
 	$regex = '/^
     ([2-9][0-8]\d)  # area code (Allowed range of [2-9] for the first digit, [0-8] for the second, and [0-9] for the third digit)
@@ -331,6 +334,9 @@ function _s4_sites_format_phone($number) {
 	return '';
 }
 
+/**
+*	Field formatter for site hours matrix
+*/
 function _s4_sites_format_hours_matrix($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
 	if (count($items[0]) == 1) { //if a single value is passed in from views
 		$element[0] = array(
@@ -446,6 +452,9 @@ function _s4_sites_format_hours_matrix($entity_type, $entity, $field, $instance,
 	return $element;
 }
 
+/**
+*	Field format callback for population matrix fields
+*/
 function _s4_sites_format_site_population_matrix($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
 	$settings = unserialize($field['settings']['settings']);
 	$data = array();
@@ -464,6 +473,10 @@ function _s4_sites_format_site_population_matrix($entity_type, $entity, $field, 
 	return $element;
 }
 
+/**
+*	Implementation of hook_comment_presave
+*	Here we are altering the target site to update it's status
+*/
 function s4_sites_comment_presave($comment) {
 	$target = node_load($comment->nid);
 	if($target->type == 'site') {
