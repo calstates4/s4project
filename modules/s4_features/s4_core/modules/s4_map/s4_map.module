@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the S4 Map feature.
+ */
+
+include_once('s4_map.features.inc');
