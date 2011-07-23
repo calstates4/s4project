@@ -297,6 +297,9 @@ a, a:visited {
 #content_top {
   margin: 15px 0;
 }
+body.front.has-footer-map #page {
+  background: #ffffff url(../images/front-map.png) repeat-y center 0;
+}
 #content_top .column-equal {
   width: 462.5px;
   float: left;
