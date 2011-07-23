@@ -201,13 +201,13 @@ function s4_core_context_default_contexts() {
         'boxes-s4_mission' => array(
           'module' => 'boxes',
           'delta' => 's4_mission',
-          'region' => 'content_top_left',
-          'weight' => '-45',
-        ),
-        'views-location_gmap-block_1' => array(
-          'module' => 'views',
-          'delta' => 'location_gmap-block_1',
           'region' => 'content_top_right',
+          'weight' => '-10',
+        ),
+        's4_map-s4_map_site_map' => array(
+          'module' => 's4_map',
+          'delta' => 's4_map_site_map',
+          'region' => 'footer_map',
           'weight' => '-10',
         ),
       ),

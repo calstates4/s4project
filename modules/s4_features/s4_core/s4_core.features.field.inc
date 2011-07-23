@@ -1042,9 +1042,9 @@ function s4_core_field_default_fields() {
             'view' => 'view',
           ),
           'author' => array(
-            'delete' => 'delete',
-            'update' => 'update',
-            'view' => 'view',
+            'delete' => 0,
+            'update' => 0,
+            'view' => 0,
           ),
           'priority' => '0',
           'referenced' => array(
@@ -1055,7 +1055,7 @@ function s4_core_field_default_fields() {
             ),
             'update' => array(
               'delete' => 0,
-              'update' => 'update',
+              'update' => 0,
               'view' => 0,
             ),
             'view' => array(
@@ -1064,15 +1064,13 @@ function s4_core_field_default_fields() {
               'view' => 'view',
             ),
           ),
+          'unused' => '0',
         ),
         'referenceable_types' => array(
-          'article' => 0,
           'contact_record' => 0,
           'coordinator' => 0,
           'course' => 0,
           'course_term' => 0,
-          'feed' => 0,
-          'feed_item' => 0,
           'file' => 0,
           'news' => 0,
           'page' => 0,
