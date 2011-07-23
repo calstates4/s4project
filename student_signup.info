@@ -108,6 +108,7 @@ dependencies[] = views
 dependencies[] = views_bulk_operations
 dependencies[] = views_calc
 dependencies[] = views_data_export
+dependencies[] = views_datasource
 dependencies[] = views_savedsearches
 dependencies[] = views_ui
 dependencies[] = webform

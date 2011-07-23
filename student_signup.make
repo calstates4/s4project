@@ -171,6 +171,12 @@ projects[references][download][type] = "git"
 projects[references][download][url] = "http://git.drupal.org/project/references.git"
 projects[references][download][branch] = "7.x-2.x"
 
+projects[views_datasource][type] = module
+projects[views_datasource][subdir] = "contrib"
+projects[views_datasource][version] = "7.x-dev"
+projects[views_datasource][download][type] = "file"
+projects[views_datasource][download][url] = "http://s4.csumb.edu/hosted_modules/views_datasource.tar.gz"
+
 projects[views_savedsearches][type] = module
 projects[views_savedsearches][subdir] = "contrib"
 projects[views_savedsearches][version] = "7.x-dev"

@@ -45,16 +45,15 @@ var s4Map = {
 	
 	activeInfoWindow : null,
 	
-	center : new google.maps.LatLng(36.653337, -121.798449),
-	
 	markers : [ ],
 	
 	style : [ ],
 	
 	init : function(mapID) {
+		var center = new google.maps.LatLng(Drupal.settings.s4_map.lat, Drupal.settings.s4_map.lon);
 		s4Map.map = new google.maps.Map(document.getElementById(mapID),
-        				   {'center' : s4Map.center,
-							'zoom' : 12,
+        				   {'center' : center,
+							'zoom' : Drupal.settings.s4_map.zoom,
 							'mapTypeControlOptions' : {
 						       'mapTypeIds': [google.maps.MapTypeId.ROADMAP, 's4']
 						    	} 
@@ -65,11 +64,9 @@ var s4Map = {
 		s4Map.map.mapTypes.set('s4', mapStyleType);
 		s4Map.map.setMapTypeId('s4');
 		if($('#' + mapID).hasClass('autofill')) {
-			google.maps.event.addListener(s4Map.map, 'dragend', s4Map.reloadMap);
-			google.maps.event.addListener(s4Map.map, 'zoom_changed', s4Map.reloadMap);
-			google.maps.event.addListener(s4Map.map, 'zoom_changed', s4Map.resizeCircles);
+			google.maps.event.addListener(s4Map.map, 'bounds_changed', s4Map.reloadMap);
 	
-			//google.maps.event.trigger(s4Map.map, 'dragend');
+//			google.maps.event.trigger(s4Map.map, 'dragend');
 		}
 	},
 	
