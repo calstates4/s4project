@@ -14,12 +14,11 @@ function s4_courses_menu() {
   
   $items['admin/config/s4/courses'] = array(
     'title' => 'Course Integration',
-    'description' => 'Manage how courses are imported from your SIS.',
+    'description' => 'Manage how courses are imported and managed.',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('s4_courses_admin_form'),
     'file' => 's4_courses.admin.inc',
     'access arguments' => array('administer site configuration'),
-    'type' => MENU_LOCAL_TASK
   );
   
   return $items;
