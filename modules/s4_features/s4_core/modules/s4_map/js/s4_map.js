@@ -102,16 +102,20 @@ var s4Map = {
 		}
 		var marker = new google.maps.Marker(markerOptions);
 		if(message) {
-			var speakie = new google.maps.InfoWindow({
-			    content: message
+			infoBubble = new InfoBubble({
+          		minWidth: 200,
+			    content: '<div class="infowindow-text">' + message + '</div>',
+			    borderColor: '#000',
+			    backgroundColor: 'rgba(0,0,0,0.8)',
+			    borderRadius: '4px'
 			});
 	
 			google.maps.event.addListener(marker, 'click', function(e) {
 			  	if(s4Map.activeInfoWindow) {
 			  		s4Map.activeInfoWindow.close();
 			  	}
-			  	speakie.open(s4Map.map,marker);
-			  	s4Map.activeInfoWindow = speakie;
+			  	infoBubble.open(s4Map.map,marker);
+			  	s4Map.activeInfoWindow = infoBubble;
 			});
 		}
 		return marker;
