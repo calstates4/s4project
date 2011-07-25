@@ -25,7 +25,7 @@ function theme_s4_reporting_chart_pie($data) {
         var data = new google.visualization.DataTable();
 		%s
         var chart = new google.visualization.PieChart(document.getElementById("'. $data['id'] .'"));
-        chart.draw(data, {pieSliceText : "label", legend : "none", width: '. $data['width'] .', height: '. $data['height'] .', title: "'. $data['title'] .'", chartArea : {height: '. $data['height'] .', width: '. $data['width'] .'}});
+        chart.draw(data, {pieSliceText : "label", legend : "none", tooltipText: "percentage",  width: '. $data['width'] .', height: '. $data['height'] .', title: "'. $data['title'] .'", chartArea : {height: '. $data['height'] .', width: '. $data['width'] .'}});
       }';
     $values = array();
 	$values[] = 'data.addColumn("string", "'. $data['label'] .'");';

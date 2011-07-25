@@ -6,3 +6,4 @@ tr.even td.hours-no { color: #FFF; }
 .hours-sample { color: #fff; padding: 3px; }
 #demographic-total { font-weight: bold; }
 	.field-name-field-site-demographics .error { background: #d6473e; color: #fff;  }
+	.field-name-field-site-demographics .success { background: #00ae3e; color: #fff;  }

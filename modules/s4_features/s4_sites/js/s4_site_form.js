@@ -23,11 +23,17 @@
 				}
 			});
 			$('#demographic-total').html(total + '%');
+			if(total != 100) {
+				$('#demographic-total').removeClass('success');
+			}
 			if(total > 100) {
 				$('#demographic-total').addClass('error');
 			}
 			else {
 				$('#demographic-total').removeClass('error');
+				if(total == 100) {
+					$('#demographic-total').addClass('success');
+				}
 			}
 		});
 		$('.field-name-field-site-demographics input[type=text]:first').trigger('keyup');

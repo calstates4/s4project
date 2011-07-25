@@ -438,8 +438,10 @@ function _s4_sites_format_hours_matrix($entity_type, $entity, $field, $instance,
 function _s4_sites_format_site_population_matrix($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
 	$settings = unserialize($field['settings']['settings']);
 	$data = array();
-	foreach($settings['rows'] as $k => $row) {
-		$data[$row['title']] = $items[$k]['value'];
+	dpm($settings['rows']);
+	dpm($items);
+	foreach($items as $row) {
+		$data[$settings['rows'][$row['row']]['title']] = $row['value'];
 	}
 	$element[0] = array(
 		'#theme' => 's4_reporting_chart_pie',
