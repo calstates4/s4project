@@ -83,9 +83,6 @@ projects[masquerade][version] = "1.0-rc3"
 projects[messaging][subdir] = "contrib"
 projects[messaging][version] = "1.0-alpha1"
 
-projects[nodeaccess_nodereference][subdir] = "contrib"
-projects[nodeaccess_nodereference][version] = "1.15"
-
 projects[nodeaccess_userreference][subdir] = "contrib"
 projects[nodeaccess_userreference][version] = "3.5"
 

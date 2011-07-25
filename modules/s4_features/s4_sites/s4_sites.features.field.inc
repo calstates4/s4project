@@ -3335,7 +3335,7 @@ function s4_sites_field_default_fields() {
       'settings' => array(
         'nodeaccess_nodereference' => array(
           'all' => array(
-            'view' => 0,
+            'view' => 'view',
           ),
           'author' => array(
             'delete' => 0,
@@ -3554,7 +3554,7 @@ function s4_sites_field_default_fields() {
       'settings' => array(
         'nodeaccess_nodereference' => array(
           'all' => array(
-            'view' => 0,
+            'view' => 'view',
           ),
           'author' => array(
             'delete' => 0,
@@ -4685,8 +4685,11 @@ function s4_sites_field_default_fields() {
           'priority' => '0',
           'referenced' => array(
             'delete' => 0,
-            'update' => 0,
-            'view' => 'view',
+            'deny_delete' => 0,
+            'deny_update' => 0,
+            'deny_view' => 0,
+            'update' => 'update',
+            'view' => 0,
           ),
           'unused' => '0',
           'views' => array(

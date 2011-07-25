@@ -452,6 +452,10 @@ function s4_core_permission() {
       'title' => t('Sign up for file expiration notifications'),
       'description' => t('Allow the user to receive notifications about files close to expiring'),
     ),
+    'view all webform fields' => array(
+      'title' => t('View all webform private fields.'),
+      'description' => t('Allows users to view information in "private" fields.'),
+    ),
   );
 }
 
@@ -1053,6 +1057,33 @@ function s4_core_form_alter(&$form, $form_state, $form_id) {
   if (strpos($form_id, 'views_form_') !== FALSE && isset($form['views_bulk_operations'])) {
     $form['#pre_render'][] = 's4_core_views_bulk_operations_pre_render';
   }
+  if(strpos($form_id, 'webform_client_form_') !== FALSE) {
+  	drupal_add_css(drupal_get_path('module', 's4_core') .'/css/status.css');
+  	foreach($form['#node']->webform['components'] as $component) {
+  		if($component['extra']['s4_core_field_private']) {
+  			$form['submitted'][$component['form_key']]['#title'] .= '<div class="private-label">Private - this question will not be viewable by your faculty member.</div>';
+  		}
+  	}
+  }
+}
+
+/**
+*	Implementation of hook_form_FORM_ID_alter
+*	Here we're adding a checkbox to make this field private
+*/
+function s4_core_form_webform_component_edit_form_alter(&$form, $form_state) {
+	$form['display']['s4_core_field_private'] = array(
+		'#type' => 'checkbox',
+		'#title' => 'Contents of this field are private and only viewable by trusted users',
+		'#description' => 'When checked, only users who have permission to view private fields, or people viewing their own information, can see the contents of this field.',
+		'#default_value' => $form_state['build_info']['args'][1]['extra']['s4_core_field_private'],
+	);
+}
+
+function s4_core_webform_component_presave(&$component) {
+	if(array_key_exists('s4_core_field_private', $component['display'])) {
+		$component['extra']['s4_core_field_private'] = $component['display']['s4_core_field_private'];
+	}
 }
 
 /**

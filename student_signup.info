@@ -83,7 +83,6 @@ dependencies[] = messaging
 dependencies[] = messaging_htmlmail
 dependencies[] = messaging_mail
 dependencies[] = messaging_template
-dependencies[] = nodeaccess_nodereference
 dependencies[] = nodeaccess_userreference
 dependencies[] = nodeformcols
 dependencies[] = nodereference_count

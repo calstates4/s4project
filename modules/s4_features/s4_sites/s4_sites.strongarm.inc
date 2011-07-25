@@ -241,8 +241,8 @@ function s4_sites_strongarm() {
   $strongarm->value = array(
     'width' => '100%',
     'height' => '400px',
-    'latlong' => '36.64418158686588,-121.7669677734375',
-    'zoom' => '10',
+    'latlong' => '36.66814353758172,-121.74877166748047',
+    'zoom' => '12',
     'maxzoom' => '14',
     'styles' => array(
       'line_default' => array(
@@ -690,7 +690,7 @@ function s4_sites_strongarm() {
           'delete' => 0,
         ),
         'all' => array(
-          'view' => 0,
+          'view' => 'view',
         ),
         'unused' => '0',
         'priority' => '0',
@@ -719,7 +719,7 @@ function s4_sites_strongarm() {
           'delete' => 0,
         ),
         'all' => array(
-          'view' => 0,
+          'view' => 'view',
         ),
         'unused' => '0',
         'priority' => '0',
@@ -765,14 +765,44 @@ function s4_sites_strongarm() {
           'view_args' => '',
         ),
         'priority' => '0',
+        'deny_view' => 0,
+        'deny_update' => 0,
+        'deny_delete' => 0,
+      ),
+      'field_course_students' => array(
+        'referenced' => array(
+          'view' => 'view',
+          'update' => 0,
+          'delete' => 0,
+          'deny_view' => 0,
+          'deny_update' => 0,
+          'deny_delete' => 0,
+        ),
+        'author' => array(
+          'view' => 0,
+          'update' => 0,
+          'delete' => 0,
+        ),
+        'all' => array(
+          'view' => 0,
+        ),
+        'unused' => '0',
+        'views' => array(
+          'view' => '',
+          'view_args' => '',
+        ),
+        'priority' => '0',
       ),
     ),
     'site' => array(
       'field_site_users' => array(
         'referenced' => array(
-          'view' => 'view',
-          'update' => 0,
+          'update' => 'update',
+          'view' => 0,
           'delete' => 0,
+          'deny_view' => 0,
+          'deny_update' => 0,
+          'deny_delete' => 0,
         ),
         'author' => array(
           'view' => 'view',

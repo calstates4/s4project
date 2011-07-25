@@ -500,6 +500,30 @@ function s4_courses_field_default_fields() {
       ),
       'module' => 'user_reference',
       'settings' => array(
+        'nodeaccess_userreference' => array(
+          'all' => array(
+            'view' => 0,
+          ),
+          'author' => array(
+            'delete' => 0,
+            'update' => 0,
+            'view' => 0,
+          ),
+          'priority' => '0',
+          'referenced' => array(
+            'delete' => 0,
+            'deny_delete' => 0,
+            'deny_update' => 0,
+            'deny_view' => 0,
+            'update' => 0,
+            'view' => 'view',
+          ),
+          'unused' => '0',
+          'views' => array(
+            'view' => '',
+            'view_args' => '',
+          ),
+        ),
         'referenceable_roles' => array(
           2 => '2',
           3 => 0,

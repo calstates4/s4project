@@ -18,8 +18,10 @@ function s4_webform_render_submission($field) {
         return NULL;
       }
       foreach ($form->webform['components'] as $k => $component) {
-        $output .= '<p><span class="form-label">' . $component['name'] . ':</span>';
-        $output .= '<span class="form-value">' . implode("\n", $submission->data[$k]['value']) . '</span></p>';
+        if(user_access('view all webform fields') || !$component['extra']['s4_core_field_private']) {
+	        $output .= '<p><span class="form-label">' . $component['name'] . ':</span>';
+	        $output .= '<span class="form-value">' . implode("\n", $submission->data[$k]['value']) . '</span></p>';
+		}
       }
       
           return array('subject' => 'Signup form',
