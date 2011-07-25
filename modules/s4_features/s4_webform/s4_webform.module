@@ -11,6 +11,7 @@ function s4_webform_render_submission($field) {
   $form = field_get_items('node', $site, 'field_site_form');
   $form = node_load($form[0]['nid']);
   $output = '';
+  global $user;
   if (count($form)) {
     module_load_include('inc', 'webform', 'includes/webform.submissions');
     $submission = webform_get_submission($form->nid, $sid[0]['value']);
@@ -18,7 +19,7 @@ function s4_webform_render_submission($field) {
         return NULL;
       }
       foreach ($form->webform['components'] as $k => $component) {
-        if(user_access('view all webform fields') || !$component['extra']['s4_core_field_private']) {
+        if(user_access('view all webform fields') || $submission->uid == $user->uid || !$component['extra']['s4_core_field_private']) {
 	        $output .= '<p><span class="form-label">' . $component['name'] . ':</span>';
 	        $output .= '<span class="form-value">' . implode("\n", $submission->data[$k]['value']) . '</span></p>';
 		}
