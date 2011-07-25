@@ -376,11 +376,18 @@ function s4_courses_edit_course_restrict_form() {
 	$form = array();
 	
 	$default = field_get_items('node', $node, 'field_site_restrict_to_list');
+	$default_email = field_get_items('node', $node, 'field_course_faculty_email');
 	
 	$form['field_site_restrict_to_list'] = array(
 		'#type' => 'checkbox', 
 		'#title' => 'Restrict students to only selected sites',
 		'#default_value' => $default[0]['value'],
+	);
+	
+	$form['field_course_faculty_email'] = array(
+		'#type' => 'checkbox', 
+		'#title' => 'Send evaluation reminders from my email account',
+		'#default_value' => $default_email[0]['value'],
 	);
 	
 	$form['submit'] = array(
@@ -395,6 +402,8 @@ function s4_courses_edit_course_restrict_form_submit($form, $form_state) {
 	$node = menu_get_object();
 	$node->field_site_restrict_to_list[$node->language][0]['value'] = 
 	   $form_state['values']['field_site_restrict_to_list'];
+	$node->field_course_faculty_email[$node->language][0]['value'] = 
+		$form_state['values']['field_course_faculty_email'];
 	node_save($node);
 	drupal_set_message('Your course has been updated.');
 }

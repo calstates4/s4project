@@ -1,0 +1,16 @@
+<?php
+
+function s4_assessment_menu() {
+	$items = array();
+	
+	$items['admin/config/s4/assessment'] = array(
+		'title' => 'Assessment options',
+		'description' => 'Manage how student assessments are managed.',
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('s4_assessment_admin_form'),
+		'access arguments' => array('administer site configuration'),
+		'file' => 's4_assessment.admin.inc',
+	);
+	
+	return $items;
+}
