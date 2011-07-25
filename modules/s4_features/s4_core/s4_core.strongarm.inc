@@ -209,6 +209,31 @@ function s4_core_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'content_access_settings';
+  $strongarm->value = array(
+    'view' => array(
+      'course' => array(
+        0 => 4,
+        1 => 3,
+      ),
+    ),
+    'view_own' => array(
+      'course' => array(
+        0 => 3,
+      ),
+    ),
+    'per_node' => array(
+      'course' => 0,
+    ),
+    'priority' => array(
+      'course' => '1',
+    ),
+  );
+  $export['content_access_settings'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'fancybox_files';
   $strongarm->value = array(
     'js' => 'jquery.fancybox-1.3.4.js',
