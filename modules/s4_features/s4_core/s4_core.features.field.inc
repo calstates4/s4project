@@ -1175,22 +1175,29 @@ function s4_core_field_default_fields() {
             'view' => 0,
           ),
           'author' => array(
-            'delete' => 'delete',
-            'update' => 'update',
-            'view' => 'view',
-          ),
-          'priority' => '0',
-          'referenced' => array(
             'delete' => 0,
             'update' => 0,
+            'view' => 0,
+          ),
+          'priority' => '2',
+          'referenced' => array(
+            'delete' => 0,
+            'deny_delete' => 0,
+            'deny_update' => 0,
+            'deny_view' => 0,
+            'update' => 0,
             'view' => 'view',
+          ),
+          'unused' => '0',
+          'views' => array(
+            'view' => '',
+            'view_args' => '',
           ),
         ),
         'referenceable_roles' => array(
           2 => '2',
           3 => 0,
           4 => 0,
-          5 => 0,
         ),
         'referenceable_status' => array(
           0 => 0,
@@ -1253,7 +1260,7 @@ function s4_core_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'user_reference_autocomplete',
-        'weight' => '0',
+        'weight' => 0,
       ),
     ),
   );

@@ -216,17 +216,26 @@ function s4_core_strongarm() {
         0 => 4,
         1 => 3,
       ),
+      'signup' => array(
+        0 => 4,
+        1 => 3,
+      ),
     ),
     'view_own' => array(
       'course' => array(
         0 => 3,
       ),
+      'signup' => array(
+        0 => 3,
+      ),
     ),
     'per_node' => array(
       'course' => 0,
+      'signup' => 0,
     ),
     'priority' => array(
       'course' => '1',
+      'signup' => '0',
     ),
   );
   $export['content_access_settings'] = $strongarm;
