@@ -64,9 +64,7 @@ var s4Map = {
 		s4Map.map.mapTypes.set('s4', mapStyleType);
 		s4Map.map.setMapTypeId('s4');
 		if($('#' + mapID).hasClass('autofill')) {
-			google.maps.event.addListener(s4Map.map, 'dragend', s4Map.reloadMap);
-			google.maps.event.addListener(s4Map.map, 'zoom_changed', s4Map.reloadMap);
-			google.maps.event.trigger(s4Map.map, 'dragend');
+			google.maps.event.addListener(s4Map.map, 'idle', s4Map.reloadMap);
 		}
 	},
 	
