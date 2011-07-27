@@ -64,9 +64,9 @@ var s4Map = {
 		s4Map.map.mapTypes.set('s4', mapStyleType);
 		s4Map.map.setMapTypeId('s4');
 		if($('#' + mapID).hasClass('autofill')) {
-			google.maps.event.addListener(s4Map.map, 'bounds_changed', s4Map.reloadMap);
-	
-//			google.maps.event.trigger(s4Map.map, 'dragend');
+			google.maps.event.addListener(s4Map.map, 'dragend', s4Map.reloadMap);
+			google.maps.event.addListener(s4Map.map, 'zoom_changed', s4Map.reloadMap);
+			google.maps.event.trigger(s4Map.map, 'dragend');
 		}
 	},
 	
@@ -76,15 +76,20 @@ var s4Map = {
 		s4Map.map.setZoom(15);
 	},
 	
-	reloadMap : function() {
+	reloadMap : function(event) {
 		var boundaries = s4Map.map.getBounds();
-		$.getJSON(Drupal.settings.basePath + 'json/map/sites?lat_min=' + boundaries.getSouthWest().Ka +'&lat_max=' + boundaries.getNorthEast().Ka + '&lon_min=' + boundaries.getSouthWest().La + '&lon_max=' + boundaries.getNorthEast().La ,function(data) {
+		if(boundaries === undefined) {
+			return null;
+		}
+		$('#map-loading-indicator').show();
+		$.getJSON(Drupal.settings.basePath + 'json/map/sites?lat_min=' + boundaries.getSouthWest().lat() +'&lat_max=' + boundaries.getNorthEast().lat() + '&lon_min=' + boundaries.getSouthWest().lng() + '&lon_max=' + boundaries.getNorthEast().lng() ,function(data) {
 			$.each(data.nodes, function(index, element) {
 				if(s4Map.markers[element.node.nid] === undefined) {
 					s4Map.markers[element.node.nid] = 
 						s4Map.addMarker(element.node.latitude, element.node.longitude, '<a href="' + element.node.path + '">' + element.node.title + '</a>');
 				}
 			});
+			$('#map-loading-indicator').hide();
 		});
 	},
 	

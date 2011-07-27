@@ -43,7 +43,7 @@ function s4_map_block_view($delta) {
 	switch($delta) {
 		case 's4_map_site_map':
 			return array('subject' => null,
-						 'content' => '<div class="map autofill" id="site-map"></div>',
+						 'content' => '<div id="map-loading-indicator">Loading</div><div class="map autofill" id="site-map"></div>',
 						 );
 			break;
 		case 's4_map_site_list_map':
