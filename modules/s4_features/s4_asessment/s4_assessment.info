@@ -2,3 +2,5 @@ name=S4 Assessment
 description=Assessment tools for student learning
 package=S4
 core=7.x
+
+files[] = views/views_handler_s4_assessment_link.inc

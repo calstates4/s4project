@@ -60,8 +60,52 @@ function s4_sites_menu() {
 		'access arguments' => array('administer site configuration'),
 		'weight' => -10,
 	);
+	
+	$items['sites/form/%/%/%/%'] = array(
+		'title' => 'Complete form',
+		'description' => 'Allow users to complete a questionnaire for a site',
+		'page callback' => 's4_sites_user_completed_form',
+		'access callback' => 's4_sites_user_completed_form_access',
+		'access arguments' => array(2, 3, 4, 5),
+		'page arguments' => array(2, 3),
+	);
   	
   	return $items;
+}
+
+/**
+*	Access callback for completing the form. This basically checks that the key is correct
+*/
+function s4_sites_user_completed_form_access($nid, $form, $email, $key) {
+	return (drupal_hmac_base64($nid .'_'. $form .'_'. $email, drupal_get_private_key() . drupal_get_hash_salt()) == $key);
+}
+
+function s4_sites_user_completed_form($site, $form) {
+	$_SESSION['s4_sites_user_form_site'] = $site;
+	drupal_goto('node/'. $form);
+}
+
+/**
+*	Implementation of hook_webform_submission_insert
+*	Here we take any submissions made by site staff and attach
+*	them to a form record.
+*/
+function s4_sites_webform_submission_insert($node, $submission) {
+	if(!$_SESSION['s4_sites_user_form_site']) {
+		return null;
+	}
+	$form = new stdClass();
+	$form->type = 'file';
+	node_object_prepare($form);
+    $form->language = LANGUAGE_NONE;
+	$form->title = $node->title;
+	$form->uid = 0;
+	$form->field_site[$form->language][0]['nid'] = $_SESSION['s4_sites_user_form_site'];
+	$form->field_form_sid[$form->language][0]['value'] = $submission->sid;
+	node_save($form);
+	unset($_SESSION['s4_sites_user_form_site']);
+	drupal_set_message('Thanks for submitting your form!');
+	drupal_goto('<front>');
 }
 
 /**
@@ -98,6 +142,8 @@ function s4_sites_block_info() {
   $blocks['s4_sites_search_help'] = array('info' => 'Site list help');
   $blocks['s4_sites_site_status'] = array('info' => 'Site status indicator');
   $blocks['s4_sites_site_comment'] = array('info' => 'Site comment form');
+  $blocks['s4_sites_site_send_form'] = array('info' => 'Send site form');
+  $blocks['s4_sites_form_webform'] = array('info' => 'Site form webform results');
   return $blocks;
 }
 
@@ -125,8 +171,132 @@ function s4_sites_block_view($delta) {
       return array('subject' => 'Post new update',
       			   'content' => drupal_get_form("comment_node_{$node->type}_form", (object) array('nid' => $node->nid)));
       break;
+    case 's4_sites_site_send_form':
+      return array('subject' => 'Send a form',
+      			   'content' => drupal_get_form('s4_sites_send_site_form'));
+      break;
+    case 's4_sites_form_webform':
+      return s4_webform_render_submission('field_form_sid');
+      break;
   }
   
+}
+
+function s4_sites_send_site_form() {
+	$form = array();
+	$node = node_load(arg(1));
+	
+	$form['site'] = array(
+		'#type' => 'hidden',
+		'#value' => $node->nid,
+	);
+	
+	$forms = array();
+	$forms_query = db_select('node', 'n');
+	$forms_query->condition('n.status', '1')
+				->condition('n.type', 'webform')
+				->fields('n', array('nid', 'title'))
+				->orderBy('n.title')
+				->distinct();
+	
+	$result = $forms_query->execute();
+	foreach($result as $row) {
+		$forms[$row->nid] = $row->title;
+	}
+	
+	$form['form'] = array(
+		'#type' => 'select',
+		'#title' => 'Select the form template to send',
+		'#options' => $forms,
+	);
+	
+	$site_staff = array('none' => '-- None --');
+	$staff_query = db_select('node', 'n');
+	$staff_query->leftJoin('field_data_field_site', 's', 's.entity_id = n.nid AND s.bundle = :bundle', array(':bundle' => 'coordinator'));
+	$staff_query->leftJoin('field_data_field_email', 'e', 's.entity_id = n.nid AND e.bundle = :bundle', array(':bundle' => 'coordinator'));
+
+	$staff_query->condition('n.status', '1')
+				->condition('s.field_site_nid', $node->nid)
+				->isNotNull('e.field_email_email')
+				->fields('n', array('nid', 'title'))
+				->orderBy('n.title')
+				->distinct();
+	
+	$result = $staff_query->execute();
+	foreach($result as $row) {
+		$site_staff[$row->nid] = $row->title;
+	}
+	
+	$form['site_staff'] = array(
+		'#type' => 'select',
+		'#title' => 'Select who should receive this message',
+		'#options' => $site_staff,
+	);
+	
+	$form['manual_email'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Or type in an email address',
+	);
+	
+	$form['subject'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Message subject',
+	);
+	
+	$form['body'] = array(
+		'#type' => 'textarea',
+		'#title' => 'Message body',
+		'#description' => 'We will append the link to the form at the bottom of your message.',
+	);
+	
+	$form['submit'] = array(
+		'#type' => 'submit',
+		'#value' => 'Email form',
+	);
+	
+	return $form;
+}
+
+function s4_sites_send_site_form_validate($form, $form_state) {
+	if($form_state['values']['site_staff'] == 'none' && !valid_email_address($form_state['manual_email'])) {
+		form_set_error('manual_email', 'Please enter a valid email address.');
+	}
+}
+
+function s4_sites_send_site_form_submit($form, $form_state) {
+	$email = ($form_state['values']['manual_email'])
+			 ? $form_state['values']['manual_email']
+			 : false;
+	if(!$email) {
+		$coordinator = node_load($form_state['values']['site_staff']);
+		$email = field_get_items('node', $coordinator, 'field_email');
+		$email = $email[0]['email'];
+	}
+	
+	drupal_mail('s4_sites', 
+				'send_site_form', 
+				$email, 
+				$coordinator->language, 
+				array('subject' => $form_state['values']['subject'],
+					  'body' => $form_state['values']['body'],
+					  'form' => $form_state['values']['form'],
+					  'site' => $form_state['values']['site'],
+					  'email' => $email,
+					  'key' => drupal_hmac_base64($form_state['values']['site'] .'_'. $form_state['values']['form'] .'_'. $email, drupal_get_private_key() . drupal_get_hash_salt()),
+				));
+	drupal_set_message('Your message has been sent.');
+}
+
+function s4_sites_mail($key, &$message, $params) {
+	switch($key) {
+		case 'send_site_form': 
+			$message['subject'] = $params['subject'];
+			$message['body'][] = $params['body'];
+			$message['body'][] = 'You can complete the form online here.';
+			$message['body'][] = url('sites/form/' . $params['site'] .'/'. $params['form'] .'/'. $params['email'] .'/'. $params['key'], array('absolute' => true));
+			break;
+	}
+
 }
 
 function s4_sites_form_field_ui_field_edit_form_alter(&$form, $form_state) {

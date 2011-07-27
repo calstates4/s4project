@@ -1613,7 +1613,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '5',
+          'weight' => '7',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -1708,7 +1708,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '6',
+          'weight' => '8',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -1791,7 +1791,7 @@ function s4_sites_field_default_fields() {
             'show_repeat_rule' => 'show',
           ),
           'type' => 'date_default',
-          'weight' => 7,
+          'weight' => '3',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -1887,7 +1887,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '3',
+          'weight' => '5',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -1914,7 +1914,7 @@ function s4_sites_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '8',
+        'weight' => '9',
       ),
     ),
   );
@@ -1970,7 +1970,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '4',
+          'weight' => '6',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -2098,6 +2098,74 @@ function s4_sites_field_default_fields() {
         ),
         'type' => 'file_generic',
         'weight' => '2',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-file-field_form_sid'
+  $fields['node-file-field_form_sid'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_form_sid',
+      'foreign keys' => array(),
+      'global_block_settings' => '1',
+      'indexes' => array(),
+      'module' => 'number',
+      'settings' => array(),
+      'translatable' => '1',
+      'type' => 'number_integer',
+    ),
+    'field_instance' => array(
+      'bundle' => 'file',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'cck_blocks' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'default' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '4',
+        ),
+        'notifications' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_form_sid',
+      'label' => 'Saved form record',
+      'required' => 0,
+      'settings' => array(
+        'max' => '',
+        'min' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 0,
+        'module' => 'number',
+        'settings' => array(),
+        'type' => 'number',
+        'weight' => '8',
       ),
     ),
   );
@@ -5154,6 +5222,7 @@ function s4_sites_field_default_fields() {
   t('Restrict to');
   t('Risk Identification');
   t('Role');
+  t('Saved form record');
   t('Select the role of this staff person.');
   t('Select the signup form students should fill out when selecting this site.');
   t('Signup form');

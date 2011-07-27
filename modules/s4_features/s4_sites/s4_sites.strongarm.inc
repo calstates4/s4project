@@ -133,7 +133,7 @@ function s4_sites_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'comment_file';
-  $strongarm->value = '2';
+  $strongarm->value = '0';
   $export['comment_file'] = $strongarm;
 
   $strongarm = new stdClass;
@@ -791,7 +791,7 @@ function s4_sites_strongarm() {
           'view' => '',
           'view_args' => '',
         ),
-        'priority' => '0',
+        'priority' => '2',
       ),
     ),
     'site' => array(
@@ -818,6 +818,32 @@ function s4_sites_strongarm() {
           'view_args' => '',
         ),
         'priority' => '0',
+      ),
+    ),
+    'signup' => array(
+      'field_user' => array(
+        'referenced' => array(
+          'view' => 'view',
+          'update' => 0,
+          'delete' => 0,
+          'deny_view' => 0,
+          'deny_update' => 0,
+          'deny_delete' => 0,
+        ),
+        'author' => array(
+          'view' => 0,
+          'update' => 0,
+          'delete' => 0,
+        ),
+        'all' => array(
+          'view' => 0,
+        ),
+        'unused' => '0',
+        'views' => array(
+          'view' => '',
+          'view_args' => '',
+        ),
+        'priority' => '2',
       ),
     ),
   );
@@ -1293,6 +1319,41 @@ function s4_sites_strongarm() {
     ),
   );
   $export['nodeformscols_field_placements_site_default'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_contact_record_pattern';
+  $strongarm->value = 'notes/[node:nid]';
+  $export['pathauto_node_contact_record_pattern'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_coordinator_pattern';
+  $strongarm->value = 'site-staff/[node:nid]';
+  $export['pathauto_node_coordinator_pattern'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_file_pattern';
+  $strongarm->value = 'form/[node:nid]';
+  $export['pathauto_node_file_pattern'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_site_pattern';
+  $strongarm->value = 'sites/[node:title]';
+  $export['pathauto_node_site_pattern'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_webform_pattern';
+  $strongarm->value = 'form/[node:nid]';
+  $export['pathauto_node_webform_pattern'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
