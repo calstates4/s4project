@@ -103,7 +103,7 @@ class s4WebTestCase extends DrupalWebTestCase {
 			'view own unpublished content',
 			'view revisions',
 		),
-		'administrator' = array(
+		'administrator' => array(
 			'access administration pages',
 			'access all views',
 			'access all webform results',
