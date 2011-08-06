@@ -114,9 +114,10 @@ var s4Map = {
 				    content: '<div class="infowindow-text">' + message + '</div>',
 				    borderColor: '#000',
 				    backgroundColor: 'rgba(0,0,0,0.8)',
-				    borderRadius: '4px'
+				    borderRadius: '4px',
+				    disableAutoPan: true,
+				    disableAnimation: true
 				});
-				infoBubble.open(s4Map.map,marker);
 				s4Map.activeInfoWindow = infoBubble;
 			});
 		}
