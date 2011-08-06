@@ -105,20 +105,19 @@ var s4Map = {
 		}
 		var marker = new google.maps.Marker(markerOptions);
 		if(message) {
-			infoBubble = new InfoBubble({
-          		minWidth: 200,
-			    content: '<div class="infowindow-text">' + message + '</div>',
-			    borderColor: '#000',
-			    backgroundColor: 'rgba(0,0,0,0.8)',
-			    borderRadius: '4px'
-			});
-	
 			google.maps.event.addListener(marker, 'click', function(e) {
-			  	if(s4Map.activeInfoWindow) {
+			  	if(s4Map.activeInfoWindow !== null) {
 			  		s4Map.activeInfoWindow.close();
 			  	}
-			  	infoBubble.open(s4Map.map,marker);
-			  	s4Map.activeInfoWindow = infoBubble;
+			  	infoBubble = new InfoBubble({
+	          		minWidth: 200,
+				    content: '<div class="infowindow-text">' + message + '</div>',
+				    borderColor: '#000',
+				    backgroundColor: 'rgba(0,0,0,0.8)',
+				    borderRadius: '4px'
+				});
+				infoBubble.open(s4Map.map,marker);
+				s4Map.activeInfoWindow = infoBubble;
 			});
 		}
 		return marker;
