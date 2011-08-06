@@ -955,6 +955,9 @@ table#webform-components {
   margin: 0;
   padding: 3px;
 }
+.form-item .tabledrag-toggle-weight-wrapper {
+  text-align: left;
+}
 .node-type-site .view-site-fields .views-field {
   margin: 0 0 10px 0;
 }
