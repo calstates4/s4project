@@ -2677,6 +2677,39 @@ function s4_sites_views_default_views() {
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'block');
   $handler->display->display_options['block_description'] = 'Site fields';
+
+  /* Display: Site operating hours */
+  $handler = $view->new_display('block', 'Site operating hours', 'block_1');
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Days and hours will you accept students for service (check all that apply) */
+  $handler->display->display_options['fields']['field_site_hours']['id'] = 'field_site_hours';
+  $handler->display->display_options['fields']['field_site_hours']['table'] = 'field_data_field_site_hours';
+  $handler->display->display_options['fields']['field_site_hours']['field'] = 'field_site_hours';
+  $handler->display->display_options['fields']['field_site_hours']['label'] = 'Available hours';
+  $handler->display->display_options['fields']['field_site_hours']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_site_hours']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_site_hours']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_site_hours']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_site_hours']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_site_hours']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_site_hours']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_site_hours']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_site_hours']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_site_hours']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_site_hours']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_site_hours']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_site_hours']['element_label_type'] = 'h4';
+  $handler->display->display_options['fields']['field_site_hours']['element_label_colon'] = 0;
+  $handler->display->display_options['fields']['field_site_hours']['element_default_classes'] = 0;
+  $handler->display->display_options['fields']['field_site_hours']['hide_empty'] = 1;
+  $handler->display->display_options['fields']['field_site_hours']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_site_hours']['hide_alter_empty'] = 0;
+  $handler->display->display_options['fields']['field_site_hours']['type'] = 's4_sites_hours_matrix';
+  $handler->display->display_options['fields']['field_site_hours']['group_rows'] = 1;
+  $handler->display->display_options['fields']['field_site_hours']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_site_hours']['delta_reversed'] = 0;
+  $handler->display->display_options['fields']['field_site_hours']['field_api_classes'] = 0;
+  $handler->display->display_options['block_description'] = 'Site operating hours';
   $translatables['site_fields'] = array(
     t('Master'),
     t('more'),
@@ -2699,6 +2732,8 @@ function s4_sites_views_default_views() {
     t('All'),
     t('Block'),
     t('Site fields'),
+    t('Site operating hours'),
+    t('Available hours'),
   );
   $export['site_fields'] = $view;
 

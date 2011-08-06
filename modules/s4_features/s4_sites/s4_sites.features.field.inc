@@ -2619,7 +2619,7 @@ function s4_sites_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => '5',
+          'weight' => '4',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -3769,7 +3769,7 @@ function s4_sites_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => '3',
+          'weight' => '2',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -3900,10 +3900,9 @@ function s4_sites_field_default_fields() {
         ),
         'default' => array(
           'label' => 'above',
-          'module' => 's4_sites',
           'settings' => array(),
-          'type' => 's4_sites_hours_matrix',
-          'weight' => '2',
+          'type' => 'hidden',
+          'weight' => '6',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -4681,7 +4680,7 @@ function s4_sites_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => '4',
+          'weight' => '3',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -5085,7 +5084,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '6',
+          'weight' => '5',
         ),
         'notifications' => array(
           'label' => 'above',
