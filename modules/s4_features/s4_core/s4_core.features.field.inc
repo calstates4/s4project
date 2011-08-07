@@ -422,7 +422,7 @@ function s4_core_field_default_fields() {
           ),
         ),
         'type' => 'nodereference_url',
-        'weight' => '-2',
+        'weight' => '2',
       ),
     ),
   );
@@ -557,7 +557,7 @@ function s4_core_field_default_fields() {
           ),
         ),
         'type' => 'nodereference_url',
-        'weight' => '-1',
+        'weight' => '3',
       ),
     ),
   );
@@ -625,7 +625,7 @@ function s4_core_field_default_fields() {
         'module' => 'number',
         'settings' => array(),
         'type' => 'number',
-        'weight' => '2',
+        'weight' => '6',
       ),
     ),
   );
@@ -693,7 +693,7 @@ function s4_core_field_default_fields() {
         'module' => 'number',
         'settings' => array(),
         'type' => 'number',
-        'weight' => '1',
+        'weight' => '5',
       ),
     ),
   );
@@ -769,7 +769,7 @@ function s4_core_field_default_fields() {
         'module' => 'number',
         'settings' => array(),
         'type' => 'number',
-        'weight' => '3',
+        'weight' => '7',
       ),
     ),
   );
@@ -863,7 +863,7 @@ function s4_core_field_default_fields() {
           'year_range' => '-3:+3',
         ),
         'type' => 'date_select',
-        'weight' => '4',
+        'weight' => '9',
       ),
     ),
   );
@@ -1008,7 +1008,102 @@ function s4_core_field_default_fields() {
         'module' => 'location_cck',
         'settings' => array(),
         'type' => 'location',
-        'weight' => '5',
+        'weight' => '10',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-signup-field_signup_start_date'
+  $fields['node-signup-field_signup_start_date'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_signup_start_date',
+      'foreign keys' => array(),
+      'global_block_settings' => '1',
+      'indexes' => array(),
+      'module' => 'date',
+      'settings' => array(
+        'granularity' => array(
+          'day' => 'day',
+          'month' => 'month',
+          'year' => 'year',
+        ),
+        'repeat' => 0,
+        'timezone_db' => '',
+        'todate' => '',
+        'tz_handling' => 'none',
+      ),
+      'translatable' => '1',
+      'type' => 'date',
+    ),
+    'field_instance' => array(
+      'bundle' => 'signup',
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'cck_blocks' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'default' => array(
+          'label' => 'above',
+          'module' => 'date',
+          'settings' => array(
+            'format_type' => 'long',
+            'fromto' => 'both',
+            'multiple_from' => '',
+            'multiple_number' => '',
+            'multiple_to' => '',
+            'show_repeat_rule' => 'show',
+          ),
+          'type' => 'date_default',
+          'weight' => 9,
+        ),
+        'notifications' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'display_label' => '',
+      'entity_type' => 'node',
+      'field_name' => 'field_signup_start_date',
+      'label' => 'First day of service',
+      'required' => 0,
+      'settings' => array(
+        'default_format' => 'medium',
+        'default_value' => 'now',
+        'default_value2' => 'blank',
+        'default_value_code' => '',
+        'default_value_code2' => '',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'date',
+        'settings' => array(
+          'increment' => '1',
+          'input_format' => 'm/d/Y - H:i:s',
+          'input_format_custom' => '',
+          'label_position' => 'above',
+          'repeat_collapsed' => 0,
+          'text_parts' => array(),
+          'year_range' => '-3:+3',
+        ),
+        'type' => 'date_select',
+        'weight' => '8',
       ),
     ),
   );
@@ -1141,7 +1236,7 @@ function s4_core_field_default_fields() {
           ),
         ),
         'type' => 'nodereference_url',
-        'weight' => '-3',
+        'weight' => '1',
       ),
     ),
   );
@@ -1260,7 +1355,7 @@ function s4_core_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'user_reference_autocomplete',
-        'weight' => 0,
+        'weight' => '4',
       ),
     ),
   );
@@ -1360,6 +1455,7 @@ function s4_core_field_default_fields() {
   t('Estimate the total number of hours you have worked at this site.');
   t('Evaluation Form Results');
   t('Files');
+  t('First day of service');
   t('Form instructions');
   t('Images');
   t('Last expected date of service');

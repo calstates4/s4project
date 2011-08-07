@@ -139,6 +139,50 @@ function s4_map_views_default_views() {
   $handler->display->display_options['fields']['path']['empty_zero'] = 0;
   $handler->display->display_options['fields']['path']['hide_alter_empty'] = 0;
   $handler->display->display_options['fields']['path']['absolute'] = 0;
+  /* Field: Site Data: Total hours */
+  $handler->display->display_options['fields']['total_site_hours']['id'] = 'total_site_hours';
+  $handler->display->display_options['fields']['total_site_hours']['table'] = 's4_sites';
+  $handler->display->display_options['fields']['total_site_hours']['field'] = 'total_site_hours';
+  $handler->display->display_options['fields']['total_site_hours']['label'] = 'hours';
+  $handler->display->display_options['fields']['total_site_hours']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['total_site_hours']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['total_site_hours']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['total_site_hours']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['total_site_hours']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['total_site_hours']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['total_site_hours']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['total_site_hours']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['total_site_hours']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['total_site_hours']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['total_site_hours']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['total_site_hours']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['total_site_hours']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['total_site_hours']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['total_site_hours']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['total_site_hours']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['total_site_hours']['hide_alter_empty'] = 0;
+  /* Field: Site Data: Total students */
+  $handler->display->display_options['fields']['total_students']['id'] = 'total_students';
+  $handler->display->display_options['fields']['total_students']['table'] = 's4_sites';
+  $handler->display->display_options['fields']['total_students']['field'] = 'total_students';
+  $handler->display->display_options['fields']['total_students']['label'] = 'students';
+  $handler->display->display_options['fields']['total_students']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['total_students']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['total_students']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['total_students']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['total_students']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['total_students']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['total_students']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['total_students']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['total_students']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['total_students']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['total_students']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['total_students']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['total_students']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['total_students']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['total_students']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['total_students']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['total_students']['hide_alter_empty'] = 0;
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -175,6 +219,8 @@ function s4_map_views_default_views() {
     t('longitude'),
     t('nid'),
     t('path'),
+    t('hours'),
+    t('students'),
     t('Page'),
   );
   $export['site_map'] = $view;
