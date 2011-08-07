@@ -6,6 +6,27 @@
 
 include_once('s4_reporting.features.inc');
 
+function s4_reporting_menu() {
+	$items = array();
+	
+	$items['node/%node/responses'] = array(
+		'title' => 'Responses',
+		'page callback' => 's4_reporting_object_report',
+		'type' => MENU_LOCAL_TASK,
+		'page arguments' => array(1),
+		'access callback' => 's4_reporting_object_report_access',
+		'access arguments' => array(1),
+		'file' => 's4_reporting.pages.inc',
+		'weight' => 10
+	);
+	
+	return $items;
+}
+
+function s4_reporting_object_report_access($node) {
+	return (in_array($node->type, array('site', 'course')) && node_access('update', $node));
+}
+
 function s4_reporting_block_info() {
 	$blocks['site_summary'] = array('info' => 'Site summary');
 	return $blocks;
