@@ -20,6 +20,28 @@ function s4_reporting_menu() {
 		'weight' => 10
 	);
 	
+	$items['node/%node/responses/signup'] = array(
+		'title' => 'Signup',
+		'page callback' => 's4_reporting_object_report',
+		'type' => MENU_LOCAL_TASK,
+		'page arguments' => array(1, 'signup'),
+		'access callback' => 's4_reporting_object_report_access',
+		'access arguments' => array(1),
+		'file' => 's4_reporting.pages.inc',
+		'weight' => 10
+	);
+	
+	$items['node/%node/responses/evaluation'] = array(
+		'title' => 'Evaluations',
+		'page callback' => 's4_reporting_object_report',
+		'type' => MENU_LOCAL_TASK,
+		'page arguments' => array(1, 'evaluation'),
+		'access callback' => 's4_reporting_object_report_access',
+		'access arguments' => array(1),
+		'file' => 's4_reporting.pages.inc',
+		'weight' => 10
+	);
+	
 	return $items;
 }
 
