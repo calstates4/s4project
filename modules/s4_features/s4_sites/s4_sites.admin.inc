@@ -56,7 +56,11 @@ function s4_sites_import_sites_form() {
 	
 	
 	$restrict = false;
+	$workflow = false;
 	foreach(taxonomy_get_vocabularies() as $vid => $vocabulary) {
+		if($vocabulary->machine_name == 'site_restrictions') {
+			$restrict = taxonomy_get_tree($vid);
+		}
 		if($vocabulary->machine_name == 'site_restrictions') {
 			$restrict = taxonomy_get_tree($vid);
 		}
@@ -71,6 +75,18 @@ function s4_sites_import_sites_form() {
 			'#type' => 'checkboxes',
 			'#title' => 'Default site restrictions',
 			'#options' => $restrict_options,
+		);
+	}
+	
+	if($workflow) {
+		$workflow_options = array();
+		foreach($workflow as $tid => $term) {
+			$workflow_options[$term->tid] = $term->name;
+		}
+		$form['default_status'] = array(
+			'#type' => 'checkboxes',
+			'#title' => 'Default site status',
+			'#options' => $workflow_options,
 		);
 	}
 	
@@ -146,6 +162,16 @@ function s4_sites_import_sites_form_submit($form, $form_state) {
 		}
 		
 	}
+	if($form_state['values']['default_status']) {
+		$i = 0;
+		foreach($form_state['values']['default_status'] as $tid => $value) {
+			if($value) {
+				$extra['default_status'][$i]['tid'] = $value;
+				$i++;
+			}
+		}
+		
+	}
 	while($row = fgetcsv($file)) {
 		$batch['operations'][] = array('s4_sites_batch_import_node', array($row, $headers, $fields, $extra));
 	}
@@ -187,6 +213,9 @@ function s4_sites_batch_import_node($row, $headers, $fields, $extra, &$context) 
 	}
 	if($extra['default_restrict']) {
 		$node->field_site_restrict[$node->language] = $extra['default_restrict'];
+	}
+	if($extra['default_status']) {
+		$node->field_workflow_status[$node->language] = $extra['default_status'];
 	}
 	node_save($node);
 	$context['message'] = t('Now processing %node', array('%node' => $new_row['title']));
