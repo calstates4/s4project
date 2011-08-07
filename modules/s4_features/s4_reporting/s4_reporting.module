@@ -6,6 +6,20 @@
 
 include_once('s4_reporting.features.inc');
 
+function s4_reporting_block_info() {
+	$blocks['site_summary'] = array('info' => 'Site summary');
+	return $blocks;
+}
+
+function s4_reporting_block_view($delta) {
+  module_load_include('inc', 's4_reporting', 's4_reporting.blocks');
+  $function_name = 's4_reporting_block_' . $delta;
+  if (function_exists($function_name)) {
+    return $function_name();
+  }
+  return NULL;
+}
+
 /**
 *	Implementation of hook_theme
 */
