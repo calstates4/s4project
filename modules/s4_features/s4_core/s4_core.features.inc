@@ -53,6 +53,18 @@ function s4_core_homebox() {
     ),
     'blocks' => 
     array (
+      'views_bookmarked_sites-block' => 
+      array (
+        'module' => 'views',
+        'delta' => 'bookmarked_sites-block',
+        'region' => 2,
+        'movable' => 1,
+        'status' => 1,
+        'open' => 1,
+        'closable' => 1,
+        'title' => '',
+        'weight' => -59,
+      ),
       'views_site_moderation-block' => 
       array (
         'module' => 'views',
@@ -65,35 +77,23 @@ function s4_core_homebox() {
         'title' => '',
         'weight' => -54,
       ),
-      'views_recent_activity-block' => 
-      array (
-        'module' => 'views',
-        'delta' => 'recent_activity-block',
-        'region' => 1,
-        'movable' => 1,
-        'status' => 1,
-        'open' => 1,
-        'closable' => 1,
-        'title' => '',
-        'weight' => -54,
-      ),
-      'views_bookmarked_sites-block' => 
-      array (
-        'module' => 'views',
-        'delta' => 'bookmarked_sites-block',
-        'region' => 2,
-        'movable' => 1,
-        'status' => 1,
-        'open' => 1,
-        'closable' => 1,
-        'title' => '',
-        'weight' => -55,
-      ),
       'views_65656e1f5a12cde25f0722f735fe7969' => 
       array (
         'module' => 'views',
         'delta' => '65656e1f5a12cde25f0722f735fe7969',
         'region' => 2,
+        'movable' => 1,
+        'status' => 1,
+        'open' => 1,
+        'closable' => 1,
+        'title' => '',
+        'weight' => -58,
+      ),
+      'views_recent_activity-block' => 
+      array (
+        'module' => 'views',
+        'delta' => 'recent_activity-block',
+        'region' => 1,
         'movable' => 1,
         'status' => 1,
         'open' => 1,
@@ -111,7 +111,19 @@ function s4_core_homebox() {
         'open' => 1,
         'closable' => 1,
         'title' => '',
-        'weight' => -1,
+        'weight' => -57,
+      ),
+      's4_reporting_site_summary' => 
+      array (
+        'module' => 's4_reporting',
+        'delta' => 'site_summary',
+        'region' => 2,
+        'movable' => 1,
+        'status' => 1,
+        'open' => 1,
+        'closable' => 1,
+        'title' => '',
+        'weight' => -59,
       ),
     ),
     'widths' => 
