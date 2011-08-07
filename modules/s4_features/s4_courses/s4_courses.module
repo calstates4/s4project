@@ -260,21 +260,26 @@ function s4_courses_s4_signup($type, $nid) {
 function s4_courses_s4_signup_dates($node) {
   $course = node_load($node->field_course[$node->language][0]['nid']);
   if (!$course) {
-    return array('date' => 0, 'weight' => 0);
+    return false;
   }
   $course_date = field_get_items('node', $course, 'field_service_end');
-  if ($course_date[0]['value']) {
-    return array('date' => strtotime($course_date[0]['value']),
+  if ($course_date[0]['value'] && strtotime($course_date[0]['value']) > time()) {
+    $end_date = array('date' => strtotime($course_date[0]['value']),
            'weight' => 50);
   }
   $term = field_get_items('node', $course, 'field_term');
-  $term = node_load($term[0]['value']);
+  $term = node_load($term[0]['nid']);
   if ($term) {
     $term_date = field_get_items('node', $term, 'field_term_date_start');
-    return array('date' => strtotime($term_date[0]['value2']),
+    $result = array();
+    $result['end_date'] = (isset($end_date))
+    					    ? $end_date
+    					    : array('date' => strtotime($term_date[0]['value2']), 'weight' => 50);
+    $result['start_date'] = array('date' => strtotime($term_date[0]['value']),
            'weight' => 50);
+    return $result;
   }
-  return 0;
+  return false;
 }
 
 /**

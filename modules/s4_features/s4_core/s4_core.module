@@ -589,15 +589,24 @@ function _s4_core_create_signup($uid = 0, $signup = array()) {
   if($signup['location']) {
   	$node->field_signup_location[$node->language][0]['lid'] = $signup['location'];
   }
-  $dates = array();
-  foreach (module_invoke_all('s4_signup_dates', $node) as $date) {
-    $dates[$date['weight']] = $date['date'];
+  $start_date = array(0 => time());
+  $end_date = array(0 => time() + ((24 * 60 * 60) * variable_get('s4_core_default_service_length', 100)));
+  foreach (module_implements('s4_signup_dates') as $module) {
+    $function = $module . '_s4_signup_dates';
+    $date = $function($node);
+    if(is_array($date)) {
+	    $start_date[$date['start_date']['weight']] = $date['start_date']['date'];
+	    $end_date[$date['end_date']['weight']] = $date['end_date']['date'];
+	}
   }
-  ksort($dates);
-  $last_date = count($dates)
-         ? array_pop($dates)
-         : time() + ((24 * 60 * 60) * variable_get('s4_core_default_service_length', 100));
-  $node->field_signup_last_date[$node->language][0]['value'] = date('Y-m-d', $last_date);
+  ksort($start_date);
+  ksort($end_date);
+  $start_date = array_pop($start_date);
+  $end_date = array_pop($end_date);
+  $node->field_signup_last_date[$node->language][0]['value'] = date('Y-m-d', $end_date);
+
+  $node->field_signup_start_date[$node->language][0]['value'] = date('Y-m-d', $start_date);
+
   node_save($node);
   return $node;
 }
