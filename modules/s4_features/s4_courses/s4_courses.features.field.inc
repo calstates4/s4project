@@ -55,7 +55,7 @@ function s4_courses_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '3',
+          'weight' => '4',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -85,7 +85,7 @@ function s4_courses_field_default_fields() {
           'size' => '10',
         ),
         'type' => 'text_textfield',
-        'weight' => '9',
+        'weight' => '10',
       ),
     ),
   );
@@ -126,6 +126,9 @@ function s4_courses_field_default_fields() {
           'priority' => '0',
           'referenced' => array(
             'delete' => 0,
+            'deny_delete' => 0,
+            'deny_update' => 0,
+            'deny_view' => 0,
             'update' => 'update',
             'view' => 'view',
           ),
@@ -170,7 +173,7 @@ function s4_courses_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '9',
+          'weight' => '10',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -185,6 +188,7 @@ function s4_courses_field_default_fields() {
           'weight' => 0,
         ),
       ),
+      'display_label' => '',
       'entity_type' => 'node',
       'field_name' => 'field_course_faculty',
       'label' => 'Faculty',
@@ -201,7 +205,91 @@ function s4_courses_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'user_reference_autocomplete',
-        'weight' => '-3',
+        'weight' => '1',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-course-field_course_faculty_email'
+  $fields['node-course-field_course_faculty_email'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_course_faculty_email',
+      'foreign keys' => array(),
+      'global_block_settings' => '1',
+      'indexes' => array(
+        'value' => array(
+          0 => 'value',
+        ),
+      ),
+      'module' => 'list',
+      'settings' => array(
+        'allowed_values' => array(
+          0 => '',
+          1 => '',
+        ),
+        'allowed_values_function' => '',
+        'allowed_values_php' => '',
+      ),
+      'translatable' => '1',
+      'type' => 'list_boolean',
+    ),
+    'field_instance' => array(
+      'bundle' => 'course',
+      'default_value' => array(
+        0 => array(
+          'value' => 0,
+        ),
+      ),
+      'default_value_function' => '',
+      'default_value_php' => '',
+      'deleted' => '0',
+      'description' => 'When checked, emails from this system to students about evaluations will be sent from the faculty member\'s account.',
+      'display' => array(
+        'cck_blocks' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'default' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '3',
+        ),
+        'notifications' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'display_label' => 'Send emails as faculty',
+      'entity_type' => 'node',
+      'field_name' => 'field_course_faculty_email',
+      'label' => 'Allow system to send emails on behalf of faculty members',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(
+          'display_label' => 1,
+        ),
+        'type' => 'options_onoff',
+        'weight' => '7',
       ),
     ),
   );
@@ -242,7 +330,7 @@ function s4_courses_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '4',
+          'weight' => '5',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -273,7 +361,7 @@ function s4_courses_field_default_fields() {
         'module' => 'number',
         'settings' => array(),
         'type' => 'number',
-        'weight' => '10',
+        'weight' => '11',
       ),
     ),
   );
@@ -308,10 +396,9 @@ function s4_courses_field_default_fields() {
         ),
         'default' => array(
           'label' => 'above',
-          'module' => NULL,
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => 12,
+          'weight' => '13',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -342,7 +429,7 @@ function s4_courses_field_default_fields() {
         'module' => 'nodereference_count',
         'settings' => array(),
         'type' => 'nodereference_count_widget',
-        'weight' => '12',
+        'weight' => '13',
       ),
     ),
   );
@@ -380,7 +467,7 @@ function s4_courses_field_default_fields() {
             'update' => 0,
             'view' => 0,
           ),
-          'priority' => '0',
+          'priority' => '2',
           'referenced' => array(
             'delete' => 0,
             'deny_delete' => 0,
@@ -430,7 +517,7 @@ function s4_courses_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '10',
+          'weight' => '11',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -461,7 +548,7 @@ function s4_courses_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'user_reference_autocomplete',
-        'weight' => '-2',
+        'weight' => '2',
       ),
     ),
   );
@@ -541,7 +628,104 @@ function s4_courses_field_default_fields() {
           'size' => '10',
         ),
         'type' => 'text_textfield',
-        'weight' => '8',
+        'weight' => '9',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-course-field_course_syllabus'
+  $fields['node-course-field_course_syllabus'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_course_syllabus',
+      'foreign keys' => array(
+        'fid' => array(
+          'columns' => array(
+            'fid' => 'fid',
+          ),
+          'table' => 'file_managed',
+        ),
+      ),
+      'global_block_settings' => '1',
+      'indexes' => array(
+        'fid' => array(
+          0 => 'fid',
+        ),
+      ),
+      'module' => 'file',
+      'settings' => array(
+        'display_default' => 0,
+        'display_field' => 0,
+        'uri_scheme' => 'public',
+      ),
+      'translatable' => '1',
+      'type' => 'file',
+    ),
+    'field_instance' => array(
+      'bundle' => 'course',
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'cck_blocks' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'default' => array(
+          'label' => 'above',
+          'module' => 'file',
+          'settings' => array(),
+          'type' => 'file_default',
+          'weight' => '1',
+        ),
+        'notifications' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_course_syllabus',
+      'label' => 'Syllabus',
+      'required' => 0,
+      'settings' => array(
+        'description_field' => 0,
+        'file_directory' => 'syllabi',
+        'file_extensions' => 'doc pdf docx odf txt',
+        'max_filesize' => '',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'file',
+        'settings' => array(
+          'insert' => 0,
+          'insert_class' => '',
+          'insert_default' => 'auto',
+          'insert_styles' => array(
+            'auto' => 'auto',
+            'image' => 0,
+            'image_large' => 0,
+            'image_medium' => 0,
+            'image_thumbnail' => 0,
+            'link' => 0,
+          ),
+          'insert_width' => '',
+          'progress_indicator' => 'throbber',
+        ),
+        'type' => 'file_generic',
+        'weight' => '14',
       ),
     ),
   );
@@ -591,7 +775,7 @@ function s4_courses_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '5',
+          'weight' => '6',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -621,7 +805,7 @@ function s4_courses_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '11',
+        'weight' => '12',
       ),
     ),
   );
@@ -675,7 +859,7 @@ function s4_courses_field_default_fields() {
             'show_repeat_rule' => 'show',
           ),
           'type' => 'date_default',
-          'weight' => '1',
+          'weight' => '0',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -714,8 +898,8 @@ function s4_courses_field_default_fields() {
           'text_parts' => array(),
           'year_range' => '-3:+3',
         ),
-        'type' => 'date_select',
-        'weight' => '7',
+        'type' => 'date_popup',
+        'weight' => '8',
       ),
     ),
   );
@@ -771,7 +955,7 @@ function s4_courses_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '11',
+          'weight' => '12',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -798,7 +982,7 @@ function s4_courses_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '0',
+        'weight' => '3',
       ),
     ),
   );
@@ -852,7 +1036,7 @@ function s4_courses_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '6',
+          'weight' => '7',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -881,7 +1065,7 @@ function s4_courses_field_default_fields() {
           'display_label' => 1,
         ),
         'type' => 'options_onoff',
-        'weight' => '4',
+        'weight' => '6',
       ),
     ),
   );
@@ -977,7 +1161,7 @@ function s4_courses_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '7',
+          'weight' => '8',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -1008,7 +1192,7 @@ function s4_courses_field_default_fields() {
           'size' => 60,
         ),
         'type' => 'node_reference_autocomplete',
-        'weight' => '2',
+        'weight' => '4',
       ),
     ),
   );
@@ -1104,7 +1288,7 @@ function s4_courses_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '8',
+          'weight' => '9',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -1135,7 +1319,7 @@ function s4_courses_field_default_fields() {
           'size' => '30',
         ),
         'type' => 'node_reference_autocomplete',
-        'weight' => '3',
+        'weight' => '5',
       ),
     ),
   );
@@ -1396,6 +1580,7 @@ function s4_courses_field_default_fields() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Allow system to send emails on behalf of faculty members');
   t('Catalog number');
   t('Course access permissions');
   t('Course filter');
@@ -1413,11 +1598,13 @@ function s4_courses_field_default_fields() {
   t('Sites');
   t('Students');
   t('Subject');
+  t('Syllabus');
   t('Term');
   t('Term Code');
   t('Term dates');
   t('Type in the user names of people who should be assigned as extra faculty to this course.');
   t('What kinds of sites or coordinators this course is allowed to access.');
+  t('When checked, emails from this system to students about evaluations will be sent from the faculty member\'s account.');
   t('When checked, students will only be able to choose from the site list.');
 
   return $fields;

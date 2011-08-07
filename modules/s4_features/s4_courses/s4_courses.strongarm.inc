@@ -156,7 +156,7 @@ function s4_courses_strongarm() {
   $strongarm->value = array(
     'additional_settings' => array(
       'region' => 'main',
-      'weight' => '7',
+      'weight' => '9',
       'has_required' => FALSE,
       'title' => 'Vertical tabs',
       'hidden' => 0,
@@ -177,7 +177,7 @@ function s4_courses_strongarm() {
     ),
     'field_course_students' => array(
       'region' => 'main',
-      'weight' => '5',
+      'weight' => '7',
       'has_required' => FALSE,
       'title' => 'Students',
       'hidden' => 0,
@@ -191,7 +191,7 @@ function s4_courses_strongarm() {
     ),
     'field_sites' => array(
       'region' => 'main',
-      'weight' => '4',
+      'weight' => '6',
       'has_required' => FALSE,
       'title' => 'Sites',
       'hidden' => 0,
@@ -205,16 +205,9 @@ function s4_courses_strongarm() {
     ),
     'field_site_restrict_to_list' => array(
       'region' => 'main',
-      'weight' => '6',
+      'weight' => '8',
       'has_required' => FALSE,
       'title' => 'Restrict students to only these sites',
-      'hidden' => 0,
-    ),
-    'field_course_signup_form' => array(
-      'region' => 'right',
-      'weight' => '2',
-      'has_required' => FALSE,
-      'title' => 'Extra signup form',
       'hidden' => 0,
     ),
     'field_service_end' => array(
@@ -226,35 +219,62 @@ function s4_courses_strongarm() {
     ),
     'field_course_subject' => array(
       'region' => 'main',
-      'weight' => '0',
+      'weight' => '1',
       'has_required' => TRUE,
       'title' => 'Subject',
     ),
     'field_course_catalog_number' => array(
       'region' => 'main',
-      'weight' => '1',
+      'weight' => '3',
       'has_required' => TRUE,
       'title' => 'Catalog number',
     ),
     'field_course_section' => array(
       'region' => 'main',
-      'weight' => '2',
+      'weight' => '4',
       'has_required' => TRUE,
       'title' => 'Section number',
     ),
     'field_course_title' => array(
       'region' => 'main',
-      'weight' => '3',
+      'weight' => '5',
       'has_required' => FALSE,
       'title' => 'Course title',
       'hidden' => 0,
     ),
     'notifications' => array(
-      'region' => 'footer',
-      'weight' => '6',
+      'region' => 'main',
+      'weight' => '12',
       'has_required' => FALSE,
       'title' => 'Notifications',
       'collapsed' => 0,
+      'hidden' => 1,
+    ),
+    'title' => array(
+      'region' => 'main',
+      'weight' => '0',
+      'has_required' => TRUE,
+      'title' => 'Course Name',
+    ),
+    'field_course_signups' => array(
+      'region' => 'main',
+      'weight' => '2',
+      'has_required' => FALSE,
+      'title' => NULL,
+      'hidden' => 0,
+    ),
+    'field_course_syllabus' => array(
+      'region' => 'main',
+      'weight' => '11',
+      'has_required' => FALSE,
+      'title' => 'Syllabus',
+      'hidden' => 0,
+    ),
+    'field_course_faculty_email' => array(
+      'region' => 'main',
+      'weight' => '10',
+      'has_required' => FALSE,
+      'title' => 'Allow system to send emails on behalf of faculty members',
       'hidden' => 0,
     ),
   );

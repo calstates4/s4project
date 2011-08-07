@@ -278,14 +278,6 @@ function s4_courses_s4_signup_dates($node) {
 }
 
 /**
-*  Implementation of hook_views_api()
-*/
-function s4_courses_views_api() {
-  return array('api' => 3,
-         'path' => drupal_get_path('module', 's4_courses') . '/views');
-}
-
-/**
 *  Implementation of hook_block_info
 */
 function s4_courses_block_info() {

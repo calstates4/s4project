@@ -750,6 +750,9 @@ function s4_sites_strongarm() {
           'view' => 'view',
           'update' => 'update',
           'delete' => 0,
+          'deny_view' => 0,
+          'deny_update' => 0,
+          'deny_delete' => 0,
         ),
         'author' => array(
           'view' => 'view',
@@ -765,9 +768,6 @@ function s4_sites_strongarm() {
           'view_args' => '',
         ),
         'priority' => '0',
-        'deny_view' => 0,
-        'deny_update' => 0,
-        'deny_delete' => 0,
       ),
       'field_course_students' => array(
         'referenced' => array(

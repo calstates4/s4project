@@ -1066,7 +1066,34 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['query_comment'] = FALSE;
-  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['type'] = 'better_exposed_filters';
+  $handler->display->display_options['exposed_form']['options']['autosubmit'] = 0;
+  $handler->display->display_options['exposed_form']['options']['autosubmit_hide'] = 1;
+  $handler->display->display_options['exposed_form']['options']['bef'] = array(
+    'field_course_subject_value' => array(
+      'more_options' => array(
+        'bef_filter_description' => '',
+      ),
+    ),
+    'field_course_catalog_number_value' => array(
+      'more_options' => array(
+        'bef_filter_description' => '',
+      ),
+    ),
+    'field_course_section_value' => array(
+      'more_options' => array(
+        'bef_filter_description' => '',
+      ),
+    ),
+    'field_term_nid' => array(
+      'bef_format' => 'bef',
+      'more_options' => array(
+        'bef_select_all_none' => 0,
+        'bef_collapsible' => 0,
+        'bef_filter_description' => '',
+      ),
+    ),
+  );
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '30';
   $handler->display->display_options['pager']['options']['offset'] = '0';
@@ -1503,6 +1530,54 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['fields']['field_first_name']['hide_empty'] = 0;
   $handler->display->display_options['fields']['field_first_name']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_first_name']['field_api_classes'] = 0;
+  /* Field: Content: Students */
+  $handler->display->display_options['fields']['field_course_students']['id'] = 'field_course_students';
+  $handler->display->display_options['fields']['field_course_students']['table'] = 'field_data_field_course_students';
+  $handler->display->display_options['fields']['field_course_students']['field'] = 'field_course_students';
+  $handler->display->display_options['fields']['field_course_students']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_course_students']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_course_students']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_course_students']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_course_students']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_course_students']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_course_students']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_course_students']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_course_students']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_course_students']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_course_students']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_course_students']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_course_students']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_course_students']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_course_students']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_course_students']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_course_students']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_course_students']['hide_alter_empty'] = 0;
+  $handler->display->display_options['fields']['field_course_students']['group_rows'] = 1;
+  $handler->display->display_options['fields']['field_course_students']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_course_students']['delta_reversed'] = 0;
+  $handler->display->display_options['fields']['field_course_students']['field_api_classes'] = 0;
+  /* Field: Course: Total course enrollment */
+  $handler->display->display_options['fields']['course_student_enrollment']['id'] = 'course_student_enrollment';
+  $handler->display->display_options['fields']['course_student_enrollment']['table'] = 's4_course';
+  $handler->display->display_options['fields']['course_student_enrollment']['field'] = 'course_student_enrollment';
+  $handler->display->display_options['fields']['course_student_enrollment']['label'] = 'Enrollment';
+  $handler->display->display_options['fields']['course_student_enrollment']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['course_student_enrollment']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['course_student_enrollment']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['course_student_enrollment']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['course_student_enrollment']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['course_student_enrollment']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['course_student_enrollment']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['course_student_enrollment']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['course_student_enrollment']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['course_student_enrollment']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['course_student_enrollment']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['course_student_enrollment']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['course_student_enrollment']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['course_student_enrollment']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['course_student_enrollment']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['course_student_enrollment']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['course_student_enrollment']['hide_alter_empty'] = 0;
   /* Field: Content: Edit link */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'node';
@@ -1593,6 +1668,21 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['filters']['field_course_section_value']['expose']['operator'] = 'field_course_section_value_op';
   $handler->display->display_options['filters']['field_course_section_value']['expose']['identifier'] = 'field_course_section_value';
   $handler->display->display_options['filters']['field_course_section_value']['expose']['multiple'] = FALSE;
+  /* Filter criterion: Content: Term (field_term) */
+  $handler->display->display_options['filters']['field_term_nid']['id'] = 'field_term_nid';
+  $handler->display->display_options['filters']['field_term_nid']['table'] = 'field_data_field_term';
+  $handler->display->display_options['filters']['field_term_nid']['field'] = 'field_term_nid';
+  $handler->display->display_options['filters']['field_term_nid']['value'] = array(
+    3 => '3',
+  );
+  $handler->display->display_options['filters']['field_term_nid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_term_nid']['expose']['operator_id'] = 'field_term_nid_op';
+  $handler->display->display_options['filters']['field_term_nid']['expose']['label'] = 'Term';
+  $handler->display->display_options['filters']['field_term_nid']['expose']['operator'] = 'field_term_nid_op';
+  $handler->display->display_options['filters']['field_term_nid']['expose']['identifier'] = 'field_term_nid';
+  $handler->display->display_options['filters']['field_term_nid']['expose']['remember'] = 1;
+  $handler->display->display_options['filters']['field_term_nid']['expose']['multiple'] = 1;
+  $handler->display->display_options['filters']['field_term_nid']['expose']['reduce'] = 0;
   $handler->display->display_options['path'] = 'courses';
 
   /* Display: Student course list */
@@ -1965,6 +2055,8 @@ function s4_courses_views_default_views() {
     t('Last Name'),
     t('Faculty'),
     t('[field_last_name], [field_first_name]'),
+    t('Students'),
+    t('Enrollment'),
     t('Edit'),
     t('Catalog number'),
     t('Student course list'),
