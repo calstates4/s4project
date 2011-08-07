@@ -47,22 +47,34 @@ var s4Map = {
 	
 	markers : [ ],
 	
+	mapID : '',
+	
 	style : [ ],
 	
+	lastZoom : 10,
+	
+	zoomStorage : [ ],
+	
+	zoomDivider : .4,
+	
+	maxSize: 120,
+	
+	minSize: 25,
+	
 	init : function(mapID) {
+		s4Map.lastZoom = Drupal.settings.s4_map.zoom;
+		s4Map.mapID = mapID;
 		var center = new google.maps.LatLng(Drupal.settings.s4_map.lat, Drupal.settings.s4_map.lon);
 		s4Map.map = new google.maps.Map(document.getElementById(mapID),
         				   {'center' : center,
 							'zoom' : Drupal.settings.s4_map.zoom,
-							'mapTypeControlOptions' : {
-						       'mapTypeIds': [google.maps.MapTypeId.ROADMAP, 's4']
-						    	} 
+						    mapTypeId: google.maps.MapTypeId.TERRAIN
 						    });
 		
-		var mapStyleType = new google.maps.StyledMapType(
+		/*var mapStyleType = new google.maps.StyledMapType(
 					      s4Map.style, { name : 'Service'} );
 		s4Map.map.mapTypes.set('s4', mapStyleType);
-		s4Map.map.setMapTypeId('s4');
+		s4Map.map.setMapTypeId('s4');*/
 		if($('#' + mapID).hasClass('autofill')) {
 			google.maps.event.addListener(s4Map.map, 'idle', s4Map.reloadMap);
 		}
@@ -82,20 +94,49 @@ var s4Map = {
 		$('#map-loading-indicator').show();
 		$.getJSON(Drupal.settings.basePath + 'json/map/sites?lat_min=' + boundaries.getSouthWest().lat() +'&lat_max=' + boundaries.getNorthEast().lat() + '&lon_min=' + boundaries.getSouthWest().lng() + '&lon_max=' + boundaries.getNorthEast().lng() ,function(data) {
 			$.each(data.nodes, function(index, element) {
-				if(s4Map.markers[element.node.nid] === undefined) {
+				if(typeof s4Map.markers[element.node.nid] == 'undefined') {
 					s4Map.markers[element.node.nid] = 
-						s4Map.addMarker(element.node.latitude, element.node.longitude, '<a href="' + element.node.path + '">' + element.node.title + '</a>');
+						s4Map.addCircle(element.node.latitude, element.node.longitude, 10 * Math.random(), '<a href="' + element.node.path + '">' + element.node.title + '</a>');
 				}
 			});
 			$('#map-loading-indicator').hide();
 		});
+		if(s4Map.lastZoom != s4Map.map.getZoom()) {
+			s4Map.lastZoom = s4Map.map.getZoom();
+			$.each(s4Map.markers, function(index, marker) {
+				if(typeof marker != 'undefined') {
+					s4Map.markers[index].setRadius(s4Map.getCircleSize(marker.get('defaultRadius')));
+				}
+			});
+		}
+	},
+	
+	getCircleSize : function(size) {
+		var meters = s4Map.getMetersPerPixels();
+		if(size > s4Map.maxSize) {
+			return s4Map.maxSize * meters;
+		}
+		if(size < s4Map.minSize) {
+			return s4Map.minSize * meters;
+		}
+		return size * meters;
+	},
+	
+	getMetersPerPixels : function() {
+		if(typeof s4Map.zoomStorage[s4Map.map.getZoom()] == 'undefined') {
+			var boundaries = s4Map.map.getBounds();
+			var meters = google.maps.geometry.spherical.computeDistanceBetween(boundaries.getSouthWest(), boundaries.getNorthEast());
+			var pixels = ($('#' + s4Map.mapID).width() ^ 2) + ($('#' + s4Map.mapID).height() ^ 2);
+			s4Map.zoomStorage[s4Map.map.getZoom()] = (meters / pixels);
+		}
+		return s4Map.zoomStorage[s4Map.map.getZoom()];
 	},
 	
 	addMarker : function(lat, lon, message, icon, shadow) {
 		var latLng = new google.maps.LatLng(lat, lon);
 		var markerOptions = {
 			position: latLng, 
-			map: s4Map.map,
+			map: s4Map.map
 		};
 		if(icon) {
 			markerOptions.icon = icon;
@@ -124,17 +165,36 @@ var s4Map = {
 		return marker;
 	},
 	
-	addCircle : function(lat, lon) {
+	addCircle : function(lat, lon, radius, message) {
 		var latLng = new google.maps.LatLng(lat, lon);
 		var marker = new google.maps.Circle({
 			center: latLng,
 			fillColor: '#4b8bba',
 			fillOpacity: 0.7,
-			radius: 20,
+			radius: s4Map.getCircleSize(radius),
 			strokeColor: '#4b8bba',
 			strokeWeight: 1, 
-			map: s4Map.map,
+			map: s4Map.map
 		});
+		marker.set('defaultRadius', radius);
+		if(typeof message !== 'undefined') {
+			google.maps.event.addListener(marker, 'click', function(e) {
+			  	if(s4Map.activeInfoWindow !== null) {
+			  		s4Map.activeInfoWindow.close();
+			  	}
+			  	infoBubble = new InfoBubble({
+	          		minWidth: 200,
+				    content: '<div class="infowindow-text">' + message + '</div>',
+				    borderColor: '#000',
+				    backgroundColor: 'rgba(0,0,0,0.8)',
+				    borderRadius: '4px',
+				    disableAutoPan: true,
+				    disableAnimation: true
+				});
+				infoBubble.open();
+				s4Map.activeInfoWindow = infoBubble;
+			});
+		}
 		return marker;
 	},
 	
