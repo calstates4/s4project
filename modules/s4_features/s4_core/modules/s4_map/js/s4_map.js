@@ -57,7 +57,7 @@ var s4Map = {
 	
 	zoomDivider : .4,
 	
-	maxSize: 120,
+	maxSize: 70,
 	
 	minSize: 25,
 	
@@ -96,7 +96,7 @@ var s4Map = {
 			$.each(data.nodes, function(index, element) {
 				if(typeof s4Map.markers[element.node.nid] == 'undefined') {
 					s4Map.markers[element.node.nid] = 
-						s4Map.addCircle(element.node.latitude, element.node.longitude, 10 * Math.random(), '<a href="' + element.node.path + '">' + element.node.title + '</a>');
+						s4Map.addCircle(element.node.latitude, element.node.longitude, s4Map.maxSize / element.node.hours, '<a href="' + element.node.path + '">' + element.node.title + '</a><div class="hours">' + element.node.hours + ' hours by ' + element.node.students + ' students</div>');
 				}
 			});
 			$('#map-loading-indicator').hide();
@@ -173,7 +173,8 @@ var s4Map = {
 			fillOpacity: 0.7,
 			radius: s4Map.getCircleSize(radius),
 			strokeColor: '#4b8bba',
-			strokeWeight: 1, 
+			strokeWeight: 1,
+			clickable: true, 
 			map: s4Map.map
 		});
 		marker.set('defaultRadius', radius);
@@ -191,7 +192,8 @@ var s4Map = {
 				    disableAutoPan: true,
 				    disableAnimation: true
 				});
-				infoBubble.open();
+				infoBubble.setPosition(marker.getCenter());
+				infoBubble.open(s4Map.map);
 				s4Map.activeInfoWindow = infoBubble;
 			});
 		}
