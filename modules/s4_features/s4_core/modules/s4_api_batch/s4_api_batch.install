@@ -24,18 +24,7 @@ function s4_api_batch_schema() {
       'subject'  => array('type' => 'varchar', 'length' => 255, 'default' => ''), 
       'catalog_number' => array('type' => 'varchar', 'length' => 255, 'default' => ''), 
       'section'   => array('type' => 'int', 'not NULL' => TRUE, 'default' => 0),
-      'title' => array('type' => 'varchar', 'length' => 255, 'default' => ''), 
-
-    ),  
-  );
-  
-  $schema['s4_api_batch_courses'] = array(
-    'description' => 'Batch storage table for course information',
-    'fields' => array(
-      'term' => array('type' => 'varchar', 'length' => 255, 'default' => ''), 
-      'subject'  => array('type' => 'varchar', 'length' => 255, 'default' => ''), 
-      'catalog_number' => array('type' => 'varchar', 'length' => 255, 'default' => ''), 
-      'section'   => array('type' => 'int', 'not NULL' => TRUE, 'default' => 0),
+      'title' => array('type' => 'varchar', 'length' => 255, 'default' => ''), //!!!
     ),  
   );
 
