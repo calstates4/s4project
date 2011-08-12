@@ -59,10 +59,9 @@ function s4_courses_cron() {
       s4_courses_create_term($term);
     }
     variable_set('s4_term_cron_last_update', time());
-    //return NULL;
+    return NULL;
   }
-  //if (time() > variable_get('s4_courses_cron_last_update', 0) + variable_get('s4_courses_update_frequency', (2 * 60 * 60))) {
-  if(true) {
+  if (time() > variable_get('s4_courses_cron_last_update', 0) + variable_get('s4_courses_update_frequency', (2 * 60 * 60))) {
   	foreach(_s4_courses_get_current_terms() as $term) {
 	    $courses = module_invoke_all('s4_get_courses', $term);
 	    foreach ($courses as $course) {
