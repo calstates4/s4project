@@ -35,9 +35,9 @@ function s4_courses_context_default_contexts() {
           'region' => 'content_subscriptions',
           'weight' => '-10',
         ),
-        'cck_blocks-field_course_faculty' => array(
-          'module' => 'cck_blocks',
-          'delta' => 'field_course_faculty',
+        'views-course_students-block_2' => array(
+          'module' => 'views',
+          'delta' => 'course_students-block_2',
           'region' => 'content_right',
           'weight' => '-10',
         ),

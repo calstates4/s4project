@@ -1145,6 +1145,18 @@ function s4_core_theme_registry_alter(&$items) {
 }
 
 /**
+*	Theme override for username so we can use first and last name
+*/
+function s4_core_preprocess_username(&$variables) {
+  $user = user_load($variables['uid']);
+  $first_name = field_get_items('user', $user, 'field_first_name');
+  $last_name = field_get_items('user', $user, 'field_last_name');
+  $variables['name'] = ($first_name[0]['value'] && $last_name[0]['value'])
+  		  ? $first_name[0]['value'] .' '. $last_name[0]['value']
+  		  : $variables['name'];
+}
+
+/**
 *  Override the views saved searches form to remove the fieldset on certain
 *  pages and also rewrite the output
 */
