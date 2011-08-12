@@ -39,7 +39,7 @@ function s4_reporting_block_course_summary() {
 		return null;
 	}
 	if($cache = cache_get('s4_erporting_courses')) {
-		//return $cache->data;
+		return $cache->data;
 	}
 	$terms = _s4_courses_get_current_terms();
 	
@@ -67,14 +67,14 @@ function s4_reporting_block_course_summary() {
 			$query = db_select('field_data_field_course', 'c')
 					 ->condition('c.field_course_nid', $course);
 			$query->addExpression('COUNT(c.entity_id)', 'entity_id');
-			$result = $query->execute();
-			$signups += $result->fetchField();
+			$result_signups = $query->execute();
+			$signups += $result_signups->fetchField();
 			
 			$query = db_select('field_data_field_course_students', 's')
 					 ->condition('s.entity_id', $course);
 			$query->addExpression('COUNT(s.field_course_students_uid)', 'uid');
-			$result = $query->execute();
-			$students += $result->fetchField();
+			$result_students = $query->execute();
+			$students += $result_students->fetchField();
 			
 			$total++;
 		}
