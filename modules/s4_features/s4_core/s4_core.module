@@ -652,6 +652,13 @@ function s4_core_create_user($sis_user, $user = FALSE) {
   if (!$sis_user) {
     return FALSE;
   }
+  $query = db_select('users', 'u')
+  		   ->condition('u.name', $sis_user['login_id'])
+  		   ->fields('u', array('uid'));
+  $uid = $query->execute()->fetchField();
+  if($uid) {
+  	$user = user_load($uid);
+  }
   if (!$user) {
     $user = new stdClass();
     $user->name = $sis_user['login_id'];

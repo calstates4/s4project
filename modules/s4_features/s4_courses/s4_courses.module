@@ -59,10 +59,16 @@ function s4_courses_cron() {
       s4_courses_create_term($term);
     }
     variable_set('s4_term_cron_last_update', time());
-    return NULL;
+    //return NULL;
   }
-  if (time() > variable_get('s4_courses_cron_last_update', 0) + variable_get('s4_courses_update_frequency', (2 * 60 * 60))) {
-    
+  //if (time() > variable_get('s4_courses_cron_last_update', 0) + variable_get('s4_courses_update_frequency', (2 * 60 * 60))) {
+  if(true) {
+  	foreach(_s4_courses_get_current_terms() as $term) {
+	    $courses = module_invoke_all('s4_get_courses', $term);
+	    foreach ($courses as $course) {
+	      s4_courses_create_course($course);
+	    }
+	}
     variable_set('s4_courses_cron_last_update', time());
   }
   
@@ -125,10 +131,13 @@ function s4_courses_create_term($term) {
 function s4_courses_create_course($course, $add_user= FALSE, $add_role = FALSE) {
   $course_node = s4_core_get_entity($course, 'course');
   if (!$course_node) {
+    
     $course_node = new stdClass();
     $course_node->type = 'course';
     $course_node->language = language_default()->language;
     $course_node->s4_unique_id = s4_core_make_hash($course, 'course');
+    $course_node->title = $course['subject'] .' '. $course['catalog_number'] .' ('. $course['section'] .')';
+    $course_node->field_term[$course_node->language][0]['nid'] = _s4_courses_get_term_nid($course['term']);
     foreach (_s4_courses_get_field_mapping() as $field => $key) {
       $course_node->{$field} = array($course_node->language => array(
                          array('value' => $course[$key])
@@ -167,6 +176,21 @@ function s4_courses_create_course($course, $add_user= FALSE, $add_role = FALSE) 
     }
     node_save($course_node);
   }
+}
+
+/**
+*	Returns the NID of a term based on term code
+*/
+function _s4_courses_get_term_nid($code) {
+	static $terms;
+	if(!isset($terms[$code])) {
+		$term = db_select('field_data_field_term_code', 't')
+	    		->condition('t.field_term_code_value', $code)
+	    		->fields('t', array('entity_id'));
+	    $result = $term->execute();
+    	$terms[$code] = $result->fetchField();
+    }
+    return $terms[$code];
 }
 
 /**

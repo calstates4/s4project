@@ -106,7 +106,7 @@ function s4_api_batch_cron() {
         ->fields(array(
               'term' => $course['term'],
               'subject' => $course['subject'],
-              'catalog_number' => $course['catalog_number'],
+              'catalog_number' => trim($course['catalog_number']),
               'section' => $course['section'],
               'title' => $course['title'],
         ))

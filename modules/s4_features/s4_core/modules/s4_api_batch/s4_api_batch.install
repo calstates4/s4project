@@ -24,7 +24,8 @@ function s4_api_batch_schema() {
       'subject'  => array('type' => 'varchar', 'length' => 255, 'default' => ''), 
       'catalog_number' => array('type' => 'varchar', 'length' => 255, 'default' => ''), 
       'section'   => array('type' => 'int', 'not NULL' => TRUE, 'default' => 0),
-      'title' => array('type' => 'varchar', 'length' => 255, 'default' => ''), //!!!
+      'title' => array('type' => 'varchar', 'length' => 255, 'default' => ''),
+      'status' => array('type' => 'int', 'default' => 1),
     ),  
   );
 
