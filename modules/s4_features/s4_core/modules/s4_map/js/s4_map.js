@@ -59,7 +59,7 @@ var s4Map = {
 	
 	maxSize: 70,
 	
-	minSize: 25,
+	minSize: 20,
 	
 	init : function(mapID) {
 		s4Map.lastZoom = Drupal.settings.s4_map.zoom;
@@ -96,7 +96,7 @@ var s4Map = {
 			$.each(data.nodes, function(index, element) {
 				if(typeof s4Map.markers[element.node.nid] == 'undefined') {
 					s4Map.markers[element.node.nid] = 
-						s4Map.addCircle(element.node.latitude, element.node.longitude, s4Map.maxSize / element.node.hours, '<a href="' + element.node.path + '">' + element.node.title + '</a><div class="hours">' + element.node.hours + ' hours by ' + element.node.students + ' students</div>');
+						s4Map.addCircle(element.node.latitude, element.node.longitude, element.node.hours / (s4Map.maxSize - s4Map.minSize), '<a href="' + element.node.path + '">' + element.node.title + '</a><div class="hours">' + element.node.hours + ' hours by ' + element.node.students + ' students</div>');
 				}
 			});
 			$('#map-loading-indicator').hide();
@@ -190,8 +190,10 @@ var s4Map = {
 				    backgroundColor: 'rgba(0,0,0,0.8)',
 				    borderRadius: '4px',
 				    disableAutoPan: true,
-				    disableAnimation: true
+				    disableAnimation: true,
+				    padding: 20
 				});
+				$(infoBubble.c).find('img:first').attr('src', Drupal.settings.basePath + Drupal.settings.s4_map_path + '/images/close.png');
 				infoBubble.setPosition(marker.getCenter());
 				infoBubble.open(s4Map.map);
 				s4Map.activeInfoWindow = infoBubble;

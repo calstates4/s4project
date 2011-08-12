@@ -83,3 +83,8 @@ function _s4_reporting_get_site_sids($node, $type = 'signup') {
 	}
 	return $sids;
 }
+
+function s4_reporting_report_view() {
+	
+	return 'report!';
+}

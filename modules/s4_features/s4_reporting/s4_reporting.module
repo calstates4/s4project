@@ -42,6 +42,14 @@ function s4_reporting_menu() {
 		'weight' => 10
 	);
 	
+	$items['reports/view/%'] = array(
+		'title' => 'Report',
+		'page callback' => 's4_reporting_report_view',
+		'page arguments' => array(2),
+		'access arguments' => array('view s4 reports'),
+		'file' => 's4_reporting.pages.inc',
+	);
+	
 	return $items;
 }
 
@@ -51,6 +59,7 @@ function s4_reporting_object_report_access($node) {
 
 function s4_reporting_block_info() {
 	$blocks['site_summary'] = array('info' => 'Site summary');
+	$blocks['course_summary'] = array('info' => 'Course summary');
 	return $blocks;
 }
 
@@ -101,4 +110,87 @@ function theme_s4_reporting_chart_pie($data) {
 	}
 	drupal_add_js(sprintf($script, implode("\n", $values)), 'inline');
 	return '<div class="chart-pie" id="'. $data['id'] .'"></div>';
+}
+
+function s4_reporting_action_info() {
+  return array(
+    's4_reporting_run_summary_report' => array(
+        'type' => 'node',
+        'label' => t('Run summary report'),
+        'configurable' => TRUE,
+        'triggers' => array('any'),
+      ),
+    's4_reporting_run_full_report' => array(
+        'type' => 'node',
+        'label' => t('Run full report'),
+        'configurable' => TRUE,
+        'triggers' => array('any'),
+      ),
+  );
+}
+
+function s4_reporting_run_summary_report($entity, $context) {
+	dpm($entity);
+	dpm($context);
+	return;
+}
+
+function _s4_reporting_action_settings_form($context) {
+	drupal_add_js(drupal_get_path('module', 's4_reporting') .'/js/s4_reporting.js');
+	$sample = node_load(array_pop(array_keys($context['selection'])));
+	$fields = field_info_instances('node', $sample->type);
+	$options = array('all' => 'Select all');
+	foreach($fields as $name => $field) {
+		$options[$name] = $field['label'];
+	}
+	
+	$form['fields'] = array(
+		'#type' => 'checkboxes',
+		'#title' => 'What fields do you want to select?',
+		'#options' => $options,
+		'#attributes' => array('class' => array('s4-reporting-fields')),
+	);
+	return $form;
+}
+
+function s4_reporting_run_summary_report_form($context) {
+	return _s4_reporting_action_settings_form($context);
+}
+
+function s4_reporting_run_summary_report_validate($form, $form_state) {
+
+}
+
+function s4_reporting_run_summary_report_submit($form, $form_state) {
+  return array(
+    'fields' => $form_state['values']['fields'],
+  );
+}
+
+function s4_reporting_run_full_report($entity, $context) {
+	dpm($entity);
+	dpm($context);
+	return;
+}
+
+function s4_reporting_run_full_report_form($context) {
+	return _s4_reporting_action_settings_form($context);
+}
+
+function s4_reporting_run_full_report_validate($form, $form_state) {
+
+}
+
+function s4_reporting_run_full_report_submit($form, $form_state) {
+  return array(
+    'fields' => $form_state['values']['fields'],
+  );
+}
+
+function s4_reporting_permissions() {
+	return array('view s4 reports' => array(
+					'title' => 'View generated reports',
+					'description' => 'User can access pre-generated reports',
+				)
+		);
 }
