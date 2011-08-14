@@ -86,6 +86,62 @@ function s4_sites_user_completed_form($site, $form) {
 }
 
 /**
+*	Implementation of s4_core_field_access
+*/
+function s4_sites_s4_field_access() {
+	
+	return array('site' => array(
+						'body',
+						'field_site_projects',
+						'field_phone',
+						'field_site_email',
+						'field_website',
+						'field_location',
+						'field_signups_max',
+						'field_site_hours_minimum',
+						'field_site_hours',
+						'field_site_instructions_required',
+						'field_site_instructions',
+						'field_site_requirements',
+						'field_site_health_training',
+						'field_site_tour',
+						'field_health_risk',
+						'field_tags',
+						'field_site_restrict',
+						'field_csu_facility',
+						'field_csu_org_type',
+						'field_site_users',
+						'field_site_form',
+						'field_site_eval_form',
+						'field_workflow_status',
+				),
+				'coordinator' => array(
+						'field_first_name',
+						'field_last_name',
+						'field_signups_max',
+						'field_site',
+						'field_site_restrict',
+						'field_staff_role',
+						'field_staff_signup_available',
+						'field_email',
+						'field_phone',
+				),
+				'file' => array(
+						'field_site',
+						'field_expiration_date',
+						'field_expiration_reminder',
+						'field_expiration_reminder_date',
+						'field_form_sid',
+						'field_file_category',
+				),
+				'contact_record' => array(
+						'field_site',
+						'field_contact',
+				),
+	);
+}
+
+/**
 *	Implementation of hook_webform_submission_insert
 *	Here we take any submissions made by site staff and attach
 *	them to a form record.

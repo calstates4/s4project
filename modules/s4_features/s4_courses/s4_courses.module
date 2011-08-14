@@ -29,6 +29,9 @@ function s4_courses_get_term_codes($requested_code = FALSE) {
   return $term_codes;
 }
 
+/**
+*	Implementation of hook_s4_site_configuration
+*/
 function s4_courses_s4_site_configuration() {
 	return array(
 		's4_courses' => array(
@@ -37,6 +40,33 @@ function s4_courses_s4_site_configuration() {
 			'description' => t('Manage how S4 integrates with your SIS for courses and create filters to select only courses that are needed for this site'),
 			'href' => 'admin/config/s4/courses',
 		),
+	);
+}
+
+/**
+*	Implementation of s4_core_field_access
+*/
+function s4_courses_s4_field_access() {
+	
+	return array('course' => array(
+						'field_course_students',
+						'field_course_faculty',
+						'field_site_restrict',
+						'field_sites',
+						'field_term',
+						'field_site_restrict_to_list',
+						'field_course_subject',
+						'field_course_title',
+						'field_course_catalog_number',
+						'field_course_section',
+						'field_course_signups',
+				),
+				'course_term' => array(
+						'field_term_code',
+						'field_term_date_start',
+						'field_term_filter',
+				),
+				
 	);
 }
 

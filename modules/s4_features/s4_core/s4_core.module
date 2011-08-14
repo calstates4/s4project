@@ -937,6 +937,73 @@ function s4_core_mail($key, &$message, $params) {
 }
 
 /**
+*  Alter menu access to restrict certain fields form being deleted or edited.
+*/
+function s4_core_menu_alter(&$items) {
+	$items['admin/structure/types/manage/%/fields/%/delete']['access callback'] = 's4_core_field_alter_access';
+	$items['admin/structure/types/manage/%/fields/%/delete']['access arguments'] = array(4, 6);
+	$items['admin/structure/types/manage/%/fields/%']['access callback'] = 's4_core_field_alter_access';
+	$items['admin/structure/types/manage/%/fields/%']['access arguments'] = array(4, 6);
+}
+
+/**
+*	Checks whether a field in a given bundle is allowed to be edited
+*/
+function s4_core_field_alter_access($type, $field) {
+	if(!user_access('administer content types')) {
+		return false;
+	}
+	if(user_access('override default field settings')) {
+		return true;
+	}
+	static $access_list;
+	if(!$access_list) {
+		$access_list = module_invoke_all('s4_field_access');
+	}
+	foreach($access_list as $bundle => $fields) {
+		foreach($fields as $field_name) {
+			if($bundle == $type && $field_name == $field) {
+				return false;
+			}
+		}
+	}
+	return true;
+}
+
+/**
+*	Implementation of s4_core_field_access
+*/
+function s4_core_s4_field_access() {
+	
+	return array('signup' => array(
+						'field_site',
+						'field_coordinator',
+						'field_course',
+						'field_user',
+						'field_form_signup_sid',
+						'field_form_evaluation_sid',
+						'field_signup_hours',
+						'field_signup_start_date',
+						'field_signup_last_date',
+						'field_signup_location',
+				),
+				
+	);
+}
+
+/**
+*	Override the node field page to restrict access to certain fields
+*/
+function s4_core_form_field_ui_field_overview_form_alter(&$form, $form_state) {
+	foreach($form['fields'] as $field_name => $field) {
+		if(!s4_core_field_alter_access($form['#bundle'], $field_name)) {
+			$form['fields'][$field_name]['edit'] = array();
+			$form['fields'][$field_name]['delete'] = array();
+		}
+	}
+}
+
+/**
 *  Implementation of hook_form_alter()
 *  We are overriding the views bulk operations to change the display of the fieldset
 */
