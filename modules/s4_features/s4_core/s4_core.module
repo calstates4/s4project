@@ -540,6 +540,7 @@ function s4_core_create_user($sis_user, $user = FALSE) {
   if (!$user) {
     $user = new stdClass();
     $user->name = $sis_user['login_id'];
+    $user->status = 1;
   }
   $values = _s4_core_map_user_attributes();
   $save = FALSE;
