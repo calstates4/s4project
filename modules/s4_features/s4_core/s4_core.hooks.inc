@@ -65,7 +65,8 @@ function hook_s4_get_courses($term) {
               'constant_registration' => FALSE,
             ),
         ),
-  );
+      )
+   );
 }
 
 /**
@@ -115,6 +116,21 @@ function hook_s4_site_configuration() {
 			'title' => t('My settings option'),
 			'href'  => 'settings/mysettings',
 			'description' => t('Description of my setting page'),
-		);
+		),
+	);
+}
+
+/**
+*	Allows modules to restrict access to certain fields in a group
+*	@return a keyed array where the key is a bundle name and the value is an array of
+*		    field names to restrict access to.
+*/
+function hook_s4_field_access() {
+	
+	return array('mybundle' => array(
+						'field_one',
+						'field_two',
+				),
+				
 	);
 }
