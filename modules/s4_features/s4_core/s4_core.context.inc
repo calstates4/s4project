@@ -416,29 +416,35 @@ function s4_core_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
-        'system-help' => array(
-          'module' => 'system',
-          'delta' => 'help',
-          'region' => 'help',
+        's4_core-s4_site_settings' => array(
+          'module' => 's4_core',
+          'delta' => 's4_site_settings',
+          'region' => 'search',
           'weight' => '-10',
         ),
         'views--exp-s4_search-page' => array(
           'module' => 'views',
           'delta' => '-exp-s4_search-page',
           'region' => 'search',
-          'weight' => 0,
+          'weight' => '-9',
         ),
         's4_core-s4_current_user_link' => array(
           'module' => 's4_core',
           'delta' => 's4_current_user_link',
           'region' => 'search',
-          'weight' => 1,
+          'weight' => '-8',
+        ),
+        'system-help' => array(
+          'module' => 'system',
+          'delta' => 'help',
+          'region' => 'help',
+          'weight' => '-10',
         ),
         'system-main' => array(
           'module' => 'system',
           'delta' => 'main',
           'region' => 'content',
-          'weight' => 0,
+          'weight' => '0',
         ),
       ),
     ),

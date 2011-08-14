@@ -133,6 +133,16 @@ function s4_core_user_default_permissions() {
     'module' => 's4_pages',
   );
 
+  // Exported permission: access s4 site settings
+  $permissions['access s4 site settings'] = array(
+    'name' => 'access s4 site settings',
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'staff',
+    ),
+    'module' => 's4_core',
+  );
+
   // Exported permission: access site in maintenance mode
   $permissions['access site in maintenance mode'] = array(
     'name' => 'access site in maintenance mode',
