@@ -23,6 +23,20 @@ function s4_map_views_query_alter(&$view, &$query) {
   }
 }
 
+/**
+*  Implementation of hook_s4_site_configuration
+*/
+function s4_map_s4_site_configuration() {
+	return array(
+		's4_map' => array(
+			'group' => t('Appearance'),
+			'title' => t('Map settings'),
+			'description' => t('Set the default center and zoom level of your site map.'),
+			'href' => 'admin/config/services/gmap',
+		),
+	);
+}
+
 function s4_map_block_info() {
 	$blocks['s4_map_site_map'] = array('info' => 'General site map');
 	$blocks['s4_map_site_list_map'] = array('info' => 'Site list map');

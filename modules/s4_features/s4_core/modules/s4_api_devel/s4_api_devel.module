@@ -14,6 +14,20 @@ function s4_api_devel_menu() {
   return $items;
 }
 
+/**
+*  Implementation of hook_s4_site_configuration
+*/
+function s4_api_devel_s4_site_configuration() {
+	return array(
+		's4_api_devel' => array(
+			'group' => t('SIS integration'),
+			'title' => t('Test your SIS integration'),
+			'description' => t('Tools to test how your site integrates with your Student Information System (SIS).'),
+			'href' => 'admin/config/s4/api-devel',
+		),
+	);
+}
+
 function s4_api_devel_form($form, $form_state) {
   $defaults = cache_get('s4_api_devel_test_values');
   $defaults = ($defaults === FALSE)

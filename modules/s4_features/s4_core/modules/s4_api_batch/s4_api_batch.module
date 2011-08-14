@@ -15,6 +15,20 @@ function s4_api_batch_menu() {
   return $items;
 }
 
+/**
+*  Implementation of hook_s4_site_configuration
+*/
+function s4_api_batch_s4_site_configuration() {
+	return array(
+		's4_api_batch' => array(
+			'group' => t('SIS integration'),
+			'title' => t('Setup batch files'),
+			'description' => t('Setup the location of your batch files.'),
+			'href' => 'admin/config/s4/batch-api',
+		),
+	);
+}
+
 function s4_api_batch_admin_form() {
   $form = array();
   

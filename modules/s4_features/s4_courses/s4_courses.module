@@ -29,6 +29,17 @@ function s4_courses_get_term_codes($requested_code = FALSE) {
   return $term_codes;
 }
 
+function s4_courses_s4_site_configuration() {
+	return array(
+		's4_courses' => array(
+			'group' => t('Courses'),
+			'title' => t('Setup courses & course filters'),
+			'description' => t('Manage how S4 integrates with your SIS for courses and create filters to select only courses that are needed for this site'),
+			'href' => 'admin/config/s4/courses',
+		),
+	);
+}
+
 /**
 *  Returns allowed term codes
 */

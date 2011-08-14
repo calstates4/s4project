@@ -19,6 +19,20 @@ function s4_api_rest_menu() {
 }
 
 /**
+*  Implementation of hook_s4_site_configuration
+*/
+function s4_api_rest_s4_site_configuration() {
+	return array(
+		's4_api_rest' => array(
+			'group' => t('SIS integration'),
+			'title' => t('REST integration setup'),
+			'description' => t('Setup your REST integration point with your SIS.'),
+			'href' => 'admin/config/s4/rest-api',
+		),
+	);
+}
+
+/**
 *	Admin form for the REST API
 */
 function s4_api_rest_admin_form() {

@@ -18,6 +18,20 @@ function s4_api_db_menu() {
 }
 
 /**
+*  Implementation of hook_s4_site_configuration
+*/
+function s4_api_db_s4_site_configuration() {
+	return array(
+		's4_api_db' => array(
+			'group' => t('SIS integration'),
+			'title' => t('Setup database queries'),
+			'description' => t('Setup the database queries used to integrate with your SIS.'),
+			'href' => 'admin/config/s4/db-api',
+		),
+	);
+}
+
+/**
 *	The admin form where users enter queries to run against their SIS
 */
 function s4_api_db_admin_form() {

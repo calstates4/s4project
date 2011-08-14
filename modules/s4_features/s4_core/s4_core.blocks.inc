@@ -369,7 +369,7 @@ function s4_core_block_s4_subscribe_file_expiration() {
 }
 
 /*
-*  Provides a link to the currnet user's informaiton
+*  Provides a link to the current user's informaiton
 */
 function s4_core_block_s4_current_user_link() {
 	global $user;
@@ -382,4 +382,14 @@ function s4_core_block_s4_current_user_link() {
 	}
 	return array('content' => l(t('Hello <strong>@username</strong>', array('@username' => format_username($user))), 'user/'. $user->uid, array('html' => TRUE)) . $masquerade_switch);
 	
+}
+
+/**
+*  Link to the site settings page
+*/
+function s4_core_block_s4_site_settings() {
+	if(!user_access('access s4 site settings')) {
+		return null;
+	}
+	return array('content' => l(t('Site settings'), 's4/settings', array('attributes' => array('class' => array('s4-site-settings')))));
 }
