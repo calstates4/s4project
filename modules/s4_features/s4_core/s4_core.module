@@ -7,7 +7,9 @@ include_once('s4_core.features.inc');
 */
 function s4_core_init() {
   drupal_add_js(drupal_get_path('module', 's4_core') . '/js/jquery.quicksearch.js');
-  drupal_add_js(drupal_get_path('module', 's4_core') . '/js/s4.quicksearch.js');
+  drupal_add_js(drupal_get_path('module', 's4_core') .'/js/chosen/chosen/chosen.jquery.min.js');
+  drupal_add_css(drupal_get_path('module', 's4_core') .'/js/chosen/chosen/chosen.css');
+  drupal_add_js(drupal_get_path('module', 's4_core') . '/js/s4.core.js');
   drupal_add_css(drupal_get_path('module', 's4_core') . '/css/quicksearch.css');
   drupal_add_css(drupal_get_path('module', 's4_core') . '/css/status.css');
   drupal_add_css(drupal_get_path('module', 's4_core') . '/css/export.css');
@@ -941,10 +943,22 @@ function s4_core_mail($key, &$message, $params) {
 *  Alter menu access to restrict certain fields form being deleted or edited.
 */
 function s4_core_menu_alter(&$items) {
-	$items['admin/structure/types/manage/%/fields/%/delete']['access callback'] = 's4_core_field_alter_access';
-	$items['admin/structure/types/manage/%/fields/%/delete']['access arguments'] = array(4, 6);
-	$items['admin/structure/types/manage/%/fields/%']['access callback'] = 's4_core_field_alter_access';
-	$items['admin/structure/types/manage/%/fields/%']['access arguments'] = array(4, 6);
+	foreach (entity_get_info() as $entity_type => $entity_info) {
+    if ($entity_info['fieldable']) {
+      foreach ($entity_info['bundles'] as $bundle_name => $bundle_info) {
+        if (isset($bundle_info['admin'])) {
+          // Extract path information from the bundle.
+          $path = $bundle_info['admin']['path'];
+			$items["$path/fields/%field_ui_menu"]['access callback'] = 's4_core_field_alter_access';
+			$items["$path/fields/%field_ui_menu"]['access arguments'] = array(4, 6);
+			$items["$path/fields/%field_ui_menu/edit"]['access callback'] = 's4_core_field_alter_access';
+			$items["$path/fields/%field_ui_menu/edit"]['access arguments'] = array(4, 6);
+			$items["$path/fields/%field_ui_menu/delete"]['access callback'] = 's4_core_field_alter_access';
+			$items["$path/fields/%field_ui_menu/delete"]['access arguments'] = array(4, 6);
+		}
+	  }
+	}
+	}
 }
 
 /**

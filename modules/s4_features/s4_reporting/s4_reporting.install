@@ -1,0 +1,18 @@
+<?php
+
+function s4_reporting_schema() {
+  $schema = array();
+  
+  $schema['s4_reporting'] = array(
+    'description' => 'Reporting data',
+    'fields' => array(
+      'nid' => array('type' => 'int','not NULL' => TRUE, 'default' => 0),
+      'vid' => array('type' => 'int','not NULL' => TRUE, 'default' => 0), 
+      'filters' => array('type' => 'text', 'size' => 'big', 'not NULL' => TRUE),
+      'fields' =>  array('type' => 'text', 'size' => 'big', 'not NULL' => TRUE),
+      'data' =>    array('type' => 'text', 'size' => 'big', 'not NULL' => TRUE),
+    ),  
+  );
+  
+  return $schema;
+}

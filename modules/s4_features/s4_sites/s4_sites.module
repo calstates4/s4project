@@ -384,10 +384,7 @@ function s4_sites_form_field_ui_field_edit_form_alter_submit($form, $form_state)
 */
 function s4_sites_form_site_node_form_alter(&$form, $form_state, $form_id) {
   drupal_add_js(drupal_get_path('module', 's4_sites') .'/js/s4_site_form.js');
-  drupal_add_css(drupal_get_path('module', 's4_sites') .'/css/s4_sites.css');
-  drupal_add_js(drupal_get_path('module', 's4_sites') .'/js/chosen/chosen/chosen.jquery.min.js');
-  drupal_add_css(drupal_get_path('module', 's4_sites') .'/js/chosen/chosen/chosen.css');
-  
+  drupal_add_css(drupal_get_path('module', 's4_sites') .'/css/s4_sites.css');  
   $terms = taxonomy_get_vocabularies();
   foreach($terms as $k => $term) {
     unset($terms[$k]);
@@ -691,4 +688,17 @@ function s4_sites_comment_presave($comment) {
 		$target->revision = true;
 		node_save($target);
 	}
+}
+
+function s4_sites_s4_reporting_info() {
+	$info = array();
+	foreach(array('site', 'file', 'coordinator', 'contact_record') as $type) {
+		$fields = field_info_instances('node', $type);
+		foreach($fields as $name => $field) {
+			$info['s4_sites']['filters'][$type][$name] = $field;
+			$info['s4_sites']['fields'][$type][$name] = $field;
+		}
+		$info['s4_sites']['types'][$type] = node_type_load($type);
+	}
+	return $info;
 }

@@ -1,5 +1,10 @@
 <?php
 
+
+function s4_reporting_run_report() {
+
+}
+
 function s4_reporting_object_report($node, $type = 'signup') {
 	module_load_include('inc', 'webform', 'includes/webform.report');
 	if($node->type == 'site') {
