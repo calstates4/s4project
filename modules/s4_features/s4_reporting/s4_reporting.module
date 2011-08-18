@@ -54,184 +54,46 @@ function s4_reporting_menu() {
 }
 
 function s4_reporting_form_report_node_form_alter(&$form, $form_state) {
-	drupal_add_css(drupal_get_path('module', 's4_reporting') .'/css/s4_reporting.node-form.css');
-	$form['report'] = array(
-		'#type' => 'vertical_tabs',
-		'#title' => 'Report',
-	);
-	
-	$fields = _s4_reporting_get_fields(0);
-	
-	drupal_add_js(array('s4_reporting_filters' => $filter_settings), 'setting');
-	
-	$form['report']['filters'] = array(
-		'#type' => 'fieldset',
-		'#title' => 'Filters',
-	);
-	
-	$form['report']['filters']['filters'] = array(
-		'#theme' => 'field_multiple_value_form',
-		'#cardinality' => -1,
-		'#title' => 'Filters',
-		'#required' => TRUE,
-		'#description' => 'Use filters to limit your report to only certain types of data',
-		'#prefix' => '<div id="report-filters">',
-		'#suffix' => '</div>',
-		'#max_delta' => 1,
-	);
-	
-	$form['report']['filters']['filters'] += $fields['filters'];
-	
-	
-	$form['report']['filters']['filters']['add_more'] = array(
-      '#type' => 'submit',
-      '#name' => 'filters_add_more',
-      '#value' => t('Add another item'),
-      '#attributes' => array('class' => array('field-add-more-submit rebuild-chosen')),
-      '#submit' => array('s4_reporting_add_more_submit'),
-      '#ajax' => array(
-        'callback' => 's4_reporting_add_more_js',
-        'wrapper' => 'report-filters',
-        'effect' => 'fade',
-      ),
-    );
-	
-	$form['report']['fields'] = array(
-		'#type' => 'fieldset',
-		'#title' => 'Fields',
-	);
-	
-	$form['report']['fields']['fields'] = array(
-		'#theme' => 'field_multiple_value_form',
-		'#cardinality' => -1,
-		'#title' => 'Fields',
-		'#required' => TRUE,
-		'#description' => 'Select what data you want in your report',
-		'#prefix' => '<div id="report-fields">',
-		'#suffix' => '</div>',
-		'#max_delta' => 1,
-	);
-	
-	$form['report']['fields']['fields'] += $fields['fields'];
-	
-	
-	$form['report']['fields']['fields']['add_more'] = array(
-      '#type' => 'submit',
-      '#name' => 'fields_add_more',
-      '#value' => t('Add another item'),
-      '#attributes' => array('class' => array('field-add-more-submit rebuild-chosen')),
-      '#submit' => array('s4_reporting_add_more_submit'),
-      '#ajax' => array(
-        'callback' => 's4_reporting_add_more_js',
-        'wrapper' => 'report-fields',
-        'effect' => 'fade',
-      ),
-    );
-	
-	$form['report']['settings'] = array(
-		'#type' => 'fieldset',
-		'#title' => 'Settings',
-	);
-	
-	$form['report']['settings']['merge_questions'] = array(
-		'#type' => 'radios',
-		'#title' => 'Multiple form handling',
-		'#description' => t('If you are including data from evaluation or signup forms, we can merge questions that are the same together, or leave them seperate'),
-		'#options' => array(
-			'merge' => 'Merge same questions from different forms together',
-			'seperate' => 'Keep same questions seperate',
-		),
-	);
-}
-
-function s4_reporting_add_more_submit($form, &$form_state) {
-  $form_state['rebuild'] = TRUE;
-}
-
-function s4_reporting_add_more_js($form, $form_state) {
-    $button = $form_state['clicked_button'];
-	$element = drupal_array_get_nested_value($form, array_slice($button['#array_parents'], 0, -1));
-	$delta = $element['#max_delta'];
-	$fields = _s4_reporting_get_fields($delta);
-	$element += $fields['filters'];
-	
-  // Add a DIV around the delta receiving the Ajax effect.
-
-  $element[$delta]['#prefix'] = '<div class="ajax-new-content">' . (isset($element[$delta]['#prefix']) ? $element[$delta]['#prefix'] : '');
-  $element[$delta]['#suffix'] = (isset($element[$delta]['#suffix']) ? $element[$delta]['#suffix'] : '') . '</div>';
-
-  return $element;
-}
-
-function _s4_reporting_get_fields($delta) {
-	$filters = array();
-	$fields = array();
-	$types = array();
-	foreach(module_invoke_all('s4_reporting_info') as $info) {
-		$filters += $info['filters'];
-		$fields += $info['fields'];	
-		$types += $info['types'];
-	}
-	$filter_settings = array();
-	foreach($filters as $type => $filters) {
-		$max_filters += count($filters);
-		
-		foreach($filters as $filter) {
-			$filter_types[$types[$type]->name][$filter['field_name']] = $filter['label'];
-			$filter_settings[$type][$filter['field_name']] = $filter['label'];
+	drupal_add_js(drupal_get_path('module', 's4_reporting') .'/js/s4_reporting.js');
+	foreach($form['field_report_filters'][$form['#node']->language] as $key => $field_entity) {
+		if(is_numeric($key) && is_array($field_entity) && isset($field_entity['field_filter_field'])) {
+			$field = &$form['field_report_filters'][$form['#node']->language][$key]['field_filter_field'];
+			$field[$field['#language']]['#options'] = s4_reporting_get_filter_fields();
 		}
 	}
-	foreach($fields as $type => $fields) {
-		$max_fields += count($fields);
-		
-		foreach($fields as $field) {
-			$field_types[$types[$type]->name][$field['field_name']] = $field['label'];
-			$field_settings[$type][$field['field_name']] = $field['label'];
+	$form['field_report_fields'][$form['#node']->language]['#options'] = s4_reporting_get_field_fields();
+}
+
+function s4_reporting_get_filter_fields() {
+	$filters = _s4_reporting_get_fields('filters');
+	$options = array();
+	foreach($filters['filters'] as $type => $fields) {
+		foreach($fields as $field_name => $field) {
+			$options[$filters['types'][$type]->name][$field_name] = text_summary($field['label'], null, 50);
 		}
 	}
-	
-	
-	$fields['filters'][$delta]['type'] = array(
-		'#type' => 'select',
-		'#title' => 'Field',
-		'#options' => $filter_types,
-		'#attributes' => array('class' => array('chosen')),
-	);
-	
-	$fields['filters'][$delta]['filter_value'] = array(
-		'#type' => 'textfield',
-		'#title' => 'Value',
-		'#options' => array(),
-	);
-	
-	$fields['filters'][$delta]['_weight'] = array(
-		'#type' => 'weight',
-		'#title' => t('Weight for row @number', array('@number' => $delta + 1)),
-		'#title_display' => 'invisible',
-		 // Note: this 'delta' is the FAPI 'weight' element's property.
-		'#delta' => $max,
-		'#default_value' => isset($items[$delta]['_weight']) ? $items[$delta]['_weight'] : $delta,
-		'#weight' => 100,
-	);
-	
-	$fields['fields'][$delta]['type'] = array(
-		'#type' => 'select',
-		'#title' => 'Field',
-		'#options' => $field_types,
-		'#attributes' => array('class' => array('chosen')),
-	);
-	
-	$fields['fields'][$delta]['_weight'] = array(
-		'#type' => 'weight',
-		'#title' => t('Weight for row @number', array('@number' => $delta + 1)),
-		'#title_display' => 'invisible',
-		 // Note: this 'delta' is the FAPI 'weight' element's property.
-		'#delta' => $max,
-		'#default_value' => isset($items[$delta]['_weight']) ? $items[$delta]['_weight'] : $delta,
-		'#weight' => 100,
-	);
-	
-	return $fields;
+	return $options;
+}
+
+function s4_reporting_get_field_fields() {
+	$filters = _s4_reporting_get_fields('filters');
+	$options = array();
+	foreach($filters['fields'] as $type => $fields) {
+		foreach($fields as $field_name => $field) {
+			$options[$filters['types'][$type]->name][$field_name] = text_summary($field['label'], null, 50);
+		}
+	}
+	return $options;
+}
+
+function _s4_reporting_get_fields() {
+	$info = array('filters' => array(), 'fields' => array(), 'types' => array());
+	foreach(module_invoke_all('s4_reporting_info') as $module => $options) {
+		$info['filters'] += $options['filters'];
+		$info['fields'] += $options['fields'];
+		$info['types'] += $options['types'];
+	}
+	return $info;
 }
 
 function s4_reporting_object_report_access($node) {

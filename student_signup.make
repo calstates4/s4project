@@ -53,6 +53,12 @@ projects[features][version] = "1.0-beta3"
 projects[field_display_label][subdir] = "contrib"
 projects[field_display_label][version] = "1.2"
 
+projects[field_collection][subdir] = "contrib"
+projects[field_collection][version] = "1.x-dev"
+
+projects[field_collection_table][subdir] = "contrib"
+projects[field_collection_table][version] = "1.x-dev"
+
 projects[field_group][subdir] = "contrib"
 projects[field_group][version] = "1.0"
 
@@ -207,3 +213,4 @@ libraries[markerclusterer][destination] = "modules/contrib/gmap/thirdparty"
 ; Patches
 projects[wysiwyg][patch][] = "http://drupal.org/files/issues/wysiwyg-entity-exportables-624018-176_1.patch"
 projects[token][patch][] = "http://drupal.org/files/issues/modules_token.92.patch"
+projects[field_collection][patch][] = "http://drupal.org/files/issues/field_collection-1209806-7.patch"
