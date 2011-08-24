@@ -322,18 +322,20 @@ body.front.has-footer-map #page {
   width: 100%;
 }
 /** USER LINK **/
-#search #block-s4-core-s4-current-user-link, #search #block-s4-core-s4-site-settings {
+#search .block a {
   margin: 2px 10px 0 0;
   font-size: 15px;
   cursor: pointer;
   padding: 3px 5px;
-}
-#block-s4-core-s4-current-user-link a, #block-s4-core-s4-site-settings a {
   color: #000;
   text-decoration: none;
+  display: block;
 }
-#block-s4-core-s4-current-user-link a:hover, #block-s4-core-s4-site-settings a:hover {
+#search .block a:hover {
   text-decoration: underline;
+}
+#search .block .contextual-links-wrapper {
+  display: none;
 }
 /** USER PROGRESS **/
 #user-progress {
