@@ -210,6 +210,12 @@ libraries[markerclusterer][download][type] = "get"
 libraries[markerclusterer][download][url] = "http://gmaps-utility-library-dev.googlecode.com/svn/tags/markerclusterer/1.0/src/markerclusterer_packed.js"
 libraries[markerclusterer][destination] = "modules/contrib/gmap/thirdparty"
 
+; Download the guidersJS library
+libraries[guiders][download][type] = "get"
+libraries[guiders][download][url] = "https://github.com/jeff-optimizely/Guiders-JS/tarball/master"
+libraries[guiders][directory_name] = "guiders"
+libraries[guiders][destination] = "libraries"
+
 ; Patches
 projects[wysiwyg][patch][] = "http://drupal.org/files/issues/wysiwyg-entity-exportables-624018-176_1.patch"
 projects[token][patch][] = "http://drupal.org/files/issues/modules_token.92.patch"

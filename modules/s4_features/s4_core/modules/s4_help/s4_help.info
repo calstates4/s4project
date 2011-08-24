@@ -1,0 +1,5 @@
+name=S4 Help
+package=S4
+description=Contextual help options for S4
+core=7.x
+dependencies[]=s4_core

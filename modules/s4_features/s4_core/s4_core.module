@@ -1381,3 +1381,8 @@ function s4_core_views_check_node_type_roles($rids, $type, $view, $account = NUL
   $roles[] = $account->uid ? DRUPAL_AUTHENTICATED_RID : DRUPAL_ANONYMOUS_RID;
   return (array_intersect(array_filter($rids), $roles) && $node->type == $type);
 }
+
+function s4_core_s4_help($path) {
+	module_load_include('inc', 's4_core', 's4_core.help');
+	return _s4_core_help($path);
+}
