@@ -963,8 +963,12 @@ table#webform-components {
 .node-type-site .view-site-fields .views-field {
   margin: 0 0 10px 0;
 }
+/** Homebox tweaks **/
 .portlet-maximize {
   display: none;
+}
+#page #homebox .homebox-portlet {
+  border: 0px;
 }
 /** Form accordions **/
 #page .field-group-accordion-wrapper {
