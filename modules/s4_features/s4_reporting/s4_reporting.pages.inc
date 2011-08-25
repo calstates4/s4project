@@ -1,8 +1,20 @@
 <?php
 
 
-function s4_reporting_run_report() {
-
+function s4_reporting_run_report($node) {
+	$filters = field_get_items('node', $node, 'field_report_filters');
+	foreach($filters as $k => $filter) {
+		$collection = field_collection_item_load($filter['value']);
+		$fields = field_get_items('field_collection_item', $collection, 'field_filter_field');
+		$values = field_get_items('field_collection_item', $collection, 'field_filter_values');
+		$operator = field_get_items('field_collection_item', $collection, 'field_filter_operator');
+		$filters[$k] = array('field' => $fields[0]['value'],
+							 'operator' => $operator[0]['value'],
+							 'value' => $values[0]['value']);
+										 
+	}
+	dpm($filters);
+	return 'hi';
 }
 
 function s4_reporting_object_report($node, $type = 'signup') {
@@ -87,9 +99,4 @@ function _s4_reporting_get_site_sids($node, $type = 'signup') {
 		$sids[$sid] = $sid;
 	}
 	return $sids;
-}
-
-function s4_reporting_report_view() {
-	
-	return 'report!';
 }

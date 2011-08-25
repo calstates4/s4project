@@ -42,15 +42,21 @@ function s4_reporting_menu() {
 		'weight' => 10
 	);
 	
-	$items['reports/view/%'] = array(
-		'title' => 'Report',
-		'page callback' => 's4_reporting_report_view',
-		'page arguments' => array(2),
-		'access arguments' => array('view s4 reports'),
+	$items['node/%node/report'] = array(
+		'title' => 'View report',
+		'type' => MENU_LOCAL_TASK,
+		'page callback' => 's4_reporting_run_report',
+		'page arguments' => array(1),
+		'access callback' => 's4_reporting_run_report_access',
+		'access arguments' => array(1),
 		'file' => 's4_reporting.pages.inc',
 	);
 
 	return $items;
+}
+
+function s4_reporting_run_report_access($node) {
+	return ($node->type == 'report' && user_access('view s4 reports'));
 }
 
 function s4_reporting_form_report_node_form_alter(&$form, $form_state) {
@@ -61,7 +67,30 @@ function s4_reporting_form_report_node_form_alter(&$form, $form_state) {
 			$field[$field['#language']]['#options'] = s4_reporting_get_filter_fields();
 		}
 	}
-	$form['field_report_fields'][$form['#node']->language]['#options'] = s4_reporting_get_field_fields();
+	foreach($form['field_report_fields'][$form['#node']->language] as $key => $field_entity) {
+		if(is_numeric($key) && is_array($field_entity) && isset($field_entity['field_report_field'])) {
+			$field = &$form['field_report_fields'][$form['#node']->language][$key]['field_report_field'];
+			$field[$field['#language']]['#options'] = s4_reporting_get_field_fields();
+		}
+	}
+	$info = _s4_reporting_get_fields();
+	$filter_settings = array();
+	foreach($info['filters'] as $bundle => $filters) {
+		foreach($filters as $filter_key => $filter) {
+			$value_key = key($field['columns']);
+
+			$type = str_replace('options_', '', $filter['widget']['type']);
+			$multiple = $filter['cardinality'] > 1 || $filter['cardinality'] == FIELD_CARDINALITY_UNLIMITED;
+			$properties = _options_properties($type, $multiple, null, null);
+			
+			// Prepare the list of options.
+			$options = _options_get_options(field_info_field($filter['field_name']), $field, $properties);
+			if(count($options)) {
+				$filter_settings[$filter['field_name']] = $options;
+			}
+		}
+	}
+	drupal_add_js(array('s4_reporting_filters' => $filter_settings), 'setting');
 }
 
 function s4_reporting_get_filter_fields() {
@@ -87,6 +116,10 @@ function s4_reporting_get_field_fields() {
 }
 
 function _s4_reporting_get_fields() {
+	static $info;
+	if(is_array($info)) {
+		return $info;
+	}
 	$info = array('filters' => array(), 'fields' => array(), 'types' => array());
 	foreach(module_invoke_all('s4_reporting_info') as $module => $options) {
 		$info['filters'] += $options['filters'];
