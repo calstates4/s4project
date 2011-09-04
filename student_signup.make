@@ -26,6 +26,9 @@ projects[cck][version] = "2.x-dev"
 projects[cck_phone][subdir] = "contrib"
 projects[cck_phone][version] = "1.x-dev"
 
+projects[cnr][subdir] = "contrib"
+projects[cnr][version] = "4.1"
+
 projects[content_access][subdir] = "contrib"
 projects[content_access][version] = "1.2-beta1"
 
@@ -145,6 +148,9 @@ projects[views_calc][version] = "1.x-dev"
 
 projects[views_data_export][subdir] = "contrib"
 projects[views_data_export][version] = "3.0-beta4"
+
+projects[views_dynamic_fields][subdir] = "contrib"
+projects[views_dynamic_fields][version] = "1.x-dev"
 
 projects[webform][subdir] = "contrib"
 projects[webform][version] = "3.11"
