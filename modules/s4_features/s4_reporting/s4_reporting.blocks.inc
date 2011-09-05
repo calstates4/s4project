@@ -81,7 +81,7 @@ function s4_reporting_block_course_summary() {
 		
 		$items[] = '<strong>Courses: </strong>' .l($total, 'courses');
 		$items[] = '<strong>Students: </strong>' .l($students, 'students');
-		$items[] = '<strong>Total signups: </strong>' .l($signups, 'students') . ' (' . round($signups / $students, 1) .'%)';
+		$items[] = '<strong>Total signups: </strong>' .l($signups, 'students') . ' (' . round(($signups / $students) * 100, 2) .'%)';
 		
 		$output .= theme('item_list', array('items' => $items));
 	}
