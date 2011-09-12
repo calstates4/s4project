@@ -135,11 +135,11 @@ function s4_courses_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
-        'views-course_students-block' => array(
+        'views-course_students-block_3' => array(
           'module' => 'views',
-          'delta' => 'course_students-block',
+          'delta' => 'course_students-block_3',
           'region' => 'content',
-          'weight' => '4',
+          'weight' => '-10',
         ),
       ),
     ),
