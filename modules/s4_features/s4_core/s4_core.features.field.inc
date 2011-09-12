@@ -1064,12 +1064,6 @@ function s4_core_field_default_fields() {
           'type' => 'date_default',
           'weight' => 9,
         ),
-        'notifications' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
         'teaser' => array(
           'label' => 'above',
           'settings' => array(),

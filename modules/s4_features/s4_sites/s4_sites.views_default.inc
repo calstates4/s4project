@@ -17,7 +17,7 @@ function s4_sites_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Bookmarked Sites';
   $view->core = 7;
-  $view->api_version = '3.0-alpha1';
+  $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -221,7 +221,7 @@ function s4_sites_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Site notes & forms';
   $view->core = 7;
-  $view->api_version = '3.0-alpha1';
+  $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -949,12 +949,12 @@ function s4_sites_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Email: Site coordinators';
   $view->core = 7;
-  $view->api_version = '3.0-alpha1';
+  $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Site coordinators';
+  $handler->display->display_options['title'] = 'Email site staff';
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
     4 => '4',
@@ -1303,19 +1303,33 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['filters']['created']['expose']['operator'] = 'created_op';
   $handler->display->display_options['filters']['created']['expose']['identifier'] = 'created';
   $handler->display->display_options['filters']['created']['expose']['multiple'] = FALSE;
+  /* Filter criterion: Content: Role (field_staff_role) */
+  $handler->display->display_options['filters']['field_staff_role_tid']['id'] = 'field_staff_role_tid';
+  $handler->display->display_options['filters']['field_staff_role_tid']['table'] = 'field_data_field_staff_role';
+  $handler->display->display_options['filters']['field_staff_role_tid']['field'] = 'field_staff_role_tid';
+  $handler->display->display_options['filters']['field_staff_role_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_staff_role_tid']['expose']['operator_id'] = 'field_staff_role_tid_op';
+  $handler->display->display_options['filters']['field_staff_role_tid']['expose']['label'] = 'Role';
+  $handler->display->display_options['filters']['field_staff_role_tid']['expose']['operator'] = 'field_staff_role_tid_op';
+  $handler->display->display_options['filters']['field_staff_role_tid']['expose']['identifier'] = 'field_staff_role_tid';
+  $handler->display->display_options['filters']['field_staff_role_tid']['expose']['reduce'] = 0;
+  $handler->display->display_options['filters']['field_staff_role_tid']['reduce_duplicates'] = 0;
+  $handler->display->display_options['filters']['field_staff_role_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_staff_role_tid']['vocabulary'] = 'site_staff_role';
+  $handler->display->display_options['filters']['field_staff_role_tid']['error_message'] = 1;
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
-  $handler->display->display_options['path'] = 'email/coordinators';
+  $handler->display->display_options['path'] = 'email/site-staff';
   $handler->display->display_options['menu']['type'] = 'default tab';
-  $handler->display->display_options['menu']['title'] = 'Coordinators';
+  $handler->display->display_options['menu']['title'] = 'Site Staff';
   $handler->display->display_options['menu']['weight'] = '0';
   $handler->display->display_options['tab_options']['type'] = 'normal';
-  $handler->display->display_options['tab_options']['title'] = 'Contacts';
+  $handler->display->display_options['tab_options']['title'] = 'Site staff';
   $handler->display->display_options['tab_options']['weight'] = '0';
   $translatables['email_site_contacts'] = array(
     t('Master'),
-    t('Site coordinators'),
+    t('Email site staff'),
     t('more'),
     t('Search'),
     t('Reset'),
@@ -1339,6 +1353,7 @@ function s4_sites_views_default_views() {
     t('Operations'),
     t('[title_1] | [edit_node]'),
     t('Who had at least one student since'),
+    t('Role'),
     t('Page'),
   );
   $export['email_site_contacts'] = $view;
@@ -1350,7 +1365,7 @@ function s4_sites_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Site Locations Map';
   $view->core = 7;
-  $view->api_version = '3.0-alpha1';
+  $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -1525,7 +1540,7 @@ function s4_sites_views_default_views() {
   $view->base_table = 'comment';
   $view->human_name = 'Recent activity';
   $view->core = 7;
-  $view->api_version = '3.0-alpha1';
+  $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -1710,7 +1725,7 @@ function s4_sites_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Site coordinators';
   $view->core = 7;
-  $view->api_version = '3.0-alpha1';
+  $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -2350,7 +2365,7 @@ function s4_sites_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Site fields';
   $view->core = 7;
-  $view->api_version = '3.0-alpha1';
+  $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -2744,7 +2759,7 @@ function s4_sites_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'site location';
   $view->core = 7;
-  $view->api_version = '3.0-alpha1';
+  $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -2936,7 +2951,7 @@ function s4_sites_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Site locations';
   $view->core = 7;
-  $view->api_version = '3.0-alpha1';
+  $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -3044,7 +3059,7 @@ function s4_sites_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Site moderation';
   $view->core = 7;
-  $view->api_version = '3.0-alpha1';
+  $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -3298,7 +3313,7 @@ function s4_sites_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Site signups';
   $view->core = 7;
-  $view->api_version = '3.0-alpha1';
+  $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -3620,7 +3635,7 @@ function s4_sites_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'sites';
   $view->core = 7;
-  $view->api_version = '3.0-alpha1';
+  $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */

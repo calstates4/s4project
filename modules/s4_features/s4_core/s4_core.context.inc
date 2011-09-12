@@ -67,6 +67,12 @@ function s4_core_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
+        's4_help-s4_contextual_help' => array(
+          'module' => 's4_help',
+          'delta' => 's4_contextual_help',
+          'region' => 'search',
+          'weight' => '-10',
+        ),
         's4_core-user_progress' => array(
           'module' => 's4_core',
           'delta' => 'user_progress',

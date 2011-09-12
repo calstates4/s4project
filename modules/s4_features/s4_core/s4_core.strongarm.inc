@@ -254,7 +254,7 @@ function s4_core_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'fancybox_path';
-  $strongarm->value = 'profiles/student_signup/fancybox/fancybox';
+  $strongarm->value = 'sites/all/libraries/fancybox/fancybox';
   $export['fancybox_path'] = $strongarm;
 
   $strongarm = new stdClass;
@@ -262,6 +262,40 @@ function s4_core_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'fancybox_settings';
   $strongarm->value = array(
+    'options' => array(
+      'width' => '425',
+      'height' => '355',
+      'padding' => 0,
+      'margin' => 0,
+      'titleShow' => 1,
+      'titlePosition' => 'outside',
+      'scrolling' => 'auto',
+      'showCloseButton' => 1,
+      'showNavArrows' => 1,
+      'cyclic' => 0,
+      'opacity' => 0,
+      'overlayShow' => 1,
+      'overlayColor' => '#666',
+      'overlayOpacity' => '0.3',
+      'hideOnOverlayClick' => 0,
+      'hideOnContentClick' => 1,
+      'enableEscapeButton' => 1,
+      'centerOnScroll' => 1,
+      'autoScale' => 1,
+      'easingIn' => 'swing',
+      'easingOut' => 'swing',
+      'changeFade' => 'fast',
+      'changeSpeed' => 0,
+      'transitionIn' => 'fade',
+      'speedIn' => 0,
+      'transitionOut' => 'fade',
+      'speedOut' => 0,
+      'onStart' => '',
+      'onComplete' => '',
+      'onClosed' => '',
+      'onCleanup' => '',
+      'onCancel' => '',
+    ),
     'activation' => array(
       'selector' => '.imagefield-fancybox',
       'activation_type' => 'include',
@@ -271,13 +305,6 @@ function s4_core_strongarm() {
       'grouping' => '1',
       'imagecache_preset' => '0',
       'use_node_title' => 0,
-    ),
-    'options' => array(
-      'margin' => 0,
-      'padding' => 0,
-      'speedIn' => 0,
-      'speedOut' => 0,
-      'changeSpeed' => 0,
     ),
   );
   $export['fancybox_settings'] = $strongarm;

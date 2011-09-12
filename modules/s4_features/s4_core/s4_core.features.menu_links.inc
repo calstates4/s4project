@@ -24,24 +24,6 @@ function s4_core_menu_default_menu_links() {
     'expanded' => '0',
     'weight' => '-43',
   );
-  // Exported menu link: main-menu:email/coordinators
-  $menu_links['main-menu:email/coordinators'] = array(
-    'menu_name' => 'main-menu',
-    'link_path' => 'email/coordinators',
-    'router_path' => 'email/coordinators',
-    'link_title' => 'Emails',
-    'options' => array(
-      'attributes' => array(
-        'title' => '',
-      ),
-    ),
-    'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '-48',
-  );
   // Exported menu link: main-menu:forms
   $menu_links['main-menu:forms'] = array(
     'menu_name' => 'main-menu',
@@ -152,7 +134,6 @@ function s4_core_menu_default_menu_links() {
   );
   // Translatables
   // Included for use with string extractors like potx.
-  t('Emails');
   t('Form Templates');
   t('Home');
   t('Logout');
