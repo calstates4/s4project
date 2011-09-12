@@ -204,12 +204,16 @@ function s4_courses_create_course($course, $add_user= FALSE, $add_role = FALSE) 
       foreach ($course[$role] as $user) {
         if (is_numeric($user) && !$existing[$user]) {
           //This is a user ID, just add it
-          $users[] = array('uid' => $user);
+          if(!isset($existing[$user])) {
+          	$users[] = array('uid' => $user);
+	      }
         }
         elseif (is_array($user)) {
           //This is a user object, create or load them
           $user = s4_core_create_user($user);
-          $users[] = array('uid' => $user->uid);
+          if(!isset($existing[$user->uid])) {
+          	$users[] = array('uid' => $user->uid);
+	      }
         }
       }
       $course_node->{$field_name}[$course_node->language] = $users;
@@ -698,9 +702,54 @@ function s4_courses_s4_reporting_info() {
 		$fields = field_info_instances('node', $type);
 		foreach($fields as $name => $field) {
 			$info['s4_courses']['filters'][$type][$name] = $field;
-			$info['s4_courses']['fields'][$type][$name] = $field;
+			if(!in_array($name, array('field_course_students', 'field_course_faculty'))) {
+				$info['s4_courses']['fields'][$type][$name] = $field;
+			}
 		}
 		$info['s4_courses']['types'][$type] = node_type_load($type);
 	}
 	return $info;
+}
+
+function s4_courses_s4_reporting_term_report($items) {
+	$totals = array('courses' => array('count' => 0,
+											   'title' => t('Total service learning courses')),
+						'students' => array('count' => 0,
+											   'title' => t('Total students')),
+						'placements' => array('count' => 0,
+											   'title' => t('Total placements')),
+					);
+	$courses = array();										   
+	foreach($items as $item) {
+		$query = db_select('node_revision', 'r')
+					   ->fields('r', array('nid', 'status'));
+	    $query->leftJoin('field_data_field_term', 't', 't.entity_id = r.nid AND t.bundle = :course', array(':course' => 'course'));
+	    $query->fields('t', array('field_term_nid'));
+	    if($item['term']) {
+	    	$query->condition('t.field_term_nid', $item['term']->nid);
+	    }
+	    else {
+		    $query->condition('r.timestamp', strtotime($item['start']), '>=')
+		    	  ->condition('r.timestamp', strtotime($item['end']), '<=');
+		}
+		$query->leftJoin('field_data_field_course_students', 's', 's.entity_id = r.nid AND s.bundle = :course', array(':course' => 'course'));
+		$query->leftJoin('field_data_field_user', 'u', 's.field_course_students_uid = u.field_user_uid AND u.bundle = :signup', array(':signup' => 'signup'));
+		//$query->leftJoin('field_data_field_course', 'c', 'c.field_course_nid = r.nid AND c.bundle => :signup', array(':signup' => 'signup'));
+		$query->fields('s', array('field_course_students_uid'));
+		$query->leftJoin('node', 'n', 'n.vid = r.vid');
+		$query->condition('n.type', 'course');
+		$results = $query->execute()->fetchAll();
+		
+		foreach($results as $result) {
+			$courses[$result->nid]++;
+			$totals['students']['count']++;
+		};
+		
+	}
+	$totals['courses']['count'] = count($courses);
+	
+	
+	return array('totals' => $totals,
+				 'output' => $output,
+				);
 }

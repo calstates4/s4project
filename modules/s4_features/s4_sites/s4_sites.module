@@ -690,6 +690,9 @@ function s4_sites_comment_presave($comment) {
 	}
 }
 
+/**
+*
+*/
 function s4_sites_s4_reporting_info() {
 	$info = array();
 	foreach(array('site', 'file', 'coordinator', 'contact_record') as $type) {
@@ -701,4 +704,55 @@ function s4_sites_s4_reporting_info() {
 		$info['s4_sites']['types'][$type] = node_type_load($type);
 	}
 	return $info;
+}
+
+function s4_sites_s4_reporting_term_report($items) {
+	$totals = array('total_sites' => array('count' => 0,
+											   'title' => t('Total number of sites')),
+						'total_active_sites' => array('count' => 0,
+											   'title' => t('Total active sites')),
+											   );
+	$locations = array();
+	$locations_total = array();
+	foreach($items as $item) {
+		$query = db_select('node_revision', 'r')
+					   ->fields('r', array('nid', 'status'))
+					   ->condition('r.timestamp', strtotime($item['start']), '>=')
+					   ->condition('r.timestamp', strtotime($item['end']), '<=');
+		$query->leftJoin('node', 'n', 'n.vid = r.vid');
+		$query->condition('n.type', 'site');
+		$query->leftJoin('field_data_field_location', 'fl', 'fl.entity_id = r.nid AND fl.bundle = :site', array(':site' => 'site'));
+		$query->leftJoin('location', 'l', 'l.lid = fl.field_location_lid');
+		$query->fields('l', array('city', 'province'));
+		$results = $query->execute()->fetchAll();
+		
+		foreach($results as $result) {
+			$totals['total_sites']['count']++;
+			if($result->status) {
+				$totals['total_active_sites']['count']++;
+				if(!isset($locations[md5($result->city . $result->province)])) {
+				  $locations[md5($result->city . $result->province)] = (array)$result;
+				}
+				$locations_total[md5($result->city . $result->province)]++;
+			}
+		}
+		
+	}
+	$output['locations'] = array(
+		'#type' => 'fieldset',
+		'#title' => 'Sites by location',
+	);
+	arsort($locations_total);
+	$header = array('City', 'Total', 'Percent');
+	$rows = array();
+	foreach($locations_total as $k => $total) {
+		$rows[] = array($locations[$k]['city'] .', '. $locations[$k]['province'],
+						$total,
+						round(($total / $totals['total_active_sites']['count']) * 100, 2) .'%');
+	}
+	$output['locations']['location_table']['#markup'] = theme('table', array('header' => $header, 'rows' => $rows));
+	
+	return array('totals' => $totals,
+				 'output' => $output,
+				);
 }

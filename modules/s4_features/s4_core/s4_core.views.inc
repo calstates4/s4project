@@ -16,7 +16,6 @@ function s4_core_views_data() {
     ),
   );
 
-
   $data['s4_signup']['user_course_select'] = array(
     'title' => t('User select course'),
     'help' => t('The end user is selecting this course to signup with.'),
@@ -53,6 +52,8 @@ function s4_core_views_data() {
     ),
   );
   
+  
+  
   $data['s4_signup']['student_signup_node'] = array(
     'title' => t('Signup related to student'),
     'help' => t('For listings of students assigned to a course'),
@@ -70,6 +71,26 @@ function s4_core_views_data() {
     'help' => t('Links to all site locations'),
     'field' => array(
       'handler' => 'views_handler_s4_site_locations',
+      'click sortable' => FALSE,
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort',
+    ),
+  );
+
+  $data['s4_user_signup']['table']['group'] = t('User Signup');
+  $data['s4_user_signup']['table']['join'] = array(
+    'users' => array(
+      'left_field' => 'uid',
+      'field' => 'uid',
+    ),
+  );
+  
+  $data['s4_user_signup']['student_signup_list'] = array(
+    'title' => t('List all signups for a user'),
+    'help' => t('Renders an unordered list of a user\'s signup records.'),
+    'field' => array(
+      'handler' => 'views_handler_s4_student_signup_list',
       'click sortable' => FALSE,
     ),
     'sort' => array(

@@ -98,7 +98,6 @@ class Notification_Document_Expires_Template extends Notifications_Node_Event_Te
     }    
   } 
   function default_text($type, $options) {
-    dvm($type);
     switch ($type) {
       case 'subject':
         return array(

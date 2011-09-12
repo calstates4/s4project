@@ -1,20 +1,119 @@
 <?php
 
 
-function s4_reporting_run_report($node) {
-	$filters = field_get_items('node', $node, 'field_report_filters');
-	foreach($filters as $k => $filter) {
-		$collection = field_collection_item_load($filter['value']);
-		$fields = field_get_items('field_collection_item', $collection, 'field_filter_field');
-		$values = field_get_items('field_collection_item', $collection, 'field_filter_values');
-		$operator = field_get_items('field_collection_item', $collection, 'field_filter_operator');
-		$filters[$k] = array('field' => $fields[0]['value'],
-							 'operator' => $operator[0]['value'],
-							 'value' => $values[0]['value']);
-										 
+function s4_reporting_term_report($form, &$form_state) {
+	$form['term'] = array(
+		'#type' => 'fieldset',
+		'#title' => 'Report by term',
+	);
+	
+	$terms = array();
+	$query = db_select('node', 'n')
+	         ->fields('n', array('nid', 'title'))
+	         ->condition('n.status', 1)
+	         ->condition('n.type', 'course_term');
+	$results = $query->execute()->fetchAll();
+	foreach($results as $result) {
+		$terms[$result->nid] = $result->title;
 	}
-	dpm($filters);
-	return 'hi';
+	
+	$form['term']['report_term'] = array(
+		'#type' => 'select',
+		'#title' => 'Report on one or more terms',
+		'#multiple' => true,
+		'#options' => $terms,
+		'#attributes' => array('class' => array('chosen'),
+							   'style' => 'width: 50%;'),
+		'#default_value' => $form_state['storage']['values']['report_term'],
+	);
+	
+	$form['dates'] = array(
+		'#type' => 'fieldset',
+		'#title' => 'Report by date',
+		'#collapsible' => true,
+		'#collapsed' => ($form_state['storage']['values']['date_enabled']) ? false : true ,
+	);
+	
+	$form['dates']['date_enabled'] = array(
+		'#type' => 'checkbox',
+		'#title' => 'Ignore terms and run report for a period of time',
+		'#default_value' => $form_state['storage']['values']['date_enabled'],
+	);
+	
+	$form['dates']['date_start'] = array(
+		'#type' => 'date',
+		'#title' => 'Start date',
+		'#default_value' => $form_state['storage']['values']['date_start'],
+	);
+	
+	$form['dates']['date_end'] = array(
+		'#type' => 'date',
+		'#title' => 'End date',
+		'#default_value' => $form_state['storage']['values']['date_end'],
+	);
+	
+	$form['submit'] = array(
+		'#type' => 'submit',
+		'#value' => 'Run report',
+	);
+	
+	if($form_state['storage']['results']) {
+		$form += $form_state['storage']['results'];
+	}
+	
+	return $form;
+}
+
+function s4_reporting_term_report_validate(&$form, $form_state) {
+	if($form_state['values']['date_enabled']) {
+		$start = $form_state['values']['date_start'];
+		$end = $form_state['values']['date_end'];
+		if(mktime(0, 0, 0, $start['month'], $start['day'], $start['year']) >=
+		   mktime(0, 0, 0, $end['month'], $end['day'], $end['year'])) {
+		   	form_set_error('date_start', t('The start date must be earlier than the end date.'));
+		   }
+	}
+	else {
+		if(!count($form_state['values']['report_term'])) {
+			form_set_error('report_term', t('You must select at least one term if you are not running this report using dates.'));
+		}
+	}
+}
+
+function s4_reporting_term_report_submit($form, &$form_state) {
+	$report_items = array();
+	if($form_state['values']['date_enabled']) {
+		$start = $form_state['values']['date_start'];
+		$end = $form_state['values']['date_end'];
+
+		$report_items[0] = array('start' => date('Y-m-d', mktime(0, 0, 0, $start['month'], $start['day'], $start['year'])), 
+						 		'end' => date('Y-m-d', mktime(0, 0, 0, $end['month'], $end['day'], $end['year'])),
+						 		'term' => false);
+	}
+	else {
+		foreach($form_state['values']['report_term'] as $nid) {
+			$term = node_load($nid);
+			$dates = field_get_items('node', $term, 'field_term_date_start');
+			$report_items[$nid] = array('start' => $dates[0]['value'],
+										'end' => $dates[0]['value2'],
+										'term' => $term);
+		}
+	}
+	$output = array();
+	$result = module_invoke_all('s4_reporting_term_report', $report_items);
+	foreach($result['totals'] as $t => $total) {
+		$output['totals'][$t] = t('<strong>@title</strong>: @count', array(
+			'@title' => $total['title'],
+			'@count' => $total['count']
+		));
+	}
+	$output += $result['output'];
+	$output['totals'] = array(
+		'#markup' => theme('item_list', array('items' => $output['totals']))
+		);	
+	$form_state['rebuild'] = TRUE;
+	$form_state['storage']['values'] = $form_state['values'];
+	$form_state['storage']['results'] = $output;
 }
 
 function s4_reporting_object_report($node, $type = 'signup') {

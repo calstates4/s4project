@@ -281,6 +281,14 @@ function s4_core_menu() {
   	'file' => 's4_core.pages.inc',
   );
   
+  $items['signup/create/%'] = array(
+  	'title' => 'Create signup',
+  	'page callback' => 'drupal_get_form',
+  	'page arguments' => array('s4_core_create_signup_form', 2),
+  	'access arguments' => array('create signups for other users'),
+  	'file' => 's4_core.pages.inc',
+  );
+  
   return $items;
 }
 
@@ -336,6 +344,10 @@ function s4_core_permission() {
     'access s4 site settings' => array(
       'title' => t('Access S4 site settings'),
       'description' => t('Give access to general site setting help page'),
+    ),
+    'create signups for other users' => array(
+      'title' => t('Create signup records for other users'),
+      'description' => t('Allowed to create signup records for other people'),
     ),
   );
 }
@@ -1109,9 +1121,13 @@ function s4_core_theme_registry_alter(&$items) {
 */
 function s4_core_preprocess_username(&$variables) {
   $user = user_load($variables['uid']);
+  $variables['name'] = s4_core_get_user_full_name($user);
+}
+
+function s4_core_get_user_full_name($user) {
   $first_name = field_get_items('user', $user, 'field_first_name');
   $last_name = field_get_items('user', $user, 'field_last_name');
-  $variables['name'] = ($first_name[0]['value'] && $last_name[0]['value'])
+  return  ($first_name[0]['value'] && $last_name[0]['value'])
   		  ? $first_name[0]['value'] .' '. $last_name[0]['value']
   		  : $variables['name'];
 }
@@ -1385,4 +1401,8 @@ function s4_core_views_check_node_type_roles($rids, $type, $view, $account = NUL
 function s4_core_s4_help($path) {
 	module_load_include('inc', 's4_core', 's4_core.help');
 	return _s4_core_help($path);
+}
+
+function s4_core_site_staff_choice(&$form, $form_state) {
+	return $form['site-staff'];
 }

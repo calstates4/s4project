@@ -42,21 +42,33 @@ function s4_reporting_menu() {
 		'weight' => 10
 	);
 	
-	$items['node/%node/report'] = array(
-		'title' => 'View report',
+	$items['reports/terms'] = array(
+		'title' => 'Terms',
 		'type' => MENU_LOCAL_TASK,
-		'page callback' => 's4_reporting_run_report',
-		'page arguments' => array(1),
-		'access callback' => 's4_reporting_run_report_access',
-		'access arguments' => array(1),
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('s4_reporting_term_report'),
+		'access arguments' => array('view all webform fields'),
 		'file' => 's4_reporting.pages.inc',
 	);
 
 	return $items;
 }
 
-function s4_reporting_run_report_access($node) {
-	return ($node->type == 'report' && user_access('view s4 reports'));
+function s4_reporting_form_views_exposed_form_alter(&$form, $form_state) {
+	if(isset($form['dyfield'])) {
+		$fancybox_settings = variable_get('fancybox_settings', array());
+		if (!empty($fancybox_settings)) {
+			fancybox_activate($fancybox_settings);
+		}
+		drupal_add_css(drupal_get_path('module', 's4_reporting') .'/css/s4_reporting.views.css');
+		drupal_add_js(drupal_get_path('module', 's4_reporting') .'/js/s4_reporting.views.js');
+		$form['dyfield']['#prefix'] = '<div class="element-invisible report-fields"  id="field-selector">';
+		$form['dyfield']['#suffix'] = '</div>';
+		$form['dyfield']['#title'] = '<div class="element-invisible">'. $form['dyfield']['#title'] .'</div>';
+		$form['show-fields'] = array(
+			'#markup' => '<a href="#field-selector" id="show-fields" class="button">Select fields </a>',
+		);
+	}
 }
 
 function s4_reporting_form_report_node_form_alter(&$form, $form_state) {
@@ -77,20 +89,25 @@ function s4_reporting_form_report_node_form_alter(&$form, $form_state) {
 	$filter_settings = array();
 	foreach($info['filters'] as $bundle => $filters) {
 		foreach($filters as $filter_key => $filter) {
-			$value_key = key($field['columns']);
-
-			$type = str_replace('options_', '', $filter['widget']['type']);
-			$multiple = $filter['cardinality'] > 1 || $filter['cardinality'] == FIELD_CARDINALITY_UNLIMITED;
-			$properties = _options_properties($type, $multiple, null, null);
-			
-			// Prepare the list of options.
-			$options = _options_get_options(field_info_field($filter['field_name']), $field, $properties);
+			$options = s4_reporting_get_options($filter);
+			foreach($options as $k => $option) {
+				$options[$k] = text_summary($option, null, 40);
+			}
 			if(count($options)) {
-				$filter_settings[$filter['field_name']] = $options;
+				$filter_settings[$filter['bundle'] .'|'. $filter['field_name']] = $options;
 			}
 		}
 	}
 	drupal_add_js(array('s4_reporting_filters' => $filter_settings), 'setting');
+}
+
+function s4_reporting_get_options($field) {
+	$type = str_replace('options_', '', $field['widget']['type']);
+	$multiple = $field['cardinality'] > 1 || $field['cardinality'] == FIELD_CARDINALITY_UNLIMITED;
+	$properties = _options_properties($type, $multiple, null, null);
+	
+	// Prepare the list of options.
+	return _options_get_options(field_info_field($field['field_name']), $field, $properties);
 }
 
 function s4_reporting_get_filter_fields() {
@@ -98,7 +115,7 @@ function s4_reporting_get_filter_fields() {
 	$options = array();
 	foreach($filters['filters'] as $type => $fields) {
 		foreach($fields as $field_name => $field) {
-			$options[$filters['types'][$type]->name][$field_name] = text_summary($field['label'], null, 50);
+			$options[$filters['types'][$type]->name][$field['bundle'] .'|'. $field_name] = text_summary($field['label'], null, 50);
 		}
 	}
 	return $options;
@@ -109,7 +126,7 @@ function s4_reporting_get_field_fields() {
 	$options = array();
 	foreach($filters['fields'] as $type => $fields) {
 		foreach($fields as $field_name => $field) {
-			$options[$filters['types'][$type]->name][$field_name] = text_summary($field['label'], null, 50);
+			$options[$filters['types'][$type]->name][$field['bundle'] .'|'. $field_name] = text_summary($field['label'], null, 50);
 		}
 	}
 	return $options;
@@ -186,4 +203,61 @@ function theme_s4_reporting_chart_pie($data) {
 	}
 	drupal_add_js(sprintf($script, implode("\n", $values)), 'inline');
 	return '<div class="chart-pie" id="'. $data['id'] .'"></div>';
+}
+
+function s4_reporting_views_pre_render($view) {
+	if($view->name == 'report_students' && arg(0) == 'reports') {
+		module_load_include('inc', 'webform', 'includes/webform.submissions');
+		if(isset($view->result[0]->field_field_form_signup_sid)) { 
+			s4_reporting_append_form_to_view($view, 'field_field_form_signup_sid', 'field_field_site_form');
+		}
+		dpm($view);
+		dpm($view->field['nid']);
+	}
+}
+
+function s4_reporting_append_form_to_view($view, $signup_field, $site_field) {
+	static $webform_fields;
+	foreach($view->result as $result_key => $result) {
+		$form = $result->{$site_field}[0]['raw']['nid'];
+		$sid = $result->{$signup_field}[0]['raw']['value'];
+		$submission = webform_get_submission($form, $sid);
+		$form = node_load($form);
+		/**
+		*	Please don't look so hard at this, you might go blind.
+		*/
+		foreach($form->webform['components'] as $key => $component) {
+			$view->result[$result_key]->{$component['form_key']} = array(
+				'rendered' => array(
+					'#markup' => webform_component_invoke($component['type'], 'table', $component, $submission->data[$key]['value'])
+				),
+				'raw' => array(
+					'value' => $submission->data[$key]['value'],
+				),
+			);
+			if(!isset($view->field[$component['form_key']])) {
+				foreach($view->field as $field_key => $field) {
+					if(get_class($field) == 'views_handler_field_field') {
+						$view->field[$component['form_key']] = clone $view->field[$field_key];
+					}
+				}
+				$view->field[$component['form_key']] = new views_handler_field_field();
+				$view->field[$component['form_key']]->view = $view->field['nid']->view;
+				$view->field[$component['form_key']]->query = $view->field['nid']->query;
+				$view->field[$component['form_key']]->handler_type = 'field';
+				$view->field[$component['form_key']]->is_handler = TRUE;
+				$view->field[$component['form_key']]->additional_fields[$component['form_key']] = array(
+					'table' => 'node',
+					'field' => 'nid',
+				);
+				$view->field[$component['form_key']]->options['label'] = $component['name'];
+				$view->field[$component['form_key']]->options['exclude'] = 0;
+				$view->field[$component['form_key']]->options['id'] = $component['form_key'];
+				$view->field[$component['form_key']]->aliases = array($component['form_key'] =>  $component['form_key']);
+				$view->field[$component['form_key']]->field = $component['form_key'];
+				$view->field[$component['form_key']]->field_alias = $component['form_key'];
+				
+			}
+		}
+	}
 }

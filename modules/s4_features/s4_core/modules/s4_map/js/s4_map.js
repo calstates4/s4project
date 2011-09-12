@@ -59,7 +59,7 @@ var s4Map = {
 	
 	maxSize: 70,
 	
-	minSize: 20,
+	minSize: 10,
 	
 	init : function(mapID) {
 		s4Map.lastZoom = Drupal.settings.s4_map.zoom;

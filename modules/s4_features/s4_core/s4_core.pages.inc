@@ -173,6 +173,12 @@ function s4_core_s4_site_configuration() {
 			'description' => t('Change login preferences, messages, and other general settings.'),
 			'href' => 'admin/config/s4',
 		),
+		's4_site_settings' => array(
+			'group' => t('General settings'),
+			'title' => t('Site name'),
+			'description' => t('Change the site name and footer message.'),
+			'href' => 'admin/config/system/site-information',
+		),
 		's4_general_user' => array(
 			'group' => t('General settings'),
 			'title' => t('Map user fields to SIS field'),
@@ -180,4 +186,128 @@ function s4_core_s4_site_configuration() {
 			'href' => 'admin/config/s4/user-attributes',
 		),
 	);
+}
+
+/**
+*	Form to quickly sign up student with a site
+*/
+function s4_core_create_signup_form($form, $form_state, $uid) {
+
+	$user = user_load($uid);
+	drupal_set_title(t('Sign up @name', array('@name' => s4_core_get_user_full_name($user))));
+	$form = array();
+	
+	$form['user'] = array(
+		'#type' => 'hidden',
+		'#value' => $user->uid,
+	);
+	
+	if(module_exists('s4_courses')) {
+		$courses = array();
+		
+		$course_list = db_select('field_data_field_course_students', 's')
+				 ->fields('s', array('entity_id'))
+				 ->condition('s.bundle', 'course')
+				 ->condition('s.field_course_students_uid', $user->uid)
+				 ->distinct()
+				 ->execute()
+				 ->fetchCol();
+		
+		foreach($course_list as $course) {
+			$course = node_load($course);
+			$term = field_get_items('node', $course, 'field_term');
+			$term = node_load($term[0]['nid']);
+			$courses[$term->title][$course->nid] = $course->title;
+		}
+		
+		$form['course'] = array(
+			'#type' => 'select',
+			'#title' => 'Course',
+			'#options' => $courses,
+			'#attributes' => array('class' => array('chosen')),
+		);
+	}
+	
+	$sites = array();
+	$query = db_select('node', 'n')
+			 ->fields('n', array('nid', 'title'))
+			 ->condition('type', 'site')
+			 ->orderBy('title', 'ASC');
+	$results = $query->execute();
+	foreach($results as $result) {
+		$sites[$result->nid] = $result->title;
+	}
+	$form['site'] = array(
+		'#type' => 'select',
+		'#title' => 'Site',
+		'#options' => $sites,
+		'#attributes' => array('class' => array('chosen')),
+		'#ajax' => array(
+			'callback' => 's4_core_site_staff_choice',
+			'wrapper' => 'site-staff-select',
+			'progress' => array(
+				'type' => 'throbber',
+				'message' => 'Looking up site staff',
+			),
+		),
+	);
+	
+	$site_staff_options = array();
+	if($form_state['values']['site']) {
+		$site_staff = db_select('field_data_field_site', 's')
+					  ->fields('s', array('entity_id'))
+					  ->condition('s.bundle', 'coordinator')
+					  ->condition('s.field_site_nid', $form_state['values']['site'])
+					  ->execute()
+					  ->fetchCol();
+		foreach($site_staff as $staff) {
+			$staff = node_load($staff);
+			$available = field_get_items('node', $staff, 'field_staff_signup_available');
+			if($available[0]['value']) {
+				$role = field_get_items('node', $staff, 'field_staff_role');
+				$role = taxonomy_term_load($role[0]['tid']);
+				$site_staff_options[$staff->nid] = t('@title (@role)', array('@title' => $staff->title,
+																			 '@role' => $role->name));
+			}
+		}
+	}
+	
+	$form['site-staff'] = array(
+		'#type' => 'radios',
+		'#prefix' => '<div id="site-staff-select">',
+		'#suffix' => '</div>',
+		'#title' => 'Site staff',
+		'#options' => $site_staff_options,
+	);
+	
+	$form['hours'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Number of expected hours of services',
+		'#size' => 6,
+	);
+	
+	$form['email-student'] = array(
+		'#type' => 'checkbox',
+		'#title' => 'Send student email to complete a signup form (if the site has one)',
+		'#default_value' => 1,
+	);
+	
+	$form['submit'] = array(
+		'#type' => 'submit',
+		'#value' => 'Create signup',
+	);
+	
+	return $form;
+}
+
+function s4_core_create_signup_form_submit($form, $form_state) {
+	$signup = array('user' => $form_state['values']['user'],
+           'site' => $form_state['values']['site'],
+           'course' => $form_state['values']['course'],
+           'coordinator' => ($form_state['values']['site-staff']) ? $form_state['values']['site-staff'] : 0,
+           'hours' => $form_state['values']['hours']
+          );
+	$signup = _s4_core_create_signup($form_state['values']['user'], $signup);
+	drupal_set_message('Created !signup record', array('!signup' => l(t('signup #@number', array('@number' => $signup->nid)), 'node/'. $signup->nid)));
+	drupal_goto($form_state['values']['destination']);
 }
