@@ -385,7 +385,7 @@ function s4_core_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '2',
+          'weight' => '7',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -520,7 +520,7 @@ function s4_core_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '3',
+          'weight' => '8',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -562,6 +562,72 @@ function s4_core_field_default_fields() {
     ),
   );
 
+  // Exported field: 'node-signup-field_form_assessment_sid'
+  $fields['node-signup-field_form_assessment_sid'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_form_assessment_sid',
+      'foreign keys' => array(),
+      'indexes' => array(),
+      'module' => 'number',
+      'settings' => array(),
+      'translatable' => '1',
+      'type' => 'number_integer',
+    ),
+    'field_instance' => array(
+      'bundle' => 'signup',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'cck_blocks' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'default' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '4',
+        ),
+        'notifications' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '4',
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_form_assessment_sid',
+      'label' => 'Assessment results',
+      'required' => FALSE,
+      'settings' => array(
+        'max' => '',
+        'min' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'module' => 'number',
+        'settings' => array(),
+        'type' => 'number',
+        'weight' => '7',
+      ),
+    ),
+  );
+
   // Exported field: 'node-signup-field_form_evaluation_sid'
   $fields['node-signup-field_form_evaluation_sid'] = array(
     'field_config' => array(
@@ -594,7 +660,7 @@ function s4_core_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '5',
+          'weight' => '10',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -662,7 +728,7 @@ function s4_core_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '4',
+          'weight' => '9',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -738,7 +804,7 @@ function s4_core_field_default_fields() {
             'thousand_separator' => ' ',
           ),
           'type' => 'number_decimal',
-          'weight' => 6,
+          'weight' => '0',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -769,7 +835,7 @@ function s4_core_field_default_fields() {
         'module' => 'number',
         'settings' => array(),
         'type' => 'number',
-        'weight' => '7',
+        'weight' => '8',
       ),
     ),
   );
@@ -823,7 +889,7 @@ function s4_core_field_default_fields() {
             'show_repeat_rule' => 'show',
           ),
           'type' => 'date_default',
-          'weight' => 7,
+          'weight' => '1',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -863,7 +929,7 @@ function s4_core_field_default_fields() {
           'year_range' => '-3:+3',
         ),
         'type' => 'date_select',
-        'weight' => '9',
+        'weight' => '10',
       ),
     ),
   );
@@ -981,7 +1047,7 @@ function s4_core_field_default_fields() {
           'module' => 'location_cck',
           'settings' => array(),
           'type' => 'location_default',
-          'weight' => 8,
+          'weight' => '2',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -1008,7 +1074,7 @@ function s4_core_field_default_fields() {
         'module' => 'location_cck',
         'settings' => array(),
         'type' => 'location',
-        'weight' => '10',
+        'weight' => '11',
       ),
     ),
   );
@@ -1062,7 +1128,21 @@ function s4_core_field_default_fields() {
             'show_repeat_rule' => 'show',
           ),
           'type' => 'date_default',
-          'weight' => 9,
+          'weight' => '3',
+        ),
+        'notifications' => array(
+          'label' => 'above',
+          'module' => 'date',
+          'settings' => array(
+            'format_type' => 'long',
+            'fromto' => 'both',
+            'multiple_from' => '',
+            'multiple_number' => '',
+            'multiple_to' => '',
+            'show_repeat_rule' => 'show',
+          ),
+          'type' => 'date_default',
+          'weight' => '3',
         ),
         'teaser' => array(
           'label' => 'above',
@@ -1097,7 +1177,7 @@ function s4_core_field_default_fields() {
           'year_range' => '-3:+3',
         ),
         'type' => 'date_select',
-        'weight' => '8',
+        'weight' => '9',
       ),
     ),
   );
@@ -1193,7 +1273,7 @@ function s4_core_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '1',
+          'weight' => '6',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -1318,7 +1398,7 @@ function s4_core_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '0',
+          'weight' => '5',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -1443,6 +1523,7 @@ function s4_core_field_default_fields() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Assessment results');
   t('Body');
   t('Coordinator');
   t('Course');
