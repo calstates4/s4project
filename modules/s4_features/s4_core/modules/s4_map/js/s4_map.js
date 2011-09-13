@@ -95,12 +95,15 @@ var s4Map = {
 					if(typeof element.node.students != 'undefined') {
 						var hours = '<strong>' + element.node.hours + 
 						'</strong> hours by <strong>' + 
-						element.node.students + '</strong> students';
+						element.node.students + '</strong> student';
+						if(element.node.students > 1) {
+							hours += 's';
+						}
 					}
 					s4Map.markers[element.node.nid] = 
 						s4Map.addMarker(element.node.latitude, element.node.longitude,
-						'<a href="' + element.node.path + '">' + element.node.title + 
-						'</a><div class="hours">' + hours + '</div>');
+						'<br/><strong><a href="' + element.node.path + '">' + element.node.title + 
+						'</a></strong><div class="hours">' + hours + '</div>');
 				}
 			});
 			$('#map-loading-indicator').hide();
@@ -132,7 +135,7 @@ var s4Map = {
 		var latLng = new google.maps.LatLng(lat, lon);
 		var markerOptions = {
 			position: latLng, 
-			map: s4Map.map
+			map: s4Map.map,
 		};
 		if(icon) {
 			markerOptions.icon = icon;
@@ -147,7 +150,8 @@ var s4Map = {
 			  		s4Map.activeInfoWindow.close();
 			  	}
 			  	var infoWindow = new google.maps.InfoWindow({
-				    content: message
+				    content: '<div class="infowindow-message">' + message + '</div>',
+				    maxWidth: 400
 				});
 				infoWindow.open(s4Map.map,marker);
 				s4Map.activeInfoWindow = infoWindow;
