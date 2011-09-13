@@ -71,10 +71,6 @@ var s4Map = {
 						    mapTypeId: google.maps.MapTypeId.TERRAIN
 						    });
 		
-		/*var mapStyleType = new google.maps.StyledMapType(
-					      s4Map.style, { name : 'Service'} );
-		s4Map.map.mapTypes.set('s4', mapStyleType);
-		s4Map.map.setMapTypeId('s4');*/
 		if($('#' + mapID).hasClass('autofill')) {
 			google.maps.event.addListener(s4Map.map, 'idle', s4Map.reloadMap);
 		}
@@ -95,20 +91,20 @@ var s4Map = {
 		$.getJSON(Drupal.settings.basePath + 'json/map/sites?lat_min=' + boundaries.getSouthWest().lat() +'&lat_max=' + boundaries.getNorthEast().lat() + '&lon_min=' + boundaries.getSouthWest().lng() + '&lon_max=' + boundaries.getNorthEast().lng() ,function(data) {
 			$.each(data.nodes, function(index, element) {
 				if(typeof s4Map.markers[element.node.nid] == 'undefined') {
+					var hours = '';
+					if(typeof element.node.students != 'undefined') {
+						var hours = '<strong>' + element.node.hours + 
+						'</strong> hours by <strong>' + 
+						element.node.students + '</strong> students';
+					}
 					s4Map.markers[element.node.nid] = 
-						s4Map.addCircle(element.node.latitude, element.node.longitude, element.node.hours / (s4Map.maxSize - s4Map.minSize), '<a href="' + element.node.path + '">' + element.node.title + '</a><div class="hours">' + element.node.hours + ' hours by ' + element.node.students + ' students</div>');
+						s4Map.addMarker(element.node.latitude, element.node.longitude,
+						'<a href="' + element.node.path + '">' + element.node.title + 
+						'</a><div class="hours">' + hours + '</div>');
 				}
 			});
 			$('#map-loading-indicator').hide();
 		});
-		if(s4Map.lastZoom != s4Map.map.getZoom()) {
-			s4Map.lastZoom = s4Map.map.getZoom();
-			$.each(s4Map.markers, function(index, marker) {
-				if(typeof marker != 'undefined') {
-					s4Map.markers[index].setRadius(s4Map.getCircleSize(marker.get('defaultRadius')));
-				}
-			});
-		}
 	},
 	
 	getCircleSize : function(size) {
@@ -147,19 +143,14 @@ var s4Map = {
 		var marker = new google.maps.Marker(markerOptions);
 		if(message) {
 			google.maps.event.addListener(marker, 'click', function(e) {
-			  	if(s4Map.activeInfoWindow !== null) {
+			  	if(s4Map.activeInfoWindow && typeof s4Map.activeInfoWindow.close != 'undefined') {
 			  		s4Map.activeInfoWindow.close();
 			  	}
-			  	infoBubble = new InfoBubble({
-	          		minWidth: 200,
-				    content: '<div class="infowindow-text">' + message + '</div>',
-				    borderColor: '#000',
-				    backgroundColor: 'rgba(0,0,0,0.8)',
-				    borderRadius: '4px',
-				    disableAutoPan: true,
-				    disableAnimation: true
+			  	var infoWindow = new google.maps.InfoWindow({
+				    content: message
 				});
-				s4Map.activeInfoWindow = infoBubble;
+				infoWindow.open(s4Map.map,marker);
+				s4Map.activeInfoWindow = infoWindow;
 			});
 		}
 		return marker;
@@ -180,23 +171,15 @@ var s4Map = {
 		marker.set('defaultRadius', radius);
 		if(typeof message !== 'undefined') {
 			google.maps.event.addListener(marker, 'click', function(e) {
-			  	if(s4Map.activeInfoWindow !== null) {
+			  	if(s4Map.activeInfoWindow && typeof s4Map.activeInfoWindow.close != 'undefined') {
 			  		s4Map.activeInfoWindow.close();
 			  	}
-			  	infoBubble = new InfoBubble({
-	          		minWidth: 200,
-				    content: '<div class="infowindow-text">' + message + '</div>',
-				    borderColor: '#000',
-				    backgroundColor: 'rgba(0,0,0,0.8)',
-				    borderRadius: '4px',
-				    disableAutoPan: true,
-				    disableAnimation: true,
-				    padding: 20
+			  	var infoWindow = new google.maps.InfoWindow({
+				    content: message
 				});
-				$(infoBubble.c).find('img:first').attr('src', Drupal.settings.basePath + Drupal.settings.s4_map_path + '/images/close.png');
-				infoBubble.setPosition(marker.getCenter());
-				infoBubble.open(s4Map.map);
-				s4Map.activeInfoWindow = infoBubble;
+				infoWindow.open(s4Map.map,marker);
+				s4Map.activeInfoWindow = infoWindow;
+
 			});
 		}
 		return marker;
