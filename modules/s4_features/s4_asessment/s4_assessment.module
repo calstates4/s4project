@@ -24,3 +24,29 @@ function s4_assessment_menu() {
 function s4_assessment_views_api() {
   return array('api' => 3);
 }
+
+/**
+*	Implemenation of hook_form_alter
+*	Here were' adding into the user's session the nid of the
+*	signup record we are assessing. This is a bit of a hack, but
+*	webform wipes anything from the form that's not necessary before
+*	submitting it.
+*/
+function s4_assessment_form_alter(&$form, $form_sate, $form_id) {
+	$assessment = variable_get('s4_assessment_assessment_form', 0);
+	if($form_id == 'webform_client_form_'. $assessment) {
+		$_SESSION['s4_assessment_signup'] = $_GET['signup'];
+	}
+}
+
+function s4_assessment_webform_submission_insert($node, $submission) {
+	$assessment = variable_get('s4_assessment_assessment_form', 0);
+	if($node->nid != $assessment || !isset($_SESSION['s4_assessment_signup'])) {
+		return null;
+	}
+	$signup = node_load($_SESSION['s4_assessment_signup']);
+	$signup->field_form_assessment_sid[$signup->language][0]['value'] = $submission->sid;
+	node_save($signup);
+	unset($_SESSION['s4_assessment_signup']);
+	drupal_set_message('Your assessment has been recorded.');
+}

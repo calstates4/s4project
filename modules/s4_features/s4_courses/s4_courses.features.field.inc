@@ -123,7 +123,7 @@ function s4_courses_field_default_fields() {
             'update' => 'update',
             'view' => 'view',
           ),
-          'priority' => '0',
+          'priority' => '8',
           'referenced' => array(
             'delete' => 0,
             'deny_delete' => 0,
@@ -132,7 +132,7 @@ function s4_courses_field_default_fields() {
             'update' => 'update',
             'view' => 'view',
           ),
-          'unused' => '0',
+          'unused' => '1',
           'views' => array(
             'view' => '',
             'view_args' => '',

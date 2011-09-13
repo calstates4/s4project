@@ -68,6 +68,30 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['relationships']['field_course_students_uid']['field'] = 'field_course_students_uid';
   $handler->display->display_options['relationships']['field_course_students_uid']['required'] = 0;
   $handler->display->display_options['relationships']['field_course_students_uid']['delta'] = '-1';
+  /* Field: User: Uid */
+  $handler->display->display_options['fields']['uid']['id'] = 'uid';
+  $handler->display->display_options['fields']['uid']['table'] = 'users';
+  $handler->display->display_options['fields']['uid']['field'] = 'uid';
+  $handler->display->display_options['fields']['uid']['relationship'] = 'field_course_students_uid';
+  $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['uid']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['uid']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['uid']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['uid']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['uid']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['uid']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['uid']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['uid']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['uid']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['uid']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['uid']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['uid']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['uid']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['uid']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['uid']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['uid']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['uid']['hide_alter_empty'] = 0;
+  $handler->display->display_options['fields']['uid']['link_to_user'] = 0;
   /* Field: Field: First Name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
@@ -153,6 +177,28 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['fields']['student_signup_node']['element_default_classes'] = 1;
   $handler->display->display_options['fields']['student_signup_node']['hide_empty'] = 0;
   $handler->display->display_options['fields']['student_signup_node']['empty_zero'] = 0;
+  /* Field: Assessment: Assessment link */
+  $handler->display->display_options['fields']['assessment_link']['id'] = 'assessment_link';
+  $handler->display->display_options['fields']['assessment_link']['table'] = 's4_assessment';
+  $handler->display->display_options['fields']['assessment_link']['field'] = 'assessment_link';
+  $handler->display->display_options['fields']['assessment_link']['label'] = 'Assessment';
+  $handler->display->display_options['fields']['assessment_link']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['assessment_link']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['assessment_link']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['assessment_link']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['assessment_link']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['assessment_link']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['assessment_link']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['assessment_link']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['assessment_link']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['assessment_link']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['assessment_link']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['assessment_link']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['assessment_link']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['assessment_link']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['assessment_link']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['assessment_link']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['assessment_link']['hide_alter_empty'] = 0;
   /* Contextual filter: Content: Nid */
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
   $handler->display->display_options['arguments']['nid']['table'] = 'node';
@@ -712,10 +758,12 @@ function s4_courses_views_default_views() {
     t('Asc'),
     t('Desc'),
     t('field_course_students'),
+    t('Uid'),
     t('First Name'),
     t('Last Name'),
     t('Last login'),
     t('Site'),
+    t('Assessment'),
     t('All'),
     t('All faculty students'),
     t('Recent student signups'),

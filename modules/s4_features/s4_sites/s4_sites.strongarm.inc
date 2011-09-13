@@ -762,12 +762,12 @@ function s4_sites_strongarm() {
         'all' => array(
           'view' => 0,
         ),
-        'unused' => '0',
+        'unused' => '1',
         'views' => array(
           'view' => '',
           'view_args' => '',
         ),
-        'priority' => '0',
+        'priority' => '8',
       ),
       'field_course_students' => array(
         'referenced' => array(
