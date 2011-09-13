@@ -228,7 +228,7 @@ function s4_core_create_signup_form($form, $form_state, $uid) {
 		);
 	}
 	
-	$sites = array();
+	$sites = array(0 => 'Select a site');
 	$query = db_select('node', 'n')
 			 ->fields('n', array('nid', 'title'))
 			 ->condition('type', 'site')
@@ -298,6 +298,12 @@ function s4_core_create_signup_form($form, $form_state, $uid) {
 	);
 	
 	return $form;
+}
+
+function s4_core_create_signup_form_validate($form, $form_state) {
+	if($form_state['values']['site'] == 0) {
+		form_set_error('site', t('You must select a site to save this signup record.'));
+	}
 }
 
 function s4_core_create_signup_form_submit($form, $form_state) {
