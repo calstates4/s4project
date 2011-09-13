@@ -15,7 +15,31 @@ function s4_assessment_menu() {
 		'file' => 's4_assessment.admin.inc',
 	);
 	
+	$items['node/%node/assessment'] = array(
+		'title' => 'Assessment',
+		'type' => MENU_LOCAL_TASK,
+		'page callback' => 's4_assessment_node_report',
+		'page arguments' => array(1),
+		'access callback' => 's4_assessment_report_access',
+		'access arguments' => array(1),
+		'file' => 's4_assessment.pages.inc',
+	
+	);
+	
 	return $items;
+}
+
+function s4_assessment_report_access($node) {
+	return (user_access('view assessment reports') && $node->type == 'course');
+}
+
+function s4_assessment_permission() {
+	return array(
+	    'view assessment reports' => array(
+	      'title' => t('View assessment reports'),
+	      'description' => t('User can view reports on student learning.'),
+	    ),
+	);
 }
 
 /**
