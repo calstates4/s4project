@@ -3,13 +3,18 @@
 class views_handler_s4_assessment_link extends views_handler_field {
 
   function render($values) {
-    $node = menu_get_object();
+    if($values->nid) {
+    	$node = node_load($values->nid);
+    }
+    else {
+	    $node = menu_get_object();
+    }
     if(!$node || $node->type != 'course') {
     	return null;
     }
    
-    $assessment = variable_get('s4_assessment_assessment_form', '');
-    if(!$assessment) {
+    $assessment_form = variable_get('s4_assessment_assessment_form', '');
+    if(!$assessment_form) {
     	return null;
     }
     $signup_query = db_select('field_data_field_course', 'c')
@@ -31,7 +36,7 @@ class views_handler_s4_assessment_link extends views_handler_field {
     }
     if($signup) {
 	    return l('Complete assessment', 
-	    		 'node/'. $assessment, 
+	    		 'node/'. $assessment_form, 
 	    		 array('query' => array('signup' => $signup,
 	    		 						'destination' => 'node/'. $node->nid
 	    		 )));
