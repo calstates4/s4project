@@ -29,7 +29,9 @@ function s4_reporting_context_default_contexts() {
       ),
     ),
   );
-  $context->reactions = array();
+  $context->reactions = array(
+    'menu' => 'reports',
+  );
   $context->condition_mode = 1;
 
   // Translatables

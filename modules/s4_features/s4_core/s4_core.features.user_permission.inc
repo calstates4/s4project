@@ -492,6 +492,7 @@ function s4_core_user_default_permissions() {
     'name' => 'bypass node access',
     'roles' => array(
       0 => 'administrator',
+      1 => 'staff',
     ),
     'module' => 'node',
   );
