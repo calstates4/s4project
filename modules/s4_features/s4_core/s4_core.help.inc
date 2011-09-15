@@ -35,11 +35,20 @@ function _s4_core_help_home() {
 				 					'position' => 3,
 				 					),
 				 'move-box' => array(
+				    'buttons' => array(array('name' =>  "Next")),
 				 	'description' => 'Use these buttons to remove or minimize boxes on your homepage. You can also drag the top of each box to reorder their positon.',
 				 	'id' => 'move-box',
+				 	'next' => 'masquerade-box',
 				 	'title' => 'Moving and removing boxes',
 				 	'attachTo' => '.portlet-icon:first',
 				 	'position' => 6,
+				 ),
+				 'masquerade' => array(
+				 	'description' => 'The masquerade tool lets you switch to any other user\'s account to see exactly what they see in the site.',
+				 	'id' => 'masquerade-box',
+				 	'title' => 'Masquerade as other users',
+				 	'attachTo' => '.block-masquerade',
+				 	'position' => 12,
 				 ),
 				);
 }
