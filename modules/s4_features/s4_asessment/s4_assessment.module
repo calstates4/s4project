@@ -23,7 +23,14 @@ function s4_assessment_menu() {
 		'access callback' => 's4_assessment_report_access',
 		'access arguments' => array(1),
 		'file' => 's4_assessment.pages.inc',
+	);
 	
+	$items['reports/assessments'] = array(
+		'title' => 'Assessment',
+		'type' => MENU_LOCAL_TASK,
+		'page callback' => 's4_assessment_report',
+		'access arguments' => array('view assessment reports'),
+		'file' => 's4_assessment.pages.inc',
 	);
 	
 	return $items;
