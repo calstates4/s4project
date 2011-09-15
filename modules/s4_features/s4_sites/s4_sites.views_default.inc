@@ -2585,6 +2585,34 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['fields']['field_site_language']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_site_language']['hide_alter_empty'] = 0;
   $handler->display->display_options['fields']['field_site_language']['field_api_classes'] = 0;
+  /* Field: Content: How many people does your organization serve? */
+  $handler->display->display_options['fields']['field_population_size']['id'] = 'field_population_size';
+  $handler->display->display_options['fields']['field_population_size']['table'] = 'field_data_field_population_size';
+  $handler->display->display_options['fields']['field_population_size']['field'] = 'field_population_size';
+  $handler->display->display_options['fields']['field_population_size']['label'] = 'Number of people served';
+  $handler->display->display_options['fields']['field_population_size']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_population_size']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_population_size']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_population_size']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_population_size']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_population_size']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_population_size']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_population_size']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_population_size']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_population_size']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_population_size']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_population_size']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_population_size']['element_label_type'] = 'strong';
+  $handler->display->display_options['fields']['field_population_size']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_population_size']['element_default_classes'] = 0;
+  $handler->display->display_options['fields']['field_population_size']['hide_empty'] = 1;
+  $handler->display->display_options['fields']['field_population_size']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_population_size']['hide_alter_empty'] = 0;
+  $handler->display->display_options['fields']['field_population_size']['settings'] = array(
+    'thousand_separator' => ' ',
+    'prefix_suffix' => 1,
+  );
+  $handler->display->display_options['fields']['field_population_size']['field_api_classes'] = 0;
   /* Field: Content: By percentage, what is the demographic of the population you serve? */
   $handler->display->display_options['fields']['field_site_demographics']['id'] = 'field_site_demographics';
   $handler->display->display_options['fields']['field_site_demographics']['table'] = 'field_data_field_site_demographics';
@@ -2741,6 +2769,7 @@ function s4_sites_views_default_views() {
     t('Location(s)'),
     t('Site Images'),
     t('Suggested languages'),
+    t('Number of people served'),
     t('Population served'),
     t('Maximum number of students'),
     t('Minimum hours'),
