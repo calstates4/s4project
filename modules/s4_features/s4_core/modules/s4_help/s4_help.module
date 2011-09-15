@@ -13,6 +13,14 @@ function s4_help_block_view($delta) {
 			drupal_add_js(drupal_get_path('module', 's4_help') .'/js/s4_help.js');
 			$help = module_invoke_all('s4_help', $_GET['q']);
 			if(count($help)) {
+				while($item = current($help)) {
+					$key = key($help);
+					$help[$key]['id'] = $key;
+					if($next = next($help)) {
+						$help[$key]['buttons'] = array(array('name' =>  "Next"));
+						$help[$key]['next'] = key($help);
+					}
+				}
 				drupal_add_js(array('s4_help' => $help), 'setting');
 				return array('content' => '<a href="#" id="contextual-help">Help</a>');
 			}
