@@ -1367,6 +1367,7 @@ function s4_sites_strongarm() {
     'field_workflow_status' => FALSE,
     'field_health_risk' => FALSE,
     'field_site_tour' => FALSE,
+    'field_population_size' => FALSE,
   );
   $export['s4_sites_field_access'] = $strongarm;
 

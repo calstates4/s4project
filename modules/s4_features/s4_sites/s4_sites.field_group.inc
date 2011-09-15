@@ -104,7 +104,7 @@ function s4_sites_field_group_info() {
   $field_group->parent_name = 'group_site_tabs';
   $field_group->data = array(
     'label' => 'Images',
-    'weight' => '26',
+    'weight' => '25',
     'children' => array(
       0 => 'field_site_images',
     ),
@@ -188,6 +188,7 @@ function s4_sites_field_group_info() {
     'weight' => '24',
     'children' => array(
       0 => 'field_site_demographics',
+      1 => 'field_population_size',
     ),
     'format_type' => 'htab',
     'format_settings' => array(

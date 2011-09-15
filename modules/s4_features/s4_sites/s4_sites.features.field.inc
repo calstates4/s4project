@@ -2481,7 +2481,7 @@ function s4_sites_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '4',
+        'weight' => '5',
       ),
     ),
   );
@@ -2570,7 +2570,7 @@ function s4_sites_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '5',
+        'weight' => '6',
       ),
     ),
   );
@@ -3118,6 +3118,82 @@ function s4_sites_field_default_fields() {
     ),
   );
 
+  // Exported field: 'node-site-field_population_size'
+  $fields['node-site-field_population_size'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_population_size',
+      'foreign keys' => array(),
+      'global_block_settings' => '1',
+      'indexes' => array(),
+      'module' => 'number',
+      'settings' => array(),
+      'translatable' => '1',
+      'type' => 'number_integer',
+    ),
+    'field_instance' => array(
+      'bundle' => 'site',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'cck_blocks' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'default' => array(
+          'label' => 'above',
+          'module' => 'number',
+          'settings' => array(
+            'decimal_separator' => '.',
+            'prefix_suffix' => TRUE,
+            'scale' => 0,
+            'thousand_separator' => ' ',
+          ),
+          'type' => 'number_integer',
+          'weight' => 27,
+        ),
+        'notifications' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'display_label' => '',
+      'entity_type' => 'node',
+      'field_name' => 'field_population_size',
+      'label' => 'How many people does your organization serve?',
+      'required' => 0,
+      's4_sites_field_access' => 1,
+      'settings' => array(
+        'max' => '',
+        'min' => '0',
+        'prefix' => '',
+        'suffix' => '',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 0,
+        'module' => 'number',
+        'settings' => array(),
+        'type' => 'number',
+        'weight' => '26',
+      ),
+    ),
+  );
+
   // Exported field: 'node-site-field_signups_max'
   $fields['node-site-field_signups_max'] = array(
     'field_config' => array(
@@ -3300,7 +3376,7 @@ function s4_sites_field_default_fields() {
         'module' => 'matrix',
         'settings' => array(),
         'type' => 'matrix_custom',
-        'weight' => '3',
+        'weight' => '27',
       ),
     ),
   );
@@ -3501,7 +3577,7 @@ function s4_sites_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '8',
+        'weight' => '9',
       ),
     ),
   );
@@ -3720,7 +3796,7 @@ function s4_sites_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '7',
+        'weight' => '8',
       ),
     ),
   );
@@ -4836,7 +4912,7 @@ function s4_sites_field_default_fields() {
           'size' => '40',
         ),
         'type' => 'user_reference_autocomplete',
-        'weight' => '6',
+        'weight' => '7',
       ),
     ),
   );
@@ -5112,7 +5188,7 @@ function s4_sites_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '27',
+        'weight' => '10',
       ),
     ),
   );
@@ -5201,6 +5277,7 @@ function s4_sites_field_default_fields() {
   t('File description or notes');
   t('Files');
   t('First Name');
+  t('How many people does your organization serve?');
   t('If you have multiple location sites that you would like students to be placed at, please provide specific location information. (You may add additional locations using the \'Add another\' button below.)');
   t('If your organization has a presence on Facebook, Twitter, or another social network, please provide the address.');
   t('Issues addressed');
