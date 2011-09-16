@@ -3,30 +3,54 @@
 function s4_assessment_node_report($node) {
 	module_load_include('inc', 'webform', 'includes/webform.report');
 	$form = node_load(variable_get('s4_assessment_assessment_form', 0));
+	$sids = _s4_assessment_get_course_sids($node->nid);
+	return webform_results_analysis($form, $sids);
+}
+
+function _s4_assessment_get_course_sids($nid) {
+	module_load_include('inc', 'webform', 'includes/webform.report');
+	$form = node_load(variable_get('s4_assessment_assessment_form', 0));
 	$query = db_select('field_data_field_course', 'c')
-			 ->condition('field_course_nid', $node->nid);
+			 ->condition('field_course_nid', $nid);
 	$query->leftJoin('field_data_field_form_assessment_sid', 'a', 'a.entity_id = c.entity_id AND a.bundle = c.bundle');
 	$query->fields('a', array('field_form_assessment_sid_value'));
 	$sids = $query->execute()->fetchCol();
-	return webform_results_analysis($form, $sids);
+	return ($sids) ? $sids : array();
 }
 
 
 function s4_assessment_report() {
 	module_load_include('inc', 'webform', 'includes/webform.report');
 	$view = views_get_view('reports_courses');
+	$view = $view->clone_view();
 	$view->set_display('page');
 	$view->init_handlers(); //initialize display handlers
+	$view->override_path = 'reports/assessments';
 	$form_state = array(
 	  'view' => $view,
-	  'display' => $view->display_handler->display,
+	  'display' => $display,
 	  'exposed_form_plugin' => $view->display_handler->get_plugin('exposed_form'),
 	  'method' => 'get',
 	  'rerender' => TRUE,
-	  'no_redirect' => TRUE,
-	  'action' => 'reports/assessments'
+	  'no_redirect' => false,
+	  'destination' => 'reports/assessments'
 	);
+	$view->display_handler->options['items_per_page'] = 0;
 	$form = drupal_build_form('views_exposed_form', $form_state);
-//	dpm(views_get_view_result('reports_courses', 'page'));
+	$courses = views_get_view_result('reports_courses', 'page');
+	$results = null;
+	if(count($courses)) {
+		$sids = array();
+		foreach($courses as $course) {
+			$sids += _s4_assessment_get_course_sids($course->nid);
+		}
+		$assessment_form = node_load(variable_get('s4_assessment_assessment_form', 0));
+		$form['results']= array(
+			'#title' => 'Assessment results',
+			'#markup' => webform_results_analysis($assessment_form, $sids),
+			'#weight' => 10,
+		);
+	}
+	
 	return $form;
 }
