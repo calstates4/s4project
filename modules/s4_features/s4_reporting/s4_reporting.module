@@ -221,8 +221,6 @@ function s4_reporting_views_pre_render($view) {
 		if(isset($view->result[0]->field_field_form_signup_sid)) { 
 			s4_reporting_append_form_to_view($view, 'field_field_form_signup_sid', 'field_field_site_form');
 		}
-		dpm($view);
-		dpm($view->field['nid']);
 	}
 }
 
