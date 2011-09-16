@@ -53,10 +53,9 @@ function s4_districts_field_default_fields() {
         ),
         'default' => array(
           'label' => 'above',
-          'module' => 'text',
           'settings' => array(),
-          'type' => 'text_default',
-          'weight' => 28,
+          'type' => 'hidden',
+          'weight' => '6',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -136,10 +135,9 @@ function s4_districts_field_default_fields() {
         ),
         'default' => array(
           'label' => 'above',
-          'module' => 'text',
           'settings' => array(),
-          'type' => 'text_default',
-          'weight' => 29,
+          'type' => 'hidden',
+          'weight' => '7',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -219,10 +217,9 @@ function s4_districts_field_default_fields() {
         ),
         'default' => array(
           'label' => 'above',
-          'module' => 'text',
           'settings' => array(),
-          'type' => 'text_default',
-          'weight' => 30,
+          'type' => 'hidden',
+          'weight' => '8',
         ),
         'notifications' => array(
           'label' => 'above',
