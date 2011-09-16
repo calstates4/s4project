@@ -55,32 +55,22 @@ function s4_reporting_menu() {
 }
 
 function s4_reporting_form_views_exposed_form_alter(&$form, $form_state) {
-	if(isset($form['dyfield'])) {
-		$fancybox_settings = variable_get('fancybox_settings', array());
-		if (!empty($fancybox_settings)) {
-			fancybox_activate($fancybox_settings);
-		}
-		drupal_add_css(drupal_get_path('module', 's4_reporting') .'/css/s4_reporting.views.css');
-		drupal_add_js(drupal_get_path('module', 's4_reporting') .'/js/s4_reporting.views.js');
-		$form['dyfield']['#prefix'] = '<div class="element-invisible report-fields"  id="field-selector">';
-		$form['dyfield']['#suffix'] = '</div>';
-		$form['dyfield']['#title'] = '<div class="element-invisible">'. $form['dyfield']['#title'] .'</div>';
-		$form['show-fields'] = array(
-			'#markup' => '<a href="#field-selector" id="show-fields" class="show-form-fancybox button" data-selector="#field-selector">Select fields</a>',
-		);
-		
-	}
 	$saved_searches = variable_get('views_savedsearches', array());
 	if($saved_searches[$form_state['view']->name]) {
-		$form['submit']['#value'] = 'Search';
 		global $user;
 		$saved_searches = views_savedsearches_load_multiple($user->uid, $form_state['view']->vid);
 		if(count($saved_searches)) {
+			$fancybox_settings = variable_get('fancybox_settings', array());
+			if (!empty($fancybox_settings)) {
+				fancybox_activate($fancybox_settings);
+			}
+			drupal_add_js(drupal_get_path('module', 's4_reporting') .'/js/s4_reporting.views.js');
 			$form['show-searches'] = array(
 				'#markup' => '<a href="#saved-search-selector" id="show-searches" class="show-form-fancybox button" data-selector="#saved-search-selector">Saved searches</a>',
 			);
 		}
 	}
+	
 }
 
 function s4_reporting_form_views_savedsearches_delete_search_form_alter(&$form, $form_state) {

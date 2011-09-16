@@ -1368,6 +1368,9 @@ function s4_sites_strongarm() {
     'field_health_risk' => FALSE,
     'field_site_tour' => FALSE,
     'field_population_size' => FALSE,
+    'field_district_federal' => FALSE,
+    'field_district_state_lower' => FALSE,
+    'field_district_state_upper' => FALSE,
   );
   $export['s4_sites_field_access'] = $strongarm;
 

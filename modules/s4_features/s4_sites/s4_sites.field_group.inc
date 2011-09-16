@@ -104,7 +104,7 @@ function s4_sites_field_group_info() {
   $field_group->parent_name = 'group_site_tabs';
   $field_group->data = array(
     'label' => 'Images',
-    'weight' => '25',
+    'weight' => '26',
     'children' => array(
       0 => 'field_site_images',
     ),
@@ -161,6 +161,9 @@ function s4_sites_field_group_info() {
     'weight' => '20',
     'children' => array(
       0 => 'field_location',
+      1 => 'field_district_federal',
+      2 => 'field_district_state_lower',
+      3 => 'field_district_state_upper',
     ),
     'format_type' => 'htab',
     'format_settings' => array(

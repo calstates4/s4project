@@ -1,3 +1,6 @@
 .views-submit-button { clear: both; }
 .report-view .view-content { overflow-x: scroll; }
 #edit-dyfield-wrapper label { position: absolute !important; clip: rect(1px 1px 1px 1px); clip: rect(1px, 1px, 1px, 1px); }
+
+/* CHOSEN WIDTH HACKS */
+.report-view .view-filters .chzn-container, .report-view .view-filters .chzn-drop { width: 100% !important; }

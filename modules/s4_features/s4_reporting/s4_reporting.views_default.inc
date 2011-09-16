@@ -32,7 +32,20 @@ function s4_reporting_views_default_views() {
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['query_comment'] = FALSE;
-  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['type'] = 's4_reporting';
+  $handler->display->display_options['exposed_form']['options']['autosubmit'] = 0;
+  $handler->display->display_options['exposed_form']['options']['autosubmit_hide'] = 1;
+  $handler->display->display_options['exposed_form']['options']['s4_reporting'] = array(
+    'group-dyfield' => '2',
+    'group-field_site_nid' => '1',
+    'group-field_term_nid' => '0',
+    'group-field_course_subject_value' => '0',
+    'group-field_course_catalog_number_value' => '0',
+    'group-field_course_section_value' => '0',
+    'groups' => 'Course
+Site
+Fields',
+  );
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '50';
   $handler->display->display_options['style_plugin'] = 'table';
@@ -545,14 +558,29 @@ function s4_reporting_views_default_views() {
   $handler->display->display_options['filters']['field_term_nid']['expose']['identifier'] = 'field_term_nid';
   $handler->display->display_options['filters']['field_term_nid']['expose']['multiple'] = 1;
   $handler->display->display_options['filters']['field_term_nid']['expose']['reduce'] = 0;
+  /* Filter criterion: Content: Subject (field_course_subject) */
+  $handler->display->display_options['filters']['field_course_subject_value']['id'] = 'field_course_subject_value';
+  $handler->display->display_options['filters']['field_course_subject_value']['table'] = 'field_data_field_course_subject';
+  $handler->display->display_options['filters']['field_course_subject_value']['field'] = 'field_course_subject_value';
+  $handler->display->display_options['filters']['field_course_subject_value']['relationship'] = 'field_course_nid';
+  $handler->display->display_options['filters']['field_course_subject_value']['group'] = 0;
+  $handler->display->display_options['filters']['field_course_subject_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_course_subject_value']['expose']['operator_id'] = 'field_course_subject_value_op';
+  $handler->display->display_options['filters']['field_course_subject_value']['expose']['label'] = 'Course Prefix';
+  $handler->display->display_options['filters']['field_course_subject_value']['expose']['operator'] = 'field_course_subject_value_op';
+  $handler->display->display_options['filters']['field_course_subject_value']['expose']['identifier'] = 'field_course_subject_value';
+  $handler->display->display_options['filters']['field_course_subject_value']['expose']['required'] = 0;
+  $handler->display->display_options['filters']['field_course_subject_value']['expose']['remember'] = 1;
+  $handler->display->display_options['filters']['field_course_subject_value']['expose']['multiple'] = FALSE;
   /* Filter criterion: Content: Catalog number (field_course_catalog_number) */
   $handler->display->display_options['filters']['field_course_catalog_number_value']['id'] = 'field_course_catalog_number_value';
   $handler->display->display_options['filters']['field_course_catalog_number_value']['table'] = 'field_data_field_course_catalog_number';
   $handler->display->display_options['filters']['field_course_catalog_number_value']['field'] = 'field_course_catalog_number_value';
   $handler->display->display_options['filters']['field_course_catalog_number_value']['relationship'] = 'field_course_nid';
+  $handler->display->display_options['filters']['field_course_catalog_number_value']['group'] = 0;
   $handler->display->display_options['filters']['field_course_catalog_number_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_course_catalog_number_value']['expose']['operator_id'] = 'field_course_catalog_number_value_op';
-  $handler->display->display_options['filters']['field_course_catalog_number_value']['expose']['label'] = 'Catalog number';
+  $handler->display->display_options['filters']['field_course_catalog_number_value']['expose']['label'] = 'Course number';
   $handler->display->display_options['filters']['field_course_catalog_number_value']['expose']['operator'] = 'field_course_catalog_number_value_op';
   $handler->display->display_options['filters']['field_course_catalog_number_value']['expose']['identifier'] = 'field_course_catalog_number_value';
   $handler->display->display_options['filters']['field_course_catalog_number_value']['expose']['required'] = 0;
@@ -563,25 +591,13 @@ function s4_reporting_views_default_views() {
   $handler->display->display_options['filters']['field_course_section_value']['table'] = 'field_data_field_course_section';
   $handler->display->display_options['filters']['field_course_section_value']['field'] = 'field_course_section_value';
   $handler->display->display_options['filters']['field_course_section_value']['relationship'] = 'field_course_nid';
+  $handler->display->display_options['filters']['field_course_section_value']['group'] = 0;
   $handler->display->display_options['filters']['field_course_section_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_course_section_value']['expose']['operator_id'] = 'field_course_section_value_op';
   $handler->display->display_options['filters']['field_course_section_value']['expose']['label'] = 'Section';
   $handler->display->display_options['filters']['field_course_section_value']['expose']['operator'] = 'field_course_section_value_op';
   $handler->display->display_options['filters']['field_course_section_value']['expose']['identifier'] = 'field_course_section_value';
   $handler->display->display_options['filters']['field_course_section_value']['expose']['multiple'] = FALSE;
-  /* Filter criterion: Content: Subject (field_course_subject) */
-  $handler->display->display_options['filters']['field_course_subject_value']['id'] = 'field_course_subject_value';
-  $handler->display->display_options['filters']['field_course_subject_value']['table'] = 'field_data_field_course_subject';
-  $handler->display->display_options['filters']['field_course_subject_value']['field'] = 'field_course_subject_value';
-  $handler->display->display_options['filters']['field_course_subject_value']['relationship'] = 'field_course_nid';
-  $handler->display->display_options['filters']['field_course_subject_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_course_subject_value']['expose']['operator_id'] = 'field_course_subject_value_op';
-  $handler->display->display_options['filters']['field_course_subject_value']['expose']['label'] = 'Subject code';
-  $handler->display->display_options['filters']['field_course_subject_value']['expose']['operator'] = 'field_course_subject_value_op';
-  $handler->display->display_options['filters']['field_course_subject_value']['expose']['identifier'] = 'field_course_subject_value';
-  $handler->display->display_options['filters']['field_course_subject_value']['expose']['required'] = 0;
-  $handler->display->display_options['filters']['field_course_subject_value']['expose']['remember'] = 1;
-  $handler->display->display_options['filters']['field_course_subject_value']['expose']['multiple'] = FALSE;
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -657,9 +673,9 @@ function s4_reporting_views_default_views() {
     t('Signup form'),
     t('Select fields'),
     t('Site(s)'),
-    t('Catalog number'),
+    t('Course Prefix'),
+    t('Course number'),
     t('Section'),
-    t('Subject code'),
     t('Page'),
     t('Data export : CSV'),
     t('Data export : XLS'),
@@ -690,7 +706,16 @@ function s4_reporting_views_default_views() {
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['query_comment'] = FALSE;
-  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['type'] = 's4_reporting';
+  $handler->display->display_options['exposed_form']['options']['autosubmit'] = 0;
+  $handler->display->display_options['exposed_form']['options']['autosubmit_hide'] = 1;
+  $handler->display->display_options['exposed_form']['options']['s4_reporting'] = array(
+    'group-field_course_subject_value' => '0',
+    'group-field_term_nid' => '0',
+    'group-dyfield' => '1',
+    'groups' => 'Course
+Fields',
+  );
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '50';
   $handler->display->display_options['style_plugin'] = 'table';
@@ -958,7 +983,7 @@ function s4_reporting_views_default_views() {
   $handler->display->display_options['filters']['field_course_subject_value']['operator'] = 'starts';
   $handler->display->display_options['filters']['field_course_subject_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_course_subject_value']['expose']['operator_id'] = 'field_course_subject_value_op';
-  $handler->display->display_options['filters']['field_course_subject_value']['expose']['label'] = 'Subject';
+  $handler->display->display_options['filters']['field_course_subject_value']['expose']['label'] = 'Course Prefix (i.e. "ENG" for "ENG 101")';
   $handler->display->display_options['filters']['field_course_subject_value']['expose']['operator'] = 'field_course_subject_value_op';
   $handler->display->display_options['filters']['field_course_subject_value']['expose']['identifier'] = 'field_course_subject_value';
   $handler->display->display_options['filters']['field_course_subject_value']['expose']['required'] = 0;
@@ -1066,6 +1091,7 @@ function s4_reporting_views_default_views() {
     t('Enrollment'),
     t('Total signed up'),
     t('View'),
+    t('Course Prefix (i.e. "ENG" for "ENG 101")'),
     t('Term'),
     t('Fields'),
     t('Page'),
@@ -1099,10 +1125,25 @@ function s4_reporting_views_default_views() {
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['distinct'] = TRUE;
   $handler->display->display_options['query']['options']['query_comment'] = FALSE;
-  $handler->display->display_options['exposed_form']['type'] = 'basic';
-  $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
+  $handler->display->display_options['exposed_form']['type'] = 's4_reporting';
   $handler->display->display_options['exposed_form']['options']['autosubmit'] = 0;
   $handler->display->display_options['exposed_form']['options']['autosubmit_hide'] = 1;
+  $handler->display->display_options['exposed_form']['options']['s4_reporting'] = array(
+    'group-city' => '1',
+    'group-field_csu_facility_tid' => '0',
+    'group-field_csu_org_type_tid' => '0',
+    'group-dyfield' => '3',
+    'group-field_term_nid' => '2',
+    'group-field_course_subject_value' => '2',
+    'group-field_course_catalog_number_value' => '2',
+    'group-field_district_federal_value' => '1',
+    'group-field_district_state_lower_value' => '1',
+    'group-field_district_state_upper_value' => '1',
+    'groups' => 'Site information
+Location
+Courses
+Fields',
+  );
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '30';
   $handler->display->display_options['style_plugin'] = 'views_calc';
@@ -1603,6 +1644,72 @@ function s4_reporting_views_default_views() {
   $handler->display->display_options['fields']['street']['empty'] = '&nbsp;';
   $handler->display->display_options['fields']['street']['hide_empty'] = 0;
   $handler->display->display_options['fields']['street']['empty_zero'] = 0;
+  /* Field: Content: Federal district */
+  $handler->display->display_options['fields']['field_district_federal']['id'] = 'field_district_federal';
+  $handler->display->display_options['fields']['field_district_federal']['table'] = 'field_data_field_district_federal';
+  $handler->display->display_options['fields']['field_district_federal']['field'] = 'field_district_federal';
+  $handler->display->display_options['fields']['field_district_federal']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_district_federal']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_district_federal']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_district_federal']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_district_federal']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_district_federal']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_district_federal']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_district_federal']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_district_federal']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_district_federal']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_district_federal']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_district_federal']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_district_federal']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_district_federal']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_district_federal']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_district_federal']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_district_federal']['hide_alter_empty'] = 0;
+  $handler->display->display_options['fields']['field_district_federal']['field_api_classes'] = 0;
+  /* Field: Content: State lower district */
+  $handler->display->display_options['fields']['field_district_state_lower']['id'] = 'field_district_state_lower';
+  $handler->display->display_options['fields']['field_district_state_lower']['table'] = 'field_data_field_district_state_lower';
+  $handler->display->display_options['fields']['field_district_state_lower']['field'] = 'field_district_state_lower';
+  $handler->display->display_options['fields']['field_district_state_lower']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_district_state_lower']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_district_state_lower']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_district_state_lower']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_district_state_lower']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_district_state_lower']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_district_state_lower']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_district_state_lower']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_district_state_lower']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_district_state_lower']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_district_state_lower']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_district_state_lower']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_district_state_lower']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_district_state_lower']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_district_state_lower']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_district_state_lower']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_district_state_lower']['hide_alter_empty'] = 0;
+  $handler->display->display_options['fields']['field_district_state_lower']['field_api_classes'] = 0;
+  /* Field: Content: State upper district */
+  $handler->display->display_options['fields']['field_district_state_upper']['id'] = 'field_district_state_upper';
+  $handler->display->display_options['fields']['field_district_state_upper']['table'] = 'field_data_field_district_state_upper';
+  $handler->display->display_options['fields']['field_district_state_upper']['field'] = 'field_district_state_upper';
+  $handler->display->display_options['fields']['field_district_state_upper']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_district_state_upper']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_district_state_upper']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_district_state_upper']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_district_state_upper']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_district_state_upper']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_district_state_upper']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_district_state_upper']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_district_state_upper']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_district_state_upper']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_district_state_upper']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_district_state_upper']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_district_state_upper']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_district_state_upper']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_district_state_upper']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_district_state_upper']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_district_state_upper']['hide_alter_empty'] = 0;
+  $handler->display->display_options['fields']['field_district_state_upper']['field_api_classes'] = 0;
   /* Field: Content: Additional users */
   $handler->display->display_options['fields']['field_site_users']['id'] = 'field_site_users';
   $handler->display->display_options['fields']['field_site_users']['table'] = 'field_data_field_site_users';
@@ -2281,6 +2388,9 @@ function s4_reporting_views_default_views() {
     'title' => 'title',
     'field_phone' => 'field_phone',
     'street' => 'street',
+    'field_district_federal' => 'field_district_federal',
+    'field_district_state_lower' => 'field_district_state_lower',
+    'field_district_state_upper' => 'field_district_state_upper',
     'field_site_users' => 'field_site_users',
     'body' => 'body',
     'field_site_projects' => 'field_site_projects',
@@ -2306,7 +2416,6 @@ function s4_reporting_views_default_views() {
     'field_site_language' => 'field_site_language',
     'field_site_restrict' => 'field_site_restrict',
     'field_workflow_status' => 'field_workflow_status',
-    'field_signup_hours' => 'field_signup_hours',
   );
   $handler->display->display_options['filters']['dyfield']['defaults_filterable_fields'] = array(
     'title' => 'title',
@@ -2314,6 +2423,9 @@ function s4_reporting_views_default_views() {
     'field_csu_facility' => 'field_csu_facility',
     'field_csu_org_type' => 'field_csu_org_type',
     'field_phone' => 0,
+    'field_district_federal' => 0,
+    'field_district_state_lower' => 0,
+    'field_district_state_upper' => 0,
     'field_site_users' => 0,
     'body' => 0,
     'field_site_projects' => 0,
@@ -2337,7 +2449,6 @@ function s4_reporting_views_default_views() {
     'field_site_language' => 0,
     'field_site_restrict' => 0,
     'field_workflow_status' => 0,
-    'field_signup_hours' => 0,
   );
   $handler->display->display_options['filters']['dyfield']['sortability'] = 1;
   $handler->display->display_options['filters']['dyfield']['checkboxes'] = 0;
@@ -2363,7 +2474,7 @@ function s4_reporting_views_default_views() {
   $handler->display->display_options['filters']['field_course_subject_value']['group'] = 0;
   $handler->display->display_options['filters']['field_course_subject_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_course_subject_value']['expose']['operator_id'] = 'field_course_subject_value_op';
-  $handler->display->display_options['filters']['field_course_subject_value']['expose']['label'] = 'Course subject';
+  $handler->display->display_options['filters']['field_course_subject_value']['expose']['label'] = 'Course Prefix';
   $handler->display->display_options['filters']['field_course_subject_value']['expose']['operator'] = 'field_course_subject_value_op';
   $handler->display->display_options['filters']['field_course_subject_value']['expose']['identifier'] = 'field_course_subject_value';
   $handler->display->display_options['filters']['field_course_subject_value']['expose']['required'] = 0;
@@ -2381,6 +2492,42 @@ function s4_reporting_views_default_views() {
   $handler->display->display_options['filters']['field_course_catalog_number_value']['expose']['identifier'] = 'field_course_catalog_number_value';
   $handler->display->display_options['filters']['field_course_catalog_number_value']['expose']['required'] = 0;
   $handler->display->display_options['filters']['field_course_catalog_number_value']['expose']['multiple'] = FALSE;
+  /* Filter criterion: Content: Federal district (field_district_federal) */
+  $handler->display->display_options['filters']['field_district_federal_value']['id'] = 'field_district_federal_value';
+  $handler->display->display_options['filters']['field_district_federal_value']['table'] = 'field_data_field_district_federal';
+  $handler->display->display_options['filters']['field_district_federal_value']['field'] = 'field_district_federal_value';
+  $handler->display->display_options['filters']['field_district_federal_value']['operator'] = 'contains';
+  $handler->display->display_options['filters']['field_district_federal_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_district_federal_value']['expose']['operator_id'] = 'field_district_federal_value_op';
+  $handler->display->display_options['filters']['field_district_federal_value']['expose']['label'] = 'Federal district';
+  $handler->display->display_options['filters']['field_district_federal_value']['expose']['operator'] = 'field_district_federal_value_op';
+  $handler->display->display_options['filters']['field_district_federal_value']['expose']['identifier'] = 'field_district_federal_value';
+  $handler->display->display_options['filters']['field_district_federal_value']['expose']['required'] = 0;
+  $handler->display->display_options['filters']['field_district_federal_value']['expose']['multiple'] = FALSE;
+  /* Filter criterion: Content: State lower district (field_district_state_lower) */
+  $handler->display->display_options['filters']['field_district_state_lower_value']['id'] = 'field_district_state_lower_value';
+  $handler->display->display_options['filters']['field_district_state_lower_value']['table'] = 'field_data_field_district_state_lower';
+  $handler->display->display_options['filters']['field_district_state_lower_value']['field'] = 'field_district_state_lower_value';
+  $handler->display->display_options['filters']['field_district_state_lower_value']['operator'] = 'contains';
+  $handler->display->display_options['filters']['field_district_state_lower_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_district_state_lower_value']['expose']['operator_id'] = 'field_district_state_lower_value_op';
+  $handler->display->display_options['filters']['field_district_state_lower_value']['expose']['label'] = 'State lower district';
+  $handler->display->display_options['filters']['field_district_state_lower_value']['expose']['operator'] = 'field_district_state_lower_value_op';
+  $handler->display->display_options['filters']['field_district_state_lower_value']['expose']['identifier'] = 'field_district_state_lower_value';
+  $handler->display->display_options['filters']['field_district_state_lower_value']['expose']['required'] = 0;
+  $handler->display->display_options['filters']['field_district_state_lower_value']['expose']['multiple'] = FALSE;
+  /* Filter criterion: Content: State upper district (field_district_state_upper) */
+  $handler->display->display_options['filters']['field_district_state_upper_value']['id'] = 'field_district_state_upper_value';
+  $handler->display->display_options['filters']['field_district_state_upper_value']['table'] = 'field_data_field_district_state_upper';
+  $handler->display->display_options['filters']['field_district_state_upper_value']['field'] = 'field_district_state_upper_value';
+  $handler->display->display_options['filters']['field_district_state_upper_value']['operator'] = 'contains';
+  $handler->display->display_options['filters']['field_district_state_upper_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_district_state_upper_value']['expose']['operator_id'] = 'field_district_state_upper_value_op';
+  $handler->display->display_options['filters']['field_district_state_upper_value']['expose']['label'] = 'State upper district';
+  $handler->display->display_options['filters']['field_district_state_upper_value']['expose']['operator'] = 'field_district_state_upper_value_op';
+  $handler->display->display_options['filters']['field_district_state_upper_value']['expose']['identifier'] = 'field_district_state_upper_value';
+  $handler->display->display_options['filters']['field_district_state_upper_value']['expose']['required'] = 0;
+  $handler->display->display_options['filters']['field_district_state_upper_value']['expose']['multiple'] = FALSE;
 
   /* Display: Data report page */
   $handler = $view->new_display('page', 'Data report page', 'page');
@@ -2458,6 +2605,9 @@ function s4_reporting_views_default_views() {
     t('[street]<br/>
 [city], [province]&nbsp;&nbsp; [postal_code]'),
     t('&nbsp;'),
+    t('Federal district'),
+    t('State lower district'),
+    t('State upper district'),
     t('Users'),
     t('Description'),
     t('Special projects'),
@@ -2484,7 +2634,7 @@ function s4_reporting_views_default_views() {
     t('Org. type'),
     t('Fields'),
     t('Had a student in'),
-    t('Course subject'),
+    t('Course Prefix'),
     t('Course Catalog Number'),
     t('Data report page'),
     t('Data export: CSV'),

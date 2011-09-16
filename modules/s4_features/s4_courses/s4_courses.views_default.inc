@@ -479,6 +479,28 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['fields']['student_signup_node']['hide_empty'] = 0;
   $handler->display->display_options['fields']['student_signup_node']['empty_zero'] = 0;
   $handler->display->display_options['fields']['student_signup_node']['hide_alter_empty'] = 0;
+  /* Field: Assessment: Assessment link */
+  $handler->display->display_options['fields']['assessment_link']['id'] = 'assessment_link';
+  $handler->display->display_options['fields']['assessment_link']['table'] = 's4_assessment';
+  $handler->display->display_options['fields']['assessment_link']['field'] = 'assessment_link';
+  $handler->display->display_options['fields']['assessment_link']['label'] = 'Complete assessment';
+  $handler->display->display_options['fields']['assessment_link']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['assessment_link']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['assessment_link']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['assessment_link']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['assessment_link']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['assessment_link']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['assessment_link']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['assessment_link']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['assessment_link']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['assessment_link']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['assessment_link']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['assessment_link']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['assessment_link']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['assessment_link']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['assessment_link']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['assessment_link']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['assessment_link']['hide_alter_empty'] = 0;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
@@ -772,6 +794,7 @@ function s4_courses_views_default_views() {
     t('Offset'),
     t('Course'),
     t('[field_course_subject-value] [field_course_catalog_number] ([field_course_section])'),
+    t('Complete assessment'),
     t('Course faculty'),
     t('Faculty'),
     t('field_course_faculty'),
