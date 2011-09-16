@@ -72,6 +72,7 @@ function s4_reporting_form_views_exposed_form_alter(&$form, $form_state) {
 	}
 	$saved_searches = variable_get('views_savedsearches', array());
 	if($saved_searches[$form_state['view']->name]) {
+		$form['submit']['#value'] = 'Search';
 		global $user;
 		$saved_searches = views_savedsearches_load_multiple($user->uid, $form_state['view']->vid);
 		if(count($saved_searches)) {
