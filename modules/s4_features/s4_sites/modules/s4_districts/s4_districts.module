@@ -1,0 +1,96 @@
+<?php
+/**
+ * @file
+ */
+
+include_once('s4_districts.features.inc');
+
+/**
+*	Implementation of hook_menu
+*/
+function s4_districts_menu() {
+	$items = array();
+	
+	$items['admin/config/s4/districts'] = array(
+		'title' => 'State & federal districts',
+		'description' => 'Setup how state and federal districts are collected',
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('s4_districts_admin_districts_form'),
+		'access arguments' => array('administer site configuration'),
+		'file' => 's4_districts.admin.inc',
+	);
+	
+	$items['admin/config/s4/districts/rebuild'] = array(
+		'title' => 'Rebuild state & federal districts',
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('s4_districts_admin_districts_rebuild_form'),
+		'access arguments' => array('administer site configuration'),
+		'file' => 's4_districts.admin.inc',
+	);
+	
+	return $items;
+}
+
+/**
+*	Static collection of district types
+*/
+function s4_districts_types() {
+	return array('federal' => 'Federal district',
+				 'state_upper' => 'State upper district',
+				 'state_lower' => 'State lower district',);
+}
+
+/**
+*	Helper function to retrieve district data from a given latitude and longitude
+*/
+function s4_districts_get_district($latitude, $longitude) {
+	$url = url(variable_get('s4_districts_district_lookup_service', ''), 
+				array('query' => array('lat' => $latitude, 'lng' => $longitude)));
+	$response = drupal_http_request($url);
+	if($response->data && $response->code == 200) {
+		try {
+			$xml = new SimpleXMLElement($response->data);
+			$xml = (array)$xml;
+			foreach($xml as $k => $value) {
+				$xml[$k] = (array)$value;
+			}
+			if(isset($xml['error'])) {
+				return false;
+			}
+			return $xml;
+		}
+		catch (Exception $e) {
+			return false;
+		}
+	}
+	return false;
+}
+
+/**
+*	Implementation of hook_node_presave
+*/
+function s4_districts_node_presave($node) {
+	if($node->type == 'site') {
+		s4_districts_set_districts($node);
+	}
+}
+
+/**
+*	Sets district data on selected fields if there's district data available
+*/
+function s4_districts_set_districts($node) {
+	$location = field_get_items('node', $node, 'locations');
+	if(!$location['latitude'] || !$location['longitude']) {
+		return null;
+	}
+	$districts = s4_districts_get_district($location['latitude'], $location['longitude']);
+	if(!$districts) {
+		return null;
+	}
+	foreach(s4_districts_types() as $type => $label) {
+		$field = variable_get('s4_districts_field_'. $type, false);
+		if($field) {
+			$node->{$field}[$node->language][0]['value'] = $districts[$type]['display_name'];
+		}
+	}
+}
