@@ -94,7 +94,7 @@ function s4_districts_admin_districts_rebuild_operation($nid, &$context) {
 */
 function s4_districts_admin_districts_rebuild_finished($success, $results, $operations) {
   if ($success) {
-    $message = count($results) .' sites updated.';
+    $message = 'Bulk update complete.';
   }
   else {
     $error_operation = reset($operations);
