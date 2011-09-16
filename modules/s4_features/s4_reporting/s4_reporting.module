@@ -68,9 +68,17 @@ function s4_reporting_form_views_exposed_form_alter(&$form, $form_state) {
 		$form['show-fields'] = array(
 			'#markup' => '<a href="#field-selector" id="show-fields" class="show-form-fancybox button" data-selector="#field-selector">Select fields</a>',
 		);
-		$form['show-searches'] = array(
-			'#markup' => '<a href="#saved-search-selector" id="show-searches" class="show-form-fancybox button" data-selector="#saved-search-selector">Saved searches</a>',
-		);
+		
+	}
+	$saved_searches = variable_get('views_savedsearches', array());
+	if($saved_searches[$form_state['view']->name]) {
+		global $user;
+		$saved_searches = views_savedsearches_load_multiple($user->uid, $form_state['view']->vid);
+		if(count($saved_searches)) {
+			$form['show-searches'] = array(
+				'#markup' => '<a href="#saved-search-selector" id="show-searches" class="show-form-fancybox button" data-selector="#saved-search-selector">Saved searches</a>',
+			);
+		}
 	}
 }
 
@@ -184,6 +192,34 @@ function s4_reporting_theme($existing, $type, $theme, $path) {
 			'variables' => array('data' => array(), 'width' => '', 'height' => '', 'label' => '', 'title' => '','id' => ''),
 		),
 	);
+}
+
+function s4_reporting_theme_registry_alter(&$items) {
+	$items['views_savedsearches_list']['function'] = 's4_reporting_theme_views_savedsearches_list';
+}
+
+function s4_reporting_theme_views_savedsearches_list($variables) {
+  global $user;
+  $view = $variables['view'];
+  $current_view_matches_sid = $variables['current_view_matches_sid'];
+  $output = '';
+
+  // Load saved searches for the current user, to use them as form options.
+  if(user_access('use all savedsearches')){
+    $saved_searches = views_savedsearches_load_multiple(NULL, $view->vid, $view->name);
+  }
+  else{
+    $saved_searches = views_savedsearches_load_multiple($user->uid, $view->vid, $view->name);
+  }
+  $options = _views_savedsearches_saved_searches_to_form_options($saved_searches, $view->get_path(), $current_view_matches_sid);
+
+  // Display a list of saved searches (if there are any) and allow the user to
+  // delete any of them.
+  if (count($options)) {
+    $output .= drupal_render(drupal_get_form('views_savedsearches_delete_search_form', $view, $options, $current_view_matches_sid));
+  }
+
+  return $output;
 }
 
 function theme_s4_reporting_chart_pie($data) {
