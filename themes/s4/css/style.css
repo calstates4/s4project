@@ -878,8 +878,12 @@ ul.pager .pager-next a, ul.pager .pager-last a {
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
 }
-#messages .messages.warning .message-icon {
+#messages .messages.notice .message-icon {
   background-position-y: -17px;
+}
+#messages .messages.notice {
+  background: #fae772;
+  border-color: #f6ca36;
 }
 #messages .messages.error .message-icon {
   background-position-y: -42px;
