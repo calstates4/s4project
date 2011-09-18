@@ -33,6 +33,15 @@ function s4_assessment_menu() {
 		'file' => 's4_assessment.pages.inc',
 	);
 	
+	$items['node/%node/webform/components/rubric/%'] = array(
+		'title' => 'Edit rubric',
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('s4_assessment_rubric_form', 1, 5),
+		'access arguments' => array('update', 1),
+		'access callback' => 'node_access',
+		'file' => 's4_assessment.pages.inc',
+	);
+	
 	return $items;
 }
 
@@ -68,6 +77,79 @@ function s4_assessment_form_alter(&$form, $form_sate, $form_id) {
 	if($form_id == 'webform_client_form_'. $assessment) {
 		$_SESSION['s4_assessment_signup'] = $_GET['signup'];
 	}
+	
+	if($form_id == 'webform_component_edit_form') {
+		$node = node_load($form['nid']['#value']);
+		$component = $node->webform['components'][$form['cid']['#value']];
+		if($component['type'] == 'grid') {
+			$form['edit_descriptions'] = array(
+				'#markup' => '<strong>'. l('Edit rubric descriptions', 'node/'. $node->nid .'/webform/components/rubric/'. $component['cid'], array('query' => array('destination' => 'node/'. $node->nid .'/webform/'))) .'</strong>',
+				'#weight' => -12,
+			);
+		}
+	}
+	if(strpos($form_id, 'webform_client_form_') !== false) {
+		foreach($form['submitted'] as $k => $question) {
+			if(is_array($question) && isset($question['#type']) && $question['#type'] == 'webform_grid') {
+				$form['submitted'][$k]['#theme_wrappers'][] = 's4_assessment_rubric_hints';
+			}
+		}
+	}
+}
+
+function theme_s4_assessment_rubric_hints(&$variables) {
+	drupal_add_js(drupal_get_path('module', 's4_assessment') .'/js/s4_assessment.js');
+	$fancybox_settings = variable_get('fancybox_settings', array());
+	if (!empty($fancybox_settings)) {
+		fancybox_activate($fancybox_settings);
+	}
+	$element = $variables['element'];
+	$rubric = (isset($element['#webform_component']['extra']['rubric']))
+			  ? $element['#webform_component']['extra']['rubric']
+			  : false;	
+	$header = $element['#grid_options'];
+	array_unshift($header, '');
+	if($rubric) {
+		$header[] = 'Rubric';
+	}
+	$rows = array();
+	$output = '';
+	foreach($element['#grid_questions'] as $question_key => $question) {
+		$rows[$question_key][] = array('data' => $question, 'header' => true);
+		$rubric_header = $rubric_rows = array();
+		foreach($element['#grid_options'] as $option_key => $option) {
+			$element[$question_key][$option_key]['#title'] = '<span class="element-invisible">' . $question .': '. $element[$question_key][$option_key]['#title'];
+			if($rubric) {
+				$element[$question_key][$option_key]['#title'] .= '<span class="rubric-question">'. $rubric[$question_key][$option_key] .'</span>';			
+				$rubric_header[] = $option;
+				$rubric_rows[0][] = $rubric[$question_key][$option_key];
+			}
+			$element[$question_key][$option_key]['#title'] .= '</span>';
+			$rows[$question_key][] = drupal_render($element[$question_key][$option_key]);
+		}
+		if($rubric) {
+			$rows[$question_key][] = '<a href="#rubric-'. $question_key .'" class="rubric-show">View rubric</a>';
+		}
+		if($rubric) {
+			$output .= theme('table', array('header' => $rubric_header, 'rows' => $rubric_rows, 
+							 'caption' => $question, 
+							 'attributes' => array('class' => array('element-invisible'), 
+							 					   'id' => 'rubric-'. $question_key)));
+		}
+	}
+	
+	return theme('table', array('header' => $header, 'rows' => $rows)) . $output;
+}
+
+function s4_assessment_theme($existing, $type, $theme, $path) {
+	return array(
+		's4_assessment_webform_components_form' => array(
+	      'render element' => 'form',
+	    ),
+	    's4_assessment_rubric_hints' => array(
+	      'render element' => 'element',
+	    ),
+	);
 }
 
 function s4_assessment_webform_submission_insert($node, $submission) {
@@ -80,4 +162,25 @@ function s4_assessment_webform_submission_insert($node, $submission) {
 	node_save($signup);
 	unset($_SESSION['s4_assessment_signup']);
 	drupal_set_message('Your assessment has been recorded.');
+}
+
+function theme_s4_assessment_webform_components_form($variables) {
+	$form = $variables['form'];
+	$node = node_load($form['nid']['#value']);
+	$component = $node->webform['components'][$form['component']['#value']];
+	$options = _webform_select_options_from_text($component['extra']['options']);
+	$questions = _webform_select_options_from_text($component['extra']['questions']);
+
+	$header = array('question' => 'Question') + $options;
+	$row = array();
+	foreach($questions as $question_key => $question) {
+		$row[$question_key][] = array('data' => $question, 'header' => TRUE);
+		foreach($options as $k => $option) {
+			$form[$question_key .'-'. $k]['#title'] = '<span class="element-invisible">'. $form[$question_key .'-'. $k]['#title'] .'</span>';
+			$row[$question_key][] = drupal_render($form[$question_key .'-'. $k]);
+		}
+	}
+	$output = theme('table', array('header' => $header, 'rows' => $row, 'id' => 'assessment-rubric-table'));
+	$output .= drupal_render_children($form);
+	return $output;
 }
