@@ -13,6 +13,7 @@ function _s4_assessment_get_course_sids($nid) {
 	$query = db_select('field_data_field_course', 'c')
 			 ->condition('field_course_nid', $nid);
 	$query->leftJoin('field_data_field_form_assessment_sid', 'a', 'a.entity_id = c.entity_id AND a.bundle = c.bundle');
+	$query->isNotNull('a.field_form_assessment_sid_value');
 	$query->fields('a', array('field_form_assessment_sid_value'));
 	$sids = $query->execute()->fetchCol();
 	return ($sids) ? $sids : array();
@@ -35,6 +36,9 @@ function s4_assessment_report() {
 	  'no_redirect' => false,
 	  'destination' => 'reports/assessments'
 	);
+	foreach($view->display as $key => $display) {
+		$view->display[$key]->display_options['pager']['options']['items_per_page'] = 0;
+	}
 	$view->display_handler->options['items_per_page'] = 0;
 	$form = drupal_build_form('views_exposed_form', $form_state);
 	$courses = views_get_view_result('reports_courses', 'page');
@@ -42,7 +46,10 @@ function s4_assessment_report() {
 	if(count($courses)) {
 		$sids = array();
 		foreach($courses as $course) {
-			$sids += _s4_assessment_get_course_sids($course->nid);
+			$course_sids = _s4_assessment_get_course_sids($course->nid);
+			if(count($course_sids)) {
+				$sids += $course_sids;
+			}
 		}
 		$assessment_form = node_load(variable_get('s4_assessment_assessment_form', 0));
 		$form['results']= array(
