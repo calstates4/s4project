@@ -80,6 +80,10 @@ function s4_reporting_form_views_savedsearches_delete_search_form_alter(&$form, 
 	$form['saved_collapse']['#collapsed'] = FALSE;
 }
 
+function s4_reporting_form_views_savedsearches_save_search_form_alter(&$form, $form_state) {
+	$form['name']['#title'] = t('Save this search as');
+}
+
 function s4_reporting_form_report_node_form_alter(&$form, $form_state) {
 	drupal_add_js(drupal_get_path('module', 's4_reporting') .'/js/s4_reporting.js');
 	foreach($form['field_report_filters'][$form['#node']->language] as $key => $field_entity) {
@@ -187,6 +191,30 @@ function s4_reporting_theme($existing, $type, $theme, $path) {
 
 function s4_reporting_theme_registry_alter(&$items) {
 	$items['views_savedsearches_list']['function'] = 's4_reporting_theme_views_savedsearches_list';
+	$items['views_savedsearches_container']['function'] = 's4_reporting_theme_views_savedsearches_container';
+}
+
+function s4_reporting_theme_views_savedsearches_container($variables) {
+	$view = $variables['view'];
+	$views_filters_form_values = $variables['views_filters_form_values'];
+	$output = '';
+
+	$view_filters = _views_savedsearches_params_to_filters($view, $views_filters_form_values);
+	$current_view_matches_sid = views_savedsearches_sid_by_filters($view_filters);
+	
+	// The list (also delete saved search form).
+	$output .= '<div class="views-savedsearches-list-ahah">';
+	$output .= theme('views_savedsearches_list', array('view' => $view, 'current_view_matches_sid' => $current_view_matches_sid));
+	$output .= '</div>';
+	
+	// The save search form.
+	$output .= '<div class="views-savedsearches-save-ahah">';
+	if ($current_view_matches_sid == -1 && count($view_filters)) {
+		$output .= drupal_render(drupal_get_form('views_savedsearches_save_search_form', $view));
+	}
+	$output .= '</div>';
+	
+	return $output;
 }
 
 function s4_reporting_theme_views_savedsearches_list($variables) {

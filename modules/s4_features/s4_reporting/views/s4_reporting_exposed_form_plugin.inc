@@ -44,6 +44,7 @@ class s4_reporting_exposed_form_plugin extends views_plugin_exposed_form_basic {
    * Tweak the exposed filter form to show Better Exposed Filter options.
    */
   function exposed_form_alter(&$form, &$form_state) {
+	
 	drupal_add_css(drupal_get_path('module', 's4_reporting') .'/css/s4_reporting.views.css');
     $form['#theme'] = array();
     $form['filters'] = array(

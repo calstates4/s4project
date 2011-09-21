@@ -16,6 +16,7 @@
 					'autoDimensions' : false
 				});
 			});
+			Drupal.behaviors.viewsSavedSearches = { }
 		}
 	};
 })(jQuery);

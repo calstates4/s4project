@@ -4,3 +4,4 @@
 
 /* CHOSEN WIDTH HACKS */
 .report-view .view-filters .chzn-container, .report-view .view-filters .chzn-drop { width: 100% !important; }
+.report-view .gmap-gmap { height: 200px !important; }
