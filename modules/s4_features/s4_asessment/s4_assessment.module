@@ -86,6 +86,11 @@ function s4_assessment_form_alter(&$form, $form_sate, $form_id) {
 				'#markup' => '<strong>'. l('Edit rubric descriptions', 'node/'. $node->nid .'/webform/components/rubric/'. $component['cid'], array('query' => array('destination' => 'node/'. $node->nid .'/webform/'))) .'</strong>',
 				'#weight' => -12,
 			);
+			$form['extra']['rubric'] = array(
+				'#type' => 'value',
+				'#value' => $component['extra']['rubric'],
+			);
+			$form['#submit'][] = 's4_assessment_component_submit';
 		}
 	}
 	if(strpos($form_id, 'webform_client_form_') !== false) {
@@ -95,6 +100,10 @@ function s4_assessment_form_alter(&$form, $form_sate, $form_id) {
 			}
 		}
 	}
+}
+
+function s4_assessment_component_submit($form, $form_state) {
+	dpm($form_state);
 }
 
 function theme_s4_assessment_rubric_hints(&$variables) {
@@ -114,6 +123,7 @@ function theme_s4_assessment_rubric_hints(&$variables) {
 	}
 	$rows = array();
 	$output = '';
+	dpm($element);
 	foreach($element['#grid_questions'] as $question_key => $question) {
 		$rows[$question_key][] = array('data' => $question, 'header' => true);
 		$rubric_header = $rubric_rows = array();
@@ -128,13 +138,13 @@ function theme_s4_assessment_rubric_hints(&$variables) {
 			$rows[$question_key][] = drupal_render($element[$question_key][$option_key]);
 		}
 		if($rubric) {
-			$rows[$question_key][] = '<a href="#rubric-'. $question_key .'" class="rubric-show">View rubric</a>';
+			$rows[$question_key][] = '<a href="#rubric-'. $element['#id'] .'-'. $question_key .'" class="rubric-show">View rubric</a>';
 		}
 		if($rubric) {
 			$output .= theme('table', array('header' => $rubric_header, 'rows' => $rubric_rows, 
 							 'caption' => $question, 
 							 'attributes' => array('class' => array('element-invisible'), 
-							 					   'id' => 'rubric-'. $question_key)));
+							 					   'id' => 'rubric-'. $element['#id'] .'-'. $question_key)));
 		}
 	}
 	
