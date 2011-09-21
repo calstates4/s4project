@@ -123,7 +123,7 @@ function s4_courses_field_default_fields() {
             'update' => 'update',
             'view' => 'view',
           ),
-          'priority' => '8',
+          'priority' => '10',
           'referenced' => array(
             'delete' => 0,
             'deny_delete' => 0,
@@ -463,11 +463,11 @@ function s4_courses_field_default_fields() {
             'view' => 0,
           ),
           'author' => array(
-            'delete' => 0,
-            'update' => 0,
-            'view' => 0,
+            'delete' => 'delete',
+            'update' => 'update',
+            'view' => 'view',
           ),
-          'priority' => '2',
+          'priority' => '10',
           'referenced' => array(
             'delete' => 0,
             'deny_delete' => 0,
@@ -532,6 +532,7 @@ function s4_courses_field_default_fields() {
           'weight' => 0,
         ),
       ),
+      'display_label' => '',
       'entity_type' => 'node',
       'field_name' => 'field_course_students',
       'label' => 'Students',
