@@ -145,13 +145,19 @@ function s4_core_context_default_contexts() {
           'module' => 'views',
           'delta' => 'user_signups-block',
           'region' => 'content',
-          'weight' => '-9',
+          'weight' => '-63',
+        ),
+        'views-user_courses-block_2' => array(
+          'module' => 'views',
+          'delta' => 'user_courses-block_2',
+          'region' => 'content',
+          'weight' => '-10',
         ),
         'views-course_students-block_1' => array(
           'module' => 'views',
           'delta' => 'course_students-block_1',
           'region' => 'content',
-          'weight' => '-10',
+          'weight' => '-61',
         ),
         'views-65656e1f5a12cde25f0722f735fe7969' => array(
           'module' => 'views',

@@ -767,7 +767,7 @@ function s4_sites_strongarm() {
           'view' => '',
           'view_args' => '',
         ),
-        'priority' => '8',
+        'priority' => '10',
       ),
       'field_course_students' => array(
         'referenced' => array(
@@ -779,9 +779,9 @@ function s4_sites_strongarm() {
           'deny_delete' => 0,
         ),
         'author' => array(
-          'view' => 0,
-          'update' => 0,
-          'delete' => 0,
+          'view' => 'view',
+          'update' => 'update',
+          'delete' => 'delete',
         ),
         'all' => array(
           'view' => 0,
@@ -791,7 +791,7 @@ function s4_sites_strongarm() {
           'view' => '',
           'view_args' => '',
         ),
-        'priority' => '2',
+        'priority' => '10',
       ),
     ),
     'site' => array(

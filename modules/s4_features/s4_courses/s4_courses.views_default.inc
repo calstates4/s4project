@@ -828,7 +828,6 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['query']['options']['distinct'] = TRUE;
   $handler->display->display_options['query']['options']['query_comment'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
-  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Search';
   $handler->display->display_options['exposed_form']['options']['autosubmit'] = 0;
   $handler->display->display_options['exposed_form']['options']['autosubmit_hide'] = 1;
   $handler->display->display_options['pager']['type'] = 'full';
@@ -1087,7 +1086,7 @@ function s4_courses_views_default_views() {
     t('Master'),
     t('Faculty'),
     t('more'),
-    t('Search'),
+    t('Apply'),
     t('Reset'),
     t('Sort by'),
     t('Asc'),

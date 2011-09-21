@@ -33,11 +33,13 @@ function s4_reporting_views_default_views() {
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['query_comment'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 's4_reporting';
+  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Search';
+  $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['exposed_form']['options']['autosubmit'] = 0;
   $handler->display->display_options['exposed_form']['options']['autosubmit_hide'] = 1;
   $handler->display->display_options['exposed_form']['options']['s4_reporting'] = array(
-    'group-dyfield' => '2',
-    'group-field_site_nid' => '1',
+    'group-dyfield' => '0',
+    'group-field_site_nid' => '0',
     'group-field_term_nid' => '0',
     'group-field_course_subject_value' => '0',
     'group-field_course_catalog_number_value' => '0',
@@ -643,7 +645,7 @@ Fields',
     t('Master'),
     t('Students'),
     t('more'),
-    t('Apply'),
+    t('Search'),
     t('Reset'),
     t('Sort by'),
     t('Asc'),
@@ -707,17 +709,29 @@ Fields',
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['query_comment'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 's4_reporting';
+  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Search';
+  $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['exposed_form']['options']['autosubmit'] = 0;
   $handler->display->display_options['exposed_form']['options']['autosubmit_hide'] = 1;
   $handler->display->display_options['exposed_form']['options']['s4_reporting'] = array(
     'group-field_course_subject_value' => '0',
     'group-field_term_nid' => '0',
-    'group-dyfield' => '1',
+    'group-dyfield' => '3',
+    'group-field_course_catalog_number_value' => '0',
+    'group-field_csu_facility_tid' => '1',
+    'group-field_csu_org_type_tid' => '1',
+    'group-city' => '2',
+    'group-distance' => '2',
     'groups' => 'Course
+Site information
+Site location
 Fields',
   );
   $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '50';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '40';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all'] = 0;
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
     'field_course_subject' => 'field_course_subject',
@@ -783,6 +797,24 @@ Fields',
   $handler->display->display_options['relationships']['field_term_nid']['field'] = 'field_term_nid';
   $handler->display->display_options['relationships']['field_term_nid']['required'] = 1;
   $handler->display->display_options['relationships']['field_term_nid']['delta'] = '-1';
+  /* Relationship: Content: Students (field_course_students) */
+  $handler->display->display_options['relationships']['field_course_students_uid']['id'] = 'field_course_students_uid';
+  $handler->display->display_options['relationships']['field_course_students_uid']['table'] = 'field_data_field_course_students';
+  $handler->display->display_options['relationships']['field_course_students_uid']['field'] = 'field_course_students_uid';
+  $handler->display->display_options['relationships']['field_course_students_uid']['required'] = 0;
+  $handler->display->display_options['relationships']['field_course_students_uid']['delta'] = '-1';
+  /* Relationship: Content: Course (field_course) - reverse */
+  $handler->display->display_options['relationships']['reverse_field_course_node']['id'] = 'reverse_field_course_node';
+  $handler->display->display_options['relationships']['reverse_field_course_node']['table'] = 'node';
+  $handler->display->display_options['relationships']['reverse_field_course_node']['field'] = 'reverse_field_course_node';
+  $handler->display->display_options['relationships']['reverse_field_course_node']['required'] = 0;
+  /* Relationship: Content: Site (field_site) */
+  $handler->display->display_options['relationships']['field_site_nid']['id'] = 'field_site_nid';
+  $handler->display->display_options['relationships']['field_site_nid']['table'] = 'field_data_field_site';
+  $handler->display->display_options['relationships']['field_site_nid']['field'] = 'field_site_nid';
+  $handler->display->display_options['relationships']['field_site_nid']['relationship'] = 'reverse_field_course_node';
+  $handler->display->display_options['relationships']['field_site_nid']['required'] = 0;
+  $handler->display->display_options['relationships']['field_site_nid']['delta'] = '-1';
   /* Field: Content: Subject */
   $handler->display->display_options['fields']['field_course_subject']['id'] = 'field_course_subject';
   $handler->display->display_options['fields']['field_course_subject']['table'] = 'field_data_field_course_subject';
@@ -957,6 +989,127 @@ Fields',
   $handler->display->display_options['fields']['view_node']['hide_empty'] = 0;
   $handler->display->display_options['fields']['view_node']['empty_zero'] = 0;
   $handler->display->display_options['fields']['view_node']['text'] = 'View';
+  /* Field: Content: Site */
+  $handler->display->display_options['fields']['field_site']['id'] = 'field_site';
+  $handler->display->display_options['fields']['field_site']['table'] = 'field_data_field_site';
+  $handler->display->display_options['fields']['field_site']['field'] = 'field_site';
+  $handler->display->display_options['fields']['field_site']['relationship'] = 'reverse_field_course_node';
+  $handler->display->display_options['fields']['field_site']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_site']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_site']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_site']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_site']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_site']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_site']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_site']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_site']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_site']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_site']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_site']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_site']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_site']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_site']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_site']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_site']['hide_alter_empty'] = 0;
+  $handler->display->display_options['fields']['field_site']['field_api_classes'] = 0;
+  /* Field: Content: Federal district */
+  $handler->display->display_options['fields']['field_district_federal']['id'] = 'field_district_federal';
+  $handler->display->display_options['fields']['field_district_federal']['table'] = 'field_data_field_district_federal';
+  $handler->display->display_options['fields']['field_district_federal']['field'] = 'field_district_federal';
+  $handler->display->display_options['fields']['field_district_federal']['relationship'] = 'field_site_nid';
+  $handler->display->display_options['fields']['field_district_federal']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_district_federal']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_district_federal']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_district_federal']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_district_federal']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_district_federal']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_district_federal']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_district_federal']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_district_federal']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_district_federal']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_district_federal']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_district_federal']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_district_federal']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_district_federal']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_district_federal']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_district_federal']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_district_federal']['hide_alter_empty'] = 0;
+  $handler->display->display_options['fields']['field_district_federal']['field_api_classes'] = 0;
+  /* Field: Content: State lower district */
+  $handler->display->display_options['fields']['field_district_state_lower']['id'] = 'field_district_state_lower';
+  $handler->display->display_options['fields']['field_district_state_lower']['table'] = 'field_data_field_district_state_lower';
+  $handler->display->display_options['fields']['field_district_state_lower']['field'] = 'field_district_state_lower';
+  $handler->display->display_options['fields']['field_district_state_lower']['relationship'] = 'field_site_nid';
+  $handler->display->display_options['fields']['field_district_state_lower']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_district_state_lower']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_district_state_lower']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_district_state_lower']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_district_state_lower']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_district_state_lower']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_district_state_lower']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_district_state_lower']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_district_state_lower']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_district_state_lower']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_district_state_lower']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_district_state_lower']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_district_state_lower']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_district_state_lower']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_district_state_lower']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_district_state_lower']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_district_state_lower']['hide_alter_empty'] = 0;
+  $handler->display->display_options['fields']['field_district_state_lower']['field_api_classes'] = 0;
+  /* Field: Content: State upper district */
+  $handler->display->display_options['fields']['field_district_state_upper']['id'] = 'field_district_state_upper';
+  $handler->display->display_options['fields']['field_district_state_upper']['table'] = 'field_data_field_district_state_upper';
+  $handler->display->display_options['fields']['field_district_state_upper']['field'] = 'field_district_state_upper';
+  $handler->display->display_options['fields']['field_district_state_upper']['relationship'] = 'field_site_nid';
+  $handler->display->display_options['fields']['field_district_state_upper']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_district_state_upper']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_district_state_upper']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_district_state_upper']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_district_state_upper']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_district_state_upper']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_district_state_upper']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_district_state_upper']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_district_state_upper']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_district_state_upper']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_district_state_upper']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_district_state_upper']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_district_state_upper']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_district_state_upper']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_district_state_upper']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_district_state_upper']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_district_state_upper']['hide_alter_empty'] = 0;
+  $handler->display->display_options['fields']['field_district_state_upper']['field_api_classes'] = 0;
+  /* Field: Location: City */
+  $handler->display->display_options['fields']['city']['id'] = 'city';
+  $handler->display->display_options['fields']['city']['table'] = 'location';
+  $handler->display->display_options['fields']['city']['field'] = 'city';
+  /* Field: Location: Postal Code */
+  $handler->display->display_options['fields']['postal_code']['id'] = 'postal_code';
+  $handler->display->display_options['fields']['postal_code']['table'] = 'location';
+  $handler->display->display_options['fields']['postal_code']['field'] = 'postal_code';
+  $handler->display->display_options['fields']['postal_code']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['postal_code']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['postal_code']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['postal_code']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['postal_code']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['postal_code']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['postal_code']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['postal_code']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['postal_code']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['postal_code']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['postal_code']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['postal_code']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['postal_code']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['postal_code']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['postal_code']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['postal_code']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['postal_code']['hide_alter_empty'] = 0;
+  /* Field: Location: Province */
+  $handler->display->display_options['fields']['province']['id'] = 'province';
+  $handler->display->display_options['fields']['province']['table'] = 'location';
+  $handler->display->display_options['fields']['province']['field'] = 'province';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -1017,18 +1170,118 @@ Fields',
     'course_student_enrollment' => 'course_student_enrollment',
     'field_course_signups' => 'field_course_signups',
     'view_node' => 'view_node',
+    'field_site' => 'field_site',
+    'field_district_federal' => 'field_district_federal',
+    'field_district_state_lower' => 'field_district_state_lower',
+    'field_district_state_upper' => 'field_district_state_upper',
+    'city' => 0,
+    'postal_code' => 0,
+    'province' => 0,
   );
   $handler->display->display_options['filters']['dyfield']['defaults_filterable_fields'] = array(
-    'field_course_subject' => 0,
-    'field_course_catalog_number' => 0,
-    'field_course_section' => 0,
+    'field_course_subject' => 'field_course_subject',
+    'field_course_catalog_number' => 'field_course_catalog_number',
+    'field_course_section' => 'field_course_section',
+    'field_course_signups' => 'field_course_signups',
+    'view_node' => 'view_node',
     'field_course_title' => 0,
     'course_student_enrollment' => 0,
-    'field_course_signups' => 0,
-    'view_node' => 0,
+    'field_site' => 0,
+    'field_district_federal' => 0,
+    'field_district_state_lower' => 0,
+    'field_district_state_upper' => 0,
+    'city' => 0,
+    'postal_code' => 0,
+    'province' => 0,
   );
   $handler->display->display_options['filters']['dyfield']['sortability'] = 1;
   $handler->display->display_options['filters']['dyfield']['checkboxes'] = 0;
+  /* Filter criterion: Content: Catalog number (field_course_catalog_number) */
+  $handler->display->display_options['filters']['field_course_catalog_number_value']['id'] = 'field_course_catalog_number_value';
+  $handler->display->display_options['filters']['field_course_catalog_number_value']['table'] = 'field_data_field_course_catalog_number';
+  $handler->display->display_options['filters']['field_course_catalog_number_value']['field'] = 'field_course_catalog_number_value';
+  $handler->display->display_options['filters']['field_course_catalog_number_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_course_catalog_number_value']['expose']['operator_id'] = 'field_course_catalog_number_value_op';
+  $handler->display->display_options['filters']['field_course_catalog_number_value']['expose']['label'] = 'Catalog number';
+  $handler->display->display_options['filters']['field_course_catalog_number_value']['expose']['operator'] = 'field_course_catalog_number_value_op';
+  $handler->display->display_options['filters']['field_course_catalog_number_value']['expose']['identifier'] = 'field_course_catalog_number_value';
+  $handler->display->display_options['filters']['field_course_catalog_number_value']['expose']['required'] = 0;
+  $handler->display->display_options['filters']['field_course_catalog_number_value']['expose']['multiple'] = FALSE;
+  /* Filter criterion: Content: Issues addressed (field_csu_facility) */
+  $handler->display->display_options['filters']['field_csu_facility_tid']['id'] = 'field_csu_facility_tid';
+  $handler->display->display_options['filters']['field_csu_facility_tid']['table'] = 'field_data_field_csu_facility';
+  $handler->display->display_options['filters']['field_csu_facility_tid']['field'] = 'field_csu_facility_tid';
+  $handler->display->display_options['filters']['field_csu_facility_tid']['relationship'] = 'field_site_nid';
+  $handler->display->display_options['filters']['field_csu_facility_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_csu_facility_tid']['expose']['operator_id'] = 'field_csu_facility_tid_op';
+  $handler->display->display_options['filters']['field_csu_facility_tid']['expose']['label'] = 'Issues addressed';
+  $handler->display->display_options['filters']['field_csu_facility_tid']['expose']['operator'] = 'field_csu_facility_tid_op';
+  $handler->display->display_options['filters']['field_csu_facility_tid']['expose']['identifier'] = 'field_csu_facility_tid';
+  $handler->display->display_options['filters']['field_csu_facility_tid']['expose']['multiple'] = 1;
+  $handler->display->display_options['filters']['field_csu_facility_tid']['expose']['reduce'] = 0;
+  $handler->display->display_options['filters']['field_csu_facility_tid']['reduce_duplicates'] = 0;
+  $handler->display->display_options['filters']['field_csu_facility_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_csu_facility_tid']['vocabulary'] = 'issues_addressed';
+  $handler->display->display_options['filters']['field_csu_facility_tid']['error_message'] = 1;
+  /* Filter criterion: Content: Organization type (field_csu_org_type) */
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['id'] = 'field_csu_org_type_tid';
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['table'] = 'field_data_field_csu_org_type';
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['field'] = 'field_csu_org_type_tid';
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['relationship'] = 'field_site_nid';
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['value'] = '';
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['expose']['operator_id'] = 'field_csu_org_type_tid_op';
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['expose']['label'] = 'Organization type (field_csu_org_type)';
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['expose']['operator'] = 'field_csu_org_type_tid_op';
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['expose']['identifier'] = 'field_csu_org_type_tid';
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['expose']['multiple'] = 1;
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['reduce_duplicates'] = 0;
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['vocabulary'] = 'organization_type';
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['error_message'] = 1;
+  /* Filter criterion: Location: City */
+  $handler->display->display_options['filters']['city']['id'] = 'city';
+  $handler->display->display_options['filters']['city']['table'] = 'location';
+  $handler->display->display_options['filters']['city']['field'] = 'city';
+  $handler->display->display_options['filters']['city']['relationship'] = 'field_site_nid';
+  $handler->display->display_options['filters']['city']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['city']['expose']['operator_id'] = 'city_op';
+  $handler->display->display_options['filters']['city']['expose']['label'] = 'City';
+  $handler->display->display_options['filters']['city']['expose']['operator'] = 'city_op';
+  $handler->display->display_options['filters']['city']['expose']['identifier'] = 'city';
+  $handler->display->display_options['filters']['city']['expose']['required'] = 0;
+  $handler->display->display_options['filters']['city']['expose']['multiple'] = FALSE;
+  /* Filter criterion: Location: Distance / Proximity */
+  $handler->display->display_options['filters']['distance']['id'] = 'distance';
+  $handler->display->display_options['filters']['distance']['table'] = 'location';
+  $handler->display->display_options['filters']['distance']['field'] = 'distance';
+  $handler->display->display_options['filters']['distance']['relationship'] = 'field_site_nid';
+  $handler->display->display_options['filters']['distance']['operator'] = 'dist';
+  $handler->display->display_options['filters']['distance']['value'] = array(
+    'latitude' => '',
+    'longitude' => '',
+    'postal_code' => '',
+    'country' => '',
+    'php_code' => '',
+    'nid_arg' => '',
+    'nid_loc_field' => 'node',
+    'uid_arg' => '',
+    'search_distance' => '100',
+    'search_units' => 'mile',
+  );
+  $handler->display->display_options['filters']['distance']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['distance']['expose']['operator_id'] = 'distance_op';
+  $handler->display->display_options['filters']['distance']['expose']['label'] = 'Distance';
+  $handler->display->display_options['filters']['distance']['expose']['operator'] = 'distance_op';
+  $handler->display->display_options['filters']['distance']['expose']['identifier'] = 'distance';
+  $handler->display->display_options['filters']['distance']['expose']['multiple'] = FALSE;
+  $handler->display->display_options['filters']['distance']['expose']['gmap_macro'] = array(
+    'default' => '[gmap ]',
+  );
+  $handler->display->display_options['filters']['distance']['expose']['user_location_choose'] = array(
+    'default' => FALSE,
+  );
+  $handler->display->display_options['filters']['distance']['origin'] = 'latlon_gmap';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -1074,7 +1327,7 @@ Fields',
     t('Master'),
     t('Course report'),
     t('more'),
-    t('Apply'),
+    t('Search'),
     t('Reset'),
     t('Sort by'),
     t('Asc'),
@@ -1083,6 +1336,9 @@ Fields',
     t('- All -'),
     t('Offset'),
     t('field_term'),
+    t('field_course_students'),
+    t('field_course'),
+    t('field_site'),
     t('Subject'),
     t('Number'),
     t('Section'),
@@ -1091,9 +1347,21 @@ Fields',
     t('Enrollment'),
     t('Total signed up'),
     t('View'),
+    t('Site'),
+    t('Federal district'),
+    t('State lower district'),
+    t('State upper district'),
+    t('City'),
+    t('Postal Code'),
+    t('Province'),
     t('Course Prefix (i.e. "ENG" for "ENG 101")'),
     t('Term'),
     t('Fields'),
+    t('Catalog number'),
+    t('Issues addressed'),
+    t('Organization type (field_csu_org_type)'),
+    t('Distance'),
+    t('[gmap ]'),
     t('Page'),
     t('Data export: CSV'),
     t('Data export: XLS'),
@@ -1126,6 +1394,8 @@ Fields',
   $handler->display->display_options['query']['options']['distinct'] = TRUE;
   $handler->display->display_options['query']['options']['query_comment'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 's4_reporting';
+  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Search';
+  $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['exposed_form']['options']['autosubmit'] = 0;
   $handler->display->display_options['exposed_form']['options']['autosubmit_hide'] = 1;
   $handler->display->display_options['exposed_form']['options']['s4_reporting'] = array(
@@ -1133,12 +1403,13 @@ Fields',
     'group-field_csu_facility_tid' => '0',
     'group-field_csu_org_type_tid' => '0',
     'group-dyfield' => '3',
-    'group-field_term_nid' => '2',
+    'group-field_term_nid' => '0',
     'group-field_course_subject_value' => '2',
     'group-field_course_catalog_number_value' => '2',
     'group-field_district_federal_value' => '1',
     'group-field_district_state_lower_value' => '1',
     'group-field_district_state_upper_value' => '1',
+    'group-distance' => '1',
     'groups' => 'Site information
 Location
 Courses
@@ -2528,6 +2799,36 @@ Fields',
   $handler->display->display_options['filters']['field_district_state_upper_value']['expose']['identifier'] = 'field_district_state_upper_value';
   $handler->display->display_options['filters']['field_district_state_upper_value']['expose']['required'] = 0;
   $handler->display->display_options['filters']['field_district_state_upper_value']['expose']['multiple'] = FALSE;
+  /* Filter criterion: Location: Distance / Proximity */
+  $handler->display->display_options['filters']['distance']['id'] = 'distance';
+  $handler->display->display_options['filters']['distance']['table'] = 'location';
+  $handler->display->display_options['filters']['distance']['field'] = 'distance';
+  $handler->display->display_options['filters']['distance']['operator'] = 'dist';
+  $handler->display->display_options['filters']['distance']['value'] = array(
+    'latitude' => '',
+    'longitude' => '',
+    'postal_code' => '',
+    'country' => '',
+    'php_code' => '',
+    'nid_arg' => '',
+    'nid_loc_field' => 'node',
+    'uid_arg' => '',
+    'search_distance' => '100',
+    'search_units' => 'mile',
+  );
+  $handler->display->display_options['filters']['distance']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['distance']['expose']['operator_id'] = 'distance_op';
+  $handler->display->display_options['filters']['distance']['expose']['label'] = 'Proximity';
+  $handler->display->display_options['filters']['distance']['expose']['operator'] = 'distance_op';
+  $handler->display->display_options['filters']['distance']['expose']['identifier'] = 'distance';
+  $handler->display->display_options['filters']['distance']['expose']['multiple'] = FALSE;
+  $handler->display->display_options['filters']['distance']['expose']['gmap_macro'] = array(
+    'default' => '[gmap ]',
+  );
+  $handler->display->display_options['filters']['distance']['expose']['user_location_choose'] = array(
+    'default' => FALSE,
+  );
+  $handler->display->display_options['filters']['distance']['origin'] = 'latlon_gmap';
 
   /* Display: Data report page */
   $handler = $view->new_display('page', 'Data report page', 'page');
@@ -2580,7 +2881,7 @@ Fields',
     t('Master'),
     t('Site Report'),
     t('more'),
-    t('Apply'),
+    t('Search'),
     t('Reset'),
     t('Sort by'),
     t('Asc'),
@@ -2636,6 +2937,8 @@ Fields',
     t('Had a student in'),
     t('Course Prefix'),
     t('Course Catalog Number'),
+    t('Proximity'),
+    t('[gmap ]'),
     t('Data report page'),
     t('Data export: CSV'),
     t('Data export: XLS'),

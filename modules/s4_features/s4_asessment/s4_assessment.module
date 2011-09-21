@@ -90,7 +90,6 @@ function s4_assessment_form_alter(&$form, $form_sate, $form_id) {
 				'#type' => 'value',
 				'#value' => $component['extra']['rubric'],
 			);
-			$form['#submit'][] = 's4_assessment_component_submit';
 		}
 	}
 	if(strpos($form_id, 'webform_client_form_') !== false) {
@@ -100,10 +99,6 @@ function s4_assessment_form_alter(&$form, $form_sate, $form_id) {
 			}
 		}
 	}
-}
-
-function s4_assessment_component_submit($form, $form_state) {
-	dpm($form_state);
 }
 
 function theme_s4_assessment_rubric_hints(&$variables) {
@@ -123,7 +118,6 @@ function theme_s4_assessment_rubric_hints(&$variables) {
 	}
 	$rows = array();
 	$output = '';
-	dpm($element);
 	foreach($element['#grid_questions'] as $question_key => $question) {
 		$rows[$question_key][] = array('data' => $question, 'header' => true);
 		$rubric_header = $rubric_rows = array();
