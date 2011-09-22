@@ -544,6 +544,16 @@ function s4_core_user_default_permissions() {
     'module' => 'node',
   );
 
+  // Exported permission: create signups for other users
+  $permissions['create signups for other users'] = array(
+    'name' => 'create signups for other users',
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'staff',
+    ),
+    'module' => 's4_core',
+  );
+
   // Exported permission: create subscriptions
   $permissions['create subscriptions'] = array(
     'name' => 'create subscriptions',
@@ -856,6 +866,15 @@ function s4_core_user_default_permissions() {
     'module' => 'pathauto',
   );
 
+  // Exported permission: override default field settings
+  $permissions['override default field settings'] = array(
+    'name' => 'override default field settings',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 's4_core',
+  );
+
   // Exported permission: post comments
   $permissions['post comments'] = array(
     'name' => 'post comments',
@@ -1020,6 +1039,16 @@ function s4_core_user_default_permissions() {
       1 => 'staff',
     ),
     'module' => 'views_savedsearches',
+  );
+
+  // Exported permission: view all webform fields
+  $permissions['view all webform fields'] = array(
+    'name' => 'view all webform fields',
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'staff',
+    ),
+    'module' => 's4_core',
   );
 
   // Exported permission: view any unpublished content

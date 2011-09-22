@@ -986,6 +986,29 @@ function s4_core_views_default_views() {
   $handler->display->display_options['fields']['login']['empty_zero'] = 0;
   $handler->display->display_options['fields']['login']['hide_alter_empty'] = 0;
   $handler->display->display_options['fields']['login']['date_format'] = 'long';
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
+  $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing_1']['label'] = 'View';
+  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = 'view';
+  $handler->display->display_options['fields']['nothing_1']['alter']['make_link'] = 1;
+  $handler->display->display_options['fields']['nothing_1']['alter']['path'] = 'user/[uid]';
+  $handler->display->display_options['fields']['nothing_1']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['nothing_1']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['nothing_1']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['nothing_1']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['nothing_1']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['nothing_1']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['nothing_1']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['nothing_1']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['nothing_1']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['nothing_1']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['nothing_1']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['nothing_1']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['nothing_1']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['nothing_1']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['nothing_1']['hide_alter_empty'] = 0;
   /* Field: User: Edit link */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'users';
@@ -1179,6 +1202,9 @@ function s4_core_views_default_views() {
     t('Last Name'),
     t('Login ID'),
     t('Last login'),
+    t('View'),
+    t('view'),
+    t('user/[uid]'),
     t('Edit'),
     t('Uid'),
     t('Signups'),

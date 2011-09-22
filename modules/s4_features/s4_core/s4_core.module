@@ -349,6 +349,10 @@ function s4_core_permission() {
       'title' => t('Create signup records for other users'),
       'description' => t('Allowed to create signup records for other people'),
     ),
+    'override default field settings' => array(
+      'title' => t('Override default field settings'),
+      'description' => t('Override the normally protected default field settings'),
+    ),
   );
 }
 
