@@ -756,3 +756,11 @@ function s4_sites_s4_reporting_term_report($items) {
 				 'output' => $output,
 				);
 }
+
+/**
+*	Implementation of hook_s4_help
+*/
+function s4_sites_s4_help($path) {
+	module_load_include('inc', 's4_sites', 's4_sites.help');
+	return _s4_sites_help($path);
+}

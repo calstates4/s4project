@@ -266,7 +266,8 @@ function s4_core_block_s4_page_notifications() {
 *  Button block for creating a site
 */
 function s4_core_block_s4_add_new_site() {
-  if (user_access('create site content')) {
+  global $user;
+  if (user_access('create site content') && !s4_core_user_can_signup($user)) {
   	if(user_access('moderate site information')) {
   		$add_link = l(t('<span class="add"></span>Add new site'), 
                   'node/add/site', 
