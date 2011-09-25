@@ -19,11 +19,10 @@ function s4_reporting_term_report($form, &$form_state) {
 	
 	$form['term']['report_term'] = array(
 		'#type' => 'select',
-		'#title' => 'Report on one or more terms',
-		'#multiple' => true,
+		'#title' => 'Report on a single term',
 		'#options' => $terms,
 		'#attributes' => array('class' => array('chosen'),
-							   'style' => 'width: 50%;'),
+							   'style' => 'width: 25%;'),
 		'#default_value' => $form_state['storage']['values']['report_term'],
 	);
 	
@@ -86,19 +85,18 @@ function s4_reporting_term_report_submit($form, &$form_state) {
 		$start = $form_state['values']['date_start'];
 		$end = $form_state['values']['date_end'];
 
-		$report_items[0] = array('start' => date('Y-m-d', mktime(0, 0, 0, $start['month'], $start['day'], $start['year'])), 
-						 		'end' => date('Y-m-d', mktime(0, 0, 0, $end['month'], $end['day'], $end['year'])),
-						 		'term' => false);
+		$report_items = array('start' => date('Y-m-d', mktime(0, 0, 0, $start['month'], $start['day'], $start['year'])), 
+						 	  'end' => date('Y-m-d', mktime(0, 0, 0, $end['month'], $end['day'], $end['year'])),
+						 	  'term' => false);
 	}
 	else {
-		foreach($form_state['values']['report_term'] as $nid) {
-			$term = node_load($nid);
-			$dates = field_get_items('node', $term, 'field_term_date_start');
-			$report_items[$nid] = array('start' => $dates[0]['value'],
-										'end' => $dates[0]['value2'],
-										'term' => $term);
-		}
+		$term = node_load($form_state['values']['report_term']);
+		$dates = field_get_items('node', $term, 'field_term_date_start');
+		$report_items = array('start' => $dates[0]['value'],
+							  'end' => $dates[0]['value2'],
+							  'term' => $term);
 	}
+	
 	$output = array();
 	$result = module_invoke_all('s4_reporting_term_report', $report_items);
 	foreach($result['totals'] as $t => $total) {
@@ -115,6 +113,7 @@ function s4_reporting_term_report_submit($form, &$form_state) {
 	$form_state['storage']['values'] = $form_state['values'];
 	$form_state['storage']['results'] = $output;
 }
+
 
 function s4_reporting_object_report($node, $type = 'signup') {
 	module_load_include('inc', 'webform', 'includes/webform.report');

@@ -1,0 +1,23 @@
+<?php
+
+function s4_csu_reporting_menu() {
+	$items = array();
+	
+	$items['reports/csu-report'] = array(
+		'title' => 'Chancellor\'s Office',
+		'type' => MENU_LOCAL_TASK,
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('s4_csu_reporting_form'),
+		'access arguments' => array('view all webform fields'),
+		'file' => 's4_csu_reporting.pages.inc',
+		'weight' => 9
+	);
+	
+	return $items;
+}
+
+function _s4_csu_reporting_functions() {
+	return array('s4_csu_reporting_totals',
+	
+	);
+}

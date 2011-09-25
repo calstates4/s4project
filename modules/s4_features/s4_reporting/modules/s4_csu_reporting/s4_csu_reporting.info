@@ -1,0 +1,6 @@
+name = "S4 CSU Reporting"
+package = "S4"
+description= "Reporting needs just for the Cal State System"
+php = "5.2.4"
+version = "7.x-1.0"
+core="7.x"
