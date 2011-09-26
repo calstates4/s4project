@@ -41,6 +41,8 @@ function s4_webform_menu_alter(&$items) {
 	$items['node/%webform_menu/webform-results/table']['access callback'] = 's4_webform_hide_results';
 	$items['node/%webform_menu/webform-results/download']['access callback'] = 's4_webform_hide_results';
 	$items['node/%webform_menu/webform-results/clear']['access callback'] = 's4_webform_hide_results';
+	$items['node/%webform_menu/webform/emails']['access callback'] = 's4_webform_hide_results';
+	$items['node/%webform_menu/webform/configure']['access callback'] = 's4_webform_hide_results';
 }
 
 function s4_webform_hide_results() {
@@ -76,4 +78,9 @@ function s4_webform_form_webform_component_edit_form_alter(&$form, $form_state) 
 		$form['extra']['savelocation']['#default_value'] = 'form-files';
 	}
 	$form['submit']['#value'] = 'Save question';
+}
+
+function s4_webform_s4_help($path) {
+	module_load_include('inc', 's4_webform', 's4_webform.help');
+	return _s4_webform_help($path);
 }
