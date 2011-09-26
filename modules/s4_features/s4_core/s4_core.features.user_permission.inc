@@ -427,6 +427,7 @@ function s4_core_user_default_permissions() {
     'name' => 'administer taxonomy',
     'roles' => array(
       0 => 'administrator',
+      1 => 'staff',
     ),
     'module' => 'taxonomy',
   );
