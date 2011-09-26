@@ -142,6 +142,25 @@ function s4_sites_user_default_permissions() {
     'module' => 'taxonomy',
   );
 
+  // Exported permission: delete terms in 10
+  $permissions['delete terms in 10'] = array(
+    'name' => 'delete terms in 10',
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'staff',
+    ),
+    'module' => 'taxonomy',
+  );
+
+  // Exported permission: delete terms in 11
+  $permissions['delete terms in 11'] = array(
+    'name' => 'delete terms in 11',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'taxonomy',
+  );
+
   // Exported permission: delete terms in 2
   $permissions['delete terms in 2'] = array(
     'name' => 'delete terms in 2',
@@ -195,6 +214,26 @@ function s4_sites_user_default_permissions() {
   // Exported permission: delete terms in 7
   $permissions['delete terms in 7'] = array(
     'name' => 'delete terms in 7',
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'staff',
+    ),
+    'module' => 'taxonomy',
+  );
+
+  // Exported permission: delete terms in 8
+  $permissions['delete terms in 8'] = array(
+    'name' => 'delete terms in 8',
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'staff',
+    ),
+    'module' => 'taxonomy',
+  );
+
+  // Exported permission: delete terms in 9
+  $permissions['delete terms in 9'] = array(
+    'name' => 'delete terms in 9',
     'roles' => array(
       0 => 'administrator',
       1 => 'staff',
@@ -292,6 +331,25 @@ function s4_sites_user_default_permissions() {
     'module' => 'taxonomy',
   );
 
+  // Exported permission: edit terms in 10
+  $permissions['edit terms in 10'] = array(
+    'name' => 'edit terms in 10',
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'staff',
+    ),
+    'module' => 'taxonomy',
+  );
+
+  // Exported permission: edit terms in 11
+  $permissions['edit terms in 11'] = array(
+    'name' => 'edit terms in 11',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'taxonomy',
+  );
+
   // Exported permission: edit terms in 2
   $permissions['edit terms in 2'] = array(
     'name' => 'edit terms in 2',
@@ -345,6 +403,26 @@ function s4_sites_user_default_permissions() {
   // Exported permission: edit terms in 7
   $permissions['edit terms in 7'] = array(
     'name' => 'edit terms in 7',
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'staff',
+    ),
+    'module' => 'taxonomy',
+  );
+
+  // Exported permission: edit terms in 8
+  $permissions['edit terms in 8'] = array(
+    'name' => 'edit terms in 8',
+    'roles' => array(
+      0 => 'administrator',
+      1 => 'staff',
+    ),
+    'module' => 'taxonomy',
+  );
+
+  // Exported permission: edit terms in 9
+  $permissions['edit terms in 9'] = array(
+    'name' => 'edit terms in 9',
     'roles' => array(
       0 => 'administrator',
       1 => 'staff',
