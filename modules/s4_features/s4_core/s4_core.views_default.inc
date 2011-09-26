@@ -171,6 +171,12 @@ function s4_core_views_default_views() {
   $handler->display->display_options['relationships']['field_course_nid']['field'] = 'field_course_nid';
   $handler->display->display_options['relationships']['field_course_nid']['required'] = 0;
   $handler->display->display_options['relationships']['field_course_nid']['delta'] = '-1';
+  /* Relationship: Content: Site (field_site) */
+  $handler->display->display_options['relationships']['field_site_nid']['id'] = 'field_site_nid';
+  $handler->display->display_options['relationships']['field_site_nid']['table'] = 'field_data_field_site';
+  $handler->display->display_options['relationships']['field_site_nid']['field'] = 'field_site_nid';
+  $handler->display->display_options['relationships']['field_site_nid']['required'] = 0;
+  $handler->display->display_options['relationships']['field_site_nid']['delta'] = '-1';
   /* Field: User: Bulk operations */
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'users';
@@ -300,6 +306,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['filters']['field_term_nid']['expose']['label'] = 'Term';
   $handler->display->display_options['filters']['field_term_nid']['expose']['operator'] = 'field_term_nid_op';
   $handler->display->display_options['filters']['field_term_nid']['expose']['identifier'] = 'field_term_nid';
+  $handler->display->display_options['filters']['field_term_nid']['expose']['multiple'] = 1;
   $handler->display->display_options['filters']['field_term_nid']['expose']['reduce'] = 0;
   /* Filter criterion: Field: Restricted to (field_site_restrict) */
   $handler->display->display_options['filters']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
@@ -317,6 +324,17 @@ function s4_core_views_default_views() {
   $handler->display->display_options['filters']['field_site_restrict_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_site_restrict_tid']['vocabulary'] = 'site_restrictions';
   $handler->display->display_options['filters']['field_site_restrict_tid']['error_message'] = 1;
+  /* Filter criterion: Content: Evaluation Form (field_site_eval_form) */
+  $handler->display->display_options['filters']['field_site_eval_form_nid']['id'] = 'field_site_eval_form_nid';
+  $handler->display->display_options['filters']['field_site_eval_form_nid']['table'] = 'field_data_field_site_eval_form';
+  $handler->display->display_options['filters']['field_site_eval_form_nid']['field'] = 'field_site_eval_form_nid';
+  $handler->display->display_options['filters']['field_site_eval_form_nid']['relationship'] = 'field_site_nid';
+  $handler->display->display_options['filters']['field_site_eval_form_nid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_site_eval_form_nid']['expose']['operator_id'] = 'field_site_eval_form_nid_op';
+  $handler->display->display_options['filters']['field_site_eval_form_nid']['expose']['label'] = 'Evaluation Form';
+  $handler->display->display_options['filters']['field_site_eval_form_nid']['expose']['operator'] = 'field_site_eval_form_nid_op';
+  $handler->display->display_options['filters']['field_site_eval_form_nid']['expose']['identifier'] = 'field_site_eval_form_nid';
+  $handler->display->display_options['filters']['field_site_eval_form_nid']['expose']['reduce'] = 0;
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -338,12 +356,14 @@ function s4_core_views_default_views() {
     t('Offset'),
     t('field_user'),
     t('field_course'),
+    t('field_site'),
     t('Email'),
     t('First Name'),
     t('Last Name'),
     t('Site'),
     t('Term'),
     t('Student site access'),
+    t('Evaluation Form'),
     t('Page'),
   );
   $export['email_students'] = $view;
@@ -375,6 +395,15 @@ function s4_core_views_default_views() {
   $handler->display->display_options['row_options']['hide_empty'] = 0;
   $handler->display->display_options['row_options']['default_field_elements'] = 1;
   $handler->display->display_options['exposed_block'] = TRUE;
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['label'] = 'No results';
+  $handler->display->display_options['empty']['area']['empty'] = FALSE;
+  $handler->display->display_options['empty']['area']['content'] = 'No search results found';
+  $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
+  $handler->display->display_options['empty']['area']['tokenize'] = 0;
   /* Field: Content: Issues addressed */
   $handler->display->display_options['fields']['field_csu_facility']['id'] = 'field_csu_facility';
   $handler->display->display_options['fields']['field_csu_facility']['table'] = 'field_data_field_csu_facility';
@@ -500,6 +529,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['filters']['keys']['expose']['label'] = 'Search';
   $handler->display->display_options['filters']['keys']['expose']['operator'] = 'keys_op';
   $handler->display->display_options['filters']['keys']['expose']['identifier'] = 'keys';
+  $handler->display->display_options['filters']['keys']['expose']['required'] = 1;
   $handler->display->display_options['filters']['keys']['expose']['multiple'] = FALSE;
   /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
@@ -686,6 +716,8 @@ function s4_core_views_default_views() {
     t('Items per page'),
     t('- All -'),
     t('Offset'),
+    t('No results'),
+    t('No search results found'),
     t('<h4>[title]</h4>
 <div class="meta">[field_csu_facility] - [field_csu_org_type]</div>'),
     t('Page'),
@@ -940,6 +972,29 @@ function s4_core_views_default_views() {
   $handler->display->display_options['fields']['field_last_name']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_last_name']['hide_alter_empty'] = 0;
   $handler->display->display_options['fields']['field_last_name']['field_api_classes'] = 0;
+  /* Field: User: Uid */
+  $handler->display->display_options['fields']['uid']['id'] = 'uid';
+  $handler->display->display_options['fields']['uid']['table'] = 'users';
+  $handler->display->display_options['fields']['uid']['field'] = 'uid';
+  $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['uid']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['uid']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['uid']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['uid']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['uid']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['uid']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['uid']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['uid']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['uid']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['uid']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['uid']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['uid']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['uid']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['uid']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['uid']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['uid']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['uid']['hide_alter_empty'] = 0;
+  $handler->display->display_options['fields']['uid']['link_to_user'] = 1;
   /* Field: User: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 'users';
@@ -1031,29 +1086,6 @@ function s4_core_views_default_views() {
   $handler->display->display_options['fields']['edit_node']['hide_empty'] = 0;
   $handler->display->display_options['fields']['edit_node']['empty_zero'] = 0;
   $handler->display->display_options['fields']['edit_node']['hide_alter_empty'] = 0;
-  /* Field: User: Uid */
-  $handler->display->display_options['fields']['uid']['id'] = 'uid';
-  $handler->display->display_options['fields']['uid']['table'] = 'users';
-  $handler->display->display_options['fields']['uid']['field'] = 'uid';
-  $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['uid']['alter']['alter_text'] = 0;
-  $handler->display->display_options['fields']['uid']['alter']['make_link'] = 0;
-  $handler->display->display_options['fields']['uid']['alter']['absolute'] = 0;
-  $handler->display->display_options['fields']['uid']['alter']['external'] = 0;
-  $handler->display->display_options['fields']['uid']['alter']['replace_spaces'] = 0;
-  $handler->display->display_options['fields']['uid']['alter']['trim_whitespace'] = 0;
-  $handler->display->display_options['fields']['uid']['alter']['nl2br'] = 0;
-  $handler->display->display_options['fields']['uid']['alter']['word_boundary'] = 1;
-  $handler->display->display_options['fields']['uid']['alter']['ellipsis'] = 1;
-  $handler->display->display_options['fields']['uid']['alter']['strip_tags'] = 0;
-  $handler->display->display_options['fields']['uid']['alter']['trim'] = 0;
-  $handler->display->display_options['fields']['uid']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['uid']['element_label_colon'] = 1;
-  $handler->display->display_options['fields']['uid']['element_default_classes'] = 1;
-  $handler->display->display_options['fields']['uid']['hide_empty'] = 0;
-  $handler->display->display_options['fields']['uid']['empty_zero'] = 0;
-  $handler->display->display_options['fields']['uid']['hide_alter_empty'] = 0;
-  $handler->display->display_options['fields']['uid']['link_to_user'] = 1;
   /* Field: User Signup: List all signups for a user */
   $handler->display->display_options['fields']['student_signup_list']['id'] = 'student_signup_list';
   $handler->display->display_options['fields']['student_signup_list']['table'] = 's4_user_signup';
@@ -1200,13 +1232,13 @@ function s4_core_views_default_views() {
     t('Offset'),
     t('First Name'),
     t('Last Name'),
+    t('Uid'),
     t('Login ID'),
     t('Last login'),
     t('View'),
     t('view'),
     t('user/[uid]'),
     t('Edit'),
-    t('Uid'),
     t('Signups'),
     t('Add signup'),
     t('Sign-up student'),

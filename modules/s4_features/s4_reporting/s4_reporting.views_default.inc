@@ -38,8 +38,8 @@ function s4_reporting_views_default_views() {
   $handler->display->display_options['exposed_form']['options']['autosubmit'] = 0;
   $handler->display->display_options['exposed_form']['options']['autosubmit_hide'] = 1;
   $handler->display->display_options['exposed_form']['options']['s4_reporting'] = array(
-    'group-dyfield' => '0',
-    'group-field_site_nid' => '0',
+    'group-dyfield' => '2',
+    'group-field_site_nid' => '1',
     'group-field_term_nid' => '0',
     'group-field_course_subject_value' => '0',
     'group-field_course_catalog_number_value' => '0',
@@ -1085,10 +1085,29 @@ Fields',
   $handler->display->display_options['fields']['city']['id'] = 'city';
   $handler->display->display_options['fields']['city']['table'] = 'location';
   $handler->display->display_options['fields']['city']['field'] = 'city';
+  $handler->display->display_options['fields']['city']['relationship'] = 'field_site_nid';
+  $handler->display->display_options['fields']['city']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['city']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['city']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['city']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['city']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['city']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['city']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['city']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['city']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['city']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['city']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['city']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['city']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['city']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['city']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['city']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['city']['hide_alter_empty'] = 0;
   /* Field: Location: Postal Code */
   $handler->display->display_options['fields']['postal_code']['id'] = 'postal_code';
   $handler->display->display_options['fields']['postal_code']['table'] = 'location';
   $handler->display->display_options['fields']['postal_code']['field'] = 'postal_code';
+  $handler->display->display_options['fields']['postal_code']['relationship'] = 'field_site_nid';
   $handler->display->display_options['fields']['postal_code']['alter']['alter_text'] = 0;
   $handler->display->display_options['fields']['postal_code']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['postal_code']['alter']['absolute'] = 0;
@@ -1110,6 +1129,24 @@ Fields',
   $handler->display->display_options['fields']['province']['id'] = 'province';
   $handler->display->display_options['fields']['province']['table'] = 'location';
   $handler->display->display_options['fields']['province']['field'] = 'province';
+  $handler->display->display_options['fields']['province']['relationship'] = 'field_site_nid';
+  $handler->display->display_options['fields']['province']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['province']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['province']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['province']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['province']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['province']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['province']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['province']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['province']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['province']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['province']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['province']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['province']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['province']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['province']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['province']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['province']['hide_alter_empty'] = 0;
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -1207,6 +1244,18 @@ Fields',
   $handler->display->display_options['filters']['field_course_catalog_number_value']['expose']['identifier'] = 'field_course_catalog_number_value';
   $handler->display->display_options['filters']['field_course_catalog_number_value']['expose']['required'] = 0;
   $handler->display->display_options['filters']['field_course_catalog_number_value']['expose']['multiple'] = FALSE;
+  /* Filter criterion: Location: City */
+  $handler->display->display_options['filters']['city']['id'] = 'city';
+  $handler->display->display_options['filters']['city']['table'] = 'location';
+  $handler->display->display_options['filters']['city']['field'] = 'city';
+  $handler->display->display_options['filters']['city']['relationship'] = 'field_site_nid';
+  $handler->display->display_options['filters']['city']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['city']['expose']['operator_id'] = 'city_op';
+  $handler->display->display_options['filters']['city']['expose']['label'] = 'City';
+  $handler->display->display_options['filters']['city']['expose']['operator'] = 'city_op';
+  $handler->display->display_options['filters']['city']['expose']['identifier'] = 'city';
+  $handler->display->display_options['filters']['city']['expose']['required'] = 0;
+  $handler->display->display_options['filters']['city']['expose']['multiple'] = FALSE;
   /* Filter criterion: Content: Issues addressed (field_csu_facility) */
   $handler->display->display_options['filters']['field_csu_facility_tid']['id'] = 'field_csu_facility_tid';
   $handler->display->display_options['filters']['field_csu_facility_tid']['table'] = 'field_data_field_csu_facility';
@@ -1228,60 +1277,17 @@ Fields',
   $handler->display->display_options['filters']['field_csu_org_type_tid']['table'] = 'field_data_field_csu_org_type';
   $handler->display->display_options['filters']['field_csu_org_type_tid']['field'] = 'field_csu_org_type_tid';
   $handler->display->display_options['filters']['field_csu_org_type_tid']['relationship'] = 'field_site_nid';
-  $handler->display->display_options['filters']['field_csu_org_type_tid']['value'] = '';
   $handler->display->display_options['filters']['field_csu_org_type_tid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_csu_org_type_tid']['expose']['operator_id'] = 'field_csu_org_type_tid_op';
-  $handler->display->display_options['filters']['field_csu_org_type_tid']['expose']['label'] = 'Organization type (field_csu_org_type)';
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['expose']['label'] = 'Organization type';
   $handler->display->display_options['filters']['field_csu_org_type_tid']['expose']['operator'] = 'field_csu_org_type_tid_op';
   $handler->display->display_options['filters']['field_csu_org_type_tid']['expose']['identifier'] = 'field_csu_org_type_tid';
   $handler->display->display_options['filters']['field_csu_org_type_tid']['expose']['multiple'] = 1;
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['expose']['reduce'] = 0;
   $handler->display->display_options['filters']['field_csu_org_type_tid']['reduce_duplicates'] = 0;
   $handler->display->display_options['filters']['field_csu_org_type_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_csu_org_type_tid']['vocabulary'] = 'organization_type';
   $handler->display->display_options['filters']['field_csu_org_type_tid']['error_message'] = 1;
-  /* Filter criterion: Location: City */
-  $handler->display->display_options['filters']['city']['id'] = 'city';
-  $handler->display->display_options['filters']['city']['table'] = 'location';
-  $handler->display->display_options['filters']['city']['field'] = 'city';
-  $handler->display->display_options['filters']['city']['relationship'] = 'field_site_nid';
-  $handler->display->display_options['filters']['city']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['city']['expose']['operator_id'] = 'city_op';
-  $handler->display->display_options['filters']['city']['expose']['label'] = 'City';
-  $handler->display->display_options['filters']['city']['expose']['operator'] = 'city_op';
-  $handler->display->display_options['filters']['city']['expose']['identifier'] = 'city';
-  $handler->display->display_options['filters']['city']['expose']['required'] = 0;
-  $handler->display->display_options['filters']['city']['expose']['multiple'] = FALSE;
-  /* Filter criterion: Location: Distance / Proximity */
-  $handler->display->display_options['filters']['distance']['id'] = 'distance';
-  $handler->display->display_options['filters']['distance']['table'] = 'location';
-  $handler->display->display_options['filters']['distance']['field'] = 'distance';
-  $handler->display->display_options['filters']['distance']['relationship'] = 'field_site_nid';
-  $handler->display->display_options['filters']['distance']['operator'] = 'dist';
-  $handler->display->display_options['filters']['distance']['value'] = array(
-    'latitude' => '',
-    'longitude' => '',
-    'postal_code' => '',
-    'country' => '',
-    'php_code' => '',
-    'nid_arg' => '',
-    'nid_loc_field' => 'node',
-    'uid_arg' => '',
-    'search_distance' => '100',
-    'search_units' => 'mile',
-  );
-  $handler->display->display_options['filters']['distance']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['distance']['expose']['operator_id'] = 'distance_op';
-  $handler->display->display_options['filters']['distance']['expose']['label'] = 'Distance';
-  $handler->display->display_options['filters']['distance']['expose']['operator'] = 'distance_op';
-  $handler->display->display_options['filters']['distance']['expose']['identifier'] = 'distance';
-  $handler->display->display_options['filters']['distance']['expose']['multiple'] = FALSE;
-  $handler->display->display_options['filters']['distance']['expose']['gmap_macro'] = array(
-    'default' => '[gmap ]',
-  );
-  $handler->display->display_options['filters']['distance']['expose']['user_location_choose'] = array(
-    'default' => FALSE,
-  );
-  $handler->display->display_options['filters']['distance']['origin'] = 'latlon_gmap';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -1359,9 +1365,7 @@ Fields',
     t('Fields'),
     t('Catalog number'),
     t('Issues addressed'),
-    t('Organization type (field_csu_org_type)'),
-    t('Distance'),
-    t('[gmap ]'),
+    t('Organization type'),
     t('Page'),
     t('Data export: CSV'),
     t('Data export: XLS'),
@@ -2813,12 +2817,12 @@ Fields',
     'nid_arg' => '',
     'nid_loc_field' => 'node',
     'uid_arg' => '',
-    'search_distance' => '100',
+    'search_distance' => '',
     'search_units' => 'mile',
   );
   $handler->display->display_options['filters']['distance']['exposed'] = TRUE;
   $handler->display->display_options['filters']['distance']['expose']['operator_id'] = 'distance_op';
-  $handler->display->display_options['filters']['distance']['expose']['label'] = 'Proximity';
+  $handler->display->display_options['filters']['distance']['expose']['label'] = 'Distance / Proximity';
   $handler->display->display_options['filters']['distance']['expose']['operator'] = 'distance_op';
   $handler->display->display_options['filters']['distance']['expose']['identifier'] = 'distance';
   $handler->display->display_options['filters']['distance']['expose']['multiple'] = FALSE;
@@ -2937,7 +2941,7 @@ Fields',
     t('Had a student in'),
     t('Course Prefix'),
     t('Course Catalog Number'),
-    t('Proximity'),
+    t('Distance / Proximity'),
     t('[gmap ]'),
     t('Data report page'),
     t('Data export: CSV'),

@@ -274,7 +274,7 @@ function s4_reporting_views_pre_render($view) {
 	if($view->name == 'report_students' && arg(0) == 'reports') {
 		module_load_include('inc', 'webform', 'includes/webform.submissions');
 		if(isset($view->result[0]->field_field_form_signup_sid)) { 
-			s4_reporting_append_form_to_view($view, 'field_field_form_signup_sid', 'field_field_site_form');
+			//s4_reporting_append_form_to_view($view, 'field_field_form_signup_sid', 'field_field_site_form');
 		}
 	}
 }
@@ -289,37 +289,39 @@ function s4_reporting_append_form_to_view($view, $signup_field, $site_field) {
 		/**
 		*	Please don't look so hard at this, you might go blind.
 		*/
-		foreach($form->webform['components'] as $key => $component) {
-			$view->result[$result_key]->{$component['form_key']} = array(
-				'rendered' => array(
-					'#markup' => webform_component_invoke($component['type'], 'table', $component, $submission->data[$key]['value'])
-				),
-				'raw' => array(
-					'value' => $submission->data[$key]['value'],
-				),
-			);
-			if(!isset($view->field[$component['form_key']])) {
-				foreach($view->field as $field_key => $field) {
-					if(get_class($field) == 'views_handler_field_field') {
-						$view->field[$component['form_key']] = clone $view->field[$field_key];
-					}
-				}
-				$view->field[$component['form_key']] = new views_handler_field_field();
-				$view->field[$component['form_key']]->view = $view->field['nid']->view;
-				$view->field[$component['form_key']]->query = $view->field['nid']->query;
-				$view->field[$component['form_key']]->handler_type = 'field';
-				$view->field[$component['form_key']]->is_handler = TRUE;
-				$view->field[$component['form_key']]->additional_fields[$component['form_key']] = array(
-					'table' => 'node',
-					'field' => 'nid',
+		if($form->webform['components']) {
+			foreach($form->webform['components'] as $key => $component) {
+				$view->result[$result_key]->{$component['form_key']} = array(
+					'rendered' => array(
+						'#markup' => webform_component_invoke($component['type'], 'table', $component, $submission->data[$key]['value'])
+					),
+					'raw' => array(
+						'value' => $submission->data[$key]['value'],
+					),
 				);
-				$view->field[$component['form_key']]->options['label'] = $component['name'];
-				$view->field[$component['form_key']]->options['exclude'] = 0;
-				$view->field[$component['form_key']]->options['id'] = $component['form_key'];
-				$view->field[$component['form_key']]->aliases = array($component['form_key'] =>  $component['form_key']);
-				$view->field[$component['form_key']]->field = $component['form_key'];
-				$view->field[$component['form_key']]->field_alias = $component['form_key'];
-				
+				if(!isset($view->field[$component['form_key']])) {
+					foreach($view->field as $field_key => $field) {
+						if(get_class($field) == 'views_handler_field_field') {
+							$view->field[$component['form_key']] = clone $view->field[$field_key];
+						}
+					}
+					$view->field[$component['form_key']] = new views_handler_field_field();
+					$view->field[$component['form_key']]->view = $view->field['nid']->view;
+					$view->field[$component['form_key']]->query = $view->field['nid']->query;
+					$view->field[$component['form_key']]->handler_type = 'field';
+					$view->field[$component['form_key']]->is_handler = TRUE;
+					$view->field[$component['form_key']]->additional_fields[$component['form_key']] = array(
+						'table' => 'node',
+						'field' => 'nid',
+					);
+					$view->field[$component['form_key']]->options['label'] = $component['name'];
+					$view->field[$component['form_key']]->options['exclude'] = 0;
+					$view->field[$component['form_key']]->options['id'] = $component['form_key'];
+					$view->field[$component['form_key']]->aliases = array($component['form_key'] =>  $component['form_key']);
+					$view->field[$component['form_key']]->field = $component['form_key'];
+					$view->field[$component['form_key']]->field_alias = $component['form_key'];
+					
+				}
 			}
 		}
 	}
