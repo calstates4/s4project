@@ -14,7 +14,9 @@ function s4_help_block_view($delta) {
 			$help = array();
 			foreach(module_implements('s4_help') as $module) {
 				$help_item = module_invoke($module, 's4_help', $_GET['q']);
-				$help += $help_item;
+				if(is_array($help_item)) {
+					$help = $help_item;
+				}
 			}
 			if(count($help)) {
 				while($item = current($help)) {
