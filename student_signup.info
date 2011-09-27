@@ -82,6 +82,7 @@ dependencies[] = location_fax
 dependencies[] = location_node
 dependencies[] = location_phone
 dependencies[] = location_search
+dependencies[] = masquerade
 dependencies[] = matrix
 dependencies[] = messaging
 dependencies[] = messaging_htmlmail
