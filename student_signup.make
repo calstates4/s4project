@@ -26,9 +26,6 @@ projects[cck][version] = "2.x-dev"
 projects[cck_phone][subdir] = "contrib"
 projects[cck_phone][version] = "1.x-dev"
 
-projects[cnr][subdir] = "contrib"
-projects[cnr][version] = "4.1"
-
 projects[content_access][subdir] = "contrib"
 projects[content_access][version] = "1.2-beta1"
 
