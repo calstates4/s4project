@@ -847,7 +847,7 @@ function s4_core_action_info() {
   return array(
     's4_core_email_site_coordinator_action' => array(
         'type' => 'system',
-        'label' => t('Send coordinator e-mail'),
+        'label' => t('Send email'),
         'configurable' => TRUE,
         'triggers' => array('any'),
       ),
@@ -1117,7 +1117,40 @@ function s4_core_theme_registry_alter(&$items) {
   $items['views_savedsearches_list'] = array(
       'arguments' => array('view', 'current_view_matches_sid'),
       'function' => 'theme_s4_core_views_savedsearches_list',
-    );
+  );
+  $items['views_bulk_operations_confirmation']['function'] = 'theme_s4_core_views_bulk_operations_confirmation';
+}
+
+function theme_s4_core_views_bulk_operations_confirmation($variables) {
+  $vbo = $variables['vbo'];
+  $entity_type = $vbo->get_entity_type();
+  $rows = $variables['rows'];
+  $result_count = count($vbo->view->result);
+  $row_count = count($rows);
+  $items = array();
+  // All rows on all pages have been selected.
+  if ($result_count < $row_count) {
+    $entity_ids = array_slice(array_keys($rows), 0, $result_count);
+    $entities = _views_bulk_operations_entity_load($entity_type, $entity_ids, $vbo->revision);
+    foreach ($entities as $entity) {
+      $items[] = check_plain(_views_bulk_operations_entity_label($entity_type, $entity));
+    }
+    $items[] = t('...and <strong>!count</strong> more.', array('!count' => $row_count - $result_count));
+  }
+  else {
+    $entities = _views_bulk_operations_entity_load($entity_type, array_keys($rows), $vbo->revision);
+    foreach ($entities as $entity) {
+      $items[] = check_plain(_views_bulk_operations_entity_label($entity_type, $entity));
+    }
+  }
+
+  $row_count = format_plural(count($entities), 'row', 'rows');
+  if(arg(0) == 'email') {
+  	$row_count = format_plural(count($entities), 'people', 'people');
+  	drupal_set_title('Are you sure you want to send emails to the following people?');
+  }
+  $output = theme('item_list', array('items' => $items, 'title' => t('You selected the following <strong>!row_count</strong>:', array('!row_count' => $row_count))));
+  return $output;
 }
 
 /**
