@@ -128,8 +128,11 @@ dependencies[] = s4_pages
 dependencies[] = s4_reporting
 dependencies[] = s4_sites
 dependencies[] = s4_map
+dependencies[] = s4_help
 dependencies[] = s4_users
 dependencies[] = s4_webform
+dependencies[] = s4_assessment
+dependencies[] = s4_districts
 
 ;Variables
 variables[admin_theme] = seven
