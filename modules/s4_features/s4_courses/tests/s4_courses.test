@@ -13,12 +13,12 @@ class S4CoursesTestCase extends s4WebTestCase {
   }
   
   public function setUp() {
-  	parent::setUp();  	
+  	parent::setUp($this->modules);  	
   }
   
   public function testCourseCreation() {
   	$this->drupalLogout();
-	$this->drupalLogin($this->admin);
+	$this->drupalLogin($this->drupalCreateUser($this->roles['administrator']));
 	$term_code = $this->randomName(8);
 	$term = $this->drupalCreateNode(array('type' => 'course_term',
 										  'title' => 'Fall 2012',
