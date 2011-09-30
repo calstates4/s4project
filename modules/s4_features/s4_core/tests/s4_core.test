@@ -13,7 +13,6 @@ class S4CoreTestCase extends s4WebTestCase {
 		$this->admin = $this->drupalCreateUser($this->roles['administrator']);
 		$this->staff = $this->drupalCreateUser($this->roles['staff']);
 		$this->authenticated = $this->drupalCreateUser($this->roles['authenticated']);
-
 	}
 	
   public static function getInfo() {
@@ -34,12 +33,12 @@ class S4CoreTestCase extends s4WebTestCase {
   
   public function testAPILoadsUsers() {
     global $base_dir;
-    $base = 'http://'. $_SERVER['HTTP_HOST'] . $base_dir . drupal_get_path('module', 's4_api_rest');
+    $base = url(drupal_get_path('module', 's4_api_rest'), array('absolute' => true));
   	
   	$this->drupalLogin($this->admin);
   	$this->drupalPost('admin/config/s4/rest-api', 
   		array('term_url' => $base .'/tests/get_terms.txt',
-  		'course_url' => '/tests/get_courses.txt',
+  		'course_url' => $base .'/tests/get_courses.txt',
   		'user_url' => $base .'/tests/get_user.txt',
   		'enrollment_url' => $base .'/tests/get_user_enrollment.txt',
   		'faculty_url' => $base .'/tests/get_faculty_courses.txt',
@@ -52,7 +51,7 @@ class S4CoreTestCase extends s4WebTestCase {
   		'faculty_user_id_argument' => 'user_id',
   		'faculty_term_argument' => 'term',
   		),
-  		'op');
+  		t('Save configuration'));
   	$this->assertNoText(t('This is not a valid URL'));
   	$this->assertText(t('REST API settings updated'));
   }
