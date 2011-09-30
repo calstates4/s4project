@@ -1071,19 +1071,25 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['relationships']['field_site_nid']['field'] = 'field_site_nid';
   $handler->display->display_options['relationships']['field_site_nid']['required'] = 0;
   $handler->display->display_options['relationships']['field_site_nid']['delta'] = '-1';
-  /* Relationship: Content: Coordinator (field_coordinator) */
-  $handler->display->display_options['relationships']['field_coordinator_nid']['id'] = 'field_coordinator_nid';
-  $handler->display->display_options['relationships']['field_coordinator_nid']['table'] = 'field_data_field_coordinator';
-  $handler->display->display_options['relationships']['field_coordinator_nid']['field'] = 'field_coordinator_nid';
-  $handler->display->display_options['relationships']['field_coordinator_nid']['required'] = 0;
-  $handler->display->display_options['relationships']['field_coordinator_nid']['delta'] = '-1';
+  /* Relationship: Content: Coordinator (field_coordinator) - reverse */
+  $handler->display->display_options['relationships']['reverse_field_coordinator_node']['id'] = 'reverse_field_coordinator_node';
+  $handler->display->display_options['relationships']['reverse_field_coordinator_node']['table'] = 'node';
+  $handler->display->display_options['relationships']['reverse_field_coordinator_node']['field'] = 'reverse_field_coordinator_node';
+  $handler->display->display_options['relationships']['reverse_field_coordinator_node']['required'] = 0;
   /* Relationship: Content: Course (field_course) */
   $handler->display->display_options['relationships']['field_course_nid']['id'] = 'field_course_nid';
   $handler->display->display_options['relationships']['field_course_nid']['table'] = 'field_data_field_course';
   $handler->display->display_options['relationships']['field_course_nid']['field'] = 'field_course_nid';
-  $handler->display->display_options['relationships']['field_course_nid']['relationship'] = 'field_coordinator_nid';
+  $handler->display->display_options['relationships']['field_course_nid']['relationship'] = 'reverse_field_coordinator_node';
   $handler->display->display_options['relationships']['field_course_nid']['required'] = 0;
   $handler->display->display_options['relationships']['field_course_nid']['delta'] = '-1';
+  /* Relationship: Content: Site (field_site) */
+  $handler->display->display_options['relationships']['field_site_nid_1']['id'] = 'field_site_nid_1';
+  $handler->display->display_options['relationships']['field_site_nid_1']['table'] = 'field_data_field_site';
+  $handler->display->display_options['relationships']['field_site_nid_1']['field'] = 'field_site_nid';
+  $handler->display->display_options['relationships']['field_site_nid_1']['relationship'] = 'reverse_field_coordinator_node';
+  $handler->display->display_options['relationships']['field_site_nid_1']['required'] = 0;
+  $handler->display->display_options['relationships']['field_site_nid_1']['delta'] = '-1';
   /* Field: Content: Bulk operations */
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'node';
@@ -1291,18 +1297,6 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'coordinator' => 'coordinator',
   );
-  /* Filter criterion: Content: Post date */
-  $handler->display->display_options['filters']['created']['id'] = 'created';
-  $handler->display->display_options['filters']['created']['table'] = 'node';
-  $handler->display->display_options['filters']['created']['field'] = 'created';
-  $handler->display->display_options['filters']['created']['relationship'] = 'field_coordinator_nid';
-  $handler->display->display_options['filters']['created']['operator'] = '>=';
-  $handler->display->display_options['filters']['created']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['created']['expose']['operator_id'] = 'created_op';
-  $handler->display->display_options['filters']['created']['expose']['label'] = 'Who had at least one student since';
-  $handler->display->display_options['filters']['created']['expose']['operator'] = 'created_op';
-  $handler->display->display_options['filters']['created']['expose']['identifier'] = 'created';
-  $handler->display->display_options['filters']['created']['expose']['multiple'] = FALSE;
   /* Filter criterion: Content: Role (field_staff_role) */
   $handler->display->display_options['filters']['field_staff_role_tid']['id'] = 'field_staff_role_tid';
   $handler->display->display_options['filters']['field_staff_role_tid']['table'] = 'field_data_field_staff_role';
@@ -1361,6 +1355,30 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['filters']['city']['expose']['identifier'] = 'city';
   $handler->display->display_options['filters']['city']['expose']['required'] = 0;
   $handler->display->display_options['filters']['city']['expose']['multiple'] = FALSE;
+  /* Filter criterion: Content: Subject (field_course_subject) */
+  $handler->display->display_options['filters']['field_course_subject_value']['id'] = 'field_course_subject_value';
+  $handler->display->display_options['filters']['field_course_subject_value']['table'] = 'field_data_field_course_subject';
+  $handler->display->display_options['filters']['field_course_subject_value']['field'] = 'field_course_subject_value';
+  $handler->display->display_options['filters']['field_course_subject_value']['relationship'] = 'field_course_nid';
+  $handler->display->display_options['filters']['field_course_subject_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_course_subject_value']['expose']['operator_id'] = 'field_course_subject_value_op';
+  $handler->display->display_options['filters']['field_course_subject_value']['expose']['label'] = 'Course subject';
+  $handler->display->display_options['filters']['field_course_subject_value']['expose']['operator'] = 'field_course_subject_value_op';
+  $handler->display->display_options['filters']['field_course_subject_value']['expose']['identifier'] = 'field_course_subject_value';
+  $handler->display->display_options['filters']['field_course_subject_value']['expose']['required'] = 0;
+  $handler->display->display_options['filters']['field_course_subject_value']['expose']['multiple'] = FALSE;
+  /* Filter criterion: Content: Term (field_term) */
+  $handler->display->display_options['filters']['field_term_nid']['id'] = 'field_term_nid';
+  $handler->display->display_options['filters']['field_term_nid']['table'] = 'field_data_field_term';
+  $handler->display->display_options['filters']['field_term_nid']['field'] = 'field_term_nid';
+  $handler->display->display_options['filters']['field_term_nid']['relationship'] = 'field_course_nid';
+  $handler->display->display_options['filters']['field_term_nid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_term_nid']['expose']['operator_id'] = 'field_term_nid_op';
+  $handler->display->display_options['filters']['field_term_nid']['expose']['label'] = 'Term';
+  $handler->display->display_options['filters']['field_term_nid']['expose']['operator'] = 'field_term_nid_op';
+  $handler->display->display_options['filters']['field_term_nid']['expose']['identifier'] = 'field_term_nid';
+  $handler->display->display_options['filters']['field_term_nid']['expose']['multiple'] = 1;
+  $handler->display->display_options['filters']['field_term_nid']['expose']['reduce'] = 0;
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -1396,11 +1414,12 @@ function s4_sites_views_default_views() {
     t('Site'),
     t('Operations'),
     t('[title_1] | [edit_node]'),
-    t('Who had at least one student since'),
     t('Role'),
     t('Issues addressed'),
     t('Organization type'),
     t('City'),
+    t('Course subject'),
+    t('Term'),
     t('Page'),
   );
   $export['email_site_contacts'] = $view;
