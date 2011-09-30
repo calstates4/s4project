@@ -9,14 +9,14 @@ class S4CoreTestCase extends s4WebTestCase {
 	var $admin;
 	
 	public function setUp() {
-		parent::setUp('s4_api_rest');
+		parent::setUp($this->modules);
 		$this->admin = $this->drupalCreateUser($this->roles['administrator']);
 		$this->staff = $this->drupalCreateUser($this->roles['staff']);
 		$this->authenticated = $this->drupalCreateUser($this->roles['authenticated']);
 
 	}
 	
-	public static function getInfo() {
+  public static function getInfo() {
     return array(
       'name' => 'S4 Basic Content Test',
       'description' => 'Test basic content creation and access control.',

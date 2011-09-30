@@ -1,6 +1,6 @@
 <?php
 
-require_once(drupal_get_path('module', 's4_core') .'/s4_core_base_test.php');
+require_once(drupal_get_path('module', 's4_core') .'/tests/s4_core_base_test.php');
 
 class S4CoursesTestCase extends s4WebTestCase {
 	
@@ -13,8 +13,18 @@ class S4CoursesTestCase extends s4WebTestCase {
   }
   
   public function setUp() {
-  	parent::setUp();
-  	$this->drupalCreateUser($this->roles['authenticated']);
-  	
+  	parent::setUp();  	
+  }
+  
+  public function testCourseCreation() {
+  	$this->drupalLogout();
+	$this->drupalLogin($this->admin);
+	$term_code = $this->randomName(8);
+	$term = $this->drupalCreateNode(array('type' => 'course_term',
+										  'title' => 'Fall 2012',
+										  'field_term_code' => array('en' => array(array('value' => $term_code))),
+										  'field_term_date_start' => array('en' => array(array('value' => '2011-07-10T00:00:00')))));
+	$this->drupalGet('node/'. $term->nid);
+	$this->assertText($term_code);
   }
 }
