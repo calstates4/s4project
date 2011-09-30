@@ -74,6 +74,7 @@ function s4_api_rest_admin_form() {
     '#type' => 'textfield',
     '#title' => 'URL to term callback',
     '#default_value' => $term['url'],
+    '#maxlength' => 500,
   );
   
   $form['term']['term_start_argument'] = array(
@@ -99,6 +100,7 @@ function s4_api_rest_admin_form() {
     '#type' => 'textfield',
     '#title' => 'URL to course callback',
     '#default_value' => $course['url'],
+    '#maxlength' => 500,
   );
   
   $form['course']['course_term_argument'] = array(
@@ -118,6 +120,7 @@ function s4_api_rest_admin_form() {
     '#type' => 'textfield',
     '#title' => 'URL to user callback',
     '#default_value' => $user['url'],
+    '#maxlength' => 500,
   );
   
   $form['user']['login_id_argument'] = array(
@@ -137,6 +140,7 @@ function s4_api_rest_admin_form() {
     '#type' => 'textfield',
     '#title' => 'URL to user enrollment callback',
     '#default_value' => $enrollment['url'],
+    '#maxlength' => 500,
   );
   
   $form['enrollment']['enrollment_user_id_argument'] = array(
@@ -162,6 +166,7 @@ function s4_api_rest_admin_form() {
     '#type' => 'textfield',
     '#title' => 'URL to faculty coursecallback',
     '#default_value' => $faculty_courses['url'],
+    '#maxlength' => 500,
   );
   
   $form['faculty']['faculty_user_id_argument'] = array(
