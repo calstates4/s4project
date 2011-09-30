@@ -26,5 +26,26 @@ class S4CoursesTestCase extends s4WebTestCase {
 										  'field_term_date_start' => array('en' => array(array('value' => '2011-07-10T00:00:00')))));
 	$this->drupalGet('node/'. $term->nid);
 	$this->assertText($term_code);
+	$faculty = $this->drupalCreateUser($this->roles['authenticated']);
+	$student = $this->drupalCreateUser($this->roles['authenticated']);
+	$course_name = $this->randomName(8);
+	$course = $this->drupalCreateNode(array('type' => 'course',
+											'field_course_section' => array('en' => array(array('value' => 1))),
+											'field_course_faculty' => array('en' => array(array('uid' => $faculty->uid))),
+											'field_course_catalog_number' => array('en' => array(array('value' => '101'))),
+											'field_course_subject' => array('en' => array(array('value' => 'SL'))),
+											'field_course_title' => array('en' => array(array('value' => $course_name))),
+											'field_term' => array('en' => array(array('nid' => $term->nid))),
+											'field_course_students' => array('en' => array(array('uid' => $student->uid)))));
+	$this->drupalGet('node/'. $course->nid);
+	$this->drupalLogout();
+	$this->drupalLogin($faculty);
+	$this->drupalGet('node/'. $course->nid);
+  	$this->assertNoText(t('Access denied'));
+	
+	$this->drupalLogout();
+	$this->drupalLogin($student);
+	$this->drupalGet('node/'. $course->nid);
+  	$this->assertNoText(t('Access denied'));
   }
 }
