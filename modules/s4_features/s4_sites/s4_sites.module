@@ -382,7 +382,7 @@ function s4_sites_form_field_ui_field_edit_form_alter_submit($form, $form_state)
 * Here we're adding links to descriptions as links can't be rendered right
 * stright from the admin settings.
 */
-function s4_sites_form_site_node_form_alter(&$form, $form_state, $form_id) {
+function s4_sites_form_site_node_form_alter(&$form, $form_state) {
   drupal_add_js(drupal_get_path('module', 's4_sites') .'/js/s4_site_form.js');
   drupal_add_css(drupal_get_path('module', 's4_sites') .'/css/s4_sites.css');  
   $terms = taxonomy_get_vocabularies();
@@ -717,4 +717,45 @@ function s4_sites_s4_reporting_term_report($report_criteria) {
 function s4_sites_s4_help($path) {
 	module_load_include('inc', 's4_sites', 's4_sites.help');
 	return _s4_sites_help($path);
+}
+
+function s4_sites_s4_site_configuration() {
+	return array(
+		'category_files' => array(
+			'group' => t('Categories'),
+			'title' => t('File categories'),
+			'description' => t('Change how files attached to sites are categorized.'),
+			'href' => 'admin/structure/taxonomy/file_category',
+		),
+		'category_issues' => array(
+			'group' => t('Categories'),
+			'title' => t('Issues addressed'),
+			'description' => t('Manage the list of issues addressed by sites.'),
+			'href' => 'admin/structure/taxonomy/issues_addressed',
+		),
+		'category_site_org' => array(
+			'group' => t('Categories'),
+			'title' => t('Organization type'),
+			'description' => t('Manage the list of site organization types.'),
+			'href' => 'admin/structure/taxonomy/organization_type',
+		),
+		'category_restrictions' => array(
+			'group' => t('Categories'),
+			'title' => t('Student & site restrictions'),
+			'description' => t('The list of restrictions used to control who can sign up with a site or site staff.'),
+			'href' => 'admin/structure/taxonomy/site_restrictions',
+		),
+		'category_requirements' => array(
+			'group' => t('Categories'),
+			'title' => t('Site special requirements'),
+			'description' => t('Special requirements like training or other risk-associated restrictions.'),
+			'href' => 'admin/structure/taxonomy/special_requirements',
+		),
+		'category_staff' => array(
+			'group' => t('Categories'),
+			'title' => t('Site staff roles'),
+			'description' => t('Manage the list of available site staff roles like "Executive Director" or "Site supervisor."'),
+			'href' => 'admin/structure/taxonomy/site_staff_role',
+		),
+	);
 }
