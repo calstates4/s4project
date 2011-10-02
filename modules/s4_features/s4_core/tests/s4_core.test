@@ -55,4 +55,13 @@ class S4CoreTestCase extends s4WebTestCase {
   	$this->assertNoText(t('This is not a valid URL'));
   	$this->assertText(t('REST API settings updated'));
   }
+  
+  public function testContentAccessRulesSet() {
+  	$this->drupalLogin($this->admin);
+  	$this->drupalGet('admin/structure/types/manage/course/access');
+  	$this->assertFieldChecked('edit-view-4');
+  	$elements = $this->xpath('//input[@id=:id]', array(':id' => 'edit-view-1'));
+  	$anonymous_checked = (isset($elements[0]) && empty($elements[0]['checked']));
+  	$this->assertTrue($anonymous_checked, (!$anonymous_checked) ? t('Anonymous access to courses unchecked') : t('Anonymous user have access to view courses'));
+  }
 }
