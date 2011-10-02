@@ -62,6 +62,6 @@ class S4CoreTestCase extends s4WebTestCase {
   	$this->assertFieldChecked('edit-view-4');
   	$elements = $this->xpath('//input[@id=:id]', array(':id' => 'edit-view-1'));
   	$anonymous_checked = (isset($elements[0]) && empty($elements[0]['checked']));
-  	$this->assertTrue($anonymous_checked, (!$anonymous_checked) ? t('Anonymous access to courses unchecked') : t('Anonymous user have access to view courses'));
+  	$this->assertTrue($anonymous_checked, ($anonymous_checked) ? t('Anonymous access to courses unchecked') : t('Anonymous user have access to view courses'));
   }
 }
