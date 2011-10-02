@@ -1066,7 +1066,7 @@ function s4_core_form_webform_component_edit_form_alter(&$form, $form_state) {
 }
 
 function s4_core_webform_component_presave(&$component) {
-	if(array_key_exists('s4_core_field_private', $component['display'])) {
+	if($component['display'] && array_key_exists('s4_core_field_private', $component['display'])) {
 		$component['extra']['s4_core_field_private'] = $component['display']['s4_core_field_private'];
 	}
 }

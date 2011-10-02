@@ -1,0 +1,356 @@
+<?php
+
+function s4_assessment_install() {
+   //Integrative learning rubric
+   $node = (object)(array(
+   'title' => 'Integrative Learning Rubric',
+   'type' => 'webform',
+   'language' => 'en',
+   'body' => 
+  array (
+    'en' => 
+    array (
+      0 => 
+      array (
+        'value' => '
+Integrative Learning Value Rubric
+for more information, please contact value@aacu.org
+
+Integrative learning is an understanding and a disposition that a student builds across the curriculum and cocurriculum, from making simple connections among ideas and experiences to synthesizing and transferring learning to new, complex situations within and beyond the campus.
+Evaluators are encouraged to assign a zero to any work sample or collection of work that does not meet benchnark (cell one) level performance.
+ 
+
+',
+        'summary' => '',
+        'format' => 'filtered_html',
+        'safe_value' => '
+Integrative Learning Value Rubric
+for more information, please contact value@aacu.org
+
+
+Integrative learning is an understanding and a disposition that a student builds across the curriculum and cocurriculum, from making simple connections among ideas and experiences to synthesizing and transferring learning to new, complex situations within and beyond the campus.
+
+
+Evaluators are encouraged to assign a zero to any work sample or collection of work that does not meet benchnark (cell one) level performance.
+
+
+ 
+
+
+',
+        'safe_summary' => '',
+      ),
+    ),
+  ),
+   'webform' => 
+  array (
+    'nid' => '2222',
+    'confirmation' => '
+Thank you for participating in our pilot and completing the Integrative Learning Rubric.
+
+Sincerely,
+CSU Center for Community Engagement
+Chancellor\'s Office
+
+',
+    'confirmation_format' => 'filtered_html',
+    'redirect_url' => '',
+    'status' => '1',
+    'block' => '0',
+    'teaser' => '0',
+    'allow_draft' => '0',
+    'auto_save' => '0',
+    'submit_notice' => '1',
+    'submit_text' => '',
+    'submit_limit' => '-1',
+    'submit_interval' => '-1',
+    'record_exists' => true,
+    'roles' => 
+    array (
+      0 => '1',
+      1 => '2',
+    ),
+    'emails' => 
+    array (
+    ),
+    'components' => 
+    array (
+      1 => 
+      array (
+        'cid' => '1',
+        'pid' => '0',
+        'form_key' => 'integrative_learning_rubric',
+        'name' => 'Integrative Learning Rubric',
+        'type' => 'grid',
+        'value' => '',
+        'extra' => 
+        array (
+          'title_display' => 0,
+          'optrand' => 0,
+          'qrand' => 0,
+          'conditional_operator' => '=',
+          'options' => '4|4
+3|3
+2|2
+1|1
+0|0
+',
+          'custom_option_keys' => 0,
+          'questions' => '0|Connections to Experience - Connects relevant experience and academic knowledge
+1|Connections to Discipline - Sees (makes) connections across disciplines, perspectives
+2|Transfer - Adapts and applies skills, abilities, theories, or methodologies gained in one situation to new situations
+3|Integrated Communication
+4|Reflection & Self-Assessment -Demonstrates a developing sense of self as a learner, building on prior experiences to respond to new and challenging contexts (may be evident in self-assessment, reflective, or creative work)
+',
+          'custom_question_keys' => 0,
+          's4_core_field_private' => 0,
+          'description' => '',
+          'conditional_component' => '',
+          'conditional_values' => '',
+          'rubric' => 
+          array (
+            0 => 
+            array (
+              4 => 'Meaningfully synthesizes connections among experiences outside of the formal classroom (including life experiences and academic experiences such as internships and travel abroad) to deepen understanding of fields of study and to broaden own points of view.',
+              3 => 'Effectively selects and develops examples of life experiences, drawn from a variety of contexts (e.g., family life, artistic participation, civic involvement, work experience), to illuminate concepts/theories/frameworks of fields of study.',
+              2 => 'Compares life experiences and academic knowledge to infer differences, as well as similarities, and acknowledge perspectives other than own.',
+              1 => 'Identifies connections between life experiences and those academic texts and ideas perceived as similar and related to own interests.',
+              0 => 'Below Benchmark level',
+            ),
+            1 => 
+            array (
+              4 => 'Independently creates wholes out of multiple parts (synthesizes) or draws conclusions by combining examples, facts, or theories from more than one field of study or perspective.',
+              3 => 'Independently connects examples, facts, or theories from more than one field of study or perspective.',
+              2 => 'When prompted, connects examples, facts, or theories from more than one field of study or perspective.',
+              1 => 'When prompted, presents examples, facts, or theories from more than one field of study or perspective.',
+              0 => 'Below Benchmark level',
+            ),
+            2 => 
+            array (
+              4 => 'Adapts and applies, independently, skills, abilities, theories, or methodologies gained in one situation to new situations to solve difficult problems or explore complex issues in original ways.',
+              3 => 'Adapts and applies skills, abilities, theories, or methodologies gained in one situation to new situations to solve problems or explore issues.',
+              2 => 'Uses skills, abilities, theories, or methodologies gained in one situation in a new situation to contribute to understanding of problems or issues.',
+              1 => 'Uses, in a basic way, skills, abilities, theories, or methodologies gained in one situation in a new situation.',
+              0 => 'Below Benchmark level',
+            ),
+            3 => 
+            array (
+              4 => 'Fulfills the assignment(s) by choosing a format, language, or graph (or other visual representation) in ways that enhance meaning, making clear the interdependence of language and meaning, thought, and expression.',
+              3 => 'Fulfills the assignment(s) by choosing a format, language, or graph (or other visual representation) to explicitly connect content and form, demonstrating awareness of purpose and audience.',
+              2 => 'Fulfills the assignment(s) by choosing a format, language, or graph (or other visual representation) that connects in a basic way what is being communicated (content) with how it is said (form).',
+              1 => 'Fulfills the assignment(s) (i.e. to produce an essay, a poster, a video, a PowerPoint presentation, etc.) in an appropriate form.',
+              0 => 'Below Benchmark level',
+            ),
+            4 => 
+            array (
+              4 => 'Envisions a future self (and possibly makes plans that build on past experiences that have occurred across multiple and diverse contexts).',
+              3 => 'Evaluates changes in own learning over time, recognizing complex contextual factors (e.g., works with ambiguity and risk, deals with frustration, considers ethical frameworks).',
+              2 => 'Articulates strengths and challenges (within specific performances or events) to increase effectiveness in different contexts (through increased self-awareness).',
+              1 => 'Describes own performances with general descriptors of success and failure.',
+              0 => 'Below Benchmark level',
+            ),
+          ),
+        ),
+        'mandatory' => '1',
+        'weight' => '0',
+        'page_num' => 1,
+      ),
+    ),
+  ),
+   'cid' => '0',
+   'last_comment_timestamp' => '1316546454',
+   'last_comment_name' => NULL,
+   'last_comment_uid' => '5',
+   'comment_count' => '0',
+   'locations' => 
+  array (
+  ),
+   'location' => 
+  array (
+  ),
+));
+node_save($node);
+
+//Civic engagement rubric
+$node = (object)(array(
+   'title' => 'Civic Engagement Rubric',
+   'type' => 'webform',
+   'language' => 'en',
+   'body' => 
+  array (
+    'en' => 
+    array (
+      0 => 
+      array (
+        'value' => '
+Please complete this form.
+
+',
+        'summary' => '',
+        'format' => 'filtered_html',
+        'safe_value' => '
+Please complete this form.
+
+
+',
+        'safe_summary' => '',
+      ),
+    ),
+  ),
+   'webform' => 
+  array (
+    'confirmation' => '',
+    'confirmation_format' => NULL,
+    'redirect_url' => '',
+    'status' => '1',
+    'block' => '0',
+    'teaser' => '0',
+    'allow_draft' => '0',
+    'auto_save' => '0',
+    'submit_notice' => '1',
+    'submit_text' => '',
+    'submit_limit' => '-1',
+    'submit_interval' => '-1',
+    'record_exists' => true,
+    'roles' => 
+    array (
+      0 => '1',
+      1 => '2',
+    ),
+    'emails' => 
+    array (
+    ),
+    'components' => 
+    array (
+      2 => 
+      array (
+        'cid' => '2',
+        'pid' => '0',
+        'form_key' => 'instructions',
+        'name' => 'Instructions',
+        'type' => 'markup',
+        'value' => '
+Civic Engagement Value Rubric
+for more information, please contact value@aacu.org
+
+Civic engagement is "working to make a difference in the civic life of our communities and developing the combination of knowledge, skills, values, and motivation to make that difference. It means promoting the quality of life in a community, through both political and non-political processes." (Excerpted from Civic Responsibility and Higher Education, edited by Thomas Ehrlich, published by Oryx Press, 2000, Preface, page vi.) In addition, civic engagement encompasses actions wherein individuals participate in activities of personal and public concern that are both individually life enriching and socially beneficial to the community.
+
+Evaluators are encouraged to assign a zero to any work sample or collection of work that does not meet benchmark (cell one) level performance.
+
+',
+        'extra' => 
+        array (
+          'conditional_operator' => '=',
+          'format' => 'filtered_html',
+          's4_core_field_private' => 0,
+          'conditional_component' => '',
+          'conditional_values' => '',
+        ),
+        'mandatory' => '0',
+        'weight' => '1',
+        'page_num' => 1,
+      ),
+      1 => 
+      array (
+        'cid' => '1',
+        'pid' => '0',
+        'form_key' => 'rubric',
+        'name' => 'Civic Engagement Rubric',
+        'type' => 'grid',
+        'value' => '',
+        'extra' => 
+        array (
+          'title_display' => 0,
+          'optrand' => 0,
+          'qrand' => 0,
+          'conditional_operator' => '=',
+          'options' => '4|4
+3|3
+2|2
+1|1
+0|0
+',
+          'custom_option_keys' => 1,
+          'questions' => '0|Diversity of Communities and Cultures
+1|Analysis of Knowledge
+2|Civic Identity and Commitment
+3|Civic Communication
+4|Civic Action and Reflection
+5|Civic Contexts/Structures
+',
+          'custom_question_keys' => 0,
+          's4_core_field_private' => 0,
+          'description' => '',
+          'conditional_component' => '',
+          'conditional_values' => '',
+          'rubric' => 
+          array (
+            0 => 
+            array (
+              4 => 'Demonstrates evidence of adjustment in own attitudes and beliefs because of working within and learning from diversity of communities and cultures. Promotes others\' engagement with diversity.',
+              3 => 'Reflects on how own attitudes and beliefs are different from those of other cultures and communities. Exhibits curiosity about what can be learned from diversity of communities and cultures.',
+              2 => 'Has awareness that own attitudes and beliefs are different from those of other cultures and communities. Exhibits little curiosity about what can be learned from diversity of communities and cultures.',
+              1 => 'Expresses attitudes and beliefs as an individual, from a one-sided view.  Is indifferent or resistant to what can be learned from diversity of communities and cultures.',
+              0 => 'Below Benchmark Level',
+            ),
+            1 => 
+            array (
+              4 => 'Connects and extends knowledge (facts, theories, etc.) from one\'s own academic study/field/discipline to civic engagement and to one\'s own  participation in civic life, politics, and government.',
+              3 => 'Analyzes knowledge (facts, theories, etc.) from one\'s own academic study/field/discipline making relevant connections to civic engagement and to one\'s own participation in civic life, politics, and government.',
+              2 => 'Begins to connect knowledge (facts, theories, etc.) from one\'s own academic study/field/discipline to civic engagement and to tone\'s own participation in civic life, politics, and government.',
+              1 => 'Begins to identify knowledge (facts, theories, etc.) from one\'s own academic study/field/discipline that is relevant to civic engagement and to one\'s own participation in civic life, politics, and government.',
+              0 => 'Below Benchmark Level',
+            ),
+            2 => 
+            array (
+              4 => 'Provides evidence of experience in civic-engagement activities and describes what she/he has learned about her or himself as it relates to a reinforced and clarified sense of civic identity and continued commitment to public action.',
+              3 => 'Provides evidence of experience in civic-engagement activities and describes what she/he has learned about her or himself as it relates to a growing sense of civic identity and commitment.',
+              2 => 'Evidence suggests involvement in civic-engagement activities is generated from expectations or course requirements rather than from a sense of civic identity. ',
+              1 => 'Provides little evidence of her/his experience in civic-engagement activities and does not connect experiences to civic identity.',
+              0 => 'Below Benchmark Level',
+            ),
+            3 => 
+            array (
+              4 => 'Tailors communication strategies to effectively express, listen, and adapt to others to establish relationships to further civic action',
+              3 => 'Effectively communicates in civic context, showing ability to do all of the following:  express, listen, and adapt ideas and messages based on others\' perspectives.',
+              2 => 'Communicates in civic context, showing ability to do more than one of the following:  express, listen, and adapt ideas and messages based on others\' perspectives.',
+              1 => 'Communicates in civic context, showing ability to do one of the following:  express, listen, and adapt ideas and messages based on others\' perspectives.',
+              0 => 'Below Benchmark Level',
+            ),
+            4 => 
+            array (
+              4 => 'Demonstrates independent experience and shows initiative in team leadership of complex or multiple civic engagement activities, accompanied by reflective insights or analysis about the aims and accomplishments of one\'s actions.',
+              3 => 'Demonstrates independent experience and team leadership of civic action, with reflective insights or analysis about the aims and accomplishments of one\'s actions.',
+              2 => 'Has clearly participated in civically focused actions and begins to reflect or describe how these actions may benefit individual(s) or communities.',
+              1 => 'Has experimented with some civic activities but shows little internalized understanding of their aims or effects and little commitment to future action.',
+              0 => 'Below Benchmark Level',
+            ),
+            5 => 
+            array (
+              4 => 'Demonstrates ability and commitment to collaboratively work across and within community contexts and structures to achieve a civic aim.',
+              3 => 'Demonstrates ability and commitment to work actively within community contexts and structures to achieve a civic aim.',
+              2 => 'Demonstrates experience identifying intentional ways to participate in civic contexts and structures.',
+              1 => 'Experiments with civic contexts and structures, tries out a few to see what fits.',
+              0 => 'Below Benchmark Level',
+            ),
+          ),
+        ),
+        'mandatory' => '1',
+        'weight' => '2',
+        'page_num' => 1,
+      ),
+    ),
+  ),
+   'cid' => '0',
+   'last_comment_name' => NULL,
+   'last_comment_uid' => '1',
+   'comment_count' => '0',
+   'locations' => 
+  array (
+  ),
+   'location' => 
+  array (
+  ),
+));
+node_save($node);
+}
