@@ -1,0 +1,55 @@
+"term","subject","catalog_number","section","title","status"
+2114,"SL","200S",1,"Intro to Service",1
+2114,"SL","200S",2,"Intro to Service",1
+2114,"SL","200S",3,"Intro to Service",1
+2114,"SL","200S",4,"Intro to Service",1
+2114,"TAT","399S",1,"TAT in the Community",1
+2114,"SL","201S",1,"Intro to Service",1
+2114,"SL","201S",2,"Intro to Service",1
+2114,"SL","295S",1,"SL Leadership Training",1
+2114,"SL","497S",2,"Independent Study",1
+2114,"VPA","306S",1,"Digital Public Art",1
+2114,"SBS","324S",1,"Archaeology/Map to Museum",1
+2114,"LS","298S",1,"Intro to Teaching & Learning S",1
+2114,"LS","298S",2,"Intro to Teaching & Learning S",1
+2114,"LS","298S",3,"Intro to Teaching & Learning S",1
+2114,"LS","394S",2,"Multi Lit Chld & Yng Adults",1
+2114,"SPAN","301S",1,"Comp/Oral Practice SL",1
+2114,"KIN","471S",1,"Service Learning: KIN Majors",1
+2114,"GS","380S",1,"Int'l Organizations & SL",1
+2114,"CST","361S",90,"Technology Tutors",1
+2114,"MATH","361S",1,"Mathematics Tutors",1
+2114,"HCOM","307S",1,"Soc Impct Of Mass Media SL",1
+2114,"BUS","303S",1,"Partic in Comm Econ Devel",1
+2114,"BUS","303S",2,"Partic in Comm Econ Devel",1
+2114,"VPA","320S",1,"Museum Studies",1
+2114,"SL","497S",1,"Independent Study",1
+2114,"ENVS","384S",1,"Social andEcologicalJustice SL",1
+2114,"LS","398S",1,"Soc Found of Multicult Ed S",1
+2114,"HCOM","340S",1,"Topics in Social Movements SL",1
+2114,"LS","394S",1,"Multi Lit Chld & Yng Adults",1
+2114,"ENVS","349S",1,"Natural History Interpretation",1
+2114,"SL","200S",5,"Intro to Service",1
+2114,"HCOM","350S",1,"Oral Hist/Comm Mem SL",1
+2114,"SL","300S",1,"SL Design & Pedagogy",1
+2114,"KIN","471S",2,"Service Learning: KIN Majors",1
+2114,"JAPN","301S",1,"Advanced Japanese SL",1
+2114,"LS","298S",5,"Intro to Teaching & Learning S",1
+2114,"SL","200S",6,"Intro to Service",1
+2114,"SL","200S",8,"Intro to Service",1
+2114,"SL","397S",1,"SL Pedagogy & Partner Support",1
+2114,"CHHS","396S",1,"Jr Field Pract Seminar A: SL",1
+2114,"CHHS","398S",1,"Jr Field Pract Seminar B: SL",1
+2114,"HCOM","432S",1,"Social Action Writing",1
+2114,"SL","200S",7,"Intro to Service",1
+2114,"SL","397S",2,"SL Pedagogy & Partner Support",1
+2114,"SL","492S",1,"SL:Community Research SL",1
+2114,"LS","398S",2,"Soc Found of Multicult Ed S",1
+2114,"HDEV","380S",1,"Service Learning Human Dev",1
+2114,"LS","398S",3,"Soc Found of Multicult Ed S",1
+2114,"LS","298S",4,"Intro to Teaching & Learning S",1
+2114,"SBS","400S",1,"Senior Capstone I/SL",1
+2114,"SBS","320S",1,"Hispanic Calif - 1542 to 1848",1
+2114,"BIO","379S",1,"Biology Education Serv Learn",1
+2114,"SBS","384S",1,"Cult/Contexts/Bilingual/Educat",1
+2114,"HCOM","395S",1,"Special Topic:Service Learning",1
