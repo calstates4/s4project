@@ -298,4 +298,14 @@ function s4_sites_test_import_sites() {
 		s4_sites_batch_import_node($row, $headers, $fields, array(), $context);
 	}
 	fclose($file);
+	$nids = db_select('node', 'n')
+			 ->condition('n.type', 'site')
+			 ->fields('n', array('nid'))
+			 ->execute()
+			 ->fetchCol();
+	foreach($nids as $nid) {
+		$node = node_load($nid);
+		$node->status = 1;
+		node_save($node);
+	}
 }
