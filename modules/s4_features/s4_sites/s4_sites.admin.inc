@@ -303,9 +303,8 @@ function s4_sites_test_import_sites() {
 	}
 	$context = array();
 	$extra = array();
-	//while($row = fgetcsv($file)) {
-	$row = fgetcsv($file);
+	while($row = fgetcsv($file)) {
 		s4_sites_batch_import_node($row, $headers, $fields, $extra, $context);
-	//}
+	}
 	fclose($file);
 }
