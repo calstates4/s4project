@@ -190,9 +190,9 @@ function s4_sites_batch_import_node($row, $headers, $fields, $extra, &$context) 
 	}
 	$node = new stdClass();
 	$node->type = 'site';
-  node_object_prepare($node);
-  $node->uid = $user->uid;
-  $node->language = LANGUAGE_NONE;
+    node_object_prepare($node);
+    $node->uid = $user->uid;
+    $node->language = LANGUAGE_NONE;
 	$node->title = check_plain($new_row['title']);
 	$location = array(
 			'street' => $new_row['location_street'],

@@ -48,15 +48,16 @@ function s4_generate_signup() {
   $course = db_query('SELECT entity_id, field_course_students_uid FROM field_data_field_course_students WHERE entity_id = (select nid from node where type = :course order by rand() limit 1) AND field_course_students_uid NOT IN (SELECT uid FROM node WHERE type = :signup) order by rand() limit 1', array(':course' => 'course', ':signup' => 'signup'));
   $course = $course->fetchAssoc();
   $site = db_query('SELECT nid FROM node WHERE type = :site order by RAND() limit 1', array(':site' => 'site'));
-  $settings = array('user' => $course['field_course_students_uid'],
-           'site' => $site->fetchField(),
-           'course' => $course['entity_id'],
-           'coordinator' => 0,
-           'location' => 0,
-           'signup_sid' => 0,
-           'hours' => 30,);
-  _s4_core_create_signup($course['field_course_students_uid'], $settings);
-
+  if($site) {
+	  $settings = array('user' => $course['field_course_students_uid'],
+	           'site' => $site->fetchField(),
+	           'course' => $course['entity_id'],
+	           'coordinator' => 0,
+	           'location' => 0,
+	           'signup_sid' => 0,
+	           'hours' => 30,);
+	  _s4_core_create_signup($course['field_course_students_uid'], $settings);
+  }
 }
 
 function s4_generate_finished($success, $results, $operations) {
