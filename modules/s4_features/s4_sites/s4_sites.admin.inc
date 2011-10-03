@@ -61,9 +61,6 @@ function s4_sites_import_sites_form() {
 		if($vocabulary->machine_name == 'site_restrictions') {
 			$restrict = taxonomy_get_tree($vid);
 		}
-		if($vocabulary->machine_name == 'site_restrictions') {
-			$restrict = taxonomy_get_tree($vid);
-		}
 	}
 	
 	if($restrict) {
@@ -282,6 +279,18 @@ function s4_sites_admin_form() {
 }
 
 function s4_sites_test_import_sites() {
+	$workflow_status = false;
+	foreach(taxonomy_get_vocabularies() as $vid => $vocabulary) {
+		if($vocabulary->machine_name == 'workflow_status') {
+			$workflow_status = taxonomy_get_tree($vid);
+		}
+	}
+	$extra = array();
+	foreach($workflow_status as $status) {
+		if(variable_get('s4_sites_workflow_'. $status->tid, 'none') == 'publish') {
+			$extra['default_status'] = $status->tid;
+		}
+	}
 	$file = fopen(drupal_get_path('module', 's4_sites') .'/tests/sites.csv', 'r');
 	$headers = fgetcsv($file);
 	$fields = s4_sites_import_field_mapping();
@@ -294,18 +303,9 @@ function s4_sites_test_import_sites() {
 	}
 	$context = array();
 	$extra = array();
-	while($row = fgetcsv($file)) {
-		s4_sites_batch_import_node($row, $headers, $fields, array(), $context);
-	}
+	//while($row = fgetcsv($file)) {
+	$row = fgetcsv($file);
+		s4_sites_batch_import_node($row, $headers, $fields, $extra, $context);
+	//}
 	fclose($file);
-	$nids = db_select('node', 'n')
-			 ->condition('n.type', 'site')
-			 ->fields('n', array('nid'))
-			 ->execute()
-			 ->fetchCol();
-	foreach($nids as $nid) {
-		$node = node_load($nid);
-		$node->status = 1;
-		node_save($node);
-	}
 }
