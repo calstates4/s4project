@@ -188,6 +188,7 @@ function s4_sites_batch_import_node($row, $headers, $fields, $extra, &$context) 
 	foreach($fields as $name => $field) {
 		$new_row[$name] = filter_xss($row[$field['key']]);
 	}
+	
 	$node = new stdClass();
 	$node->type = 'site';
     node_object_prepare($node);
@@ -284,8 +285,12 @@ function s4_sites_test_import_sites() {
 	$file = fopen(drupal_get_path('module', 's4_sites') .'/tests/sites.csv', 'r');
 	$headers = fgetcsv($file);
 	$fields = s4_sites_import_field_mapping();
-	foreach($fields as $name => $field) {
-		$fields[$name]['key'] = $field['csv'];
+	foreach($headers as $k => $h) {
+		foreach($fields as $name => $field) {
+			if($field['csv'] == trim($h)) {
+				$fields[$name]['key'] = $k;
+			}
+		}
 	}
 	$context = array();
 	$extra = array();
