@@ -96,10 +96,12 @@ function s4_courses_cron() {
   if (time() > variable_get('s4_term_cron_last_update', 0) + variable_get('s4_courses_update_frequency', (2 * 60 * 60))) {
     $terms = module_invoke_all('s4_get_term', date('Y-m-d', strtotime('-1 year')),
                            date('Y-m-d', strtotime('+1 year')));
-    foreach ($terms as $term) {
-      s4_courses_create_term($term);
-    }
-    variable_set('s4_term_cron_last_update', time());
+    if(count($terms)) {
+	    foreach ($terms as $term) {
+	      s4_courses_create_term($term);
+	    }
+	    variable_set('s4_term_cron_last_update', time());
+	}
     return NULL;
   }
   if (time() > variable_get('s4_courses_cron_last_update', 0) + variable_get('s4_courses_update_frequency', (2 * 60 * 60))) {
