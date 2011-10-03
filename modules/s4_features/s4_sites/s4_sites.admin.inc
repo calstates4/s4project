@@ -284,6 +284,9 @@ function s4_sites_test_import_sites() {
 	$file = fopen(drupal_get_path('module', 's4_sites') .'/tests/sites.csv', 'r');
 	$headers = fgetcsv($file);
 	$fields = s4_sites_import_field_mapping();
+	foreach($fields as $name => $field) {
+		$fields[$name]['key'] = $field['csv'];
+	}
 	$context = array();
 	$extra = array();
 	while($row = fgetcsv($file)) {
