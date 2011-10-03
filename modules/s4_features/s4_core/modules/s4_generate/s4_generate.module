@@ -3,7 +3,7 @@
 function s4_generate_menu() {
 	$items = array();
 	
-	$items['admin/config/s4/api-devel'] = array(
+	$items['admin/config/s4/generate'] = array(
 		'title' => 'Generate signups',
 		'description' => 'Generate fake signup records.',
 		'page callback' => 'drupal_get_form',
@@ -47,6 +47,9 @@ function s4_generate_form_submit($formm, $form_state) {
 function s4_generate_signup() {
   $course = db_query('SELECT entity_id, field_course_students_uid FROM field_data_field_course_students WHERE entity_id = (select nid from node where type = :course order by rand() limit 1) AND field_course_students_uid NOT IN (SELECT uid FROM node WHERE type = :signup) order by rand() limit 1', array(':course' => 'course', ':signup' => 'signup'));
   $course = $course->fetchAssoc();
+  if(!$course) {
+  	return null;
+  }
   $site = db_query('SELECT nid FROM node WHERE type = :site order by RAND() limit 1', array(':site' => 'site'));
   if($site) {
 	  $settings = array('user' => $course['field_course_students_uid'],
