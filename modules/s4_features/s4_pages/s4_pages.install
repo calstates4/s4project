@@ -1,15 +1,20 @@
 <?php
 
-function s4_pages_install() {
+function s4_pages_enable() {
 	foreach(user_roles() as $rid => $name) {
+		dpm($rid);
+		db_delete('front_page')
+				 ->condition('rid', $rid)
+				 ->execute();
 		if($name == 'staff') {
-			db_insert('front_page')
+			$result = db_insert('front_page')
 			->fields(array('rid' => $rid, 
 						   'mode' => 'alias', 
 						   'data' => 'home', 
 						   'filter_format' => '', 
 						   'weight' => 0))
 			->execute();
+			dpm($result);
 		}
 		else {
 			db_insert('front_page')
