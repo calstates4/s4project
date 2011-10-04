@@ -2,7 +2,6 @@
 
 function s4_pages_enable() {
 	foreach(user_roles() as $rid => $name) {
-		dpm($rid);
 		db_delete('front_page')
 				 ->condition('rid', $rid)
 				 ->execute();
@@ -14,7 +13,6 @@ function s4_pages_enable() {
 						   'filter_format' => '', 
 						   'weight' => 0))
 			->execute();
-			dpm($result);
 		}
 		else {
 			db_insert('front_page')
