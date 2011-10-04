@@ -1,13 +1,5 @@
 <?php
 
-function s4_pages_init() {
-	if(!variable_get('s4_pages_front_set', false)) {
-		module_load_include('install', 'st_pages');
-		s4_pages_enable();
-	}
-	variable_set('s4_pages_front_set', true);
-}
-
 /**
 *  Implementaiton of hook_menu
 */
