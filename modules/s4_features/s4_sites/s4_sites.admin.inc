@@ -191,7 +191,7 @@ function s4_sites_batch_import_node($row, $headers, $fields, $extra, &$context) 
     node_object_prepare($node);
     $node->uid = $user->uid;
     $node->language = LANGUAGE_NONE;
-	$node->title = check_plain($new_row['title']);
+	$node->title = filter_xss($new_row['title']);
 	$location = array(
 			'street' => $new_row['location_street'],
 			'additional' => $new_row['location_additional'],
