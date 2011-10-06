@@ -52,4 +52,11 @@ class S4CoursesTestCase extends s4WebTestCase {
   	$this->drupalGet('node/'. $course->nid);
   	$this->assertText(t('Access denied'));
   }
+  
+  public function testCourseList() {
+  	$this->drupalLogout();
+	$this->drupalLogin($this->drupalCreateUser($this->roles['administrator']));
+	$this->drupalGet('courses');
+	$this->assertText('101');
+  }
 }

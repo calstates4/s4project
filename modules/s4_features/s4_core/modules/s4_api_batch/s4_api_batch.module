@@ -71,6 +71,7 @@ function s4_api_batch_cron() {
   $terms = s4_api_batch_get_batch('terms.txt');
   if ($terms) {
     foreach ($terms as $term) {
+      array_walk($term, 'trim');
       db_delete('s4_api_batch_terms')
         ->condition('term_code', $term['term_code'])
         ->execute();
@@ -89,6 +90,7 @@ function s4_api_batch_cron() {
   $users = s4_api_batch_get_batch('users.txt');
   if ($users) {
     foreach ($users as $user) {
+      array_walk($user, 'trim');
       db_delete('s4_api_batch_users')
         ->condition('user_id', $user['user_id'])
         ->execute();
@@ -110,6 +112,7 @@ function s4_api_batch_cron() {
   $courses = s4_api_batch_get_batch('courses.txt');
   if ($courses) {
     foreach ($courses as $course) {
+      array_walk($course, 'trim');
       db_delete('s4_api_batch_courses')
         ->condition('term', $course['term'])
         ->condition('subject', $course['subject'])
@@ -142,6 +145,7 @@ function _s4_api_batch_cron_update_user_courses($file, $role) {
     return FALSE;
   }
   foreach ($users as $user) {
+    array_walk($user, 'trim');
     db_delete('s4_api_batch_user_courses')
       ->condition('role', $role)
       ->condition('term', $user['term'])
