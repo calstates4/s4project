@@ -215,6 +215,9 @@ function s4_sites_batch_import_node($row, $headers, $fields, $extra, &$context) 
 	if($extra['default_status']) {
 		$node->field_workflow_status[$node->language] = $extra['default_status'];
 	}
+	if(isset($extra['status'])) {
+		$node->status = $extra['status'];
+	}
 	node_save($node);
 	$context['message'] = t('Now processing %node', array('%node' => $new_row['title']));
 	$context['results'][] = $node->nid;
@@ -302,7 +305,7 @@ function s4_sites_test_import_sites() {
 		}
 	}
 	$context = array();
-	$extra = array();
+	$extra = array('status' => NODE_PUBLISHED);
 	while($row = fgetcsv($file)) {
 		s4_sites_batch_import_node($row, $headers, $fields, $extra, $context);
 	}
