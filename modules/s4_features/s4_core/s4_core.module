@@ -847,7 +847,7 @@ function s4_core_action_info() {
   return array(
     's4_core_email_site_coordinator_action' => array(
         'type' => 'system',
-        'label' => t('Send coordinator e-mail'),
+        'label' => t('Send site staff e-mail'),
         'configurable' => TRUE,
         'triggers' => array('any'),
       ),
