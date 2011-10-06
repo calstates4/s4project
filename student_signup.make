@@ -116,6 +116,9 @@ projects[options_element][version] = "1.4"
 projects[pathauto][subdir] = "contrib"
 projects[pathauto][version] = "1.0-beta1"
 
+projects[references][subdir] = "contrib"
+projects[references][version] = "2.x-dev"
+
 projects[save_draft][subdir] = "contrib"
 projects[save_draft][version] = "1.4"
 
@@ -175,13 +178,6 @@ projects[matrix][subdir] = "contrib"
 projects[matrix][version] = "1.x-dev"
 projects[matrix][download][type] = "file"
 projects[matrix][download][url] = "http://s4.csumb.edu/hosted_modules/matrix.tar.gz"
-
-projects[references][type] = module
-projects[references][subdir] = "contrib"
-projects[references][version] = "2.x-dev"
-projects[references][download][type] = "git"
-projects[references][download][url] = "http://git.drupal.org/project/references.git"
-projects[references][download][branch] = "7.x-2.x"
 
 projects[views_datasource][type] = module
 projects[views_datasource][subdir] = "contrib"
