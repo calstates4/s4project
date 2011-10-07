@@ -1080,8 +1080,13 @@ function s4_core_form_file_node_form_alter(&$form, $form_state) {
   drupal_add_js(drupal_get_path('module', 's4_core') . '/js/s4.node-file.js');
   foreach ($form['field_file_category'][$form['#node']->language]['#options'] as $tid => $taxonomy) {
     $term = taxonomy_term_load($tid);
-    $days = field_get_items('taxonomy_term', $term, 'field_type_reminder_days');
-    $reminders[$tid] = $days[0]['value'];
+    try {
+	    $days = field_get_items('taxonomy_term', $term, 'field_type_reminder_days');
+	    $reminders[$tid] = $days[0]['value'];
+	}
+	catch (Exception $e) { 
+		$reminders[$tid] = 30;
+	}
   }
   drupal_add_js(array('file_category_reminders' => array('days' => $reminders,
             'node_exists' => ($form['#node']->nid) ? TRUE : FALSE)), 
