@@ -183,7 +183,7 @@ function s4_sites_batch_import_node($row, $headers, $fields, $extra, &$context) 
 	global $user;
 	$new_row = array();
 	foreach($fields as $name => $field) {
-		$new_row[$name] = filter_xss($row[$field['key']]);
+		$new_row[$name] = strip_tags($row[$field['key']]);
 	}
 	
 	$node = new stdClass();
@@ -191,7 +191,7 @@ function s4_sites_batch_import_node($row, $headers, $fields, $extra, &$context) 
     node_object_prepare($node);
     $node->uid = $user->uid;
     $node->language = LANGUAGE_NONE;
-	$node->title = filter_xss($new_row['title']);
+	$node->title = strip_tags($new_row['title']);
 	$location = array(
 			'street' => $new_row['location_street'],
 			'additional' => $new_row['location_additional'],
