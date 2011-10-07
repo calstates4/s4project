@@ -37,6 +37,10 @@ class S4CoursesTestCase extends s4WebTestCase {
 											'field_course_title' => array('en' => array(array('value' => $course_name))),
 											'field_term' => array('en' => array(array('nid' => $term->nid))),
 											'field_course_students' => array('en' => array(array('uid' => $student->uid)))));
+	
+  	$this->drupalGet('courses');
+  	$this->assertText($course_name);
+	
 	$this->drupalGet('node/'. $course->nid);
 	$this->drupalLogout();
 	$this->drupalLogin($faculty);
@@ -51,6 +55,8 @@ class S4CoursesTestCase extends s4WebTestCase {
   	$this->drupalLogout();
   	$this->drupalGet('node/'. $course->nid);
   	$this->assertText(t('Access denied'));
+  	
+  	
   }
   
   public function testCourseList() {
