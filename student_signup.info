@@ -696,3 +696,11 @@ terms[declined][name] = "Declined"
 terms[declined][vocabulary_machine_name] = workflow_status
 terms[approved][name] = "Approved"
 terms[approved][vocabulary_machine_name] = workflow_status
+
+;Vocabularies - file category
+terms[survey][name] = "Survey"
+terms[survey][vocabulary_machine_name] = file_category
+terms[site_agreement][name] = "Site agreement"
+terms[site_agreement][vocabulary_machine_name] = file_category
+terms[risk_agreement][name] = "Risk management"
+terms[risk_agreement][vocabulary_machine_name] = file_category
