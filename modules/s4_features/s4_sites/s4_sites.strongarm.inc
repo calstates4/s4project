@@ -748,26 +748,26 @@ function s4_sites_strongarm() {
       'field_course_faculty' => array(
         'referenced' => array(
           'view' => 'view',
-          'update' => 'update',
+          'update' => 0,
           'delete' => 0,
           'deny_view' => 0,
           'deny_update' => 0,
           'deny_delete' => 0,
         ),
         'author' => array(
-          'view' => 'view',
-          'update' => 'update',
-          'delete' => 'delete',
+          'view' => 0,
+          'update' => 0,
+          'delete' => 0,
         ),
         'all' => array(
           'view' => 0,
         ),
-        'unused' => '1',
+        'unused' => '0',
         'views' => array(
           'view' => '',
           'view_args' => '',
         ),
-        'priority' => '10',
+        'priority' => '9',
       ),
       'field_course_students' => array(
         'referenced' => array(
@@ -779,19 +779,19 @@ function s4_sites_strongarm() {
           'deny_delete' => 0,
         ),
         'author' => array(
-          'view' => 'view',
-          'update' => 'update',
-          'delete' => 'delete',
+          'view' => 0,
+          'update' => 0,
+          'delete' => 0,
         ),
         'all' => array(
           'view' => 0,
         ),
-        'unused' => '0',
+        'unused' => '1',
         'views' => array(
           'view' => '',
           'view_args' => '',
         ),
-        'priority' => '10',
+        'priority' => '9',
       ),
     ),
     'site' => array(
