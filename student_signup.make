@@ -220,4 +220,3 @@ projects[wysiwyg][patch][] = "http://drupal.org/files/issues/wysiwyg-entity-expo
 projects[token][patch][] = "http://drupal.org/files/issues/modules_token.92.patch"
 projects[field_collection][patch][] = "http://drupal.org/files/issues/field_collection-1209806-7.patch"
 projects[cck_phone][patch][] = "http://drupal.org/files/issues/cck_phone_testing-1165464-2.patch"
-projects[references][patch][] = "http://drupal.org/files/issues/column_not_found_1054_unkonw_column-1275096-11.patch"
