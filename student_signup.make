@@ -83,9 +83,6 @@ projects[imce_wysiwyg][version] = "1.x-dev"
 projects[insert][subdir] = "contrib"
 projects[insert][version] = "1.0"
 
-projects[job_scheduler][subdir] = "contrib"
-projects[job_scheduler][version] = "2.0-alpha2"
-
 projects[link][subdir] = "contrib"
 projects[link][version] = "1.0-alpha3"
 
