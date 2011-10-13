@@ -1633,14 +1633,6 @@ function s4_sites_views_default_views() {
   );
   $handler->display->display_options['row_options']['hide_empty'] = 0;
   $handler->display->display_options['row_options']['default_field_elements'] = 1;
-  /* No results behavior: Global: Text area */
-  $handler->display->display_options['empty']['area']['id'] = 'area';
-  $handler->display->display_options['empty']['area']['table'] = 'views';
-  $handler->display->display_options['empty']['area']['field'] = 'area';
-  $handler->display->display_options['empty']['area']['empty'] = FALSE;
-  $handler->display->display_options['empty']['area']['content'] = 'No recent activity.';
-  $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
-  $handler->display->display_options['empty']['area']['tokenize'] = 0;
   /* Relationship: Comment: Content */
   $handler->display->display_options['relationships']['nid']['id'] = 'nid';
   $handler->display->display_options['relationships']['nid']['table'] = 'comment';
@@ -1783,7 +1775,6 @@ function s4_sites_views_default_views() {
     t('Items per page'),
     t('- All -'),
     t('Offset'),
-    t('No recent activity.'),
     t('Content'),
     t('author'),
     t('[name] posted '),
@@ -3186,14 +3177,6 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['header']['area']['content'] = 'This is a list of sites that people have submitted for review, or are unpublished because their information is incomplete.';
   $handler->display->display_options['header']['area']['format'] = 'filtered_html';
   $handler->display->display_options['header']['area']['tokenize'] = 0;
-  /* No results behavior: Global: Text area */
-  $handler->display->display_options['empty']['area']['id'] = 'area';
-  $handler->display->display_options['empty']['area']['table'] = 'views';
-  $handler->display->display_options['empty']['area']['field'] = 'area';
-  $handler->display->display_options['empty']['area']['empty'] = FALSE;
-  $handler->display->display_options['empty']['area']['content'] = 'No sites are waiting for approval.';
-  $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
-  $handler->display->display_options['empty']['area']['tokenize'] = 0;
   /* Relationship: Content: Author */
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';
   $handler->display->display_options['relationships']['uid']['table'] = 'node';
@@ -3408,7 +3391,6 @@ function s4_sites_views_default_views() {
     t('- All -'),
     t('Offset'),
     t('This is a list of sites that people have submitted for review, or are unpublished because their information is incomplete.'),
-    t('No sites are waiting for approval.'),
     t('author'),
     t('Post date'),
     t('E-mail'),
