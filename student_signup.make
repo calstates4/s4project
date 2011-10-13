@@ -12,7 +12,7 @@ api = 2
 
 ; Contrib Modules
 projects[auto_nodetitle][subdir] = "contrib"
-projects[auto_nodetitle][version] = "1.0-alpha1"
+projects[auto_nodetitle][version] = "1.0"
 
 projects[better_exposed_filters][subdir] = "contrib"
 projects[better_exposed_filters][version] = "1.x-dev"
@@ -30,19 +30,19 @@ projects[content_access][subdir] = "contrib"
 projects[content_access][version] = "1.2-beta1"
 
 projects[context][subdir] = "contrib"
-projects[context][version] = "3.0-beta1"
+projects[context][version] = "3.0-beta2"
 
 projects[ctools][subdir] = "contrib"
-projects[ctools][version] = "1.x-dev"
+projects[ctools][version] = "1.0-rc1"
 
 projects[date][subdir] = "contrib"
-projects[date][version] = "2.0-alpha3"
+projects[date][version] = "2.0-alpha4"
 
 projects[email][subdir] = "contrib"
-projects[email][version] = "1.0-beta1"
+projects[email][version] = "1.0"
 
 projects[entity][subdir] = "contrib"
-projects[entity][version] = "1.0-beta9"
+projects[entity][version] = "1.0-beta10"
 
 projects[fancybox][subdir] = "contrib"
 projects[fancybox][version] = "1.x-dev"
@@ -53,50 +53,41 @@ projects[features][version] = "1.0-beta4"
 projects[field_display_label][subdir] = "contrib"
 projects[field_display_label][version] = "1.2"
 
-projects[field_collection][subdir] = "contrib"
-projects[field_collection][version] = "1.x-dev"
-
-projects[field_collection_table][subdir] = "contrib"
-projects[field_collection_table][version] = "1.x-dev"
-
 projects[field_group][subdir] = "contrib"
 projects[field_group][version] = "1.0"
 
 projects[flag][subdir] = "contrib"
-projects[flag][version] = "2.0-beta5"
+projects[flag][version] = "2.0-beta6"
 
 projects[front][subdir] = "contrib"
-projects[front][version] = "2.0-rc1"
+projects[front][version] = "2.0"
 
 projects[gmap][subdir] = "contrib"
 projects[gmap][version] = "1.x-dev"
 
 projects[homebox][subdir] = "contrib"
-projects[homebox][version] = "2.0-beta3"
+projects[homebox][version] = "2.0-beta6"
 
 projects[imce][subdir] = "contrib"
 projects[imce][version] = "1.4"
 
 projects[imce_wysiwyg][subdir] = "contrib"
-projects[imce_wysiwyg][version] = "1.x-dev"
+projects[imce_wysiwyg][version] = "1.0"
 
 projects[insert][subdir] = "contrib"
-projects[insert][version] = "1.0"
-
-projects[job_scheduler][subdir] = "contrib"
-projects[job_scheduler][version] = "2.0-alpha2"
+projects[insert][version] = "1.1"
 
 projects[link][subdir] = "contrib"
-projects[link][version] = "1.0-alpha3"
+projects[link][version] = "1.0-beta1"
 
 projects[masquerade][subdir] = "contrib"
-projects[masquerade][version] = "1.0-rc3"
+projects[masquerade][version] = "1.0-rc4"
 
 projects[messaging][subdir] = "contrib"
 projects[messaging][version] = "1.0-alpha1"
 
 projects[nodeaccess_userreference][subdir] = "contrib"
-projects[nodeaccess_userreference][version] = "3.5"
+projects[nodeaccess_userreference][version] = "3.6"
 
 projects[nodeformcols][subdir] = "contrib"
 projects[nodeformcols][version] = "1.x-dev"
@@ -105,7 +96,7 @@ projects[nodereference_count][subdir] = "contrib"
 projects[nodereference_count][version] = "1.x-dev"
 
 projects[nodereference_url][subdir] = "contrib"
-projects[nodereference_url][version] = "1.11"
+projects[nodereference_url][version] = "1.12"
 
 projects[notifications][subdir] = "contrib"
 projects[notifications][version] = "1.0-alpha1"
@@ -114,10 +105,10 @@ projects[options_element][subdir] = "contrib"
 projects[options_element][version] = "1.4"
 
 projects[pathauto][subdir] = "contrib"
-projects[pathauto][version] = "1.0-beta1"
+projects[pathauto][version] = "1.0-rc2"
 
 projects[references][subdir] = "contrib"
-projects[references][version] = "2.x-dev"
+projects[references][version] = "2.0-beta3"
 
 projects[save_draft][subdir] = "contrib"
 projects[save_draft][version] = "1.4"
@@ -126,13 +117,13 @@ projects[select_or_other][subdir] = "contrib"
 projects[select_or_other][version] = "2.0"
 
 projects[strongarm][subdir] = "contrib"
-projects[strongarm][version] = "2.0-beta2"
+projects[strongarm][version] = "2.0-beta3"
 
 projects[talk][subdir] = "contrib"
 projects[talk][version] = "1.x-dev"
 
 projects[token][subdir] = "contrib"
-projects[token][version] = "1.0-beta2"
+projects[token][version] = "1.0-beta6"
 
 projects[view_unpublished][subdir] = "contrib"
 projects[view_unpublished][version] = "1.0"
@@ -153,7 +144,7 @@ projects[views_dynamic_fields][subdir] = "contrib"
 projects[views_dynamic_fields][version] = "1.x-dev"
 
 projects[webform][subdir] = "contrib"
-projects[webform][version] = "3.11"
+projects[webform][version] = "3.13"
 
 projects[wysiwyg][subdir] = "contrib"
 projects[wysiwyg][version] = "2.1"
