@@ -56,9 +56,6 @@ projects[field_display_label][version] = "1.2"
 projects[field_collection][subdir] = "contrib"
 projects[field_collection][version] = "1.x-dev"
 
-projects[field_collection_table][subdir] = "contrib"
-projects[field_collection_table][version] = "1.x-dev"
-
 projects[field_group][subdir] = "contrib"
 projects[field_group][version] = "1.0"
 
