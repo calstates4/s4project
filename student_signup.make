@@ -53,9 +53,6 @@ projects[features][version] = "1.0-beta4"
 projects[field_display_label][subdir] = "contrib"
 projects[field_display_label][version] = "1.2"
 
-projects[field_collection][subdir] = "contrib"
-projects[field_collection][version] = "1.x-dev"
-
 projects[field_group][subdir] = "contrib"
 projects[field_group][version] = "1.0"
 
@@ -212,5 +209,4 @@ libraries[guiders][destination] = "libraries"
 ; Patches
 projects[wysiwyg][patch][] = "http://drupal.org/files/issues/wysiwyg-entity-exportables-624018-176_1.patch"
 projects[token][patch][] = "http://drupal.org/files/issues/modules_token.92.patch"
-projects[field_collection][patch][] = "http://drupal.org/files/issues/field_collection-1209806-7.patch"
 projects[cck_phone][patch][] = "http://drupal.org/files/issues/cck_phone_testing-1165464-2.patch"
