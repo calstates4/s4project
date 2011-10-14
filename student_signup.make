@@ -15,7 +15,7 @@ projects[auto_nodetitle][subdir] = "contrib"
 projects[auto_nodetitle][version] = "1.0-alpha1"
 
 projects[better_exposed_filters][subdir] = "contrib"
-projects[better_exposed_filters][version] = "1.x-dev"
+projects[better_exposed_filters][version] = "3.0-beta1"
 
 projects[boxes][subdir] = "contrib"
 projects[boxes][version] = "1.0-beta2"
@@ -66,7 +66,7 @@ projects[gmap][subdir] = "contrib"
 projects[gmap][version] = "1.x-dev"
 
 projects[homebox][subdir] = "contrib"
-projects[homebox][version] = "2.0-beta3"
+projects[homebox][version] = "2.0-beta6"
 
 projects[imce][subdir] = "contrib"
 projects[imce][version] = "1.4"
