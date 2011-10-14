@@ -105,6 +105,25 @@ function s4_core_admin_form() {
     '#description' => 'The email body to be sent when reminding users to complete their evaluations',
     '#default_value' => variable_get('s4_core_reminder_email_body', ''),
   );
+
+  $form['signup_reminder'] = array(
+    '#type' => 'fieldset',
+    '#title' => 'Signup email',
+  );
+  
+  $form['signup_reminder']['s4_core_signup_email_subject'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Email subject',
+    '#default_value' => variable_get('s4_core_signup_email_subject', ''),
+  );
+  
+  $form['signup_reminder']['s4_core_signup_email_body'] = array(
+    '#type' => 'textarea',
+    '#title' => 'Email message',
+    '#description' => 'The email body used when the user signs up with a site.',
+    '#default_value' => variable_get('s4_core_signup_email_body', ''),
+  );
+
   
   if (module_exists('token')) {
       theme('token_tree', array('token_types' => array('node')));

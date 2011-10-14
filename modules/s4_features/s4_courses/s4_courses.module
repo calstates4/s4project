@@ -648,8 +648,8 @@ function s4_courses_token_info() {
     
     
     return array(
-      'types' => array('s4_signup' => $type),
-      'tokens' => array('s4_signup' => $tokens),
+      'types' => array('s4_courses' => $type),
+      'tokens' => array('s4_courses' => $tokens),
     );
 }
 

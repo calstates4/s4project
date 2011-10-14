@@ -315,5 +315,22 @@ function s4_core_create_signup_form_submit($form, $form_state) {
           );
 	$signup = _s4_core_create_signup($form_state['values']['user'], $signup);
 	drupal_set_message('Created !signup record', array('!signup' => l(t('signup #@number', array('@number' => $signup->nid)), 'node/'. $signup->nid)));
+	$site = node_load($form_state['values']['site']);
+	$form = field_get_items('node', $site, 'field_site_form');
+	if($form[0]['nid'] && $form_state['values']['email-student']) {
+		
+	}
 	drupal_goto($form_state['values']['destination']);
+}
+
+function s4_core_student_signup_complete($signup) {
+	$signup = node_load($signup);
+	$site = field_get_items('node', $signup, 'field_site');
+	$site = node_load($site[0]['nid']);
+	$form = field_get_items('node', $site, 'field_site_form');
+	$sid = field_get_items('node', $signup, 'field_form_assessment_sid');
+	if(!$sid[0]['value']) {
+		$_SESSION['s4_core_student_signup_complete'] = $signup->nid;
+		drupal_goto('node/'. $form[0]['nid']);
+	}
 }

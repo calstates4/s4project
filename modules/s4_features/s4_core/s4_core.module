@@ -289,7 +289,20 @@ function s4_core_menu() {
   	'file' => 's4_core.pages.inc',
   );
   
+  $items['signup/register/%/%'] = array(
+  	'title' => 'Complete site registration',
+  	'page callback' => 's4_core_student_signup_complete',
+  	'page arguments' => array(2),
+  	'access callback' => 's4_core_student_signup_complete_access',
+  	'access arguments' => array(2, 3),
+  	'file' => 's4_core.pages.inc',
+  );
+  
   return $items;
+}
+
+function s4_core_student_signup_complete_access($signup, $key) {
+	return (hash('sha256', $signup . drupal_get_hash_salt()) == $key);
 }
 
 /**
@@ -531,6 +544,15 @@ function s4_core_webform_submission_insert($node, $submission) {
     drupal_set_message(t('Thanks for your evaluation. We will be using this to improve the experience for future students.'));
     drupal_goto('<front>');
   }
+  if (isset($_SESSION['s4_core_student_signup_complete'])) {
+  	$signup = node_load($_SESSION['s4_core_site_eval_signup']);
+    if ($signup) {
+      $signup->field_form_signup_sid[$node->language][0]['value'] = $submission->sid;
+      node_save($signup);
+    }
+    unset($_SESSION['s4_core_student_signup_complete']);
+    drupal_goto('<front>');
+  }
 }
 
 /**
@@ -612,6 +634,23 @@ function s4_core_node_insert($node) {
               'unique_id'   => $node->s4_unique_id
         ))
         ->execute();
+  }
+  if ($node->type == 'signup') {
+  	$user = field_get_items('node', $node, 'field_user');
+  	$user = user_load($user[0]['uid']);
+  	if($user->mail) {
+  	   $site = field_get_items('node', $node, 'field_site');
+  	   $site = node_load($site[0]['nid']);
+  	   $form = field_get_items('node', $site, 'field_');
+  	   $sid = field_get_items('node', $node, 'field_form_assessment_sid');
+  	   if($form[0]['nid'] && !$sid[0]['value']) {
+  	   	  $body_message = t('<p><strong>You have not completed your registration until you complete the following form:</strong></p>');
+  	   	  $body_message .= '<p>'. url('signup/register/'. $node->nid .'/'. hash('sha256', $node->nid . drupal_get_hash_salt()), array('absolute' => true)) .'</p>';
+  	   }
+  	   $context['subject'] = variable_get('s4_core_signup_email_subject', '');
+  	   $context['body'] = variable_get('s4_core_signup_email_body', '');
+	   drupal_mail('s4_core', 'action_send_email', $user->mail, language_default(), $context);
+  	}
   }
 }
 
@@ -1209,7 +1248,7 @@ function s4_core_token_info() {
     'description' => t('Tokens related to a student\'s signup record.'),
   );
   
-  $tokens['site'] = array('name' => 'Site name',
+    $tokens['site'] = array('name' => 'Site name',
                        'description' => t('The name of the site'));
     $tokens['coordinator'] = array('name' => 'Site coordinator',
                        'description' => t('The name of the coordinator'));
