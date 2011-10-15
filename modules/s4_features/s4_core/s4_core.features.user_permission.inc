@@ -61,7 +61,8 @@ function s4_core_user_default_permissions() {
     'name' => 'access comments',
     'roles' => array(
       0 => 'administrator',
-      1 => 'staff',
+      1 => 'site approver',
+      2 => 'staff',
     ),
     'module' => 'comment',
   );
@@ -742,7 +743,8 @@ function s4_core_user_default_permissions() {
     'name' => 'edit own comments',
     'roles' => array(
       0 => 'administrator',
-      1 => 'staff',
+      1 => 'site approver',
+      2 => 'staff',
     ),
     'module' => 'comment',
   );
@@ -881,7 +883,8 @@ function s4_core_user_default_permissions() {
     'name' => 'post comments',
     'roles' => array(
       0 => 'administrator',
-      1 => 'staff',
+      1 => 'site approver',
+      2 => 'staff',
     ),
     'module' => 'comment',
   );
@@ -947,7 +950,8 @@ function s4_core_user_default_permissions() {
     'name' => 'skip comment approval',
     'roles' => array(
       0 => 'administrator',
-      1 => 'staff',
+      1 => 'site approver',
+      2 => 'staff',
     ),
     'module' => 'comment',
   );
@@ -1057,7 +1061,8 @@ function s4_core_user_default_permissions() {
     'name' => 'view any unpublished content',
     'roles' => array(
       0 => 'administrator',
-      1 => 'staff',
+      1 => 'site approver',
+      2 => 'staff',
     ),
     'module' => 'view_unpublished',
   );
