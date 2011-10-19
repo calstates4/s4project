@@ -15,7 +15,6 @@ class s4WebTestCase extends DrupalWebTestCase {
 					'auto_nodetitle',
 					'better_exposed_filters',
 					'block',
-					'boxes',
 					'cck',
 					'cck_blocks',
 					'cck_phone',

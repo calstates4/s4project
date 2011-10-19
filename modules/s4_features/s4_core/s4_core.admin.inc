@@ -80,12 +80,21 @@ function s4_core_admin_form() {
     '#default_value' => variable_get('s4_core_auth_sites', 'none'),
   );
   
+  $directions = variable_get('s4_core_auth_directions', array('value' => ''));
   $form['auth']['s4_core_auth_directions'] = array(
     '#type' => 'text_format',
     '#title' => 'Custom message',
     '#options' => 'Message to appear above the login form. This could include information on who to call if the account does not work.',
     '#text_format' => FILTER_FORMAT_DEFAULT, 
-    '#default_value' => variable_get('s4_core_auth_directions', ''),
+    '#default_value' => $directions['value'],
+  );
+  $message = variable_get('s4_core_welcome_message', array('value' => ''));
+  $form['s4_core_welcome_message'] = array(
+    '#type' => 'text_format',
+    '#title' => 'Welcome message',
+    '#options' => 'This message appears on your site\'s front page.',
+    '#text_format' => FILTER_FORMAT_DEFAULT, 
+    '#default_value' => $message['value'],
   );
   
   $form['evaluation_reminder'] = array(

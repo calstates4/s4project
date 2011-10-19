@@ -41,7 +41,6 @@ dependencies[] = user
 ; Contrib
 dependencies[] = auto_nodetitle
 dependencies[] = better_exposed_filters
-dependencies[] = boxes
 dependencies[] = cck
 dependencies[] = cck_blocks
 dependencies[] = cck_phone

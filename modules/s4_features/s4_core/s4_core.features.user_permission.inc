@@ -198,15 +198,6 @@ function s4_core_user_default_permissions() {
     'module' => 'block',
   );
 
-  // Exported permission: administer boxes
-  $permissions['administer boxes'] = array(
-    'name' => 'administer boxes',
-    'roles' => array(
-      0 => 'administrator',
-    ),
-    'module' => 'boxes',
-  );
-
   // Exported permission: administer comments
   $permissions['administer comments'] = array(
     'name' => 'administer comments',
@@ -726,16 +717,6 @@ function s4_core_user_default_permissions() {
       1 => 'staff',
     ),
     'module' => 'node',
-  );
-
-  // Exported permission: edit boxes
-  $permissions['edit boxes'] = array(
-    'name' => 'edit boxes',
-    'roles' => array(
-      0 => 'administrator',
-      1 => 'staff',
-    ),
-    'module' => 'boxes',
   );
 
   // Exported permission: edit own comments

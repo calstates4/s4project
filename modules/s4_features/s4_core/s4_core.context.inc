@@ -210,9 +210,9 @@ function s4_core_context_default_contexts() {
           'region' => 'content_top_left',
           'weight' => '-46',
         ),
-        'boxes-s4_mission' => array(
-          'module' => 'boxes',
-          'delta' => 's4_mission',
+        's4_core-s4_welcome_message' => array(
+          'module' => 's4_core',
+          'delta' => 's4_welcome_message',
           'region' => 'content_top_right',
           'weight' => '-10',
         ),

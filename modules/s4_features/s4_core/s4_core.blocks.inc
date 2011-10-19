@@ -394,3 +394,11 @@ function s4_core_block_s4_site_settings() {
 	}
 	return array('content' => l(t('Site settings'), 's4/settings', array('attributes' => array('class' => array('s4-site-settings')))));
 }
+
+function s4_core_block_s4_welcome_message() {
+	$message = variable_get('s4_core_welcome_message', array('value' => false));
+	if(!$message['value']) {
+		$message['value'] = '<p class="intro">This where you can give users more information about your program. Let us know in a few sentences what you do, and what the community gets from your program.</p><p>Select <strong>Site Settings</strong> then <strong> General settings</strong> to change this message.</p>';
+	}
+	return array('content' => $message['value']);
+}

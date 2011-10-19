@@ -17,9 +17,6 @@ projects[auto_nodetitle][version] = "1.0-alpha1"
 projects[better_exposed_filters][subdir] = "contrib"
 projects[better_exposed_filters][version] = "3.0-beta1"
 
-projects[boxes][subdir] = "contrib"
-projects[boxes][version] = "1.0-beta2"
-
 projects[cck][subdir] = "contrib"
 projects[cck][version] = "2.x-dev"
 
