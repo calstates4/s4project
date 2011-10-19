@@ -5,7 +5,7 @@
  */
 
 /**
- * Implementation of hook_views_default_views().
+ * Implements hook_views_default_views().
  */
 function s4_courses_views_default_views() {
   $export = array();
@@ -17,7 +17,7 @@ function s4_courses_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Course students';
   $view->core = 7;
-  $view->api_version = '3.0';
+  $view->api_version = '3.0-alpha1';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -813,7 +813,7 @@ function s4_courses_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Email: Faculty';
   $view->core = 7;
-  $view->api_version = '3.0';
+  $view->api_version = '3.0-alpha1';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -1247,7 +1247,7 @@ function s4_courses_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Course Terms';
   $view->core = 7;
-  $view->api_version = '3.0';
+  $view->api_version = '3.0-alpha1';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -1471,6 +1471,26 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'course_term' => 'course_term',
   );
+  /* Filter criterion: Content: Term dates (field_term_date_start) */
+  $handler->display->display_options['filters']['field_term_date_start_value']['id'] = 'field_term_date_start_value';
+  $handler->display->display_options['filters']['field_term_date_start_value']['table'] = 'field_data_field_term_date_start';
+  $handler->display->display_options['filters']['field_term_date_start_value']['field'] = 'field_term_date_start_value';
+  $handler->display->display_options['filters']['field_term_date_start_value']['operator'] = '<=';
+  $handler->display->display_options['filters']['field_term_date_start_value']['granularity'] = 'day';
+  $handler->display->display_options['filters']['field_term_date_start_value']['form_type'] = 'date_select';
+  $handler->display->display_options['filters']['field_term_date_start_value']['default_date'] = 'now';
+  $handler->display->display_options['filters']['field_term_date_start_value']['default_to_date'] = '';
+  $handler->display->display_options['filters']['field_term_date_start_value']['year_range'] = '-3:+3';
+  /* Filter criterion: Content: Term dates (field_term_date_start:value2) */
+  $handler->display->display_options['filters']['field_term_date_start_value2']['id'] = 'field_term_date_start_value2';
+  $handler->display->display_options['filters']['field_term_date_start_value2']['table'] = 'field_data_field_term_date_start';
+  $handler->display->display_options['filters']['field_term_date_start_value2']['field'] = 'field_term_date_start_value2';
+  $handler->display->display_options['filters']['field_term_date_start_value2']['operator'] = '>=';
+  $handler->display->display_options['filters']['field_term_date_start_value2']['granularity'] = 'day';
+  $handler->display->display_options['filters']['field_term_date_start_value2']['form_type'] = 'date_select';
+  $handler->display->display_options['filters']['field_term_date_start_value2']['default_date'] = 'now + 1 day';
+  $handler->display->display_options['filters']['field_term_date_start_value2']['default_to_date'] = '';
+  $handler->display->display_options['filters']['field_term_date_start_value2']['year_range'] = '-3:+3';
 
   /* Display: Student Term list */
   $handler = $view->new_display('block', 'Student Term list', 'block_1');
@@ -1555,7 +1575,7 @@ function s4_courses_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Courses';
   $view->core = 7;
-  $view->api_version = '3.0';
+  $view->api_version = '3.0-alpha1';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
