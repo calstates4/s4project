@@ -65,7 +65,7 @@ function s4_core_signup($type, $nid) {
   if ($type == 'site') {
     $site = node_load($nid);
     if ($site->type == 'site') {
-      $instructions = field_get_items('node', $site, 'field_site_instructions_required');
+      $instructions = field_get_items('node', $site, 'field_site_instructions_required', $node->language);
       $instruction_text = field_get_items('node', $site, 'field_site_instructions');
       $locations = field_get_items('node', $site, 'field_location');
       
