@@ -135,8 +135,6 @@ function s4_core_admin_form() {
 
   
   if (module_exists('token')) {
-      theme('token_tree', array('token_types' => array('node')));
-    // Or use it in a form:
     $form['tokens'] = array(
       '#theme' => 'token_tree',
       '#token_types' => array('s4_signup'),

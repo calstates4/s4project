@@ -964,6 +964,14 @@ function s4_core_email_site_coordinator_action_form($context) {
     '#cols' => '80',
     '#rows' => '15',
   );
+  
+  if (module_exists('token')) {
+    $form['tokens'] = array(
+      '#theme' => 'token_tree',
+      '#token_types' => array('node'),
+    );
+  }
+  
   return $form;
 }
 
@@ -982,11 +990,13 @@ function s4_core_email_site_coordinator_action_submit($form, $form_state) {
 *  Implementation of hook_mail
 */
 function s4_core_mail($key, &$message, $params) {
-  $message['headers']['Content-type'] = 'text/html; charset=ISO-8859-1';
+  $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed';
+  $message['headers']['MIME-Version'] = '1.0';
+  $message['headers']['Content-Transfer-Encoding'] = '8Bit';
   switch ($key) {
     case 'action_send_email': 
       $message['subject'] = $params['subject'];
-      $message['body'] = $params['message'];
+      $message['body'][] = check_markup($params['message']['value'], $params['message']['format']);
       break;
   }
 }
