@@ -45,7 +45,7 @@ function s4_reporting_views_default_views() {
     'group-field_course_catalog_number_value' => '0',
     'group-field_course_section_value' => '0',
     'groups' => 'Course
-Site
+Specific Site(s)
 Fields',
   );
   $handler->display->display_options['pager']['type'] = 'full';

@@ -51,13 +51,13 @@ projects[field_display_label][subdir] = "contrib"
 projects[field_display_label][version] = "1.2"
 
 projects[field_group][subdir] = "contrib"
-projects[field_group][version] = "1.0"
+projects[field_group][version] = "1.1"
 
 projects[flag][subdir] = "contrib"
-projects[flag][version] = "2.0-beta5"
+projects[flag][version] = "2.0-beta6"
 
 projects[front][subdir] = "contrib"
-projects[front][version] = "2.0-rc1"
+projects[front][version] = "2.1"
 
 projects[gmap][subdir] = "contrib"
 projects[gmap][version] = "1.x-dev"
@@ -66,19 +66,19 @@ projects[homebox][subdir] = "contrib"
 projects[homebox][version] = "2.0-beta6"
 
 projects[imce][subdir] = "contrib"
-projects[imce][version] = "1.4"
+projects[imce][version] = "1.5"
 
 projects[imce_wysiwyg][subdir] = "contrib"
-projects[imce_wysiwyg][version] = "1.x-dev"
+projects[imce_wysiwyg][version] = "1.0"
 
 projects[insert][subdir] = "contrib"
-projects[insert][version] = "1.0"
+projects[insert][version] = "1.1"
 
 projects[link][subdir] = "contrib"
-projects[link][version] = "1.0-alpha3"
+projects[link][version] = "1.0"
 
 projects[masquerade][subdir] = "contrib"
-projects[masquerade][version] = "1.0-rc3"
+projects[masquerade][version] = "1.0-rc4"
 
 projects[messaging][subdir] = "contrib"
 projects[messaging][version] = "1.0-alpha1"

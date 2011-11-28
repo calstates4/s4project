@@ -162,15 +162,6 @@ function s4_core_user_default_permissions() {
     'module' => 'system',
   );
 
-  // Exported permission: access toolbar
-  $permissions['access toolbar'] = array(
-    'name' => 'access toolbar',
-    'roles' => array(
-      0 => 'administrator',
-    ),
-    'module' => 'toolbar',
-  );
-
   // Exported permission: access user profiles
   $permissions['access user profiles'] = array(
     'name' => 'access user profiles',
