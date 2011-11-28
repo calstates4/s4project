@@ -179,6 +179,14 @@ projects[views_savedsearches][version] = "7.x-dev"
 projects[views_savedsearches][download][type] = "file"
 projects[views_savedsearches][download][url] = "http://s4.csumb.edu/hosted_modules/views_savedsearches.tar.gz"
 
+; Themes
+
+projects[rubik][subdir] = "contrib"
+projects[rubik][version] = "4.0-beta6"
+
+projects[tao][subdir] = "contrib"
+projects[tao][version] = "3.0-beta4"
+
 ; Libraries
 ; Download fancybox as a library
 libraries[fancybox][download][type] = "get"

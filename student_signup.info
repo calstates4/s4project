@@ -129,7 +129,7 @@ dependencies[] = s4_assessment
 dependencies[] = s4_districts
 
 ;Variables
-variables[admin_theme] = seven
+variables[admin_theme] = rubik
 variables[site_frontpage] = homepage
 variables[error_level] = 0
 
