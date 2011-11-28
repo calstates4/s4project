@@ -38,6 +38,9 @@ dependencies[] = trigger
 dependencies[] = update
 dependencies[] = user
 
+;libraries
+dependencies[] = libraries
+
 ; Contrib
 dependencies[] = auto_nodetitle
 dependencies[] = better_exposed_filters
