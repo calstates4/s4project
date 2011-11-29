@@ -62,8 +62,8 @@ projects[front][version] = "2.1"
 projects[gmap][subdir] = "contrib"
 projects[gmap][version] = "1.x-dev"
 
-projects[Guiders-JS][subdir] = "contrib"
-projects[Guiders-JS][version] = "1.x-dev"
+;projects[Guiders-JS][subdir] = "contrib"
+;projects[Guiders-JS][version] = "1.x-dev"
 
 projects[homebox][subdir] = "contrib"
 projects[homebox][version] = "2.0-beta6"
@@ -193,6 +193,14 @@ projects[rubik][version] = "4.0-beta6"
 projects[tao][subdir] = "contrib"
 projects[tao][version] = "3.0-beta4"
 
+; Fixed Guiders-JS module module
+projects[guiders_js_fixed][type] = module
+projects[guiders_js_fixed][subdir] = "contrib"
+projects[guiders_js_fixed][version] = "1.x-dev"
+projects[guiders_js_fixed][download][type] = "git"
+projects[guiders_js_fixed][download][url] = "http://git.drupal.org/sandbox/kevee/1355900.git"
+projects[guiders_js_fixed][download][branch] = "master"
+
 ; Libraries
 ; Download fancybox as a library
 libraries[fancybox][download][type] = "get"
@@ -221,4 +229,3 @@ libraries[guiders][destination] = "libraries"
 projects[wysiwyg][patch][] = "http://drupal.org/files/issues/wysiwyg-entity-exportables-624018-176_1.patch"
 projects[token][patch][] = "http://drupal.org/files/issues/modules_token.92.patch"
 projects[cck_phone][patch][] = "http://drupal.org/files/issues/cck_phone_testing-1165464-2.patch"
-projects[Guiders-JS][patch][] = "http://drupal.org/files/guiders_help_block-1342418-5.txt"
