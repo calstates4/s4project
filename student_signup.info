@@ -69,6 +69,7 @@ dependencies[] = front_page
 dependencies[] = gmap
 dependencies[] = gmap_location
 dependencies[] = gmap_macro_builder
+dependencies[] = guiders_js
 dependencies[] = homebox
 dependencies[] = imce
 dependencies[] = imce_wysiwyg

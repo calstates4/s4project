@@ -62,6 +62,9 @@ projects[front][version] = "2.1"
 projects[gmap][subdir] = "contrib"
 projects[gmap][version] = "1.x-dev"
 
+projects[Guiders-JS][subdir] = "contrib"
+projects[Guiders-JS][version] = "1.x-dev"
+
 projects[homebox][subdir] = "contrib"
 projects[homebox][version] = "2.0-beta6"
 
@@ -218,3 +221,4 @@ libraries[guiders][destination] = "libraries"
 projects[wysiwyg][patch][] = "http://drupal.org/files/issues/wysiwyg-entity-exportables-624018-176_1.patch"
 projects[token][patch][] = "http://drupal.org/files/issues/modules_token.92.patch"
 projects[cck_phone][patch][] = "http://drupal.org/files/issues/cck_phone_testing-1165464-2.patch"
+projects[Guiders-JS][patch][] = "http://drupal.org/files/guiders_help_block-1342418-5.txt"
