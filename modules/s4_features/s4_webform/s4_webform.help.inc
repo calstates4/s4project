@@ -2,6 +2,9 @@
 
 function _s4_webform_help($path) {
 	$node = menu_get_object();
+	if(!$node) {
+	 return null;
+	}
 	if($node->type == 'webform' && !arg(2) && node_access('update', $node)) {
 		return _s4_webform_help_view();
 	}

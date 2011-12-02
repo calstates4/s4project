@@ -5,7 +5,7 @@
  */
 
 /**
- * Implements hook_views_default_views().
+ * Implementation of hook_views_default_views().
  */
 function s4_courses_views_default_views() {
   $export = array();
@@ -17,7 +17,7 @@ function s4_courses_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Course students';
   $view->core = 7;
-  $view->api_version = '3.0-alpha1';
+  $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -813,7 +813,7 @@ function s4_courses_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Email: Faculty';
   $view->core = 7;
-  $view->api_version = '3.0-alpha1';
+  $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -839,7 +839,7 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['relationships']['field_course_faculty_uid']['field'] = 'field_course_faculty_uid';
   $handler->display->display_options['relationships']['field_course_faculty_uid']['required'] = 0;
   $handler->display->display_options['relationships']['field_course_faculty_uid']['delta'] = '-1';
-  /* Relationship: Content: Course (field_course) - reverse */
+  /* Relationship: Broken/missing handler */
   $handler->display->display_options['relationships']['reverse_field_course_node']['id'] = 'reverse_field_course_node';
   $handler->display->display_options['relationships']['reverse_field_course_node']['table'] = 'node';
   $handler->display->display_options['relationships']['reverse_field_course_node']['field'] = 'reverse_field_course_node';
@@ -1221,7 +1221,7 @@ function s4_courses_views_default_views() {
     t('- All -'),
     t('Offset'),
     t('field_course_faculty'),
-    t('field_course'),
+    t('reverse_field_course_node'),
     t('field_site'),
     t('Email'),
     t('First Name'),
@@ -1247,7 +1247,7 @@ function s4_courses_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Course Terms';
   $view->core = 7;
-  $view->api_version = '3.0-alpha1';
+  $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -1575,7 +1575,7 @@ function s4_courses_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Courses';
   $view->core = 7;
-  $view->api_version = '3.0-alpha1';
+  $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
