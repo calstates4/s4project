@@ -558,6 +558,7 @@ function _s4_sites_format_phone($number) {
 *	Field formatter for site hours matrix
 */
 function _s4_sites_format_hours_matrix($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+	$hour_count = 0;
 	if (count($items[0]) == 1) { //if a single value is passed in from views
 		$element[0] = array(
 			'#markup' => field_filter_xss($items[0]['value']), 
@@ -620,6 +621,9 @@ function _s4_sites_format_hours_matrix($entity_type, $entity, $field, $instance,
 				$values = $values[0];
 			}
 			$yes_class = ($values) ? 'hours-yes' : 'hours-no';
+			if($values) {
+			 $hour_count++;
+			}
 			$rows[$row_id][$col_id] = array('data' => ($values) ? 'available' : 'not available', 'class' => $yes_class . ' 	matrix-col-'. $col_id .' matrix-row-'. $row_id .' matrix-cell-'. $row_id .'-'. $col_id);
 		}
 	}
@@ -669,6 +673,9 @@ function _s4_sites_format_hours_matrix($entity_type, $entity, $field, $instance,
 		'#rows' => $rows,
 		'#caption' => 'Available times are <span class="hours-sample">marked in dark blue</span>.',
 	);
+	if(!$hour_count) {
+	 return null;
+	}
 	return $element;
 }
 
