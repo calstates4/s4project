@@ -68,14 +68,16 @@ function s4_core_signup($type, $nid) {
       $instructions = field_get_items('node', $site, 'field_site_instructions_required', $node->language);
       $instruction_text = field_get_items('node', $site, 'field_site_instructions');
       $locations = field_get_items('node', $site, 'field_location');
-      
+      if($_GET['agreed']) {
+        $_SESSION['s4_signup_agreed'] = true;
+      }
       if(!$_SESSION['s4_signup_location'] && count($locations) > 1) {
       	drupal_goto('sites/'. $site->nid .'/locations');
       }
-      elseif ($instructions[0]['value'] && strip_tags($instruction_text[0]['value']) != '' && !$_GET['agreed']) {
+      elseif ($instructions[0]['value'] && strip_tags($instruction_text[0]['value']) != '' && !$_SESSION['s4_signup_agreed']) {
         drupal_set_message('This site requires that you read and agree to these additional instructions');
         drupal_set_title(t('Site instructions'));
-        return $instruction_text[0]['value'] . 
+        return check_markup($instruction_text[0]['value'], $instruction_text[0]['format']) . 
             '<p>' .
                  l('Agree', 's4/signup/' . $type . '/' . $site->nid,
                    array('query' => array('agreed' => 1),

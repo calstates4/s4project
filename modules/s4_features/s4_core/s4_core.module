@@ -433,6 +433,8 @@ function s4_core_user_signup_completed($sid = 0) {
   unset($_SESSION['s4_signup_course']);
   unset($_SESSION['s4_signup_site']);
   unset($_SESSION['s4_signup_coordinator']);
+  unset($_SESSION['s4_signup_hours']);
+  unset($_SESSION['s4_signup_agreed']);
   drupal_set_message(t('Congratulations, you are signed up!'));
   drupal_goto('<front>', array('query' => array('finished' => 'finished')));
 }
@@ -513,6 +515,8 @@ function _s4_core_create_signup($uid = 0, $signup = array()) {
 
   $node->field_signup_start_date[$node->language][0]['value'] = date('Y-m-d', $start_date);
 
+  node_save($node);
+  $node->title = t('Signup #!nid', array('!nid' => $node->nid));
   node_save($node);
   return $node;
 }
@@ -1424,7 +1428,7 @@ function s4_core_field_formatter_view($entity_type, $entity, $field, $instance, 
 	    }
 	    else {
 		    if (isset($_SESSION['s4_signup_location']) && $_SESSION['s4_signup_location'] == $item['lid']) {
-		      $output[] = '<div class="signup signed-up"><div class="icon"></div>Coordinator selected</div>';
+		      $output[] = '<div class="signup signed-up"><div class="icon"></div>Site staff selected</div>';
 		    }
 		    else {
 		      $output[] = '<div class="signup"><div class="icon"></div>' .
