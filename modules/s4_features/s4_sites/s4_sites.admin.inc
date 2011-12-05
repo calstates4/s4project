@@ -210,10 +210,10 @@ function s4_sites_batch_import_node($row, $headers, $fields, $extra, &$context) 
 		$node->field_website[$node->language][0]['url'] = $new_row['field_website'];
 	}
 	if($extra['default_restrict']) {
-		$node->field_site_restrict[$node->language] = $extra['default_restrict'];
+		$node->field_site_restrict[$node->language][0]['tid'] = $extra['default_restrict'];
 	}
 	if($extra['default_status']) {
-		$node->field_workflow_status[$node->language] = $extra['default_status'];
+		$node->field_workflow_status[$node->language][0]['tid'] = $extra['default_status'];
 	}
 	if(isset($extra['status'])) {
 		$node->status = $extra['status'];
