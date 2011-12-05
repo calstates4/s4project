@@ -1071,7 +1071,7 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['relationships']['field_site_nid']['field'] = 'field_site_nid';
   $handler->display->display_options['relationships']['field_site_nid']['required'] = 0;
   $handler->display->display_options['relationships']['field_site_nid']['delta'] = '-1';
-  /* Relationship: Content: Coordinator (field_coordinator) - reverse */
+  /* Relationship: Broken/missing handler */
   $handler->display->display_options['relationships']['reverse_field_coordinator_node']['id'] = 'reverse_field_coordinator_node';
   $handler->display->display_options['relationships']['reverse_field_coordinator_node']['table'] = 'node';
   $handler->display->display_options['relationships']['reverse_field_coordinator_node']['field'] = 'reverse_field_coordinator_node';
@@ -1402,7 +1402,7 @@ function s4_sites_views_default_views() {
     t('- All -'),
     t('Offset'),
     t('field_site'),
-    t('field_coordinator'),
+    t('reverse_field_coordinator_node'),
     t('field_course'),
     t('Send email'),
     t('First Name'),

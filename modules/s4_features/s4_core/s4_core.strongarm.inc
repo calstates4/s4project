@@ -225,8 +225,7 @@ function s4_core_strongarm() {
         1 => 3,
       ),
       'course' => array(
-        0 => 4,
-        1 => 3,
+        0 => 3,
       ),
     ),
     'view_own' => array(

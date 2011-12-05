@@ -380,7 +380,7 @@ function s4_core_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Coordinators';
+  $handler->display->display_options['title'] = 'Site staff';
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -557,8 +557,8 @@ function s4_core_views_default_views() {
     'page' => 'page',
   );
 
-  /* Display: Coordinator search */
-  $handler = $view->new_display('block', 'Coordinator search', 'block_1');
+  /* Display: Site staff */
+  $handler = $view->new_display('block', 'Site staff', 'block_1');
   $handler->display->display_options['defaults']['use_ajax'] = FALSE;
   $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['defaults']['pager'] = FALSE;
@@ -706,7 +706,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['block_description'] = 'Search coordinators';
   $translatables['s4_search'] = array(
     t('Master'),
-    t('Coordinators'),
+    t('Site staff'),
     t('more'),
     t('Search'),
     t('Reset'),
@@ -722,7 +722,6 @@ function s4_core_views_default_views() {
 <div class="meta">[field_csu_facility] - [field_csu_org_type]</div>'),
     t('Page'),
     t('Feed'),
-    t('Coordinator search'),
     t('[field_last_name], [field_first_name] '),
     t('node/[nid]'),
     t(' at [field_site]'),
