@@ -8,6 +8,9 @@ class views_handler_s4_site_locations extends views_handler_field {
   function render($values) {
     $site = node_load($values->nid);
     $locations = field_get_items('node', $site, 'field_location');
+    if(!is_array($locations) || count($locations) == 0) {
+      return null;
+    }
     foreach($locations as $location) {
     	if($location['latitude'] && $location['longitude']) {
 	    	$output[] = '<div class="map-link-wrapper">

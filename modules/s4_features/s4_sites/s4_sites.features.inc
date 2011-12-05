@@ -97,8 +97,8 @@ function s4_sites_node_info() {
       'base' => 'node_content',
       'description' => t('A site staff person is a contact or site coordinator with a site.'),
       'has_title' => '1',
-      'title_label' => t('Coordinator Name'),
-      'help' => t('A site coordinator is someone who students sign up with for service.'),
+      'title_label' => t('Site staff Name'),
+      'help' => t('A site site staff is someone who students sign up with for service.'),
     ),
     'file' => array(
       'name' => t('File'),

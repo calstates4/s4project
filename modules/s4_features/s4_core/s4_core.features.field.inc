@@ -402,7 +402,7 @@ function s4_core_field_default_fields() {
       ),
       'entity_type' => 'node',
       'field_name' => 'field_coordinator',
-      'label' => 'Coordinator',
+      'label' => 'Site staff',
       'required' => 0,
       'settings' => array(
         'user_register_form' => FALSE,
@@ -1525,7 +1525,7 @@ function s4_core_field_default_fields() {
   // Included for use with string extractors like potx.
   t('Assessment results');
   t('Body');
-  t('Coordinator');
+  t('Site Staff');
   t('Course');
   t('Estimate the total number of hours you have worked at this site.');
   t('Evaluation Form Results');

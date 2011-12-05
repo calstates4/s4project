@@ -39,7 +39,7 @@ function s4_core_block_user_progress() {
             l($coordinator->title, 'node/' . $coordinator->nid) . '</div>';
     }
     if (!$site || count($site_coordinators)) {
-      $status['coordinator'] = array('data' => 'Coordinator',
+      $status['coordinator'] = array('data' => 'Site Staff',
               'id'   => 'status-coordinator',
                 'class'   => (isset($coordinator)) ? array('done') : array(),
               'href' => 'sites/' . $site->nid . '/coordinators',

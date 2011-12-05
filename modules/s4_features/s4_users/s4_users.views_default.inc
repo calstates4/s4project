@@ -246,7 +246,7 @@ function s4_users_views_default_views() {
     t('Course'),
     t('Post date'),
     t('Site'),
-    t('Coordinator'),
+    t('Site staff'),
     t('All'),
     t('Block'),
     t('User page signups'),

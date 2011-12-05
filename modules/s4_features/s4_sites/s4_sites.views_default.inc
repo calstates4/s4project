@@ -3729,7 +3729,7 @@ function s4_sites_views_default_views() {
     t('First Name'),
     t('Last Name'),
     t('Course'),
-    t('Coordinator'),
+    t('Site staff'),
     t('View'),
     t('node/[nid]'),
     t('Edit'),

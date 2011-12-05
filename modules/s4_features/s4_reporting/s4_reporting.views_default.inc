@@ -296,7 +296,7 @@ Fields',
   $handler->display->display_options['fields']['title_2']['table'] = 'node';
   $handler->display->display_options['fields']['title_2']['field'] = 'title';
   $handler->display->display_options['fields']['title_2']['relationship'] = 'field_coordinator_nid';
-  $handler->display->display_options['fields']['title_2']['label'] = 'Coordinator';
+  $handler->display->display_options['fields']['title_2']['label'] = 'Site staff';
   $handler->display->display_options['fields']['title_2']['alter']['alter_text'] = 0;
   $handler->display->display_options['fields']['title_2']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['title_2']['alter']['absolute'] = 0;
@@ -665,7 +665,7 @@ Fields',
     t('Term'),
     t('Course'),
     t('Site'),
-    t('Coordinator'),
+    t('Site staff'),
     t('Edit link'),
     t('Actions'),
     t('view'),
