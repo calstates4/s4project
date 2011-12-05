@@ -218,6 +218,7 @@ function s4_sites_batch_import_node($row, $headers, $fields, $extra, &$context) 
 	if(isset($extra['status'])) {
 		$node->status = $extra['status'];
 	}
+	$node->s4_sites_import = true;
 	node_save($node);
 	$context['message'] = t('Now processing %node', array('%node' => $new_row['title']));
 	$context['results'][] = $node->nid;
@@ -310,9 +311,4 @@ function s4_sites_test_import_sites() {
 		s4_sites_batch_import_node($row, $headers, $fields, $extra, $context);
 	}
 	fclose($file);
-	foreach($context['results'] as $node) {
-		$node = node_load($node);
-		$node->status = 1;
-		node_save($node);
-	}
 }

@@ -446,7 +446,7 @@ function s4_sites_node_presave($node) {
   if($node->type == 'site') {
      cache_clear_all('s4_pages_overview_data', 'cache');
      $user = user_load($node->uid);
-     if(!user_access('moderate site information')) {
+     if(!user_access('moderate site information') && !$node->s4_sites_import) {
        $node->status = 0;
        $node->field_workflow_status[$node->language][0]['tid'] = variable_get('s4_sites_workflow_default_state', 0);
        drupal_set_message('Thanks for your site recommendation. We will be contacting you shortly.');
