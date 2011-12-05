@@ -839,19 +839,21 @@ function s4_core_views_default_views() {
   $handler->display->display_options['sorts']['field_first_name_format']['id'] = 'field_first_name_format';
   $handler->display->display_options['sorts']['field_first_name_format']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['sorts']['field_first_name_format']['field'] = 'field_first_name_format';
-  /* Filter criterion: User: Name */
-  $handler->display->display_options['filters']['uid']['id'] = 'uid';
-  $handler->display->display_options['filters']['uid']['table'] = 'users';
-  $handler->display->display_options['filters']['uid']['field'] = 'uid';
-  $handler->display->display_options['filters']['uid']['value'] = '';
-  $handler->display->display_options['filters']['uid']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['uid']['expose']['operator_id'] = 'uid_op';
-  $handler->display->display_options['filters']['uid']['expose']['label'] = 'Name';
-  $handler->display->display_options['filters']['uid']['expose']['operator'] = 'uid_op';
-  $handler->display->display_options['filters']['uid']['expose']['identifier'] = 'keys';
-  $handler->display->display_options['filters']['uid']['expose']['required'] = 1;
-  $handler->display->display_options['filters']['uid']['expose']['multiple'] = FALSE;
-  $handler->display->display_options['filters']['uid']['expose']['reduce'] = 0;
+  $handler->display->display_options['filter_groups']['groups'] = array(
+    0 => 'OR',
+  );
+  /* Filter criterion: User: Name (raw) */
+  $handler->display->display_options['filters']['name']['id'] = 'name';
+  $handler->display->display_options['filters']['name']['table'] = 'users';
+  $handler->display->display_options['filters']['name']['field'] = 'name';
+  $handler->display->display_options['filters']['name']['operator'] = 'contains';
+  $handler->display->display_options['filters']['name']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['name']['expose']['operator_id'] = 'name_op';
+  $handler->display->display_options['filters']['name']['expose']['label'] = 'Login ID';
+  $handler->display->display_options['filters']['name']['expose']['operator'] = 'name_op';
+  $handler->display->display_options['filters']['name']['expose']['identifier'] = 'keys';
+  $handler->display->display_options['filters']['name']['expose']['required'] = 1;
+  $handler->display->display_options['filters']['name']['expose']['multiple'] = FALSE;
 
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'block');
@@ -870,7 +872,7 @@ function s4_core_views_default_views() {
     t('Offset'),
     t('[field_last_name], [field_first_name]'),
     t('([name])'),
-    t('Name'),
+    t('Login ID'),
     t('Block'),
     t('Search for students'),
   );
