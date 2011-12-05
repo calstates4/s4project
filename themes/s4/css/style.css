@@ -971,6 +971,9 @@ table#webform-components {
 .portlet-maximize {
   display: none;
 }
+.homebox-maximized {
+  clear: both;
+}
 #page #homebox .homebox-portlet {
   border: 0px;
 }
