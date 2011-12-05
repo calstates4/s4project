@@ -3572,7 +3572,7 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['fields']['field_course']['hide_empty'] = 0;
   $handler->display->display_options['fields']['field_course']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_course']['field_api_classes'] = 0;
-  /* Field: Content: Coordinator */
+  /* Field: Content: Site staff */
   $handler->display->display_options['fields']['field_coordinator']['id'] = 'field_coordinator';
   $handler->display->display_options['fields']['field_coordinator']['table'] = 'field_data_field_coordinator';
   $handler->display->display_options['fields']['field_coordinator']['field'] = 'field_coordinator';
