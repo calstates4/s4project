@@ -239,8 +239,8 @@ function s4_sites_block_view($delta) {
 }
 
 function s4_sites_form_comment_node_site_form_alter(&$form, $form_state) {
-	if(user_access('moderate site information')) {
-		//return;
+	if(!user_access('moderate site information')) {
+		return;
 	}
 	global $user;
 	$user = user_load($user->uid);
