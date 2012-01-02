@@ -271,7 +271,7 @@ function s4_core_block_s4_page_notifications() {
 */
 function s4_core_block_s4_add_new_site() {
   global $user;
-  if (user_access('create site content') && !s4_core_user_can_signup($user)) {
+  if (user_access('edit any site content') && !s4_core_user_can_signup($user)) {
   	if(user_access('moderate site information')) {
   		$add_link = l(t('<span class="add"></span>Add new site'), 
                   'node/add/site', 
