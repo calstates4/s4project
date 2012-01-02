@@ -168,6 +168,8 @@ variables[cck_blocks_field_website_block_availability] = 2
 ;Vocabularies - site restrictions
 terms[service_learning][name] = Service Learning
 terms[service_learning][vocabulary_machine_name] = site_restrictions
+terms[internship][name] = Internship
+terms[internship][vocabulary_machine_name] = site_restrictions
 
 ;Vocabularies - issues addressed
 terms[advocacy][name] = Advocacy
