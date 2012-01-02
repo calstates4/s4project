@@ -5,7 +5,7 @@
  */
 
 /**
- * Implementation of hook_views_default_views().
+ * Implements hook_views_default_views().
  */
 function s4_core_views_default_views() {
   $export = array();
@@ -17,7 +17,7 @@ function s4_core_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Community member: your sites';
   $view->core = 7;
-  $view->api_version = '3.0';
+  $view->api_version = '3.0-alpha1';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -118,7 +118,7 @@ function s4_core_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Email: Students';
   $view->core = 7;
-  $view->api_version = '3.0';
+  $view->api_version = '3.0-alpha1';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -201,7 +201,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['fields']['views_bulk_operations']['empty_zero'] = 0;
   $handler->display->display_options['fields']['views_bulk_operations']['hide_alter_empty'] = 0;
   $handler->display->display_options['fields']['views_bulk_operations']['vbo']['operations'] = array(
-    's4_core_email_user_action' => array(
+    'action::s4_core_email_user_action' => array(
       'selected' => TRUE,
       'skip_confirmation' => 0,
     ),
@@ -375,7 +375,7 @@ function s4_core_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'S4: Search entire site';
   $view->core = 7;
-  $view->api_version = '3.0';
+  $view->api_version = '3.0-alpha1';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -736,7 +736,7 @@ function s4_core_views_default_views() {
   $view->base_table = 'users';
   $view->human_name = 's4: Search students';
   $view->core = 7;
-  $view->api_version = '3.0';
+  $view->api_version = '3.0-alpha1';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -885,7 +885,7 @@ function s4_core_views_default_views() {
   $view->base_table = 'users';
   $view->human_name = 'S4: Students';
   $view->core = 7;
-  $view->api_version = '3.0';
+  $view->api_version = '3.0-alpha1';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -1256,7 +1256,7 @@ function s4_core_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Forms';
   $view->core = 7;
-  $view->api_version = '3.0';
+  $view->api_version = '3.0-alpha1';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -1276,8 +1276,10 @@ function s4_core_views_default_views() {
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
   $handler->display->display_options['header']['area']['empty'] = TRUE;
-  $handler->display->display_options['header']['area']['content'] = '<p><a class="button" href="node/add/webform"><span class="add"></span>Add new form</a></p>';
+  $handler->display->display_options['header']['area']['content'] = '<h2>Online Forms</h2>
+<p><a class="button" href="node/add/webform"><span class="add"></span>Add online form</a></p>';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
+  $handler->display->display_options['header']['area']['tokenize'] = 0;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -1355,6 +1357,71 @@ function s4_core_views_default_views() {
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['path'] = 'forms';
+
+  /* Display: Block */
+  $handler = $view->new_display('block', 'Block', 'block_1');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['empty'] = TRUE;
+  $handler->display->display_options['header']['area']['content'] = '<h2>Downloadable Forms</h2>
+<p><a class="button" href="node/add/downloadable-form"><span class="add"></span>Add downloadable form</a></p>';
+  $handler->display->display_options['header']['area']['format'] = 'full_html';
+  $handler->display->display_options['header']['area']['tokenize'] = 0;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['title']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['title']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['title']['link_to_node'] = 1;
+  /* Field: Content: Edit link */
+  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['table'] = 'node';
+  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['edit_node']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['edit_node']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['edit_node']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['edit_node']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['edit_node']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['edit_node']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['edit_node']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['edit_node']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['edit_node']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['edit_node']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['edit_node']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['edit_node']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['edit_node']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['edit_node']['empty_zero'] = 0;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 0;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'downloadable_form' => 'downloadable_form',
+  );
   $translatables['site_forms'] = array(
     t('Master'),
     t('Forms'),
@@ -1367,10 +1434,14 @@ function s4_core_views_default_views() {
     t('Items per page'),
     t('- All -'),
     t('Offset'),
-    t('<p><a class="button" href="node/add/webform"><span class="add"></span>Add new form</a></p>'),
+    t('<h2>Online Forms</h2>
+<p><a class="button" href="node/add/webform"><span class="add"></span>Add online form</a></p>'),
     t('# of Submissions'),
     t('Edit link'),
     t('Page'),
+    t('Block'),
+    t('<h2>Downloadable Forms</h2>
+<p><a class="button" href="node/add/downloadable-form"><span class="add"></span>Add downloadable form</a></p>'),
   );
   $export['site_forms'] = $view;
 
@@ -1381,7 +1452,7 @@ function s4_core_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'User signups';
   $view->core = 7;
-  $view->api_version = '3.0';
+  $view->api_version = '3.0-alpha1';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -1445,7 +1516,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['fields']['field_site']['id'] = 'field_site';
   $handler->display->display_options['fields']['field_site']['table'] = 'field_data_field_site';
   $handler->display->display_options['fields']['field_site']['field'] = 'field_site';
-  /* Field: Content: Coordinator */
+  /* Field: Content: Site staff */
   $handler->display->display_options['fields']['field_coordinator']['id'] = 'field_coordinator';
   $handler->display->display_options['fields']['field_coordinator']['table'] = 'field_data_field_coordinator';
   $handler->display->display_options['fields']['field_coordinator']['field'] = 'field_coordinator';
@@ -1557,7 +1628,7 @@ function s4_core_views_default_views() {
     t('node/[nid]'),
     t('Course'),
     t('Site'),
-    t('Coordinator'),
+    t('Site staff'),
     t('Date'),
     t('All'),
     t('Current users sites'),

@@ -5,10 +5,17 @@
  */
 
 /**
- * Implementation of hook_strongarm().
+ * Implements hook_strongarm().
  */
 function s4_core_strongarm() {
   $export = array();
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'comment_anonymous_downloadable_form';
+  $strongarm->value = 0;
+  $export['comment_anonymous_downloadable_form'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -27,16 +34,16 @@ function s4_core_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_anonymous_site';
+  $strongarm->name = 'comment_anonymous_webform';
   $strongarm->value = 0;
-  $export['comment_anonymous_site'] = $strongarm;
+  $export['comment_anonymous_webform'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_anonymous_webform';
-  $strongarm->value = 0;
-  $export['comment_anonymous_webform'] = $strongarm;
+  $strongarm->name = 'comment_default_mode_downloadable_form';
+  $strongarm->value = 1;
+  $export['comment_default_mode_downloadable_form'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -55,16 +62,16 @@ function s4_core_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_default_mode_site';
+  $strongarm->name = 'comment_default_mode_webform';
   $strongarm->value = 1;
-  $export['comment_default_mode_site'] = $strongarm;
+  $export['comment_default_mode_webform'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_default_mode_webform';
-  $strongarm->value = 1;
-  $export['comment_default_mode_webform'] = $strongarm;
+  $strongarm->name = 'comment_default_per_page_downloadable_form';
+  $strongarm->value = '50';
+  $export['comment_default_per_page_downloadable_form'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -83,16 +90,23 @@ function s4_core_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_default_per_page_site';
+  $strongarm->name = 'comment_default_per_page_webform';
   $strongarm->value = '50';
-  $export['comment_default_per_page_site'] = $strongarm;
+  $export['comment_default_per_page_webform'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_default_per_page_webform';
-  $strongarm->value = '50';
-  $export['comment_default_per_page_webform'] = $strongarm;
+  $strongarm->name = 'comment_downloadable_form';
+  $strongarm->value = '2';
+  $export['comment_downloadable_form'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'comment_form_location_downloadable_form';
+  $strongarm->value = 1;
+  $export['comment_form_location_downloadable_form'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -111,13 +125,6 @@ function s4_core_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_form_location_site';
-  $strongarm->value = 1;
-  $export['comment_form_location_site'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'comment_form_location_webform';
   $strongarm->value = 1;
   $export['comment_form_location_webform'] = $strongarm;
@@ -128,6 +135,13 @@ function s4_core_strongarm() {
   $strongarm->name = 'comment_page';
   $strongarm->value = '0';
   $export['comment_page'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'comment_preview_downloadable_form';
+  $strongarm->value = '1';
+  $export['comment_preview_downloadable_form'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -146,13 +160,6 @@ function s4_core_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_preview_site';
-  $strongarm->value = '0';
-  $export['comment_preview_site'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'comment_preview_webform';
   $strongarm->value = '1';
   $export['comment_preview_webform'] = $strongarm;
@@ -167,9 +174,9 @@ function s4_core_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_site';
-  $strongarm->value = '2';
-  $export['comment_site'] = $strongarm;
+  $strongarm->name = 'comment_subject_field_downloadable_form';
+  $strongarm->value = 1;
+  $export['comment_subject_field_downloadable_form'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -184,13 +191,6 @@ function s4_core_strongarm() {
   $strongarm->name = 'comment_subject_field_signup';
   $strongarm->value = 1;
   $export['comment_subject_field_signup'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'comment_subject_field_site';
-  $strongarm->value = 1;
-  $export['comment_subject_field_site'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -340,16 +340,16 @@ function s4_core_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'language_content_type_signup';
+  $strongarm->name = 'language_content_type_downloadable_form';
   $strongarm->value = '0';
-  $export['language_content_type_signup'] = $strongarm;
+  $export['language_content_type_downloadable_form'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'language_content_type_site';
+  $strongarm->name = 'language_content_type_signup';
   $strongarm->value = '0';
-  $export['language_content_type_site'] = $strongarm;
+  $export['language_content_type_signup'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -385,6 +385,16 @@ function s4_core_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'node_options_downloadable_form';
+  $strongarm->value = array(
+    0 => 'status',
+    1 => 'promote',
+  );
+  $export['node_options_downloadable_form'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'node_options_page';
   $strongarm->value = array(
     0 => 'status',
@@ -401,16 +411,6 @@ function s4_core_strongarm() {
     1 => 'revision',
   );
   $export['node_options_signup'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'node_options_site';
-  $strongarm->value = array(
-    0 => 'status',
-    1 => 'revision',
-  );
-  $export['node_options_site'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */

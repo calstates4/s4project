@@ -5,7 +5,7 @@
  */
 
 /**
- * Implementation of hook_menu_default_menu_links().
+ * Implements hook_menu_default_menu_links().
  */
 function s4_core_menu_default_menu_links() {
   $menu_links = array();
@@ -29,7 +29,7 @@ function s4_core_menu_default_menu_links() {
     'menu_name' => 'main-menu',
     'link_path' => 'forms',
     'router_path' => 'forms',
-    'link_title' => 'Form Templates',
+    'link_title' => 'Forms',
     'options' => array(
       'attributes' => array(
         'title' => '',
@@ -96,24 +96,6 @@ function s4_core_menu_default_menu_links() {
     'expanded' => '0',
     'weight' => '-50',
   );
-  // Exported menu link: menu-add-content:node/add/news
-  $menu_links['menu-add-content:node/add/news'] = array(
-    'menu_name' => 'menu-add-content',
-    'link_path' => 'node/add/news',
-    'router_path' => 'node/add/news',
-    'link_title' => 'News',
-    'options' => array(
-      'attributes' => array(
-        'title' => '',
-      ),
-    ),
-    'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '0',
-  );
   // Exported menu link: menu-add-content:node/add/site
   $menu_links['menu-add-content:node/add/site'] = array(
     'menu_name' => 'menu-add-content',
@@ -134,10 +116,9 @@ function s4_core_menu_default_menu_links() {
   );
   // Translatables
   // Included for use with string extractors like potx.
-  t('Form Templates');
+  t('Forms');
   t('Home');
   t('Logout');
-  t('News');
   t('Reports');
   t('Site or Community Partner');
   t('Students');

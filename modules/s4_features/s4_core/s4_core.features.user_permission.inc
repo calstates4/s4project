@@ -5,7 +5,7 @@
  */
 
 /**
- * Implementation of hook_user_default_permissions().
+ * Implements hook_user_default_permissions().
  */
 function s4_core_user_default_permissions() {
   $permissions = array();
@@ -499,6 +499,15 @@ function s4_core_user_default_permissions() {
     'module' => 'user',
   );
 
+  // Exported permission: create downloadable_form content
+  $permissions['create downloadable_form content'] = array(
+    'name' => 'create downloadable_form content',
+    'roles' => array(
+      0 => 'staff',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: create gmap macro
   $permissions['create gmap macro'] = array(
     'name' => 'create gmap macro',
@@ -591,6 +600,15 @@ function s4_core_user_default_permissions() {
     'module' => 'webform',
   );
 
+  // Exported permission: delete any downloadable_form content
+  $permissions['delete any downloadable_form content'] = array(
+    'name' => 'delete any downloadable_form content',
+    'roles' => array(
+      0 => 'staff',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: delete any page content
   $permissions['delete any page content'] = array(
     'name' => 'delete any page content',
@@ -619,6 +637,12 @@ function s4_core_user_default_permissions() {
       1 => 'staff',
     ),
     'module' => 'node',
+  );
+
+  // Exported permission: delete own downloadable_form content
+  $permissions['delete own downloadable_form content'] = array(
+    'name' => 'delete own downloadable_form content',
+    'roles' => array(),
   );
 
   // Exported permission: delete own page content
@@ -680,6 +704,15 @@ function s4_core_user_default_permissions() {
     'module' => 'webform',
   );
 
+  // Exported permission: edit any downloadable_form content
+  $permissions['edit any downloadable_form content'] = array(
+    'name' => 'edit any downloadable_form content',
+    'roles' => array(
+      0 => 'staff',
+    ),
+    'module' => 'node',
+  );
+
   // Exported permission: edit any page content
   $permissions['edit any page content'] = array(
     'name' => 'edit any page content',
@@ -719,6 +752,12 @@ function s4_core_user_default_permissions() {
       2 => 'staff',
     ),
     'module' => 'comment',
+  );
+
+  // Exported permission: edit own downloadable_form content
+  $permissions['edit own downloadable_form content'] = array(
+    'name' => 'edit own downloadable_form content',
+    'roles' => array(),
   );
 
   // Exported permission: edit own page content

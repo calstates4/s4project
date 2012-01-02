@@ -5,7 +5,7 @@
  */
 
 /**
- * Implementation of hook_context_default_contexts().
+ * Implements hook_context_default_contexts().
  */
 function s4_core_context_default_contexts() {
   $export = array();
@@ -113,6 +113,44 @@ function s4_core_context_default_contexts() {
   // Included for use with string extractors like potx.
   t('content');
   $export['basic-page'] = $context;
+
+  $context = new stdClass;
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
+  $context->name = 'forms-listing-page';
+  $context->description = 'User is viewing the form listing page';
+  $context->tag = 'sites';
+  $context->conditions = array(
+    'path' => array(
+      'values' => array(
+        'forms' => 'forms',
+      ),
+    ),
+    'user' => array(
+      'values' => array(
+        'staff' => 'staff',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        'views-site_forms-block_1' => array(
+          'module' => 'views',
+          'delta' => 'site_forms-block_1',
+          'region' => 'content_right',
+          'weight' => '-10',
+        ),
+      ),
+    ),
+  );
+  $context->condition_mode = 1;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('User is viewing the form listing page');
+  t('sites');
+  $export['forms-listing-page'] = $context;
 
   $context = new stdClass;
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */

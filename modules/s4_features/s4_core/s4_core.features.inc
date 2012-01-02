@@ -5,7 +5,7 @@
  */
 
 /**
- * Implementation of hook_ctools_plugin_api().
+ * Implements hook_ctools_plugin_api().
  */
 function s4_core_ctools_plugin_api() {
   list($module, $api) = func_get_args();
@@ -19,7 +19,7 @@ function s4_core_ctools_plugin_api() {
 }
 
 /**
- * Implementation of hook_views_api().
+ * Implements hook_views_api().
  */
 function s4_core_views_api() {
   list($module, $api) = func_get_args();
@@ -29,7 +29,7 @@ function s4_core_views_api() {
 }
 
 /**
- * Implementation of hook_homebox().
+ * Implements hook_homebox().
  */
 function s4_core_homebox() {
   $homeboxes = array();
@@ -154,10 +154,18 @@ function s4_core_homebox() {
 }
 
 /**
- * Implementation of hook_node_info().
+ * Implements hook_node_info().
  */
 function s4_core_node_info() {
   $items = array(
+    'downloadable_form' => array(
+      'name' => t('Downloadable form'),
+      'base' => 'node_content',
+      'description' => t('A paper form for users to download.'),
+      'has_title' => '1',
+      'title_label' => t('Form name'),
+      'help' => '',
+    ),
     'page' => array(
       'name' => t('Basic page'),
       'base' => 'node_content',
