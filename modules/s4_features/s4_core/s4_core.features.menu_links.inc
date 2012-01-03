@@ -42,6 +42,24 @@ function s4_core_menu_default_menu_links() {
     'expanded' => '0',
     'weight' => '-46',
   );
+  // Exported menu link: main-menu:forms/public
+  $menu_links['main-menu:forms/public'] = array(
+    'menu_name' => 'main-menu',
+    'link_path' => 'forms/public',
+    'router_path' => 'forms/public',
+    'link_title' => 'Forms',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+    ),
+    'module' => 'menu',
+    'hidden' => '0',
+    'external' => '0',
+    'has_children' => '0',
+    'expanded' => '0',
+    'weight' => '-45',
+  );
   // Exported menu link: main-menu:reports
   $menu_links['main-menu:reports'] = array(
     'menu_name' => 'main-menu',
