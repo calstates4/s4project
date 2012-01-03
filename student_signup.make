@@ -236,3 +236,4 @@ projects[wysiwyg][patch][] = "http://drupal.org/files/issues/wysiwyg-entity-expo
 projects[token][patch][] = "http://drupal.org/files/issues/modules_token.92.patch"
 projects[cck_phone][patch][] = "http://drupal.org/files/issues/cck_phone_testing-1165464-2.patch"
 projects[nodeformcols][patch][] = "http://drupal.org/files/nodeformcolum_captcha_error.patch"
+projects[fancybox][patch][] = "http://drupal.org/files/fancybox_library_sub_folder.patch"
