@@ -11,7 +11,7 @@ function s4_sites_install() {
           'captcha_type' => 'Text Captcha',
         ))
         ->execute();
-  $node = (object)array (=
+  $node = (object)array (
       'confirmation' => '',
       'confirmation_format' => NULL,
       'redirect_url' => '<confirmation>',
