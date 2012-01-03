@@ -425,6 +425,61 @@ function s4_core_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'nodeformscols_field_placements_downloadable_form_default';
+  $strongarm->value = array(
+    'title' => array(
+      'region' => 'main',
+      'weight' => '0',
+      'has_required' => TRUE,
+      'title' => 'Form name',
+    ),
+    'additional_settings' => array(
+      'region' => 'main',
+      'weight' => '4',
+      'has_required' => FALSE,
+      'title' => 'Vertical tabs',
+      'hidden' => 0,
+    ),
+    'actions' => array(
+      'region' => 'right',
+      'weight' => '0',
+      'has_required' => FALSE,
+      'title' => 'Publish',
+      'hidden' => 0,
+    ),
+    'body' => array(
+      'region' => 'main',
+      'weight' => '1',
+      'has_required' => FALSE,
+      'title' => 'File description',
+      'hidden' => 0,
+    ),
+    'field_downloadable_file' => array(
+      'region' => 'right',
+      'weight' => '2',
+      'has_required' => TRUE,
+      'title' => 'File',
+    ),
+    'field_site_restrict' => array(
+      'region' => 'right',
+      'weight' => '1',
+      'has_required' => TRUE,
+      'title' => 'Available to',
+    ),
+    'notifications' => array(
+      'region' => 'footer',
+      'weight' => '5',
+      'has_required' => FALSE,
+      'title' => 'Notifications',
+      'collapsed' => 0,
+      'hidden' => 1,
+    ),
+  );
+  $export['nodeformscols_field_placements_downloadable_form_default'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'notifications_content_per_type';
   $strongarm->value = '0';
   $export['notifications_content_per_type'] = $strongarm;

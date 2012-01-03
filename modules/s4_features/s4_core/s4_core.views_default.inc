@@ -1280,6 +1280,14 @@ function s4_core_views_default_views() {
 <p><a class="button" href="node/add/webform"><span class="add"></span>Add online form</a></p>';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
   $handler->display->display_options['header']['area']['tokenize'] = 0;
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = FALSE;
+  $handler->display->display_options['empty']['area']['content'] = 'No online forms created yet.';
+  $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
+  $handler->display->display_options['empty']['area']['tokenize'] = 0;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -1371,6 +1379,15 @@ function s4_core_views_default_views() {
 <p><a class="button" href="node/add/downloadable-form"><span class="add"></span>Add downloadable form</a></p>';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
   $handler->display->display_options['header']['area']['tokenize'] = 0;
+  $handler->display->display_options['defaults']['empty'] = FALSE;
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = FALSE;
+  $handler->display->display_options['empty']['area']['content'] = 'No downloadable forms created yet.';
+  $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
+  $handler->display->display_options['empty']['area']['tokenize'] = 0;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
@@ -1388,6 +1405,29 @@ function s4_core_views_default_views() {
   $handler->display->display_options['fields']['title']['hide_empty'] = 0;
   $handler->display->display_options['fields']['title']['empty_zero'] = 0;
   $handler->display->display_options['fields']['title']['link_to_node'] = 1;
+  /* Field: Content: File */
+  $handler->display->display_options['fields']['field_downloadable_file']['id'] = 'field_downloadable_file';
+  $handler->display->display_options['fields']['field_downloadable_file']['table'] = 'field_data_field_downloadable_file';
+  $handler->display->display_options['fields']['field_downloadable_file']['field'] = 'field_downloadable_file';
+  $handler->display->display_options['fields']['field_downloadable_file']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_downloadable_file']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_downloadable_file']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_downloadable_file']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_downloadable_file']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_downloadable_file']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_downloadable_file']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_downloadable_file']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_downloadable_file']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_downloadable_file']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_downloadable_file']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_downloadable_file']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_downloadable_file']['element_label_colon'] = 1;
+  $handler->display->display_options['fields']['field_downloadable_file']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_downloadable_file']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_downloadable_file']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_downloadable_file']['hide_alter_empty'] = 0;
+  $handler->display->display_options['fields']['field_downloadable_file']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_downloadable_file']['field_api_classes'] = 0;
   /* Field: Content: Edit link */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'node';
@@ -1436,12 +1476,15 @@ function s4_core_views_default_views() {
     t('Offset'),
     t('<h2>Online Forms</h2>
 <p><a class="button" href="node/add/webform"><span class="add"></span>Add online form</a></p>'),
+    t('No online forms created yet.'),
     t('# of Submissions'),
     t('Edit link'),
     t('Page'),
     t('Block'),
     t('<h2>Downloadable Forms</h2>
 <p><a class="button" href="node/add/downloadable-form"><span class="add"></span>Add downloadable form</a></p>'),
+    t('No downloadable forms created yet.'),
+    t('File'),
   );
   $export['site_forms'] = $view;
 
