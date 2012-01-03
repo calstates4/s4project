@@ -5,7 +5,7 @@
  */
 
 /**
- * Implementation of hook_field_default_fields().
+ * Implements hook_field_default_fields().
  */
 function s4_courses_field_default_fields() {
   $fields = array();
@@ -467,25 +467,9 @@ function s4_courses_field_default_fields() {
             'update' => 0,
             'view' => 0,
           ),
-          'create' => array(
-            'contact_record' => 0,
-            'coordinator' => 0,
-            'course' => 0,
-            'course_term' => 0,
-            'file' => 0,
-            'news' => 0,
-            'page' => 0,
-            'report' => 0,
-            'signup' => 0,
-            'site' => 0,
-            'webform' => 0,
-          ),
-          'priority' => '9',
+          'priority' => '5',
           'referenced' => array(
             'delete' => 0,
-            'deny_delete' => 0,
-            'deny_update' => 0,
-            'deny_view' => 0,
             'update' => 0,
             'view' => 'view',
           ),
@@ -499,7 +483,7 @@ function s4_courses_field_default_fields() {
           2 => '2',
           3 => 0,
           4 => 0,
-          6 => 0,
+          5 => 0,
         ),
         'referenceable_status' => array(
           0 => 0,
@@ -945,8 +929,8 @@ function s4_courses_field_default_fields() {
       'settings' => array(
         'allowed_values' => array(
           0 => array(
-            'parent' => '0',
             'vocabulary' => 'site_restrictions',
+            'parent' => '0',
           ),
         ),
       ),

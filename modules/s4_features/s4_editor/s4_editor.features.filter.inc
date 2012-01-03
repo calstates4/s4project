@@ -5,7 +5,7 @@
  */
 
 /**
- * Implementation of hook_filter_default_formats().
+ * Implements hook_filter_default_formats().
  */
 function s4_editor_filter_default_formats() {
   $formats = array();

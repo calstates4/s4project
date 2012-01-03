@@ -5,7 +5,7 @@
  */
 
 /**
- * Implementation of hook_strongarm().
+ * Implements hook_strongarm().
  */
 function s4_editor_strongarm() {
   $export = array();
@@ -68,35 +68,6 @@ function s4_editor_strongarm() {
       'directories' => array(
         0 => array(
           'name' => 'u%uid',
-          'subnav' => 0,
-          'browse' => 1,
-          'upload' => 1,
-          'thumb' => 1,
-          'delete' => 0,
-          'resize' => 0,
-        ),
-      ),
-      'thumbnails' => array(
-        0 => array(
-          'name' => 'Thumb',
-          'dimensions' => '90x90',
-          'prefix' => 'thumb_',
-          'suffix' => '',
-        ),
-      ),
-    ),
-    3 => array(
-      'name' => 'staff',
-      'usertab' => 0,
-      'filesize' => '2',
-      'quota' => '0',
-      'tuquota' => '0',
-      'extensions' => 'gif png jpg jpeg',
-      'dimensions' => '800x600',
-      'filenum' => '1',
-      'directories' => array(
-        0 => array(
-          'name' => 'images/staff',
           'subnav' => 0,
           'browse' => 1,
           'upload' => 1,

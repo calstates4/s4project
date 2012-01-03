@@ -5,7 +5,7 @@
  */
 
 /**
- * Implementation of hook_ctools_plugin_api().
+ * Implements hook_ctools_plugin_api().
  */
 function s4_sites_ctools_plugin_api() {
   list($module, $api) = func_get_args();
@@ -27,7 +27,7 @@ function s4_sites_ctools_plugin_api() {
 }
 
 /**
- * Implementation of hook_views_api().
+ * Implements hook_views_api().
  */
 function s4_sites_views_api() {
   list($module, $api) = func_get_args();
@@ -37,7 +37,7 @@ function s4_sites_views_api() {
 }
 
 /**
- * Implementation of hook_flag_default_flags().
+ * Implements hook_flag_default_flags().
  */
 function s4_sites_flag_default_flags() {
   $flags = array();
@@ -47,7 +47,7 @@ function s4_sites_flag_default_flags() {
     'title' => 'Bookmarks',
     'global' => '0',
     'types' => array(
-      0 => 'site',
+      0 => 'article',
     ),
     'flag_short' => 'Bookmark this',
     'flag_long' => 'Add this post to your bookmarks',
@@ -59,15 +59,15 @@ function s4_sites_flag_default_flags() {
     'link_type' => 'toggle',
     'roles' => array(
       'flag' => array(
-        0 => '2',
+        0 => 2,
       ),
       'unflag' => array(
-        0 => '2',
+        0 => 2,
       ),
     ),
     'show_on_page' => 1,
     'show_on_teaser' => 1,
-    'show_on_form' => 0,
+    'show_on_form' => 1,
     'access_author' => '',
     'i18n' => 0,
     'module' => 's4_sites',
@@ -80,7 +80,7 @@ function s4_sites_flag_default_flags() {
 }
 
 /**
- * Implementation of hook_node_info().
+ * Implements hook_node_info().
  */
 function s4_sites_node_info() {
   $items = array(

@@ -5,7 +5,7 @@
  */
 
 /**
- * Implementation of hook_menu_default_menu_links().
+ * Implements hook_menu_default_menu_links().
  */
 function s4_sites_menu_default_menu_links() {
   $menu_links = array();
@@ -44,7 +44,7 @@ function s4_sites_menu_default_menu_links() {
     'external' => '0',
     'has_children' => '0',
     'expanded' => '0',
-    'weight' => '-44',
+    'weight' => '-43',
   );
   // Translatables
   // Included for use with string extractors like potx.

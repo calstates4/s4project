@@ -5,7 +5,7 @@
  */
 
 /**
- * Implementation of hook_views_default_views().
+ * Implements hook_views_default_views().
  */
 function s4_sites_views_default_views() {
   $export = array();
@@ -17,7 +17,7 @@ function s4_sites_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Bookmarked Sites';
   $view->core = 7;
-  $view->api_version = '3.0';
+  $view->api_version = '3.0-alpha1';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -221,7 +221,7 @@ function s4_sites_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Site notes & forms';
   $view->core = 7;
-  $view->api_version = '3.0';
+  $view->api_version = '3.0-alpha1';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -949,7 +949,7 @@ function s4_sites_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Email: Site coordinators';
   $view->core = 7;
-  $view->api_version = '3.0';
+  $view->api_version = '3.0-alpha1';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -1071,7 +1071,7 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['relationships']['field_site_nid']['field'] = 'field_site_nid';
   $handler->display->display_options['relationships']['field_site_nid']['required'] = 0;
   $handler->display->display_options['relationships']['field_site_nid']['delta'] = '-1';
-  /* Relationship: Broken/missing handler */
+  /* Relationship: Content: Site staff (field_coordinator) - reverse */
   $handler->display->display_options['relationships']['reverse_field_coordinator_node']['id'] = 'reverse_field_coordinator_node';
   $handler->display->display_options['relationships']['reverse_field_coordinator_node']['table'] = 'node';
   $handler->display->display_options['relationships']['reverse_field_coordinator_node']['field'] = 'reverse_field_coordinator_node';
@@ -1113,7 +1113,7 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['fields']['views_bulk_operations']['empty_zero'] = 0;
   $handler->display->display_options['fields']['views_bulk_operations']['hide_alter_empty'] = 0;
   $handler->display->display_options['fields']['views_bulk_operations']['vbo']['operations'] = array(
-    's4_core_email_site_coordinator_action' => array(
+    'action::s4_core_email_site_coordinator_action' => array(
       'selected' => TRUE,
       'skip_confirmation' => 0,
     ),
@@ -1402,7 +1402,7 @@ function s4_sites_views_default_views() {
     t('- All -'),
     t('Offset'),
     t('field_site'),
-    t('reverse_field_coordinator_node'),
+    t('field_coordinator'),
     t('field_course'),
     t('Send email'),
     t('First Name'),
@@ -1431,7 +1431,7 @@ function s4_sites_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Site Locations Map';
   $view->core = 7;
-  $view->api_version = '3.0';
+  $view->api_version = '3.0-alpha1';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -1606,7 +1606,7 @@ function s4_sites_views_default_views() {
   $view->base_table = 'comment';
   $view->human_name = 'Recent activity';
   $view->core = 7;
-  $view->api_version = '3.0';
+  $view->api_version = '3.0-alpha1';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -1800,7 +1800,7 @@ function s4_sites_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Site coordinators';
   $view->core = 7;
-  $view->api_version = '3.0';
+  $view->api_version = '3.0-alpha1';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -2440,7 +2440,7 @@ function s4_sites_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Site fields';
   $view->core = 7;
-  $view->api_version = '3.0';
+  $view->api_version = '3.0-alpha1';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -2863,7 +2863,7 @@ function s4_sites_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'site location';
   $view->core = 7;
-  $view->api_version = '3.0';
+  $view->api_version = '3.0-alpha1';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -3055,7 +3055,7 @@ function s4_sites_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Site locations';
   $view->core = 7;
-  $view->api_version = '3.0';
+  $view->api_version = '3.0-alpha1';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -3163,7 +3163,7 @@ function s4_sites_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Site moderation';
   $view->core = 7;
-  $view->api_version = '3.0';
+  $view->api_version = '3.0-alpha1';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -3323,7 +3323,7 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['header'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Field: Status */
+  /* Field: Content: Status */
   $handler->display->display_options['fields']['field_workflow_status']['id'] = 'field_workflow_status';
   $handler->display->display_options['fields']['field_workflow_status']['table'] = 'field_data_field_workflow_status';
   $handler->display->display_options['fields']['field_workflow_status']['field'] = 'field_workflow_status';
@@ -3426,7 +3426,7 @@ function s4_sites_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Site signups';
   $view->core = 7;
-  $view->api_version = '3.0';
+  $view->api_version = '3.0-alpha1';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -3748,7 +3748,7 @@ function s4_sites_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'sites';
   $view->core = 7;
-  $view->api_version = '3.0';
+  $view->api_version = '3.0-alpha1';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */

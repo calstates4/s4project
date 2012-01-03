@@ -5,7 +5,7 @@
  */
 
 /**
- * Implementation of hook_views_default_views().
+ * Implements hook_views_default_views().
  */
 function s4_courses_views_default_views() {
   $export = array();
@@ -17,7 +17,7 @@ function s4_courses_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Course students';
   $view->core = 7;
-  $view->api_version = '3.0';
+  $view->api_version = '3.0-alpha1';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -813,7 +813,7 @@ function s4_courses_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Email: Faculty';
   $view->core = 7;
-  $view->api_version = '3.0';
+  $view->api_version = '3.0-alpha1';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -839,7 +839,7 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['relationships']['field_course_faculty_uid']['field'] = 'field_course_faculty_uid';
   $handler->display->display_options['relationships']['field_course_faculty_uid']['required'] = 0;
   $handler->display->display_options['relationships']['field_course_faculty_uid']['delta'] = '-1';
-  /* Relationship: Broken/missing handler */
+  /* Relationship: Content: Course (field_course) - reverse */
   $handler->display->display_options['relationships']['reverse_field_course_node']['id'] = 'reverse_field_course_node';
   $handler->display->display_options['relationships']['reverse_field_course_node']['table'] = 'node';
   $handler->display->display_options['relationships']['reverse_field_course_node']['field'] = 'reverse_field_course_node';
@@ -875,7 +875,7 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['fields']['views_bulk_operations']['empty_zero'] = 0;
   $handler->display->display_options['fields']['views_bulk_operations']['hide_alter_empty'] = 0;
   $handler->display->display_options['fields']['views_bulk_operations']['vbo']['operations'] = array(
-    's4_core_email_user_action' => array(
+    'action::s4_core_email_user_action' => array(
       'selected' => TRUE,
       'skip_confirmation' => 1,
     ),
@@ -1221,7 +1221,7 @@ function s4_courses_views_default_views() {
     t('- All -'),
     t('Offset'),
     t('field_course_faculty'),
-    t('reverse_field_course_node'),
+    t('field_course'),
     t('field_site'),
     t('Email'),
     t('First Name'),
@@ -1247,7 +1247,7 @@ function s4_courses_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Course Terms';
   $view->core = 7;
-  $view->api_version = '3.0';
+  $view->api_version = '3.0-alpha1';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -1575,7 +1575,7 @@ function s4_courses_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Courses';
   $view->core = 7;
-  $view->api_version = '3.0';
+  $view->api_version = '3.0-alpha1';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */

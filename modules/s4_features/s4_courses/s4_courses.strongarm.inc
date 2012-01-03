@@ -5,7 +5,7 @@
  */
 
 /**
- * Implementation of hook_strongarm().
+ * Implements hook_strongarm().
  */
 function s4_courses_strongarm() {
   $export = array();
@@ -14,7 +14,7 @@ function s4_courses_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'cck_blocks_field_course_faculty_block_availability';
-  $strongarm->value = 2;
+  $strongarm->value = '2';
   $export['cck_blocks_field_course_faculty_block_availability'] = $strongarm;
 
   $strongarm = new stdClass;

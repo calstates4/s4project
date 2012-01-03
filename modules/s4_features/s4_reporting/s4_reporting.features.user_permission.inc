@@ -5,7 +5,7 @@
  */
 
 /**
- * Implementation of hook_user_default_permissions().
+ * Implements hook_user_default_permissions().
  */
 function s4_reporting_user_default_permissions() {
   $permissions = array();
@@ -13,10 +13,7 @@ function s4_reporting_user_default_permissions() {
   // Exported permission: view assessment reports
   $permissions['view assessment reports'] = array(
     'name' => 'view assessment reports',
-    'roles' => array(
-      0 => 'staff',
-    ),
-    'module' => 's4_assessment',
+    'roles' => array(),
   );
 
   return $permissions;

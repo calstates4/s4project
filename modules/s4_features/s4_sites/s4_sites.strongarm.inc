@@ -5,7 +5,7 @@
  */
 
 /**
- * Implementation of hook_strongarm().
+ * Implements hook_strongarm().
  */
 function s4_sites_strongarm() {
   $export = array();
@@ -774,22 +774,6 @@ function s4_sites_strongarm() {
           'view' => 'view',
           'update' => 0,
           'delete' => 0,
-          'deny_view' => 0,
-          'deny_update' => 0,
-          'deny_delete' => 0,
-        ),
-        'create' => array(
-          'page' => 0,
-          'contact_record' => 0,
-          'course' => 0,
-          'course_term' => 0,
-          'file' => 0,
-          'news' => 0,
-          'report' => 0,
-          'signup' => 0,
-          'site' => 0,
-          'coordinator' => 0,
-          'webform' => 0,
         ),
         'author' => array(
           'view' => 0,
@@ -804,7 +788,7 @@ function s4_sites_strongarm() {
           'view' => '',
           'view_args' => '',
         ),
-        'priority' => '9',
+        'priority' => '5',
       ),
     ),
     'site' => array(

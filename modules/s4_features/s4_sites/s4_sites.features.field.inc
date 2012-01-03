@@ -5,7 +5,7 @@
  */
 
 /**
- * Implementation of hook_field_default_fields().
+ * Implements hook_field_default_fields().
  */
 function s4_sites_field_default_fields() {
   $fields = array();
@@ -1258,8 +1258,8 @@ function s4_sites_field_default_fields() {
       'settings' => array(
         'allowed_values' => array(
           0 => array(
-            'parent' => '0',
             'vocabulary' => 'site_restrictions',
+            'parent' => '0',
           ),
         ),
       ),
@@ -4139,9 +4139,12 @@ function s4_sites_field_default_fields() {
       'display' => array(
         'cck_blocks' => array(
           'label' => 'hidden',
-          'module' => 'fancybox',
-          'settings' => array(),
-          'type' => 'medium_fancybox',
+          'module' => 'image',
+          'settings' => array(
+            'image_link' => '',
+            'image_style' => '',
+          ),
+          'type' => 'image',
           'weight' => '0',
         ),
         'default' => array(
@@ -4652,8 +4655,8 @@ function s4_sites_field_default_fields() {
       'settings' => array(
         'allowed_values' => array(
           0 => array(
-            'parent' => '0',
             'vocabulary' => 'site_restrictions',
+            'parent' => '0',
           ),
         ),
       ),

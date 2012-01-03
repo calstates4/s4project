@@ -5,7 +5,7 @@
  */
 
 /**
- * Implementation of hook_views_default_views().
+ * Implements hook_views_default_views().
  */
 function s4_reporting_views_default_views() {
   $export = array();
@@ -17,7 +17,7 @@ function s4_reporting_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Report: Students';
   $view->core = 7;
-  $view->api_version = '3.0';
+  $view->api_version = '3.0-alpha1';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -145,7 +145,7 @@ Fields',
   $handler->display->display_options['relationships']['field_term_nid']['relationship'] = 'field_course_nid';
   $handler->display->display_options['relationships']['field_term_nid']['required'] = 0;
   $handler->display->display_options['relationships']['field_term_nid']['delta'] = '-1';
-  /* Relationship: Content: Coordinator (field_coordinator) */
+  /* Relationship: Content: Site staff (field_coordinator) */
   $handler->display->display_options['relationships']['field_coordinator_nid']['id'] = 'field_coordinator_nid';
   $handler->display->display_options['relationships']['field_coordinator_nid']['table'] = 'field_data_field_coordinator';
   $handler->display->display_options['relationships']['field_coordinator_nid']['field'] = 'field_coordinator_nid';
@@ -692,7 +692,7 @@ Fields',
   $view->base_table = 'node';
   $view->human_name = 'Reports: Courses';
   $view->core = 7;
-  $view->api_version = '3.0';
+  $view->api_version = '3.0-alpha1';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -1380,7 +1380,7 @@ Fields',
   $view->base_table = 'node';
   $view->human_name = 'Reports: sites';
   $view->core = 7;
-  $view->api_version = '3.0';
+  $view->api_version = '3.0-alpha1';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -2558,7 +2558,7 @@ Fields',
   $handler->display->display_options['fields']['field_site_restrict']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_site_restrict']['delta_reversed'] = 0;
   $handler->display->display_options['fields']['field_site_restrict']['field_api_classes'] = 0;
-  /* Field: Field: Status */
+  /* Field: Content: Status */
   $handler->display->display_options['fields']['field_workflow_status']['id'] = 'field_workflow_status';
   $handler->display->display_options['fields']['field_workflow_status']['table'] = 'field_data_field_workflow_status';
   $handler->display->display_options['fields']['field_workflow_status']['field'] = 'field_workflow_status';
