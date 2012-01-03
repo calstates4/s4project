@@ -229,8 +229,9 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['title'] = 'Notes and Forms';
   $handler->display->display_options['access']['type'] = 'type_role';
   $handler->display->display_options['access']['role'] = array(
-    3 => '3',
     4 => '4',
+    3 => '3',
+    5 => '5',
   );
   $handler->display->display_options['access']['node_type'] = 'site';
   $handler->display->display_options['cache']['type'] = 'none';
@@ -1799,7 +1800,7 @@ function s4_sites_views_default_views() {
   $view->description = 'Listings of site coordinators';
   $view->tag = 'default';
   $view->base_table = 'node';
-  $view->human_name = 'Site coordinators';
+  $view->human_name = 'Site staff';
   $view->core = 7;
   $view->api_version = '3.0-alpha1';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
@@ -1809,8 +1810,8 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['title'] = 'Site Staff';
   $handler->display->display_options['access']['type'] = 'type_role';
   $handler->display->display_options['access']['role'] = array(
-    3 => '3',
     4 => '4',
+    5 => '5',
   );
   $handler->display->display_options['access']['node_type'] = 'site';
   $handler->display->display_options['cache']['type'] = 'none';
