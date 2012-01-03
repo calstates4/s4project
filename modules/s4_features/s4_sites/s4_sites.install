@@ -11,4 +11,70 @@ function s4_sites_install() {
           'captcha_type' => 'Text Captcha',
         ))
         ->execute();
+  $node = (object)array (=
+      'confirmation' => '',
+      'confirmation_format' => NULL,
+      'redirect_url' => '<confirmation>',
+      'status' => '1',
+      'block' => '0',
+      'teaser' => '0',
+      'allow_draft' => '0',
+      'auto_save' => '0',
+      'submit_notice' => '1',
+      'submit_text' => '',
+      'submit_limit' => '-1',
+      'submit_interval' => '-1',
+      'record_exists' => true,
+      'roles' => 
+      array (
+        0 => '1',
+        1 => '2',
+      ),
+      'emails' => 
+      array (
+      ),
+      'components' => 
+      array (
+        1 => 
+        array (
+          'nid' => 10,
+          'cid' => '1',
+          'pid' => '0',
+          'form_key' => 'assessment_rubric',
+          'name' => 'Assessment rubric',
+          'type' => 'grid',
+          'value' => '',
+          'extra' => 
+          array (
+            'title_display' => 0,
+            'optrand' => 0,
+            'qrand' => 0,
+            'conditional_operator' => '=',
+            'options' => '0|No
+    1|Yes
+    ',
+            'custom_option_keys' => 0,
+            'questions' => '0|SUPERVISION:  Will the students be supervised less than 50% of the time or will the supervisor be responsible for overseeing more than 8 people?
+    1|POPULATION SERVED:  Will the students be working with Òbehaviorally challengedÓ populations?  Will students be working unsupervised with minors?
+    2|POPULATION SERVED: Will the students be working with individuals who have a known criminal background or history of violent behavior?
+    3|LEARNING SITE LOCATION:  Would the location be described as a high-crime area, or are there concerns about the parking and work areas being secure or adequately illuminated?
+    4|CRIMINAL ACTIVITY: Have there been any incidents of criminal activity at the organization within the last year?
+    5|KNOWN HAZARDS:  Are there concerns with the siteÕs physical location; such as physical, environmental, or inherent hazards that are not addressed adequately by training and security measures?
+    6|KNOWN HAZARDS:  Does the placement require working with any hazardous materials, heavy equipment, or heavy machinery?
+    7|EMERGENCY PLAN:  Are there any concerns as to the Learning SiteÕs Emergency Plan or regarding non-working fire-rated doors or blockages to the exits and hallways?
+    8|Is there anything else not covered that might impact the safety and well-being of the students?
+    ',
+            'custom_question_keys' => 0,
+            's4_core_field_private' => 0,
+            'description' => '',
+            'conditional_component' => '',
+            'conditional_values' => '',
+          ),
+          'mandatory' => '0',
+          'weight' => '0',
+          'page_num' => 1,
+        ),
+      ),
+    );
+    node_save($node);
 }
