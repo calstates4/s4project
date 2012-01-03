@@ -35,7 +35,8 @@ function s4_sites_user_default_permissions() {
   $permissions['create site content'] = array(
     'name' => 'create site content',
     'roles' => array(
-      0 => 'authenticated user',
+      0 => 'anonymous user',
+      1 => 'authenticated user',
     ),
     'module' => 'node',
   );
@@ -272,6 +273,15 @@ function s4_sites_user_default_permissions() {
   $permissions['moderate site information'] = array(
     'name' => 'moderate site information',
     'roles' => array(),
+  );
+
+  // Exported permission: skip CAPTCHA
+  $permissions['skip CAPTCHA'] = array(
+    'name' => 'skip CAPTCHA',
+    'roles' => array(
+      0 => 'authenticated user',
+    ),
+    'module' => 'captcha',
   );
 
   return $permissions;

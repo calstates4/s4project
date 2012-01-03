@@ -1,0 +1,14 @@
+<?php
+
+/**
+ * Implements hook_install().
+ */
+function s4_sites_install() {
+  db_insert('captcha_points')
+        ->fields(array(
+          'form_id' => 'site_node_form',
+          'module' => 'textcaptcha',
+          'captcha_type' => 'Text Captcha',
+        ))
+        ->execute();
+}

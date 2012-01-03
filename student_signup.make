@@ -17,6 +17,9 @@ projects[auto_nodetitle][version] = "1.0-alpha1"
 projects[better_exposed_filters][subdir] = "contrib"
 projects[better_exposed_filters][version] = "3.0-beta1"
 
+projects[captcha][subdir] = "contrib"
+projects[captcha][version] = "1.0-beta2"
+
 projects[cck][subdir] = "contrib"
 projects[cck][version] = "2.x-dev"
 
@@ -125,6 +128,9 @@ projects[strongarm][version] = "2.0-beta2"
 projects[talk][subdir] = "contrib"
 projects[talk][version] = "1.x-dev"
 
+projects[textcaptcha][subdir] = "contrib"
+projects[textcaptcha][version] = "1.x-dev"
+
 projects[token][subdir] = "contrib"
 projects[token][version] = "1.0-beta2"
 
@@ -229,3 +235,4 @@ libraries[guiders][destination] = "libraries"
 projects[wysiwyg][patch][] = "http://drupal.org/files/issues/wysiwyg-entity-exportables-624018-176_1.patch"
 projects[token][patch][] = "http://drupal.org/files/issues/modules_token.92.patch"
 projects[cck_phone][patch][] = "http://drupal.org/files/issues/cck_phone_testing-1165464-2.patch"
+projects[nodeformcols][patch][] = "http://drupal.org/files/nodeformcolum_captcha_error.patch"
