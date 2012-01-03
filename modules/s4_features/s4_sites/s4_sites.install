@@ -12,27 +12,44 @@ function s4_sites_install() {
         ))
         ->execute();
   $node = (object)array (
-      'confirmation' => '',
-      'confirmation_format' => NULL,
-      'redirect_url' => '<confirmation>',
-      'status' => '1',
-      'block' => '0',
-      'teaser' => '0',
-      'allow_draft' => '0',
-      'auto_save' => '0',
-      'submit_notice' => '1',
-      'submit_text' => '',
-      'submit_limit' => '-1',
-      'submit_interval' => '-1',
-      'record_exists' => true,
-      'roles' => 
+      'title' => 'Integrative Learning Rubric',
+       'type' => 'webform',
+       'language' => 'en',
+       'body' => 
       array (
-        0 => '1',
-        1 => '2',
-      ),
-      'emails' => 
-      array (
-      ),
+        'en' => 
+        array (
+          0 => 
+          array (
+            'value' => '',
+            'safe_summary' => '',
+          ),
+        ),
+      ),'webform' => 
+        array (
+          'nid' => '',
+          'confirmation' => '',
+          'confirmation_format' => 'filtered_html',
+          'redirect_url' => '',
+          'status' => '1',
+          'block' => '0',
+          'teaser' => '0',
+          'allow_draft' => '0',
+          'auto_save' => '0',
+          'submit_notice' => '1',
+          'submit_text' => '',
+          'submit_limit' => '-1',
+          'submit_interval' => '-1',
+          'record_exists' => true,
+          'roles' => 
+          array (
+            0 => '1',
+            1 => '2',
+          ),
+          'emails' => 
+          array (
+          ),
+
       'components' => 
       array (
         1 => 
@@ -74,6 +91,7 @@ function s4_sites_install() {
           'weight' => '0',
           'page_num' => 1,
         ),
+      ),
       ),
     );
     node_save($node);
