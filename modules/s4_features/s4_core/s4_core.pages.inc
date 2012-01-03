@@ -68,6 +68,7 @@ function s4_core_signup($type, $nid) {
       $instructions = field_get_items('node', $site, 'field_site_instructions_required', $node->language);
       $instruction_text = field_get_items('node', $site, 'field_site_instructions');
       $locations = field_get_items('node', $site, 'field_location');
+      $form_terms = s4_core_site_has_downloadable_forms($site);
       if($_GET['agreed']) {
         $_SESSION['s4_signup_agreed'] = true;
       }
@@ -88,9 +89,13 @@ function s4_core_signup($type, $nid) {
       else {
         $_SESSION['s4_signup_site'] = check_plain($nid);
         if(variable_get('s4_core_collect_service_hours', TRUE) && !$_SESSION['s4_signup_hours']) {
-	  	   drupal_set_title('Service hours');
-	  	   return drupal_get_form('s4_core_student_signup_hours');
-	    }
+  	  	   drupal_set_title('Service hours');
+  	  	   return drupal_get_form('s4_core_student_signup_hours');
+  	    }
+        if($form_terms && !$_SESSION['s4_core_viewed_downloadable_forms']) {
+          $_SESSION['s4_core_viewed_downloadable_forms'] = TRUE;
+          drupal_goto('forms/download/' . implode('+', $form_terms));
+        }
         $form = field_get_items('node', $site, 'field_site_form');
         if ($form) {
           drupal_set_message(t('This site requires an additional form to be completed after you select your coordinator'));

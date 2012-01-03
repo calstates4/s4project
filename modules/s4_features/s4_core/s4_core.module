@@ -35,6 +35,7 @@ function s4_core_block_info() {
   $blocks['s4_current_user_link'] = array('info' => 'Logged-in user link');
   $blocks['s4_site_settings'] = array('info' => 'S4 site settings');
   $blocks['s4_welcome_message'] = array('info' => 'S4 Welcome Message');
+  $blocks['s4_signup_forms'] = array('info' => 'S4 Signup form jump link');
   return $blocks;
 }
 
@@ -1012,19 +1013,37 @@ function s4_core_menu_alter(&$items) {
 	foreach (entity_get_info() as $entity_type => $entity_info) {
     if ($entity_info['fieldable']) {
       foreach ($entity_info['bundles'] as $bundle_name => $bundle_info) {
-        if (isset($bundle_info['admin'])) {
-          // Extract path information from the bundle.
-          $path = $bundle_info['admin']['path'];
-			$items["$path/fields/%field_ui_menu"]['access callback'] = 's4_core_field_alter_access';
-			$items["$path/fields/%field_ui_menu"]['access arguments'] = array(4, 6);
-			$items["$path/fields/%field_ui_menu/edit"]['access callback'] = 's4_core_field_alter_access';
-			$items["$path/fields/%field_ui_menu/edit"]['access arguments'] = array(4, 6);
-			$items["$path/fields/%field_ui_menu/delete"]['access callback'] = 's4_core_field_alter_access';
-			$items["$path/fields/%field_ui_menu/delete"]['access arguments'] = array(4, 6);
-		}
-	  }
+          if (isset($bundle_info['admin'])) {
+            // Extract path information from the bundle.
+            $path = $bundle_info['admin']['path'];
+      			$items["$path/fields/%field_ui_menu"]['access callback'] = 's4_core_field_alter_access';
+      			$items["$path/fields/%field_ui_menu"]['access arguments'] = array(4, 6);
+      			$items["$path/fields/%field_ui_menu/edit"]['access callback'] = 's4_core_field_alter_access';
+      			$items["$path/fields/%field_ui_menu/edit"]['access arguments'] = array(4, 6);
+      			$items["$path/fields/%field_ui_menu/delete"]['access callback'] = 's4_core_field_alter_access';
+      			$items["$path/fields/%field_ui_menu/delete"]['access arguments'] = array(4, 6);
+    		}
+  	  }
+  	}
 	}
-	}
+}
+
+/**
+ * Returns whether a given site has downloadable forms.
+ */
+function s4_core_site_has_downloadable_forms($node) {
+  $taxonomy = field_get_items('node', $node, 'field_site_restrict');
+  $terms = array();
+  foreach($taxonomy as $term) {
+    $terms[] = $term['tid'];
+  }
+  $forms = db_select('field_data_field_site_restrict', 'r')
+           ->fields('r', array('entity_id'))
+           ->condition('bundle', 'downloadable_form')
+           ->condition('field_site_restrict_tid', $terms, 'IN')
+           ->execute()
+           ->fetchAllKeyed(0, 0);
+  return (count($forms)) ? $terms : FALSE;
 }
 
 /**

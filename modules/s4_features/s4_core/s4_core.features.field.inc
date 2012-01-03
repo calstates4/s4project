@@ -195,6 +195,91 @@ function s4_core_field_default_fields() {
     ),
   );
 
+  // Exported field: 'node-downloadable_form-field_downloadable_show'
+  $fields['node-downloadable_form-field_downloadable_show'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_downloadable_show',
+      'foreign keys' => array(),
+      'global_block_settings' => '1',
+      'indexes' => array(
+        'value' => array(
+          0 => 'value',
+        ),
+      ),
+      'module' => 'list',
+      'settings' => array(
+        'allowed_values' => array(
+          0 => 'No',
+          1 => 'Yes',
+        ),
+        'allowed_values_function' => '',
+        'allowed_values_php' => '',
+      ),
+      'translatable' => '0',
+      'type' => 'list_boolean',
+    ),
+    'field_instance' => array(
+      'bundle' => 'downloadable_form',
+      'default_value' => array(
+        0 => array(
+          'value' => 0,
+        ),
+      ),
+      'default_value_function' => '',
+      'default_value_php' => '',
+      'deleted' => '0',
+      'description' => 'When checked, the form will be shown to a user when they sign up for a site.',
+      'display' => array(
+        'cck_blocks' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'default' => array(
+          'label' => 'above',
+          'module' => 'list',
+          'settings' => array(),
+          'type' => 'list_default',
+          'weight' => 3,
+        ),
+        'notifications' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'display_label' => '',
+      'entity_type' => 'node',
+      'field_name' => 'field_downloadable_show',
+      'label' => 'Show on signup',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(
+          'display_label' => 1,
+        ),
+        'type' => 'options_onoff',
+        'weight' => '4',
+      ),
+    ),
+  );
+
   // Exported field: 'node-downloadable_form-field_site_restrict'
   $fields['node-downloadable_form-field_site_restrict'] = array(
     'field_config' => array(
@@ -1808,11 +1893,13 @@ function s4_core_field_default_fields() {
   t('Let us know the last date you will be working on this site. This can be an approximation, and if you are singing up as part of a course, this will be automatically the last day of the semester.');
   t('Location');
   t('Service hours');
+  t('Show on signup');
   t('Signup Form Results');
   t('Site');
   t('Site staff');
   t('Type the name of the user who you will be signing up for.');
   t('User');
+  t('When checked, the form will be shown to a user when they sign up for a site.');
 
   return $fields;
 }

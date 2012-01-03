@@ -59,7 +59,12 @@ function s4_core_block_user_progress() {
               'selection' => FALSE
               );
     }
+    $form_terms = s4_core_site_has_downloadable_forms($site);
+    if(count($form_terms) && !$_SESSION['s4_core_viewed_downloadable_forms']) {
+      $status['form']['href'] = 'forms/download/' . implode('+', $form_terms);
+    }
   }
+  
   foreach (module_implements('s4_user_status') as $module) {
     //Iterate over modules and pass status by reference
     $function_name = $module . '_s4_user_status';
@@ -405,4 +410,16 @@ function s4_core_block_s4_welcome_message() {
 		$message['value'] = '<p class="intro">This where you can give users more information about your program. Let us know in a few sentences what you do, and what the community gets from your program.</p><p>Select <strong>Site Settings</strong> then <strong> General settings</strong> to change this message.</p>';
 	}
 	return array('content' => $message['value']);
+}
+
+/**
+ * Link from the downloadable form page to continue
+ */
+function s4_core_block_s4_signup_forms() {
+  if(!$_SESSION['s4_signup_site']) {
+    return;
+  }
+  return array('content' => '<div class="signup"><div class="icon"></div>' .
+                            l('Continue signing up', 's4/signup/site/'. $_SESSION['s4_signup_site'])
+                            .'</div>');
 }

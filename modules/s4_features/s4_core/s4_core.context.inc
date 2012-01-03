@@ -387,6 +387,39 @@ function s4_core_context_default_contexts() {
   $context = new stdClass;
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
+  $context->name = 'signup-form-page';
+  $context->description = 'User is viewing the signup form list';
+  $context->tag = 'signup';
+  $context->conditions = array(
+    'views' => array(
+      'values' => array(
+        'site_forms:page_3' => 'site_forms:page_3',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        's4_core-s4_signup_forms' => array(
+          'module' => 's4_core',
+          'delta' => 's4_signup_forms',
+          'region' => 'content_right',
+          'weight' => '-10',
+        ),
+      ),
+    ),
+  );
+  $context->condition_mode = 0;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('User is viewing the signup form list');
+  t('signup');
+  $export['signup-form-page'] = $context;
+
+  $context = new stdClass;
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
   $context->name = 'signup_page';
   $context->description = 'User is on a signup page';
   $context->tag = 'signup';

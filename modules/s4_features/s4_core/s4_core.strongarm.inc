@@ -225,7 +225,9 @@ function s4_core_strongarm() {
         1 => 3,
       ),
       'course' => array(
-        0 => 3,
+        0 => 2,
+        1 => 5,
+        2 => 4,
       ),
     ),
     'view_own' => array(
@@ -243,7 +245,8 @@ function s4_core_strongarm() {
         2 => 3,
       ),
       'course' => array(
-        0 => 3,
+        0 => 5,
+        1 => 4,
       ),
     ),
     'per_node' => array(
@@ -456,7 +459,7 @@ function s4_core_strongarm() {
     ),
     'field_downloadable_file' => array(
       'region' => 'right',
-      'weight' => '2',
+      'weight' => '3',
       'has_required' => TRUE,
       'title' => 'File',
     ),
@@ -473,6 +476,13 @@ function s4_core_strongarm() {
       'title' => 'Notifications',
       'collapsed' => 0,
       'hidden' => 1,
+    ),
+    'field_downloadable_show' => array(
+      'region' => 'right',
+      'weight' => '2',
+      'has_required' => FALSE,
+      'title' => 'Yes',
+      'hidden' => 0,
     ),
   );
   $export['nodeformscols_field_placements_downloadable_form_default'] = $strongarm;

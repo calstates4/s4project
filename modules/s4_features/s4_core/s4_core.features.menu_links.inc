@@ -22,7 +22,7 @@ function s4_core_menu_default_menu_links() {
     'external' => '1',
     'has_children' => '0',
     'expanded' => '0',
-    'weight' => '-43',
+    'weight' => '-42',
   );
   // Exported menu link: main-menu:forms
   $menu_links['main-menu:forms'] = array(
@@ -76,7 +76,7 @@ function s4_core_menu_default_menu_links() {
     'external' => '0',
     'has_children' => '0',
     'expanded' => '0',
-    'weight' => '-45',
+    'weight' => '-44',
   );
   // Exported menu link: main-menu:user/logout
   $menu_links['main-menu:user/logout'] = array(
