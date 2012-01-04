@@ -18,8 +18,7 @@ function s4_webform_render_submission($field) {
         return NULL;
       }
       $output = webform_submission_render($form, $submission, NULL, 'html');
-      
-          return array('content' => $output);
+      return array('content' => $output);
   }
 }
 
