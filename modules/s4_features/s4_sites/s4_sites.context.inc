@@ -270,6 +270,8 @@ function s4_sites_context_default_contexts() {
       'values' => array(
         'site-list' => 'site-list',
         'site-list*' => 'site-list*',
+        '~site-list/staff' => '~site-list/staff',
+        '~site-list/staff/*' => '~site-list/staff/*',
       ),
     ),
   );
@@ -313,6 +315,41 @@ function s4_sites_context_default_contexts() {
   t('User is on the site list and search page');
   t('sites');
   $export['site-list'] = $context;
+
+  $context = new stdClass;
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
+  $context->name = 'site-list-staff';
+  $context->description = 'User is on the site list for staff page';
+  $context->tag = 'sites';
+  $context->conditions = array(
+    'path' => array(
+      'values' => array(
+        'site-list/staff' => 'site-list/staff',
+        'site-list/staff*' => 'site-list/staff*',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        's4_core-s4_add_new_site' => array(
+          'module' => 's4_core',
+          'delta' => 's4_add_new_site',
+          'region' => 'content_top_left',
+          'weight' => '-10',
+        ),
+      ),
+    ),
+    'menu' => 'site-list',
+  );
+  $context->condition_mode = 0;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('User is on the site list for staff page');
+  t('sites');
+  $export['site-list-staff'] = $context;
 
   $context = new stdClass;
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */

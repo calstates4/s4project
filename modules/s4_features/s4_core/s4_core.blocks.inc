@@ -286,16 +286,6 @@ function s4_core_block_s4_add_new_site() {
                   )
                   );
     }
-    else {
-    	$add_link = l(t('<span class="add"></span>Add your site to this list'), 
-                  'sites/propose', 
-                  array('html' => TRUE,
-                  		'query' => array('destination' => 'site-list'),
-                       'attributes' => 
-                      array('class' => 'button add')
-                  )
-                  );
-    }
     if(user_access('administer site configuration')) {
     	$import_link = l(t('<span class="add"></span>Import sites'), 
                   'admin/config/s4/site-import', 
