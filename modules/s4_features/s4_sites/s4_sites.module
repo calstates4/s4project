@@ -69,8 +69,56 @@ function s4_sites_menu() {
 		'access arguments' => array(2, 3, 4, 5),
 		'page arguments' => array(2, 3),
 	);
+	
+	$items['sites/propose'] = array(
+	  'title' => 'Propose a new site',
+	  'page arguments' => array('s4_sites_propose_site_form'),
+	  'page callback' => 'drupal_get_form',
+	  'access arguments' => array('create site content'),
+	);
   	
   	return $items;
+}
+
+/**
+ * Propose sites page
+ */
+function s4_sites_propose_site_form() {
+  drupal_add_css(drupal_get_path('module', 's4_sites') .'/css/s4_sites.css');  
+
+  $form = array();
+  $vocabulary = taxonomy_vocabulary_machine_name_load('site_restrictions');
+  $terms = taxonomy_get_tree($vocabulary->vid);
+  $form['instructions'] = array(
+    '#type' => 'markup',
+    '#markup' => t('Please select the types of students you would like to have at your site. If you do not know right now, we will contact you once we have reviewed your application.'),
+  );
+  foreach($terms as $t) {
+    $form['terms_'. $t->tid] = array(
+      '#type' => 'checkbox',
+      '#title' => $t->name,
+      '#description' => $t->description,
+    );
+  }
+  
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Continue'),
+  );
+  
+  return $form;
+}
+
+function s4_sites_propose_site_form_submit($form, $form_state) {
+  $vocabulary = taxonomy_vocabulary_machine_name_load('site_restrictions');
+  $terms = taxonomy_get_tree($vocabulary->vid);
+  $proposed_terms = array();
+  foreach($terms as $term) {
+    if($form_state['values']['terms_'. $term->tid]) {
+      $proposed_terms[$term->tid] = $term->tid;
+    }
+  }
+  drupal_goto('node/add/site/'. implode(',', $proposed_terms));
 }
 
 /**
@@ -451,6 +499,12 @@ function s4_sites_form_site_node_form_alter(&$form, $form_state) {
 		if($access === false) {
 			$form[$name]['#access'] = false;
 		}
+	}
+	if(arg(3)) {
+	 $terms = explode(',', arg(3));
+	 foreach($terms as $term) {
+	   $form['field_site_restrict'][$form['#node']->language]['#default_value'][] = $term;
+	 }
 	}
 	
 	drupal_add_js(array('wysiwyg' => array()), 'setting');

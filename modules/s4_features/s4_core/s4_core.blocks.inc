@@ -288,7 +288,7 @@ function s4_core_block_s4_add_new_site() {
     }
     else {
     	$add_link = l(t('<span class="add"></span>Add your site to this list'), 
-                  'node/add/site', 
+                  'sites/propose', 
                   array('html' => TRUE,
                   		'query' => array('destination' => 'site-list'),
                        'attributes' => 

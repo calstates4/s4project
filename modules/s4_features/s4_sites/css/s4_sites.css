@@ -7,3 +7,8 @@ tr.even td.hours-no { color: #FFF; }
 #demographic-total { font-weight: bold; }
 	.field-name-field-site-demographics .error { background: #d6473e; color: #fff;  }
 	.field-name-field-site-demographics .success { background: #00ae3e; color: #fff;  }
+
+#s4-sites-propose-site-form .form-type-checkbox { margin-bottom: 1.5em; }
+  #s4-sites-propose-site-form .form-type-checkbox input { margin-right: -8px; margin-top: -5px;  width: 30px; height: 30px;}
+  #s4-sites-propose-site-form .form-type-checkbox label { font-size: 150%; cursor: pointer; }
+  #s4-sites-propose-site-form .form-type-checkbox .description { margin-left: 30px; font-size: 110%; }
