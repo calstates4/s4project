@@ -18,7 +18,7 @@ function s4_assessment_admin_form() {
 	}
 	
 	$form['s4_assessment_assessment_form'] = array(
-		'#type' => 'select',
+		'#type' => 'checkboxes',
 		'#title' => 'Select the form template to use for assessment',
 		'#options' => $options,
 		'#default_value' => variable_get('s4_assessment_assessment_form', 0),

@@ -530,7 +530,6 @@ function s4_core_views_default_views() {
   $handler->display->display_options['filters']['keys']['expose']['label'] = 'Search';
   $handler->display->display_options['filters']['keys']['expose']['operator'] = 'keys_op';
   $handler->display->display_options['filters']['keys']['expose']['identifier'] = 'keys';
-  $handler->display->display_options['filters']['keys']['expose']['required'] = 1;
   $handler->display->display_options['filters']['keys']['expose']['multiple'] = FALSE;
   /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';

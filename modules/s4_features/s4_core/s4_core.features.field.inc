@@ -920,11 +920,12 @@ function s4_core_field_default_fields() {
   $fields['node-signup-field_form_assessment_sid'] = array(
     'field_config' => array(
       'active' => '1',
-      'cardinality' => '1',
+      'cardinality' => '-1',
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_form_assessment_sid',
       'foreign keys' => array(),
+      'global_block_settings' => '1',
       'indexes' => array(),
       'module' => 'number',
       'settings' => array(),
@@ -962,10 +963,11 @@ function s4_core_field_default_fields() {
           'weight' => 0,
         ),
       ),
+      'display_label' => '',
       'entity_type' => 'node',
       'field_name' => 'field_form_assessment_sid',
       'label' => 'Assessment results',
-      'required' => FALSE,
+      'required' => 0,
       'settings' => array(
         'max' => '',
         'min' => '',
@@ -974,6 +976,7 @@ function s4_core_field_default_fields() {
         'user_register_form' => FALSE,
       ),
       'widget' => array(
+        'active' => 0,
         'module' => 'number',
         'settings' => array(),
         'type' => 'number',
