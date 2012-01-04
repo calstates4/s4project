@@ -849,6 +849,12 @@ function s4_sites_s4_help($path) {
 
 function s4_sites_s4_site_configuration() {
 	return array(
+		'workflow_settings' => array(
+		  'group' => t('General settings'),
+		  'title' => t('Workflow settings'),
+		  'description' => t('Set up how sites are approved or rejected.'),
+		  'href' => 'admin/config/s4/workflow',
+		),
 		'category_files' => array(
 			'group' => t('Categories'),
 			'title' => t('File categories'),
@@ -884,6 +890,12 @@ function s4_sites_s4_site_configuration() {
 			'title' => t('Site staff roles'),
 			'description' => t('Manage the list of available site staff roles like "Executive Director" or "Site supervisor."'),
 			'href' => 'admin/structure/taxonomy/site_staff_role',
+		),
+		'category_workflow_status' => array(
+		  'group' => t('Categories'),
+			'title' => t('Workflow statuses'),
+			'description' => t('Statuses for sites, like "Approved" or "Pending."'),
+			'href' => 'admin/structure/taxonomy/workflow_status',
 		),
 	);
 }

@@ -3326,7 +3326,7 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['header'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Content: Status */
+  /* Field: Field: Status */
   $handler->display->display_options['fields']['field_workflow_status']['id'] = 'field_workflow_status';
   $handler->display->display_options['fields']['field_workflow_status']['table'] = 'field_data_field_workflow_status';
   $handler->display->display_options['fields']['field_workflow_status']['field'] = 'field_workflow_status';

@@ -781,14 +781,14 @@ function s4_sites_strongarm() {
           'delete' => 0,
         ),
         'all' => array(
-          'view' => 0,
+          'view' => 'view',
         ),
         'unused' => '1',
         'views' => array(
           'view' => '',
           'view_args' => '',
         ),
-        'priority' => '5',
+        'priority' => '0',
       ),
     ),
     'site' => array(
@@ -1405,48 +1405,6 @@ function s4_sites_strongarm() {
     'field_district_state_upper' => FALSE,
   );
   $export['s4_sites_field_access'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 's4_sites_workflow_67';
-  $strongarm->value = 'none';
-  $export['s4_sites_workflow_67'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 's4_sites_workflow_68';
-  $strongarm->value = 'none';
-  $export['s4_sites_workflow_68'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 's4_sites_workflow_69';
-  $strongarm->value = 'unpublish';
-  $export['s4_sites_workflow_69'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 's4_sites_workflow_70';
-  $strongarm->value = 'publish';
-  $export['s4_sites_workflow_70'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 's4_sites_workflow_default_state';
-  $strongarm->value = '67';
-  $export['s4_sites_workflow_default_state'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 's4_workflow_default_state';
-  $strongarm->value = '67';
-  $export['s4_workflow_default_state'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
