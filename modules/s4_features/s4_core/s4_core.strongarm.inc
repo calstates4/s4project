@@ -259,7 +259,7 @@ function s4_core_strongarm() {
       'file' => '0',
       'contact_record' => '0',
       'signup' => '0',
-      'course' => '6',
+      'course' => '0',
     ),
   );
   $export['content_access_settings'] = $strongarm;

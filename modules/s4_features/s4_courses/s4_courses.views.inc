@@ -24,3 +24,21 @@ function s4_courses_views_data() {
   
   return $data;
 }
+
+/**
+*	Implements hook_views_plugins
+*/
+function s4_courses_views_plugins() {
+	$plugins = array(
+		'access' => array(
+		  'user_faculty' => array(
+		    'title' => t('User is faculty'),
+		    'help' => t('Access is granted if the current user is a faculty for the course on the current page.'),
+		    'handler' => 's4_courses_views_access_course_faculty',
+		    'uses options' => TRUE,
+		    'help topic' => 'access-perm',
+		  ),
+		),
+	);
+	return $plugins;
+}

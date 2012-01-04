@@ -460,14 +460,14 @@ function s4_courses_field_default_fields() {
       'settings' => array(
         'nodeaccess_userreference' => array(
           'all' => array(
-            'view' => 0,
+            'view' => 'view',
           ),
           'author' => array(
             'delete' => 0,
             'update' => 0,
             'view' => 0,
           ),
-          'priority' => '5',
+          'priority' => '0',
           'referenced' => array(
             'delete' => 0,
             'update' => 0,
