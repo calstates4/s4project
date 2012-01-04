@@ -1476,6 +1476,17 @@ function s4_core_views_check_node_type_roles($rids, $type, $view, $account = NUL
   return (array_intersect(array_filter($rids), $roles) && $node->type == $type);
 }
 
+function s4_core_views_check_reverse_view_roles($rids, $type, $view, $account = NULL) {
+  global $user;
+  if(user_access('administer views')) {
+    return TRUE;
+  }
+  $account = isset($account) ? $account : $user;
+  $roles = array_keys($account->roles);
+  $roles[] = $account->uid ? DRUPAL_AUTHENTICATED_RID : DRUPAL_ANONYMOUS_RID;
+  return (!array_intersect(array_filter($rids), $roles));
+}
+
 function s4_core_s4_help($path) {
 	module_load_include('inc', 's4_core', 's4_core.help');
 	return _s4_core_help($path);

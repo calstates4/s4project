@@ -1503,9 +1503,9 @@ function s4_core_views_default_views() {
   /* Display: Public forms */
   $handler = $view->new_display('page', 'Public forms', 'page_1');
   $handler->display->display_options['defaults']['access'] = FALSE;
-  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['type'] = 'role_reverse';
   $handler->display->display_options['access']['role'] = array(
-    1 => '1',
+    5 => '5',
   );
   $handler->display->display_options['defaults']['header'] = FALSE;
   /* Header: Global: Text area */

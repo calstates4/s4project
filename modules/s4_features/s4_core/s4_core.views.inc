@@ -114,6 +114,13 @@ function s4_core_views_plugins() {
 		    'uses options' => TRUE,
 		    'help topic' => 'access-perm',
 		  ),
+		  'role_reverse' => array(
+		    'title' => t('User is not in a role'),
+		    'help' => t('Access will be granted to users without the selected role.'),
+		    'handler' => 's4_core_views_access_role_reverse',
+		    'uses options' => TRUE,
+		    'help topic' => 'access-perm',
+		  ),
 		),
 	);
 	return $plugins;
