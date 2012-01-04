@@ -76,8 +76,37 @@ function s4_sites_menu() {
 	  'page callback' => 'drupal_get_form',
 	  'access arguments' => array('create site content'),
 	);
+	
+	$items['sites/thank-you/%'] = array(
+	  'title' => 'Thank you',
+	  'page callback' => 's4_sites_thank_you',
+	  'page arguments' => array(2),
+	  'access arguments' => array('create site content'),
+	);
   	
-  	return $items;
+  return $items;
+}
+
+/**
+ * Thank you page
+ */
+function s4_sites_thank_you($terms) {
+  $terms = explode(',', $terms);
+  $output = '';
+  foreach($terms as $t) {
+    $term = taxonomy_term_load($t);
+    if($term->vocabulary_machine_name == 'site_restrictions') {
+      $output .= '<h2>'. $term->name .'</h2>';
+      $message = field_get_items('taxonomy_term', $term, 'field_thank_you_message');
+      $output .= check_markup($message[0]['value'], $message[0]['format']);
+    }
+  }
+  if(strlen($output) == 0) {
+    drupal_set_message(t('Thank you for proposing your site. We will be contacting you shortly.'));
+    //drupal_goto('<front>');
+  }
+  $output .= l(t('Return to homepage'), '<front>');
+  return $output;
 }
 
 /**
@@ -118,7 +147,8 @@ function s4_sites_propose_site_form_submit($form, $form_state) {
       $proposed_terms[$term->tid] = $term->tid;
     }
   }
-  drupal_goto('node/add/site/'. implode(',', $proposed_terms));
+  $proposed_terms = implode(',', $proposed_terms);
+  drupal_goto('node/add/site/'. $proposed_terms, array('query' => array('destination' => 'sites/thank-you/'. $proposed_terms)));
 }
 
 /**
