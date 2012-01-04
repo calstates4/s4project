@@ -235,7 +235,6 @@ function s4_sites_block_view($delta) {
       			   'content' => drupal_get_form('s4_sites_send_site_form'));
       break;
     case 's4_sites_form_webform':
-      dpm('hi');
       return s4_webform_render_submission('field_form_sid');
       break;
   }
