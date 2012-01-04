@@ -228,7 +228,7 @@ function s4_sites_block_view($delta) {
       			   'content' => drupal_get_form("comment_node_{$node->type}_form", (object) array('nid' => $node->nid)));
       break;
     case 's4_sites_site_send_form':
-      return array('subject' => 'Send a form',
+      return array('subject' => 'Attach a form',
       			   'content' => drupal_get_form('s4_sites_send_site_form'));
       break;
     case 's4_sites_form_webform':
@@ -237,6 +237,7 @@ function s4_sites_block_view($delta) {
   }
   
 }
+
 
 function s4_sites_form_comment_node_site_form_alter(&$form, $form_state) {
 	if(!user_access('moderate site information')) {
@@ -279,7 +280,7 @@ function s4_sites_send_site_form() {
 	
 	$form['form'] = array(
 		'#type' => 'select',
-		'#title' => 'Select the form template to send',
+		'#title' => 'Select the form to complete',
 		'#options' => $forms,
 	);
 	
@@ -299,24 +300,35 @@ function s4_sites_send_site_form() {
 	foreach($result as $row) {
 		$site_staff[$row->nid] = $row->title;
 	}
+	$form['email'] = array(
+	 '#type' => 'fieldset',
+	 '#title' => 'Email form to someone else',
+	 '#collapsible' => TRUE,
+	 '#collapsed' => TRUE,
+	);
 	
-	$form['site_staff'] = array(
+	$form['email']['email_form'] = array(
+	 '#type' => 'checkbox',
+	 '#title' => t('Email this form for someone else to complete'),
+	);
+	
+	$form['email']['site_staff'] = array(
 		'#type' => 'select',
 		'#title' => 'Select who should receive this message',
 		'#options' => $site_staff,
 	);
 	
-	$form['manual_email'] = array(
+	$form['email']['manual_email'] = array(
 		'#type' => 'textfield',
 		'#title' => 'Or type in an email address',
 	);
 	
-	$form['subject'] = array(
+	$form['email']['subject'] = array(
 		'#type' => 'textfield',
 		'#title' => 'Message subject',
 	);
 	
-	$form['body'] = array(
+	$form['email']['body'] = array(
 		'#type' => 'textarea',
 		'#title' => 'Message body',
 		'#description' => 'We will append the link to the form at the bottom of your message.',
@@ -324,19 +336,25 @@ function s4_sites_send_site_form() {
 	
 	$form['submit'] = array(
 		'#type' => 'submit',
-		'#value' => 'Email form',
+		'#value' => 'Attach form',
+		'#submit' => array('s4_sites_send_site_form_submit'),
 	);
 	
 	return $form;
 }
 
-function s4_sites_send_site_form_validate($form, $form_state) {
-	if($form_state['values']['site_staff'] == 'none' && !valid_email_address($form_state['manual_email'])) {
+function s4_sites_send_site_form_validate($form, &$form_state) {
+  if($form_state['values']['email_form'] && $form_state['values']['site_staff'] == 'none' && !valid_email_address($form_state['values']['manual_email'])) {
 		form_set_error('manual_email', 'Please enter a valid email address.');
 	}
 }
 
-function s4_sites_send_site_form_submit($form, $form_state) {
+function s4_sites_send_site_form_submit($form, &$form_state) {
+	if(!$form_state['values']['email_form']) {
+    $key = drupal_hmac_base64($form_state['values']['site'] .'_'. $form_state['values']['form'] .'_email', drupal_get_private_key() . drupal_get_hash_salt());
+    drupal_goto('sites/form/' . $form_state['values']['site'] .'/'. $form_state['values']['form'] .'/email/'. $key, array('query' => array('destination' => 'node/'. $form_state['values']['site'] .'/forms')));
+    return;
+	}
 	$email = ($form_state['values']['manual_email'])
 			 ? $form_state['values']['manual_email']
 			 : false;
