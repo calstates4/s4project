@@ -27,7 +27,6 @@ function s4_sites_install() {
         ),
       ),'webform' => 
         array (
-          'nid' => '',
           'confirmation' => '',
           'confirmation_format' => 'filtered_html',
           'redirect_url' => '',
@@ -54,7 +53,6 @@ function s4_sites_install() {
       array (
         1 => 
         array (
-          'nid' => 10,
           'cid' => '1',
           'pid' => '0',
           'form_key' => 'assessment_rubric',
