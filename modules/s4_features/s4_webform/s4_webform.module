@@ -6,7 +6,7 @@
 function s4_webform_render_submission($field) {
   $node = menu_get_object();
   $sid = field_get_items('node', $node, $field);
-  $query = db_select('webform_submissions', 'w')->fields('w', array('nid'))->condition('sid',14);
+  $query = db_select('webform_submissions', 'w')->fields('w', array('nid'))->condition('sid',$sid[0]['value']);
   $results = $query->execute();
   $form = node_load($results->fetchField());
   $output = '';
@@ -17,15 +17,9 @@ function s4_webform_render_submission($field) {
       if (!$submission) {
         return NULL;
       }
-      foreach ($form->webform['components'] as $k => $component) {
-        if(user_access('view all webform fields') || $submission->uid == $user->uid || !$component['extra']['s4_core_field_private']) {
-	        $output .= '<p><span class="form-label">' . $component['name'] . ':</span>';
-	        $output .= '<span class="form-value">' . implode("\n", $submission->data[$k]['value']) . '</span></p>';
-		}
-      }
+      $output = webform_submission_render($form, $submission, NULL, 'html');
       
-          return array('subject' => 'Signup form',
-                'content' => $output);
+          return array('content' => $output);
   }
 }
 

@@ -175,6 +175,42 @@ function s4_sites_context_default_contexts() {
   $context = new stdClass;
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
+  $context->name = 'site-form-view';
+  $context->description = 'User is viewing a site form';
+  $context->tag = 'sites';
+  $context->conditions = array(
+    'node' => array(
+      'values' => array(
+        'file' => 'file',
+      ),
+      'options' => array(
+        'node_form' => '0',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        's4_sites-s4_sites_form_webform' => array(
+          'module' => 's4_sites',
+          'delta' => 's4_sites_form_webform',
+          'region' => 'content_bottom',
+          'weight' => '-10',
+        ),
+      ),
+    ),
+  );
+  $context->condition_mode = 0;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('User is viewing a site form');
+  t('sites');
+  $export['site-form-view'] = $context;
+
+  $context = new stdClass;
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
   $context->name = 'site-forms';
   $context->description = 'User is on the site forms page';
   $context->tag = 'sites';
@@ -198,19 +234,19 @@ function s4_sites_context_default_contexts() {
           'module' => 's4_core',
           'delta' => 's4_subscribe_file_expiration',
           'region' => 'content_right',
-          'weight' => '-59',
+          'weight' => '-10',
         ),
         's4_pages-add_site_file' => array(
           'module' => 's4_pages',
           'delta' => 'add_site_file',
           'region' => 'content_right',
-          'weight' => '-58',
+          'weight' => '-9',
         ),
         's4_sites-s4_sites_site_send_form' => array(
           'module' => 's4_sites',
           'delta' => 's4_sites_site_send_form',
           'region' => 'content_right',
-          'weight' => '-57',
+          'weight' => '-7',
         ),
       ),
     ),

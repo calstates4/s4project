@@ -160,6 +160,9 @@ function s4_sites_webform_submission_insert($node, $submission) {
 	$form->field_form_sid[$form->language][0]['value'] = $submission->sid;
 	node_save($form);
 	unset($_SESSION['s4_sites_user_form_site']);
+	if(user_access('administer nodes')) {
+	  drupal_goto('node/'. $form->field_site[$form->language][0]['nid'] .'/forms');
+	}
 	drupal_set_message('Thanks for submitting your form!');
 	drupal_goto('<front>');
 }
@@ -232,6 +235,7 @@ function s4_sites_block_view($delta) {
       			   'content' => drupal_get_form('s4_sites_send_site_form'));
       break;
     case 's4_sites_form_webform':
+      dpm('hi');
       return s4_webform_render_submission('field_form_sid');
       break;
   }
@@ -334,10 +338,9 @@ function s4_sites_send_site_form() {
 		'#description' => 'We will append the link to the form at the bottom of your message.',
 	);
 	
-	$form['submit'] = array(
+	$form['send_form_submit'] = array(
 		'#type' => 'submit',
 		'#value' => 'Attach form',
-		'#submit' => array('s4_sites_send_site_form_submit'),
 	);
 	
 	return $form;
@@ -352,7 +355,7 @@ function s4_sites_send_site_form_validate($form, &$form_state) {
 function s4_sites_send_site_form_submit($form, &$form_state) {
 	if(!$form_state['values']['email_form']) {
     $key = drupal_hmac_base64($form_state['values']['site'] .'_'. $form_state['values']['form'] .'_email', drupal_get_private_key() . drupal_get_hash_salt());
-    drupal_goto('sites/form/' . $form_state['values']['site'] .'/'. $form_state['values']['form'] .'/email/'. $key, array('query' => array('destination' => 'node/'. $form_state['values']['site'] .'/forms')));
+    drupal_goto('sites/form/' . $form_state['values']['site'] .'/'. $form_state['values']['form'] .'/email/'. $key, array('destination' => 'node/'. $form_state['values']['site'] .'/forms'));
     return;
 	}
 	$email = ($form_state['values']['manual_email'])
