@@ -13,21 +13,22 @@ function s4_reporting_block_site_summary() {
 	foreach($workflow_status as $status) {
 		$query = db_select('field_data_field_workflow_status', 'f');
 		$query->condition('f.field_workflow_status_tid', $status->tid)
-			  ->condition('f.entity_type', 'node')
+			    ->condition('f.entity_type', 'node')
+			    ->condition('f.bundle', 'site')
 		      ->addExpression('COUNT(entity_id)', 'entity_count');
 		$result = $query->execute();
 		$count = $result->fetchField();
 		if(variable_get('s4_sites_workflow_'. $status->tid, 'none') == 'publish' && !$published) {
 			$query = db_select('node', 'n');
 			$query->condition('n.type', 'site')
-				  ->condition('n.status', 1)
+				    ->condition('n.status', 1)
 			      ->addExpression('COUNT(nid)', 'node_count');
 			$result = $query->execute();
 			$published_count = $result->fetchField();
-			$count += $published_count;
+			$count = $published_count;
 			$published = true;
 		}
-		$items[$status->tid] = '<strong>'. $status->name .':</strong> '. $count;
+		$items[$status->tid] = '<strong>'. $status->name .':</strong> '. l($count, 'site-list/'. $status->tid);
 	}
 	
 	return array('subject' => 'Site overview',
