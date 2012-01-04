@@ -28,7 +28,7 @@ function s4_reporting_block_site_summary() {
 			$count = $published_count;
 			$published = true;
 		}
-		$items[$status->tid] = '<strong>'. $status->name .':</strong> '. l($count, 'site-list/'. $status->tid);
+		$items[$status->tid] = '<strong>'. $status->name .':</strong> '. l($count, 'site-list/staff', array('query' => array('status' => $status->tid)));
 	}
 	
 	return array('subject' => 'Site overview',
