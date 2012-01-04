@@ -92,5 +92,5 @@ function s4_sites_install() {
       ),
       ),
     );
-    node_save($node);
+    //node_save($node);
 }
