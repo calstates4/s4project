@@ -135,7 +135,7 @@ var s4Map = {
 		var latLng = new google.maps.LatLng(lat, lon);
 		var markerOptions = {
 			position: latLng, 
-			map: s4Map.map,
+			map: s4Map.map
 		};
 		if(icon) {
 			markerOptions.icon = icon;
