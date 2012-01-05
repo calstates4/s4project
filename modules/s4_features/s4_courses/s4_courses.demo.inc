@@ -1,15 +1,15 @@
 <?php
 
 function s4_courses_load_demo_course() {
-  $result = db_query('SELECT uid FROM users WHERE name LIKE :student', array(':student' => '%student'));
+  $result = db_query('SELECT uid FROM users WHERE name LIKE :student', array(':student' => 'student%'));
   $students = array();
   foreach($result as $row) {
      $students[] = array('uid' => $row->uid);
   }
-  $result = db_query('SELECT uid FROM users WHERE name LIKE :faculty', array(':faculty' => '%faculty'));
+  $result = db_query('SELECT uid FROM users WHERE name LIKE :faculty', array(':faculty' => 'faculty%'));
   $faculty = array();
   foreach($result as $row) {
-     $faculty[] = array('uid' => $row->uid);;
+     $faculty[] = array('uid' => $row->uid);
   }
   $term = db_query('SELECT nid FROM node WHERE type = :type LIMIT 1', array(':type' => 'course_term'));
   foreach($term as $t) {
