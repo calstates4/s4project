@@ -440,6 +440,7 @@ function s4_sites_strongarm() {
         ),
         'province' => array(
           'collect' => '0',
+          'widget' => 'autocomplete',
           'default' => '',
           'weight' => '10',
         ),
@@ -533,6 +534,7 @@ function s4_sites_strongarm() {
         ),
         'province' => array(
           'collect' => '0',
+          'widget' => 'autocomplete',
           'default' => '',
           'weight' => '10',
         ),
@@ -628,6 +630,20 @@ function s4_sites_strongarm() {
     1 => 'revision',
   );
   $export['node_options_site'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'node_submitted_coordinator';
+  $strongarm->value = 0;
+  $export['node_submitted_coordinator'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'node_submitted_site';
+  $strongarm->value = 0;
+  $export['node_submitted_site'] = $strongarm;
 
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
