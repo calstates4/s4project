@@ -77,7 +77,7 @@ function s4_sites_menu() {
 	  'access arguments' => array('create site content'),
 	);
 	
-	$items['sites/thank-you/%'] = array(
+	$items['sites/thank-you'] = array(
 	  'title' => 'Thank you',
 	  'page callback' => 's4_sites_thank_you',
 	  'page arguments' => array(2),
@@ -103,7 +103,7 @@ function s4_sites_thank_you($terms) {
   }
   if(strlen($output) == 0) {
     drupal_set_message(t('Thank you for proposing your site. We will be contacting you shortly.'));
-    //drupal_goto('<front>');
+    drupal_goto('<front>');
   }
   $output .= l(t('Return to homepage'), '<front>');
   return $output;
@@ -527,7 +527,7 @@ function s4_sites_form_site_node_form_alter(&$form, $form_state) {
 	$access = variable_get('s4_sites_field_access', array());
 	foreach($access as $name => $access) {
 		if($access === false) {
-			$form[$name]['#access'] = false;
+			$form[$name]['#access'] = $form[$name]['#required'] = false;
 		}
 	}
 	if(arg(3)) {
