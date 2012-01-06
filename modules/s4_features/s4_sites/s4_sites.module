@@ -20,6 +20,10 @@ function s4_sites_menu_alter(&$items) {
   $items['node/%node/talk']['title callback'] = 's4_sites_talk_title';
 }
 
+function s4_sites_view_alter(&$view) {
+  dpm($view);
+}
+
 /**
 *  Talk page title 
 *  @todo Add a counter for unread content
@@ -524,21 +528,23 @@ function s4_sites_form_site_node_form_alter(&$form, $form_state) {
     	$form['#groups'][$k]->format_type = 'accordion-item';
     }
     $form['#groups']['group_site_tabs']->format_type = 'accordion';
-	$access = variable_get('s4_sites_field_access', array());
-	foreach($access as $name => $access) {
-		if($access === false) {
-			$form[$name]['#access'] = $form[$name]['#required'] = false;
-		}
-	}
-	if(arg(3)) {
-	 $terms = explode(',', arg(3));
-	 foreach($terms as $term) {
-	   $form['field_site_restrict'][$form['#node']->language]['#default_value'][] = $term;
-	 }
-	}
-	
-	drupal_add_js(array('wysiwyg' => array()), 'setting');
-	drupal_set_title(t('Request a new site'));
+    dpm($form);
+    $form['field_workflow_status']['#default_value'] = variable_get('s4_sites_workflow_default_state', 0);
+  	$access = variable_get('s4_sites_field_access', array());
+  	foreach($access as $name => $access) {
+  		if($access === false) {
+  			$form[$name]['#access'] = $form[$name]['#required'] = false;
+  		}
+  	}
+  	if(arg(3)) {
+  	 $terms = explode(',', arg(3));
+  	 foreach($terms as $term) {
+  	   $form['field_site_restrict'][$form['#node']->language]['#default_value'][] = $term;
+  	 }
+  	}
+  	
+  	drupal_add_js(array('wysiwyg' => array()), 'setting');
+  	drupal_set_title(t('Request a new site'));
     drupal_add_js(drupal_get_path('module', 's4_sites') .'/js/s4_sites_accordion.js');
   }
 }
