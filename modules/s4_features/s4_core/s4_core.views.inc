@@ -5,7 +5,7 @@
 */
 
 /**
-*  Implementation of hook_views_data
+* Implements hook_views_data
 */
 function s4_core_views_data() {
   $data['s4_signup']['table']['group'] = t('Signup');
@@ -127,7 +127,7 @@ function s4_core_views_plugins() {
 }
 
 /**
-*  Implementation of hook_views_plugins_alter
+* Implements hook_views_plugins_alter
 */
 function s4_core_views_plugins_alter(&$plugins) {
   $plugins['style']['views_data_export_csv']['export feed icon'] = drupal_get_path('module', 's4_core') . '/images/export_csv.png';

@@ -5,7 +5,7 @@
 */
 
 /**
-*  Implementation of hook_views_data
+* Implements hook_views_data
 */
 function s4_reporting_views_data() {
   $data['s4_reporting']['table']['group'] = t('Form Evaluation');

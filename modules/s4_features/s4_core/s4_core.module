@@ -3,7 +3,7 @@
 include_once('s4_core.features.inc');
 
 /**
-*  Implementation of hook_init()
+* Implements hook_init()
 */
 function s4_core_init() {
   drupal_add_js(drupal_get_path('module', 's4_core') . '/js/jquery.quicksearch.js');
@@ -17,7 +17,7 @@ function s4_core_init() {
 }
 
 /**
-*  Implementation of hook_block_info()
+* Implements hook_block_info()
 */
 function s4_core_block_info() {
   $blocks['user_progress'] = array('info' => 'User progress bar');
@@ -40,7 +40,7 @@ function s4_core_block_info() {
 }
 
 /**
-*  Implementation of hook_block_view
+* Implements hook_block_view
 */
 function s4_core_block_view($delta) {
   module_load_include('inc', 's4_core', 's4_core.blocks');
@@ -328,7 +328,7 @@ function s4_core_add_site_to_course_access($course) {
 }
 
 /**
-*  Implementation of hook_permission
+* Implements hook_permission
 */
 function s4_core_permission() {
   return array(
@@ -524,7 +524,7 @@ function _s4_core_create_signup($uid = 0, $signup = array()) {
 
 
 /**
-*  Implementation of hook_webform_submission_insert
+* Implements hook_webform_submission_insert
 *  Here we check that this is the last step of the signup
 *  process and if so, fire off the completed function
 */
@@ -558,7 +558,7 @@ function s4_core_webform_submission_insert($node, $submission) {
 }
 
 /**
-*  Implementation of hook_user_login
+* Implements hook_user_login
 */
 function s4_core_user_login(&$edit, $account) {
   $sis_user = module_invoke_all('s4_get_user', $account->name);
@@ -625,7 +625,7 @@ function s4_core_get_entity($data, $type, $id_only = FALSE) {
 }
 
 /**
-*  Implementation of hook_node_insert
+* Implements hook_node_insert
 */
 function s4_core_node_insert($node) {
   if (isset($node->s4_unique_id)) {
@@ -657,7 +657,7 @@ function s4_core_node_insert($node) {
 }
 
 /**
-*  Implementation of hook_node_delete
+* Implements hook_node_delete
 */
 function s4_core_node_delete($node) {
   db_delete('s4_core_entity_data')
@@ -712,7 +712,7 @@ function _s4_core_map_user_attributes() {
 }
 
 /**
-*  Implementation of hoook_element_info_alter
+* Implements hook_element_info_alter
 *  So we can go ahead and remove input filter notices
 */
 function s4_core_element_info_alter(&$type) {
@@ -882,7 +882,7 @@ function s4_core_filter_process_format($element) {
 }
 
 /**
-*  Implementation of hook_action_info
+* Implements hook_action_info
 */
 function s4_core_action_info() {
   return array(
@@ -992,7 +992,7 @@ function s4_core_email_site_coordinator_action_submit($form, $form_state) {
 }
 
 /**
-*  Implementation of hook_mail
+* Implements hook_mail
 */
 function s4_core_mail($key, &$message, $params) {
   $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed';
@@ -1104,7 +1104,7 @@ function s4_core_form_field_ui_field_overview_form_alter(&$form, $form_state) {
 }
 
 /**
-*  Implementation of hook_form_alter()
+* Implements hook_form_alter()
 *  We are overriding the views bulk operations to change the display of the fieldset
 */
 function s4_core_form_alter(&$form, $form_state, $form_id) {
@@ -1173,7 +1173,7 @@ function s4_core_views_bulk_operations_pre_render(&$form, $form_state = NULL) {
 }
 
 /**
-*  Implementation of hook_form_*_alter()
+* Implements hook_form_*_alter()
 *  Altering the views exposed form on the serach
 *  view to add placeholders as well as hiding the search button.
 */
@@ -1185,7 +1185,7 @@ function s4_core_form_views_exposed_form_alter(&$form, $form_state) {
 }
 
 /**
-*  Implementation of hook_theme_registry_alter()
+* Implements hook_theme_registry_alter()
 */
 function s4_core_theme_registry_alter(&$items) {
   $items['views_savedsearches_list'] = array(
@@ -1242,7 +1242,7 @@ function theme_s4_core_views_savedsearches_list($variables) {
 }
 
 /**
-*  Implementation of hook_cron()
+* Implements hook_cron()
 *  Here we check on any signups which have expired and send out emails
 */
 function s4_core_cron() {
@@ -1291,7 +1291,7 @@ function s4_core_token_info() {
 }
 
 /**
-*  Implementation of hook_notifications
+* Implements hook_notifications
 */
 function s4_core_notifications($op) {
   switch ($op) {

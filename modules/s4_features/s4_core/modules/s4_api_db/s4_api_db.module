@@ -18,7 +18,7 @@ function s4_api_db_menu() {
 }
 
 /**
-*  Implementation of hook_s4_site_configuration
+* Implements hook_s4_site_configuration
 */
 function s4_api_db_s4_site_configuration() {
 	return array(

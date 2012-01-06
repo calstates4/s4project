@@ -24,7 +24,7 @@ function s4_map_views_query_alter(&$view, &$query) {
 }
 
 /**
-*  Implementation of hook_s4_site_configuration
+* Implements hook_s4_site_configuration
 */
 function s4_map_s4_site_configuration() {
 	return array(

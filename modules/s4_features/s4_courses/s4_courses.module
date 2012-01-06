@@ -7,7 +7,7 @@
 include_once('s4_courses.features.inc');
 
 /**
-*  Implementation of hook_menu
+* Implements hook_menu
 */
 function s4_courses_menu() {
   $items = array();
@@ -88,7 +88,7 @@ function s4_courses_get_allowed_term_codes() {
 }
 
 /**
-*  Implementation of hook_cron
+* Implements hook_cron
 *  On cron we check courses periodically and create new course or
 *  term nodes.
 */
@@ -118,7 +118,7 @@ function s4_courses_cron() {
 }
 
 /**
-*  Implementation of hook_user_login
+* Implements hook_user_login
 *  On login, we cal user enrollment and faculty
 *  enrollment hooks to see what courses are assigned
 *  to the current user.
@@ -282,7 +282,7 @@ function _s4_courses_get_current_terms() {
 
 
 /**
-*  Implementation of hook_s4_user_status
+* Implements hook_s4_user_status
 */
 function s4_courses_s4_user_status(&$status) {
   if (isset($_SESSION['s4_signup_course'])) {
@@ -299,7 +299,7 @@ function s4_courses_s4_user_status(&$status) {
 }
 
 /**
-*  Implementation of hook_s4_signup
+* Implements hook_s4_signup
 */
 function s4_courses_s4_signup($type, $nid) {
   if ($type == 'course') {
@@ -353,7 +353,7 @@ function s4_courses_s4_signup_dates($node) {
 }
 
 /**
-*  Implementation of hook_block_info
+* Implements hook_block_info
 */
 function s4_courses_block_info() {
   $blocks['s4_courses_add_course'] = array('info' => 'Add new course button');
@@ -363,7 +363,7 @@ function s4_courses_block_info() {
 }
 
 /**
-*  Implementation of hook_block_view
+* Implements hook_block_view
 */
 function s4_courses_block_view($delta) {
   switch ($delta) {
@@ -476,7 +476,7 @@ function s4_courses_edit_course_restrict_form_submit($form, $form_state) {
 }
 
 /**
-*  Implementation of hook_notifications
+* Implements hook_notifications
 */
 function s4_courses_notifications($op) {
   switch ($op) {

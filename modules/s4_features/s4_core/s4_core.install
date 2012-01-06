@@ -37,7 +37,7 @@ function s4_core_schema() {
 }
 
 /**
-*  Implementation of hook_install
+* Implements hook_install
 */
 function s4_core_install() {
   //Register our trigger for course signup notifications

@@ -52,7 +52,7 @@ function s4_pages_permission() {
 }
 
 /**
-*  Implementation of hook_block_info
+* Implements hook_block_info
 */
 function s4_pages_block_info() {
   $blocks['overview_paragraph']['info'] = 'Overview paragraph';
@@ -63,7 +63,7 @@ function s4_pages_block_info() {
 }
 
 /**
-*  Implementation of hook_block_view
+* Implements hook_block_view
 */
 function s4_pages_block_view($delta) {
   $function_name = 's4_pages_' . $delta;
@@ -106,7 +106,7 @@ function s4_pages_add_site_file() {
 }
 
 /**
-*  Implementation of hook_theme
+* Implements hook_theme
 */
 function s4_pages_theme() {
   return array(

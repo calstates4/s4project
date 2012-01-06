@@ -5,7 +5,7 @@
 */
 
 /**
-*  Implementation of hook_views_data
+* Implements hook_views_data
 */
 function s4_sites_views_data() {
   $data['s4_sites']['table']['group'] = t('Site Data');

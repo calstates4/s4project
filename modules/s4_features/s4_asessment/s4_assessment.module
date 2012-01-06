@@ -59,7 +59,7 @@ function s4_assessment_permission() {
 }
 
 /**
-*  Implementation of hook_views_api()
+* Implements hook_views_api()
 */
 function s4_assessment_views_api() {
   return array('api' => 3);
