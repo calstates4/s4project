@@ -524,7 +524,6 @@ function s4_sites_form_site_node_form_alter(&$form, $form_state) {
     	$form['#groups'][$k]->format_type = 'accordion-item';
     }
     $form['#groups']['group_site_tabs']->format_type = 'accordion';
-    dpm($form);
     $form['field_workflow_status']['#default_value'] = variable_get('s4_sites_workflow_default_state', 0);
   	$access = variable_get('s4_sites_field_access', array());
   	foreach($access as $name => $access) {
