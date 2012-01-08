@@ -20,10 +20,6 @@ function s4_sites_menu_alter(&$items) {
   $items['node/%node/talk']['title callback'] = 's4_sites_talk_title';
 }
 
-function s4_sites_view_alter(&$view) {
-  dpm($view);
-}
-
 /**
 *  Talk page title 
 *  @todo Add a counter for unread content

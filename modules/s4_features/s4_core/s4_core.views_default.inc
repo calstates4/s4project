@@ -17,7 +17,7 @@ function s4_core_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Community member: your sites';
   $view->core = 7;
-  $view->api_version = '3.0-alpha1';
+  $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -118,7 +118,7 @@ function s4_core_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Email: Students';
   $view->core = 7;
-  $view->api_version = '3.0-alpha1';
+  $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -376,7 +376,7 @@ function s4_core_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'S4: Search entire site';
   $view->core = 7;
-  $view->api_version = '3.0-alpha1';
+  $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -736,7 +736,7 @@ function s4_core_views_default_views() {
   $view->base_table = 'users';
   $view->human_name = 's4: Search students';
   $view->core = 7;
-  $view->api_version = '3.0-alpha1';
+  $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -885,7 +885,7 @@ function s4_core_views_default_views() {
   $view->base_table = 'users';
   $view->human_name = 'S4: Students';
   $view->core = 7;
-  $view->api_version = '3.0-alpha1';
+  $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -1256,7 +1256,7 @@ function s4_core_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Forms';
   $view->core = 7;
-  $view->api_version = '3.0-alpha1';
+  $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -1362,7 +1362,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['fields']['webform_submission_count_node']['empty_zero'] = 0;
   /* Field: Content: Edit link */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['table'] = 'node';
+  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = 0;
   $handler->display->display_options['fields']['edit_node']['alter']['make_link'] = 0;
@@ -1464,10 +1464,11 @@ function s4_core_views_default_views() {
   $handler->display->display_options['fields']['field_downloadable_file']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_downloadable_file']['hide_alter_empty'] = 0;
   $handler->display->display_options['fields']['field_downloadable_file']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_downloadable_file']['group_column'] = 'fid';
   $handler->display->display_options['fields']['field_downloadable_file']['field_api_classes'] = 0;
   /* Field: Content: Edit link */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['table'] = 'node';
+  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = 0;
   $handler->display->display_options['fields']['edit_node']['alter']['make_link'] = 0;
@@ -1594,6 +1595,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['fields']['field_downloadable_file']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_downloadable_file']['hide_alter_empty'] = 0;
   $handler->display->display_options['fields']['field_downloadable_file']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_downloadable_file']['group_column'] = 'fid';
   $handler->display->display_options['fields']['field_downloadable_file']['field_api_classes'] = 0;
   /* Field: Field: Restricted to */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
@@ -1727,6 +1729,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['fields']['field_downloadable_file']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_downloadable_file']['hide_alter_empty'] = 0;
   $handler->display->display_options['fields']['field_downloadable_file']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_downloadable_file']['group_column'] = 'fid';
   $handler->display->display_options['fields']['field_downloadable_file']['field_api_classes'] = 0;
   /* Field: Field: Restricted to */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
@@ -1836,7 +1839,7 @@ function s4_core_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'User signups';
   $view->core = 7;
-  $view->api_version = '3.0-alpha1';
+  $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */

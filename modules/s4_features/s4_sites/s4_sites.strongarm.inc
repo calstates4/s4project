@@ -1419,6 +1419,7 @@ function s4_sites_strongarm() {
     'field_district_federal' => FALSE,
     'field_district_state_lower' => FALSE,
     'field_district_state_upper' => FALSE,
+    'field_phone' => FALSE,
   );
   $export['s4_sites_field_access'] = $strongarm;
 
@@ -1433,7 +1434,7 @@ function s4_sites_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'talk_page';
-  $strongarm->value = 'Approval status';
+  $strongarm->value = '[node:title]';
   $export['talk_page'] = $strongarm;
 
   $strongarm = new stdClass;

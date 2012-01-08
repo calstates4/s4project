@@ -3000,10 +3000,12 @@ function s4_sites_field_default_fields() {
           'weight' => 0,
         ),
       ),
+      'display_label' => '',
       'entity_type' => 'node',
       'field_name' => 'field_phone',
       'label' => 'Main phone number',
       'required' => 0,
+      's4_sites_field_access' => 1,
       'settings' => array(
         'all_country_codes' => 0,
         'country_codes' => array(
@@ -3200,6 +3202,7 @@ function s4_sites_field_default_fields() {
             'sn' => 0,
             'so' => 0,
             'sr' => 0,
+            'ss' => 0,
             'st' => 0,
             'sv' => 0,
             'sy' => 0,
@@ -3239,6 +3242,7 @@ function s4_sites_field_default_fields() {
             'zm' => 0,
             'zw' => 0,
           ),
+          'hide_single_cc' => 0,
         ),
         'default_country' => 'us',
         'enable_country_level_validation' => 0,

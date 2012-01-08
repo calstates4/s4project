@@ -17,7 +17,7 @@ function s4_sites_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Bookmarked Sites';
   $view->core = 7;
-  $view->api_version = '3.0-alpha1';
+  $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -221,7 +221,7 @@ function s4_sites_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Site notes & forms';
   $view->core = 7;
-  $view->api_version = '3.0-alpha1';
+  $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -396,6 +396,8 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['arguments']['field_site_nid']['table'] = 'field_data_field_site';
   $handler->display->display_options['arguments']['field_site_nid']['field'] = 'field_site_nid';
   $handler->display->display_options['arguments']['field_site_nid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['field_site_nid']['title_enable'] = 1;
+  $handler->display->display_options['arguments']['field_site_nid']['title'] = '%1';
   $handler->display->display_options['arguments']['field_site_nid']['default_argument_type'] = 'node';
   $handler->display->display_options['arguments']['field_site_nid']['default_argument_skip_url'] = 1;
   $handler->display->display_options['arguments']['field_site_nid']['summary']['number_of_records'] = '0';
@@ -632,6 +634,8 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['arguments']['field_site_nid']['table'] = 'field_data_field_site';
   $handler->display->display_options['arguments']['field_site_nid']['field'] = 'field_site_nid';
   $handler->display->display_options['arguments']['field_site_nid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['field_site_nid']['title_enable'] = 1;
+  $handler->display->display_options['arguments']['field_site_nid']['title'] = '%1';
   $handler->display->display_options['arguments']['field_site_nid']['default_argument_type'] = 'node';
   $handler->display->display_options['arguments']['field_site_nid']['default_argument_skip_url'] = 1;
   $handler->display->display_options['arguments']['field_site_nid']['summary']['number_of_records'] = '0';
@@ -929,6 +933,7 @@ function s4_sites_views_default_views() {
     t('Contact type'),
     t('Files'),
     t('All'),
+    t('%1'),
     t('Search'),
     t('Files close to expiration'),
     t('Expires'),
@@ -951,7 +956,7 @@ function s4_sites_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Email: Site coordinators';
   $view->core = 7;
-  $view->api_version = '3.0-alpha1';
+  $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -1191,7 +1196,7 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['fields']['field_email']['field_api_classes'] = 0;
   /* Field: Content: Edit link */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['table'] = 'node';
+  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['exclude'] = TRUE;
   $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = 0;
@@ -1434,7 +1439,7 @@ function s4_sites_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Site Locations Map';
   $view->core = 7;
-  $view->api_version = '3.0-alpha1';
+  $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -1483,7 +1488,7 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['fields']['title']['link_to_node'] = 1;
   /* Field: Content: Edit link */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['table'] = 'node';
+  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['label'] = '';
   $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = 0;
@@ -1609,7 +1614,7 @@ function s4_sites_views_default_views() {
   $view->base_table = 'comment';
   $view->human_name = 'Recent activity';
   $view->core = 7;
-  $view->api_version = '3.0-alpha1';
+  $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -1803,7 +1808,7 @@ function s4_sites_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Site staff';
   $view->core = 7;
-  $view->api_version = '3.0-alpha1';
+  $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -1904,6 +1909,8 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['arguments']['field_site_nid']['table'] = 'field_data_field_site';
   $handler->display->display_options['arguments']['field_site_nid']['field'] = 'field_site_nid';
   $handler->display->display_options['arguments']['field_site_nid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['field_site_nid']['title_enable'] = 1;
+  $handler->display->display_options['arguments']['field_site_nid']['title'] = '%1';
   $handler->display->display_options['arguments']['field_site_nid']['default_argument_type'] = 'node';
   $handler->display->display_options['arguments']['field_site_nid']['default_argument_skip_url'] = 0;
   $handler->display->display_options['arguments']['field_site_nid']['summary']['number_of_records'] = '0';
@@ -2049,6 +2056,8 @@ function s4_sites_views_default_views() {
 
   /* Display: Site staff tab */
   $handler = $view->new_display('page', 'Site staff tab', 'page_2');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Site staff';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
@@ -2293,7 +2302,7 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['fields']['field_staff_signup_available']['field_api_classes'] = 0;
   /* Field: Content: Edit link */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['table'] = 'node';
+  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['label'] = 'Edit';
   $handler->display->display_options['fields']['edit_node']['exclude'] = TRUE;
@@ -2316,7 +2325,7 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['fields']['edit_node']['hide_alter_empty'] = 0;
   /* Field: Content: Link */
   $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
-  $handler->display->display_options['fields']['view_node']['table'] = 'node';
+  $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
   $handler->display->display_options['fields']['view_node']['label'] = '';
   $handler->display->display_options['fields']['view_node']['exclude'] = TRUE;
@@ -2419,10 +2428,12 @@ function s4_sites_views_default_views() {
     t('Restricted to'),
     t('Phone'),
     t('All'),
+    t('%1'),
     t('Page'),
     t('<p class="intro">Select a coordinator who will be working with you during your service.</p>'),
     t('Select'),
     t('Site staff tab'),
+    t('Site staff'),
     t('Last Name'),
     t('First Name'),
     t('Email'),
@@ -2443,7 +2454,7 @@ function s4_sites_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Site fields';
   $view->core = 7;
-  $view->api_version = '3.0-alpha1';
+  $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -2866,7 +2877,7 @@ function s4_sites_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'site location';
   $view->core = 7;
-  $view->api_version = '3.0-alpha1';
+  $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -3058,7 +3069,7 @@ function s4_sites_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Site locations';
   $view->core = 7;
-  $view->api_version = '3.0-alpha1';
+  $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -3166,7 +3177,7 @@ function s4_sites_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Site moderation';
   $view->core = 7;
-  $view->api_version = '3.0-alpha1';
+  $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -3429,7 +3440,7 @@ function s4_sites_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Site signups';
   $view->core = 7;
-  $view->api_version = '3.0-alpha1';
+  $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -3751,7 +3762,7 @@ function s4_sites_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'sites';
   $view->core = 7;
-  $view->api_version = '3.0-alpha1';
+  $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
