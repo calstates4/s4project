@@ -62,6 +62,7 @@ dependencies[] = email
 dependencies[] = entity
 dependencies[] = fancybox
 dependencies[] = features
+dependencies[] = feeds
 dependencies[] = field_display_label
 dependencies[] = field_group
 dependencies[] = flag
