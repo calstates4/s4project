@@ -1,0 +1,4 @@
+name=S4 Feeds
+description=S4 Feeds integration
+package=S4 SIS Integration
+core=7.x

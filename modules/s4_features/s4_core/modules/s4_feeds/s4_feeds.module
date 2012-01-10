@@ -1,0 +1,43 @@
+<?php
+
+/**
+ * Implements hook_feeds_plugins().
+ */
+function s4_feeds_feeds_plugins() {
+  $path = drupal_get_path('module', 's4_feeds') .'/plugins';
+  $info['S4CourseProcessor'] = array(
+    'name' => 'Course processor',
+    'description' => 'Add and update course records.',
+    'help' => 'Create and update course records from parsed content.',
+    'handler' => array(
+      'parent' => 'FeedsNodeProcessor',
+      'class' => 'S4CourseProcessor',
+      'file' => 'S4CourseProcessor.inc',
+      'path' => $path,
+    ),
+  );
+  $info['S4CourseEnrollmentProcessor'] = array(
+    'name' => 'Course enrollment processor',
+    'description' => 'Add and update course enrollment records.',
+    'help' => 'Create and update enrollment records from parsed content.',
+    'handler' => array(
+      'parent' => 'FeedsProcessor',
+      'class' => 'S4CourseEnrollmentProcessor',
+      'file' => 'S4CourseEnrollmentProcessor.inc',
+      'path' => $path,
+    ),
+  );
+  $info['S4CourseFaculyProcessor'] = array(
+    'name' => 'Course faculy processor',
+    'description' => 'Add and update course faculty records.',
+    'help' => 'Create and update faculty records from parsed content.',
+    'handler' => array(
+      'parent' => 'FeedsProcessor',
+      'class' => 'S4CourseFaculyProcessor',
+      'file' => 'S4CourseFaculyProcessor.inc',
+      'path' => $path,
+    ),
+  );
+  
+  return $info;
+}
