@@ -5,7 +5,7 @@
  */
 
 /**
- * Implementation of hook_field_default_fields().
+ * Implements hook_field_default_fields().
  */
 function s4_users_field_default_fields() {
   $fields = array();
@@ -202,6 +202,67 @@ function s4_users_field_default_fields() {
     ),
   );
 
+  // Exported field: 'user-user-field_sis_id'
+  $fields['user-user-field_sis_id'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_sis_id',
+      'foreign keys' => array(
+        'format' => array(
+          'columns' => array(
+            'format' => 'format',
+          ),
+          'table' => 'filter_format',
+        ),
+      ),
+      'indexes' => array(
+        'format' => array(
+          0 => 'format',
+        ),
+      ),
+      'module' => 'text',
+      'settings' => array(
+        'max_length' => '255',
+      ),
+      'translatable' => '0',
+      'type' => 'text',
+    ),
+    'field_instance' => array(
+      'bundle' => 'user',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => 6,
+        ),
+      ),
+      'entity_type' => 'user',
+      'field_name' => 'field_sis_id',
+      'label' => 'SIS ID',
+      'required' => FALSE,
+      'settings' => array(
+        'text_processing' => 0,
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'module' => 'text',
+        'settings' => array(
+          'size' => 60,
+        ),
+        'type' => 'text_textfield',
+        'weight' => '9',
+      ),
+    ),
+  );
+
   // Exported field: 'user-user-field_site_restrict'
   $fields['user-user-field_site_restrict'] = array(
     'field_config' => array(
@@ -228,8 +289,8 @@ function s4_users_field_default_fields() {
       'settings' => array(
         'allowed_values' => array(
           0 => array(
-            'parent' => '0',
             'vocabulary' => 'site_restrictions',
+            'parent' => '0',
           ),
         ),
       ),
@@ -349,6 +410,7 @@ Grants & contracts',
   t('If checked, the user will always be able to register with a site regardless of any membership in a course.');
   t('Last Name');
   t('Restricted to');
+  t('SIS ID');
   t('User is not restricted to a course');
 
   return $fields;

@@ -5,7 +5,7 @@
  */
 
 /**
- * Implementation of hook_views_default_views().
+ * Implements hook_views_default_views().
  */
 function s4_users_views_default_views() {
   $export = array();
@@ -171,7 +171,7 @@ function s4_users_views_default_views() {
   $handler->display->display_options['fields']['field_site']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_site']['hide_alter_empty'] = 0;
   $handler->display->display_options['fields']['field_site']['field_api_classes'] = 0;
-  /* Field: Content: Coordinator */
+  /* Field: Content: Site staff */
   $handler->display->display_options['fields']['field_coordinator']['id'] = 'field_coordinator';
   $handler->display->display_options['fields']['field_coordinator']['table'] = 'field_data_field_coordinator';
   $handler->display->display_options['fields']['field_coordinator']['field'] = 'field_coordinator';
