@@ -76,6 +76,7 @@ dependencies[] = homebox
 dependencies[] = imce
 dependencies[] = imce_wysiwyg
 dependencies[] = insert
+dependencies[] = job_scheduler
 dependencies[] = link
 dependencies[] = location
 dependencies[] = location_cck
