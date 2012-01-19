@@ -1,0 +1,8 @@
+core = "7.x"
+name = "S4 Field trip"
+description = "Allows faculty to define field trips, and for students to sign up for trips."
+package = "S4"
+php = "5.2.4"
+
+dependencies[] = "features"
+features[node][] = "fieldtrip"
