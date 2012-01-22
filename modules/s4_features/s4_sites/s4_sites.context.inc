@@ -74,12 +74,6 @@ function s4_sites_context_default_contexts() {
           'region' => 'content_subscriptions',
           'weight' => '0',
         ),
-        'views-site_fields-block_1' => array(
-          'module' => 'views',
-          'delta' => 'site_fields-block_1',
-          'region' => 'content',
-          'weight' => '1',
-        ),
         's4_sites-s4_sites_site_status' => array(
           'module' => 's4_sites',
           'delta' => 's4_sites_site_status',
@@ -97,12 +91,6 @@ function s4_sites_context_default_contexts() {
           'delta' => 'user_courses-block_1',
           'region' => 'content_right',
           'weight' => '-8',
-        ),
-        'views-site_fields-block' => array(
-          'module' => 'views',
-          'delta' => 'site_fields-block',
-          'region' => 'content_right',
-          'weight' => '-7',
         ),
       ),
     ),

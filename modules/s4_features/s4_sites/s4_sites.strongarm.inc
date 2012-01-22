@@ -1420,6 +1420,11 @@ function s4_sites_strongarm() {
     'field_district_state_lower' => FALSE,
     'field_district_state_upper' => FALSE,
     'field_phone' => FALSE,
+    'field_site_demographics' => FALSE,
+    'field_site_language' => FALSE,
+    'field_site_hours' => FALSE,
+    'field_site_projects' => FALSE,
+    'field_site_hours_minimum' => FALSE,
   );
   $export['s4_sites_field_access'] = $strongarm;
 

@@ -2585,9 +2585,10 @@ function s4_sites_field_default_fields() {
         ),
         'default' => array(
           'label' => 'above',
+          'module' => 'taxonomy',
           'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '22',
+          'type' => 'taxonomy_term_reference_link',
+          'weight' => '5',
         ),
         'full' => array(
           'label' => 'above',
@@ -2674,9 +2675,10 @@ function s4_sites_field_default_fields() {
         ),
         'default' => array(
           'label' => 'above',
+          'module' => 'taxonomy',
           'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '23',
+          'type' => 'taxonomy_term_reference_link',
+          'weight' => '6',
         ),
         'full' => array(
           'label' => 'above',
@@ -2754,6 +2756,13 @@ function s4_sites_field_default_fields() {
           'weight' => '15',
         ),
         'default' => array(
+          'label' => 'above',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => '2',
+        ),
+        'full' => array(
           'label' => 'above',
           'module' => 'text',
           'settings' => array(),
@@ -2905,9 +2914,10 @@ function s4_sites_field_default_fields() {
         ),
         'default' => array(
           'label' => 'above',
+          'module' => 'location_cck',
           'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '20',
+          'type' => 'location_default',
+          'weight' => '10',
         ),
         'full' => array(
           'label' => 'above',
@@ -2977,9 +2987,10 @@ function s4_sites_field_default_fields() {
         ),
         'default' => array(
           'label' => 'above',
+          'module' => 'cck_phone',
           'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '28',
+          'type' => 'local_phone_number',
+          'weight' => '8',
         ),
         'full' => array(
           'label' => 'above',
@@ -3000,12 +3011,12 @@ function s4_sites_field_default_fields() {
           'weight' => 0,
         ),
       ),
-      'display_label' => '',
+      'display_label' => 'Phone number',
       'entity_type' => 'node',
       'field_name' => 'field_phone',
       'label' => 'Main phone number',
       'required' => 0,
-      's4_sites_field_access' => 1,
+      's4_sites_field_access' => 0,
       'settings' => array(
         'all_country_codes' => 0,
         'country_codes' => array(
@@ -3299,6 +3310,12 @@ function s4_sites_field_default_fields() {
             'thousand_separator' => ' ',
           ),
           'type' => 'number_integer',
+          'weight' => '12',
+        ),
+        'full' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
           'weight' => '5',
         ),
         'notifications' => array(
@@ -3314,12 +3331,12 @@ function s4_sites_field_default_fields() {
           'weight' => 0,
         ),
       ),
-      'display_label' => '',
+      'display_label' => 'Number of people served',
       'entity_type' => 'node',
       'field_name' => 'field_population_size',
       'label' => 'How many people does your organization serve?',
       'required' => 0,
-      's4_sites_field_access' => 1,
+      's4_sites_field_access' => 0,
       'settings' => array(
         'max' => '',
         'min' => '0',
@@ -3375,6 +3392,12 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
+          'weight' => '26',
+        ),
+        'full' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
           'weight' => '12',
         ),
         'notifications' => array(
@@ -3420,7 +3443,7 @@ function s4_sites_field_default_fields() {
       'entity_types' => array(),
       'field_name' => 'field_site_demographics',
       'foreign keys' => array(),
-      'global_block_settings' => '2',
+      'global_block_settings' => '1',
       'indexes' => array(
         'col' => array(
           0 => 'col',
@@ -3490,8 +3513,16 @@ function s4_sites_field_default_fields() {
         ),
         'default' => array(
           'label' => 'above',
+          'module' => 's4_sites',
           'settings' => array(),
-          'type' => 'hidden',
+          'type' => 's4_sites_population_matrix',
+          'weight' => '13',
+        ),
+        'full' => array(
+          'label' => 'above',
+          'module' => 'matrix',
+          'settings' => array(),
+          'type' => 'matrix_default',
           'weight' => '13',
         ),
         'notifications' => array(
@@ -3507,10 +3538,12 @@ function s4_sites_field_default_fields() {
           'weight' => 0,
         ),
       ),
+      'display_label' => 'Population served',
       'entity_type' => 'node',
       'field_name' => 'field_site_demographics',
       'label' => 'By percentage, what is the demographic of the population you serve?',
       'required' => FALSE,
+      's4_sites_field_access' => 0,
       'settings' => array(
         'user_register_form' => FALSE,
       ),
@@ -3554,9 +3587,10 @@ function s4_sites_field_default_fields() {
         ),
         'default' => array(
           'label' => 'above',
+          'module' => 'email',
           'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '27',
+          'type' => 'email_default',
+          'weight' => '9',
         ),
         'full' => array(
           'label' => 'above',
@@ -3686,7 +3720,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '29',
+          'weight' => '35',
         ),
         'full' => array(
           'label' => 'above',
@@ -3770,8 +3804,16 @@ function s4_sites_field_default_fields() {
         ),
         'default' => array(
           'label' => 'above',
+          'module' => 'link',
           'settings' => array(),
-          'type' => 'hidden',
+          'type' => 'link_default',
+          'weight' => '11',
+        ),
+        'full' => array(
+          'label' => 'above',
+          'module' => 'link',
+          'settings' => array(),
+          'type' => 'link_default',
           'weight' => '14',
         ),
         'notifications' => array(
@@ -3908,7 +3950,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '25',
+          'weight' => '32',
         ),
         'full' => array(
           'label' => 'above',
@@ -3987,6 +4029,13 @@ function s4_sites_field_default_fields() {
           'weight' => '14',
         ),
         'default' => array(
+          'label' => 'above',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => '1',
+        ),
+        'full' => array(
           'label' => 'above',
           'module' => 'text',
           'settings' => array(),
@@ -4122,8 +4171,16 @@ function s4_sites_field_default_fields() {
         ),
         'default' => array(
           'label' => 'above',
+          'module' => 's4_sites',
           'settings' => array(),
-          'type' => 'hidden',
+          'type' => 's4_sites_hours_matrix',
+          'weight' => '4',
+        ),
+        'full' => array(
+          'label' => 'above',
+          'module' => 'matrix',
+          'settings' => array(),
+          'type' => 'matrix_default',
           'weight' => '10',
         ),
         'notifications' => array(
@@ -4165,7 +4222,7 @@ function s4_sites_field_default_fields() {
       'entity_types' => array(),
       'field_name' => 'field_site_hours_minimum',
       'foreign keys' => array(),
-      'global_block_settings' => '2',
+      'global_block_settings' => '1',
       'indexes' => array(
         'value' => array(
           0 => 'value',
@@ -4211,6 +4268,13 @@ function s4_sites_field_default_fields() {
         ),
         'default' => array(
           'label' => 'above',
+          'module' => 'list',
+          'settings' => array(),
+          'type' => 'list_default',
+          'weight' => '16',
+        ),
+        'full' => array(
+          'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
           'weight' => '11',
@@ -4228,10 +4292,12 @@ function s4_sites_field_default_fields() {
           'weight' => 0,
         ),
       ),
+      'display_label' => 'Minimum hours',
       'entity_type' => 'node',
       'field_name' => 'field_site_hours_minimum',
       'label' => 'What is the minimum number of hours you would require of a student in service per term',
       'required' => 0,
+      's4_sites_field_access' => 1,
       'settings' => array(
         'user_register_form' => FALSE,
       ),
@@ -4292,9 +4358,13 @@ function s4_sites_field_default_fields() {
         ),
         'default' => array(
           'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '19',
+          'module' => 'fancybox',
+          'settings' => array(
+            'image_link_style' => 'large',
+            'image_style' => 'thumbnail',
+          ),
+          'type' => 'fancybox_image',
+          'weight' => '17',
         ),
         'full' => array(
           'label' => 'above',
@@ -4397,7 +4467,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '26',
+          'weight' => '33',
         ),
         'full' => array(
           'label' => 'above',
@@ -4487,7 +4557,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '30',
+          'weight' => '36',
         ),
         'full' => array(
           'label' => 'above',
@@ -4543,7 +4613,7 @@ function s4_sites_field_default_fields() {
           'table' => 'taxonomy_term_data',
         ),
       ),
-      'global_block_settings' => '2',
+      'global_block_settings' => '1',
       'indexes' => array(
         'tid' => array(
           0 => 'tid',
@@ -4553,8 +4623,8 @@ function s4_sites_field_default_fields() {
       'settings' => array(
         'allowed_values' => array(
           0 => array(
-            'parent' => '0',
             'vocabulary' => 'language',
+            'parent' => '0',
           ),
         ),
       ),
@@ -4576,8 +4646,16 @@ function s4_sites_field_default_fields() {
         ),
         'default' => array(
           'label' => 'above',
+          'module' => 'taxonomy',
           'settings' => array(),
-          'type' => 'hidden',
+          'type' => 'taxonomy_term_reference_link',
+          'weight' => '14',
+        ),
+        'full' => array(
+          'label' => 'above',
+          'module' => 'taxonomy',
+          'settings' => array(),
+          'type' => 'taxonomy_term_reference_link',
           'weight' => '15',
         ),
         'notifications' => array(
@@ -4593,10 +4671,12 @@ function s4_sites_field_default_fields() {
           'weight' => 0,
         ),
       ),
+      'display_label' => 'Languages',
       'entity_type' => 'node',
       'field_name' => 'field_site_language',
       'label' => 'What languages would you like students to speak other than English?',
       'required' => 0,
+      's4_sites_field_access' => 0,
       'settings' => array(
         'user_register_form' => FALSE,
       ),
@@ -4654,6 +4734,12 @@ function s4_sites_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
+          'weight' => '3',
+        ),
+        'full' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
           'weight' => '1',
         ),
         'notifications' => array(
@@ -4669,10 +4755,12 @@ function s4_sites_field_default_fields() {
           'weight' => 0,
         ),
       ),
+      'display_label' => 'Ongoing needs and special projects',
       'entity_type' => 'node',
       'field_name' => 'field_site_projects',
       'label' => 'Briefly describe any ongoing needs or special projects with which students can assist agency staff',
       'required' => 0,
+      's4_sites_field_access' => 1,
       'settings' => array(
         'text_processing' => '1',
         'user_register_form' => FALSE,
@@ -4738,8 +4826,16 @@ function s4_sites_field_default_fields() {
         ),
         'default' => array(
           'label' => 'above',
+          'module' => 'taxonomy',
           'settings' => array(),
-          'type' => 'hidden',
+          'type' => 'taxonomy_term_reference_link',
+          'weight' => '15',
+        ),
+        'full' => array(
+          'label' => 'above',
+          'module' => 'taxonomy',
+          'settings' => array(),
+          'type' => 'taxonomy_term_reference_link',
           'weight' => '16',
         ),
         'notifications' => array(
@@ -4822,7 +4918,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '21',
+          'weight' => '28',
         ),
         'full' => array(
           'label' => 'above',
@@ -4902,9 +4998,14 @@ function s4_sites_field_default_fields() {
         ),
         'default' => array(
           'label' => 'above',
-          'module' => 'text',
           'settings' => array(),
-          'type' => 'text_default',
+          'type' => 'hidden',
+          'weight' => '24',
+        ),
+        'full' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
           'weight' => '3',
         ),
         'notifications' => array(
@@ -5023,7 +5124,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '24',
+          'weight' => '29',
         ),
         'full' => array(
           'label' => 'above',
@@ -5117,7 +5218,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '17',
+          'weight' => '27',
         ),
         'full' => array(
           'label' => 'above',
@@ -5204,9 +5305,10 @@ function s4_sites_field_default_fields() {
         ),
         'default' => array(
           'label' => 'above',
+          'module' => 'link',
           'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '18',
+          'type' => 'link_default',
+          'weight' => '7',
         ),
         'full' => array(
           'label' => 'above',
@@ -5309,6 +5411,12 @@ function s4_sites_field_default_fields() {
           'weight' => 0,
         ),
         'default' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '25',
+        ),
+        'full' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
