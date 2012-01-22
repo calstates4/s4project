@@ -900,3 +900,24 @@ function s4_sites_s4_site_configuration() {
 		),
 	);
 }
+
+/**
+ * Define a 75%/25% layout for sites
+ */
+function s4_sites_ds_layout_info() {
+  $path = drupal_get_path('module', 's4_sites');
+
+  $layouts = array(
+    's4_site' => array(
+      'label' => t('Two column 75/25'),
+      'path' => $path . '/layouts/s4_site',
+      'regions' => array(
+        'left' => t('Left'),
+        'right' => t('Right')
+      ),
+      'css' => TRUE,
+    ),
+  );
+
+  return $layouts;
+}
