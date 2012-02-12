@@ -4939,9 +4939,10 @@ function s4_sites_field_default_fields() {
           'weight' => 0,
         ),
       ),
+      'display_label' => '',
       'entity_type' => 'node',
       'field_name' => 'field_site_restrict',
-      'label' => 'Restrict site to',
+      'label' => 'Available programs',
       'required' => 1,
       's4_sites_field_access' => 0,
       'settings' => array(
@@ -5580,6 +5581,7 @@ function s4_sites_field_default_fields() {
   t('Additional users');
   t('Approval');
   t('Attach a few photos of the site. The first image will be used in the site preview.');
+  t('Available programs');
   t('Body');
   t('Briefly describe any ongoing needs or special projects with which students can assist agency staff');
   t('By percentage, what is the demographic of the population you serve?');
@@ -5617,7 +5619,6 @@ function s4_sites_field_default_fields() {
   t('Provide an overview description of your organization, i.e. who you are, what you do, and who you serve.');
   t('Reminder date');
   t('Reminder period (days)');
-  t('Restrict site to');
   t('Restrict this site staff to the following types of students.');
   t('Restrict to');
   t('Risk Identification');

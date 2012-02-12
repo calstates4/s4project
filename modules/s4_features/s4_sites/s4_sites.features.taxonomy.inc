@@ -148,7 +148,7 @@ function s4_sites_taxonomy_default_vocabularies() {
       ),
     ),
     'site_restrictions' => array(
-      'name' => 'Site restrictions',
+      'name' => 'Program',
       'machine_name' => 'site_restrictions',
       'description' => 'Useful to control who can sign up for a site.',
       'hierarchy' => '0',

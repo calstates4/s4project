@@ -311,9 +311,10 @@ function s4_users_field_default_fields() {
           'weight' => 2,
         ),
       ),
+      'display_label' => '',
       'entity_type' => 'user',
       'field_name' => 'field_site_restrict',
-      'label' => 'Restricted to',
+      'label' => 'Available programs',
       'required' => 0,
       'settings' => array(
         'user_register_form' => 0,
@@ -406,10 +407,10 @@ Grants & contracts',
   // Translatables
   // Included for use with string extractors like potx.
   t('Approval access');
+  t('Available programs');
   t('First Name');
   t('If checked, the user will always be able to register with a site regardless of any membership in a course.');
   t('Last Name');
-  t('Restricted to');
   t('SIS ID');
   t('User is not restricted to a course');
 

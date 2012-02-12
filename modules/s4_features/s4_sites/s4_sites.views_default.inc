@@ -1853,7 +1853,7 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['fields']['title']['hide_empty'] = 0;
   $handler->display->display_options['fields']['title']['empty_zero'] = 0;
   $handler->display->display_options['fields']['title']['link_to_node'] = 1;
-  /* Field: Field: Restricted to */
+  /* Field: Field: Available programs */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
@@ -1965,7 +1965,7 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['fields']['title']['hide_empty'] = 0;
   $handler->display->display_options['fields']['title']['empty_zero'] = 0;
   $handler->display->display_options['fields']['title']['link_to_node'] = 1;
-  /* Field: Field: Restricted to */
+  /* Field: Field: Available programs */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
@@ -2425,7 +2425,7 @@ function s4_sites_views_default_views() {
     t('- All -'),
     t('Offset'),
     t('Name'),
-    t('Restricted to'),
+    t('Available programs'),
     t('Phone'),
     t('All'),
     t('%1'),
@@ -3873,7 +3873,7 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['empty'] = '<h4>[title]</h4><div class="meta">[field_csu_facility] - [field_csu_org_type]</div>';
   $handler->display->display_options['fields']['nothing_1']['hide_empty'] = 0;
   $handler->display->display_options['fields']['nothing_1']['empty_zero'] = 0;
-  /* Field: Field: Restricted to */
+  /* Field: Field: Available programs */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
@@ -4156,7 +4156,7 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['fields']['field_csu_org_type']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_csu_org_type']['delta_reversed'] = 0;
   $handler->display->display_options['fields']['field_csu_org_type']['field_api_classes'] = 0;
-  /* Field: Field: Restricted to */
+  /* Field: Field: Available programs */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
@@ -4313,7 +4313,7 @@ function s4_sites_views_default_views() {
     t('- All -'),
     t('Offset'),
     t('<h4>[title]</h4><div class="meta">[field_csu_facility] - [field_csu_org_type]</div>'),
-    t('Restricted to'),
+    t('Available programs'),
     t('All'),
     t('Search'),
     t('City'),
