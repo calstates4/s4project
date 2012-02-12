@@ -137,6 +137,9 @@ projects[strongarm][version] = "2.0-beta2"
 projects[talk][subdir] = "contrib"
 projects[talk][version] = "1.x-dev"
 
+projects[tac_lite][subdir] = "contrib"
+projects[tac_lite][version] = "1.x-dev"
+
 projects[textcaptcha][subdir] = "contrib"
 projects[textcaptcha][version] = "1.x-dev"
 

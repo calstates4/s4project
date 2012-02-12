@@ -13,7 +13,10 @@ function s4_sites_user_default_permissions() {
   // Exported permission: create contact_record content
   $permissions['create contact_record content'] = array(
     'name' => 'create contact_record content',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'staff',
+    ),
+    'module' => 'node',
   );
 
   // Exported permission: create coordinator content
@@ -21,6 +24,7 @@ function s4_sites_user_default_permissions() {
     'name' => 'create coordinator content',
     'roles' => array(
       0 => 'authenticated user',
+      1 => 'staff',
     ),
     'module' => 'node',
   );
@@ -28,7 +32,10 @@ function s4_sites_user_default_permissions() {
   // Exported permission: create file content
   $permissions['create file content'] = array(
     'name' => 'create file content',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'staff',
+    ),
+    'module' => 'node',
   );
 
   // Exported permission: create site content
@@ -37,6 +44,7 @@ function s4_sites_user_default_permissions() {
     'roles' => array(
       0 => 'anonymous user',
       1 => 'authenticated user',
+      2 => 'staff',
     ),
     'module' => 'node',
   );
@@ -44,19 +52,28 @@ function s4_sites_user_default_permissions() {
   // Exported permission: delete any contact_record content
   $permissions['delete any contact_record content'] = array(
     'name' => 'delete any contact_record content',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'staff',
+    ),
+    'module' => 'node',
   );
 
   // Exported permission: delete any coordinator content
   $permissions['delete any coordinator content'] = array(
     'name' => 'delete any coordinator content',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'staff',
+    ),
+    'module' => 'node',
   );
 
   // Exported permission: delete any file content
   $permissions['delete any file content'] = array(
     'name' => 'delete any file content',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'staff',
+    ),
+    'module' => 'node',
   );
 
   // Exported permission: delete any site content
@@ -68,19 +85,28 @@ function s4_sites_user_default_permissions() {
   // Exported permission: delete own contact_record content
   $permissions['delete own contact_record content'] = array(
     'name' => 'delete own contact_record content',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'staff',
+    ),
+    'module' => 'node',
   );
 
   // Exported permission: delete own coordinator content
   $permissions['delete own coordinator content'] = array(
     'name' => 'delete own coordinator content',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'staff',
+    ),
+    'module' => 'node',
   );
 
   // Exported permission: delete own file content
   $permissions['delete own file content'] = array(
     'name' => 'delete own file content',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'staff',
+    ),
+    'module' => 'node',
   );
 
   // Exported permission: delete own site content
@@ -158,19 +184,28 @@ function s4_sites_user_default_permissions() {
   // Exported permission: edit any contact_record content
   $permissions['edit any contact_record content'] = array(
     'name' => 'edit any contact_record content',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'staff',
+    ),
+    'module' => 'node',
   );
 
   // Exported permission: edit any coordinator content
   $permissions['edit any coordinator content'] = array(
     'name' => 'edit any coordinator content',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'staff',
+    ),
+    'module' => 'node',
   );
 
   // Exported permission: edit any file content
   $permissions['edit any file content'] = array(
     'name' => 'edit any file content',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'staff',
+    ),
+    'module' => 'node',
   );
 
   // Exported permission: edit any site content
@@ -182,19 +217,28 @@ function s4_sites_user_default_permissions() {
   // Exported permission: edit own contact_record content
   $permissions['edit own contact_record content'] = array(
     'name' => 'edit own contact_record content',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'staff',
+    ),
+    'module' => 'node',
   );
 
   // Exported permission: edit own coordinator content
   $permissions['edit own coordinator content'] = array(
     'name' => 'edit own coordinator content',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'staff',
+    ),
+    'module' => 'node',
   );
 
   // Exported permission: edit own file content
   $permissions['edit own file content'] = array(
     'name' => 'edit own file content',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'staff',
+    ),
+    'module' => 'node',
   );
 
   // Exported permission: edit own site content
@@ -272,7 +316,10 @@ function s4_sites_user_default_permissions() {
   // Exported permission: moderate site information
   $permissions['moderate site information'] = array(
     'name' => 'moderate site information',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'staff',
+    ),
+    'module' => 's4_sites',
   );
 
   // Exported permission: skip CAPTCHA
