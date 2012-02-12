@@ -309,7 +309,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['filters']['field_term_nid']['expose']['identifier'] = 'field_term_nid';
   $handler->display->display_options['filters']['field_term_nid']['expose']['multiple'] = 1;
   $handler->display->display_options['filters']['field_term_nid']['expose']['reduce'] = 0;
-  /* Filter criterion: Field: Restricted to (field_site_restrict) */
+  /* Filter criterion: Field: Available programs (field_site_restrict) */
   $handler->display->display_options['filters']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
   $handler->display->display_options['filters']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['filters']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';
@@ -1193,7 +1193,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['filters']['name']['expose']['identifier'] = 'name';
   $handler->display->display_options['filters']['name']['expose']['required'] = 0;
   $handler->display->display_options['filters']['name']['expose']['multiple'] = FALSE;
-  /* Filter criterion: Field: Restricted to (field_site_restrict) */
+  /* Filter criterion: Field: Available programs (field_site_restrict) */
   $handler->display->display_options['filters']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
   $handler->display->display_options['filters']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['filters']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';
@@ -1597,7 +1597,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['fields']['field_downloadable_file']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_downloadable_file']['group_column'] = 'fid';
   $handler->display->display_options['fields']['field_downloadable_file']['field_api_classes'] = 0;
-  /* Field: Field: Restricted to */
+  /* Field: Field: Available programs */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
@@ -1731,7 +1731,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['fields']['field_downloadable_file']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_downloadable_file']['group_column'] = 'fid';
   $handler->display->display_options['fields']['field_downloadable_file']['field_api_classes'] = 0;
-  /* Field: Field: Restricted to */
+  /* Field: Field: Available programs */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
@@ -1761,7 +1761,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['fields']['field_site_restrict']['delta_reversed'] = 0;
   $handler->display->display_options['fields']['field_site_restrict']['field_api_classes'] = 0;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
-  /* Contextual filter: Field: Restricted to (field_site_restrict) */
+  /* Contextual filter: Field: Available programs (field_site_restrict) */
   $handler->display->display_options['arguments']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
   $handler->display->display_options['arguments']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['arguments']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';

@@ -16,6 +16,12 @@ function s4_core_user_default_roles() {
     'weight' => '2',
   );
 
+  // Exported role: manager
+  $roles['manager'] = array(
+    'name' => 'manager',
+    'weight' => '7',
+  );
+
   // Exported role: staff
   $roles['staff'] = array(
     'name' => 'staff',

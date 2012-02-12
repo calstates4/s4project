@@ -42,6 +42,7 @@ function s4_core_user_default_permissions() {
     'name' => 'access all views',
     'roles' => array(
       0 => 'administrator',
+      1 => 'manager',
     ),
     'module' => 'views',
   );
@@ -439,7 +440,7 @@ function s4_core_user_default_permissions() {
     'name' => 'administer users',
     'roles' => array(
       0 => 'administrator',
-      1 => 'staff',
+      1 => 'manager',
     ),
     'module' => 'user',
   );
@@ -476,7 +477,6 @@ function s4_core_user_default_permissions() {
     'name' => 'bypass node access',
     'roles' => array(
       0 => 'administrator',
-      1 => 'staff',
     ),
     'module' => 'node',
   );
