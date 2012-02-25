@@ -57,6 +57,7 @@ class S4CourseFaculyProcessor extends FeedsProcessor {
   
   public function process(FeedsSource $source, FeedsParserResult $parser_result) {
     $state = $source->state(FEEDS_PROCESS);
+    $mappings = $this->config['mappings'];
     
     foreach ($mappings as $map) {
       if ($map['target'] == 'sis_id') {

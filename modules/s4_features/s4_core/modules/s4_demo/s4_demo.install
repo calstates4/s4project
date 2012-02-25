@@ -1,0 +1,20 @@
+<?php
+
+function s4_demo_install() {
+	$feeds = array('demo_user_importer' 				=> 'users.csv',
+								 'demo_term_importer' 				=> 'terms.csv',
+								 'demo_course_importer' 			=> 'courses.csv',
+								 'demo_enrollment_importer' 	=> 'enrollment.csv',
+								 'demo_faculty_importer'      => 'faculty_assignments.csv',
+                 );
+  foreach ($feeds as $feed_name => $file) {
+    $feed = feeds_source($feed_name, 0);
+    $config = array(
+      'FeedsFileFetcher' => array(
+      'source' => drupal_realpath(drupal_get_path('module', 's4_demo') . 
+                  '/data/'. $file)));
+    $feed->addConfig($config);
+    while (FEEDS_BATCH_COMPLETE != $feed->import());  
+  }
+
+}

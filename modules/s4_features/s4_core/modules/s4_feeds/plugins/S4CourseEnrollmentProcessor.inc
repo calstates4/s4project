@@ -29,7 +29,7 @@ class S4CourseEnrollmentProcessor extends FeedsProcessor {
    * Creates a new enrollment relation in memory and returns it.
    */
   public function newReference(FeedsSource $source, $item, $enrolled = 1) {
-    $course = $item['course'];
+    $course = node_load($item['course']);
     $existing = field_get_items('node', $course, 'field_course_students');
     foreach($existing as $k => $existing_student) {
       if($existing_student['uid'] == $item['user']) {
@@ -62,7 +62,7 @@ class S4CourseEnrollmentProcessor extends FeedsProcessor {
   
   public function process(FeedsSource $source, FeedsParserResult $parser_result) {
     $state = $source->state(FEEDS_PROCESS);
-    
+    $mappings = $this->config['mappings'];
     foreach ($mappings as $map) {
       if ($map['target'] == 'sis_id') {
         $sis_id_key = $map['source'];

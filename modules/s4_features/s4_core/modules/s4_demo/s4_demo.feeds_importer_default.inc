@@ -32,16 +32,16 @@ function s4_demo_feeds_importer_default() {
       ),
     ),
     'processor' => array(
-      'plugin_key' => 'S4CourseProcessor',
+      'plugin_key' => 'FeedsNodeProcessor',
       'config' => array(
-        'content_type' => 'page',
-        'expire' => -1,
+        'content_type' => 'course',
+        'expire' => '-1',
         'author' => 0,
         'mappings' => array(
           0 => array(
-            'source' => 'term',
-            'target' => 'term_code',
-            'unique' => FALSE,
+            'source' => 'course_id',
+            'target' => 'guid',
+            'unique' => 0,
           ),
           1 => array(
             'source' => 'subject',
@@ -49,23 +49,28 @@ function s4_demo_feeds_importer_default() {
             'unique' => FALSE,
           ),
           2 => array(
-            'source' => 'catalog_number',
-            'target' => 'field_course_catalog_number',
-            'unique' => FALSE,
-          ),
-          3 => array(
             'source' => 'section',
             'target' => 'field_course_section',
             'unique' => FALSE,
           ),
-          4 => array(
+          3 => array(
             'source' => 'title',
             'target' => 'field_course_title',
             'unique' => FALSE,
           ),
+          4 => array(
+            'source' => 'catalog_number',
+            'target' => 'field_course_catalog_number',
+            'unique' => FALSE,
+          ),
+          5 => array(
+            'source' => 'strm',
+            'target' => 'field_term:guid',
+            'unique' => FALSE,
+          ),
         ),
-        'update_existing' => 0,
-        'input_format' => NULL,
+        'update_existing' => '0',
+        'input_format' => 'plain_text',
       ),
     ),
     'content_type' => '',
