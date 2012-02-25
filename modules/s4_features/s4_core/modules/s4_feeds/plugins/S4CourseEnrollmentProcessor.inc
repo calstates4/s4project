@@ -31,14 +31,16 @@ class S4CourseEnrollmentProcessor extends FeedsProcessor {
   public function newReference(FeedsSource $source, $item, $enrolled = 1) {
     $course = node_load($item['course']);
     $existing = field_get_items('node', $course, 'field_course_students');
-    foreach($existing as $k => $existing_student) {
-      if($existing_student['uid'] == $item['user']) {
-        if(!$enrolled) {
-          unset($course->field_course_students[$course->language][$k]);
-          node_save($course);
-          return $course;
+    if($existing) {
+      foreach($existing as $k => $existing_student) {
+        if($existing_student['uid'] == $item['user']) {
+          if(!$enrolled) {
+            unset($course->field_course_students[$course->language][$k]);
+            node_save($course);
+            return $course;
+          }
+          return;
         }
-        return;
       }
     }
     $course->field_course_students[$course->language][] = array('uid' => $item['user']);
