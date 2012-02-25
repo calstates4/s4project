@@ -95,6 +95,9 @@ projects[libraries][version] = "1.0"
 projects[link][subdir] = "contrib"
 projects[link][version] = "1.0"
 
+projects[location_feeds][subdir] = "contrib"
+projects[location_feeds][version] = "1.5"
+
 projects[masquerade][subdir] = "contrib"
 projects[masquerade][version] = "1.0-rc4"
 
@@ -247,4 +250,5 @@ libraries[guiders][destination] = "libraries"
 projects[wysiwyg][patch][] = "http://drupal.org/files/issues/wysiwyg-entity-exportables-624018-176_1.patch"
 projects[token][patch][] = "http://drupal.org/files/issues/modules_token.92.patch"
 projects[nodeformcols][patch][] = "http://drupal.org/files/nodeformcolum_captcha_error.patch"
+projects[cck_phone][] = "http://drupal.org/files/cck_phone_feeds-1160186-2.patch"
 projects[fancybox][patch][] = "http://drupal.org/files/fancybox_library_sub_folder.patch"
