@@ -41,7 +41,7 @@ function s4_demo_feeds_importer_default() {
           0 => array(
             'source' => 'course_id',
             'target' => 'guid',
-            'unique' => 0,
+            'unique' => 1,
           ),
           1 => array(
             'source' => 'subject',
@@ -69,7 +69,7 @@ function s4_demo_feeds_importer_default() {
             'unique' => FALSE,
           ),
         ),
-        'update_existing' => '0',
+        'update_existing' => '2',
         'input_format' => 'plain_text',
       ),
     ),
@@ -124,6 +124,11 @@ function s4_demo_feeds_importer_default() {
             'target' => 'enrollment_indicator',
             'unique' => FALSE,
           ),
+          3 => array(
+            'source' => 'enrollment_id',
+            'target' => 'guid',
+            'unique' => 1,
+          ),
         ),
         'update_existing' => 0,
         'input_format' => NULL,
@@ -175,6 +180,11 @@ function s4_demo_feeds_importer_default() {
             'target' => 'course_id',
             'unique' => FALSE,
           ),
+          2 => array(
+            'source' => 'assignment_id',
+            'target' => 'guid',
+            'unique' => FALSE,
+          ),
         ),
         'update_existing' => 0,
         'input_format' => NULL,
@@ -188,6 +198,98 @@ function s4_demo_feeds_importer_default() {
     'process_in_background' => 0,
   );
   $export['demo_faculty_importer'] = $feeds_importer;
+
+  $feeds_importer = new stdClass;
+  $feeds_importer->disabled = FALSE; /* Edit this to true to make a default feeds_importer disabled initially */
+  $feeds_importer->api_version = 1;
+  $feeds_importer->id = 'demo_site_importer';
+  $feeds_importer->config = array(
+    'name' => 'Demo site importer',
+    'description' => 'Imports sites.',
+    'fetcher' => array(
+      'plugin_key' => 'FeedsFileFetcher',
+      'config' => array(
+        'allowed_extensions' => 'txt csv tsv xml opml',
+        'direct' => FALSE,
+      ),
+    ),
+    'parser' => array(
+      'plugin_key' => 'FeedsCSVParser',
+      'config' => array(
+        'delimiter' => ',',
+        'no_headers' => 0,
+      ),
+    ),
+    'processor' => array(
+      'plugin_key' => 'FeedsNodeProcessor',
+      'config' => array(
+        'content_type' => 'site',
+        'expire' => '-1',
+        'author' => 0,
+        'mappings' => array(
+          0 => array(
+            'source' => 'title',
+            'target' => 'guid',
+            'unique' => 0,
+          ),
+          1 => array(
+            'source' => 'title',
+            'target' => 'title',
+            'unique' => FALSE,
+          ),
+          2 => array(
+            'source' => 'address_street',
+            'target' => 'field_location:street',
+            'unique' => FALSE,
+          ),
+          3 => array(
+            'source' => 'address_street_2',
+            'target' => 'field_location:additional',
+            'unique' => FALSE,
+          ),
+          4 => array(
+            'source' => 'city',
+            'target' => 'field_location:city',
+            'unique' => FALSE,
+          ),
+          5 => array(
+            'source' => 'state',
+            'target' => 'field_location:province',
+            'unique' => FALSE,
+          ),
+          6 => array(
+            'source' => 'postal_code',
+            'target' => 'field_location:postal_code',
+            'unique' => FALSE,
+          ),
+          7 => array(
+            'source' => 'description',
+            'target' => 'body',
+            'unique' => FALSE,
+          ),
+          8 => array(
+            'source' => 'web_url',
+            'target' => 'field_website:url',
+            'unique' => FALSE,
+          ),
+          9 => array(
+            'source' => 'phone',
+            'target' => 'field_phone:number',
+            'unique' => FALSE,
+          ),
+        ),
+        'update_existing' => '0',
+        'input_format' => 'plain_text',
+      ),
+    ),
+    'content_type' => '',
+    'update' => 0,
+    'import_period' => '-1',
+    'expire_period' => 3600,
+    'import_on_create' => 1,
+    'process_in_background' => 0,
+  );
+  $export['demo_site_importer'] = $feeds_importer;
 
   $feeds_importer = new stdClass;
   $feeds_importer->disabled = FALSE; /* Edit this to true to make a default feeds_importer disabled initially */

@@ -134,6 +134,7 @@ dependencies[] = s4_pages
 dependencies[] = s4_reporting
 dependencies[] = s4_sites
 dependencies[] = s4_map
+dependencies[] = s4_feeds
 dependencies[] = s4_help
 dependencies[] = s4_users
 dependencies[] = s4_webform
