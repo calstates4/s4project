@@ -228,53 +228,73 @@ function s4_demo_feeds_importer_default() {
         'author' => 0,
         'mappings' => array(
           0 => array(
-            'source' => 'title',
-            'target' => 'guid',
-            'unique' => 0,
+            'source' => 'name',
+            'target' => 'title',
+            'unique' => 1,
           ),
           1 => array(
-            'source' => 'title',
-            'target' => 'title',
-            'unique' => FALSE,
+            'source' => 'name',
+            'target' => 'guid',
+            'unique' => 1,
           ),
           2 => array(
+            'source' => 'status',
+            'target' => 'status',
+            'unique' => FALSE,
+          ),
+          3 => array(
             'source' => 'address_street',
             'target' => 'field_location:street',
             'unique' => FALSE,
           ),
-          3 => array(
-            'source' => 'address_street_2',
+          4 => array(
+            'source' => 'address_street2',
             'target' => 'field_location:additional',
             'unique' => FALSE,
           ),
-          4 => array(
-            'source' => 'city',
+          5 => array(
+            'source' => 'address_city',
             'target' => 'field_location:city',
             'unique' => FALSE,
           ),
-          5 => array(
-            'source' => 'state',
+          6 => array(
+            'source' => 'address_state',
             'target' => 'field_location:province',
             'unique' => FALSE,
           ),
-          6 => array(
-            'source' => 'postal_code',
+          7 => array(
+            'source' => 'address_zip',
             'target' => 'field_location:postal_code',
             'unique' => FALSE,
           ),
-          7 => array(
+          8 => array(
             'source' => 'description',
             'target' => 'body',
             'unique' => FALSE,
           ),
-          8 => array(
-            'source' => 'web_url',
+          9 => array(
+            'source' => 'population_size',
+            'target' => 'field_population_size',
+            'unique' => FALSE,
+          ),
+          10 => array(
+            'source' => 'projects',
+            'target' => 'field_site_projects',
+            'unique' => FALSE,
+          ),
+          11 => array(
+            'source' => 'web',
             'target' => 'field_website:url',
             'unique' => FALSE,
           ),
-          9 => array(
-            'source' => 'phone',
-            'target' => 'field_phone:number',
+          12 => array(
+            'source' => 'issues',
+            'target' => 'field_csu_facility',
+            'unique' => FALSE,
+          ),
+          13 => array(
+            'source' => 'org_types',
+            'target' => 'field_csu_org_type',
             'unique' => FALSE,
           ),
         ),
