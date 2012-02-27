@@ -64,7 +64,7 @@ function s4_demo_feeds_importer_default() {
             'unique' => FALSE,
           ),
           5 => array(
-            'source' => 'strm',
+            'source' => 'term',
             'target' => 'field_term:guid',
             'unique' => FALSE,
           ),
