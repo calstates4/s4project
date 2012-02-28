@@ -8,6 +8,9 @@ function s4_demo_install() {
 								 'demo_faculty_importer'      => 'faculty_assignments.csv',
 								 'demo_site_importer'      		=> 'sites.csv',
                  );
+  global $user;
+  $current_user = $user;
+  $user = user_load(1);
   foreach ($feeds as $feed_name => $file) {
     $feed = feeds_source($feed_name, 0);
     $config = array(
@@ -17,5 +20,5 @@ function s4_demo_install() {
     $feed->addConfig($config);
     while (FEEDS_BATCH_COMPLETE != $feed->import());  
   }
-
+  $user = $current_user;
 }
