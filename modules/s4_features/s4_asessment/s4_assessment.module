@@ -73,11 +73,11 @@ function s4_assessment_views_api() {
 *	submitting it.
 */
 function s4_assessment_form_alter(&$form, $form_sate, $form_id) {
-	$assessment = variable_get('s4_assessment_assessment_form', 0);
+	$assessment = variable_get('s4_assessment_assessment_form', array());
 	foreach($assessment as $assessment_nid => $enabled) {
-  	if($enabled && $form_id == 'webform_client_form_'. $assessment_nid) {
-  		$_SESSION['s4_assessment_signup'] = $_GET['signup'];
-  	}
+	  	if($enabled && $form_id == 'webform_client_form_'. $assessment_nid) {
+	  		$_SESSION['s4_assessment_signup'] = $_GET['signup'];
+	  	}
 	}
 	
 	if($form_id == 'webform_component_edit_form') {
