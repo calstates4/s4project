@@ -442,36 +442,6 @@ function s4_core_context_default_contexts() {
           'region' => 'content',
           'weight' => '-10',
         ),
-        'cck_blocks-field_user' => array(
-          'module' => 'cck_blocks',
-          'delta' => 'field_user',
-          'region' => 'content_right',
-          'weight' => '-10',
-        ),
-        'cck_blocks-field_signup_hours' => array(
-          'module' => 'cck_blocks',
-          'delta' => 'field_signup_hours',
-          'region' => 'content_right',
-          'weight' => '-10',
-        ),
-        'cck_blocks-field_site' => array(
-          'module' => 'cck_blocks',
-          'delta' => 'field_site',
-          'region' => 'content_right',
-          'weight' => '-9',
-        ),
-        'cck_blocks-field_coordinator' => array(
-          'module' => 'cck_blocks',
-          'delta' => 'field_coordinator',
-          'region' => 'content_right',
-          'weight' => '-8',
-        ),
-        'cck_blocks-field_course' => array(
-          'module' => 'cck_blocks',
-          'delta' => 'field_course',
-          'region' => 'content_right',
-          'weight' => '-7',
-        ),
       ),
     ),
   );
