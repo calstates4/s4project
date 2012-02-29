@@ -16,7 +16,6 @@ class s4WebTestCase extends DrupalWebTestCase {
 					'better_exposed_filters',
 					'block',
 					'cck',
-					'cck_blocks',
 					'cck_phone',
 					'color',
 					'comment',

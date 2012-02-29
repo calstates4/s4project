@@ -17,7 +17,7 @@ function s4_courses_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Course students';
   $view->core = 7;
-  $view->api_version = '3.0-alpha1';
+  $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -813,7 +813,7 @@ function s4_courses_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Email: Faculty';
   $view->core = 7;
-  $view->api_version = '3.0-alpha1';
+  $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -1248,7 +1248,7 @@ function s4_courses_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Course Terms';
   $view->core = 7;
-  $view->api_version = '3.0-alpha1';
+  $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -1576,7 +1576,7 @@ function s4_courses_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Courses';
   $view->core = 7;
-  $view->api_version = '3.0-alpha1';
+  $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -2101,7 +2101,7 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['fields']['course_student_enrollment']['hide_alter_empty'] = 0;
   /* Field: Content: Edit link */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['table'] = 'node';
+  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['label'] = 'Edit';
   $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = 0;
