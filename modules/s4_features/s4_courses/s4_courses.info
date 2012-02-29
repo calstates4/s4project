@@ -1,5 +1,4 @@
 core = "7.x"
-dependencies[] = "cck_blocks"
 dependencies[] = "context"
 dependencies[] = "date"
 dependencies[] = "features"

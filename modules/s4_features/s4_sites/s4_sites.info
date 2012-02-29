@@ -1,6 +1,5 @@
 core = "7.x"
 dependencies[] = "captcha"
-dependencies[] = "cck_blocks"
 dependencies[] = "cck_phone"
 dependencies[] = "context"
 dependencies[] = "date"

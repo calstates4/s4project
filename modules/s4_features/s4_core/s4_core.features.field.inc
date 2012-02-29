@@ -375,12 +375,6 @@ function s4_core_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '2',
-        ),
         'default' => array(
           'label' => 'hidden',
           'module' => 'text',
@@ -462,13 +456,6 @@ function s4_core_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'hidden',
-          'module' => 'file',
-          'settings' => array(),
-          'type' => 'file_default',
-          'weight' => '0',
-        ),
         'default' => array(
           'label' => 'hidden',
           'settings' => array(),
@@ -558,12 +545,6 @@ function s4_core_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '1',
-        ),
         'default' => array(
           'label' => 'above',
           'settings' => array(),
@@ -704,13 +685,6 @@ function s4_core_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'module' => 'node_reference',
-          'settings' => array(),
-          'type' => 'node_reference_default',
-          'weight' => '2',
-        ),
         'default' => array(
           'label' => 'above',
           'module' => 'node_reference',
@@ -845,13 +819,6 @@ function s4_core_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'module' => 'node_reference',
-          'settings' => array(),
-          'type' => 'node_reference_default',
-          'weight' => '0',
-        ),
         'default' => array(
           'label' => 'above',
           'module' => 'node_reference',
@@ -928,12 +895,6 @@ function s4_core_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
         'default' => array(
           'label' => 'above',
           'settings' => array(),
@@ -1003,12 +964,6 @@ function s4_core_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '5',
-        ),
         'default' => array(
           'label' => 'above',
           'settings' => array(),
@@ -1077,12 +1032,6 @@ function s4_core_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '4',
-        ),
         'default' => array(
           'label' => 'above',
           'settings' => array(),
@@ -1153,12 +1102,6 @@ function s4_core_field_default_fields() {
       'deleted' => '0',
       'description' => 'Estimate the total number of hours you have worked at this site.',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
         'default' => array(
           'label' => 'above',
           'module' => 'number',
@@ -1248,12 +1191,6 @@ function s4_core_field_default_fields() {
       'deleted' => '0',
       'description' => 'Let us know the last date you will be working on this site. This can be an approximation, and if you are singing up as part of a course, this will be automatically the last day of the semester.',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
         'default' => array(
           'label' => 'above',
           'module' => 'date',
@@ -1427,12 +1364,6 @@ function s4_core_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
         'default' => array(
           'label' => 'above',
           'module' => 'location_cck',
@@ -1508,12 +1439,6 @@ function s4_core_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
         'default' => array(
           'label' => 'above',
           'module' => 'date',
@@ -1674,13 +1599,6 @@ function s4_core_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'module' => 'node_reference',
-          'settings' => array(),
-          'type' => 'node_reference_default',
-          'weight' => '1',
-        ),
         'default' => array(
           'label' => 'above',
           'module' => 'node_reference',
@@ -1807,13 +1725,6 @@ function s4_core_field_default_fields() {
       'deleted' => '0',
       'description' => 'Type the name of the user who you will be signing up for.',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'module' => 'user_reference',
-          'settings' => array(),
-          'type' => 'user_reference_default',
-          'weight' => '3',
-        ),
         'default' => array(
           'label' => 'above',
           'settings' => array(),
@@ -1895,12 +1806,6 @@ function s4_core_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
         'default' => array(
           'label' => 'hidden',
           'module' => 'text',
