@@ -10,14 +10,14 @@ function s4_core_block_user_progress() {
   }
   drupal_add_css(drupal_get_path('module', 's4_core') . '/css/status.css');
   $status = array();
-  
+
   if (isset($_SESSION['s4_signup_site'])) {
     $site = node_load($_SESSION['s4_signup_site']);
   }
   if (isset($_SESSION['s4_signup_coordinator'])) {
     $coordinator = node_load($_SESSION['s4_signup_coordinator']);
   }
-  
+
   if (isset($site)) {
     $site_selection = '<div class="selection">' . l($site->title, 'node/' . $site->nid) . '</div>';
   }
@@ -29,13 +29,13 @@ function s4_core_block_user_progress() {
                     : 'site-list',
             'selection' => (isset($site_selection)) ? $site_selection : FALSE,
             );
-  
+
   if (variable_get('s4_core_signup_require_coordinator', 1)) {
     if ($site && module_exists('views')) {
       $site_coordinators = views_get_view_result('site_coordinators', 'block', $site->nid);
     }
     if (isset($coordinator)) {
-      $coordinator_selection = '<div class="selection">' . 
+      $coordinator_selection = '<div class="selection">' .
             l($coordinator->title, 'node/' . $coordinator->nid) . '</div>';
     }
     if (!$site || count($site_coordinators)) {
@@ -64,13 +64,13 @@ function s4_core_block_user_progress() {
       $status['form']['href'] = 'forms/download/' . implode('+', $form_terms);
     }
   }
-  
+
   foreach (module_implements('s4_user_status') as $module) {
     //Iterate over modules and pass status by reference
     $function_name = $module . '_s4_user_status';
     $function_name($status);
   }
-  
+
   $number = 1;
   foreach ($status as $key => $stat) {
     $status[$key]['data'] = '<div><span class="number">' . ($number) . '</span>' . $stat['data'] . '</div>';
@@ -103,7 +103,7 @@ function _s4_core_get_course_site_arguments($course) {
   if (!$sites || !count($sites)) {
     return 'site-list';
   }
-  
+
   $site_arguments = array();
   foreach ($sites as $site) {
     $site_arguments[] = $site['nid'];
@@ -121,13 +121,13 @@ function s4_core_block_user_site_signup() {
   if (!$node ||   $node->type != 'site' || !s4_core_user_can_signup($user)) {
     return NULL;
   }
-  
-  
+
+
   if (!s4_core_signup_access($node, $user)) {
     $output = '<div class="signup denied"><div class="icon"></div>You can\'t sign up for this site.</div>';
   }
   else {
-    $output = '<div class="signup"><div class="icon"></div>' . 
+    $output = '<div class="signup"><div class="icon"></div>' .
           l(t('Signup for this site'), 's4/signup/site/' . $node->nid,
            array('attributes' => array('data-target' => 'status-site'))) . '</div>';
   }
@@ -149,19 +149,19 @@ function s4_core_block_site_list_course_restriction() {
     return NULL;
   }
   if ($restrict[0]['value']) {
-    
+
     if (!arg(1)) {
-      $output = t('This is a list of all sites; however, you are restricted by @course to sign up for only a few sites. !link', 
+      $output = t('This is a list of all sites; however, you are restricted by @course to sign up for only a few sites. !link',
           array('@course' => $course->title,
                 '!link' => l(t('View list of allowed sites.'), _s4_core_get_course_site_arguments($course))));
     }
     else {
-      $output = t('You are restricted to selecting from the following sites for @course.', 
+      $output = t('You are restricted to selecting from the following sites for @course.',
           array('@course' => $course->title));
     }
   }
   else {
-    $output = t('Your faculty for @course suggest the following sites; however, you are allowed to select a !link.', 
+    $output = t('Your faculty for @course suggest the following sites; however, you are allowed to select a !link.',
           array('@course' => $course->title,
               '!link' => l(t('site not included on this list'), 'site-list')));
   }
@@ -197,7 +197,7 @@ function s4_core_block_s4_user_login() {
   $login_destinations = array('user' => 'user',
                 'ldap' => 'user',
                 'cas'  => 'cas/login');
-  
+
   $login_options = array();
   foreach ($auth_types as $audience => $method) {
     if ($method != 'none') {
@@ -212,7 +212,7 @@ function s4_core_block_s4_user_login() {
     }
     $audience = ucfirst(implode(((isset($join_list)) ? $join_list : ' &amp;') . ' ', $audience));
     $output[] = t('<strong>!audience:</strong>', array('!audience' => $audience)) . ' ' .
-          l(t('Login'), $login_destinations[$option], 
+          l(t('Login'), $login_destinations[$option],
               array('query' => array('destination' => '<front>')));
   }
   return array('subject' => NULL,
@@ -249,7 +249,7 @@ function s4_core_block_s4_page_notifications() {
   $list = notifications_subscription_list('page subscriptions')
       ->filter_option('subscriptions_block');
   $links = array();
-  foreach ($list->get_instances() as $notification) { 
+  foreach ($list->get_instances() as $notification) {
     $link = $notification->element_link();
     if ($notification->is_stored()) {
       $link['#title'] = t('<span class="hover">Unsubscribe</span><span class="nohover">Subscribed</span>');
@@ -276,31 +276,16 @@ function s4_core_block_s4_page_notifications() {
 */
 function s4_core_block_s4_add_new_site() {
   global $user;
-  if (user_access('edit any site content') && !s4_core_user_can_signup($user)) {
-  	if(user_access('moderate site information')) {
-  		$add_link = l(t('<span class="add"></span>Add new site'), 
-                  'node/add/site', 
-                  array('html' => TRUE,
-                       'attributes' => 
-                      array('class' => 'button add')
-                  )
-                  );
-    }
-    if(user_access('administer site configuration')) {
-    	$import_link = l(t('<span class="add"></span>Import sites'), 
-                  'admin/config/s4/site-import', 
-                  array('html' => TRUE,
-                       'attributes' => 
-                      array('class' => 'button add')
-                  )
-                  );
-    }
-    else {
-    	$import_link = '';
-    }
+  if (user_access('moderate site information') && !s4_core_user_can_signup($user)) {
+		$add_link = l(t('<span class="add"></span>Add new site'),
+                'node/add/site',
+                array('html' => TRUE,
+                     'attributes' =>
+                    array('class' => 'button add')
+                )
+                );
     return array('content' => $add_link .' '. $import_link);
   }
-  return NULL;
 }
 
 /**
@@ -310,11 +295,11 @@ function s4_core_block_s4_add_new_site() {
 function s4_core_block_s4_add_new_coordinator() {
   if (user_access('create site content')) {
     $node = node_load(check_plain(arg(1)));
-    return array('content' => l('<span class="add"></span>' . t('Add new site staff'), 
-                  'node/add/coordinator/' . $node->nid, 
+    return array('content' => l('<span class="add"></span>' . t('Add new site staff'),
+                  'node/add/coordinator/' . $node->nid,
                   array('html' => TRUE,
                       'query' => array('destination' => 'node/' . $node->nid .'/site-staff'),
-                       'attributes' => 
+                       'attributes' =>
                       array('class' => 'button add')
                   )
                   )
@@ -330,7 +315,7 @@ function s4_core_block_s4_report_export_link() {
   $arguments = $_GET;
   $url = $_GET['q'];
   unset($arguments['q']);
-  return array('content' => l(t('Export data'), $url . '/export', 
+  return array('content' => l(t('Export data'), $url . '/export',
                 array('query' => $arguments,
                     'attributes' => array('class' => 'button export-link'))));
 }
@@ -381,7 +366,7 @@ function s4_core_block_s4_current_user_link() {
 		$masquerade_switch = l('switch back', 'masquerade/unswitch', array('attributes' => array('class' => 'switch-link'), 'query' => array('token' => drupal_get_token('masquerade/unswitch'))));
 	}
 	return array('content' => l(t('Hello <strong>@username</strong>', array('@username' => format_username($user))), 'user/'. $user->uid, array('html' => TRUE)) . $masquerade_switch);
-	
+
 }
 
 /**
