@@ -184,12 +184,6 @@ function s4_sites_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '4',
-        ),
         'default' => array(
           'label' => 'hidden',
           'module' => 'text',
@@ -273,12 +267,6 @@ function s4_sites_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '1',
-        ),
         'default' => array(
           'label' => 'above',
           'settings' => array(),
@@ -355,13 +343,6 @@ function s4_sites_field_default_fields() {
       'deleted' => '0',
       'description' => 'Enter a few tags to help categorize this type of contact',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'module' => 'taxonomy',
-          'settings' => array(),
-          'type' => 'taxonomy_term_reference_link',
-          'weight' => '0',
-        ),
         'default' => array(
           'label' => 'above',
           'settings' => array(),
@@ -437,13 +418,6 @@ function s4_sites_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'module' => 'file',
-          'settings' => array(),
-          'type' => 'file_default',
-          'weight' => '3',
-        ),
         'default' => array(
           'label' => 'above',
           'settings' => array(),
@@ -578,12 +552,6 @@ function s4_sites_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '2',
-        ),
         'default' => array(
           'label' => 'above',
           'settings' => array(),
@@ -1319,13 +1287,6 @@ function s4_sites_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'module' => 'node_reference',
-          'settings' => array(),
-          'type' => 'node_reference_default',
-          'weight' => '0',
-        ),
         'default' => array(
           'label' => 'above',
           'module' => 'node_reference',
@@ -1657,12 +1618,6 @@ function s4_sites_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '4',
-        ),
         'default' => array(
           'label' => 'above',
           'module' => 'text',
@@ -1859,13 +1814,6 @@ function s4_sites_field_default_fields() {
       'deleted' => '0',
       'description' => 'When checked, users who have opted to receive notifications about expiring files will get a weekly email when this file is about to expire.',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'module' => 'list',
-          'settings' => array(),
-          'type' => 'list_default',
-          'weight' => '3',
-        ),
         'default' => array(
           'label' => 'above',
           'settings' => array(),
@@ -2058,13 +2006,6 @@ function s4_sites_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'module' => 'taxonomy',
-          'settings' => array(),
-          'type' => 'taxonomy_term_reference_link',
-          'weight' => '0',
-        ),
         'default' => array(
           'label' => 'above',
           'module' => 'taxonomy',
@@ -2148,13 +2089,6 @@ function s4_sites_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'module' => 'taxonomy',
-          'settings' => array(),
-          'type' => 'taxonomy_term_reference_link',
-          'weight' => '1',
-        ),
         'default' => array(
           'label' => 'above',
           'module' => 'taxonomy',
@@ -2237,12 +2171,6 @@ function s4_sites_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '5',
-        ),
         'default' => array(
           'label' => 'above',
           'module' => 'file',
@@ -2459,12 +2387,6 @@ function s4_sites_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '6',
-        ),
         'default' => array(
           'label' => 'above',
           'settings' => array(),
@@ -2553,12 +2475,6 @@ function s4_sites_field_default_fields() {
       'deleted' => '0',
       'description' => 'Provide an overview description of your organization, i.e. who you are, what you do, and who you serve.',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '25',
-        ),
         'default' => array(
           'label' => 'hidden',
           'module' => 'text',
@@ -2652,13 +2568,6 @@ function s4_sites_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'module' => 'taxonomy',
-          'settings' => array(),
-          'type' => 'taxonomy_term_reference_link',
-          'weight' => '1',
-        ),
         'default' => array(
           'label' => 'above',
           'module' => 'taxonomy',
@@ -2742,13 +2651,6 @@ function s4_sites_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'module' => 'taxonomy',
-          'settings' => array(),
-          'type' => 'taxonomy_term_reference_link',
-          'weight' => '3',
-        ),
         'default' => array(
           'label' => 'above',
           'module' => 'taxonomy',
@@ -2825,12 +2727,6 @@ function s4_sites_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '15',
-        ),
         'default' => array(
           'label' => 'above',
           'module' => 'text',
@@ -2982,13 +2878,6 @@ function s4_sites_field_default_fields() {
       'deleted' => '0',
       'description' => 'If you have multiple location sites that you would like students to be placed at, please provide specific location information. (You may add additional locations using the \'Add another\' button below.)',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'module' => 's4_sites',
-          'settings' => array(),
-          'type' => 's4_sites_address',
-          'weight' => '4',
-        ),
         'default' => array(
           'label' => 'above',
           'module' => 'location_cck',
@@ -3057,13 +2946,6 @@ function s4_sites_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'module' => 's4_sites',
-          'settings' => array(),
-          'type' => 's4_sites_local_phone_number',
-          'weight' => '2',
-        ),
         'default' => array(
           'label' => 'above',
           'module' => 'cck_phone',
@@ -3585,13 +3467,6 @@ function s4_sites_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'module' => 's4_sites',
-          'settings' => array(),
-          'type' => 's4_sites_population_matrix',
-          'weight' => '8',
-        ),
         'default' => array(
           'label' => 'above',
           'module' => 's4_sites',
@@ -3660,12 +3535,6 @@ function s4_sites_field_default_fields() {
       'deleted' => '0',
       'description' => 'This will be shown to the public, so only include a generic email contact for the site.',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '23',
-        ),
         'default' => array(
           'label' => 'above',
           'module' => 'email',
@@ -3791,12 +3660,6 @@ function s4_sites_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '22',
-        ),
         'default' => array(
           'label' => 'above',
           'settings' => array(),
@@ -3876,13 +3739,6 @@ function s4_sites_field_default_fields() {
       'deleted' => '0',
       'description' => 'If your organization has a presence on Facebook, Twitter, or another social network, please provide the address.',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'module' => 'link',
-          'settings' => array(),
-          'type' => 'link_default',
-          'weight' => '9',
-        ),
         'default' => array(
           'label' => 'above',
           'module' => 'link',
@@ -4021,12 +3877,6 @@ function s4_sites_field_default_fields() {
       'deleted' => '0',
       'description' => 'Select the signup form students should fill out when selecting this site.',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '21',
-        ),
         'default' => array(
           'label' => 'above',
           'settings' => array(),
@@ -4103,12 +3953,6 @@ function s4_sites_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '14',
-        ),
         'default' => array(
           'label' => 'above',
           'module' => 'text',
@@ -4244,12 +4088,6 @@ function s4_sites_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '13',
-        ),
         'default' => array(
           'label' => 'above',
           'module' => 's4_sites',
@@ -4340,13 +4178,6 @@ function s4_sites_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'module' => 'list',
-          'settings' => array(),
-          'type' => 'list_default',
-          'weight' => '12',
-        ),
         'default' => array(
           'label' => 'above',
           'module' => 'list',
@@ -4538,12 +4369,6 @@ function s4_sites_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '20',
-        ),
         'default' => array(
           'label' => 'above',
           'settings' => array(),
@@ -4628,12 +4453,6 @@ function s4_sites_field_default_fields() {
       'deleted' => '0',
       'description' => 'This information will be displayed to students before they sign up. This could contain additional information the student needs to know when they sign up for issues like TB testing, background checks, or specialized training',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '18',
-        ),
         'default' => array(
           'label' => 'above',
           'settings' => array(),
@@ -4718,13 +4537,6 @@ function s4_sites_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'module' => 'taxonomy',
-          'settings' => array(),
-          'type' => 'taxonomy_term_reference_link',
-          'weight' => '10',
-        ),
         'default' => array(
           'label' => 'above',
           'module' => 'taxonomy',
@@ -4804,12 +4616,6 @@ function s4_sites_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '17',
-        ),
         'default' => array(
           'label' => 'above',
           'module' => 'text',
@@ -4898,13 +4704,6 @@ function s4_sites_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'module' => 'taxonomy',
-          'settings' => array(),
-          'type' => 'taxonomy_term_reference_link',
-          'weight' => '11',
-        ),
         'default' => array(
           'label' => 'above',
           'module' => 'taxonomy',
@@ -4989,12 +4788,6 @@ function s4_sites_field_default_fields() {
       'deleted' => '0',
       'description' => 'Check off who is allowed to sign up with this site. ',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '24',
-        ),
         'default' => array(
           'label' => 'above',
           'settings' => array(),
@@ -5072,12 +4865,6 @@ function s4_sites_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '16',
-        ),
         'default' => array(
           'label' => 'above',
           'settings' => array(),
@@ -5196,12 +4983,6 @@ function s4_sites_field_default_fields() {
       'deleted' => '0',
       'description' => 'These are other users (besides department staff) who can edit this site\'s information, along with information about associated coordinators.',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '19',
-        ),
         'default' => array(
           'label' => 'above',
           'settings' => array(),
@@ -5289,13 +5070,6 @@ function s4_sites_field_default_fields() {
       'deleted' => '0',
       'description' => 'Enter a few tags to describe this site.',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'module' => 'taxonomy',
-          'settings' => array(),
-          'type' => 'taxonomy_term_reference_link',
-          'weight' => '6',
-        ),
         'default' => array(
           'label' => 'above',
           'settings' => array(),
@@ -5378,13 +5152,6 @@ function s4_sites_field_default_fields() {
       'deleted' => '0',
       'description' => 'Enter the URL to this site\'s website.',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'module' => 'link',
-          'settings' => array(),
-          'type' => 'link_default',
-          'weight' => '5',
-        ),
         'default' => array(
           'label' => 'above',
           'module' => 'link',

@@ -45,12 +45,6 @@ function s4_courses_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '12',
-        ),
         'default' => array(
           'label' => 'above',
           'settings' => array(),
@@ -168,13 +162,6 @@ function s4_courses_field_default_fields() {
       'deleted' => '0',
       'description' => 'Type in the user names of people who should be assigned as extra faculty to this course.',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'module' => 'user_reference',
-          'settings' => array(),
-          'type' => 'user_reference_default',
-          'weight' => '2',
-        ),
         'default' => array(
           'label' => 'above',
           'module' => 'user_reference',
@@ -340,12 +327,6 @@ function s4_courses_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '9',
-        ),
         'default' => array(
           'label' => 'above',
           'settings' => array(),
@@ -414,12 +395,6 @@ function s4_courses_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '11',
-        ),
         'default' => array(
           'label' => 'above',
           'settings' => array(),
@@ -536,13 +511,6 @@ function s4_courses_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'module' => 'user_reference',
-          'settings' => array(),
-          'type' => 'user_reference_default',
-          'weight' => '1',
-        ),
         'default' => array(
           'label' => 'above',
           'settings' => array(),
@@ -625,12 +593,6 @@ function s4_courses_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '8',
-        ),
         'default' => array(
           'label' => 'above',
           'settings' => array(),
@@ -813,12 +775,6 @@ function s4_courses_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '7',
-        ),
         'default' => array(
           'label' => 'above',
           'settings' => array(),
@@ -895,12 +851,6 @@ function s4_courses_field_default_fields() {
       'deleted' => '0',
       'description' => 'On this date, evaluation forms will start being sent to students via email and also be available on the site itself.',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '4',
-        ),
         'default' => array(
           'label' => 'above',
           'settings' => array(),
@@ -996,13 +946,6 @@ function s4_courses_field_default_fields() {
       'deleted' => '0',
       'description' => 'What kinds of sites or coordinators this course is allowed to access.',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'module' => 'taxonomy',
-          'settings' => array(),
-          'type' => 'taxonomy_term_reference_plain',
-          'weight' => '0',
-        ),
         'default' => array(
           'label' => 'above',
           'settings' => array(),
@@ -1084,12 +1027,6 @@ function s4_courses_field_default_fields() {
       'deleted' => '0',
       'description' => 'When checked, students will only be able to choose from the site list.',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '5',
-        ),
         'default' => array(
           'label' => 'above',
           'module' => 'list',
@@ -1216,13 +1153,6 @@ function s4_courses_field_default_fields() {
       'deleted' => '0',
       'description' => 'If you want only a handful of sites which are recommended or required, select those sites here.',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'module' => 'node_reference',
-          'settings' => array(),
-          'type' => 'node_reference_default',
-          'weight' => '3',
-        ),
         'default' => array(
           'label' => 'above',
           'module' => 'node_reference',
@@ -1352,12 +1282,6 @@ function s4_courses_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '6',
-        ),
         'default' => array(
           'label' => 'above',
           'settings' => array(),

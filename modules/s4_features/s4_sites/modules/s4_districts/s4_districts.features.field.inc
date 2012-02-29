@@ -45,12 +45,6 @@ function s4_districts_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '13',
-        ),
         'default' => array(
           'label' => 'above',
           'settings' => array(),
@@ -133,12 +127,6 @@ function s4_districts_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '16',
-        ),
         'default' => array(
           'label' => 'above',
           'settings' => array(),
@@ -221,12 +209,6 @@ function s4_districts_field_default_fields() {
       'deleted' => '0',
       'description' => '',
       'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '17',
-        ),
         'default' => array(
           'label' => 'above',
           'settings' => array(),
