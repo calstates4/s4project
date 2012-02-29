@@ -79,7 +79,10 @@ function s4_sites_user_default_permissions() {
   // Exported permission: delete any site content
   $permissions['delete any site content'] = array(
     'name' => 'delete any site content',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'staff',
+    ),
+    'module' => 'node',
   );
 
   // Exported permission: delete own contact_record content
@@ -211,7 +214,10 @@ function s4_sites_user_default_permissions() {
   // Exported permission: edit any site content
   $permissions['edit any site content'] = array(
     'name' => 'edit any site content',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'staff',
+    ),
+    'module' => 'node',
   );
 
   // Exported permission: edit own contact_record content

@@ -122,34 +122,6 @@ function s4_sites_context_default_contexts() {
     ),
   );
   $context->reactions = array(
-    'block' => array(
-      'blocks' => array(
-        'cck_blocks-field_file_category' => array(
-          'module' => 'cck_blocks',
-          'delta' => 'field_file_category',
-          'region' => 'content_right',
-          'weight' => '-10',
-        ),
-        'cck_blocks-field_file_tags' => array(
-          'module' => 'cck_blocks',
-          'delta' => 'field_file_tags',
-          'region' => 'content_right',
-          'weight' => '-9',
-        ),
-        'cck_blocks-field_expiration_date' => array(
-          'module' => 'cck_blocks',
-          'delta' => 'field_expiration_date',
-          'region' => 'content_right',
-          'weight' => '-8',
-        ),
-        'cck_blocks-field_expiration_reminder' => array(
-          'module' => 'cck_blocks',
-          'delta' => 'field_expiration_reminder',
-          'region' => 'content_right',
-          'weight' => '-7',
-        ),
-      ),
-    ),
     'menu' => 'site-list',
   );
   $context->condition_mode = 0;

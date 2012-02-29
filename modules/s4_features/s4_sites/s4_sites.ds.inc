@@ -12,6 +12,40 @@ function s4_sites_ds_layout_settings_info() {
 
   $ds_layout = new stdClass;
   $ds_layout->api_version = 1;
+  $ds_layout->id = 'node|file|default';
+  $ds_layout->entity_type = 'node';
+  $ds_layout->bundle = 'file';
+  $ds_layout->view_mode = 'default';
+  $ds_layout->layout = 's4_site';
+  $ds_layout->settings = array(
+    'hide_empty_regions' => 0,
+    'hide_sidebars' => 0,
+    'regions' => array(
+      'left' => array(
+        0 => 'body',
+        1 => 'field_files',
+      ),
+      'right' => array(
+        0 => 'field_file_category',
+        1 => 'field_file_tags',
+        2 => 'field_expiration_date',
+        3 => 'field_expiration_reminder_date',
+      ),
+    ),
+    'fields' => array(
+      'body' => 'left',
+      'field_files' => 'left',
+      'field_file_category' => 'right',
+      'field_file_tags' => 'right',
+      'field_expiration_date' => 'right',
+      'field_expiration_reminder_date' => 'right',
+    ),
+    'classes' => array(),
+  );
+  $export['node|file|default'] = $ds_layout;
+
+  $ds_layout = new stdClass;
+  $ds_layout->api_version = 1;
   $ds_layout->id = 'node|site|default';
   $ds_layout->entity_type = 'node';
   $ds_layout->bundle = 'site';
