@@ -3986,12 +3986,11 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['filters']['field_csu_facility_tid']['reduce_duplicates'] = 1;
   $handler->display->display_options['filters']['field_csu_facility_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_csu_facility_tid']['vocabulary'] = 'issues_addressed';
-  $handler->display->display_options['filters']['field_csu_facility_tid']['error_message'] = 0;
+  $handler->display->display_options['filters']['field_csu_facility_tid']['error_message'] = 1;
   /* Filter criterion: Content: Organization type (field_csu_org_type) */
   $handler->display->display_options['filters']['field_csu_org_type_tid']['id'] = 'field_csu_org_type_tid';
   $handler->display->display_options['filters']['field_csu_org_type_tid']['table'] = 'field_data_field_csu_org_type';
   $handler->display->display_options['filters']['field_csu_org_type_tid']['field'] = 'field_csu_org_type_tid';
-  $handler->display->display_options['filters']['field_csu_org_type_tid']['value'] = '';
   $handler->display->display_options['filters']['field_csu_org_type_tid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_csu_org_type_tid']['expose']['operator_id'] = 'field_csu_org_type_tid_op';
   $handler->display->display_options['filters']['field_csu_org_type_tid']['expose']['label'] = 'Organization type';
@@ -3999,15 +3998,15 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['filters']['field_csu_org_type_tid']['expose']['identifier'] = 'field_csu_org_type_tid';
   $handler->display->display_options['filters']['field_csu_org_type_tid']['expose']['remember'] = 1;
   $handler->display->display_options['filters']['field_csu_org_type_tid']['expose']['multiple'] = 1;
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['expose']['reduce'] = 0;
   $handler->display->display_options['filters']['field_csu_org_type_tid']['reduce_duplicates'] = 1;
   $handler->display->display_options['filters']['field_csu_org_type_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_csu_org_type_tid']['vocabulary'] = 'organization_type';
-  $handler->display->display_options['filters']['field_csu_org_type_tid']['error_message'] = 0;
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['error_message'] = 1;
   /* Filter criterion: Field: Available programs (field_site_restrict) */
   $handler->display->display_options['filters']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
   $handler->display->display_options['filters']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['filters']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';
-  $handler->display->display_options['filters']['field_site_restrict_tid']['value'] = '';
   $handler->display->display_options['filters']['field_site_restrict_tid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['operator_id'] = 'field_site_restrict_tid_op';
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['label'] = 'Available programs';
@@ -4015,10 +4014,11 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['identifier'] = 'field_site_restrict_tid';
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['remember'] = 1;
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['multiple'] = 1;
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['reduce'] = 0;
   $handler->display->display_options['filters']['field_site_restrict_tid']['reduce_duplicates'] = 1;
   $handler->display->display_options['filters']['field_site_restrict_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_site_restrict_tid']['vocabulary'] = 'site_restrictions';
-  $handler->display->display_options['filters']['field_site_restrict_tid']['error_message'] = 0;
+  $handler->display->display_options['filters']['field_site_restrict_tid']['error_message'] = 1;
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
