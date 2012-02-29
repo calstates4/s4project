@@ -177,13 +177,6 @@ projects[wysiwyg][subdir] = "contrib"
 projects[wysiwyg][version] = "2.1"
 
 ;Modules still in development
-
-projects[cck_blocks][type] = module
-projects[cck_blocks][subdir] = "contrib"
-projects[cck_blocks][version] = "1.x-dev"
-projects[cck_blocks][download][type] = "file"
-projects[cck_blocks][download][url] = "http://s4.csumb.edu/hosted_modules/cck_blocks.tar.gz"
-	
 projects[location][type] = module
 projects[location][subdir] = "contrib"
 projects[location][version] = "3.x-dev"
