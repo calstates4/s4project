@@ -24,8 +24,8 @@ class views_handler_s4_course_student_signup extends views_handler_field {
     }
     return $output;
   }
-  
+
   function query() {
-    
+
   }
 }

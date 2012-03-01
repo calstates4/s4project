@@ -26,10 +26,10 @@ class views_handler_s4_faculty_site_select extends views_handler_field {
         l(t('Add to @site', array('@site' => $values->node_title)), 's4/course-list/add/' . $values->nid . '/' . $node->nid)
         . '</div>';
     }
-    
+
   }
-  
+
   function query() {
-    
+
   }
 }

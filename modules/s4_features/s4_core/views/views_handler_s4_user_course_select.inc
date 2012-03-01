@@ -21,8 +21,8 @@ class views_handler_s4_user_course_select extends views_handler_field {
         array('attributes' => array('data-target' => 'signup-course')))
       . '</div>';
   }
-  
+
   function query() {
-    
+
   }
 }

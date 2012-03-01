@@ -24,8 +24,8 @@ class views_handler_s4_site_locations extends views_handler_field {
     }
     return null;
   }
-  
+
   function query() {
-    
+
   }
 }

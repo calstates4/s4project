@@ -26,8 +26,8 @@ class views_handler_s4_student_signup_list extends views_handler_field {
     }
     return theme('item_list', array('items' => $list));
   }
-  
+
   function query() {
-    
+
   }
 }
