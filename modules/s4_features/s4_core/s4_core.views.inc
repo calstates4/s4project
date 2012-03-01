@@ -39,7 +39,7 @@ function s4_core_views_data() {
       'handler' => 'views_handler_sort',
     ),
   );
-  
+
   $data['s4_signup']['faculty_coordinator_select'] = array(
     'title' => t('User select coordinator'),
     'help' => t('The user is adding a coordinator.'),
@@ -51,9 +51,9 @@ function s4_core_views_data() {
       'handler' => 'views_handler_sort',
     ),
   );
-  
-  
-  
+
+
+
   $data['s4_signup']['student_signup_node'] = array(
     'title' => t('Signup related to student'),
     'help' => t('For listings of students assigned to a course'),
@@ -65,7 +65,7 @@ function s4_core_views_data() {
       'handler' => 'views_handler_sort',
     ),
   );
-  
+
   $data['s4_signup']['site_location_links'] = array(
     'title' => t('Site location links'),
     'help' => t('Links to all site locations'),
@@ -85,7 +85,7 @@ function s4_core_views_data() {
       'field' => 'uid',
     ),
   );
-  
+
   $data['s4_user_signup']['student_signup_list'] = array(
     'title' => t('List all signups for a user'),
     'help' => t('Renders an unordered list of a user\'s signup records.'),
@@ -97,7 +97,7 @@ function s4_core_views_data() {
       'handler' => 'views_handler_sort',
     ),
   );
-  
+
   return $data;
 }
 
