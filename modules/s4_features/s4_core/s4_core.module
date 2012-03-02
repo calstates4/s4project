@@ -660,10 +660,6 @@ function s4_core_node_insert($node) {
 * Implements hook_node_delete
 */
 function s4_core_node_delete($node) {
-  db_delete('s4_core_entity_data')
-        ->condition('entity_id', $node->nid)
-        ->condition('entity_type', 'node')
-        ->execute();
   if($node->type == 'signup') {
   	module_load_include('inc', 'webform', 'includes/webform.submissions');
   	$signup_sid = field_get_items('node', $node, 'field_form_signup_sid');

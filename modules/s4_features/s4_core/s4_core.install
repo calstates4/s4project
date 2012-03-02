@@ -1,41 +1,5 @@
 <?php
 
-function s4_core_schema() {
-  $schema = array();
-  
-  $schema['s4_core_entity_data'] = array(
-    'description' => 'Maintains a list of distinct record IDs brought over from an SIS to ensure data is not duplicated',
-    'fields' => array(
-      'entity_id' => array(
-            'description' => 'The primary identifier for the entity.', 
-            'type' => 'serial', 
-            'unsigned' => TRUE, 
-            'not NULL' => TRUE,
-         ),
-         'entity_type' => array(
-           'description' => 'The type of entity.', 
-            'type' => 'varchar', 
-            'length' => 32, 
-            'not NULL' => TRUE, 
-            'default' => '',
-         ),
-         'unique_id' => array(
-           'description' => 'The unique ID computed for this type of import',
-           'type' => 'varchar',
-           'length' => 255,
-           'not NULL' => TRUE,
-           'default' => '',
-         ),
-    ),
-    'unique keys' => array(
-        'nid_type' => array('entity_id', 'entity_type'), 
-        'unique_id' => array('unique_id'),
-      ), 
-  );
-  
-  return $schema;
-}
-
 /**
 * Implements hook_install
 */
