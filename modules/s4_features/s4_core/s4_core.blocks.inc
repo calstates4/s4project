@@ -112,30 +112,6 @@ function _s4_core_get_course_site_arguments($course) {
 }
 
 /**
-*  The "select this site" button
-*/
-
-function s4_core_block_user_site_signup() {
-  global $user;
-  $node = menu_get_object();
-  if (!$node ||   $node->type != 'site' || !s4_core_user_can_signup($user)) {
-    return NULL;
-  }
-
-
-  if (!s4_core_signup_access($node, $user)) {
-    $output = '<div class="signup denied"><div class="icon"></div>You can\'t sign up for this site.</div>';
-  }
-  else {
-    $output = '<div class="signup"><div class="icon"></div>' .
-          l(t('Signup for this site'), 's4/signup/site/' . $node->nid,
-           array('attributes' => array('data-target' => 'status-site'))) . '</div>';
-  }
-  return array('subject' => '',
-         'content' => $output);
-}
-
-/**
 *  Note to students about the site list being either restrictive or non-restrictive
 */
 function s4_core_block_site_list_course_restriction() {
@@ -228,14 +204,6 @@ function s4_core_block_jump_to_node() {
   drupal_add_css(drupal_get_path('module', 's4_core') . '/css/jump_form.css');
   return array('subject' => '',
          'content' => drupal_get_form('s4_core_block_jump_form'));
-}
-
-/**
-*  Block callback for rendering the webform submission
-*  associated with the signup node.
-*/
-function s4_core_block_s4_signup_webform_signup() {
-  return s4_webform_render_submission('field_form_signup_sid');
 }
 
 /**

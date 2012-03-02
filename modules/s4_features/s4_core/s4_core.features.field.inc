@@ -690,14 +690,14 @@ function s4_core_field_default_fields() {
           'module' => 'node_reference',
           'settings' => array(),
           'type' => 'node_reference_default',
-          'weight' => '1',
+          'weight' => '2',
         ),
         'full' => array(
           'label' => 'above',
           'module' => 'node_reference',
           'settings' => array(),
           'type' => 'node_reference_default',
-          'weight' => '1',
+          'weight' => '3',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -824,14 +824,14 @@ function s4_core_field_default_fields() {
           'module' => 'node_reference',
           'settings' => array(),
           'type' => 'node_reference_default',
-          'weight' => '4',
+          'weight' => '0',
         ),
         'full' => array(
           'label' => 'above',
           'module' => 'node_reference',
           'settings' => array(),
           'type' => 'node_reference_default',
-          'weight' => '4',
+          'weight' => '0',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -899,13 +899,13 @@ function s4_core_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '13',
+          'weight' => '14',
         ),
         'full' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '13',
+          'weight' => '14',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -946,7 +946,7 @@ function s4_core_field_default_fields() {
   $fields['node-signup-field_form_evaluation_sid'] = array(
     'field_config' => array(
       'active' => '1',
-      'cardinality' => '1',
+      'cardinality' => '-1',
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_form_evaluation_sid',
@@ -968,13 +968,13 @@ function s4_core_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '16',
+          'weight' => '15',
         ),
         'full' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '16',
+          'weight' => '17',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -989,6 +989,7 @@ function s4_core_field_default_fields() {
           'weight' => 0,
         ),
       ),
+      'display_label' => '',
       'entity_type' => 'node',
       'field_name' => 'field_form_evaluation_sid',
       'label' => 'Evaluation Form Results',
@@ -1036,13 +1037,13 @@ function s4_core_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '15',
+          'weight' => '17',
         ),
         'full' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '15',
+          'weight' => '16',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -1112,7 +1113,7 @@ function s4_core_field_default_fields() {
             'thousand_separator' => ' ',
           ),
           'type' => 'number_decimal',
-          'weight' => '5',
+          'weight' => '4',
         ),
         'full' => array(
           'label' => 'above',
@@ -1203,7 +1204,7 @@ function s4_core_field_default_fields() {
             'show_repeat_rule' => 'show',
           ),
           'type' => 'date_default',
-          'weight' => '7',
+          'weight' => '6',
         ),
         'full' => array(
           'label' => 'above',
@@ -1369,7 +1370,7 @@ function s4_core_field_default_fields() {
           'module' => 'location_cck',
           'settings' => array(),
           'type' => 'location_default',
-          'weight' => '2',
+          'weight' => '3',
         ),
         'full' => array(
           'label' => 'above',
@@ -1451,7 +1452,7 @@ function s4_core_field_default_fields() {
             'show_repeat_rule' => 'show',
           ),
           'type' => 'date_default',
-          'weight' => '6',
+          'weight' => '5',
         ),
         'full' => array(
           'label' => 'above',
@@ -1604,14 +1605,14 @@ function s4_core_field_default_fields() {
           'module' => 'node_reference',
           'settings' => array(),
           'type' => 'node_reference_default',
-          'weight' => '0',
+          'weight' => '1',
         ),
         'full' => array(
           'label' => 'above',
           'module' => 'node_reference',
           'settings' => array(),
           'type' => 'node_reference_default',
-          'weight' => '0',
+          'weight' => '1',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -1729,13 +1730,13 @@ function s4_core_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '14',
+          'weight' => '16',
         ),
         'full' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '14',
+          'weight' => '15',
         ),
         'notifications' => array(
           'label' => 'above',

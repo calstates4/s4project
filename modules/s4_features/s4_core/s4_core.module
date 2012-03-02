@@ -22,11 +22,9 @@ function s4_core_init() {
 function s4_core_block_info() {
   $blocks['user_progress'] = array('info' => 'User progress bar');
   $blocks['jump_to_node'] = array('info' => 'Jump to node');
-  $blocks['user_site_signup'] = array('info' => 'User site sign-up');
   $blocks['site_list_course_restriction'] = array('info' => 'Site list course restrictions');
   $blocks['s4_user_login'] = array('info' => 'S4 Login options');
   $blocks['s4_user_login_message'] = array('info' => 'S4 Login message');
-  $blocks['s4_signup_webform_signup'] = array('info' => 'Signup site signup form submission');
   $blocks['s4_page_notifications'] = array('info' => 'Pretty page subscriptions');
   $blocks['s4_add_new_site'] = array('info' => 'Add new site button');
   $blocks['s4_add_new_coordinator'] = array('info' => 'Add new coordinator button');
@@ -52,6 +50,52 @@ function s4_core_block_view($delta) {
 }
 
 /**
+ * Implements hook_field_extra_fields().
+ */
+function s4_core_field_extra_fields() {
+  $extra['node']['signup']['display'] = array(
+    's4_core_signup_submission' => array(
+      'label' => t('Signup form submission'),
+      'description' => t('Displays the results of the signup form.'),
+      'weight' => 10,
+      ),
+  );
+  $extra['node']['site']['display'] = array(
+    's4_core_signup_select_site' => array(
+        'label' => t('Signup for this site'),
+        'description' => t('Provides a helpful link to signup with the site.'),
+        'weight' => 10,
+      ),
+  );
+  return $extra;
+}
+
+function s4_core_node_view($node, $view_mode){
+  if($node->type == 'signup') {
+    $content = s4_webform_render_submission('field_form_signup_sid', $node);
+    $node->content['s4_core_signup_submission'] = array(
+      '#type' => 'item',
+      '#title' => t('Signup form'),
+      '#markup' => $content['content'],
+      );
+  }
+  if($node->type == 'site' && s4_core_user_can_signup()) {
+    if (!s4_core_signup_access($node)) {
+      $output = '<div class="signup denied"><div class="icon"></div>You can\'t sign up for this site.</div>';
+    }
+    else {
+      $output = '<div class="signup"><div class="icon"></div>' .
+            l(t('Signup for this site'), 's4/signup/site/' . $node->nid,
+             array('attributes' => array('data-target' => 'status-site'))) . '</div>';
+    }
+    $node->content['s4_core_signup_select_site'] = array(
+      '#type' => 'item',
+      '#markup' => $output,
+      );
+  }
+}
+
+/**
 *	Alter the masquerade form to be more user-friendly
 */
 function s4_core_form_masquerade_block_1_alter(&$form, $form_state) {
@@ -68,21 +112,24 @@ function s4_core_block_view_alter(&$data, $block) {
 *  Compares the access restrictions of any object to the user's access
 *  vis-a-vis a course or their individual settings.
 */
-function s4_core_signup_access($node, $user) {
+function s4_core_signup_access($node, $user = FALSE) {
+  if(!$user) {
+    global $user;
+  }
   $user = user_load($user->uid);
   $user_access = field_get_items('user', $user, 'field_site_restrict');
   $node_access = field_get_items('node', $node, 'field_site_restrict');
   if(_s4_core_object_is_full($node)) {
   	return FALSE;
   }
-  if (!count($node_access)) {
+  if (!count($node_access) || !is_array($node_access)) {
     return TRUE;
   }
   foreach ($node_access as $key => $value) {
     $node_access[$key] = $value['tid'];
   }
   $user_access = ($user_access) ? $user_access : array();
-  
+
   if (isset($_SESSION['s4_signup_course'])) {
     $course = node_load($_SESSION['s4_signup_course']);
     $course_access = field_get_items('node', $node, 'field_site_restrict');
@@ -90,7 +137,7 @@ function s4_core_signup_access($node, $user) {
       $user_access[] = $access;
     }
   }
-  
+
   if (!$user_access || !count($user_access)) {
     return FALSE;
   }
@@ -134,22 +181,22 @@ WHERE n.created > :start AND d.field_signup_last_date_value > :end AND s.field_c
 
 function s4_core_block_jump_form() {
   $form = array();
-  
+
   $form['#attributes']['class'] = 'jump';
-  
+
   $form['nid'] = array(
     '#type' => 'textfield',
     '#title' => 'Jump to a page',
     '#attributes' => array('placeholder' => 'Enter a number'),
     '#default_value' => '',
   );
-  
+
   $form['submit'] = array(
     '#type' => 'submit',
     '#value' => 'Jump',
     '#attributes' => array('class' => array('element-invisible')),
   );
-  
+
   return $form;
 }
 
@@ -165,7 +212,7 @@ function s4_core_block_jump_form_submit($form, &$form_state) {
 
 function s4_core_menu() {
   $items = array();
-  
+
   $items['admin/config/s4'] = array(
     'title' => 'S4 configuration',
     'description' => 'General site configuration for S4',
@@ -175,7 +222,7 @@ function s4_core_menu() {
     'position' => 'right',
     'access arguments' => array('administer site configuration'),
   );
-  
+
   $items['admin/config/s4/settings'] = array(
     'title' => 'General configuration',
     'description' => 'General site configuration for S4',
@@ -185,7 +232,7 @@ function s4_core_menu() {
     'access arguments' => array('administer site configuration'),
     'weight' => -10,
   );
-  
+
   $items['admin/config/s4/user-attributes'] = array(
     'title' => 'User attributes',
     'description' => 'Map additional user attributes like major to a profile field.',
@@ -194,7 +241,7 @@ function s4_core_menu() {
     'access arguments' => array('administer site configuration'),
     'weight' => -9,
   );
-  
+
   $items['admin/config/s4/user-attributes/list'] = array(
     'title' => 'User attributes',
     'description' => 'Map additional user attributes like major to a profile field.',
@@ -204,7 +251,7 @@ function s4_core_menu() {
     'type' => MENU_DEFAULT_LOCAL_TASK,
     'weight' => -3,
   );
-  
+
   $items['admin/config/s4/user-attributes/add'] = array(
     'title' => 'Add attribute',
     'description' => 'Add a new user attribute',
@@ -214,7 +261,7 @@ function s4_core_menu() {
     'access arguments' => array('administer site configuration'),
     'type' => MENU_LOCAL_TASK,
   );
-  
+
   $items['admin/config/s4/user-attributes/test'] = array(
     'title' => 'Test attributes',
     'description' => 'Test user attributes',
@@ -224,7 +271,7 @@ function s4_core_menu() {
     'access arguments' => array('administer site configuration'),
     'type' => MENU_LOCAL_TASK,
   );
-  
+
   $items['admin/config/s4/user-attributes/edit/%'] = array(
     'title' => 'Edit attribute',
     'description' => 'Edit user attribute',
@@ -233,7 +280,7 @@ function s4_core_menu() {
     'file' => 's4_core.admin.inc',
     'access arguments' => array('administer site configuration')
   );
-  
+
   $items['admin/config/s4/user-attributes/delete/%'] = array(
     'title' => 'Delete attribute',
     'description' => 'Delete user attribute',
@@ -242,7 +289,7 @@ function s4_core_menu() {
     'file' => 's4_core.admin.inc',
     'access arguments' => array('administer site configuration')
   );
-  
+
   $items['s4/signup/%/%'] = array(
     'title' => 'Signup',
     'description' => 'User signup callback',
@@ -251,7 +298,7 @@ function s4_core_menu() {
     'page arguments' => array(2, 3),
     'access arguments' => array('signup for service'),
   );
-  
+
   $items['s4/course-list/%/%/%'] = array(
     'title' => 'Add to course',
     'description' => 'Adding a site to a course list',
@@ -261,7 +308,7 @@ function s4_core_menu() {
     'access callback' => 's4_core_add_site_to_course_access',
     'access arguments' => array(3),
   );
-  
+
   $items['s4/evaluation/%node'] = array(
     'title' => 'Complete evaluation',
     'description' => 'Complete an evaluation of a site',
@@ -271,14 +318,14 @@ function s4_core_menu() {
     'access callback' => 's4_core_signup_evaluation_access',
     'access arguments' => array(2),
   );
-  
+
   $items['s4/settings'] = array(
   	'title' => 'Site settings',
   	'page callback' => 's4_core_site_settings',
   	'access arguments' => array('access s4 site settings'),
   	'file' => 's4_core.pages.inc',
   );
-  
+
   $items['signup/create/%'] = array(
   	'title' => 'Create signup',
   	'page callback' => 'drupal_get_form',
@@ -286,7 +333,7 @@ function s4_core_menu() {
   	'access arguments' => array('create signups for other users'),
   	'file' => 's4_core.pages.inc',
   );
-  
+
   $items['signup/register/%/%'] = array(
   	'title' => 'Complete site registration',
   	'page callback' => 's4_core_student_signup_complete',
@@ -295,7 +342,7 @@ function s4_core_menu() {
   	'access arguments' => array(2, 3),
   	'file' => 's4_core.pages.inc',
   );
-  
+
   return $items;
 }
 
@@ -371,15 +418,18 @@ function s4_core_permission() {
 *  Function to test if the user is allowed to signup for service
 *  This can be used to hide the signup process block
 */
-function s4_core_user_can_signup($user) {
-  if (!user_access('signup for service', $user)) {    
+function s4_core_user_can_signup($user = FALSE) {
+  if(!$user) {
+    global $user;
+  }
+  if (!user_access('signup for service', $user)) {
     return FALSE;
   }
   $ignore_courses = field_get_items('user', $user, 'field_course_ignore');
   if ($ignore_courses[0]['value'] || !module_exists('s4_courses')) {
     return TRUE;
   }
-  if (module_exists('views') 
+  if (module_exists('views')
      && module_exists('s4_courses')
      && $view = views_get_view_result('user_courses', 'block_2', $user->uid)) {
     $courses = array();
@@ -400,16 +450,16 @@ function s4_core_user_can_signup($user) {
 }
 
 function s4_core_get_user_status() {
-  
+
 }
 
 /**
 *  Retrieves a list of the given uid's signup
 */
 function s4_core_get_user_signups($uid) {
-  $result = db_query('SELECT f.entity_id FROM {field_data_field_user} f 
-            LEFT JOIN {node} n ON n.nid = f.entity_id  
-            WHERE f.field_user_uid = :uid AND n.status = 1', 
+  $result = db_query('SELECT f.entity_id FROM {field_data_field_user} f
+            LEFT JOIN {node} n ON n.nid = f.entity_id
+            WHERE f.field_user_uid = :uid AND n.status = 1',
             array(':uid' => $uid));
   $signups = array();
   foreach ($result as $record) {
@@ -424,7 +474,7 @@ function s4_core_get_user_signups($uid) {
 function s4_core_user_signup_completed($sid = 0) {
   global $user;
   $signup = array('user' => $user->uid,
-          'site' => $_SESSION['s4_signup_site'], 
+          'site' => $_SESSION['s4_signup_site'],
           'course' => $_SESSION['s4_signup_course'],
           'coordinator' => $_SESSION['s4_signup_coordinator'],
           'location' => $_SESSION['s4_signup_location'],
@@ -443,19 +493,19 @@ function s4_core_user_signup_completed($sid = 0) {
 function s4_core_student_signup_hours() {
 	drupal_add_js(drupal_get_path('module', 's4_core') .'/js/s4.hours.js');
 	$form = array();
-	
+
 	$form['hours'] = array(
 		'#type' => 'textfield',
 		'#title' => 'Please estimate the minimum number of hours you will serve at this site',
 		'#description' => 'You will have a chance to correct this when you complete your site evaluation, but it is helpful for us to know a rough estimate before you start your service.',
 		'#attributes' => array('class' => array('hours-field')),
 	);
-	
+
 	$form['submit'] = array(
 		'#type' => 'submit',
 		'#value' => 'Submit',
 	);
-	
+
 	return $form;
 }
 
@@ -664,22 +714,22 @@ function s4_core_node_delete($node) {
   	module_load_include('inc', 'webform', 'includes/webform.submissions');
   	$signup_sid = field_get_items('node', $node, 'field_form_signup_sid');
   	$eval_sid = field_get_items('node', $node, 'field_form_evaluation_sid');
-  	
+
   	$site = field_get_items('node', $node, 'field_site');
   	$site = node_load($site[0]['nid']);
-  	
+
   	$site_form = field_get_items('node', $site, 'field_site_form');
   	if($site_form) {
   		$site_form = node_load($site_form[0]['nid']);
   		webform_submission_delete($site_node, $signup_sid);
   	}
-  	
+
   	$eval_form = field_get_items('node', $site, 'field_site_eval_form');
   	if($eval_form) {
   		$eval_form = node_load($eval_form[0]['nid']);
   		webform_submission_delete($eval_form, $eval_sid);
   	}
-  	
+
   }
 }
 
@@ -965,14 +1015,14 @@ function s4_core_email_site_coordinator_action_form($context) {
     '#cols' => '80',
     '#rows' => '15',
   );
-  
+
   if (module_exists('token')) {
     $form['tokens'] = array(
       '#theme' => 'token_tree',
       '#token_types' => array('node'),
     );
   }
-  
+
   return $form;
 }
 
@@ -995,7 +1045,7 @@ function s4_core_mail($key, &$message, $params) {
   $message['headers']['MIME-Version'] = '1.0';
   $message['headers']['Content-Transfer-Encoding'] = '8Bit';
   switch ($key) {
-    case 'action_send_email': 
+    case 'action_send_email':
       $message['subject'] = $params['subject'];
       $message['body'][] = check_markup($params['message']['value'], $params['message']['format']);
       break;
@@ -1032,6 +1082,9 @@ function s4_core_site_has_downloadable_forms($node) {
   $terms = array();
   foreach($taxonomy as $term) {
     $terms[] = $term['tid'];
+  }
+  if(!count($terms)) {
+    return false;
   }
   $forms = db_select('field_data_field_site_restrict', 'r')
            ->fields('r', array('entity_id'))
@@ -1070,7 +1123,7 @@ function s4_core_field_alter_access($type, $field) {
 *	Implementation of s4_core_field_access
 */
 function s4_core_s4_field_access() {
-	
+
 	return array('signup' => array(
 						'field_site',
 						'field_coordinator',
@@ -1083,7 +1136,7 @@ function s4_core_s4_field_access() {
 						'field_signup_last_date',
 						'field_signup_location',
 				),
-				
+
 	);
 }
 
@@ -1149,13 +1202,13 @@ function s4_core_form_file_node_form_alter(&$form, $form_state) {
 	    $days = field_get_items('taxonomy_term', $term, 'field_type_reminder_days');
 	    $reminders[$tid] = $days[0]['value'];
 	}
-	catch (Exception $e) { 
+	catch (Exception $e) {
 		$reminders[$tid] = 30;
 	}
   }
   drupal_add_js(array('file_category_reminders' => array('days' => $reminders,
-            'node_exists' => ($form['#node']->nid) ? TRUE : FALSE)), 
-          'setting');  
+            'node_exists' => ($form['#node']->nid) ? TRUE : FALSE)),
+          'setting');
 }
 
 /**
@@ -1251,7 +1304,7 @@ function s4_core_cron() {
       ->condition('field_expiration_reminder_date_value', date('Y-m-d', $last_date), '>=')
       ->condition('field_expiration_reminder_date_value', date('Y-m-d'), '<=')
       ->orderBy('field_expiration_reminder_date_value', 'DESC');
-  
+
   $result = $query->execute();
   foreach ($result as $r) {
     $node = node_load($r->entity_id);
@@ -1273,7 +1326,7 @@ function s4_core_token_info() {
     'name' => t('Student signup record'),
     'description' => t('Tokens related to a student\'s signup record.'),
   );
-  
+
     $tokens['site'] = array('name' => 'Site name',
                        'description' => t('The name of the site'));
     $tokens['coordinator'] = array('name' => 'Site coordinator',
@@ -1338,10 +1391,10 @@ function s4_core_notifications($op) {
         '#description' => t('Subscription links will be displayed for full node pages.'),
       );
       return $options;
-      
+
     case 'event classes':
       return array('node' => t('Node'));
-      
+
     case 'event actions':
       return array(
         'document_expiration' => t('Document expiration'),
@@ -1351,7 +1404,7 @@ function s4_core_notifications($op) {
 
 function s4_core_document_about_to_expire_action($node, $context = array()) {
   $node = $context['node'];
-  if ($node->type == 'file') { 
+  if ($node->type == 'file') {
      s4_core_node_event('document_expiration', $node)->trigger();
   }
 }
@@ -1362,11 +1415,11 @@ function s4_core_notifications_subscription($op, $subscription = NULL) {
       $objects = array();
       // Return objects on current page to which we can subscribe
       if (arg(0) == 'node' && is_numeric(arg(1)) && ($node = menu_get_object('file')) && $node->type == 'file') {
-        $objects[] = notifications_object('file', $node);  
+        $objects[] = notifications_object('file', $node);
       }
       return $objects;
       break;
-  }  
+  }
 }
 
 function s4_core_node_event($action, $node) {
@@ -1403,7 +1456,7 @@ function s4_core_field_formatter_info() {
 *  Formatter for locations that are in the user signup for a site location screen
 */
 function s4_core_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
-  
+
   $element = array();
   $settings = $display['settings'];
   if($display['type'] == 's4_sites_address_select') {
@@ -1453,7 +1506,7 @@ function s4_core_field_formatter_view($entity_type, $entity, $field, $instance, 
 		    }
 		}
 		$output[] = '</div>';
-		
+
 	    $element[$delta] = array(
 	      '#markup' => '<address>'. implode('<br />', $output) .'</address>',
 	    );

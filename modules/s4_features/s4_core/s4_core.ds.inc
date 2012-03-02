@@ -40,37 +40,75 @@ function s4_core_ds_layout_settings_info() {
   $ds_layout->entity_type = 'node';
   $ds_layout->bundle = 'signup';
   $ds_layout->view_mode = 'default';
-  $ds_layout->layout = 's4_site';
+  $ds_layout->layout = 'ds_2col';
   $ds_layout->settings = array(
     'hide_empty_regions' => 0,
     'hide_sidebars' => 0,
     'regions' => array(
       'left' => array(
-        0 => 'field_site',
-        1 => 'field_coordinator',
-        2 => 'field_signup_location',
+        0 => 'field_course',
+        1 => 'field_site',
+        2 => 'field_coordinator',
+        3 => 'field_signup_location',
       ),
       'right' => array(
-        0 => 'post_date',
-        1 => 'field_course',
-        2 => 'field_signup_hours',
-        3 => 'field_signup_start_date',
-        4 => 'field_signup_last_date',
+        0 => 'field_signup_hours',
+        1 => 'field_signup_start_date',
+        2 => 'field_signup_last_date',
+        3 => 's4_core_signup_submission',
       ),
     ),
     'fields' => array(
+      'field_course' => 'left',
       'field_site' => 'left',
       'field_coordinator' => 'left',
       'field_signup_location' => 'left',
-      'post_date' => 'right',
-      'field_course' => 'right',
+      'field_signup_hours' => 'right',
+      'field_signup_start_date' => 'right',
+      'field_signup_last_date' => 'right',
+      's4_core_signup_submission' => 'right',
+    ),
+    'classes' => array(),
+  );
+  $export['node|signup|default'] = $ds_layout;
+
+  $ds_layout = new stdClass;
+  $ds_layout->api_version = 1;
+  $ds_layout->id = 'node|signup|full';
+  $ds_layout->entity_type = 'node';
+  $ds_layout->bundle = 'signup';
+  $ds_layout->view_mode = 'full';
+  $ds_layout->layout = 'ds_2col';
+  $ds_layout->settings = array(
+    'hide_empty_regions' => 0,
+    'hide_sidebars' => 0,
+    'regions' => array(
+      'left' => array(
+        0 => 'field_course',
+        1 => 'field_site',
+        2 => 'field_signup_location',
+        3 => 'field_coordinator',
+        4 => 's4_core_signup_submission',
+      ),
+      'right' => array(
+        0 => 'field_signup_hours',
+        1 => 'field_signup_start_date',
+        2 => 'field_signup_last_date',
+      ),
+    ),
+    'fields' => array(
+      'field_course' => 'left',
+      'field_site' => 'left',
+      'field_signup_location' => 'left',
+      'field_coordinator' => 'left',
+      's4_core_signup_submission' => 'left',
       'field_signup_hours' => 'right',
       'field_signup_start_date' => 'right',
       'field_signup_last_date' => 'right',
     ),
     'classes' => array(),
   );
-  $export['node|signup|default'] = $ds_layout;
+  $export['node|signup|full'] = $ds_layout;
 
   return $export;
 }
