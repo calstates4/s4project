@@ -8,12 +8,12 @@ include_once('s4_core.features.inc');
 function s4_core_init() {
   drupal_add_js(drupal_get_path('module', 's4_core') . '/js/jquery.quicksearch.js');
   drupal_add_js(drupal_get_path('module', 's4_core') .'/js/chosen/chosen/chosen.jquery.min.js');
-  drupal_add_css(drupal_get_path('module', 's4_core') .'/js/chosen/chosen/chosen.css');
+  drupal_add_js(drupal_get_path('module', 's4_core') . '/js/s4.status.js');
   drupal_add_js(drupal_get_path('module', 's4_core') . '/js/s4.core.js');
+  drupal_add_css(drupal_get_path('module', 's4_core') .'/js/chosen/chosen/chosen.css');
   drupal_add_css(drupal_get_path('module', 's4_core') . '/css/quicksearch.css');
   drupal_add_css(drupal_get_path('module', 's4_core') . '/css/status.css');
   drupal_add_css(drupal_get_path('module', 's4_core') . '/css/export.css');
-  drupal_add_js(drupal_get_path('module', 's4_core') . '/js/s4.status.js');
 }
 
 /**
