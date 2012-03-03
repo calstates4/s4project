@@ -8,20 +8,26 @@ function s4_webform_render_submission($field, $node = FALSE) {
   	$node = menu_get_object();
   }
   $sid = field_get_items('node', $node, $field);
-  $query = db_select('webform_submissions', 'w')->fields('w', array('nid'))->condition('sid',$sid[0]['value']);
-  $results = $query->execute();
-  $form = node_load($results->fetchField());
   $output = '';
-  global $user;
-  if (count($form)) {
-    module_load_include('inc', 'webform', 'includes/webform.submissions');
-    $submission = webform_get_submission($form->nid, $sid[0]['value']);
-      if (!$submission) {
-        return NULL;
-      }
-      $output = webform_submission_render($form, $submission, NULL, 'html');
-      return array('content' => $output);
+  if(!$sid || !count($sid)) {
+  	return FALSE;
   }
+  foreach($sid as $submission) {
+	  $query = db_select('webform_submissions', 'w')->fields('w', array('nid'))->condition('sid', $submission['value']);
+	  $results = $query->execute();
+	  $form = node_load($results->fetchField());
+	  $output = '';
+	  global $user;
+	  if (count($form)) {
+	    module_load_include('inc', 'webform', 'includes/webform.submissions');
+	    $submission = webform_get_submission($form->nid, $sid[0]['value']);
+	      if (!$submission) {
+	        return NULL;
+	      }
+	      $output .= webform_submission_render($form, $submission, NULL, 'html');
+	  }
+	}
+  return array('content' => $output);
 }
 
 /**
