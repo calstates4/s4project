@@ -1446,11 +1446,10 @@ function s4_sites_strongarm() {
   $strongarm->value = array(
     'name' => 'Edit sites',
     'perms' => array(
-      'grant_view' => 'grant_view',
       'grant_update' => 'grant_update',
       'grant_delete' => 'grant_delete',
     ),
-    'term_visibility' => 1,
+    'term_visibility' => 0,
   );
   $export['tac_lite_config_scheme_1'] = $strongarm;
 
