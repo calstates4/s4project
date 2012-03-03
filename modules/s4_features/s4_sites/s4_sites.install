@@ -11,6 +11,52 @@ function s4_sites_install() {
           'captcha_type' => 'Text Captcha',
         ))
         ->execute();
+  $states = array(
+    'approved_by_purchasing' => array('label' => t('Approved by purchasing'),
+                                      'description' => '',
+                                      'weight' => -6),
+    'approved_by_risk_manager' => array('label' => t('Approved by risk manager'),
+                                        'description' => '',
+                                        'weight' => -8),
+    'draft' => array('label' => t('Draft Work in progress'),
+                     'description' => '',
+                     'weight' => -10),
+    'needs_purchasing_approval' => array('label' => t('Needs purchasing approval'),
+                                         'description' => '',
+                                         'weight' => -7),
+    'needs_risk_manager_approval' => array('label' => t('Needs risk manager approval'),
+                                          'description' => '',
+                                          'weight' => -9),
+    'program_approval' => array('label' => t('Program approval'),
+                                             'description' => '',
+                                             'weight' => -5),
+    'published' => array('label' => t('Published'),
+                         'description' => t('Make this version live'),
+                         'weight' => -4),
+  );
+  foreach($states as $name => $state) {
+    $state['name'] = $name;
+    db_insert('workbench_moderation_states')
+      ->fields($state)
+      ->execute();
+  }
+  $transitions = array(
+    array('from_name' => 'draft', 'to_name' => 'needs_risk_manager_approval'),
+    array('from_name' => 'approved_by_risk_manager', 'to_name' => 'needs_purchasing_approval'),
+    array('from_name' => 'approved_by_purchasing', 'to_name' => 'program_approval'),
+    array('from_name' => 'program_approval', 'to_name' => 'published'),
+    array('from_name' => 'needs_risk_manager_approval', 'to_name' => 'approved_by_risk_manager'),
+    array('from_name' => 'needs_purchasing_approval', 'to_name' => 'approved_by_purchasing'),
+    array('from_name' => 'approved_by_risk_manager', 'to_name' => 'needs_risk_manager_approval'),
+    array('from_name' => 'approved_by_purchasing', 'to_name' => 'needs_purchasing_approval'),
+    array('from_name' => 'program_approval', 'to_name' => 'needs_risk_manager_approval'),
+    array('from_name' => 'program_approval', 'to_name' => 'needs_purchasing_approval'),
+  );
+  foreach($transitions as $transition) {
+    db_insert('workbench_moderation_transitions')
+      ->fields($transition)
+      ->execute();
+  }
   $node = (object)array (
       'title' => 'Integrative Learning Rubric',
        'type' => 'webform',
@@ -93,4 +139,14 @@ function s4_sites_install() {
       ),
     );
     //node_save($node);
+}
+
+function s4_sites_schema_alter(&$schema) {
+  // Add field to existing schema.
+  $schema['workbench_moderation_node_history']['fields']['note'] = array(
+    'type' => 'text', 
+    'not null' => FALSE, 
+    'default' => '', 
+    'description' => 'Note about the moderation',
+  );
 }

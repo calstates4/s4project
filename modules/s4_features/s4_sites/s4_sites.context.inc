@@ -74,21 +74,9 @@ function s4_sites_context_default_contexts() {
           'region' => 'content_subscriptions',
           'weight' => '0',
         ),
-        's4_core-user_site_signup' => array(
-          'module' => 's4_core',
-          'delta' => 'user_site_signup',
-          'region' => 'content_top_right',
-          'weight' => '-10',
-        ),
         'views-user_courses-block_1' => array(
           'module' => 'views',
           'delta' => 'user_courses-block_1',
-          'region' => 'content_top_right',
-          'weight' => '-10',
-        ),
-        's4_sites-s4_sites_site_status' => array(
-          'module' => 's4_sites',
-          'delta' => 's4_sites_site_status',
           'region' => 'content_top_right',
           'weight' => '-10',
         ),
@@ -350,6 +338,39 @@ function s4_sites_context_default_contexts() {
   $context = new stdClass;
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
+  $context->name = 'site-moderation';
+  $context->description = 'User is viewing the site moderation tab';
+  $context->tag = 'sites';
+  $context->conditions = array(
+    'path' => array(
+      'values' => array(
+        'node/*/moderation' => 'node/*/moderation',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        'views-contact_records-block_1' => array(
+          'module' => 'views',
+          'delta' => 'contact_records-block_1',
+          'region' => 'content_right',
+          'weight' => '-10',
+        ),
+      ),
+    ),
+  );
+  $context->condition_mode = 0;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('User is viewing the site moderation tab');
+  t('sites');
+  $export['site-moderation'] = $context;
+
+  $context = new stdClass;
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
   $context->name = 'site-notes';
   $context->description = 'User is on the site notes page';
   $context->tag = 'sites';
@@ -463,51 +484,6 @@ function s4_sites_context_default_contexts() {
   t('User is on the site students list');
   t('site');
   $export['site-students'] = $context;
-
-  $context = new stdClass;
-  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
-  $context->api_version = 3;
-  $context->name = 'sites-talk-page';
-  $context->description = 'User is on the talk page';
-  $context->tag = 'sites';
-  $context->conditions = array(
-    'path' => array(
-      'values' => array(
-        'node/*/talk' => 'node/*/talk',
-      ),
-    ),
-    'user' => array(
-      'values' => array(
-        'administrator' => 'administrator',
-        'staff' => 'staff',
-      ),
-    ),
-  );
-  $context->reactions = array(
-    'block' => array(
-      'blocks' => array(
-        'views-contact_records-block_1' => array(
-          'module' => 'views',
-          'delta' => 'contact_records-block_1',
-          'region' => 'content_top_left',
-          'weight' => '-10',
-        ),
-        's4_sites-s4_sites_site_comment' => array(
-          'module' => 's4_sites',
-          'delta' => 's4_sites_site_comment',
-          'region' => 'content_right',
-          'weight' => '-10',
-        ),
-      ),
-    ),
-  );
-  $context->condition_mode = 1;
-
-  // Translatables
-  // Included for use with string extractors like potx.
-  t('User is on the talk page');
-  t('sites');
-  $export['sites-talk-page'] = $context;
 
   $context = new stdClass;
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */

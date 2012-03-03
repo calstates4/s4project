@@ -9,7 +9,6 @@ theme = s4
 ; Core
 dependencies[] = block
 dependencies[] = color
-dependencies[] = comment
 dependencies[] = contextual
 dependencies[] = dashboard
 dependencies[] = dblog
@@ -112,7 +111,6 @@ dependencies[] = references
 dependencies[] = save_draft
 dependencies[] = select_or_other
 dependencies[] = strongarm
-dependencies[] = talk
 dependencies[] = textcaptcha
 dependencies[] = token
 dependencies[] = user_reference
@@ -126,6 +124,8 @@ dependencies[] = views_dynamic_fields
 dependencies[] = views_savedsearches
 dependencies[] = views_ui
 dependencies[] = webform
+dependencies[] = workbench
+dependencies[] = workbench_moderation
 dependencies[] = wysiwyg
 
 ; Custom
@@ -666,16 +666,6 @@ terms[site_supervisor][name] = Site supervisor
 terms[site_supervisor][vocabulary_machine_name] = site_staff_role
 terms[other][name] = Other
 terms[other][vocabulary_machine_name] = site_staff_role
-
-;Vocabularies - workflow_status
-terms[pending][name] = "Pending"
-terms[pending][vocabulary_machine_name] = workflow_status
-terms[more_info][name] = "Needs more information"
-terms[more_info][vocabulary_machine_name] = workflow_status
-terms[declined][name] = "Declined"
-terms[declined][vocabulary_machine_name] = workflow_status
-terms[approved][name] = "Approved"
-terms[approved][vocabulary_machine_name] = workflow_status
 
 ;Vocabularies - file category
 terms[survey][name] = "Survey"

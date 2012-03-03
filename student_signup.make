@@ -140,9 +140,6 @@ projects[select_or_other][version] = "2.0"
 projects[strongarm][subdir] = "contrib"
 projects[strongarm][version] = "2.0-beta2"
 
-projects[talk][subdir] = "contrib"
-projects[talk][version] = "1.x-dev"
-
 projects[tac_lite][subdir] = "contrib"
 projects[tac_lite][version] = "1.x-dev"
 
@@ -169,6 +166,12 @@ projects[views_data_export][version] = "3.0-beta4"
 
 projects[views_dynamic_fields][subdir] = "contrib"
 projects[views_dynamic_fields][version] = "1.x-dev"
+
+projects[workbench][subdir] = "contrib"
+projects[workbench][version] = "1.1"
+
+projects[workbench_moderation][subdir] = "contrib"
+projects[workbench_moderation][version] = "1.1"
 
 projects[webform][subdir] = "contrib"
 projects[webform][version] = "3.11"

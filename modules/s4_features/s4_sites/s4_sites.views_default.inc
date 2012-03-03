@@ -900,6 +900,20 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['fields']['field_files']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_files']['delta_reversed'] = 0;
   $handler->display->display_options['fields']['field_files']['field_api_classes'] = 0;
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Site (field_site) */
+  $handler->display->display_options['arguments']['field_site_nid']['id'] = 'field_site_nid';
+  $handler->display->display_options['arguments']['field_site_nid']['table'] = 'field_data_field_site';
+  $handler->display->display_options['arguments']['field_site_nid']['field'] = 'field_site_nid';
+  $handler->display->display_options['arguments']['field_site_nid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['field_site_nid']['title'] = '%1';
+  $handler->display->display_options['arguments']['field_site_nid']['default_argument_type'] = 'node';
+  $handler->display->display_options['arguments']['field_site_nid']['default_argument_skip_url'] = 1;
+  $handler->display->display_options['arguments']['field_site_nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_site_nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_site_nid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['field_site_nid']['break_phrase'] = 0;
+  $handler->display->display_options['arguments']['field_site_nid']['not'] = 0;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';

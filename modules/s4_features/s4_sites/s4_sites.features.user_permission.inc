@@ -10,6 +10,24 @@
 function s4_sites_user_default_permissions() {
   $permissions = array();
 
+  // Exported permission: access workbench
+  $permissions['access workbench'] = array(
+    'name' => 'access workbench',
+    'roles' => array(),
+  );
+
+  // Exported permission: administer workbench moderation
+  $permissions['administer workbench moderation'] = array(
+    'name' => 'administer workbench moderation',
+    'roles' => array(),
+  );
+
+  // Exported permission: bypass workbench moderation
+  $permissions['bypass workbench moderation'] = array(
+    'name' => 'bypass workbench moderation',
+    'roles' => array(),
+  );
+
   // Exported permission: create contact_record content
   $permissions['create contact_record content'] = array(
     'name' => 'create contact_record content',
@@ -319,6 +337,96 @@ function s4_sites_user_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported permission: moderate content from approved_by_purchasing to needs_purchasing_approval
+  $permissions['moderate content from approved_by_purchasing to needs_purchasing_approval'] = array(
+    'name' => 'moderate content from approved_by_purchasing to needs_purchasing_approval',
+    'roles' => array(
+      0 => 'staff',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
+  // Exported permission: moderate content from approved_by_purchasing to program_approval
+  $permissions['moderate content from approved_by_purchasing to program_approval'] = array(
+    'name' => 'moderate content from approved_by_purchasing to program_approval',
+    'roles' => array(
+      0 => 'staff',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
+  // Exported permission: moderate content from approved_by_risk_manager to needs_purchasing_approval
+  $permissions['moderate content from approved_by_risk_manager to needs_purchasing_approval'] = array(
+    'name' => 'moderate content from approved_by_risk_manager to needs_purchasing_approval',
+    'roles' => array(
+      0 => 'staff',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
+  // Exported permission: moderate content from approved_by_risk_manager to needs_risk_manager_approval
+  $permissions['moderate content from approved_by_risk_manager to needs_risk_manager_approval'] = array(
+    'name' => 'moderate content from approved_by_risk_manager to needs_risk_manager_approval',
+    'roles' => array(
+      0 => 'staff',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
+  // Exported permission: moderate content from draft to needs_risk_manager_approval
+  $permissions['moderate content from draft to needs_risk_manager_approval'] = array(
+    'name' => 'moderate content from draft to needs_risk_manager_approval',
+    'roles' => array(
+      0 => 'staff',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
+  // Exported permission: moderate content from needs_purchasing_approval to approved_by_purchasing
+  $permissions['moderate content from needs_purchasing_approval to approved_by_purchasing'] = array(
+    'name' => 'moderate content from needs_purchasing_approval to approved_by_purchasing',
+    'roles' => array(
+      0 => 'staff',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
+  // Exported permission: moderate content from needs_risk_manager_approval to approved_by_risk_manager
+  $permissions['moderate content from needs_risk_manager_approval to approved_by_risk_manager'] = array(
+    'name' => 'moderate content from needs_risk_manager_approval to approved_by_risk_manager',
+    'roles' => array(
+      0 => 'staff',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
+  // Exported permission: moderate content from program_approval to needs_purchasing_approval
+  $permissions['moderate content from program_approval to needs_purchasing_approval'] = array(
+    'name' => 'moderate content from program_approval to needs_purchasing_approval',
+    'roles' => array(
+      0 => 'staff',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
+  // Exported permission: moderate content from program_approval to needs_risk_manager_approval
+  $permissions['moderate content from program_approval to needs_risk_manager_approval'] = array(
+    'name' => 'moderate content from program_approval to needs_risk_manager_approval',
+    'roles' => array(
+      0 => 'staff',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
+  // Exported permission: moderate content from program_approval to published
+  $permissions['moderate content from program_approval to published'] = array(
+    'name' => 'moderate content from program_approval to published',
+    'roles' => array(
+      0 => 'staff',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
   // Exported permission: moderate site information
   $permissions['moderate site information'] = array(
     'name' => 'moderate site information',
@@ -335,6 +443,51 @@ function s4_sites_user_default_permissions() {
       0 => 'authenticated user',
     ),
     'module' => 'captcha',
+  );
+
+  // Exported permission: use workbench_moderation my drafts tab
+  $permissions['use workbench_moderation my drafts tab'] = array(
+    'name' => 'use workbench_moderation my drafts tab',
+    'roles' => array(
+      0 => 'staff',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
+  // Exported permission: use workbench_moderation needs review tab
+  $permissions['use workbench_moderation needs review tab'] = array(
+    'name' => 'use workbench_moderation needs review tab',
+    'roles' => array(
+      0 => 'staff',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
+  // Exported permission: view all unpublished content
+  $permissions['view all unpublished content'] = array(
+    'name' => 'view all unpublished content',
+    'roles' => array(
+      0 => 'staff',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
+  // Exported permission: view moderation history
+  $permissions['view moderation history'] = array(
+    'name' => 'view moderation history',
+    'roles' => array(
+      0 => 'staff',
+    ),
+    'module' => 'workbench_moderation',
+  );
+
+  // Exported permission: view moderation messages
+  $permissions['view moderation messages'] = array(
+    'name' => 'view moderation messages',
+    'roles' => array(
+      0 => 'staff',
+    ),
+    'module' => 'workbench_moderation',
   );
 
   return $permissions;
