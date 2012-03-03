@@ -7,7 +7,7 @@ function s4_reporting_block_site_summary() {
 			$workflow_status = taxonomy_get_tree($vid);
 		}
 	}
-	
+
 	$items = array();
 	$published = false;
 	foreach($workflow_status as $status) {
@@ -30,7 +30,7 @@ function s4_reporting_block_site_summary() {
 		}
 		$items[$status->tid] = '<strong>'. $status->name .':</strong> '. l($count, 'site-list/staff', array('query' => array('status' => $status->tid)));
 	}
-	
+
 	return array('subject' => 'Site overview',
 				 'content' => theme('item_list', array('items' => $items)));
 }
@@ -43,7 +43,7 @@ function s4_reporting_block_course_summary() {
 		return $cache->data;
 	}
 	$terms = _s4_courses_get_current_terms();
-	
+
 	$output = '';
 	foreach($terms as $term) {
 		$items = array();
@@ -53,9 +53,9 @@ function s4_reporting_block_course_summary() {
 				 ->execute()
 				 ->fetchField();
 		$term = node_load($nid);
-		
+
 		$output .= t('<h4>@title</h4>', array('@title' => $term->title ));
-		
+
 		$query = db_select('field_data_field_term', 't');
 		$query->condition('entity_type', 'node')
 				 ->condition('field_term_nid', $term->nid)
@@ -70,20 +70,22 @@ function s4_reporting_block_course_summary() {
 			$query->addExpression('COUNT(c.entity_id)', 'entity_id');
 			$result_signups = $query->execute();
 			$signups += $result_signups->fetchField();
-			
+
 			$query = db_select('field_data_field_course_students', 's')
 					 ->condition('s.entity_id', $course);
 			$query->addExpression('COUNT(s.field_course_students_uid)', 'uid');
 			$result_students = $query->execute();
 			$students += $result_students->fetchField();
-			
+
 			$total++;
 		}
-		
+
 		$items[] = '<strong>Courses: </strong>' .l($total, 'courses');
 		$items[] = '<strong>Students: </strong>' .l($students, 'students');
-		$items[] = '<strong>Total signups: </strong>' .l($signups, 'students') . ' (' . round(($signups / $students) * 100, 2) .'%)';
-		
+		if($students) {
+			//Preventing division by zero error
+			$items[] = '<strong>Total signups: </strong>' .l($signups, 'students') . ' (' . round(($signups / $students) * 100, 2) .'%)';
+		}
 		$output .= theme('item_list', array('items' => $items));
 	}
 	$result =  array('subject' => 'Course overview',
