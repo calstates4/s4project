@@ -18,9 +18,6 @@ function s4_sites_install() {
     'approved_by_risk_manager' => array('label' => t('Approved by risk manager'),
                                         'description' => '',
                                         'weight' => -8),
-    'draft' => array('label' => t('Draft Work in progress'),
-                     'description' => '',
-                     'weight' => -10),
     'needs_purchasing_approval' => array('label' => t('Needs purchasing approval'),
                                          'description' => '',
                                          'weight' => -7),
@@ -30,9 +27,6 @@ function s4_sites_install() {
     'program_approval' => array('label' => t('Program approval'),
                                              'description' => '',
                                              'weight' => -5),
-    'published' => array('label' => t('Published'),
-                         'description' => t('Make this version live'),
-                         'weight' => -4),
   );
   foreach($states as $name => $state) {
     $state['name'] = $name;
