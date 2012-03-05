@@ -1,34 +1,17 @@
 <?php
 
 function s4_reporting_block_site_summary() {
-	$workflow_status = false;
-	foreach(taxonomy_get_vocabularies() as $vid => $vocabulary) {
-		if($vocabulary->machine_name == 'workflow_status') {
-			$workflow_status = taxonomy_get_tree($vid);
-		}
-	}
-
-	$items = array();
-	$published = false;
-	foreach($workflow_status as $status) {
-		$query = db_select('field_data_field_workflow_status', 'f');
-		$query->condition('f.field_workflow_status_tid', $status->tid)
-			    ->condition('f.entity_type', 'node')
-			    ->condition('f.bundle', 'site')
-		      ->addExpression('COUNT(entity_id)', 'entity_count');
+	$states = workbench_moderation_states();
+	foreach($states as $state) {
+		$query = db_select('workbench_moderation_node_history', 'h');
+		$query->leftJoin('node', 'n', 'n.nid = h.nid');
+		$query->condition('h.current', 1)
+			    ->condition('h.state', $state->name)
+			    ->condition('n.type', 'site')
+		      	->addExpression('COUNT(h.nid)', 'entity_count');
 		$result = $query->execute();
 		$count = $result->fetchField();
-		if(variable_get('s4_sites_workflow_'. $status->tid, 'none') == 'publish' && !$published) {
-			$query = db_select('node', 'n');
-			$query->condition('n.type', 'site')
-				    ->condition('n.status', 1)
-			      ->addExpression('COUNT(nid)', 'node_count');
-			$result = $query->execute();
-			$published_count = $result->fetchField();
-			$count = $published_count;
-			$published = true;
-		}
-		$items[$status->tid] = '<strong>'. $status->name .':</strong> '. l($count, 'site-list/staff', array('query' => array('status' => $status->tid)));
+		$items[$state->name] = '<strong>'. $state->label .':</strong> '. l($count, 'site-list/manage/'. $state->name);
 	}
 
 	return array('subject' => 'Site overview',
