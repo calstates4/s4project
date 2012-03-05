@@ -218,8 +218,8 @@ function s4_sites_context_default_contexts() {
       'values' => array(
         'site-list' => 'site-list',
         'site-list*' => 'site-list*',
-        '~site-list/staff' => '~site-list/staff',
-        '~site-list/staff/*' => '~site-list/staff/*',
+        '~site-list/manage' => '~site-list/manage',
+        '~site-list/manage/*' => '~site-list/manage/*',
       ),
     ),
   );
