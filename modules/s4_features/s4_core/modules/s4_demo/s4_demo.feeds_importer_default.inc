@@ -297,6 +297,16 @@ function s4_demo_feeds_importer_default() {
             'target' => 'field_csu_org_type',
             'unique' => FALSE,
           ),
+          14 => array(
+            'source' => 'program',
+            'target' => 'field_site_restrict',
+            'unique' => FALSE,
+          ),
+          15 => array(
+            'source' => 'approval_status',
+            'target' => 'workbench_moderation_state',
+            'unique' => FALSE,
+          ),
         ),
         'update_existing' => '0',
         'input_format' => 'plain_text',

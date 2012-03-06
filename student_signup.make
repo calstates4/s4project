@@ -251,3 +251,4 @@ projects[token][patch][] = "http://drupal.org/files/issues/modules_token.92.patc
 projects[nodeformcols][patch][] = "http://drupal.org/files/nodeformcolum_captcha_error.patch"
 projects[cck_phone][] = "http://drupal.org/files/cck_phone_feeds_1160186_7.patch"
 projects[fancybox][patch][] = "http://drupal.org/files/fancybox_library_sub_folder.patch"
+projects[workbench_moderation][] = "http://drupal.org/files/workbench_moderation_feeds_state.patch"
