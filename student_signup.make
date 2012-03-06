@@ -144,7 +144,7 @@ projects[tac_lite][subdir] = "contrib"
 projects[tac_lite][version] = "1.x-dev"
 
 projects[textcaptcha][subdir] = "contrib"
-projects[textcaptcha][version] = "1.x-dev"
+projects[textcaptcha][version] = "1.2"
 
 projects[token][subdir] = "contrib"
 projects[token][version] = "1.0-beta2"
