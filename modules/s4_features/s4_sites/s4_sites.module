@@ -158,7 +158,6 @@ function s4_sites_s4_field_access() {
 						'field_site_users',
 						'field_site_form',
 						'field_site_eval_form',
-						'field_workflow_status',
 				),
 				'coordinator' => array(
 						'field_first_name',
@@ -456,7 +455,6 @@ function s4_sites_form_site_node_form_alter(&$form, $form_state) {
     	$form['#groups'][$k]->format_type = 'accordion-item';
     }
     $form['#groups']['group_site_tabs']->format_type = 'accordion';
-    $form['field_workflow_status']['#default_value'] = variable_get('s4_sites_workflow_default_state', 0);
   	$access = variable_get('s4_sites_field_access', array());
   	foreach($access as $name => $access) {
   		if($access === false) {
@@ -485,16 +483,8 @@ function s4_sites_node_presave($node) {
      $user = user_load($node->uid);
      if(!user_access('moderate site information') && !$node->s4_sites_import) {
        $node->status = 0;
-       $node->field_workflow_status[$node->language][0]['tid'] = variable_get('s4_sites_workflow_default_state', 0);
        drupal_set_message('Thanks for your site recommendation. We will be contacting you shortly.');
      }
-	 $status = field_get_items('node', $node, 'field_workflow_status');
-	 if(variable_get('s4_sites_workflow_'. $status[0]['tid']) == 'publish') {
-	   $node->status = 1;
-	 }
-	 if(variable_get('s4_sites_workflow_'. $status[0]['tid']) == 'unpublish') {
-	   $node->status = 0;
-	 }
   }
 }
 

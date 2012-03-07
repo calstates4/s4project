@@ -10,145 +10,6 @@
 function s4_sites_field_default_fields() {
   $fields = array();
 
-  // Exported field: 'comment-comment_node_site-field_workflow_approved'
-  $fields['comment-comment_node_site-field_workflow_approved'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '-1',
-      'deleted' => '0',
-      'entity_types' => array(),
-      'field_name' => 'field_workflow_approved',
-      'foreign keys' => array(
-        'format' => array(
-          'columns' => array(
-            'format' => 'format',
-          ),
-          'table' => 'filter_format',
-        ),
-      ),
-      'global_block_settings' => '1',
-      'indexes' => array(
-        'format' => array(
-          0 => 'format',
-        ),
-      ),
-      'module' => 'text',
-      'settings' => array(
-        'max_length' => '255',
-      ),
-      'translatable' => '1',
-      'type' => 'text',
-    ),
-    'field_instance' => array(
-      'bundle' => 'comment_node_site',
-      'default_value' => NULL,
-      'deleted' => '0',
-      'description' => '',
-      'display' => array(
-        'default' => array(
-          'label' => 'above',
-          'module' => 'text',
-          'settings' => array(),
-          'type' => 'text_default',
-          'weight' => 1,
-        ),
-      ),
-      'display_label' => '',
-      'entity_type' => 'comment',
-      'field_name' => 'field_workflow_approved',
-      'label' => 'Approval',
-      'required' => 0,
-      'settings' => array(
-        'text_processing' => '0',
-        'user_register_form' => FALSE,
-      ),
-      'widget' => array(
-        'active' => 1,
-        'module' => 'select_or_other',
-        'settings' => array(
-          'available_options' => '',
-          'available_options_fieldset' => array(
-            'advanced_options' => array(
-              'available_options_php' => '',
-            ),
-          ),
-          'available_options_php' => '',
-          'markup_available_options_php' => '&lt;none&gt;',
-          'other' => 'Other',
-          'other_unknown_defaults' => 'other',
-        ),
-        'type' => 'select_or_other',
-        'weight' => '3',
-      ),
-    ),
-  );
-
-  // Exported field: 'comment-comment_node_site-field_workflow_status'
-  $fields['comment-comment_node_site-field_workflow_status'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '1',
-      'deleted' => '0',
-      'entity_types' => array(),
-      'field_name' => 'field_workflow_status',
-      'foreign keys' => array(
-        'tid' => array(
-          'columns' => array(
-            'tid' => 'tid',
-          ),
-          'table' => 'taxonomy_term_data',
-        ),
-      ),
-      'global_block_settings' => '1',
-      'indexes' => array(
-        'tid' => array(
-          0 => 'tid',
-        ),
-      ),
-      'module' => 'taxonomy',
-      'settings' => array(
-        'allowed_values' => array(
-          0 => array(
-            'vocabulary' => 'workflow_status',
-            'parent' => '0',
-          ),
-        ),
-      ),
-      'translatable' => '1',
-      'type' => 'taxonomy_term_reference',
-    ),
-    'field_instance' => array(
-      'bundle' => 'comment_node_site',
-      'default_value' => NULL,
-      'deleted' => '0',
-      'description' => '',
-      'display' => array(
-        'default' => array(
-          'label' => 'above',
-          'module' => 'taxonomy',
-          'settings' => array(),
-          'type' => 'taxonomy_term_reference_link',
-          'weight' => 2,
-        ),
-      ),
-      'display_label' => '',
-      'entity_type' => 'comment',
-      'field_name' => 'field_workflow_status',
-      'label' => 'New status',
-      'required' => 0,
-      'settings' => array(
-        'user_register_form' => FALSE,
-      ),
-      'widget' => array(
-        'active' => 1,
-        'module' => 'options',
-        'settings' => array(),
-        'type' => 'options_select',
-        'weight' => '2',
-      ),
-    ),
-  );
-
   // Exported field: 'node-contact_record-body'
   $fields['node-contact_record-body'] = array(
     'field_config' => array(
@@ -5209,99 +5070,6 @@ function s4_sites_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-site-field_workflow_status'
-  $fields['node-site-field_workflow_status'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '1',
-      'deleted' => '0',
-      'entity_types' => array(),
-      'field_name' => 'field_workflow_status',
-      'foreign keys' => array(
-        'tid' => array(
-          'columns' => array(
-            'tid' => 'tid',
-          ),
-          'table' => 'taxonomy_term_data',
-        ),
-      ),
-      'global_block_settings' => '1',
-      'indexes' => array(
-        'tid' => array(
-          0 => 'tid',
-        ),
-      ),
-      'module' => 'taxonomy',
-      'settings' => array(
-        'allowed_values' => array(
-          0 => array(
-            'vocabulary' => 'workflow_status',
-            'parent' => '0',
-          ),
-        ),
-      ),
-      'translatable' => '1',
-      'type' => 'taxonomy_term_reference',
-    ),
-    'field_instance' => array(
-      'bundle' => 'site',
-      'default_value' => array(
-        0 => array(
-          'tid' => '67',
-        ),
-      ),
-      'deleted' => '0',
-      'description' => '',
-      'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
-        'default' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '26',
-        ),
-        'full' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '9',
-        ),
-        'notifications' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
-        'teaser' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
-      ),
-      'entity_type' => 'node',
-      'field_name' => 'field_workflow_status',
-      'label' => 'Status',
-      'required' => 0,
-      's4_sites_field_access' => 0,
-      'settings' => array(
-        'user_register_form' => FALSE,
-      ),
-      'widget' => array(
-        'active' => 1,
-        'module' => 'options',
-        'settings' => array(),
-        'type' => 'options_select',
-        'weight' => '10',
-      ),
-    ),
-  );
-
   // Exported field: 'taxonomy_term-file_category-field_type_reminder_days'
   $fields['taxonomy_term-file_category-field_type_reminder_days'] = array(
     'field_config' => array(
@@ -5427,7 +5195,6 @@ function s4_sites_field_default_fields() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Additional users');
-  t('Approval');
   t('Attach a few photos of the site. The first image will be used in the site preview.');
   t('Available programs');
   t('Body');
@@ -5460,7 +5227,6 @@ function s4_sites_field_default_fields() {
   t('Main phone number');
   t('Maximum number of students');
   t('Maximum number of students your site can accept at any given time');
-  t('New status');
   t('Once this number is reached, students will not be able to register with your site.');
   t('Organization type');
   t('Phone number');
@@ -5483,7 +5249,6 @@ function s4_sites_field_default_fields() {
   t('Site special requirements');
   t('Social network page');
   t('Special site instructions');
-  t('Status');
   t('Students can register with this staff');
   t('Tags');
   t('Thank-you message');
