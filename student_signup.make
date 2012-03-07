@@ -171,7 +171,7 @@ projects[workbench][subdir] = "contrib"
 projects[workbench][version] = "1.1"
 
 projects[workbench_moderation][subdir] = "contrib"
-projects[workbench_moderation][version] = "1.x-dev"
+projects[workbench_moderation][version] = "1.1"
 
 projects[webform][subdir] = "contrib"
 projects[webform][version] = "3.11"
@@ -251,4 +251,4 @@ projects[token][patch][] = "http://drupal.org/files/issues/modules_token.92.patc
 projects[nodeformcols][patch][] = "http://drupal.org/files/nodeformcolum_captcha_error.patch"
 projects[cck_phone][] = "http://drupal.org/files/cck_phone_feeds_1160186_7.patch"
 projects[fancybox][patch][] = "http://drupal.org/files/fancybox_library_sub_folder.patch"
-projects[workbench_moderation][] = "http://drupal.org/files/workbench_moderation_feeds_state.patch"
+projects[workbench_moderation][] = "http://drupal.org/files/workbench_moderation_feeds-1470528-1.patch"
