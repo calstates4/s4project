@@ -88,12 +88,13 @@ function student_signup_profiler_install_step($callback, $data, $config, &$conte
 }
 
 function student_signup_profiler_install_terms($term, $vocabs_by_machine_name, $vocabs, &$context) {
-	if (isset($term['vocabulary_machine_name'], $vocabs_by_machine_name[$term['vocabulary_machine_name']])) {
+	$weight = 0;
+  if (isset($term['vocabulary_machine_name'], $vocabs_by_machine_name[$term['vocabulary_machine_name']])) {
     $term['vid'] = $vocabs_by_machine_name[$term['vocabulary_machine_name']];
   }
   // Sanity checks before creating.
   if (!empty($term['name']) && !empty($term['vid']) && isset($vocabs[$term['vid']])) {
-    $term['weight'] = isset($term['weight']) ? $weight++ : $term['weight'];
+    $term['weight'] = !isset($term['weight']) ? $weight++ : $term['weight'];
     //Cast the term as an object, to allow it to be saved properly.
     taxonomy_term_save((object) $term);
     $context['message'] = t('Installing category @term', array('@term' => check_plain($term['name'])));
