@@ -171,7 +171,7 @@ projects[workbench][subdir] = "contrib"
 projects[workbench][version] = "1.1"
 
 projects[workbench_moderation][subdir] = "contrib"
-projects[workbench_moderation][version] = "1.1"
+projects[workbench_moderation][version] = "1.x-dev"
 
 projects[webform][subdir] = "contrib"
 projects[webform][version] = "3.11"
