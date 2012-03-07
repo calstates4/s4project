@@ -18,6 +18,7 @@ function s4_sites_menu_alter(&$items) {
   $items['node/%/files']['access arguments'] = array(1);
   $items['node/%node/moderation']['page callback'] = 's4_sites_workbench_moderation_node_history_view';
   $items['node/%node/moderation']['file'] = 's4_sites.moderation.inc';
+  $items['node/%node/moderation']['title'] = 'Approval';
   $items['node/%node/moderation']['file path'] = drupal_get_path('module', 's4_sites');
 }
 
