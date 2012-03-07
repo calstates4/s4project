@@ -93,7 +93,7 @@ function student_signup_profiler_install_terms($term, $vocabs_by_machine_name, $
   }
   // Sanity checks before creating.
   if (!empty($term['name']) && !empty($term['vid']) && isset($vocabs[$term['vid']])) {
-    $term['weight'] = empty($term['weight']) ? $weight++ : $term['weight'];
+    $term['weight'] = isset($term['weight']) ? $weight++ : $term['weight'];
     //Cast the term as an object, to allow it to be saved properly.
     taxonomy_term_save((object) $term);
     $context['message'] = t('Installing category @term', array('@term' => check_plain($term['name'])));
