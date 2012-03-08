@@ -252,7 +252,14 @@ function s4_core_block_s4_add_new_site() {
                     array('class' => 'button add')
                 )
                 );
-    return array('content' => $add_link .' '. $import_link);
+    $manage_link = l(t('Manage sites'),
+                'site-list/manage',
+                array('html' => TRUE,
+                     'attributes' =>
+                    array('class' => 'button add')
+                )
+                );
+    return array('content' => $add_link .' '. $manage_link);
   }
 }
 

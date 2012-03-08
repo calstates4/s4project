@@ -273,6 +273,31 @@ function s4_sites_context_default_contexts() {
   $context = new stdClass;
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
+  $context->name = 'site-list-link';
+  $context->description = 'Site menu should be enabled';
+  $context->tag = 'sites';
+  $context->conditions = array(
+    'path' => array(
+      'values' => array(
+        'site-list/*' => 'site-list/*',
+        'site-list' => 'site-list',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'menu' => 'site-list',
+  );
+  $context->condition_mode = 0;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('Site menu should be enabled');
+  t('sites');
+  $export['site-list-link'] = $context;
+
+  $context = new stdClass;
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
   $context->name = 'site-list-staff';
   $context->description = 'User is on the site list for staff page';
   $context->tag = 'sites';

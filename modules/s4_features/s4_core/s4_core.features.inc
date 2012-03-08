@@ -53,41 +53,17 @@ function s4_core_homebox() {
     ),
     'blocks' => 
     array (
-      's4_reporting_site_summary' => 
+      's4_reporting_course_summary' => 
       array (
         'module' => 's4_reporting',
-        'delta' => 'site_summary',
+        'delta' => 'course_summary',
         'region' => 2,
         'movable' => 1,
         'status' => 1,
         'open' => 1,
         'closable' => 1,
         'title' => '',
-        'weight' => -59,
-      ),
-      'views_bookmarked_sites-block' => 
-      array (
-        'module' => 'views',
-        'delta' => 'bookmarked_sites-block',
-        'region' => 2,
-        'movable' => 1,
-        'status' => 1,
-        'open' => 1,
-        'closable' => 1,
-        'title' => '',
-        'weight' => -58,
-      ),
-      'views_65656e1f5a12cde25f0722f735fe7969' => 
-      array (
-        'module' => 'views',
-        'delta' => '65656e1f5a12cde25f0722f735fe7969',
-        'region' => 2,
-        'movable' => 1,
-        'status' => 1,
-        'open' => 1,
-        'closable' => 1,
-        'title' => '',
-        'weight' => -57,
+        'weight' => -48,
       ),
       'masquerade_masquerade' => 
       array (
@@ -99,19 +75,55 @@ function s4_core_homebox() {
         'open' => 1,
         'closable' => 1,
         'title' => '',
-        'weight' => -56,
+        'weight' => -48,
       ),
-      'views_site_moderation-block' => 
+      's4_reporting_site_summary' => 
       array (
-        'module' => 'views',
-        'delta' => 'site_moderation-block',
+        'module' => 's4_reporting',
+        'delta' => 'site_summary',
         'region' => 1,
         'movable' => 1,
         'status' => 1,
         'open' => 1,
         'closable' => 1,
         'title' => '',
-        'weight' => -54,
+        'weight' => -48,
+      ),
+      'views_bookmarked_sites-block' => 
+      array (
+        'module' => 'views',
+        'delta' => 'bookmarked_sites-block',
+        'region' => 2,
+        'movable' => 1,
+        'status' => 1,
+        'open' => 1,
+        'closable' => 1,
+        'title' => '',
+        'weight' => -48,
+      ),
+      'views_65656e1f5a12cde25f0722f735fe7969' => 
+      array (
+        'module' => 'views',
+        'delta' => '65656e1f5a12cde25f0722f735fe7969',
+        'region' => 2,
+        'movable' => 1,
+        'status' => 1,
+        'open' => 1,
+        'closable' => 1,
+        'title' => '',
+        'weight' => -48,
+      ),
+      'views_manage_sites-block_1' => 
+      array (
+        'module' => 'views',
+        'delta' => 'manage_sites-block_1',
+        'region' => 1,
+        'movable' => 1,
+        'status' => 1,
+        'open' => 1,
+        'closable' => 1,
+        'title' => '',
+        'weight' => -47,
       ),
       'views_recent_activity-block' => 
       array (
@@ -123,19 +135,7 @@ function s4_core_homebox() {
         'open' => 1,
         'closable' => 1,
         'title' => '',
-        'weight' => -54,
-      ),
-      's4_reporting_course_summary' => 
-      array (
-        'module' => 's4_reporting',
-        'delta' => 'course_summary',
-        'region' => 2,
-        'movable' => 1,
-        'status' => 1,
-        'open' => 1,
-        'closable' => 1,
-        'title' => '',
-        'weight' => -59,
+        'weight' => -46,
       ),
     ),
     'widths' => 
