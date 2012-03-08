@@ -51,6 +51,13 @@ function s4_sites_install() {
       ->fields($transition)
       ->execute();
   }
+
+  variable_set('node_options_site', array(
+      0 => 'status',
+      1 => 'moderation',
+      2 => 'revision',
+    ));
+
   $node = (object)array (
       'title' => 'Integrative Learning Rubric',
        'type' => 'webform',
