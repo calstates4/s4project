@@ -80,6 +80,12 @@ function s4_sites_context_default_contexts() {
           'region' => 'content_top_right',
           'weight' => '-10',
         ),
+        'workbench-block' => array(
+          'module' => 'workbench',
+          'delta' => 'block',
+          'region' => 'content',
+          'weight' => '-10',
+        ),
       ),
     ),
     'breadcrumb' => 'site-list',

@@ -2119,7 +2119,7 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['alter_text'] = 0;
   $handler->display->display_options['fields']['title']['alter']['make_link'] = 1;
-  $handler->display->display_options['fields']['title']['alter']['path'] = 'node/[nid]';
+  $handler->display->display_options['fields']['title']['alter']['path'] = 'node/[nid_1]';
   $handler->display->display_options['fields']['title']['alter']['absolute'] = 0;
   $handler->display->display_options['fields']['title']['alter']['external'] = 0;
   $handler->display->display_options['fields']['title']['alter']['replace_spaces'] = 0;
@@ -2230,7 +2230,6 @@ function s4_sites_views_default_views() {
     t('Programs'),
     t('Pending sites block'),
     t('Pending sites'),
-    t('node/[nid]'),
   );
   $export['manage_sites'] = $view;
 
