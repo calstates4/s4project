@@ -11,11 +11,16 @@ function s4_sites_install() {
           'captcha_type' => 'Text Captcha',
         ))
         ->execute();
-  $schema['workbench_moderation_node_history'] = array();
-  s4_sites_schema_alter($schema);
-  foreach ($schema['workbench_moderation_node_history']['fields'] as $name => $spec) {
-    db_add_field($ret, 'workbench_moderation_node_history', $name, $spec);
-  }
+  
+  // Add a field to the existing flags table (Flag module)
+  $field = array(
+    'type' => 'text', 
+    'not null' => FALSE, 
+    'default' => '', 
+    'description' => 'Note about the moderation',
+   );
+
+  db_add_field('workbench_moderation_node_history', 'note', $field);
   
   $states = array(
     'approved_by_purchasing' => array('label' => t('Approved by purchasing'),
