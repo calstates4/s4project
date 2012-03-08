@@ -11,6 +11,12 @@ function s4_sites_install() {
           'captcha_type' => 'Text Captcha',
         ))
         ->execute();
+  $schema['workbench_moderation_node_history'] = array();
+  mymodule_schema_alter($schema);
+  foreach ($schema['workbench_moderation_node_history']['fields'] as $name => $spec) {
+    db_add_field($ret, 'workbench_moderation_node_history', $name, $spec);
+  }
+  
   $states = array(
     'approved_by_purchasing' => array('label' => t('Approved by purchasing'),
                                       'description' => '',
