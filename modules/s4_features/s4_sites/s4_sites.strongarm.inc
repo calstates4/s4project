@@ -1324,6 +1324,13 @@ function s4_sites_strongarm() {
       'title' => 'Site special requirements',
       'hidden' => 0,
     ),
+    'field_workflow_status' => array(
+      'region' => 'right',
+      'weight' => '2',
+      'has_required' => FALSE,
+      'title' => 'Status',
+      'hidden' => 0,
+    ),
     'field_district_federal' => array(
       'region' => 'main',
       'weight' => '2',
@@ -1406,6 +1413,7 @@ function s4_sites_strongarm() {
     'field_site_restrict' => FALSE,
     'field_site_users' => FALSE,
     'field_site_eval_form' => FALSE,
+    'field_workflow_status' => FALSE,
     'field_health_risk' => FALSE,
     'field_site_tour' => FALSE,
     'field_population_size' => FALSE,

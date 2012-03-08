@@ -341,7 +341,8 @@ function s4_sites_user_default_permissions() {
   $permissions['moderate content from approved_by_purchasing to needs_purchasing_approval'] = array(
     'name' => 'moderate content from approved_by_purchasing to needs_purchasing_approval',
     'roles' => array(
-      0 => 'staff',
+      0 => 'site approver',
+      1 => 'staff',
     ),
     'module' => 'workbench_moderation',
   );
@@ -350,7 +351,8 @@ function s4_sites_user_default_permissions() {
   $permissions['moderate content from approved_by_purchasing to program_approval'] = array(
     'name' => 'moderate content from approved_by_purchasing to program_approval',
     'roles' => array(
-      0 => 'staff',
+      0 => 'site approver',
+      1 => 'staff',
     ),
     'module' => 'workbench_moderation',
   );
@@ -368,7 +370,8 @@ function s4_sites_user_default_permissions() {
   $permissions['moderate content from approved_by_risk_manager to needs_risk_manager_approval'] = array(
     'name' => 'moderate content from approved_by_risk_manager to needs_risk_manager_approval',
     'roles' => array(
-      0 => 'staff',
+      0 => 'site approver',
+      1 => 'staff',
     ),
     'module' => 'workbench_moderation',
   );
@@ -395,7 +398,8 @@ function s4_sites_user_default_permissions() {
   $permissions['moderate content from needs_risk_manager_approval to approved_by_risk_manager'] = array(
     'name' => 'moderate content from needs_risk_manager_approval to approved_by_risk_manager',
     'roles' => array(
-      0 => 'staff',
+      0 => 'site approver',
+      1 => 'staff',
     ),
     'module' => 'workbench_moderation',
   );
@@ -404,7 +408,8 @@ function s4_sites_user_default_permissions() {
   $permissions['moderate content from program_approval to needs_purchasing_approval'] = array(
     'name' => 'moderate content from program_approval to needs_purchasing_approval',
     'roles' => array(
-      0 => 'staff',
+      0 => 'manager',
+      1 => 'staff',
     ),
     'module' => 'workbench_moderation',
   );

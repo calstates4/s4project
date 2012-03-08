@@ -51,6 +51,10 @@ function s4_sites_install() {
       ->fields($transition)
       ->execute();
   }
+  //Rebuild user permissions so we get the transition permissions rebuilt.
+  module_load_include('inc', 'features', 'includes/features.user');
+  user_permission_features_rebuild('s4_sites');
+
   $node = (object)array (
       'title' => 'Integrative Learning Rubric',
        'type' => 'webform',
