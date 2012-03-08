@@ -12,7 +12,7 @@ function s4_sites_install() {
         ))
         ->execute();
   $schema['workbench_moderation_node_history'] = array();
-  mymodule_schema_alter($schema);
+  s4_sites_schema_alter($schema);
   foreach ($schema['workbench_moderation_node_history']['fields'] as $name => $spec) {
     db_add_field($ret, 'workbench_moderation_node_history', $name, $spec);
   }
