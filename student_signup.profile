@@ -63,6 +63,10 @@ function student_signup_setup_homepage($form, $form_state, &$context) {
                'filter_format' => '',
                'weight' => 0))
       ->execute();
+      //While we are here, add the role "staff" to user 1.
+      $user = user_load(1);
+      $user->roles[$rid] = $name;
+      user_save($user);
     }
     else {
       db_insert('front_page')
