@@ -16,7 +16,7 @@ function s4_sites_install() {
   $field = array(
     'type' => 'text', 
     'not null' => FALSE, 
-    'default' => '', 
+    'default' => NULL, 
     'description' => 'Note about the moderation',
    );
 
