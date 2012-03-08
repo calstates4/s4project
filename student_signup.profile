@@ -78,6 +78,10 @@ function student_signup_setup_homepage(&$context) {
       ->execute();
     }
   }
+  // Disable all DB blocks
+  if (module_exists('block')) {
+    db_query("UPDATE {block} SET status = 0, region = ''");
+  }
   $context['messages'] = t('Setting up homepage');
   $context['results'][] = 'homepage';
 }
