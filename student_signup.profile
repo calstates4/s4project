@@ -50,7 +50,7 @@ function student_signup_profiler_install_tasks() {
   return $batch;
 }
 
-function student_signup_setup_homepage($form, $form_state, &$context) {
+function student_signup_setup_homepage(&$context) {
   foreach(user_roles() as $rid => $name) {
     db_delete('front_page')
          ->condition('rid', $rid)
