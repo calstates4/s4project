@@ -1587,34 +1587,9 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['query_comment'] = FALSE;
-  $handler->display->display_options['exposed_form']['type'] = 'better_exposed_filters';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['exposed_form']['options']['autosubmit'] = 0;
   $handler->display->display_options['exposed_form']['options']['autosubmit_hide'] = 1;
-  $handler->display->display_options['exposed_form']['options']['bef'] = array(
-    'field_course_subject_value' => array(
-      'more_options' => array(
-        'bef_filter_description' => '',
-      ),
-    ),
-    'field_course_catalog_number_value' => array(
-      'more_options' => array(
-        'bef_filter_description' => '',
-      ),
-    ),
-    'field_course_section_value' => array(
-      'more_options' => array(
-        'bef_filter_description' => '',
-      ),
-    ),
-    'field_term_nid' => array(
-      'bef_format' => 'bef',
-      'more_options' => array(
-        'bef_select_all_none' => 0,
-        'bef_collapsible' => 0,
-        'bef_filter_description' => '',
-      ),
-    ),
-  );
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '30';
   $handler->display->display_options['pager']['options']['offset'] = '0';
@@ -2193,9 +2168,6 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['filters']['field_term_nid']['id'] = 'field_term_nid';
   $handler->display->display_options['filters']['field_term_nid']['table'] = 'field_data_field_term';
   $handler->display->display_options['filters']['field_term_nid']['field'] = 'field_term_nid';
-  $handler->display->display_options['filters']['field_term_nid']['value'] = array(
-    3 => '3',
-  );
   $handler->display->display_options['filters']['field_term_nid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_term_nid']['expose']['operator_id'] = 'field_term_nid_op';
   $handler->display->display_options['filters']['field_term_nid']['expose']['label'] = 'Term';
