@@ -29,7 +29,7 @@ class S4CourseFaculyProcessor extends FeedsProcessor {
    * Creates a new enrollment relation in memory and returns it.
    */
   public function newReference(FeedsSource $source, $item) {
-    $course = $item['course'];
+    $course = node_load($item['course']);
     $existing = field_get_items('node', $course, 'field_course_faculty');
     foreach($existing as $existing_faculty) {
       if($existing_faculty['uid'] == $item['user']) {

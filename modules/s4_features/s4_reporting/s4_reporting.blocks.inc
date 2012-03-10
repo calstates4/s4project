@@ -11,7 +11,7 @@ function s4_reporting_block_site_summary() {
 		      	->addExpression('COUNT(h.nid)', 'entity_count');
 		$result = $query->execute();
 		$count = $result->fetchField();
-		$items[$state->name] = '<strong>'. $state->label .':</strong> '. l($count, 'site-list/manage/'. $state->name);
+		$items[$state->name] = '<strong>'. $state->label .':</strong> '. l($count, 'site-list/manage/', array('query' => array('state[]' => $state->name)));
 	}
 
 	return array('subject' => 'Site overview',
