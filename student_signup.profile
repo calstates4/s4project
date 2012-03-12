@@ -48,6 +48,7 @@ function student_signup_profiler_install_tasks() {
     $batch['operations'][] = array('student_signup_profiler_install_terms', array($term, $vocabs_by_machine_name, $vocabs));
   }
   $batch['operations'][] = array('student_signup_install_rebuild_permissions', array());
+  $batch['operations'][] = array('student_signup_install_cache_clear', array());
   return $batch;
 }
 
@@ -60,6 +61,18 @@ function student_signup_install_rebuild_permissions(&$context) {
   $context['results'][] = 'node_rebuild';
 }
 
+/**
+ * Clear cache so views is happy.
+ */
+function student_signup_install_cache_clear(&$context) {
+  drupal_flush_all_caches();
+  $context['messages'] = t('Clearing caches');
+  $context['results'][] = 'cache_clear';
+}
+
+/**
+ * Install batch callback that sets up role-based homepages.
+ */
 function student_signup_setup_homepage(&$context) {
   foreach(user_roles() as $rid => $name) {
     db_delete('front_page')
@@ -96,6 +109,9 @@ function student_signup_setup_homepage(&$context) {
   $context['results'][] = 'homepage';
 }
 
+/**
+ * Install batch callback that completed regular profiler install steps
+ */
 function student_signup_profiler_install_step($callback, $data, $config, &$context) {
 	if(empty($context['sandbox'])) {
     $context['sandbox']['identifiers'] = array();
@@ -105,6 +121,9 @@ function student_signup_profiler_install_step($callback, $data, $config, &$conte
 	$context['results'][] = $callback;
 }
 
+/**
+ * Install batch callback for setting up taxonomy terms.
+ */
 function student_signup_profiler_install_terms($term, $vocabs_by_machine_name, $vocabs, &$context) {
 	$weight = 0;
   if (isset($term['vocabulary_machine_name'], $vocabs_by_machine_name[$term['vocabulary_machine_name']])) {
