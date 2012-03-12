@@ -47,7 +47,17 @@ function student_signup_profiler_install_tasks() {
     // by its machine name.
     $batch['operations'][] = array('student_signup_profiler_install_terms', array($term, $vocabs_by_machine_name, $vocabs));
   }
+  $batch['operations'][] = array('student_signup_install_rebuild_permissions', array());
   return $batch;
+}
+
+/**
+ * Install back callback - rebuild node permissions.
+ */
+function student_signup_install_rebuild_permissions(&$context) {
+  node_access_rebuild();
+  $context['messages'] = t('Rebuilding node permissions');
+  $context['results'][] = 'node_rebuild';
 }
 
 function student_signup_setup_homepage(&$context) {
