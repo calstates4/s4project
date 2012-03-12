@@ -2168,6 +2168,7 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['filters']['field_term_nid']['id'] = 'field_term_nid';
   $handler->display->display_options['filters']['field_term_nid']['table'] = 'field_data_field_term';
   $handler->display->display_options['filters']['field_term_nid']['field'] = 'field_term_nid';
+  $handler->display->display_options['filters']['field_term_nid']['group'] = '0';
   $handler->display->display_options['filters']['field_term_nid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_term_nid']['expose']['operator_id'] = 'field_term_nid_op';
   $handler->display->display_options['filters']['field_term_nid']['expose']['label'] = 'Term';

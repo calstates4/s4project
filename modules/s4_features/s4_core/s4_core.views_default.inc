@@ -525,6 +525,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['filters']['keys']['id'] = 'keys';
   $handler->display->display_options['filters']['keys']['table'] = 'search_index';
   $handler->display->display_options['filters']['keys']['field'] = 'keys';
+  $handler->display->display_options['filters']['keys']['group'] = '0';
   $handler->display->display_options['filters']['keys']['exposed'] = TRUE;
   $handler->display->display_options['filters']['keys']['expose']['operator_id'] = 'keys_op';
   $handler->display->display_options['filters']['keys']['expose']['label'] = 'Search';
@@ -840,13 +841,15 @@ function s4_core_views_default_views() {
   $handler->display->display_options['sorts']['field_first_name_format']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['sorts']['field_first_name_format']['field'] = 'field_first_name_format';
   $handler->display->display_options['filter_groups']['groups'] = array(
-    0 => 'OR',
+    2 => 'AND',
+    1 => 'OR',
   );
   /* Filter criterion: User: Name (raw) */
   $handler->display->display_options['filters']['name']['id'] = 'name';
   $handler->display->display_options['filters']['name']['table'] = 'users';
   $handler->display->display_options['filters']['name']['field'] = 'name';
   $handler->display->display_options['filters']['name']['operator'] = 'contains';
+  $handler->display->display_options['filters']['name']['group'] = 1;
   $handler->display->display_options['filters']['name']['exposed'] = TRUE;
   $handler->display->display_options['filters']['name']['expose']['operator_id'] = 'name_op';
   $handler->display->display_options['filters']['name']['expose']['label'] = 'Login ID';
@@ -1485,13 +1488,17 @@ function s4_core_views_default_views() {
   $handler->display->display_options['fields']['edit_node']['element_default_classes'] = 1;
   $handler->display->display_options['fields']['edit_node']['hide_empty'] = 0;
   $handler->display->display_options['fields']['edit_node']['empty_zero'] = 0;
+  $handler->display->display_options['filter_groups']['groups'] = array(
+    1 => 'AND',
+    2 => 'AND',
+  );
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['value'] = 1;
-  $handler->display->display_options['filters']['status']['group'] = 0;
+  $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
   /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
@@ -1500,6 +1507,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'downloadable_form' => 'downloadable_form',
   );
+  $handler->display->display_options['filters']['type']['group'] = 1;
 
   /* Display: Public forms */
   $handler = $view->new_display('page', 'Public forms', 'page_1');
@@ -1626,13 +1634,17 @@ function s4_core_views_default_views() {
   $handler->display->display_options['fields']['field_site_restrict']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_site_restrict']['delta_reversed'] = 0;
   $handler->display->display_options['fields']['field_site_restrict']['field_api_classes'] = 0;
+  $handler->display->display_options['filter_groups']['groups'] = array(
+    1 => 'AND',
+    2 => 'AND',
+  );
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['value'] = 1;
-  $handler->display->display_options['filters']['status']['group'] = 0;
+  $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
   /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
@@ -1641,6 +1653,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'downloadable_form' => 'downloadable_form',
   );
+  $handler->display->display_options['filters']['type']['group'] = 1;
   $handler->display->display_options['path'] = 'forms/public';
 
   /* Display: Signup forms */
@@ -1773,13 +1786,17 @@ function s4_core_views_default_views() {
   $handler->display->display_options['arguments']['field_site_restrict_tid']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['arguments']['field_site_restrict_tid']['break_phrase'] = 1;
   $handler->display->display_options['arguments']['field_site_restrict_tid']['not'] = 0;
+  $handler->display->display_options['filter_groups']['groups'] = array(
+    1 => 'AND',
+    2 => 'AND',
+  );
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['value'] = 1;
-  $handler->display->display_options['filters']['status']['group'] = 0;
+  $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
   /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
@@ -1788,6 +1805,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'downloadable_form' => 'downloadable_form',
   );
+  $handler->display->display_options['filters']['type']['group'] = 1;
   /* Filter criterion: Content: Show on signup (field_downloadable_show) */
   $handler->display->display_options['filters']['field_downloadable_show_value']['id'] = 'field_downloadable_show_value';
   $handler->display->display_options['filters']['field_downloadable_show_value']['table'] = 'field_data_field_downloadable_show';
@@ -1795,6 +1813,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['filters']['field_downloadable_show_value']['value'] = array(
     1 => '1',
   );
+  $handler->display->display_options['filters']['field_downloadable_show_value']['group'] = 1;
   $handler->display->display_options['path'] = 'forms/download/%';
   $translatables['site_forms'] = array(
     t('Master'),
