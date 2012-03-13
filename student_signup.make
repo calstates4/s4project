@@ -41,6 +41,9 @@ projects[date][version] = "2.0-alpha3"
 projects[ds][subdir] = "contrib"
 projects[ds][version] = "1.4"
 
+projects[edit_limit][subdir] = "contrib"
+projects[edit_limit][version] = "1.0-beta4"
+
 projects[email][subdir] = "contrib"
 projects[email][version] = "1.0-beta1"
 

@@ -436,7 +436,8 @@ function s4_sites_user_default_permissions() {
   $permissions['moderate site information'] = array(
     'name' => 'moderate site information',
     'roles' => array(
-      0 => 'staff',
+      0 => 'administrator',
+      1 => 'staff',
     ),
     'module' => 's4_sites',
   );
