@@ -66,7 +66,7 @@ function student_signup_install_rebuild_permissions(&$context) {
  * Install back callback - now that permissions are setup, rebuild features.
  */
 function student_signup_install_rebuild_features(&$context) {
-  features_revert(array('s4_sites' => array('permission')));
+  features_revert(array('s4_sites' => array('user_permission')));
   $context['messages'] = t('Rebuilding access permissions');
   $context['results'][] = 'features_rebuild';
 }
