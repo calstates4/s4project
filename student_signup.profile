@@ -49,6 +49,7 @@ function student_signup_profiler_install_tasks() {
   }
   $batch['operations'][] = array('student_signup_install_rebuild_permissions', array());
   $batch['operations'][] = array('student_signup_install_cache_clear', array());
+  $batch['operations'][] = array('student_signup_install_rebuild_features', array());
   return $batch;
 }
 
@@ -59,6 +60,15 @@ function student_signup_install_rebuild_permissions(&$context) {
   node_access_rebuild();
   $context['messages'] = t('Rebuilding node permissions');
   $context['results'][] = 'node_rebuild';
+}
+
+/**
+ * Install back callback - now that permissions are setup, rebuild features.
+ */
+function student_signup_install_rebuild_features(&$context) {
+  node_access_rebuild(array('s4_sites' => array('permission')));
+  $context['messages'] = t('Rebuilding access permissions');
+  $context['results'][] = 'features_rebuild';
 }
 
 /**
