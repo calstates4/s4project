@@ -57,17 +57,6 @@ function s4_core_user_default_permissions() {
     'module' => 'webform',
   );
 
-  // Exported permission: access comments
-  $permissions['access comments'] = array(
-    'name' => 'access comments',
-    'roles' => array(
-      0 => 'administrator',
-      1 => 'site approver',
-      2 => 'staff',
-    ),
-    'module' => 'comment',
-  );
-
   // Exported permission: access content
   $permissions['access content'] = array(
     'name' => 'access content',
@@ -188,15 +177,6 @@ function s4_core_user_default_permissions() {
       0 => 'administrator',
     ),
     'module' => 'block',
-  );
-
-  // Exported permission: administer comments
-  $permissions['administer comments'] = array(
-    'name' => 'administer comments',
-    'roles' => array(
-      0 => 'administrator',
-    ),
-    'module' => 'comment',
   );
 
   // Exported permission: administer content types
@@ -743,17 +723,6 @@ function s4_core_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: edit own comments
-  $permissions['edit own comments'] = array(
-    'name' => 'edit own comments',
-    'roles' => array(
-      0 => 'administrator',
-      1 => 'site approver',
-      2 => 'staff',
-    ),
-    'module' => 'comment',
-  );
-
   // Exported permission: edit own downloadable_form content
   $permissions['edit own downloadable_form content'] = array(
     'name' => 'edit own downloadable_form content',
@@ -889,17 +858,6 @@ function s4_core_user_default_permissions() {
     'module' => 's4_core',
   );
 
-  // Exported permission: post comments
-  $permissions['post comments'] = array(
-    'name' => 'post comments',
-    'roles' => array(
-      0 => 'administrator',
-      1 => 'site approver',
-      2 => 'staff',
-    ),
-    'module' => 'comment',
-  );
-
   // Exported permission: revert revisions
   $permissions['revert revisions'] = array(
     'name' => 'revert revisions',
@@ -954,17 +912,6 @@ function s4_core_user_default_permissions() {
       0 => 'authenticated user',
     ),
     'module' => 's4_core',
-  );
-
-  // Exported permission: skip comment approval
-  $permissions['skip comment approval'] = array(
-    'name' => 'skip comment approval',
-    'roles' => array(
-      0 => 'administrator',
-      1 => 'site approver',
-      2 => 'staff',
-    ),
-    'module' => 'comment',
   );
 
   // Exported permission: skip notifications

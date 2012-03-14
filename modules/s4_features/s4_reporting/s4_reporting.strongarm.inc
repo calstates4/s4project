@@ -41,7 +41,6 @@ function s4_reporting_strongarm() {
     'archive' => 0,
     'backlinks' => 0,
     'bookmarked_sites' => 0,
-    'comments_recent' => 0,
     'community_member_your_sites' => 0,
     'date_browser' => 0,
     'flag_bookmarks' => 0,

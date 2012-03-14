@@ -158,10 +158,6 @@ Chancellor\'s Office
     ),
   ),
    'cid' => '0',
-   'last_comment_timestamp' => '1316546454',
-   'last_comment_name' => NULL,
-   'last_comment_uid' => '5',
-   'comment_count' => '0',
    'locations' => 
   array (
   ),
@@ -342,9 +338,6 @@ Evaluators are encouraged to assign a zero to any work sample or collection of w
     ),
   ),
    'cid' => '0',
-   'last_comment_name' => NULL,
-   'last_comment_uid' => '1',
-   'comment_count' => '0',
    'locations' => 
   array (
   ),

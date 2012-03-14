@@ -841,8 +841,8 @@ function s4_core_views_default_views() {
   $handler->display->display_options['sorts']['field_first_name_format']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['sorts']['field_first_name_format']['field'] = 'field_first_name_format';
   $handler->display->display_options['filter_groups']['groups'] = array(
-    2 => 'AND',
     1 => 'OR',
+    2 => 'AND',
   );
   /* Filter criterion: User: Name (raw) */
   $handler->display->display_options['filters']['name']['id'] = 'name';

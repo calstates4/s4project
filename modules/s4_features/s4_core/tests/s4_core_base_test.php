@@ -18,7 +18,6 @@ class s4WebTestCase extends DrupalWebTestCase {
 					'cck',
 					'cck_phone',
 					'color',
-					'comment',
 					'content_access',
 					'context',
 					'contextual',
