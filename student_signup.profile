@@ -5,12 +5,9 @@ if(!function_exists('profiler_v2')) {
 
 profiler_v2('student_signup');
 
-function student_signup_form_install_configure_form_alter(&$form, $form_state) {
-	$form['#submit'][] = 'student_signup_setup_homepage';
-}
-
-
-
+/**
+ * Implements hook_install_tasks().
+ */
 function student_signup_install_tasks() {
 	return array('student_signup_profiler_install_tasks' => array(
 		'display_name' => st('Student signup setup'),
@@ -19,6 +16,9 @@ function student_signup_install_tasks() {
 	);
 }
 
+/**
+ * Install tasks, sets a batch API to occur after site configuration.
+ */
 function student_signup_profiler_install_tasks() {
 	$batch = array(
 	  'title' => t('Completing student signup setup.'),
