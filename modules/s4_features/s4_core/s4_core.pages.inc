@@ -76,7 +76,7 @@ function s4_core_signup($type, $nid) {
       	drupal_goto('sites/'. $site->nid .'/locations');
       }
       elseif ($instructions[0]['value'] && strip_tags($instruction_text[0]['value']) != '' && !$_SESSION['s4_signup_agreed']) {
-        drupal_set_message('This site requires that you read and agree to these additional instructions');
+        drupal_set_message(t('This site requires that you read and agree to these additional instructions'));
         drupal_set_title(t('Site instructions'));
         return check_markup($instruction_text[0]['value'], $instruction_text[0]['format']) . 
             '<p>' .
@@ -321,7 +321,7 @@ function s4_core_create_signup_form_submit($form, $form_state) {
            'hours' => $form_state['values']['hours']
           );
 	$signup = _s4_core_create_signup($form_state['values']['user'], $signup);
-	drupal_set_message('Created !signup record', array('!signup' => l(t('signup #@number', array('@number' => $signup->nid)), 'node/'. $signup->nid)));
+	drupal_set_message(t('Created !signup record', array('!signup' => l(t('signup #@number', array('@number' => $signup->nid)), 'node/'. $signup->nid))));
 	$site = node_load($form_state['values']['site']);
 	$form = field_get_items('node', $site, 'field_site_form');
 	if($form[0]['nid'] && $form_state['values']['email-student']) {
