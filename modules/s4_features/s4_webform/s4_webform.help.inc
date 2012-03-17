@@ -2,13 +2,13 @@
 
 function _s4_webform_help($path) {
 	$node = menu_get_object();
-	if(!$node) {
+	if (!$node) {
 	 return null;
 	}
-	if($node->type == 'webform' && !arg(2) && node_access('update', $node)) {
+	if ($node->type == 'webform' && !arg(2) && node_access('update', $node)) {
 		return _s4_webform_help_view();
 	}
-	if(arg(0) == 'node' && arg(2) == 'webform' && !arg(3)) {
+	if (arg(0) == 'node' && arg(2) == 'webform' && !arg(3)) {
 		return _s4_webform_webform_view();
 	}
 	return null;

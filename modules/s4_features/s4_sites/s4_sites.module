@@ -23,33 +23,33 @@ function s4_sites_menu_alter(&$items) {
 }
 
 /**
-*	Implementation of hook_menu
+*  Implementation of hook_menu
 */
 function s4_sites_menu() {
-	$items = array();
+  $items = array();
 
-	$items['sites/form/%/%/%/%'] = array(
-		'title' => 'Complete form',
-		'description' => 'Allow users to complete a questionnaire for a site',
-		'page callback' => 's4_sites_user_completed_form',
-		'access callback' => 's4_sites_user_completed_form_access',
-		'access arguments' => array(2, 3, 4, 5),
-		'page arguments' => array(2, 3),
-	);
+  $items['sites/form/%/%/%/%'] = array(
+    'title' => 'Complete form',
+    'description' => 'Allow users to complete a questionnaire for a site',
+    'page callback' => 's4_sites_user_completed_form',
+    'access callback' => 's4_sites_user_completed_form_access',
+    'access arguments' => array(2, 3, 4, 5),
+    'page arguments' => array(2, 3),
+  );
 
-	$items['sites/propose'] = array(
-	  'title' => 'Propose a new site',
-	  'page arguments' => array('s4_sites_propose_site_form'),
-	  'page callback' => 'drupal_get_form',
-	  'access arguments' => array('create site content'),
-	);
+  $items['sites/propose'] = array(
+    'title' => 'Propose a new site',
+    'page arguments' => array('s4_sites_propose_site_form'),
+    'page callback' => 'drupal_get_form',
+    'access arguments' => array('create site content'),
+  );
 
-	$items['sites/thank-you'] = array(
-	  'title' => 'Thank you',
-	  'page callback' => 's4_sites_thank_you',
-	  'page arguments' => array(2),
-	  'access arguments' => array('create site content'),
-	);
+  $items['sites/thank-you'] = array(
+    'title' => 'Thank you',
+    'page callback' => 's4_sites_thank_you',
+    'page arguments' => array(2),
+    'access arguments' => array('create site content'),
+  );
 
   return $items;
 }
@@ -62,13 +62,13 @@ function s4_sites_thank_you($terms) {
   $output = '';
   foreach($terms as $t) {
     $term = taxonomy_term_load($t);
-    if($term->vocabulary_machine_name == 'site_restrictions') {
+    if ($term->vocabulary_machine_name == 'site_restrictions') {
       $output .= '<h2>'. $term->name .'</h2>';
       $message = field_get_items('taxonomy_term', $term, 'field_thank_you_message');
       $output .= check_markup($message[0]['value'], $message[0]['format']);
     }
   }
-  if(strlen($output) == 0) {
+  if (strlen($output) == 0) {
     drupal_set_message(t('Thank you for proposing your site. We will be contacting you shortly.'));
     drupal_goto('<front>');
   }
@@ -110,7 +110,7 @@ function s4_sites_propose_site_form_submit($form, $form_state) {
   $terms = taxonomy_get_tree($vocabulary->vid);
   $proposed_terms = array();
   foreach($terms as $term) {
-    if($form_state['values']['terms_'. $term->tid]) {
+    if ($form_state['values']['terms_'. $term->tid]) {
       $proposed_terms[$term->tid] = $term->tid;
     }
   }
@@ -119,107 +119,107 @@ function s4_sites_propose_site_form_submit($form, $form_state) {
 }
 
 /**
-*	Access callback for completing the form. This basically checks that the key is correct
+*  Access callback for completing the form. This basically checks that the key is correct
 */
 function s4_sites_user_completed_form_access($nid, $form, $email, $key) {
-	return (drupal_hmac_base64($nid .'_'. $form .'_'. $email, drupal_get_private_key() . drupal_get_hash_salt()) == $key);
+  return (drupal_hmac_base64($nid .'_'. $form .'_'. $email, drupal_get_private_key() . drupal_get_hash_salt()) == $key);
 }
 
 function s4_sites_user_completed_form($site, $form) {
-	$_SESSION['s4_sites_user_form_site'] = $site;
-	drupal_goto('node/'. $form);
+  $_SESSION['s4_sites_user_form_site'] = $site;
+  drupal_goto('node/'. $form);
 }
 
 /**
-*	Implementation of s4_core_field_access
+*  Implementation of s4_core_field_access
 */
 function s4_sites_s4_field_access() {
 
-	return array('site' => array(
-						'body',
-						'field_site_projects',
-						'field_phone',
-						'field_site_email',
-						'field_website',
-						'field_location',
-						'field_signups_max',
-						'field_site_hours_minimum',
-						'field_site_hours',
-						'field_site_instructions_required',
-						'field_site_instructions',
-						'field_site_requirements',
-						'field_site_health_training',
-						'field_site_tour',
-						'field_health_risk',
-						'field_tags',
-						'field_site_restrict',
-						'field_csu_facility',
-						'field_csu_org_type',
-						'field_site_users',
-						'field_site_form',
-						'field_site_eval_form',
-				),
-				'coordinator' => array(
-						'field_first_name',
-						'field_last_name',
-						'field_signups_max',
-						'field_site',
-						'field_site_restrict',
-						'field_staff_role',
-						'field_staff_signup_available',
-						'field_email',
-						'field_phone',
-				),
-				'file' => array(
-						'field_site',
-						'field_expiration_date',
-						'field_expiration_reminder',
-						'field_expiration_reminder_date',
-						'field_form_sid',
-						'field_file_category',
-				),
-				'contact_record' => array(
-						'field_site',
-						'field_contact',
-				),
-	);
+  return array('site' => array(
+            'body',
+            'field_site_projects',
+            'field_phone',
+            'field_site_email',
+            'field_website',
+            'field_location',
+            'field_signups_max',
+            'field_site_hours_minimum',
+            'field_site_hours',
+            'field_site_instructions_required',
+            'field_site_instructions',
+            'field_site_requirements',
+            'field_site_health_training',
+            'field_site_tour',
+            'field_health_risk',
+            'field_tags',
+            'field_site_restrict',
+            'field_csu_facility',
+            'field_csu_org_type',
+            'field_site_users',
+            'field_site_form',
+            'field_site_eval_form',
+        ),
+        'coordinator' => array(
+            'field_first_name',
+            'field_last_name',
+            'field_signups_max',
+            'field_site',
+            'field_site_restrict',
+            'field_staff_role',
+            'field_staff_signup_available',
+            'field_email',
+            'field_phone',
+        ),
+        'file' => array(
+            'field_site',
+            'field_expiration_date',
+            'field_expiration_reminder',
+            'field_expiration_reminder_date',
+            'field_form_sid',
+            'field_file_category',
+        ),
+        'contact_record' => array(
+            'field_site',
+            'field_contact',
+        ),
+  );
 }
 
 /**
-*	Implementation of hook_webform_submission_insert
-*	Here we take any submissions made by site staff and attach
-*	them to a form record.
+*  Implementation of hook_webform_submission_insert
+*  Here we take any submissions made by site staff and attach
+*  them to a form record.
 */
 function s4_sites_webform_submission_insert($node, $submission) {
-	if(!$_SESSION['s4_sites_user_form_site']) {
-		return null;
-	}
-	$form = new stdClass();
-	$form->type = 'file';
-	node_object_prepare($form);
+  if (!$_SESSION['s4_sites_user_form_site']) {
+    return null;
+  }
+  $form = new stdClass();
+  $form->type = 'file';
+  node_object_prepare($form);
     $form->language = LANGUAGE_NONE;
-	$form->title = $node->title;
-	$form->uid = 0;
-	$form->field_site[$form->language][0]['nid'] = $_SESSION['s4_sites_user_form_site'];
-	$form->field_form_sid[$form->language][0]['value'] = $submission->sid;
-	node_save($form);
-	unset($_SESSION['s4_sites_user_form_site']);
-	if(user_access('administer nodes')) {
-	  drupal_goto('node/'. $form->field_site[$form->language][0]['nid'] .'/forms');
-	}
-	drupal_set_message('Thanks for submitting your form!');
-	drupal_goto('<front>');
+  $form->title = $node->title;
+  $form->uid = 0;
+  $form->field_site[$form->language][0]['nid'] = $_SESSION['s4_sites_user_form_site'];
+  $form->field_form_sid[$form->language][0]['value'] = $submission->sid;
+  node_save($form);
+  unset($_SESSION['s4_sites_user_form_site']);
+  if (user_access('administer nodes')) {
+    drupal_goto('node/'. $form->field_site[$form->language][0]['nid'] .'/forms');
+  }
+  drupal_set_message('Thanks for submitting your form!');
+  drupal_goto('<front>');
 }
 
 /**
-*	Implementation of hook_permission
+*  Implementation of hook_permission
 */
 function s4_sites_permission() {
-	return array(
-		'moderate site information' => array(
-		  'title' => t('Moderate site information'),
-		  'description' => t('If checked, users with this role will be able to create site and site staff content without moderation.'),
-		),
+  return array(
+    'moderate site information' => array(
+      'title' => t('Moderate site information'),
+      'description' => t('If checked, users with this role will be able to create site and site staff content without moderation.'),
+    ),
     );
 }
 /**
@@ -259,7 +259,7 @@ function s4_sites_block_view($delta) {
       break;
     case 's4_sites_site_send_form':
       return array('subject' => 'Attach a form',
-      			   'content' => drupal_get_form('s4_sites_send_site_form'));
+               'content' => drupal_get_form('s4_sites_send_site_form'));
       break;
     case 's4_sites_form_webform':
       return s4_webform_render_submission('field_form_sid');
@@ -269,158 +269,158 @@ function s4_sites_block_view($delta) {
 }
 
 function s4_sites_send_site_form() {
-	$form = array();
-	$node = node_load(arg(1));
+  $form = array();
+  $node = node_load(arg(1));
 
-	$form['site'] = array(
-		'#type' => 'hidden',
-		'#value' => $node->nid,
-	);
+  $form['site'] = array(
+    '#type' => 'hidden',
+    '#value' => $node->nid,
+  );
 
-	$forms = array();
-	$forms_query = db_select('node', 'n');
-	$forms_query->condition('n.status', '1')
-				->condition('n.type', 'webform')
-				->fields('n', array('nid', 'title'))
-				->orderBy('n.title')
-				->distinct();
+  $forms = array();
+  $forms_query = db_select('node', 'n');
+  $forms_query->condition('n.status', '1')
+        ->condition('n.type', 'webform')
+        ->fields('n', array('nid', 'title'))
+        ->orderBy('n.title')
+        ->distinct();
 
-	$result = $forms_query->execute();
-	foreach($result as $row) {
-		$forms[$row->nid] = $row->title;
-	}
+  $result = $forms_query->execute();
+  foreach($result as $row) {
+    $forms[$row->nid] = $row->title;
+  }
 
-	$form['form'] = array(
-		'#type' => 'select',
-		'#title' => 'Select the form to complete',
-		'#options' => $forms,
-	);
+  $form['form'] = array(
+    '#type' => 'select',
+    '#title' => 'Select the form to complete',
+    '#options' => $forms,
+  );
 
-	$site_staff = array('none' => '-- None --');
-	$staff_query = db_select('node', 'n');
-	$staff_query->leftJoin('field_data_field_site', 's', 's.entity_id = n.nid AND s.bundle = :bundle', array(':bundle' => 'coordinator'));
-	$staff_query->leftJoin('field_data_field_email', 'e', 's.entity_id = n.nid AND e.bundle = :bundle', array(':bundle' => 'coordinator'));
+  $site_staff = array('none' => '-- None --');
+  $staff_query = db_select('node', 'n');
+  $staff_query->leftJoin('field_data_field_site', 's', 's.entity_id = n.nid AND s.bundle = :bundle', array(':bundle' => 'coordinator'));
+  $staff_query->leftJoin('field_data_field_email', 'e', 's.entity_id = n.nid AND e.bundle = :bundle', array(':bundle' => 'coordinator'));
 
-	$staff_query->condition('n.status', '1')
-				->condition('s.field_site_nid', $node->nid)
-				->isNotNull('e.field_email_email')
-				->fields('n', array('nid', 'title'))
-				->orderBy('n.title')
-				->distinct();
+  $staff_query->condition('n.status', '1')
+        ->condition('s.field_site_nid', $node->nid)
+        ->isNotNull('e.field_email_email')
+        ->fields('n', array('nid', 'title'))
+        ->orderBy('n.title')
+        ->distinct();
 
-	$result = $staff_query->execute();
-	foreach($result as $row) {
-		$site_staff[$row->nid] = $row->title;
-	}
-	$form['email'] = array(
-	 '#type' => 'fieldset',
-	 '#title' => 'Email form to someone else',
-	 '#collapsible' => TRUE,
-	 '#collapsed' => TRUE,
-	);
+  $result = $staff_query->execute();
+  foreach($result as $row) {
+    $site_staff[$row->nid] = $row->title;
+  }
+  $form['email'] = array(
+   '#type' => 'fieldset',
+   '#title' => 'Email form to someone else',
+   '#collapsible' => TRUE,
+   '#collapsed' => TRUE,
+  );
 
-	$form['email']['email_form'] = array(
-	 '#type' => 'checkbox',
-	 '#title' => t('Email this form for someone else to complete'),
-	);
+  $form['email']['email_form'] = array(
+   '#type' => 'checkbox',
+   '#title' => t('Email this form for someone else to complete'),
+  );
 
-	$form['email']['site_staff'] = array(
-		'#type' => 'select',
-		'#title' => 'Select who should receive this message',
-		'#options' => $site_staff,
-	);
+  $form['email']['site_staff'] = array(
+    '#type' => 'select',
+    '#title' => 'Select who should receive this message',
+    '#options' => $site_staff,
+  );
 
-	$form['email']['manual_email'] = array(
-		'#type' => 'textfield',
-		'#title' => 'Or type in an email address',
-	);
+  $form['email']['manual_email'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Or type in an email address',
+  );
 
-	$form['email']['subject'] = array(
-		'#type' => 'textfield',
-		'#title' => 'Message subject',
-	);
+  $form['email']['subject'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Message subject',
+  );
 
-	$form['email']['body'] = array(
-		'#type' => 'textarea',
-		'#title' => 'Message body',
-		'#description' => 'We will append the link to the form at the bottom of your message.',
-	);
+  $form['email']['body'] = array(
+    '#type' => 'textarea',
+    '#title' => 'Message body',
+    '#description' => 'We will append the link to the form at the bottom of your message.',
+  );
 
-	$form['send_form_submit'] = array(
-		'#type' => 'submit',
-		'#value' => 'Attach form',
-	);
+  $form['send_form_submit'] = array(
+    '#type' => 'submit',
+    '#value' => 'Attach form',
+  );
 
-	return $form;
+  return $form;
 }
 
 function s4_sites_send_site_form_validate($form, &$form_state) {
-  if($form_state['values']['email_form'] && $form_state['values']['site_staff'] == 'none' && !valid_email_address($form_state['values']['manual_email'])) {
-		form_set_error('manual_email', 'Please enter a valid email address.');
-	}
+  if ($form_state['values']['email_form'] && $form_state['values']['site_staff'] == 'none' && !valid_email_address($form_state['values']['manual_email'])) {
+    form_set_error('manual_email', 'Please enter a valid email address.');
+  }
 }
 
 function s4_sites_send_site_form_submit($form, &$form_state) {
-	if(!$form_state['values']['email_form']) {
+  if (!$form_state['values']['email_form']) {
     $key = drupal_hmac_base64($form_state['values']['site'] .'_'. $form_state['values']['form'] .'_email', drupal_get_private_key() . drupal_get_hash_salt());
     drupal_goto('sites/form/' . $form_state['values']['site'] .'/'. $form_state['values']['form'] .'/email/'. $key, array('destination' => 'node/'. $form_state['values']['site'] .'/forms'));
     return;
-	}
-	$email = ($form_state['values']['manual_email'])
-			 ? $form_state['values']['manual_email']
-			 : false;
-	if(!$email) {
-		$coordinator = node_load($form_state['values']['site_staff']);
-		$email = field_get_items('node', $coordinator, 'field_email');
-		$email = $email[0]['email'];
-	}
+  }
+  $email = ($form_state['values']['manual_email'])
+       ? $form_state['values']['manual_email']
+       : false;
+  if (!$email) {
+    $coordinator = node_load($form_state['values']['site_staff']);
+    $email = field_get_items('node', $coordinator, 'field_email');
+    $email = $email[0]['email'];
+  }
 
-	drupal_mail('s4_sites',
-				'send_site_form',
-				$email,
-				$coordinator->language,
-				array('subject' => $form_state['values']['subject'],
-					  'body' => $form_state['values']['body'],
-					  'form' => $form_state['values']['form'],
-					  'site' => $form_state['values']['site'],
-					  'email' => $email,
-					  'key' => drupal_hmac_base64($form_state['values']['site'] .'_'. $form_state['values']['form'] .'_'. $email, drupal_get_private_key() . drupal_get_hash_salt()),
-				));
-	drupal_set_message('Your message has been sent.');
+  drupal_mail('s4_sites',
+        'send_site_form',
+        $email,
+        $coordinator->language,
+        array('subject' => $form_state['values']['subject'],
+            'body' => $form_state['values']['body'],
+            'form' => $form_state['values']['form'],
+            'site' => $form_state['values']['site'],
+            'email' => $email,
+            'key' => drupal_hmac_base64($form_state['values']['site'] .'_'. $form_state['values']['form'] .'_'. $email, drupal_get_private_key() . drupal_get_hash_salt()),
+        ));
+  drupal_set_message('Your message has been sent.');
 }
 
 function s4_sites_mail($key, &$message, $params) {
-	switch($key) {
-		case 'send_site_form':
-			$message['subject'] = $params['subject'];
-			$message['body'][] = $params['body'];
-			$message['body'][] = 'You can complete the form online here.';
-			$message['body'][] = url('sites/form/' . $params['site'] .'/'. $params['form'] .'/'. $params['email'] .'/'. $params['key'], array('absolute' => true));
-			break;
-	}
+  switch($key) {
+    case 'send_site_form':
+      $message['subject'] = $params['subject'];
+      $message['body'][] = $params['body'];
+      $message['body'][] = 'You can complete the form online here.';
+      $message['body'][] = url('sites/form/' . $params['site'] .'/'. $params['form'] .'/'. $params['email'] .'/'. $params['key'], array('absolute' => true));
+      break;
+  }
 
 }
 
 function s4_sites_form_field_ui_field_edit_form_alter(&$form, $form_state) {
-	if($form['#instance']['entity_type'] != 'node' || $form['#instance']['bundle'] != 'site') {
-		return null;
-	}
+  if ($form['#instance']['entity_type'] != 'node' || $form['#instance']['bundle'] != 'site') {
+    return null;
+  }
 
-	$access = variable_get('s4_sites_field_access', array());
+  $access = variable_get('s4_sites_field_access', array());
 
-	$form['instance']['s4_sites_field_access'] = array(
-		'#type' => 'checkbox',
-		'#title' => 'Non department staff can edit this field',
-		'#default_value' => ($access[$form['#field']['field_name']] !== false),
-	);
+  $form['instance']['s4_sites_field_access'] = array(
+    '#type' => 'checkbox',
+    '#title' => 'Non department staff can edit this field',
+    '#default_value' => ($access[$form['#field']['field_name']] !== false),
+  );
 
-	$form['#submit'][] = 's4_sites_form_field_ui_field_edit_form_alter_submit';
+  $form['#submit'][] = 's4_sites_form_field_ui_field_edit_form_alter_submit';
 }
 
 function s4_sites_form_field_ui_field_edit_form_alter_submit($form, $form_state) {
-	$access = variable_get('s4_sites_field_access', array());
-	$access[$form['#field']['field_name']] = ($form_state['values']['s4_sites_field_access']) ? true : false;
-	variable_set('s4_sites_field_access', $access);
+  $access = variable_get('s4_sites_field_access', array());
+  $access[$form['#field']['field_name']] = ($form_state['values']['s4_sites_field_access']) ? true : false;
+  variable_set('s4_sites_field_access', $access);
 }
 
 /**
@@ -443,33 +443,33 @@ function s4_sites_form_site_node_form_alter(&$form, $form_state) {
   foreach($fields as $field_name) {
     $field = field_info_field($field_name);
     $term = $terms[$field['settings']['allowed_values'][0]['vocabulary']];
-    if(user_access('edit terms in ' . $term->vid)) {
+    if (user_access('edit terms in ' . $term->vid)) {
       $form[$field_name][$form['#node']->language]['#description'] .=
         l('Add new values to this list.', 'admin/structure/taxonomy/' . $term->machine_name, array('attributes' => array('target' => '_blank')));
     }
   }
-  if(!user_access('moderate site information')) {
+  if (!user_access('moderate site information')) {
     $form['revision_information']['#attributes']['class'][] = 'element-invisible';
     $form['revision_information']['#group'] = false;
     foreach($form['#groups'] as $k => $group) {
-    	$form['#groups'][$k]->format_type = 'accordion-item';
+      $form['#groups'][$k]->format_type = 'accordion-item';
     }
     $form['#groups']['group_site_tabs']->format_type = 'accordion';
-  	$access = variable_get('s4_sites_field_access', array());
-  	foreach($access as $name => $access) {
-  		if($access === false) {
-  			$form[$name]['#access'] = $form[$name]['#required'] = false;
-  		}
-  	}
-  	if(arg(3)) {
-  	 $terms = explode(',', arg(3));
-  	 foreach($terms as $term) {
-  	   $form['field_site_restrict'][$form['#node']->language]['#default_value'][] = $term;
-  	 }
-  	}
+    $access = variable_get('s4_sites_field_access', array());
+    foreach($access as $name => $access) {
+      if ($access === false) {
+        $form[$name]['#access'] = $form[$name]['#required'] = false;
+      }
+    }
+    if (arg(3)) {
+     $terms = explode(',', arg(3));
+     foreach($terms as $term) {
+       $form['field_site_restrict'][$form['#node']->language]['#default_value'][] = $term;
+     }
+    }
 
-  	drupal_add_js(array('wysiwyg' => array()), 'setting');
-  	drupal_set_title(t('Request a new site'));
+    drupal_add_js(array('wysiwyg' => array()), 'setting');
+    drupal_set_title(t('Request a new site'));
     drupal_add_js(drupal_get_path('module', 's4_sites') .'/js/s4_sites_accordion.js');
   }
 }
@@ -478,10 +478,10 @@ function s4_sites_form_site_node_form_alter(&$form, $form_state) {
 * Implements hook_node_insert.
 */
 function s4_sites_node_presave($node) {
-  if($node->type == 'site') {
+  if ($node->type == 'site') {
      cache_clear_all('s4_pages_overview_data', 'cache');
      $user = user_load($node->uid);
-     if(!user_access('moderate site information') && !$node->s4_sites_import) {
+     if (!user_access('moderate site information') && !$node->s4_sites_import) {
        $node->status = 0;
        drupal_set_message('Thanks for your site recommendation. We will be contacting you shortly.');
      }
@@ -489,318 +489,318 @@ function s4_sites_node_presave($node) {
 }
 
 /**
-*	Implementation of hook_field_formatter_info_alter
+*  Implementation of hook_field_formatter_info_alter
 */
 function s4_sites_field_formatter_info() {
-	return array(
-		's4_sites_local_phone_number' => array(
-	      'label' => t('Student Signup phone number'),
-	      'field types' => array('phone_number'),
-	      'multiple values' => FIELD_BEHAVIOR_DEFAULT,
-	    ),
-	    's4_sites_address' => array(
-	      'label' => t('Student Signup'),
-	      'field types' => array('location'),
-	    ),
-	    's4_sites_hours_matrix' => array(
-	      'label' => t('Site hours'),
-	      'field types' => array('matrix_text', 'matrix_custom'),
-	    ),
-	    's4_sites_population_matrix' => array(
-	      'label' => t('Site population'),
-	      'field types' => array('matrix_text', 'matrix_custom'),
-	    ),
-	);
+  return array(
+    's4_sites_local_phone_number' => array(
+        'label' => t('Student Signup phone number'),
+        'field types' => array('phone_number'),
+        'multiple values' => FIELD_BEHAVIOR_DEFAULT,
+      ),
+      's4_sites_address' => array(
+        'label' => t('Student Signup'),
+        'field types' => array('location'),
+      ),
+      's4_sites_hours_matrix' => array(
+        'label' => t('Site hours'),
+        'field types' => array('matrix_text', 'matrix_custom'),
+      ),
+      's4_sites_population_matrix' => array(
+        'label' => t('Site population'),
+        'field types' => array('matrix_text', 'matrix_custom'),
+      ),
+  );
 }
 
 /**
-*	Implementation of hook_field_formatter_view
+*  Implementation of hook_field_formatter_view
 */
 function s4_sites_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
 
   $element = array();
   $settings = $display['settings'];
-  if($display['type'] == 's4_sites_hours_matrix') {
-  	drupal_add_css(drupal_get_path('module', 's4_sites') .'/css/s4_sites.css');
-  	$element = _s4_sites_format_hours_matrix($entity_type, $entity, $field, $instance, $langcode, $items, $display);
+  if ($display['type'] == 's4_sites_hours_matrix') {
+    drupal_add_css(drupal_get_path('module', 's4_sites') .'/css/s4_sites.css');
+    $element = _s4_sites_format_hours_matrix($entity_type, $entity, $field, $instance, $langcode, $items, $display);
   }
-  if($display['type'] == 's4_sites_population_matrix') {
-  	$element = _s4_sites_format_site_population_matrix($entity_type, $entity, $field, $instance, $langcode, $items, $display);
+  if ($display['type'] == 's4_sites_population_matrix') {
+    $element = _s4_sites_format_site_population_matrix($entity_type, $entity, $field, $instance, $langcode, $items, $display);
   }
-  if($display['type'] == 's4_sites_local_phone_number') {
-	  foreach ($items as $delta => $item) {
+  if ($display['type'] == 's4_sites_local_phone_number') {
+    foreach ($items as $delta => $item) {
 
-	    $element[$delta] = array(
-	      '#markup' => _s4_sites_format_phone($item['number']),
-	    );
-	  }
+      $element[$delta] = array(
+        '#markup' => _s4_sites_format_phone($item['number']),
+      );
+    }
   }
-  if($display['type'] == 's4_sites_address') {
-  	 foreach ($items as $delta => $item) {
-	    $output = array();
-	    if($item['name']) {
-	    	$output[] = '<strong>'. $item['name'] .'</strong>';
-	    }
-	    if($item['phone']) {
-	    	$output[] = _s4_sites_format_phone($item['phone']);
-	    }
-	    if($item['fax']) {
-	    	$output[] = '<strong>Fax:</strong> ' . _s4_sites_format_phone($item['fax']);
-	    }
-	    if($item['street']) {
-	    	$output[] = $item['street'];
-	    }
-	    if($item['additional']) {
-	    	$output[] = $item['additional'];
-	    }
-	    $output[] = $item['city'] .', '. $item['province'] . '&nbsp;&nbsp;' . $item['postal_code'];
-	    $element[$delta] = array(
-	      '#markup' => '<address>'. implode('<br />', $output) .'</address>',
-	    );
-	  }
+  if ($display['type'] == 's4_sites_address') {
+     foreach ($items as $delta => $item) {
+      $output = array();
+      if ($item['name']) {
+        $output[] = '<strong>'. $item['name'] .'</strong>';
+      }
+      if ($item['phone']) {
+        $output[] = _s4_sites_format_phone($item['phone']);
+      }
+      if ($item['fax']) {
+        $output[] = '<strong>Fax:</strong> ' . _s4_sites_format_phone($item['fax']);
+      }
+      if ($item['street']) {
+        $output[] = $item['street'];
+      }
+      if ($item['additional']) {
+        $output[] = $item['additional'];
+      }
+      $output[] = $item['city'] .', '. $item['province'] . '&nbsp;&nbsp;' . $item['postal_code'];
+      $element[$delta] = array(
+        '#markup' => '<address>'. implode('<br />', $output) .'</address>',
+      );
+    }
 
   }
   return $element;
 }
 
 /**
-*	Field formatter for phone numbers
+*  Field formatter for phone numbers
 */
 function _s4_sites_format_phone($number) {
-	$regex = '/^
+  $regex = '/^
     ([2-9][0-8]\d)  # area code (Allowed range of [2-9] for the first digit, [0-8] for the second, and [0-9] for the third digit)
     ([2-9]\d{2})    # 3-digit prefix (cannot start with 0 or 1)
     (\d{4})         # 4-digit line number
     /x';
 
-	$result = preg_match($regex, $number, $matches);
+  $result = preg_match($regex, $number, $matches);
 
-	if ($result) {
-		return $cc['code'] . ' (' . $matches[1] . ') ' . $matches[2] . '-' . $matches[3];
-	}
-	return '';
+  if ($result) {
+    return $cc['code'] . ' (' . $matches[1] . ') ' . $matches[2] . '-' . $matches[3];
+  }
+  return '';
 }
 
 /**
-*	Field formatter for site hours matrix
+*  Field formatter for site hours matrix
 */
 function _s4_sites_format_hours_matrix($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
-	$hour_count = 0;
-	if (count($items[0]) == 1) { //if a single value is passed in from views
-		$element[0] = array(
-			'#markup' => field_filter_xss($items[0]['value']),
-		);
-	}
+  $hour_count = 0;
+  if (count($items[0]) == 1) { //if a single value is passed in from views
+    $element[0] = array(
+      '#markup' => field_filter_xss($items[0]['value']),
+    );
+  }
 
-	//transpose the $items array into a [$row][$col] = value arangement
-	foreach ($items as $delta => $item) {
-		$items[$item['row']][$item['col']][] = matrix_cell_value($item, $field);
-	}
+  //transpose the $items array into a [$row][$col] = value arangement
+  foreach ($items as $delta => $item) {
+    $items[$item['row']][$item['col']][] = matrix_cell_value($item, $field);
+  }
 
-	//work out how many rows and columns to show
-	// For rows this is rows_count if rows_count > 0, else the number of rows with at least some data in the row.
-	if ($field['settings']['rows_count'] > 0) {
-		$rows_count = $field['settings']['rows_count'];
-	}
-	else {
-		foreach ($items as $row_id => $row) {
-			foreach ($row as $col_id => $value) {
-				if ($value != '') {
-					$rows_count = $row_id;
-				}
-			}
-		}
-	}
+  //work out how many rows and columns to show
+  // For rows this is rows_count if rows_count > 0, else the number of rows with at least some data in the row.
+  if ($field['settings']['rows_count'] > 0) {
+    $rows_count = $field['settings']['rows_count'];
+  }
+  else {
+    foreach ($items as $row_id => $row) {
+      foreach ($row as $col_id => $value) {
+        if ($value != '') {
+          $rows_count = $row_id;
+        }
+      }
+    }
+  }
 
-	if ($cols_count = $field['settings']['cols_count'] > 0) {
-		$cols_count = $field['settings']['cols_count'];
-	}
-	else {
-		foreach ($items as $row_id => $row) {
-			foreach ($row as $col_id => $value) {
-				if (!empty($value)) {
-					$max_cols[$col_id] = $col_id;
-				}
-			}
-		}
-		$cols_count = max($max_cols);
-	}
+  if ($cols_count = $field['settings']['cols_count'] > 0) {
+    $cols_count = $field['settings']['cols_count'];
+  }
+  else {
+    foreach ($items as $row_id => $row) {
+      foreach ($row as $col_id => $value) {
+        if (!empty($value)) {
+          $max_cols[$col_id] = $col_id;
+        }
+      }
+    }
+    $cols_count = max($max_cols);
+  }
 
-	//populate the data part of the table rows
-	$rows = array();
-	for ($row = 1; $row <= $rows_count; $row++) {
-		for ($col = 1; $col <= $cols_count; $col++) {
-			$value = array('');
-			if (isset($items[$row][$col])) {
-				$value = $items[$row][$col];
-			}
-			$rows[$row][$col] = $value;
-		}
-	}
+  //populate the data part of the table rows
+  $rows = array();
+  for ($row = 1; $row <= $rows_count; $row++) {
+    for ($col = 1; $col <= $cols_count; $col++) {
+      $value = array('');
+      if (isset($items[$row][$col])) {
+        $value = $items[$row][$col];
+      }
+      $rows[$row][$col] = $value;
+    }
+  }
 
-	//collapse any multi-valued results into a list
-	foreach ($rows as $row_id => $row) {
-		foreach ($row as $col_id => $values) {
-			if (count($values) > 1) {
-				$values = theme('item_list', array('items' => $values));
-			}
-			else {
-				$values = $values[0];
-			}
-			$yes_class = ($values) ? 'hours-yes' : 'hours-no';
-			if($values) {
-			 $hour_count++;
-			}
-			$rows[$row_id][$col_id] = array('data' => ($values) ? 'available' : 'not available', 'class' => $yes_class . ' 	matrix-col-'. $col_id .' matrix-row-'. $row_id .' matrix-cell-'. $row_id .'-'. $col_id);
-		}
-	}
+  //collapse any multi-valued results into a list
+  foreach ($rows as $row_id => $row) {
+    foreach ($row as $col_id => $values) {
+      if (count($values) > 1) {
+        $values = theme('item_list', array('items' => $values));
+      }
+      else {
+        $values = $values[0];
+      }
+      $yes_class = ($values) ? 'hours-yes' : 'hours-no';
+      if ($values) {
+       $hour_count++;
+      }
+      $rows[$row_id][$col_id] = array('data' => ($values) ? 'available' : 'not available', 'class' => $yes_class . '   matrix-col-'. $col_id .' matrix-row-'. $row_id .' matrix-cell-'. $row_id .'-'. $col_id);
+    }
+  }
 
-	if ($field['type'] == 'matrix_text' && $field['settings']['spreadsheet_style'] == TRUE) {
-		for ($col = 1; $col <= $cols_count; $col++) {
-			$headers[$col] = matrix_make_letter($col);
-		}
-		array_unshift($headers, ''); //cell 0,0
+  if ($field['type'] == 'matrix_text' && $field['settings']['spreadsheet_style'] == TRUE) {
+    for ($col = 1; $col <= $cols_count; $col++) {
+      $headers[$col] = matrix_make_letter($col);
+    }
+    array_unshift($headers, ''); //cell 0,0
 
-		for ($row = 1; $row <= $rows_count; $row++) {
-			$cell = array('data' => $row, 'scope' => 'row', 'header' => true, 'class' => 'matrix-col-header');
-			array_unshift($rows[$row], $cell);
-		}
-	}
-	elseif ($field['type'] == 'matrix_custom') {
-		$headers = array();
-		$headers = array_fill(1, $cols_count, '&nbsp;'); //initialize the headers with spaces (in case headers have not title set)
-		$settings = unserialize($field['settings']['settings']);
+    for ($row = 1; $row <= $rows_count; $row++) {
+      $cell = array('data' => $row, 'scope' => 'row', 'header' => true, 'class' => 'matrix-col-header');
+      array_unshift($rows[$row], $cell);
+    }
+  }
+  elseif ($field['type'] == 'matrix_custom') {
+    $headers = array();
+    $headers = array_fill(1, $cols_count, '&nbsp;'); //initialize the headers with spaces (in case headers have not title set)
+    $settings = unserialize($field['settings']['settings']);
 
-		if (isset($settings['cols'])) {
-			foreach ($settings['cols'] as $col_id => $col) {
-				$headers[$col_id] = $col['title'];
-			}
-		}
+    if (isset($settings['cols'])) {
+      foreach ($settings['cols'] as $col_id => $col) {
+        $headers[$col_id] = $col['title'];
+      }
+    }
 
-		if ($field['settings']['rows_count'] > 0) { //had left lables so translate the headers one to the right
-			array_unshift($headers, ''); //cell 0,0
-		}
+    if ($field['settings']['rows_count'] > 0) { //had left lables so translate the headers one to the right
+      array_unshift($headers, ''); //cell 0,0
+    }
 
-		if (!empty($settings['rows'])) {
-			foreach ($settings['rows'] as $row_id => $row) {
-				$cell = array('data' => $row['title'], 'scope' => 'row', 'header' => true, 'class' => 'matrix-col-header');
-				if (isset($rows[$row_id])) {
-					array_unshift($rows[$row_id], $cell);
-				}
-			}
-		}
-	}
-	else {
-		$headers = NULL;
-	}
+    if (!empty($settings['rows'])) {
+      foreach ($settings['rows'] as $row_id => $row) {
+        $cell = array('data' => $row['title'], 'scope' => 'row', 'header' => true, 'class' => 'matrix-col-header');
+        if (isset($rows[$row_id])) {
+          array_unshift($rows[$row_id], $cell);
+        }
+      }
+    }
+  }
+  else {
+    $headers = NULL;
+  }
 
-	$element[0] = array(
-		'#theme' => 'table',
-		'#header' => $headers,
-		'#rows' => $rows,
-		'#caption' => 'Available times are <span class="hours-sample">marked in dark blue</span>.',
-	);
-	if(!$hour_count) {
-	 return null;
-	}
-	return $element;
+  $element[0] = array(
+    '#theme' => 'table',
+    '#header' => $headers,
+    '#rows' => $rows,
+    '#caption' => 'Available times are <span class="hours-sample">marked in dark blue</span>.',
+  );
+  if (!$hour_count) {
+   return null;
+  }
+  return $element;
 }
 
 /**
-*	Field format callback for population matrix fields
+*  Field format callback for population matrix fields
 */
 function _s4_sites_format_site_population_matrix($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
-	$settings = unserialize($field['settings']['settings']);
-	$data = array();
-	foreach($items as $row) {
-		$data[$settings['rows'][$row['row']]['title']] = $row['value'];
-	}
-	$element[0] = array(
-		'#theme' => 's4_reporting_chart_pie',
-		'#id' => 'demographics-pie',
-		'#label' => 'Population',
-		'#title' => '',
-		'#width' => 240,
-		'#height' => 220,
-		'#data' => $data,
-	);
-	return $element;
+  $settings = unserialize($field['settings']['settings']);
+  $data = array();
+  foreach($items as $row) {
+    $data[$settings['rows'][$row['row']]['title']] = $row['value'];
+  }
+  $element[0] = array(
+    '#theme' => 's4_reporting_chart_pie',
+    '#id' => 'demographics-pie',
+    '#label' => 'Population',
+    '#title' => '',
+    '#width' => 240,
+    '#height' => 220,
+    '#data' => $data,
+  );
+  return $element;
 }
 
 /**
 *
 */
 function s4_sites_s4_reporting_info() {
-	$info = array();
-	foreach(array('site', 'file', 'coordinator', 'contact_record') as $type) {
-		$fields = field_info_instances('node', $type);
-		foreach($fields as $name => $field) {
-			$info['s4_sites']['filters'][$type][$name] = $field;
-			$info['s4_sites']['fields'][$type][$name] = $field;
-		}
-		$info['s4_sites']['types'][$type] = node_type_load($type);
-	}
-	return $info;
+  $info = array();
+  foreach(array('site', 'file', 'coordinator', 'contact_record') as $type) {
+    $fields = field_info_instances('node', $type);
+    foreach($fields as $name => $field) {
+      $info['s4_sites']['filters'][$type][$name] = $field;
+      $info['s4_sites']['fields'][$type][$name] = $field;
+    }
+    $info['s4_sites']['types'][$type] = node_type_load($type);
+  }
+  return $info;
 }
 
 function s4_sites_s4_reporting_term_report($report_criteria) {
-	module_load_include('inc', 's4_sites', 's4_sites.reporting');
-	return _s4_sites_s4_reporting_term_report($report_criteria);
+  module_load_include('inc', 's4_sites', 's4_sites.reporting');
+  return _s4_sites_s4_reporting_term_report($report_criteria);
 }
 
 /**
-*	Implementation of hook_s4_help
+*  Implementation of hook_s4_help
 */
 function s4_sites_s4_help($path) {
-	module_load_include('inc', 's4_sites', 's4_sites.help');
-	return _s4_sites_help($path);
+  module_load_include('inc', 's4_sites', 's4_sites.help');
+  return _s4_sites_help($path);
 }
 
 function s4_sites_s4_site_configuration() {
-	return array(
-		'workflow_settings' => array(
-		  'group' => t('General settings'),
-		  'title' => t('Workflow settings'),
-		  'description' => t('Set up how sites are approved or rejected.'),
-		  'href' => 'admin/config/s4/workflow',
-		),
-		'category_files' => array(
-			'group' => t('Categories'),
-			'title' => t('File categories'),
-			'description' => t('Change how files attached to sites are categorized.'),
-			'href' => 'admin/structure/taxonomy/file_category',
-		),
-		'category_issues' => array(
-			'group' => t('Categories'),
-			'title' => t('Issues addressed'),
-			'description' => t('Manage the list of issues addressed by sites.'),
-			'href' => 'admin/structure/taxonomy/issues_addressed',
-		),
-		'category_site_org' => array(
-			'group' => t('Categories'),
-			'title' => t('Organization type'),
-			'description' => t('Manage the list of site organization types.'),
-			'href' => 'admin/structure/taxonomy/organization_type',
-		),
-		'category_restrictions' => array(
-			'group' => t('Categories'),
-			'title' => t('Student & site restrictions'),
-			'description' => t('The list of restrictions used to control who can sign up with a site or site staff.'),
-			'href' => 'admin/structure/taxonomy/site_restrictions',
-		),
-		'category_requirements' => array(
-			'group' => t('Categories'),
-			'title' => t('Site special requirements'),
-			'description' => t('Special requirements like training or other risk-associated restrictions.'),
-			'href' => 'admin/structure/taxonomy/special_requirements',
-		),
-		'category_staff' => array(
-			'group' => t('Categories'),
-			'title' => t('Site staff roles'),
-			'description' => t('Manage the list of available site staff roles like "Executive Director" or "Site supervisor."'),
-			'href' => 'admin/structure/taxonomy/site_staff_role',
-		),
-	);
+  return array(
+    'workflow_settings' => array(
+      'group' => t('General settings'),
+      'title' => t('Workflow settings'),
+      'description' => t('Set up how sites are approved or rejected.'),
+      'href' => 'admin/config/s4/workflow',
+    ),
+    'category_files' => array(
+      'group' => t('Categories'),
+      'title' => t('File categories'),
+      'description' => t('Change how files attached to sites are categorized.'),
+      'href' => 'admin/structure/taxonomy/file_category',
+    ),
+    'category_issues' => array(
+      'group' => t('Categories'),
+      'title' => t('Issues addressed'),
+      'description' => t('Manage the list of issues addressed by sites.'),
+      'href' => 'admin/structure/taxonomy/issues_addressed',
+    ),
+    'category_site_org' => array(
+      'group' => t('Categories'),
+      'title' => t('Organization type'),
+      'description' => t('Manage the list of site organization types.'),
+      'href' => 'admin/structure/taxonomy/organization_type',
+    ),
+    'category_restrictions' => array(
+      'group' => t('Categories'),
+      'title' => t('Student & site restrictions'),
+      'description' => t('The list of restrictions used to control who can sign up with a site or site staff.'),
+      'href' => 'admin/structure/taxonomy/site_restrictions',
+    ),
+    'category_requirements' => array(
+      'group' => t('Categories'),
+      'title' => t('Site special requirements'),
+      'description' => t('Special requirements like training or other risk-associated restrictions.'),
+      'href' => 'admin/structure/taxonomy/special_requirements',
+    ),
+    'category_staff' => array(
+      'group' => t('Categories'),
+      'title' => t('Site staff roles'),
+      'description' => t('Manage the list of available site staff roles like "Executive Director" or "Site supervisor."'),
+      'href' => 'admin/structure/taxonomy/site_staff_role',
+    ),
+  );
 }
 
 /**
@@ -825,22 +825,22 @@ function s4_sites_ds_layout_info() {
 }
 
 function s4_sites_form_workbench_moderation_moderate_form_alter(&$form) {
-	if($form['#access'] === FALSE) {
-		return;
-	}
-	$form['note'] = array(
-		'#type' => 'textarea',
-		'#title' => t('Notes'),
-		'#rows' => 2,
-		'#weight' => -4,
-		);
-	unset($form['#theme']);
-	unset($form['#attributes']['class']);
-	$form['state']['#title'] = t('Select new status');
-	$form['submit']['#value'] = t('Save');
-	$form['#submit'][] = 's4_sites_form_workbench_moderation_moderate_form_alter_submit';
+  if ($form['#access'] === FALSE) {
+    return;
+  }
+  $form['note'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Notes'),
+    '#rows' => 2,
+    '#weight' => -4,
+    );
+  unset($form['#theme']);
+  unset($form['#attributes']['class']);
+  $form['state']['#title'] = t('Select new status');
+  $form['submit']['#value'] = t('Save');
+  $form['#submit'][] = 's4_sites_form_workbench_moderation_moderate_form_alter_submit';
   foreach($form['#submit'] as $k => $callback) {
-    if($callback == 'workbench_moderation_moderate_form_submit') {
+    if ($callback == 'workbench_moderation_moderate_form_submit') {
       unset($form['#submit'][$k]);
     }
   }
@@ -858,15 +858,15 @@ function s4_sites_form_workbench_moderation_moderate_form_alter_submit($form, $f
   // able to redirect to the published revision.
   
   $query = db_select('workbench_moderation_node_history', 'w')
-    							->condition('w.nid', $form_state['values']['node']->nid);
+                  ->condition('w.nid', $form_state['values']['node']->nid);
   $query->addExpression('max(w.hid)', 'max_hid');
   $latest_id = $query->execute()
-    							->fetchField();
-	db_update('workbench_moderation_node_history')
-		->condition('nid', $form_state['values']['node']->nid)
-		->condition('hid', $latest_id)
-		->fields(array('note' => $form_state['values']['note']))
-		->execute();
+                  ->fetchField();
+  db_update('workbench_moderation_node_history')
+    ->condition('nid', $form_state['values']['node']->nid)
+    ->condition('hid', $latest_id)
+    ->fields(array('note' => $form_state['values']['note']))
+    ->execute();
   if (!empty($form['#destination'])) {
     if ($form_state['values']['state'] == workbench_moderation_state_published()) {
       if ($uri = entity_uri('node', $form['node']['#value'])) {

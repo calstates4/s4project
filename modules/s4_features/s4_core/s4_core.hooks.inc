@@ -107,30 +107,30 @@ function hook_s4_get_user($login_id) {
 }
 
 /**
-*	Returns a list of links and descriptions for the S4 Site Configuration page
+*  Returns a list of links and descriptions for the S4 Site Configuration page
 */
 function hook_s4_site_configuration() {
-	return array(
-		'test_link' => array(
-			'group' => t('My group'),
-			'title' => t('My settings option'),
-			'href'  => 'settings/mysettings',
-			'description' => t('Description of my setting page'),
-		),
-	);
+  return array(
+    'test_link' => array(
+      'group' => t('My group'),
+      'title' => t('My settings option'),
+      'href'  => 'settings/mysettings',
+      'description' => t('Description of my setting page'),
+    ),
+  );
 }
 
 /**
-*	Allows modules to restrict access to certain fields in a group
-*	@return a keyed array where the key is a bundle name and the value is an array of
-*		    field names to restrict access to.
+*  Allows modules to restrict access to certain fields in a group
+*  @return a keyed array where the key is a bundle name and the value is an array of
+*        field names to restrict access to.
 */
 function hook_s4_field_access() {
-	
-	return array('mybundle' => array(
-						'field_one',
-						'field_two',
-				),
-				
-	);
+  
+  return array('mybundle' => array(
+            'field_one',
+            'field_two',
+        ),
+        
+  );
 }

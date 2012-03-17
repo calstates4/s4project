@@ -7,7 +7,7 @@
 include_once('s4_map.features.inc');
 
 function s4_map_views_query_alter(&$view, &$query) {
-  if($view->name == 'site_map'){
+  if ($view->name == 'site_map'){
     $query->where[0]['conditions'][] = array('field' => 'location.latitude',
     									    'value' => floatval($_GET['lat_min']),
     									    'operator' => '>=');

@@ -19,10 +19,10 @@ function s4_reporting_block_site_summary() {
 }
 
 function s4_reporting_block_course_summary() {
-	if(!module_exists('s4_courses')) {
+	if (!module_exists('s4_courses')) {
 		return null;
 	}
-	if($cache = cache_get('s4_erporting_courses')) {
+	if ($cache = cache_get('s4_erporting_courses')) {
 		return $cache->data;
 	}
 	$terms = _s4_courses_get_current_terms();
@@ -65,7 +65,7 @@ function s4_reporting_block_course_summary() {
 
 		$items[] = '<strong>Courses: </strong>' .l($total, 'courses');
 		$items[] = '<strong>Students: </strong>' .l($students, 'students');
-		if($students) {
+		if ($students) {
 			//Preventing division by zero error
 			$items[] = '<strong>Total signups: </strong>' .l($signups, 'students') . ' (' . round(($signups / $students) * 100, 2) .'%)';
 		}

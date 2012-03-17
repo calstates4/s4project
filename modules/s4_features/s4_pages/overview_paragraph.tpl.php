@@ -1,6 +1,6 @@
 <p class="overview">
 Together, we 
-<?php if($data['students']): ?>
+<?php if ($data['students']): ?>
   have placed <span class="number"><?php print $data['students']; ?></span> students
 <?php else: ?>
   will place students

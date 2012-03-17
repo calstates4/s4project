@@ -69,22 +69,22 @@ function s4_sites_install() {
       2 => 'revision',
     ));
 
-  $node = (object)array (
+  $node = (object)array(
       'title' => 'Integrative Learning Rubric',
        'type' => 'webform',
        'language' => 'en',
        'body' => 
-      array (
+      array(
         'en' => 
-        array (
+        array(
           0 => 
-          array (
+          array(
             'value' => '',
             'safe_summary' => '',
           ),
         ),
       ),'webform' => 
-        array (
+        array(
           'confirmation' => '',
           'confirmation_format' => 'filtered_html',
           'redirect_url' => '',
@@ -99,18 +99,18 @@ function s4_sites_install() {
           'submit_interval' => '-1',
           'record_exists' => true,
           'roles' => 
-          array (
+          array(
             0 => '1',
             1 => '2',
           ),
           'emails' => 
-          array (
+          array(
           ),
 
       'components' => 
-      array (
+      array(
         1 => 
-        array (
+        array(
           'cid' => '1',
           'pid' => '0',
           'form_key' => 'assessment_rubric',
@@ -118,7 +118,7 @@ function s4_sites_install() {
           'type' => 'grid',
           'value' => '',
           'extra' => 
-          array (
+          array(
             'title_display' => 0,
             'optrand' => 0,
             'qrand' => 0,

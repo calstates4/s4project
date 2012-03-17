@@ -147,7 +147,7 @@ function s4_pages_overview_paragraph() {
     $data['students'] = $query->countQuery()->execute()->fetchField();
     cache_set('s4_pages_overview_data', $data, 'cache', CACHE_TEMPORARY);
   }
-  if($data['sites'] == 0) {
+  if ($data['sites'] == 0) {
   	return null;
   }
   return array('subject' => NULL,
@@ -160,7 +160,7 @@ function s4_pages_overview_paragraph() {
 function s4_pages_dashboard_title() {
   global $user;
   foreach($user->roles as $role) {
-  	if($role == 'staff') {
+  	if ($role == 'staff') {
   		return null;
   	}
   }

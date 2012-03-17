@@ -1,7 +1,7 @@
 <?php
 
 /**
-*	Admin form for general site settings
+*  Admin form for general site settings
 */
 function s4_core_admin_form() {
   $form = array();

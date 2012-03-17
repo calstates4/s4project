@@ -4,12 +4,12 @@
 *  Block helper for rendering a given webform submission
 */
 function s4_webform_render_submission($field, $node = FALSE) {
-  if(!$node) {
+  if (!$node) {
   	$node = menu_get_object();
   }
   $sid = field_get_items('node', $node, $field);
   $output = '';
-  if(!$sid || !count($sid)) {
+  if (!$sid || !count($sid)) {
   	return FALSE;
   }
   foreach($sid as $submission) {
@@ -68,14 +68,14 @@ function s4_webform_form_webform_components_form_alter(&$form, $form_state) {
 function s4_webform_form_webform_component_edit_form_alter(&$form, $form_state) {
 	$form['form_key']['#title'] = t('Short computer name');
 	$form['form_key']['#description'] = t('Enter a computer-readable version of this question. This can only contain letters, numbers, and underscores (_).');
-	if(isset($form['display']['title_display'])) {
+	if (isset($form['display']['title_display'])) {
 		$form['display']['title_display']['#title'] = t('Hide the question text');
 		$form['display']['title_display']['#description'] = t('Do not display the question over this field.');
 	}	
-	if(isset($form['display']['aslist'])) {
+	if (isset($form['display']['aslist'])) {
 		$form['display']['aslist']['#description'] = t('Check this box if you want this question\'s options to be a drop-down menu instead of a list of check boxes or radio buttons.');
 	}
-	if(isset($form['extra']['savelocation']) && !$form['cid']['#value']) {
+	if (isset($form['extra']['savelocation']) && !$form['cid']['#value']) {
 		$form['extra']['savelocation']['#default_value'] = 'form-files';
 	}
 	$form['submit']['#value'] = 'Save question';

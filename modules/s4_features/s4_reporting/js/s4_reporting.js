@@ -1,7 +1,7 @@
 (function($) {
 	$(document).ready(function() {
 		$('input#edit-fields-all').change(function() {
-			if($(this).is(':checked')) {
+			if ($(this).is(':checked')) {
 				$('input.s4-reporting-fields').attr('checked', true);
 			}
 			else {
@@ -13,14 +13,14 @@
 		$('.field-name-field-report-field select').chosen();
 		$('.field-name-field-filter-field select').change(function() {
 			var $valueCell = $(this).parents('tr:first').find('.field-name-field-filter-values');
-			if(typeof Drupal.settings.s4_reporting_filters[$(this).val()] != 'undefined') {
+			if (typeof Drupal.settings.s4_reporting_filters[$(this).val()] != 'undefined') {
 				var text = $valueCell.find('input.form-text').val().split(',');
 				var $valueField = $('<select>');
 				$valueField.attr('multiple', 'multiple');
 				$.each(Drupal.settings.s4_reporting_filters[$(this).val()], function(index, value) {
 					var $option = $('<option>').attr('value', index)
 											   .html(value);
-					if(text.indexOf(index) != -1) {
+					if (text.indexOf(index) != -1) {
 						$option.attr('selected', 'selected');
 					}
 					$valueField.append($option);

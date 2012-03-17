@@ -1,10 +1,10 @@
 <?php
 
-require_once(drupal_get_path('module', 's4_core') .'/tests/s4_core_base_test.php');
+require_once(drupal_get_path('module', 's4_core') . '/tests/s4_core_base_test.php');
 
 class S4ApiBatchTestCase extends s4WebTestCase {
-	
-	public static function getInfo() {
+  
+  public static function getInfo() {
     return array(
       'name' => 'S4 Batch API test',
       'description' => 'Test the batch API method.',
@@ -13,25 +13,25 @@ class S4ApiBatchTestCase extends s4WebTestCase {
   }
   
   public function setUp() {
-  	parent::setUp($this->modules + array('s4_api_batch', 's4_api_devel'));  	
+    parent::setUp($this->modules + array('s4_api_batch', 's4_api_devel'));    
   }
   
   public function testSetBatchAdmin() {
-  	$this->drupalLogin($this->drupalCreateUser($this->roles['administrator']));
-	$this->drupalPost('admin/config/s4/batch-api', array(
-					's4_api_batch_location' => 'profiles/student_signup/modules/s4_features/s4_core/modules/s4_api_batch/tests',
-					),
-					t('Save Configuration'));
-	$this->assertText('The configuration options have been saved.');
-	$this->drupalPost('admin/config/s4/api-devel', array(
-					'term_enable' => 1,
-					'term_module' => 's4_api_batch',
-					'term_start_date' => '2010-01-01',
-					'term_end_date' => '2011-01-01',
-					),
-					t('Start test'));
-	$this->assertText('term (pass)');
-	$this->assertText('Fall 2010');
+    $this->drupalLogin($this->drupalCreateUser($this->roles['administrator']));
+  $this->drupalPost('admin/config/s4/batch-api', array(
+          's4_api_batch_location' => 'profiles/student_signup/modules/s4_features/s4_core/modules/s4_api_batch/tests',
+          ),
+          t('Save Configuration'));
+  $this->assertText('The configuration options have been saved.');
+  $this->drupalPost('admin/config/s4/api-devel', array(
+          'term_enable' => 1,
+          'term_module' => 's4_api_batch',
+          'term_start_date' => '2010-01-01',
+          'term_end_date' => '2011-01-01',
+          ),
+          t('Start test'));
+  $this->assertText('term (pass)');
+  $this->assertText('Fall 2010');
   }
   
 }

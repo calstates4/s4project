@@ -102,28 +102,28 @@ function s4_core_views_data() {
 }
 
 /**
-*	Implementatio of hook_views_plugins
+*  Implementatio of hook_views_plugins
 */
 function s4_core_views_plugins() {
-	$plugins = array(
-		'access' => array(
-		  'type_role' => array(
-		    'title' => t('Node type and role'),
-		    'help' => t('Access will be granted to users with the specified role where the node in the URL argument is given.'),
-		    'handler' => 's4_core_views_access_node_type_role',
-		    'uses options' => TRUE,
-		    'help topic' => 'access-perm',
-		  ),
-		  'role_reverse' => array(
-		    'title' => t('User is not in a role'),
-		    'help' => t('Access will be granted to users without the selected role.'),
-		    'handler' => 's4_core_views_access_role_reverse',
-		    'uses options' => TRUE,
-		    'help topic' => 'access-perm',
-		  ),
-		),
-	);
-	return $plugins;
+  $plugins = array(
+    'access' => array(
+      'type_role' => array(
+        'title' => t('Node type and role'),
+        'help' => t('Access will be granted to users with the specified role where the node in the URL argument is given.'),
+        'handler' => 's4_core_views_access_node_type_role',
+        'uses options' => TRUE,
+        'help topic' => 'access-perm',
+      ),
+      'role_reverse' => array(
+        'title' => t('User is not in a role'),
+        'help' => t('Access will be granted to users without the selected role.'),
+        'handler' => 's4_core_views_access_role_reverse',
+        'uses options' => TRUE,
+        'help topic' => 'access-perm',
+      ),
+    ),
+  );
+  return $plugins;
 }
 
 /**

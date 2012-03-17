@@ -4,9 +4,9 @@ function s4_courses_admin_form() {
   $form = array();
   
   $values = variable_get('s4_courses_term_codes', array('1' => 'Winter',
-  														'2' => 'Spring',
-  														'3' => 'Summer',
-  														'4' => 'Winter',));
+                              '2' => 'Spring',
+                              '3' => 'Summer',
+                              '4' => 'Winter',));
   foreach ($values as $key => $value) {
     $term_values[] = $key . '|' . $value;
   }
@@ -41,10 +41,10 @@ function s4_courses_admin_form() {
   );
   
   $form['s4_courses_default_filter'] = array(
-  	'#type' => 'textarea',
-  	'#title' => 'Default course filter',
-  	'#description' => 'If your SIS import tool does not filter out service learning courses, you can enter a filter pattern here. If your import tool already does the filtering for you, leave this blank.',
-  	'#default_value' => variable_get('s4_courses_default_filter', ''),
+    '#type' => 'textarea',
+    '#title' => 'Default course filter',
+    '#description' => 'If your SIS import tool does not filter out service learning courses, you can enter a filter pattern here. If your import tool already does the filtering for you, leave this blank.',
+    '#default_value' => variable_get('s4_courses_default_filter', ''),
   );
   
   $form['submit'] = array(

@@ -1,36 +1,36 @@
 <?php
 
 function s4_help_block_info() {
-	$blocks['s4_contextual_help'] = array('info' => 'Contextual help');
-	return $blocks;
+  $blocks['s4_contextual_help'] = array('info' => 'Contextual help');
+  return $blocks;
 }
 
 function s4_help_block_view($delta) {
-	switch($delta) {
-		case 's4_contextual_help':
-			drupal_add_css('profiles/student_signup/libraries/guiders/guiders-1.1.1.css');
-			drupal_add_js('profiles/student_signup/libraries/guiders/guiders-1.1.1.js');
-			drupal_add_js(drupal_get_path('module', 's4_help') .'/js/s4_help.js');
-			$help = array();
-			foreach(module_implements('s4_help') as $module) {
-				$help_item = module_invoke($module, 's4_help', $_GET['q']);
-				if(is_array($help_item)) {
-					$help = $help_item;
-				}
-			}
-			if(count($help)) {
-				while($item = current($help)) {
-					$key = key($help);
-					$help[$key]['id'] = $key;
-					if($next = next($help)) {
-						$help[$key]['buttons'] = array(array('name' =>  "Next"));
-						$help[$key]['next'] = key($help);
-					}
-				}
-				drupal_add_js(array('s4_help' => $help), 'setting');
-				return array('content' => '<a href="#" id="contextual-help">Help</a>');
-			}
-			break;
-	}
+  switch($delta) {
+    case 's4_contextual_help':
+      drupal_add_css('profiles/student_signup/libraries/guiders/guiders-1.1.1.css');
+      drupal_add_js('profiles/student_signup/libraries/guiders/guiders-1.1.1.js');
+      drupal_add_js(drupal_get_path('module', 's4_help') .'/js/s4_help.js');
+      $help = array();
+      foreach(module_implements('s4_help') as $module) {
+        $help_item = module_invoke($module, 's4_help', $_GET['q']);
+        if (is_array($help_item)) {
+          $help = $help_item;
+        }
+      }
+      if (count($help)) {
+        while($item = current($help)) {
+          $key = key($help);
+          $help[$key]['id'] = $key;
+          if ($next = next($help)) {
+            $help[$key]['buttons'] = array(array('name' =>  "Next"));
+            $help[$key]['next'] = key($help);
+          }
+        }
+        drupal_add_js(array('s4_help' => $help), 'setting');
+        return array('content' => '<a href="#" id="contextual-help">Help</a>');
+      }
+      break;
+  }
 }
 

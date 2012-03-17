@@ -56,10 +56,10 @@ function s4_reporting_menu() {
 
 function s4_reporting_form_views_exposed_form_alter(&$form, $form_state) {
 	$saved_searches = variable_get('views_savedsearches', array());
-	if($saved_searches[$form_state['view']->name]) {
+	if ($saved_searches[$form_state['view']->name]) {
 		global $user;
 		$saved_searches = views_savedsearches_load_multiple($user->uid, $form_state['view']->vid);
-		if(count($saved_searches)) {
+		if (count($saved_searches)) {
 			$fancybox_settings = variable_get('fancybox_settings', array());
 			if (!empty($fancybox_settings)) {
 				fancybox_activate($fancybox_settings);
@@ -87,13 +87,13 @@ function s4_reporting_form_views_savedsearches_save_search_form_alter(&$form, $f
 function s4_reporting_form_report_node_form_alter(&$form, $form_state) {
 	drupal_add_js(drupal_get_path('module', 's4_reporting') .'/js/s4_reporting.js');
 	foreach($form['field_report_filters'][$form['#node']->language] as $key => $field_entity) {
-		if(is_numeric($key) && is_array($field_entity) && isset($field_entity['field_filter_field'])) {
+		if (is_numeric($key) && is_array($field_entity) && isset($field_entity['field_filter_field'])) {
 			$field = &$form['field_report_filters'][$form['#node']->language][$key]['field_filter_field'];
 			$field[$field['#language']]['#options'] = s4_reporting_get_filter_fields();
 		}
 	}
 	foreach($form['field_report_fields'][$form['#node']->language] as $key => $field_entity) {
-		if(is_numeric($key) && is_array($field_entity) && isset($field_entity['field_report_field'])) {
+		if (is_numeric($key) && is_array($field_entity) && isset($field_entity['field_report_field'])) {
 			$field = &$form['field_report_fields'][$form['#node']->language][$key]['field_report_field'];
 			$field[$field['#language']]['#options'] = s4_reporting_get_field_fields();
 		}
@@ -106,7 +106,7 @@ function s4_reporting_form_report_node_form_alter(&$form, $form_state) {
 			foreach($options as $k => $option) {
 				$options[$k] = text_summary($option, null, 40);
 			}
-			if(count($options)) {
+			if (count($options)) {
 				$filter_settings[$filter['bundle'] .'|'. $filter['field_name']] = $options;
 			}
 		}
@@ -147,7 +147,7 @@ function s4_reporting_get_field_fields() {
 
 function _s4_reporting_get_fields() {
 	static $info;
-	if(is_array($info)) {
+	if (is_array($info)) {
 		return $info;
 	}
 	$info = array('filters' => array(), 'fields' => array(), 'types' => array());
@@ -224,7 +224,7 @@ function s4_reporting_theme_views_savedsearches_list($variables) {
   $output = '';
 
   // Load saved searches for the current user, to use them as form options.
-  if(user_access('use all savedsearches')){
+  if (user_access('use all savedsearches')){
     $saved_searches = views_savedsearches_load_multiple(NULL, $view->vid, $view->name);
   }
   else{
@@ -257,13 +257,13 @@ function theme_s4_reporting_chart_pie($data) {
 	$values[] = 'data.addRows('. count($data['data']) .');';
 	$i = 0;
 	foreach($data['data'] as $type => $value) {
-		if($value) {
+		if ($value) {
 			$values[] = 'data.setValue('. $i .',0,"'. $type .'");';
 			$values[] = 'data.setValue('. $i .',1,'. $value .');';
 			$i++;
 		}
 	}
-	if(count($values) == 3) {
+	if (count($values) == 3) {
 		return null;
 	}
 	drupal_add_js(sprintf($script, implode("\n", $values)), 'inline');
@@ -271,9 +271,9 @@ function theme_s4_reporting_chart_pie($data) {
 }
 
 function s4_reporting_views_pre_render($view) {
-	if($view->name == 'report_students' && arg(0) == 'reports') {
+	if ($view->name == 'report_students' && arg(0) == 'reports') {
 		module_load_include('inc', 'webform', 'includes/webform.submissions');
-		if(isset($view->result[0]->field_field_form_signup_sid)) { 
+		if (isset($view->result[0]->field_field_form_signup_sid)) { 
 			//s4_reporting_append_form_to_view($view, 'field_field_form_signup_sid', 'field_field_site_form');
 		}
 	}
@@ -289,7 +289,7 @@ function s4_reporting_append_form_to_view($view, $signup_field, $site_field) {
 		/**
 		*	Please don't look so hard at this, you might go blind.
 		*/
-		if($form->webform['components']) {
+		if ($form->webform['components']) {
 			foreach($form->webform['components'] as $key => $component) {
 				$view->result[$result_key]->{$component['form_key']} = array(
 					'rendered' => array(
@@ -299,9 +299,9 @@ function s4_reporting_append_form_to_view($view, $signup_field, $site_field) {
 						'value' => $submission->data[$key]['value'],
 					),
 				);
-				if(!isset($view->field[$component['form_key']])) {
+				if (!isset($view->field[$component['form_key']])) {
 					foreach($view->field as $field_key => $field) {
-						if(get_class($field) == 'views_handler_field_field') {
+						if (get_class($field) == 'views_handler_field_field') {
 							$view->field[$component['form_key']] = clone $view->field[$field_key];
 						}
 					}
@@ -340,7 +340,7 @@ function s4_reporting_s4_reporting_term_report($report_criteria) {
 				   ->fields('r', array('nid', 'status'));
     $query->leftJoin('field_data_field_term', 't', 't.entity_id = r.nid AND t.bundle = :course', array(':course' => 'course'));
     $query->fields('t', array('field_term_nid'));
-    if($report_criteria['term']) {
+    if ($report_criteria['term']) {
     	$query->condition('t.field_term_nid', $report_criteria['term']->nid);
     }
     else {

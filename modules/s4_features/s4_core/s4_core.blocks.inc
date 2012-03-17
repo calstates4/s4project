@@ -60,7 +60,7 @@ function s4_core_block_user_progress() {
               );
     }
     $form_terms = s4_core_site_has_downloadable_forms($site);
-    if(count($form_terms) && !$_SESSION['s4_core_viewed_downloadable_forms']) {
+    if (count($form_terms) && !$_SESSION['s4_core_viewed_downloadable_forms']) {
       $status['form']['href'] = 'forms/download/' . implode('+', $form_terms);
     }
   }
@@ -121,7 +121,7 @@ function s4_core_block_site_list_course_restriction() {
   $course = node_load($_SESSION['s4_signup_course']);
   $restrict = field_get_items('node', $course, 'field_site_restrict_to_list');
   $suggested_sites = field_get_items('node', $course, 'field_sites');
-  if(!$suggested_sites) {
+  if (!$suggested_sites) {
     return NULL;
   }
   if ($restrict[0]['value']) {
@@ -150,8 +150,8 @@ function s4_core_block_site_list_course_restriction() {
 */
 function s4_core_block_s4_user_login_message() {
   $directions = variable_get('s4_core_auth_directions', FALSE);
-  if(!$directions) {
-  	return null;
+  if (!$directions) {
+    return NULL;
   }
   $directions = check_markup($directions['value'], $directions['format']);
   if (!strlen(trim($directions))) {
@@ -167,9 +167,9 @@ function s4_core_block_s4_user_login_message() {
 function s4_core_block_s4_user_login() {
   $output = array();
   $auth_types = array('students'        => variable_get('s4_core_auth_students', 'user'),
-		            'staff'             => variable_get('s4_core_auth_staff', 'user'),
-		            'faculty'           => variable_get('s4_core_auth_faculty', 'user'),
-		            'community members' => variable_get('s4_core_auth_sites', 'none'));
+                'staff'             => variable_get('s4_core_auth_staff', 'user'),
+                'faculty'           => variable_get('s4_core_auth_faculty', 'user'),
+                'community members' => variable_get('s4_core_auth_sites', 'none'));
   $login_destinations = array('user' => 'user',
                 'ldap' => 'user',
                 'cas'  => 'cas/login');
@@ -211,8 +211,8 @@ function s4_core_block_jump_to_node() {
 */
 function s4_core_block_s4_page_notifications() {
   global $user;
-  if(!$user->uid) {
-  	return null;
+  if (!$user->uid) {
+    return NULL;
   }
   $list = notifications_subscription_list('page subscriptions')
       ->filter_option('subscriptions_block');
@@ -245,7 +245,7 @@ function s4_core_block_s4_page_notifications() {
 function s4_core_block_s4_add_new_site() {
   global $user;
   if (user_access('moderate site information') && !s4_core_user_can_signup($user)) {
-		$add_link = l(t('<span class="add"></span>Add new site'),
+    $add_link = l(t('<span class="add"></span>Add new site'),
                 'node/add/site',
                 array('html' => TRUE,
                      'attributes' =>
@@ -259,7 +259,7 @@ function s4_core_block_s4_add_new_site() {
                     array('class' => 'button add')
                 )
                 );
-    return array('content' => $add_link .' '. $manage_link);
+    return array('content' => $add_link . ' ' . $manage_link);
   }
 }
 
@@ -273,7 +273,7 @@ function s4_core_block_s4_add_new_coordinator() {
     return array('content' => l('<span class="add"></span>' . t('Add new site staff'),
                   'node/add/coordinator/' . $node->nid,
                   array('html' => TRUE,
-                      'query' => array('destination' => 'node/' . $node->nid .'/site-staff'),
+                      'query' => array('destination' => 'node/' . $node->nid . '/site-staff'),
                        'attributes' =>
                       array('class' => 'button add')
                   )
@@ -332,15 +332,15 @@ function s4_core_block_s4_subscribe_file_expiration() {
 *  Provides a link to the current user's informaiton
 */
 function s4_core_block_s4_current_user_link() {
-	global $user;
-	if(!$user->uid) {
-		return null;
-	}
-	$masquerade_switch = '';
-	if(isset($_SESSION['masquerading'])) {
-		$masquerade_switch = l('switch back', 'masquerade/unswitch', array('attributes' => array('class' => 'switch-link'), 'query' => array('token' => drupal_get_token('masquerade/unswitch'))));
-	}
-	return array('content' => l(t('Hello <strong>@username</strong>', array('@username' => format_username($user))), 'user/'. $user->uid, array('html' => TRUE)) . $masquerade_switch);
+  global $user;
+  if (!$user->uid) {
+    return NULL;
+  }
+  $masquerade_switch = '';
+  if (isset($_SESSION['masquerading'])) {
+    $masquerade_switch = l(t('switch back'), 'masquerade/unswitch', array('attributes' => array('class' => 'switch-link'), 'query' => array('token' => drupal_get_token('masquerade/unswitch'))));
+  }
+  return array('content' => l(t('Hello <strong>@username</strong>', array('@username' => format_username($user))), 'user/' . $user->uid, array('html' => TRUE)) . $masquerade_switch);
 
 }
 
@@ -348,28 +348,28 @@ function s4_core_block_s4_current_user_link() {
 *  Link to the site settings page
 */
 function s4_core_block_s4_site_settings() {
-	if(!user_access('access s4 site settings')) {
-		return null;
-	}
-	return array('content' => l(t('Site settings'), 's4/settings', array('attributes' => array('class' => array('s4-site-settings')))));
+  if (!user_access('access s4 site settings')) {
+    return NULL;
+  }
+  return array('content' => l(t('Site settings'), 's4/settings', array('attributes' => array('class' => array('s4-site-settings')))));
 }
 
 function s4_core_block_s4_welcome_message() {
-	$message = variable_get('s4_core_welcome_message', array('value' => false));
-	if(!$message['value']) {
-		$message['value'] = '<p class="intro">This where you can give users more information about your program. Let us know in a few sentences what you do, and what the community gets from your program.</p><p>Select <strong>Site Settings</strong> then <strong> General settings</strong> to change this message.</p>';
-	}
-	return array('content' => $message['value']);
+  $message = variable_get('s4_core_welcome_message', array('value' => FALSE));
+  if (!$message['value']) {
+    $message['value'] = '<p class="intro">This where you can give users more information about your program. Let us know in a few sentences what you do, and what the community gets from your program.</p><p>Select <strong>Site Settings</strong> then <strong> General settings</strong> to change this message.</p>';
+  }
+  return array('content' => $message['value']);
 }
 
 /**
  * Link from the downloadable form page to continue
  */
 function s4_core_block_s4_signup_forms() {
-  if(!$_SESSION['s4_signup_site']) {
+  if (!$_SESSION['s4_signup_site']) {
     return;
   }
   return array('content' => '<div class="signup"><div class="icon"></div>' .
-                            l('Continue signing up', 's4/signup/site/'. $_SESSION['s4_signup_site'])
-                            .'</div>');
+                            l('Continue signing up', 's4/signup/site/' . $_SESSION['s4_signup_site'])
+                            . '</div>');
 }

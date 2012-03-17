@@ -1,7 +1,7 @@
 <?php
 
 /**
-*	Example implementation of hook_s4_help.
+*  Example implementation of hook_s4_help.
   buttons: [{name: "Next"}],
   description: "description",
   id: "first",
@@ -22,12 +22,12 @@
 
 */
 function s4_help_s4_help($path) {
-	return array('s4_homepage' => 
-		array('title' => 'Hi, there!',
-			  'description' => 'This is the homepage!',
-			  'id' => 'help-box',
-			  'next' => null,
-			  'attachTo' => '#homebox-add-link',
-			 )
-	);
+  return array('s4_homepage' => 
+    array('title' => 'Hi, there!',
+        'description' => 'This is the homepage!',
+        'id' => 'help-box',
+        'next' => NULL,
+        'attachTo' => '#homebox-add-link',
+       )
+  );
 }

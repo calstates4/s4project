@@ -13,12 +13,12 @@ function s4_core_install() {
     ->execute();
   
   //Insert the default homebox page
-  $homebox_settings = array (
+  $homebox_settings = array(
     'regions' => 2,
     'cache' => 0,
     'color' => 0,
     'colors' => 
-    array (
+    array(
       0 => '#E4F0F8',
       1 => '#E4F0F8',
       2 => '#E4F0F8',
@@ -27,9 +27,9 @@ function s4_core_install() {
       5 => '#E4F0F8',
     ),
     'blocks' => 
-    array (
+    array(
       's4_reporting_course_summary' => 
-      array (
+      array(
         'module' => 's4_reporting',
         'delta' => 'course_summary',
         'region' => 2,
@@ -41,7 +41,7 @@ function s4_core_install() {
         'weight' => -48,
       ),
       'masquerade_masquerade' => 
-      array (
+      array(
         'module' => 'masquerade',
         'delta' => 'masquerade',
         'region' => 2,
@@ -53,7 +53,7 @@ function s4_core_install() {
         'weight' => -48,
       ),
       's4_reporting_site_summary' => 
-      array (
+      array(
         'module' => 's4_reporting',
         'delta' => 'site_summary',
         'region' => 1,
@@ -65,7 +65,7 @@ function s4_core_install() {
         'weight' => -48,
       ),
       'views_bookmarked_sites-block' => 
-      array (
+      array(
         'module' => 'views',
         'delta' => 'bookmarked_sites-block',
         'region' => 2,
@@ -77,7 +77,7 @@ function s4_core_install() {
         'weight' => -48,
       ),
       'views_65656e1f5a12cde25f0722f735fe7969' => 
-      array (
+      array(
         'module' => 'views',
         'delta' => '65656e1f5a12cde25f0722f735fe7969',
         'region' => 2,
@@ -89,7 +89,7 @@ function s4_core_install() {
         'weight' => -48,
       ),
       'views_manage_sites-block_1' => 
-      array (
+      array(
         'module' => 'views',
         'delta' => 'manage_sites-block_1',
         'region' => 1,
@@ -102,7 +102,7 @@ function s4_core_install() {
       ),
     ),
     'widths' => 
-    array (
+    array(
     ),
     'title' => 'Home',
     'path' => 'home',
@@ -111,7 +111,7 @@ function s4_core_install() {
     'auto_save' => 1,
     'full' => 0,
     'roles' => 
-    array (
+    array(
       0 => 'authenticated user',
     ),
   );
@@ -125,20 +125,20 @@ function s4_core_install() {
 }
 
 /**
-*	Implementation of hook_requirements
+*  Implementation of hook_requirements
 */
 function s4_core_requirements() {
-	$t = get_t();
-	if(intval(ini_get('memory_limit')) < 80) {
-		return array('student_signup_memory' => array(
-			'title' => $t('Memory limit is at least 80M'),
-			'description' => $t('The memory is currently %memory, it should be at least 80M to install the Student Signup install profile. !link', 
-				array('%memory' => ini_get('memory_limit'), 
-					  '!link' => l($t('Learn how to change your memory limit'), 
-					  				  'http://drupal.org/node/207036',
-					  				  array('attributes' => array('target' => '_blank'))))),
-			'severity' => REQUIREMENT_ERROR,
-		));
-	}
-	return array();
+  $t = get_t();
+  if (intval(ini_get('memory_limit')) < 80) {
+    return array('student_signup_memory' => array(
+      'title' => $t('Memory limit is at least 80M'),
+      'description' => $t('The memory is currently %memory, it should be at least 80M to install the Student Signup install profile. !link', 
+        array('%memory' => ini_get('memory_limit'), 
+            '!link' => l($t('Learn how to change your memory limit'), 
+                      'http://drupal.org/node/207036',
+                      array('attributes' => array('target' => '_blank'))))),
+      'severity' => REQUIREMENT_ERROR,
+    ));
+  }
+  return array();
 }

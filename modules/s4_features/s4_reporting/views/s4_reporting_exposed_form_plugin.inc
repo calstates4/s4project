@@ -63,7 +63,7 @@ class s4_reporting_exposed_form_plugin extends views_plugin_exposed_form_basic {
 	unset($fields['groups']);
 	foreach($fields as $field => $group) {
 		$field = str_replace('group-', '', $field);
-		if(is_array($form[$field])) {
+		if (is_array($form[$field])) {
 			$form['filters'][$group][$field] = $form[$field] + 
 				array('#title' => $form['#info']['filter-'. $field]['label']);
 			unset($form[$field]);

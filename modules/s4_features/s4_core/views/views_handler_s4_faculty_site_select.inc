@@ -1,7 +1,7 @@
 <?php
 
 /**
-*	Views handler indicating a user can signup with a site
+*  Views handler indicating a user can signup with a site
 */
 class views_handler_s4_faculty_site_select extends views_handler_field {
 

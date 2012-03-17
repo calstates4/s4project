@@ -30,44 +30,44 @@ function s4_courses_get_term_codes($requested_code = FALSE) {
 }
 
 /**
-*	Implementation of hook_s4_site_configuration
+*  Implementation of hook_s4_site_configuration
 */
 function s4_courses_s4_site_configuration() {
-	return array(
-		's4_courses' => array(
-			'group' => t('Courses'),
-			'title' => t('Setup courses & course filters'),
-			'description' => t('Manage how S4 integrates with your SIS for courses and create filters to select only courses that are needed for this site'),
-			'href' => 'admin/config/s4/courses',
-		),
-	);
+  return array(
+    's4_courses' => array(
+      'group' => t('Courses'),
+      'title' => t('Setup courses & course filters'),
+      'description' => t('Manage how S4 integrates with your SIS for courses and create filters to select only courses that are needed for this site'),
+      'href' => 'admin/config/s4/courses',
+    ),
+  );
 }
 
 /**
-*	Implementation of s4_core_field_access
+*  Implementation of s4_core_field_access
 */
 function s4_courses_s4_field_access() {
-	
-	return array('course' => array(
-						'field_course_students',
-						'field_course_faculty',
-						'field_site_restrict',
-						'field_sites',
-						'field_term',
-						'field_site_restrict_to_list',
-						'field_course_subject',
-						'field_course_title',
-						'field_course_catalog_number',
-						'field_course_section',
-						'field_course_signups',
-				),
-				'course_term' => array(
-						'field_term_code',
-						'field_term_date_start',
-						'field_term_filter',
-				),
-				
-	);
+  
+  return array('course' => array(
+            'field_course_students',
+            'field_course_faculty',
+            'field_site_restrict',
+            'field_sites',
+            'field_term',
+            'field_site_restrict_to_list',
+            'field_course_subject',
+            'field_course_title',
+            'field_course_catalog_number',
+            'field_course_section',
+            'field_course_signups',
+        ),
+        'course_term' => array(
+            'field_term_code',
+            'field_term_date_start',
+            'field_term_filter',
+        ),
+        
+  );
 }
 
 /**
@@ -96,21 +96,21 @@ function s4_courses_cron() {
   if (time() > variable_get('s4_term_cron_last_update', 0) + variable_get('s4_courses_update_frequency', (2 * 60 * 60))) {
     $terms = module_invoke_all('s4_get_term', date('Y-m-d', strtotime('-1 year')),
                            date('Y-m-d', strtotime('+1 year')));
-    if(count($terms)) {
-	    foreach ($terms as $term) {
-	      s4_courses_create_term($term);
-	    }
-	    variable_set('s4_term_cron_last_update', time());
-	}
+    if (count($terms)) {
+      foreach ($terms as $term) {
+        s4_courses_create_term($term);
+      }
+      variable_set('s4_term_cron_last_update', time());
+  }
     return NULL;
   }
   if (time() > variable_get('s4_courses_cron_last_update', 0) + variable_get('s4_courses_update_frequency', (2 * 60 * 60))) {
-  	foreach(_s4_courses_get_current_terms() as $term) {
-	    $courses = module_invoke_all('s4_get_courses', $term);
-	    foreach ($courses as $course) {
-	      s4_courses_create_course($course);
-	    }
-	}
+    foreach(_s4_courses_get_current_terms() as $term) {
+      $courses = module_invoke_all('s4_get_courses', $term);
+      foreach ($courses as $course) {
+        s4_courses_create_course($course);
+      }
+  }
     variable_set('s4_courses_cron_last_update', time());
   }
   
@@ -206,16 +206,16 @@ function s4_courses_create_course($course, $add_user= FALSE, $add_role = FALSE) 
       foreach ($course[$role] as $user) {
         if (is_numeric($user) && !$existing[$user]) {
           //This is a user ID, just add it
-          if(!isset($existing[$user])) {
-          	$users[] = array('uid' => $user);
-	      }
+          if (!isset($existing[$user])) {
+            $users[] = array('uid' => $user);
+        }
         }
         elseif (is_array($user)) {
           //This is a user object, create or load them
           $user = s4_core_create_user($user);
-          if(!isset($existing[$user->uid])) {
-          	$users[] = array('uid' => $user->uid);
-	      }
+          if (!isset($existing[$user->uid])) {
+            $users[] = array('uid' => $user->uid);
+        }
         }
       }
       $course_node->{$field_name}[$course_node->language] = $users;
@@ -225,16 +225,16 @@ function s4_courses_create_course($course, $add_user= FALSE, $add_role = FALSE) 
 }
 
 /**
-*	Returns the NID of a term based on term code
+*  Returns the NID of a term based on term code
 */
 function _s4_courses_get_term_nid($code) {
-	static $terms;
-	if(!isset($terms[$code])) {
-		$term = db_select('field_data_field_term_code', 't')
-	    		->condition('t.field_term_code_value', $code)
-	    		->fields('t', array('entity_id'));
-	    $result = $term->execute();
-    	$terms[$code] = $result->fetchField();
+  static $terms;
+  if (!isset($terms[$code])) {
+    $term = db_select('field_data_field_term_code', 't')
+          ->condition('t.field_term_code_value', $code)
+          ->fields('t', array('entity_id'));
+      $result = $term->execute();
+      $terms[$code] = $result->fetchField();
     }
     return $terms[$code];
 }
@@ -343,8 +343,8 @@ function s4_courses_s4_signup_dates($node) {
     $term_date = field_get_items('node', $term, 'field_term_date_start');
     $result = array();
     $result['end_date'] = (isset($end_date))
-    					    ? $end_date
-    					    : array('date' => strtotime($term_date[0]['value2']), 'weight' => 50);
+                  ? $end_date
+                  : array('date' => strtotime($term_date[0]['value2']), 'weight' => 50);
     $result['start_date'] = array('date' => strtotime($term_date[0]['value']),
            'weight' => 50);
     return $result;
@@ -419,60 +419,60 @@ function s4_courses_block_view($delta) {
     case 's4_courses_restriction_form': 
       $node = menu_get_object();
       global $user;
-      if($node->type != 'course') {
+      if ($node->type != 'course') {
         return null;
       }
       $faculty = array();
       $course_faculty = field_get_items('node', $node, 'field_course_faculty');
-		if(is_array($course_faculty)) {
-		  foreach($course_faculty as $faculty_uid) {
-		  	$faculty[] = $faculty_uid['uid'];
-		  }
-		}
-	  if(!in_array($user->uid, $faculty) && !node_access('update', $node)) {
-	  	return null;
-	  }
-	  return array('subject' => '',
-	  			   'content' => drupal_get_form('s4_courses_edit_course_restrict_form'));
+    if (is_array($course_faculty)) {
+      foreach($course_faculty as $faculty_uid) {
+        $faculty[] = $faculty_uid['uid'];
+      }
+    }
+    if (!in_array($user->uid, $faculty) && !node_access('update', $node)) {
+      return null;
+    }
+    return array('subject' => '',
+             'content' => drupal_get_form('s4_courses_edit_course_restrict_form'));
       break;
   }
 }
 
 function s4_courses_edit_course_restrict_form() {
-	$node = menu_get_object();
-	$form = array();
-	
-	$default = field_get_items('node', $node, 'field_site_restrict_to_list');
-	$default_email = field_get_items('node', $node, 'field_course_faculty_email');
-	
-	$form['field_site_restrict_to_list'] = array(
-		'#type' => 'checkbox', 
-		'#title' => 'Restrict students to only selected sites',
-		'#default_value' => $default[0]['value'],
-	);
-	
-	$form['field_course_faculty_email'] = array(
-		'#type' => 'checkbox', 
-		'#title' => 'Send evaluation reminders from my email account',
-		'#default_value' => $default_email[0]['value'],
-	);
-	
-	$form['submit'] = array(
-		'#type' => 'submit',
-		'#value' => 'Update',
-	);
-	
-	return $form;
+  $node = menu_get_object();
+  $form = array();
+  
+  $default = field_get_items('node', $node, 'field_site_restrict_to_list');
+  $default_email = field_get_items('node', $node, 'field_course_faculty_email');
+  
+  $form['field_site_restrict_to_list'] = array(
+    '#type' => 'checkbox', 
+    '#title' => 'Restrict students to only selected sites',
+    '#default_value' => $default[0]['value'],
+  );
+  
+  $form['field_course_faculty_email'] = array(
+    '#type' => 'checkbox', 
+    '#title' => 'Send evaluation reminders from my email account',
+    '#default_value' => $default_email[0]['value'],
+  );
+  
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => 'Update',
+  );
+  
+  return $form;
 }
 
 function s4_courses_edit_course_restrict_form_submit($form, $form_state) {
-	$node = menu_get_object();
-	$node->field_site_restrict_to_list[$node->language][0]['value'] = 
-	   $form_state['values']['field_site_restrict_to_list'];
-	$node->field_course_faculty_email[$node->language][0]['value'] = 
-		$form_state['values']['field_course_faculty_email'];
-	node_save($node);
-	drupal_set_message('Your course has been updated.');
+  $node = menu_get_object();
+  $node->field_site_restrict_to_list[$node->language][0]['value'] = 
+     $form_state['values']['field_site_restrict_to_list'];
+  $node->field_course_faculty_email[$node->language][0]['value'] = 
+    $form_state['values']['field_course_faculty_email'];
+  node_save($node);
+  drupal_set_message('Your course has been updated.');
 }
 
 /**
@@ -540,7 +540,7 @@ function s4_courses_notifications($op) {
 }
 
 /**
-*	Implementation of hook_signup_post_action
+*  Implementation of hook_signup_post_action
 */
 function s4_courses_signup_post_action($node, $context = array()) {
   $node = $context['node'];
@@ -550,7 +550,7 @@ function s4_courses_signup_post_action($node, $context = array()) {
 }
 
 /**
-*	Implementation of hook_action_info
+*  Implementation of hook_action_info
 */
 function s4_courses_action_info() {
   return array(
@@ -565,7 +565,7 @@ function s4_courses_action_info() {
 }
 
 /**
-*	Notification subscriptions
+*  Notification subscriptions
 */
 function s4_courses_notifications_subscription($op, $subscription = NULL) {
   switch ($op) {
@@ -581,7 +581,7 @@ function s4_courses_notifications_subscription($op, $subscription = NULL) {
 }
 
 /**
-*	Implementation of hook_node_event
+*  Implementation of hook_node_event
 */
 function s4_courses_node_event($action, $node) {
   $page = &drupal_static(__FUNCTION__);
@@ -592,7 +592,7 @@ function s4_courses_node_event($action, $node) {
 }
 
 /**
-*	Implementation of hook_node_insert
+*  Implementation of hook_node_insert
 */
 function s4_courses_node_insert($node) {
   if ($node->type == 'signup') {
@@ -603,7 +603,7 @@ function s4_courses_node_insert($node) {
 }
 
 /**
-*	Implementation of hook_trigger_info
+*  Implementation of hook_trigger_info
 */
 function s4_courses_trigger_info() {
   return array(
@@ -616,7 +616,7 @@ function s4_courses_trigger_info() {
 }
 
 /**
-*	Course tokens
+*  Course tokens
 */
 function s4_courses_tokens($type, $tokens, array $data = array(), array $options = array()) {
   if ($type == 's4_signup') {
@@ -627,7 +627,7 @@ function s4_courses_tokens($type, $tokens, array $data = array(), array $options
 }
 
 /**
-*	Implementation of hook_token_info
+*  Implementation of hook_token_info
 */
 function s4_courses_token_info() {
   $type = array(
@@ -654,7 +654,7 @@ function s4_courses_token_info() {
 }
 
 /**
-*	Implementation of hook_context_plugins
+*  Implementation of hook_context_plugins
 */
 function s4_courses_context_plugins() {
   $plugins = array();
@@ -670,7 +670,7 @@ function s4_courses_context_plugins() {
 }
 
 /**
-*	Implementation of hook_context_registry
+*  Implementation of hook_context_registry
 */
 function s4_courses_context_registry() {
   return array(
@@ -684,100 +684,100 @@ function s4_courses_context_registry() {
 }
 
 /**
-*	Implementation of hook_node_view
-*	Here we trigger the user can edit course context
+*  Implementation of hook_node_view
+*  Here we trigger the user can edit course context
 */
 function s4_courses_node_view($node, $view_mode) {
   if ($view_mode === 'full') {
     $object = menu_get_object();
     if (isset($object->nid) && $object->nid === $node->nid) {
       if ($plugin = context_get_plugin('condition', 'user_edit_course')) {
-	    $plugin->execute($node);
+      $plugin->execute($node);
       }
     }
   }
 }
 
 function s4_courses_s4_reporting_info() {
-	$info = array();
-	foreach(array('course', 'course_term') as $type) {
-		$fields = field_info_instances('node', $type);
-		foreach($fields as $name => $field) {
-			$info['s4_courses']['filters'][$type][$name] = $field;
-			if(!in_array($name, array('field_course_students', 'field_course_faculty'))) {
-				$info['s4_courses']['fields'][$type][$name] = $field;
-			}
-		}
-		$info['s4_courses']['types'][$type] = node_type_load($type);
-	}
-	return $info;
+  $info = array();
+  foreach(array('course', 'course_term') as $type) {
+    $fields = field_info_instances('node', $type);
+    foreach($fields as $name => $field) {
+      $info['s4_courses']['filters'][$type][$name] = $field;
+      if (!in_array($name, array('field_course_students', 'field_course_faculty'))) {
+        $info['s4_courses']['fields'][$type][$name] = $field;
+      }
+    }
+    $info['s4_courses']['types'][$type] = node_type_load($type);
+  }
+  return $info;
 }
 
 function s4_courses_s4_reporting_term_report($report_criteria) {
-	$totals = array('courses' => array('count' => 0,
-											   'title' => t('Total service learning courses')),
-						'ud-courses' => array('count' => 0,
-											   'title' => t('Total upper-division courses')),
-						'ld-courses' => array('count' => 0,
-											   'title' => t('Total lower-division courses')),
-						'students' => array('count' => 0,
-											   'title' => t('Total students')),
-						'placements' => array('count' => 0,
-											   'title' => t('Total placements')),
-						'hours' => array('count' => 0,
-											'title' => t('Total service hours')),
-					);
-	$courses = array();			
-	$query = db_select('node_revision', 'r')
-				   ->fields('r', array('nid', 'status'));
+  $totals = array('courses' => array('count' => 0,
+                         'title' => t('Total service learning courses')),
+            'ud-courses' => array('count' => 0,
+                         'title' => t('Total upper-division courses')),
+            'ld-courses' => array('count' => 0,
+                         'title' => t('Total lower-division courses')),
+            'students' => array('count' => 0,
+                         'title' => t('Total students')),
+            'placements' => array('count' => 0,
+                         'title' => t('Total placements')),
+            'hours' => array('count' => 0,
+                      'title' => t('Total service hours')),
+          );
+  $courses = array();      
+  $query = db_select('node_revision', 'r')
+           ->fields('r', array('nid', 'status'));
     $query->leftJoin('field_data_field_term', 't', 't.entity_id = r.nid AND t.bundle = :course', array(':course' => 'course'));
     $query->fields('t', array('field_term_nid'));
-    if($report_criteria['term']) {
-    	$query->condition('t.field_term_nid', $report_criteria['term']->nid);
+    if ($report_criteria['term']) {
+      $query->condition('t.field_term_nid', $report_criteria['term']->nid);
     }
     else {
-	    $query->condition('r.timestamp', strtotime($report_criteria['start']), '>=')
-	    	  ->condition('r.timestamp', strtotime($report_criteria['end']), '<=');
-	}
-	$query->leftJoin('field_data_field_course_students', 's', 's.entity_id = r.nid AND s.bundle = :course', array(':course' => 'course'));
-	$query->leftJoin('field_data_field_user', 'u', 's.field_course_students_uid = u.field_user_uid AND u.bundle = :signup', array(':signup' => 'signup'));
-	$query->leftJoin('field_data_field_course', 'c', 'c.field_course_nid = r.nid AND c.bundle = :signup', array(':signup' => 'signup'));
-	
-	$query->leftJoin('field_data_field_course_catalog_number', 'cn', 'cn.entity_id = t.entity_id AND cn.bundle = t.bundle');
-	$query->leftJoin('field_data_field_signup_hours', 'h', 'h.entity_id = c.entity_id AND h.bundle = c.bundle');
-	$query->fields('h', array('field_signup_hours_value'));
-	$query->fields('cn', array('field_course_catalog_number_value'));
-	$query->fields('c', array('entity_id'));
-	$query->fields('s', array('field_course_students_uid'));
-	$query->leftJoin('node', 'n', 'n.vid = r.vid');
-	$query->condition('n.type', 'course');
-	$results = $query->execute()->fetchAll();
-	
-	foreach($results as $result) {
-		$courses[$result->nid] = $result->nid;
-		$students[$result->field_course_students_uid] = $result->field_course_students_uid;
-		$signups[$result->entity_id] = $result->entity_id;
-		if(intval(substr($result->field_course_catalog_number_value, 0, 1)) > 2) {
-			$ud_courses[$result->nid] = $result->nid;
-		}
-		else {
-			$ld_courses[$result->nid] = $result->nid;
-		}
-		$hours[$result->entity_id] = $result->field_signup_hours_value;
-	};
-	foreach($hours as $hour) {
-		$totals['hours']['count'] += $hour;
-	}
-	$totals['students']['count'] = count($students);
-	$totals['courses']['count'] = count($courses);
-	$totals['placements']['count'] = count($signups);
-	$totals['ud-courses']['count'] = count($ud_courses);
-	$totals['ld-courses']['count'] = count($ld_courses);
-	
-	
-	return array('totals' => $totals,
-				 'output' => $output,
-				);
+      $query->condition('r.timestamp', strtotime($report_criteria['start']), '>=')
+          ->condition('r.timestamp', strtotime($report_criteria['end']), '<=');
+  }
+  $query->leftJoin('field_data_field_course_students', 's', 's.entity_id = r.nid AND s.bundle = :course', array(':course' => 'course'));
+  $query->leftJoin('field_data_field_user', 'u', 's.field_course_students_uid = u.field_user_uid AND u.bundle = :signup', array(':signup' => 'signup'));
+  $query->leftJoin('field_data_field_course', 'c', 'c.field_course_nid = r.nid AND c.bundle = :signup', array(':signup' => 'signup'));
+  
+  $query->leftJoin('field_data_field_course_catalog_number', 'cn', 'cn.entity_id = t.entity_id AND cn.bundle = t.bundle');
+  $query->leftJoin('field_data_field_signup_hours', 'h', 'h.entity_id = c.entity_id AND h.bundle = c.bundle');
+  $query->fields('h', array('field_signup_hours_value'));
+  $query->fields('cn', array('field_course_catalog_number_value'));
+  $query->fields('c', array('entity_id'));
+  $query->fields('s', array('field_course_students_uid'));
+  $query->leftJoin('node', 'n', 'n.vid = r.vid');
+  $query->condition('n.type', 'course');
+  $results = $query->execute()->fetchAll();
+  
+  foreach($results as $result) {
+    $courses[$result->nid] = $result->nid;
+    $students[$result->field_course_students_uid] = $result->field_course_students_uid;
+    $signups[$result->entity_id] = $result->entity_id;
+    if (intval(substr($result->field_course_catalog_number_value, 0, 1)) > 2) {
+      $ud_courses[$result->nid] = $result->nid;
+    }
+    else {
+      $ld_courses[$result->nid] = $result->nid;
+    }
+    $hours[$result->entity_id] = $result->field_signup_hours_value;
+  };
+  foreach($hours as $hour) {
+    $totals['hours']['count'] += $hour;
+  }
+  $totals['students']['count'] = count($students);
+  $totals['courses']['count'] = count($courses);
+  $totals['placements']['count'] = count($signups);
+  $totals['ud-courses']['count'] = count($ud_courses);
+  $totals['ld-courses']['count'] = count($ld_courses);
+  
+  
+  return array('totals' => $totals,
+         'output' => $output,
+        );
 }
 
 /**
@@ -785,13 +785,13 @@ function s4_courses_s4_reporting_term_report($report_criteria) {
  */
 function s4_courses_views_check_faculty_access() {
   $node = node_load(arg(1));
-  if($node->type != 'course' || user_access('create signups for other users')) {
+  if ($node->type != 'course' || user_access('create signups for other users')) {
     return TRUE;
   }
   $faculty = field_get_items('node', $node, 'field_course_faculty');
   global $user;
   foreach($faculty as $instructor) {
-    if($instructor[0]['uid'] == $user->uid) {
+    if ($instructor[0]['uid'] == $user->uid) {
       return TRUE;
     }
   }

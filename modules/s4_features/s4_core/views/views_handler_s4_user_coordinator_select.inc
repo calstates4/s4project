@@ -9,8 +9,8 @@ class views_handler_s4_user_coordinator_select extends views_handler_field {
         . '</div>';
     }
     $coordinator = node_load($values->nid);
-    if(_s4_core_object_is_full($coordinator)) {
-    	return '<div class="signup denied"><div class="icon"></div>' .
+    if (_s4_core_object_is_full($coordinator)) {
+      return '<div class="signup denied"><div class="icon"></div>' .
         t('Site staff unavailable.')
         . '</div>';
     }

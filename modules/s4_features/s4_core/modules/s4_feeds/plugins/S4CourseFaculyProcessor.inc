@@ -31,8 +31,8 @@ class S4CourseFaculyProcessor extends FeedsProcessor {
   public function newReference(FeedsSource $source, $item) {
     $course = node_load($item['course']);
     $existing = field_get_items('node', $course, 'field_course_faculty');
-    foreach($existing as $existing_faculty) {
-      if($existing_faculty['uid'] == $item['user']) {
+    foreach ($existing as $existing_faculty) {
+      if ($existing_faculty['uid'] == $item['user']) {
         return;
       }
     }
@@ -43,7 +43,7 @@ class S4CourseFaculyProcessor extends FeedsProcessor {
   
   protected function newEntity(FeedsSource $source) {
   
-    return null;
+    return NULL;
   }
   
   private function getTargetEntity($id, $type) {

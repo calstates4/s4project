@@ -4,7 +4,7 @@
 *	Implementation of hook_install
 */
 function s4_editor_install() {
-  if(!module_exists('wysiwyg')) {
+  if (!module_exists('wysiwyg')) {
   	return NULL;
   }
   $settings = array(

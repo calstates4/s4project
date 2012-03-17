@@ -1,12 +1,12 @@
 (function($) {
 	$(document).ready(function() {
-		if($('#site-map').length) {
+		if ($('#site-map').length) {
 			s4Map.init('site-map');
 		}
-		if($('#site-list-map').length) {
+		if ($('#site-list-map').length) {
 			$(document).scroll(function() {
 				var columnTop = $('#content_middle .column').position();
-				if($(document).scrollTop() > columnTop.top) {
+				if ($(document).scrollTop() > columnTop.top) {
 					$('#site-list-map').css('position', 'fixed').css('top', 0);
 				}
 				else {
@@ -18,7 +18,7 @@
 			
 			var bounds = new google.maps.LatLngBounds();
 			$('.map-link').each(function(index, element) {
-				if($(this).attr('lat') == 0 && !$(this).attr('lon') == 0 ) {
+				if ($(this).attr('lat') == 0 && !$(this).attr('lon') == 0 ) {
 					$(this).html('&times;').addClass('disabled').show();
 					return null;
 				}
@@ -71,7 +71,7 @@ var s4Map = {
 						    mapTypeId: google.maps.MapTypeId.TERRAIN
 						    });
 		
-		if($('#' + mapID).hasClass('autofill')) {
+		if ($('#' + mapID).hasClass('autofill')) {
 			google.maps.event.addListener(s4Map.map, 'idle', s4Map.reloadMap);
 		}
 	},
@@ -84,19 +84,19 @@ var s4Map = {
 	
 	reloadMap : function(event) {
 		var boundaries = s4Map.map.getBounds();
-		if(boundaries === undefined) {
+		if (boundaries === undefined) {
 			return null;
 		}
 		$('#map-loading-indicator').show();
 		$.getJSON(Drupal.settings.basePath + 'json/map/sites?lat_min=' + boundaries.getSouthWest().lat() +'&lat_max=' + boundaries.getNorthEast().lat() + '&lon_min=' + boundaries.getSouthWest().lng() + '&lon_max=' + boundaries.getNorthEast().lng() ,function(data) {
 			$.each(data.nodes, function(index, element) {
-				if(typeof s4Map.markers[element.node.nid] == 'undefined') {
+				if (typeof s4Map.markers[element.node.nid] == 'undefined') {
 					var hours = '';
-					if(typeof element.node.students != 'undefined') {
+					if (typeof element.node.students != 'undefined') {
 						var hours = '<strong>' + element.node.hours + 
 						'</strong> hours by <strong>' + 
 						element.node.students + '</strong> student';
-						if(element.node.students > 1) {
+						if (element.node.students > 1) {
 							hours += 's';
 						}
 					}
@@ -112,17 +112,17 @@ var s4Map = {
 	
 	getCircleSize : function(size) {
 		var meters = s4Map.getMetersPerPixels();
-		if(size > s4Map.maxSize) {
+		if (size > s4Map.maxSize) {
 			return s4Map.maxSize * meters;
 		}
-		if(size < s4Map.minSize) {
+		if (size < s4Map.minSize) {
 			return s4Map.minSize * meters;
 		}
 		return size * meters;
 	},
 	
 	getMetersPerPixels : function() {
-		if(typeof s4Map.zoomStorage[s4Map.map.getZoom()] == 'undefined') {
+		if (typeof s4Map.zoomStorage[s4Map.map.getZoom()] == 'undefined') {
 			var boundaries = s4Map.map.getBounds();
 			var meters = google.maps.geometry.spherical.computeDistanceBetween(boundaries.getSouthWest(), boundaries.getNorthEast());
 			var pixels = ($('#' + s4Map.mapID).width() ^ 2) + ($('#' + s4Map.mapID).height() ^ 2);
@@ -137,16 +137,16 @@ var s4Map = {
 			position: latLng, 
 			map: s4Map.map
 		};
-		if(icon) {
+		if (icon) {
 			markerOptions.icon = icon;
 		}
-		if(shadow) {
+		if (shadow) {
 			markerOptions.shadow = shadow;
 		}
 		var marker = new google.maps.Marker(markerOptions);
-		if(message) {
+		if (message) {
 			google.maps.event.addListener(marker, 'click', function(e) {
-			  	if(s4Map.activeInfoWindow && typeof s4Map.activeInfoWindow.close != 'undefined') {
+			  	if (s4Map.activeInfoWindow && typeof s4Map.activeInfoWindow.close != 'undefined') {
 			  		s4Map.activeInfoWindow.close();
 			  	}
 			  	var infoWindow = new google.maps.InfoWindow({
@@ -173,9 +173,9 @@ var s4Map = {
 			map: s4Map.map
 		});
 		marker.set('defaultRadius', radius);
-		if(typeof message !== 'undefined') {
+		if (typeof message !== 'undefined') {
 			google.maps.event.addListener(marker, 'click', function(e) {
-			  	if(s4Map.activeInfoWindow && typeof s4Map.activeInfoWindow.close != 'undefined') {
+			  	if (s4Map.activeInfoWindow && typeof s4Map.activeInfoWindow.close != 'undefined') {
 			  		s4Map.activeInfoWindow.close();
 			  	}
 			  	var infoWindow = new google.maps.InfoWindow({

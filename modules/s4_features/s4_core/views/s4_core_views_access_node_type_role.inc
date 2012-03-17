@@ -31,7 +31,7 @@ class s4_core_views_access_node_type_role extends views_plugin_access {
   function option_definition() {
     $options = parent::option_definition();
     $options['role'] = array('default' => array());
-	$options['node_type'] = array('default' => '');
+  $options['node_type'] = array('default' => '');
     return $options;
   }
 
@@ -44,10 +44,10 @@ class s4_core_views_access_node_type_role extends views_plugin_access {
       '#description' => t('Only the checked roles will be able to access this display. Note that users with "access all views" can see any view, regardless of role.'),
     );
     $form['node_type'] = array(
-    	'#type' => 'textfield',
-    	'#title' => t('Node type'),
-    	'#default_value' => $this->options['node_type'],
-    	'#description' => 'Enter the machine name of the node type this should be active on',
+      '#type' => 'textfield',
+      '#title' => t('Node type'),
+      '#default_value' => $this->options['node_type'],
+      '#description' => 'Enter the machine name of the node type this should be active on',
     );
   }
 

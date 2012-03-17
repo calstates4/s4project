@@ -6,16 +6,16 @@
     },
     
     showHelp: function() {
-    	$.each(Drupal.settings.s4_help, function(key, help) {
-    		if(help.overlay) {
-    			guiders.createGuider(help).show();
-    		}
-    		else {
-    			guiders.createGuider(help);
-    		}
-    		
-    	});
-    	return false;
+      $.each(Drupal.settings.s4_help, function(key, help) {
+        if (help.overlay) {
+          guiders.createGuider(help).show();
+        }
+        else {
+          guiders.createGuider(help);
+        }
+        
+      });
+      return false;
     }
   };
 

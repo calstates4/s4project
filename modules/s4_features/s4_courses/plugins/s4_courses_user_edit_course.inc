@@ -27,18 +27,18 @@ class s4_courses_user_edit_course extends context_condition {
    */
   function execute($value) {
     foreach ($this->get_contexts($value) as $context) {
-		// Include both the path alias and normal path for matching.
-		global $user;
-		$faculty = array();
-		$course_faculty = field_get_items('node', $value, 'field_course_faculty');
-		if(is_array($course_faculty)) {
-		  foreach($course_faculty as $faculty_uid) {
-		  	$faculty[] = $faculty_uid['uid'];
-		  }
-		}
-		if($value->type == 'course' && in_array($user->uid, $faculty)) {
-			$this->condition_met($context, $value);
-		}
+    // Include both the path alias and normal path for matching.
+    global $user;
+    $faculty = array();
+    $course_faculty = field_get_items('node', $value, 'field_course_faculty');
+    if (is_array($course_faculty)) {
+      foreach($course_faculty as $faculty_uid) {
+        $faculty[] = $faculty_uid['uid'];
+      }
+    }
+    if ($value->type == 'course' && in_array($user->uid, $faculty)) {
+      $this->condition_met($context, $value);
+    }
     }
   }
 

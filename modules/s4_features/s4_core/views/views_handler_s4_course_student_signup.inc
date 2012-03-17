@@ -1,7 +1,7 @@
 <?php
 
 /**
-*	Views handler to render a link indicating the user can signup with a course
+*  Views handler to render a link indicating the user can signup with a course
 */
 class views_handler_s4_course_student_signup extends views_handler_field {
 

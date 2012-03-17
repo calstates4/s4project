@@ -5,8 +5,8 @@ tr.even td.hours-no { color: #FFF; }
 .matrix-col-header { font-size: 80%; }
 .hours-sample { color: #fff; padding: 3px; }
 #demographic-total { font-weight: bold; }
-	.field-name-field-site-demographics .error { background: #d6473e; color: #fff;  }
-	.field-name-field-site-demographics .success { background: #00ae3e; color: #fff;  }
+  .field-name-field-site-demographics .error { background: #d6473e; color: #fff;  }
+  .field-name-field-site-demographics .success { background: #00ae3e; color: #fff;  }
 
 #s4-sites-propose-site-form .form-type-checkbox { margin-bottom: 1.5em; }
   #s4-sites-propose-site-form .form-type-checkbox input { margin-right: -8px; margin-top: -5px;  width: 30px; height: 30px;}
