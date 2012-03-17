@@ -536,11 +536,11 @@ body.front.has-footer-map #page {
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
 }
-.field-type-taxonomy-term-reference a:hover, #content .links a:hover {
+#content .links a:hover {
   color: #046;
   background-color: #efaa99;
 }
-.page-node-edit .field-type-taxonomy-term-reference a, .page-node-add .field-type-taxonomy-term-reference a {
+.page-node-add .field-type-taxonomy-term-reference a {
   background: transparent;
   border: 0px;
   text-decoration: underline;
