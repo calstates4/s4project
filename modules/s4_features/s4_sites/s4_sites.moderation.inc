@@ -136,7 +136,7 @@ function s4_sites_workbench_moderation_node_history_view($node) {
   }
 
   // Set the table header.
-  $header = array(t('Date'), t('Actions'), t('Moderation Actions'));
+  $header = array(t('Date'), t('Actions'), t('Approval notes'));
 
   // Return properly styled output.
   return array(
