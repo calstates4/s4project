@@ -522,15 +522,11 @@ body.front.has-footer-map #page {
   -webkit-border-radius: 0 4px 4px 0;
 }
 /** TAGS **/
-.field-type-taxonomy-term-reference .field-items {
-  color: #666;
-  margin: 10px 0;
-}
 .field-type-taxonomy-term-reference .field-item {
   display: inline;
   margin: 0 10px 0 0;
 }
-.field-type-taxonomy-term-reference a, #content .links a {
+#content .links a {
   color: #000;
   background-color: #e26140;
   border: 1px solid #ca433c;
