@@ -971,9 +971,10 @@ function s4_courses_field_default_fields() {
           'weight' => 0,
         ),
       ),
+      'display_label' => '',
       'entity_type' => 'node',
       'field_name' => 'field_site_restrict',
-      'label' => 'Course access permissions',
+      'label' => 'Available programs',
       'required' => 0,
       'settings' => array(
         'user_register_form' => FALSE,
@@ -1585,8 +1586,8 @@ function s4_courses_field_default_fields() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Allow system to send emails on behalf of faculty members');
+  t('Available programs');
   t('Catalog number');
-  t('Course access permissions');
   t('Course filter');
   t('Course title');
   t('Date to send evaluations');
