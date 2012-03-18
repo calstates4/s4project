@@ -1402,6 +1402,21 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['filters']['field_term_nid']['expose']['identifier'] = 'field_term_nid';
   $handler->display->display_options['filters']['field_term_nid']['expose']['multiple'] = 1;
   $handler->display->display_options['filters']['field_term_nid']['expose']['reduce'] = 0;
+  /* Filter criterion: Field: Available programs (field_site_restrict) */
+  $handler->display->display_options['filters']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['operator_id'] = 'field_site_restrict_tid_op';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['label'] = 'Available programs';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['operator'] = 'field_site_restrict_tid_op';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['identifier'] = 'field_site_restrict_tid';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['multiple'] = 1;
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['reduce'] = 0;
+  $handler->display->display_options['filters']['field_site_restrict_tid']['reduce_duplicates'] = 0;
+  $handler->display->display_options['filters']['field_site_restrict_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['vocabulary'] = 'site_restrictions';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['error_message'] = 1;
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -1443,6 +1458,7 @@ function s4_sites_views_default_views() {
     t('City'),
     t('Course subject'),
     t('Term'),
+    t('Available programs'),
     t('Page'),
   );
   $export['email_site_contacts'] = $view;
