@@ -29,11 +29,6 @@ function s4_pages_menu() {
   return $items;
 }
 
-function s4_pages_menu_alter(&$items) {
-	$items['node/%node/revisions']['title'] = 'History';
-	$items['node/%node/revisions']['weight'] = 4;
-}
-
 function _s4_pages_site_student_access($node) {
   return (node_access('update', $node) && $node->type == 'site');
 }
