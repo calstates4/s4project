@@ -168,39 +168,6 @@ function s4_courses_context_default_contexts() {
   $context = new stdClass;
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
-  $context->name = 'course-student-list';
-  $context->description = 'A student is on the my courses page';
-  $context->tag = 'course';
-  $context->conditions = array(
-    'path' => array(
-      'values' => array(
-        'my-courses' => 'my-courses',
-      ),
-    ),
-  );
-  $context->reactions = array(
-    'block' => array(
-      'blocks' => array(
-        'views-terms-block_1' => array(
-          'module' => 'views',
-          'delta' => 'terms-block_1',
-          'region' => 'content_right',
-          'weight' => '-10',
-        ),
-      ),
-    ),
-  );
-  $context->condition_mode = 0;
-
-  // Translatables
-  // Included for use with string extractors like potx.
-  t('A student is on the my courses page');
-  t('course');
-  $export['course-student-list'] = $context;
-
-  $context = new stdClass;
-  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
-  $context->api_version = 3;
   $context->name = 'frontpage-courses';
   $context->description = 'Frontpage course information';
   $context->tag = 'frontpage';
