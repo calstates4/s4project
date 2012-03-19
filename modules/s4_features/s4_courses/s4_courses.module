@@ -303,13 +303,21 @@ function s4_courses_s4_user_status(&$status) {
 */
 function s4_courses_s4_signup($type, $nid) {
   if ($type == 'course') {
+    global $user;
     $course = node_load($nid);
     if ($course->type == 'course') {
       $_SESSION['s4_signup_course'] = check_plain($nid);
       drupal_set_message(t('Course @course selected.', array('@course' => $course->title)));
+      $programs = field_get_items('node', $course, 'field_site_restrict');
+      $program_terms = array();
+      foreach($programs as $program) {
+        $program = taxonomy_term_load($program['tid']);
+        $program_terms[$program->tid] = $program->name;
+      }
+      $_SESSION['s4_signup_programs'] = $program_terms;
       $sites = field_get_items('node', $course, 'field_sites');
       if (!$sites || !count($sites)) {
-        drupal_goto('site-list');
+        drupal_goto('site-list/all/'. implode('+', $program_terms));
       }
       else {
         
@@ -317,7 +325,7 @@ function s4_courses_s4_signup($type, $nid) {
         foreach ($sites as $site) {
           $argument[] = $site['nid'];
         }
-        drupal_goto('site-list/' . implode('+', $argument));
+        drupal_goto('site-list/' . implode('+', $argument) . '/'. implode('+', $program_terms));
       }
     }
     else {

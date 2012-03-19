@@ -144,7 +144,6 @@ function s4_core_signup($type, $nid) {
   drupal_goto('node/' . $nid);
 }  
 
-
 /**
 *  System settings landing page
 */

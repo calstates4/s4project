@@ -164,12 +164,11 @@ function s4_core_signup_access($node, $user = FALSE) {
 
   if (isset($_SESSION['s4_signup_course'])) {
     $course = node_load($_SESSION['s4_signup_course']);
-    $course_access = field_get_items('node', $node, 'field_site_restrict');
+    $course_access = field_get_items('node', $course, 'field_site_restrict');
     foreach ($course_access as $key => $access) {
       $user_access[] = $access;
     }
   }
-
   if (!$user_access || !count($user_access)) {
     return FALSE;
   }
@@ -1351,6 +1350,15 @@ function s4_core_cron() {
   }
   variable_set('s4_core_file_expiration_last_notice', time());
 }
+
+
+/**
+ * Helper function to retrieve the correct form for a student.
+ */
+function s4_core_get_site_form($site, $term) {
+  
+}
+
 
 function s4_core_tokens($type, $tokens, array $data = array(), array $options = array()) {
   if ($type == 's4_signup') {
