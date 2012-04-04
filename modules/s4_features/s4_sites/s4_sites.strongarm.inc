@@ -1224,6 +1224,8 @@ function s4_sites_strongarm() {
     'field_site_projects' => FALSE,
     'field_site_hours_minimum' => FALSE,
     'field_location' => FALSE,
+    'field_site_signup_group' => FALSE,
+    'field_site_evaluation_group' => FALSE,
   );
   $export['s4_sites_field_access'] = $strongarm;
 

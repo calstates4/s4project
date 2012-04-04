@@ -10,6 +10,362 @@
 function s4_sites_field_default_fields() {
   $fields = array();
 
+  // Exported field: 'field_collection_item-field_site_evaluation_group-field_site_eval_form'
+  $fields['field_collection_item-field_site_evaluation_group-field_site_eval_form'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_site_eval_form',
+      'foreign keys' => array(
+        'nid' => array(
+          'columns' => array(
+            'nid' => 'nid',
+          ),
+          'table' => 'node',
+        ),
+      ),
+      'global_block_settings' => '1',
+      'indexes' => array(
+        'nid' => array(
+          0 => 'nid',
+        ),
+      ),
+      'module' => 'node_reference',
+      'settings' => array(
+        'nodeaccess_nodereference' => array(
+          'all' => array(
+            'view' => 'view',
+          ),
+          'author' => array(
+            'delete' => 0,
+            'update' => 0,
+            'view' => 0,
+          ),
+          'priority' => '0',
+          'referenced' => array(
+            'delete' => array(
+              'delete' => 0,
+              'update' => 0,
+              'view' => 0,
+            ),
+            'update' => array(
+              'delete' => 0,
+              'update' => 0,
+              'view' => 0,
+            ),
+            'view' => array(
+              'delete' => 0,
+              'update' => 0,
+              'view' => 0,
+            ),
+          ),
+          'unused' => '0',
+        ),
+        'referenceable_types' => array(
+          'contact_record' => 0,
+          'coordinator' => 0,
+          'course' => 0,
+          'course_term' => 0,
+          'downloadable_form' => 0,
+          'fieldtrip' => 0,
+          'file' => 0,
+          'page' => 0,
+          'signup' => 0,
+          'site' => 0,
+          'webform' => 'webform',
+        ),
+        'view' => array(
+          'args' => array(),
+          'display_name' => '',
+          'view_name' => '',
+        ),
+      ),
+      'translatable' => '1',
+      'type' => 'node_reference',
+    ),
+    'field_instance' => array(
+      'bundle' => 'field_site_evaluation_group',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'node_reference',
+          'settings' => array(),
+          'type' => 'node_reference_default',
+          'weight' => 0,
+        ),
+      ),
+      'display_label' => '',
+      'entity_type' => 'field_collection_item',
+      'field_name' => 'field_site_eval_form',
+      'label' => 'Form',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'nodereference_url',
+        'settings' => array(
+          'edit_fallback' => 0,
+          'fallback' => 'select',
+          'node_link' => array(
+            'destination' => 'default',
+            'full' => 0,
+            'hover_title' => '',
+            'teaser' => 0,
+            'title' => '',
+          ),
+        ),
+        'type' => 'nodereference_url',
+        'weight' => '0',
+      ),
+    ),
+  );
+
+  // Exported field: 'field_collection_item-field_site_evaluation_group-field_site_restrict'
+  $fields['field_collection_item-field_site_evaluation_group-field_site_restrict'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '-1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_site_restrict',
+      'foreign keys' => array(
+        'tid' => array(
+          'columns' => array(
+            'tid' => 'tid',
+          ),
+          'table' => 'taxonomy_term_data',
+        ),
+      ),
+      'global_block_settings' => '2',
+      'indexes' => array(
+        'tid' => array(
+          0 => 'tid',
+        ),
+      ),
+      'module' => 'taxonomy',
+      'settings' => array(
+        'allowed_values' => array(
+          0 => array(
+            'vocabulary' => 'site_restrictions',
+            'parent' => '0',
+          ),
+        ),
+      ),
+      'translatable' => '1',
+      'type' => 'taxonomy_term_reference',
+    ),
+    'field_instance' => array(
+      'bundle' => 'field_site_evaluation_group',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'taxonomy',
+          'settings' => array(),
+          'type' => 'taxonomy_term_reference_link',
+          'weight' => 1,
+        ),
+      ),
+      'display_label' => '',
+      'entity_type' => 'field_collection_item',
+      'field_name' => 'field_site_restrict',
+      'label' => 'Program',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(),
+        'type' => 'options_select',
+        'weight' => '1',
+      ),
+    ),
+  );
+
+  // Exported field: 'field_collection_item-field_site_signup_group-field_site_form'
+  $fields['field_collection_item-field_site_signup_group-field_site_form'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_site_form',
+      'foreign keys' => array(
+        'nid' => array(
+          'columns' => array(
+            'nid' => 'nid',
+          ),
+          'table' => 'node',
+        ),
+      ),
+      'global_block_settings' => '1',
+      'indexes' => array(
+        'nid' => array(
+          0 => 'nid',
+        ),
+      ),
+      'module' => 'node_reference',
+      'settings' => array(
+        'nodeaccess_nodereference' => array(
+          'all' => array(
+            'view' => 'view',
+          ),
+          'author' => array(
+            'delete' => 0,
+            'update' => 0,
+            'view' => 0,
+          ),
+          'priority' => '0',
+          'referenced' => array(
+            'delete' => array(
+              'delete' => 0,
+              'update' => 0,
+              'view' => 0,
+            ),
+            'update' => array(
+              'delete' => 0,
+              'update' => 0,
+              'view' => 0,
+            ),
+            'view' => array(
+              'delete' => 0,
+              'update' => 0,
+              'view' => 0,
+            ),
+          ),
+          'unused' => '0',
+        ),
+        'referenceable_types' => array(
+          'contact_record' => 0,
+          'coordinator' => 0,
+          'course' => 0,
+          'course_term' => 0,
+          'downloadable_form' => 0,
+          'fieldtrip' => 0,
+          'file' => 0,
+          'page' => 0,
+          'signup' => 0,
+          'site' => 0,
+          'webform' => 'webform',
+        ),
+        'view' => array(
+          'args' => array(),
+          'display_name' => '',
+          'view_name' => '',
+        ),
+      ),
+      'translatable' => '1',
+      'type' => 'node_reference',
+    ),
+    'field_instance' => array(
+      'bundle' => 'field_site_signup_group',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'node_reference',
+          'settings' => array(),
+          'type' => 'node_reference_default',
+          'weight' => 0,
+        ),
+      ),
+      'display_label' => '',
+      'entity_type' => 'field_collection_item',
+      'field_name' => 'field_site_form',
+      'label' => 'Form',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(),
+        'type' => 'options_select',
+        'weight' => '0',
+      ),
+    ),
+  );
+
+  // Exported field: 'field_collection_item-field_site_signup_group-field_site_restrict'
+  $fields['field_collection_item-field_site_signup_group-field_site_restrict'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '-1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_site_restrict',
+      'foreign keys' => array(
+        'tid' => array(
+          'columns' => array(
+            'tid' => 'tid',
+          ),
+          'table' => 'taxonomy_term_data',
+        ),
+      ),
+      'global_block_settings' => '2',
+      'indexes' => array(
+        'tid' => array(
+          0 => 'tid',
+        ),
+      ),
+      'module' => 'taxonomy',
+      'settings' => array(
+        'allowed_values' => array(
+          0 => array(
+            'vocabulary' => 'site_restrictions',
+            'parent' => '0',
+          ),
+        ),
+      ),
+      'translatable' => '1',
+      'type' => 'taxonomy_term_reference',
+    ),
+    'field_instance' => array(
+      'bundle' => 'field_site_signup_group',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'taxonomy',
+          'settings' => array(),
+          'type' => 'taxonomy_term_reference_link',
+          'weight' => 1,
+        ),
+      ),
+      'display_label' => '',
+      'entity_type' => 'field_collection_item',
+      'field_name' => 'field_site_restrict',
+      'label' => 'Available to',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(),
+        'type' => 'options_select',
+        'weight' => '1',
+      ),
+    ),
+  );
+
   // Exported field: 'node-contact_record-body'
   $fields['node-contact_record-body'] = array(
     'field_config' => array(
@@ -2517,7 +2873,7 @@ function s4_sites_field_default_fields() {
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_link',
-          'weight' => '7',
+          'weight' => '8',
         ),
         'full' => array(
           'label' => 'above',
@@ -2744,7 +3100,7 @@ function s4_sites_field_default_fields() {
           'module' => 'location_cck',
           'settings' => array(),
           'type' => 'location_default',
-          'weight' => '11',
+          'weight' => '12',
         ),
         'full' => array(
           'label' => 'above',
@@ -2812,7 +3168,7 @@ function s4_sites_field_default_fields() {
           'module' => 'cck_phone',
           'settings' => array(),
           'type' => 'local_phone_number',
-          'weight' => '9',
+          'weight' => '10',
         ),
         'full' => array(
           'label' => 'above',
@@ -3134,7 +3490,7 @@ function s4_sites_field_default_fields() {
             'thousand_separator' => ' ',
           ),
           'type' => 'number_integer',
-          'weight' => '13',
+          'weight' => '14',
         ),
         'full' => array(
           'label' => 'above',
@@ -3216,7 +3572,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '27',
+          'weight' => '25',
         ),
         'full' => array(
           'label' => 'above',
@@ -3333,7 +3689,7 @@ function s4_sites_field_default_fields() {
           'module' => 's4_sites',
           'settings' => array(),
           'type' => 's4_sites_population_matrix',
-          'weight' => '14',
+          'weight' => '15',
         ),
         'full' => array(
           'label' => 'above',
@@ -3401,7 +3757,7 @@ function s4_sites_field_default_fields() {
           'module' => 'email',
           'settings' => array(),
           'type' => 'email_default',
-          'weight' => '10',
+          'weight' => '11',
         ),
         'full' => array(
           'label' => 'above',
@@ -3441,79 +3797,22 @@ function s4_sites_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-site-field_site_eval_form'
-  $fields['node-site-field_site_eval_form'] = array(
+  // Exported field: 'node-site-field_site_evaluation_group'
+  $fields['node-site-field_site_evaluation_group'] = array(
     'field_config' => array(
       'active' => '1',
-      'cardinality' => '1',
+      'cardinality' => '-1',
       'deleted' => '0',
       'entity_types' => array(),
-      'field_name' => 'field_site_eval_form',
-      'foreign keys' => array(
-        'nid' => array(
-          'columns' => array(
-            'nid' => 'nid',
-          ),
-          'table' => 'node',
-        ),
-      ),
-      'global_block_settings' => '1',
-      'indexes' => array(
-        'nid' => array(
-          0 => 'nid',
-        ),
-      ),
-      'module' => 'node_reference',
+      'field_name' => 'field_site_evaluation_group',
+      'foreign keys' => array(),
+      'indexes' => array(),
+      'module' => 'field_collection',
       'settings' => array(
-        'nodeaccess_nodereference' => array(
-          'all' => array(
-            'view' => 'view',
-          ),
-          'author' => array(
-            'delete' => 0,
-            'update' => 0,
-            'view' => 0,
-          ),
-          'priority' => '0',
-          'referenced' => array(
-            'delete' => array(
-              'delete' => 0,
-              'update' => 0,
-              'view' => 0,
-            ),
-            'update' => array(
-              'delete' => 0,
-              'update' => 0,
-              'view' => 0,
-            ),
-            'view' => array(
-              'delete' => 0,
-              'update' => 0,
-              'view' => 0,
-            ),
-          ),
-          'unused' => '0',
-        ),
-        'referenceable_types' => array(
-          'contact_record' => 0,
-          'coordinator' => 0,
-          'course' => 0,
-          'course_term' => 0,
-          'file' => 0,
-          'news' => 0,
-          'page' => 0,
-          'signup' => 0,
-          'site' => 0,
-          'webform' => 'webform',
-        ),
-        'view' => array(
-          'args' => array(),
-          'display_name' => '',
-          'view_name' => '',
-        ),
+        'path' => '',
       ),
-      'translatable' => '1',
-      'type' => 'node_reference',
+      'translatable' => '0',
+      'type' => 'field_collection',
     ),
     'field_instance' => array(
       'bundle' => 'site',
@@ -3526,12 +3825,6 @@ function s4_sites_field_default_fields() {
           'settings' => array(),
           'type' => 'hidden',
           'weight' => '36',
-        ),
-        'full' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
         ),
         'notifications' => array(
           'label' => 'above',
@@ -3546,20 +3839,21 @@ function s4_sites_field_default_fields() {
           'weight' => 0,
         ),
       ),
+      'display_label' => '',
       'entity_type' => 'node',
-      'field_name' => 'field_site_eval_form',
-      'label' => 'Evaluation Form',
+      'field_name' => 'field_site_evaluation_group',
+      'label' => 'Evaluation forms',
       'required' => 0,
-      's4_sites_field_access' => 0,
+      's4_sites_field_access' => 1,
       'settings' => array(
         'user_register_form' => FALSE,
       ),
       'widget' => array(
-        'active' => 1,
-        'module' => 'options',
+        'active' => 0,
+        'module' => 'field_collection_table',
         'settings' => array(),
-        'type' => 'options_select',
-        'weight' => '9',
+        'type' => 'field_collection_table',
+        'weight' => '31',
       ),
     ),
   );
@@ -3605,7 +3899,7 @@ function s4_sites_field_default_fields() {
           'module' => 'link',
           'settings' => array(),
           'type' => 'link_default',
-          'weight' => '12',
+          'weight' => '13',
         ),
         'full' => array(
           'label' => 'above',
@@ -3654,129 +3948,6 @@ function s4_sites_field_default_fields() {
         'settings' => array(),
         'type' => 'link_field',
         'weight' => '2',
-      ),
-    ),
-  );
-
-  // Exported field: 'node-site-field_site_form'
-  $fields['node-site-field_site_form'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '1',
-      'deleted' => '0',
-      'entity_types' => array(),
-      'field_name' => 'field_site_form',
-      'foreign keys' => array(
-        'nid' => array(
-          'columns' => array(
-            'nid' => 'nid',
-          ),
-          'table' => 'node',
-        ),
-      ),
-      'global_block_settings' => '1',
-      'indexes' => array(
-        'nid' => array(
-          0 => 'nid',
-        ),
-      ),
-      'module' => 'node_reference',
-      'settings' => array(
-        'nodeaccess_nodereference' => array(
-          'all' => array(
-            'view' => 'view',
-          ),
-          'author' => array(
-            'delete' => 0,
-            'update' => 0,
-            'view' => 0,
-          ),
-          'priority' => '0',
-          'referenced' => array(
-            'delete' => array(
-              'delete' => 0,
-              'update' => 0,
-              'view' => 0,
-            ),
-            'update' => array(
-              'delete' => 0,
-              'update' => 0,
-              'view' => 0,
-            ),
-            'view' => array(
-              'delete' => 0,
-              'update' => 0,
-              'view' => 0,
-            ),
-          ),
-          'unused' => '0',
-        ),
-        'referenceable_types' => array(
-          'contact_record' => 0,
-          'coordinator' => 0,
-          'course' => 0,
-          'course_term' => 0,
-          'file' => 0,
-          'news' => 0,
-          'page' => 0,
-          'signup' => 0,
-          'site' => 0,
-          'webform' => 'webform',
-        ),
-        'view' => array(
-          'args' => array(),
-          'display_name' => '',
-          'view_name' => '',
-        ),
-      ),
-      'translatable' => '1',
-      'type' => 'node_reference',
-    ),
-    'field_instance' => array(
-      'bundle' => 'site',
-      'default_value' => NULL,
-      'deleted' => '0',
-      'description' => 'Select the signup form students should fill out when selecting this site.',
-      'display' => array(
-        'default' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '33',
-        ),
-        'full' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
-        'notifications' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
-        'teaser' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
-      ),
-      'entity_type' => 'node',
-      'field_name' => 'field_site_form',
-      'label' => 'Signup form',
-      'required' => 0,
-      's4_sites_field_access' => 0,
-      'settings' => array(
-        'user_register_form' => FALSE,
-      ),
-      'widget' => array(
-        'active' => 1,
-        'module' => 'options',
-        'settings' => array(),
-        'type' => 'options_select',
-        'weight' => '8',
       ),
     ),
   );
@@ -4044,7 +4215,7 @@ function s4_sites_field_default_fields() {
           'module' => 'list',
           'settings' => array(),
           'type' => 'list_default',
-          'weight' => '17',
+          'weight' => '18',
         ),
         'full' => array(
           'label' => 'above',
@@ -4080,119 +4251,6 @@ function s4_sites_field_default_fields() {
         'settings' => array(),
         'type' => 'options_select',
         'weight' => '28',
-      ),
-    ),
-  );
-
-  // Exported field: 'node-site-field_site_images'
-  $fields['node-site-field_site_images'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '-1',
-      'deleted' => '0',
-      'entity_types' => array(),
-      'field_name' => 'field_site_images',
-      'foreign keys' => array(
-        'fid' => array(
-          'columns' => array(
-            'fid' => 'fid',
-          ),
-          'table' => 'file_managed',
-        ),
-      ),
-      'global_block_settings' => '2',
-      'indexes' => array(
-        'fid' => array(
-          0 => 'fid',
-        ),
-      ),
-      'module' => 'image',
-      'settings' => array(
-        'default_image' => 0,
-        'uri_scheme' => 'public',
-      ),
-      'translatable' => '1',
-      'type' => 'image',
-    ),
-    'field_instance' => array(
-      'bundle' => 'site',
-      'deleted' => '0',
-      'description' => 'Attach a few photos of the site. The first image will be used in the site preview.',
-      'display' => array(
-        'cck_blocks' => array(
-          'label' => 'hidden',
-          'module' => 'image',
-          'settings' => array(
-            'image_link' => '',
-            'image_style' => '',
-          ),
-          'type' => 'image',
-          'weight' => '0',
-        ),
-        'default' => array(
-          'label' => 'above',
-          'module' => 'fancybox',
-          'settings' => array(
-            'image_link_style' => 'large',
-            'image_style' => 'thumbnail',
-          ),
-          'type' => 'fancybox_image',
-          'weight' => '18',
-        ),
-        'full' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '4',
-        ),
-        'notifications' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
-        'teaser' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
-      ),
-      'entity_type' => 'node',
-      'field_name' => 'field_site_images',
-      'label' => 'Site Images',
-      'required' => 0,
-      'settings' => array(
-        'alt_field' => 1,
-        'file_directory' => 'site/photos',
-        'file_extensions' => 'png gif jpg jpeg',
-        'max_filesize' => '',
-        'max_resolution' => '',
-        'min_resolution' => '',
-        'title_field' => 0,
-        'user_register_form' => FALSE,
-      ),
-      'widget' => array(
-        'active' => 1,
-        'module' => 'image',
-        'settings' => array(
-          'insert' => 0,
-          'insert_class' => '',
-          'insert_default' => 'auto',
-          'insert_styles' => array(
-            'auto' => 'auto',
-            'image' => 0,
-            'image_large' => 0,
-            'image_medium' => 0,
-            'image_thumbnail' => 0,
-            'link' => 0,
-          ),
-          'insert_width' => '',
-          'preview_image_style' => 'thumbnail',
-          'progress_indicator' => 'throbber',
-        ),
-        'type' => 'image_image',
-        'weight' => '26',
       ),
     ),
   );
@@ -4234,7 +4292,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '34',
+          'weight' => '31',
         ),
         'full' => array(
           'label' => 'above',
@@ -4318,7 +4376,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '37',
+          'weight' => '34',
         ),
         'full' => array(
           'label' => 'above',
@@ -4403,7 +4461,7 @@ function s4_sites_field_default_fields() {
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_link',
-          'weight' => '15',
+          'weight' => '16',
         ),
         'full' => array(
           'label' => 'above',
@@ -4570,7 +4628,7 @@ function s4_sites_field_default_fields() {
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_link',
-          'weight' => '16',
+          'weight' => '17',
         ),
         'full' => array(
           'label' => 'above',
@@ -4651,9 +4709,10 @@ function s4_sites_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
+          'module' => 'taxonomy',
           'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '29',
+          'type' => 'taxonomy_term_reference_plain',
+          'weight' => '7',
         ),
         'full' => array(
           'label' => 'above',
@@ -4689,6 +4748,67 @@ function s4_sites_field_default_fields() {
         'settings' => array(),
         'type' => 'options_buttons',
         'weight' => '3',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-site-field_site_signup_group'
+  $fields['node-site-field_site_signup_group'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '-1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_site_signup_group',
+      'foreign keys' => array(),
+      'indexes' => array(),
+      'module' => 'field_collection',
+      'settings' => array(
+        'path' => '',
+      ),
+      'translatable' => '0',
+      'type' => 'field_collection',
+    ),
+    'field_instance' => array(
+      'bundle' => 'site',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '35',
+        ),
+        'notifications' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'display_label' => '',
+      'entity_type' => 'node',
+      'field_name' => 'field_site_signup_group',
+      'label' => 'Signup forms',
+      'required' => 0,
+      's4_sites_field_access' => 1,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 0,
+        'module' => 'field_collection_table',
+        'settings' => array(),
+        'type' => 'field_collection_table',
+        'weight' => '30',
       ),
     ),
   );
@@ -4730,7 +4850,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '25',
+          'weight' => '24',
         ),
         'full' => array(
           'label' => 'above',
@@ -4848,7 +4968,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '30',
+          'weight' => '28',
         ),
         'full' => array(
           'label' => 'above',
@@ -4935,7 +5055,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '28',
+          'weight' => '26',
         ),
         'full' => array(
           'label' => 'above',
@@ -5018,7 +5138,7 @@ function s4_sites_field_default_fields() {
           'module' => 'link',
           'settings' => array(),
           'type' => 'link_default',
-          'weight' => '8',
+          'weight' => '9',
         ),
         'full' => array(
           'label' => 'above',
@@ -5130,6 +5250,67 @@ function s4_sites_field_default_fields() {
     ),
   );
 
+  // Exported field: 'taxonomy_term-site_restrictions-field_form_instructions'
+  $fields['taxonomy_term-site_restrictions-field_form_instructions'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_form_instructions',
+      'foreign keys' => array(
+        'format' => array(
+          'columns' => array(
+            'format' => 'format',
+          ),
+          'table' => 'filter_format',
+        ),
+      ),
+      'indexes' => array(
+        'format' => array(
+          0 => 'format',
+        ),
+      ),
+      'module' => 'text',
+      'settings' => array(),
+      'translatable' => '0',
+      'type' => 'text_long',
+    ),
+    'field_instance' => array(
+      'bundle' => 'site_restrictions',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => 'This message appears when users are viewing your paper forms and are in the process of signing up.',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => 1,
+        ),
+      ),
+      'display_label' => '',
+      'entity_type' => 'taxonomy_term',
+      'field_name' => 'field_form_instructions',
+      'label' => 'Downloadable form instructions',
+      'required' => 0,
+      'settings' => array(
+        'text_processing' => '1',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'text',
+        'settings' => array(
+          'rows' => '5',
+        ),
+        'type' => 'text_textarea',
+        'weight' => '2',
+      ),
+    ),
+  );
+
   // Exported field: 'taxonomy_term-site_restrictions-field_thank_you_message'
   $fields['taxonomy_term-site_restrictions-field_thank_you_message'] = array(
     'field_config' => array(
@@ -5195,8 +5376,8 @@ function s4_sites_field_default_fields() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Additional users');
-  t('Attach a few photos of the site. The first image will be used in the site preview.');
   t('Available programs');
+  t('Available to');
   t('Body');
   t('Briefly describe any ongoing needs or special projects with which students can assist agency staff');
   t('By percentage, what is the demographic of the population you serve?');
@@ -5205,18 +5386,20 @@ function s4_sites_field_default_fields() {
   t('Contact tags');
   t('Contact type');
   t('Days and hours will you accept students for service (check all that apply)');
+  t('Downloadable form instructions');
   t('Email address');
   t('Enable expiration reminder');
   t('Enter a few tags to describe this site.');
   t('Enter a few tags to help categorize this type of contact');
   t('Enter the URL to this site\'s website.');
   t('Enter the number of days before a file of this type expires that an email reminder should be sent to department staff. ');
-  t('Evaluation Form');
+  t('Evaluation forms');
   t('Expiration date');
   t('File category');
   t('File description or notes');
   t('Files');
   t('First Name');
+  t('Form');
   t('How many people does your organization serve?');
   t('If you have multiple location sites that you would like students to be placed at, please provide specific location information. (You may add additional locations using the \'Add another\' button below.)');
   t('If your organization has a presence on Facebook, Twitter, or another social network, please provide the address.');
@@ -5230,6 +5413,7 @@ function s4_sites_field_default_fields() {
   t('Once this number is reached, students will not be able to register with your site.');
   t('Organization type');
   t('Phone number');
+  t('Program');
   t('Provide an overview description of your organization, i.e. who you are, what you do, and who you serve.');
   t('Reminder date');
   t('Reminder period (days)');
@@ -5239,10 +5423,8 @@ function s4_sites_field_default_fields() {
   t('Role');
   t('Saved form record');
   t('Select the role of this staff person.');
-  t('Select the signup form students should fill out when selecting this site.');
-  t('Signup form');
+  t('Signup forms');
   t('Site');
-  t('Site Images');
   t('Site Tour');
   t('Site description');
   t('Site has special requirements');
@@ -5255,6 +5437,7 @@ function s4_sites_field_default_fields() {
   t('The date when a reminder to check on this file will be sent out.');
   t('These are other users (besides department staff) who can edit this site\'s information, along with information about associated coordinators.');
   t('This information will be displayed to students before they sign up. This could contain additional information the student needs to know when they sign up for issues like TB testing, background checks, or specialized training');
+  t('This message appears when users are viewing your paper forms and are in the process of signing up.');
   t('This will be shown to the public, so only include a generic email contact for the site.');
   t('Training and orientation information');
   t('Website');

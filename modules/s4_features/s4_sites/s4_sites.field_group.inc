@@ -37,6 +37,34 @@ function s4_sites_field_group_info() {
   $field_group = new stdClass;
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_site_forms|node|site|form';
+  $field_group->group_name = 'group_site_forms';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'site';
+  $field_group->mode = 'form';
+  $field_group->parent_name = 'group_site_tabs';
+  $field_group->data = array(
+    'label' => 'Forms',
+    'weight' => '26',
+    'children' => array(
+      0 => 'field_site_signup_group',
+      1 => 'field_site_evaluation_group',
+    ),
+    'format_type' => 'htab',
+    'format_settings' => array(
+      'formatter' => 'closed',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => '',
+        'required_fields' => 1,
+      ),
+    ),
+  );
+  $export['group_site_forms|node|site|form'] = $field_group;
+
+  $field_group = new stdClass;
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_site_general|node|site|form';
   $field_group->group_name = 'group_site_general';
   $field_group->entity_type = 'node';
@@ -98,32 +126,6 @@ function s4_sites_field_group_info() {
     ),
   );
   $export['group_site_health_safety|node|site|form'] = $field_group;
-
-  $field_group = new stdClass;
-  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
-  $field_group->api_version = 1;
-  $field_group->identifier = 'group_site_images|node|site|form';
-  $field_group->group_name = 'group_site_images';
-  $field_group->entity_type = 'node';
-  $field_group->bundle = 'site';
-  $field_group->mode = 'form';
-  $field_group->parent_name = 'group_site_tabs';
-  $field_group->data = array(
-    'label' => 'Images',
-    'weight' => '26',
-    'children' => array(
-      0 => 'field_site_images',
-    ),
-    'format_type' => 'htab',
-    'format_settings' => array(
-      'formatter' => 'closed',
-      'instance_settings' => array(
-        'classes' => '',
-        'required_fields' => 1,
-      ),
-    ),
-  );
-  $export['group_site_images|node|site|form'] = $field_group;
 
   $field_group = new stdClass;
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -230,9 +232,9 @@ function s4_sites_field_group_info() {
       1 => 'group_site_contact',
       2 => 'group_site_general',
       3 => 'group_site_health_safety',
-      4 => 'group_site_images',
-      5 => 'group_site_instructions',
-      6 => 'group_site_population',
+      4 => 'group_site_instructions',
+      5 => 'group_site_population',
+      6 => 'group_site_forms',
     ),
     'format_type' => 'htabs',
     'format_settings' => array(

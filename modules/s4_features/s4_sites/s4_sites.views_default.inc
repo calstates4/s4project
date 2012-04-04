@@ -3076,7 +3076,7 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['fields']['field_location']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_location']['delta_reversed'] = 0;
   $handler->display->display_options['fields']['field_location']['field_api_classes'] = 0;
-  /* Field: Content: Site Images */
+  /* Field: Broken/missing handler */
   $handler->display->display_options['fields']['field_site_images']['id'] = 'field_site_images';
   $handler->display->display_options['fields']['field_site_images']['table'] = 'field_data_field_site_images';
   $handler->display->display_options['fields']['field_site_images']['field'] = 'field_site_images';
@@ -3098,16 +3098,6 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['fields']['field_site_images']['hide_empty'] = 1;
   $handler->display->display_options['fields']['field_site_images']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_site_images']['hide_alter_empty'] = 0;
-  $handler->display->display_options['fields']['field_site_images']['click_sort_column'] = 'fid';
-  $handler->display->display_options['fields']['field_site_images']['type'] = 'medium_fancybox';
-  $handler->display->display_options['fields']['field_site_images']['settings'] = array(
-    'image_style' => '',
-    'image_link' => '',
-  );
-  $handler->display->display_options['fields']['field_site_images']['group_rows'] = 1;
-  $handler->display->display_options['fields']['field_site_images']['delta_offset'] = '0';
-  $handler->display->display_options['fields']['field_site_images']['delta_reversed'] = 0;
-  $handler->display->display_options['fields']['field_site_images']['field_api_classes'] = 0;
   /* Field: Content: What languages would you like students to speak other than English? */
   $handler->display->display_options['fields']['field_site_language']['id'] = 'field_site_language';
   $handler->display->display_options['fields']['field_site_language']['table'] = 'field_data_field_site_language';
@@ -3314,7 +3304,7 @@ function s4_sites_views_default_views() {
     t('Social network page'),
     t('Phone number'),
     t('Location(s)'),
-    t('Site Images'),
+    t('Broken handler field_data_field_site_images.field_site_images'),
     t('Suggested languages'),
     t('Number of people served'),
     t('Population served'),
