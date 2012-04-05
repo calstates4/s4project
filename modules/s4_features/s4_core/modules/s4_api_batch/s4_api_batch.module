@@ -56,9 +56,13 @@ function s4_api_batch_get_batch($file) {
   }
   $file_handle = fopen($file_path, 'r');
   $headers = fgetcsv($file_handle);
+  array_walk($course, create_function('&$val', '$val = trim($val);'));
   $results = array();
   while (($row = fgetcsv($file_handle)) !== FALSE) {
     if (count($headers) == count($row)) {
+      foreach($row as $k => $v) {
+        $row[$k] = trim($v);
+      }
       $results[] = array_combine($headers, $row);
     }
   }
