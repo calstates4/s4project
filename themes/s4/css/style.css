@@ -51,7 +51,9 @@ button {
   font-family: inherit;
   margin: 0;
 }
-input[type=button], input[type=submit], button {
+input[type=button],
+input[type=submit],
+button {
   overflow: visible;
 }
 input[disabled],
@@ -91,7 +93,8 @@ blockquote {
 li {
   margin-bottom: 0.5em;
 }
-ul, ol {
+ul,
+ol {
   margin-left: 1em;
   margin-bottom: 0.5em;
 }
@@ -134,7 +137,8 @@ h6 {
   font-size: 1.1em;
 }
 /** LAYOUT **/
-a, a:visited {
+a,
+a:visited {
   color: #0084b4;
 }
 .container {
@@ -152,7 +156,8 @@ a, a:visited {
   display: none;
 }
 /** NAVIGATION & BRANDING **/
-#branding, #footer {
+#branding,
+#footer {
   border-bottom: 1px solid #000;
   padding: 10px 0;
 }
@@ -185,7 +190,8 @@ a, a:visited {
   top: 0;
   left: -9999px;
 }
-#search input, .tool-link {
+#search input,
+.tool-link {
   padding: 4px 5px;
 }
 #search input[type=text] {
@@ -196,7 +202,8 @@ a, a:visited {
   -webkit-border-radius: 4px;
   width: 200px;
 }
-#search input[type=submit], .tool-link {
+#search input[type=submit],
+.tool-link {
   border-radius: 4px;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
@@ -206,7 +213,8 @@ a, a:visited {
   margin: 0 0 0 10px;
   padding: 3px 5px;
 }
-#search input[type=submit]:hover, #search input[type=submit]:active {
+#search input[type=submit]:hover,
+#search input[type=submit]:active {
   background: #0b1013;
   color: #ffffff;
 }
@@ -217,13 +225,15 @@ a, a:visited {
   border-bottom: 1px solid #000;
   padding: 5px 0;
 }
-#navigation a, #navigation .breadcrumb {
+#navigation a,
+#navigation .breadcrumb {
   color: #000000;
   font-weight: bold;
   text-align: right;
   text-decoration: none;
 }
-#navigation ul#main-menu li, #navigation ul#main-menu li a {
+#navigation ul#main-menu li,
+#navigation ul#main-menu li a {
   float: right;
   list-style-type: none;
 }
@@ -240,7 +250,9 @@ a, a:visited {
   padding: 6px 10px;
   text-transform: uppercase;
 }
-#main-menu a:hover, #main-menu .active a, #main-menu .active-trail a {
+#main-menu a:hover,
+#main-menu .active a,
+#main-menu .active-trail a {
   background: #FFF;
   color: #111;
   text-decoration: none;
@@ -291,7 +303,8 @@ a, a:visited {
   padding: 15px 0;
   min-height: 400px;
 }
-.column-equal.column-last, #content_middle .column {
+.column-equal.column-last,
+#content_middle .column {
   margin: 0 0 0 15px;
 }
 #content_top {
@@ -307,14 +320,16 @@ body.front.has-footer-map #page {
 #content_top .block {
   margin: 0;
 }
-#content, body .node-form .form-region-main {
+#content,
+body .node-form .form-region-main {
   float: left;
   width: 626.6666666666666px;
 }
 .no-content-sidebar #content {
   width: 100%;
 }
-#content_middle .column, body .node-form .form-region-right {
+#content_middle .column,
+body .node-form .form-region-right {
   width: 298.3333333333333px;
   float: right;
 }
@@ -406,7 +421,8 @@ body.front.has-footer-map #page {
   margin: 10px 0;
   color: #666666;
 }
-.postal-address, address {
+.postal-address,
+address {
   margin: 15px 0;
   font-style: normal;
 }
@@ -560,7 +576,9 @@ body.front.has-footer-map #page {
 #content ul.links.inline li {
   padding: 0 10px 0 0;
 }
-#content ul.links .contact_record_field_site a, #content ul.links .coordinator_field_site a, #content ul.links .flag-bookmarks a {
+#content ul.links .contact_record_field_site a,
+#content ul.links .coordinator_field_site a,
+#content ul.links .flag-bookmarks a {
   padding-left: 20px;
   background-image: url(../images/link-icons-add.png);
   background-repeat: no-repeat;
@@ -569,7 +587,9 @@ body.front.has-footer-map #page {
 #content ul.links .flag-bookmarks a {
   background-image: url(../images/link-icons-bookmark.png);
 }
-#content ul.links .contact_record_field_site a:hover, #content ul.links .coordinator_field_site a:hover, #content ul.links .flag-bookmarks a:hover {
+#content ul.links .contact_record_field_site a:hover,
+#content ul.links .coordinator_field_site a:hover,
+#content ul.links .flag-bookmarks a:hover {
   background-position-y: -24px;
 }
 /** TABS **/
@@ -595,13 +615,15 @@ body.front.has-footer-map #page {
 #page ul.tabs li a:hover {
   text-decoration: underline;
 }
-#page ul.tabs.secondary li, #page ul.tabs.secondary li a {
+#page ul.tabs.secondary li,
+#page ul.tabs.secondary li a {
   border: none;
 }
 #page ul.tabs.secondary {
   padding: 5px 0px 10px 0px;
 }
-#page ul.tabs li.active a, #page ul.tabs li.active-trail a {
+#page ul.tabs li.active a,
+#page ul.tabs li.active-trail a {
   background: #ffffff;
   border-color: 1px solid #ffffff;
 }
@@ -628,7 +650,8 @@ table thead th {
   -moz-text-shadow: 0px 1px 0px #ffffff;
   white-space: nowrap;
 }
-table th, table td {
+table th,
+table td {
   padding: 6px 8px;
 }
 table th a {
@@ -663,7 +686,8 @@ legend {
   font-weight: bold;
   color: #304854;
 }
-.form-region-right input[type=text], .form-region-right fieldset {
+.form-region-right input[type=text],
+.form-region-right fieldset {
   width: 298.3333333333333px;
 }
 .region-content-right input[type=text] {
@@ -672,7 +696,8 @@ legend {
 .form-region-right table input[type=text] {
   width: 150px;
 }
-.form-region-right tr.odd .form-item, .form-region-right tr.even .form-item {
+.form-region-right tr.odd .form-item,
+.form-region-right tr.even .form-item {
   white-space: normal;
 }
 .form-region-right table .form-type-textfield .description {
@@ -694,7 +719,9 @@ a.add {
   margin: 10px 0;
 }
 /** Shamelessly stolen from the Seven theme in Drupal. **/
-input.form-submit, input[type=button], a.button {
+input.form-submit,
+input[type=button],
+a.button {
   cursor: pointer;
   padding: 4px 17px;
   margin-bottom: 1em;
@@ -720,7 +747,8 @@ a.button:active {
   text-decoration: none;
   color: #5a5a5a;
 }
-div.node-form input#edit-submit, div.node-form input#edit-submit-1 {
+div.node-form input#edit-submit,
+div.node-form input#edit-submit-1 {
   border: 1px solid #8eB7cd;
   border-left-color: #8eB7cd;
   border-right-color: #8eB7cd;
@@ -734,7 +762,8 @@ input.form-submit:active {
   border-color: #555;
   text-shadow: #222222 0px -1px 0px;
 }
-input.form-button-disabled, input.form-button-disabled:active {
+input.form-button-disabled,
+input.form-button-disabled:active {
   background: #eee none;
   border-color: #eee;
   text-shadow: none;
@@ -763,7 +792,8 @@ input.form-button-disabled, input.form-button-disabled:active {
   clear: both;
   padding: 8px 0;
 }
-.site-listing li .site-info, .site-listing li .site-restrictions {
+.site-listing li .site-info,
+.site-listing li .site-restrictions {
   float: left;
 }
 .site-listing li .site-info {
@@ -843,7 +873,8 @@ ul.pager li.pager-current {
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
 }
-ul.pager li.pager-current, ul.pager a {
+ul.pager li.pager-current,
+ul.pager a {
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
@@ -852,7 +883,8 @@ ul.pager a:hover {
   background: #6aa4c2;
   color: #fff;
 }
-ul.pager .pager-next a, ul.pager .pager-last a {
+ul.pager .pager-next a,
+ul.pager .pager-last a {
   width: 70px;
 }
 /** MESSAGES **/
@@ -922,7 +954,8 @@ ul.pager .pager-next a, ul.pager .pager-last a {
   background: url(../images/subscription_icons.png) no-repeat 4px -38px #a6a6a6;
   display: block;
 }
-.subscription-button .hover, .subscription-button.subscribed:hover .nohover {
+.subscription-button .hover,
+.subscription-button.subscribed:hover .nohover {
   display: none;
 }
 .subscription-button.subscribed:hover .hover {
@@ -940,14 +973,17 @@ ul.pager .pager-next a, ul.pager .pager-last a {
 #edit-field-signups-max input {
   width: 75px;
 }
-.field-name-field-course-subject, .field-name-field-course-catalog-number, .field-name-field-course-section {
+.field-name-field-course-subject,
+.field-name-field-course-catalog-number,
+.field-name-field-course-section {
   float: left;
   margin-right: 25px;
 }
 .field-name-field-course-title {
   clear: both;
 }
-li.horizontal-tab-button.selected, li.horizontal-tab-button.selected a {
+li.horizontal-tab-button.selected,
+li.horizontal-tab-button.selected a {
   outline: none;
 }
 #content .horizontal-tabs fieldset.horizontal-tabs-pane {

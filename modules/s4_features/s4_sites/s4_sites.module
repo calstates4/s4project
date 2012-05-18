@@ -818,6 +818,7 @@ function s4_sites_ds_layout_info() {
         'right' => t('Right')
       ),
       'css' => TRUE,
+      'form' => TRUE
     ),
   );
 

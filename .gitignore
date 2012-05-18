@@ -4,3 +4,4 @@ libraries/guiders/*
 modules/contrib/*
 themes/contrib/*
 themes/student_signup/*
+*.sublime*

@@ -197,7 +197,7 @@ function s4_core_s4_site_configuration() {
 /**
 *  Form to quickly sign up student with a site
 */
-function s4_core_create_signup_form($form, $form_state, $uid) {
+function s4_core_create_signup_form($form, $form_state, $uid, $courses = true) {
 
   $user = user_load($uid);
   drupal_set_title(t('Sign up @name', array('@name' => s4_core_get_user_full_name($user))));
@@ -208,7 +208,7 @@ function s4_core_create_signup_form($form, $form_state, $uid) {
     '#value' => $user->uid,
   );
   
-  if (module_exists('s4_courses')) {
+  if (module_exists('s4_courses') && $courses) {
     $courses = array();
     
     $course_list = db_select('field_data_field_course_students', 's')
@@ -234,7 +234,7 @@ function s4_core_create_signup_form($form, $form_state, $uid) {
     );
   }
   
-  $sites = array(0 => 'Select a site');
+  $sites = array();
   $query = db_select('node', 'n')
        ->fields('n', array('nid', 'title'))
        ->condition('type', 'site')
@@ -248,6 +248,8 @@ function s4_core_create_signup_form($form, $form_state, $uid) {
     '#title' => 'Site',
     '#options' => $sites,
     '#attributes' => array('class' => array('chosen')),
+    '#required' => TRUE,
+    '#empty_option' => t('-- Select a site --'),
     '#ajax' => array(
       'callback' => 's4_core_site_staff_choice',
       'wrapper' => 'site-staff-select',
@@ -324,7 +326,7 @@ function s4_core_create_signup_form_submit($form, $form_state) {
   $site = node_load($form_state['values']['site']);
   $form = field_get_items('node', $site, 'field_site_form');
   if ($form[0]['nid'] && $form_state['values']['email-student']) {
-    
+
   }
   drupal_goto($form_state['values']['destination']);
 }
