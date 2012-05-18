@@ -3,7 +3,7 @@
 		
 		attach : function() {
 			this.addChosen();
-			$('.view.quicksearch').each(function(index, element) {
+			$('.view.quicksearch:has(table)').each(function(index, element) {
 		      $(this).prepend('<div class="search-filter"><label for="filter-' + index + 
 		               '">Filter: </label><input type="text" id="filter-' + index +
 		               '" name="filter-' + index + '"></div>');
