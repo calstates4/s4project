@@ -15,7 +15,7 @@ function s4_core_signup_evaluation($node) {
   $eval_form = field_get_items('node', $site, 'field_site_eval_form');
   $eval_form = node_load($eval_form[0]['nid']);
   if (!$eval_form) {
-    drupal_set_message(t('The site @site does not require an evaluation', 
+    drupal_set_message(t('The site @site does not require an evaluation',
                array('@site' => $site->title)), 'error');
     return '';
   }
@@ -24,7 +24,7 @@ function s4_core_signup_evaluation($node) {
 }
 
 /**
-*  Menu callback to handle when a user has added a site to 
+*  Menu callback to handle when a user has added a site to
 *  a course.
 */
 function s4_core_add_site_to_course($op = 'add', $course, $site) {
@@ -78,12 +78,12 @@ function s4_core_signup($type, $nid) {
       elseif ($instructions[0]['value'] && strip_tags($instruction_text[0]['value']) != '' && !$_SESSION['s4_signup_agreed']) {
         drupal_set_message(t('This site requires that you read and agree to these additional instructions'));
         drupal_set_title(t('Site instructions'));
-        return check_markup($instruction_text[0]['value'], $instruction_text[0]['format']) . 
+        return check_markup($instruction_text[0]['value'], $instruction_text[0]['format']) .
             '<p>' .
                  l(t('Agree'), 's4/signup/' . $type . '/' . $site->nid,
                    array('query' => array('agreed' => 1),
                           'attributes' => array('class' => array('button')))) .
-                 ' ' . l(t('Return to site'), 'node/' . $site->nid) . 
+                 ' ' . l(t('Return to site'), 'node/' . $site->nid) .
             '</p>';
       }
       else {
@@ -114,12 +114,12 @@ function s4_core_signup($type, $nid) {
       }
     }
   }
-  
+
   if ($type == 'location') {
     $_SESSION['s4_signup_location'] = check_plain($nid);
     drupal_goto('s4/signup/site/' . check_plain(arg(4)));
   }
-  
+
   if ($type == 'coordinator') {
     $site = node_load($_SESSION['s4_signup_site']);
     $coordinator = node_load($nid);
@@ -131,7 +131,7 @@ function s4_core_signup($type, $nid) {
     }
   }
   if ($type == 'coordinator' || ($type == 'site' && $site_skip_coordinator)) {
-    $form = field_get_items('node', $site, 'field_site_form');    
+    $form = field_get_items('node', $site, 'field_site_form');
     if ($form !== FALSE && count($form)) {
       drupal_goto('node/' . $form[0]['nid']);
     }
@@ -139,10 +139,10 @@ function s4_core_signup($type, $nid) {
       s4_core_user_signup_completed();
     }
   }
-  
+
   drupal_set_message(t($message));
   drupal_goto('node/' . $nid);
-}  
+}
 
 /**
 *  System settings landing page
@@ -202,15 +202,15 @@ function s4_core_create_signup_form($form, $form_state, $uid, $courses = true) {
   $user = user_load($uid);
   drupal_set_title(t('Sign up @name', array('@name' => s4_core_get_user_full_name($user))));
   $form = array();
-  
+
   $form['user'] = array(
     '#type' => 'hidden',
     '#value' => $user->uid,
   );
-  
+
   if (module_exists('s4_courses') && $courses) {
     $courses = array();
-    
+
     $course_list = db_select('field_data_field_course_students', 's')
          ->fields('s', array('entity_id'))
          ->condition('s.bundle', 'course')
@@ -218,14 +218,14 @@ function s4_core_create_signup_form($form, $form_state, $uid, $courses = true) {
          ->distinct()
          ->execute()
          ->fetchCol();
-    
+
     foreach ($course_list as $course) {
       $course = node_load($course);
       $term = field_get_items('node', $course, 'field_term');
       $term = node_load($term[0]['nid']);
       $courses[$term->title][$course->nid] = $course->title;
     }
-    
+
     $form['course'] = array(
       '#type' => 'select',
       '#title' => 'Course',
@@ -233,7 +233,7 @@ function s4_core_create_signup_form($form, $form_state, $uid, $courses = true) {
       '#attributes' => array('class' => array('chosen')),
     );
   }
-  
+
   $sites = array();
   $query = db_select('node', 'n')
        ->fields('n', array('nid', 'title'))
@@ -259,7 +259,7 @@ function s4_core_create_signup_form($form, $form_state, $uid, $courses = true) {
       ),
     ),
   );
-  
+
   $site_staff_options = array();
   if ($form_state['values']['site']) {
     $site_staff = db_select('field_data_field_site', 's')
@@ -279,7 +279,7 @@ function s4_core_create_signup_form($form, $form_state, $uid, $courses = true) {
       }
     }
   }
-  
+
   $form['site-staff'] = array(
     '#type' => 'radios',
     '#prefix' => '<div id="site-staff-select">',
@@ -287,24 +287,24 @@ function s4_core_create_signup_form($form, $form_state, $uid, $courses = true) {
     '#title' => 'Site staff',
     '#options' => $site_staff_options,
   );
-  
+
   $form['hours'] = array(
     '#type' => 'textfield',
     '#title' => 'Number of expected hours of services',
     '#size' => 6,
   );
-  
+
   $form['email-student'] = array(
     '#type' => 'checkbox',
     '#title' => 'Send student email to complete a signup form (if the site has one)',
     '#default_value' => 1,
   );
-  
+
   $form['submit'] = array(
     '#type' => 'submit',
     '#value' => 'Create signup',
   );
-  
+
   return $form;
 }
 

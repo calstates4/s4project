@@ -325,7 +325,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['filters']['field_site_restrict_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_site_restrict_tid']['vocabulary'] = 'site_restrictions';
   $handler->display->display_options['filters']['field_site_restrict_tid']['error_message'] = 1;
-  /* Filter criterion: Content: Evaluation Form (field_site_eval_form) */
+  /* Filter criterion: Field collection item: Form (field_site_eval_form) */
   $handler->display->display_options['filters']['field_site_eval_form_nid']['id'] = 'field_site_eval_form_nid';
   $handler->display->display_options['filters']['field_site_eval_form_nid']['table'] = 'field_data_field_site_eval_form';
   $handler->display->display_options['filters']['field_site_eval_form_nid']['field'] = 'field_site_eval_form_nid';

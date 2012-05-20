@@ -26,7 +26,10 @@ function s4_core_ctools_plugin_api() {
  * Implements hook_views_api().
  */
 function s4_core_views_api() {
-  return array("version" => "3.0");
+  list($module, $api) = func_get_args();
+  if ($module == "views" && $api == "views_default") {
+    return array("version" => "3.0");
+  }
 }
 
 /**
@@ -35,12 +38,12 @@ function s4_core_views_api() {
 function s4_core_homebox() {
   $homeboxes = array();
 
-  $homeboxes['home'] = array(
+  $homeboxes['home'] = array (
     'regions' => 2,
     'cache' => 0,
     'color' => 0,
     'colors' => 
-    array(
+    array (
       0 => '#E4F0F8',
       1 => '#E4F0F8',
       2 => '#E4F0F8',
@@ -49,9 +52,9 @@ function s4_core_homebox() {
       5 => '#E4F0F8',
     ),
     'blocks' => 
-    array(
+    array (
       's4_reporting_course_summary' => 
-      array(
+      array (
         'module' => 's4_reporting',
         'delta' => 'course_summary',
         'region' => 2,
@@ -63,7 +66,7 @@ function s4_core_homebox() {
         'weight' => -48,
       ),
       'masquerade_masquerade' => 
-      array(
+      array (
         'module' => 'masquerade',
         'delta' => 'masquerade',
         'region' => 2,
@@ -75,7 +78,7 @@ function s4_core_homebox() {
         'weight' => -48,
       ),
       's4_reporting_site_summary' => 
-      array(
+      array (
         'module' => 's4_reporting',
         'delta' => 'site_summary',
         'region' => 1,
@@ -87,7 +90,7 @@ function s4_core_homebox() {
         'weight' => -48,
       ),
       'views_bookmarked_sites-block' => 
-      array(
+      array (
         'module' => 'views',
         'delta' => 'bookmarked_sites-block',
         'region' => 2,
@@ -99,7 +102,7 @@ function s4_core_homebox() {
         'weight' => -48,
       ),
       'views_65656e1f5a12cde25f0722f735fe7969' => 
-      array(
+      array (
         'module' => 'views',
         'delta' => '65656e1f5a12cde25f0722f735fe7969',
         'region' => 2,
@@ -111,7 +114,7 @@ function s4_core_homebox() {
         'weight' => -48,
       ),
       'views_manage_sites-block_1' => 
-      array(
+      array (
         'module' => 'views',
         'delta' => 'manage_sites-block_1',
         'region' => 1,
@@ -123,7 +126,7 @@ function s4_core_homebox() {
         'weight' => -47,
       ),
       'views_recent_activity-block' => 
-      array(
+      array (
         'module' => 'views',
         'delta' => 'recent_activity-block',
         'region' => 1,
@@ -136,7 +139,7 @@ function s4_core_homebox() {
       ),
     ),
     'widths' => 
-    array(
+    array (
     ),
     'title' => 'Home',
     'path' => 'home',
@@ -145,7 +148,7 @@ function s4_core_homebox() {
     'auto_save' => 1,
     'full' => 0,
     'roles' => 
-    array(
+    array (
       0 => 'authenticated user',
     ),
   );

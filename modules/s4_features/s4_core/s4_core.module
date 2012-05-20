@@ -713,6 +713,20 @@ function s4_core_get_entity($data, $type, $id_only = FALSE) {
 }
 
 /**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function s4_core_form_taxonomy_term_form_alter(&$form) {
+
+  if (module_exists('token')) {
+    $form['tokens'] = array(
+      '#theme' => 'token_tree',
+      '#token_types' => array('s4_signup'),
+    );
+  }
+  dpm($form);
+}
+
+/**
 * Implements hook_node_insert
 */
 function s4_core_node_insert($node) {
