@@ -751,9 +751,17 @@ function s4_core_node_insert($node) {
            $body_message = t('<p><strong>You have not completed your registration until you complete the following form:</strong></p>');
            $body_message .= '<p>' . url('signup/register/' . $node->nid . '/' . hash('sha256', $node->nid . drupal_get_hash_salt()), array('absolute' => TRUE)) . '</p>';
        }
-       $context['subject'] = variable_get('s4_core_signup_email_subject', '');
-       $context['body'] = variable_get('s4_core_signup_email_body', '');
-     drupal_mail('s4_core', 'action_send_email', $user->mail, language_default(), $context);
+       $program = field_get_items('node', $node, 'field_site_restrict');
+       if($program[0]['tid']) {
+        $term = taxonomy_term_load($program[0]['tid']);
+        $email_subject = field_get_items('taxonomy_term', $term, 'field_confirmation_subject');
+        $email_body = field_get_items('taxonomy_term', $term, 'field_confirmation_email');
+        if($email_subject[0]['value'] && $email_body[0]['value']) {
+          $context['subject'] = $email_subject[0]['value'];
+          $context['body'] = $email_body[0]['value'];
+          drupal_mail('s4_core', 'action_send_email', $user->mail, language_default(), $context);
+        }
+       }
     }
   }
 }
