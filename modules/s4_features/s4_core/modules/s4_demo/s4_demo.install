@@ -6,7 +6,8 @@ function s4_demo_install() {
                  'demo_course_importer'       => 'courses.csv',
                  'demo_enrollment_importer'   => 'enrollment.csv',
                  'demo_faculty_importer'      => 'faculty_assignments.csv',
-                 'demo_site_importer'          => 'sites.csv',
+                 'demo_site_importer'         => 'sites.csv',
+                 'demo_site_staff_importer'   => 'site_staff.csv',
                  );
   global $user;
   $current_user = $user;

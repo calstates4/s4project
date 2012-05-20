@@ -65,7 +65,7 @@ function s4_demo_feeds_importer_default() {
           ),
           5 => array(
             'source' => 'term',
-            'target' => 'field_term:guid',
+            'target' => 'field_term:guid:duplicates',
             'unique' => FALSE,
           ),
         ),
@@ -320,6 +320,83 @@ function s4_demo_feeds_importer_default() {
     'process_in_background' => 0,
   );
   $export['demo_site_importer'] = $feeds_importer;
+
+  $feeds_importer = new stdClass;
+  $feeds_importer->disabled = FALSE; /* Edit this to true to make a default feeds_importer disabled initially */
+  $feeds_importer->api_version = 1;
+  $feeds_importer->id = 'demo_site_staff_importer';
+  $feeds_importer->config = array(
+    'name' => 'Demo site staff importer',
+    'description' => 'Imports site staff based on linking the site GUID with the site staff record.',
+    'fetcher' => array(
+      'plugin_key' => 'FeedsFileFetcher',
+      'config' => array(
+        'allowed_extensions' => 'txt csv tsv xml opml',
+        'direct' => FALSE,
+      ),
+    ),
+    'parser' => array(
+      'plugin_key' => 'FeedsCSVParser',
+      'config' => array(
+        'delimiter' => ',',
+        'no_headers' => 0,
+      ),
+    ),
+    'processor' => array(
+      'plugin_key' => 'FeedsNodeProcessor',
+      'config' => array(
+        'content_type' => 'coordinator',
+        'expire' => '-1',
+        'author' => 0,
+        'mappings' => array(
+          0 => array(
+            'source' => 'site',
+            'target' => 'field_site:guid',
+            'unique' => FALSE,
+          ),
+          1 => array(
+            'source' => 'first_name',
+            'target' => 'field_first_name',
+            'unique' => FALSE,
+          ),
+          2 => array(
+            'source' => 'last_name',
+            'target' => 'field_last_name',
+            'unique' => FALSE,
+          ),
+          3 => array(
+            'source' => 'number_students',
+            'target' => 'field_signups_max',
+            'unique' => FALSE,
+          ),
+          4 => array(
+            'source' => 'phone',
+            'target' => 'field_phone:number',
+            'unique' => FALSE,
+          ),
+          5 => array(
+            'source' => 'register',
+            'target' => 'field_staff_signup_available',
+            'unique' => FALSE,
+          ),
+          6 => array(
+            'source' => 'id',
+            'target' => 'guid',
+            'unique' => 1,
+          ),
+        ),
+        'update_existing' => '0',
+        'input_format' => 'plain_text',
+      ),
+    ),
+    'content_type' => '',
+    'update' => 0,
+    'import_period' => '-1',
+    'expire_period' => 3600,
+    'import_on_create' => 1,
+    'process_in_background' => 0,
+  );
+  $export['demo_site_staff_importer'] = $feeds_importer;
 
   $feeds_importer = new stdClass;
   $feeds_importer->disabled = FALSE; /* Edit this to true to make a default feeds_importer disabled initially */
