@@ -68,6 +68,11 @@ function s4_demo_feeds_importer_default() {
             'target' => 'field_term:guid:duplicates',
             'unique' => FALSE,
           ),
+          6 => array(
+            'source' => 'program',
+            'target' => 'field_site_restrict',
+            'unique' => FALSE,
+          ),
         ),
         'update_existing' => '2',
         'input_format' => 'plain_text',

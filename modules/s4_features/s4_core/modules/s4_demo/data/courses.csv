@@ -1,55 +1,55 @@
-"course_id","term","subject","catalog_number","section","title","status"
-"a7095c3e2ced5b12fa14ae4e2a01cc22",2114,"SL","200S",1,"Intro to Service",1
-"26593b6f96aafedd3a4d9d0bf49743ce",2114,"SL","200S",2,"Intro to Service",1
-"d2d59a5b9d84ed52d847568f5044bc8a",2114,"SL","200S",3,"Intro to Service",1
-"26be60f7709833fedbd974d7e977934b",2114,"SL","200S",4,"Intro to Service",1
-"8943316de06f61be2c2d0dc64c481ed6",2114,"TAT","399S",1,"TAT in the Community",1
-"3637c95b1f434ff8e5214cbc505f71ee",2114,"SL","201S",1,"Intro to Service",1
-"1aaafabda071d938ff29374cf9f2078c",2114,"SL","201S",2,"Intro to Service",1
-"ddcfd70143fc149d78850fc41f6b5da7",2114,"SL","295S",1,"SL Leadership Training",1
-"41b2c6064c43757cb7bca69e94154efe",2114,"SL","497S",2,"Independent Study",1
-"8e42abe73fde3115065d79784ecf8bf5",2114,"VPA","306S",1,"Digital Public Art",1
-"029d50d360d514fe2c959858c3a68f0a",2114,"SBS","324S",1,"Archaeology/Map to Museum",1
-"beab53b781babc3f7d760bd73569c6bc",2114,"LS","298S",1,"Intro to Teaching & Learning S",1
-"8c35bd2b1c889b34210b6f39bf9b30b2",2114,"LS","298S",2,"Intro to Teaching & Learning S",1
-"0b7a97e8fbdf4e2e6484b6bb458d56ef",2114,"LS","298S",3,"Intro to Teaching & Learning S",1
-"b79695759026c4e4fc95f08dc51e0bd1",2114,"LS","394S",2,"Multi Lit Chld & Yng Adults",1
-"6ce7e77344ab9981362b0d2be606df69",2114,"SPAN","301S",1,"Comp/Oral Practice SL",1
-"caf75e47cd29520fc2f5986e172fb056",2114,"KIN","471S",1,"Service Learning: KIN Majors",1
-"bb39647c56bfad8ec8edfe56b1ec5bac",2114,"GS","380S",1,"Int'l Organizations & SL",1
-"b55313deaf245a8c4dff9e6152256240",2114,"CST","361S",90,"Technology Tutors",1
-"cc4a9dffd8b714efd9722faf9f983979",2114,"MATH","361S",1,"Mathematics Tutors",1
-"528e079f134eda2cf62a67d18d65da9e",2114,"HCOM","307S",1,"Soc Impct Of Mass Media SL",1
-"ba5f8970d68351d074919fb9fa1adf70",2114,"BUS","303S",1,"Partic in Comm Econ Devel",1
-"6ee5fa583de16915691122714514c7b0",2114,"BUS","303S",2,"Partic in Comm Econ Devel",1
-"ff00d21042633c9728538e4595c8bf1b",2114,"VPA","320S",1,"Museum Studies",1
-"8d69a25d6ab0b3165d7c620f187befc6",2114,"SL","497S",1,"Independent Study",1
-"f88458233ed35e86395e6920bacad35a",2114,"ENVS","384S",1,"Social andEcologicalJustice SL",1
-"2b65538d4f0c25beee6e5c46e6f90269",2114,"LS","398S",1,"Soc Found of Multicult Ed S",1
-"ff20fc37917757d5a87ff2afba98848f",2114,"HCOM","340S",1,"Topics in Social Movements SL",1
-"4efbbb55ddc5b0f2f4717b6e20f8444f",2114,"LS","394S",1,"Multi Lit Chld & Yng Adults",1
-"1549a99651f9094fbdef430192424c81",2114,"ENVS","349S",1,"Natural History Interpretation",1
-"fac6504a36906835dcddd1380cb38d9e",2114,"SL","200S",5,"Intro to Service",1
-"035a5f01ebe9d366bc66c8d9aa361d11",2114,"HCOM","350S",1,"Oral Hist/Comm Mem SL",1
-"1119b680e31631594a87f5d41bed7127",2114,"SL","300S",1,"SL Design & Pedagogy",1
-"b91e5616bb6e429a732d1043b526af0b",2114,"KIN","471S",2,"Service Learning: KIN Majors",1
-"0f2f46234928dcce73ec5dbb683bd17a",2114,"JAPN","301S",1,"Advanced Japanese SL",1
-"afebea7a72a7455441a026c7134b4b1c",2114,"LS","298S",5,"Intro to Teaching & Learning S",1
-"2bc268ed04a0a3d541055ffb57194513",2114,"SL","200S",6,"Intro to Service",1
-"e56006144450b9593931a3af0a462d20",2114,"SL","200S",8,"Intro to Service",1
-"ad5918dc7b9d6e829263a7dfe475f7e5",2114,"SL","397S",1,"SL Pedagogy & Partner Support",1
-"76dc32a049670ff33636396b6a148030",2114,"CHHS","396S",1,"Jr Field Pract Seminar A: SL",1
-"924aba7f43c50700c8b6da527117483e",2114,"CHHS","398S",1,"Jr Field Pract Seminar B: SL",1
-"f0b6ab0b0340041e4f5ccef642294001",2114,"HCOM","432S",1,"Social Action Writing",1
-"06fced581761312144a52662d177a750",2114,"SL","200S",7,"Intro to Service",1
-"e2c822b71f9282d552959724432c65df",2114,"SL","397S",2,"SL Pedagogy & Partner Support",1
-"7acc931bb82f16387fb1f227f6ccfac4",2114,"SL","492S",1,"SL:Community Research SL",1
-"e9bb89d4729e18d82bfe6186f95439ce",2114,"LS","398S",2,"Soc Found of Multicult Ed S",1
-"a062fda62edb9dca5fcc3c6f789e7bf2",2114,"HDEV","380S",1,"Service Learning Human Dev",1
-"95c7974f64c7f081fa6d14597eb60696",2114,"LS","398S",3,"Soc Found of Multicult Ed S",1
-"ca8a87f602785836e35b769f4c6855f5",2114,"LS","298S",4,"Intro to Teaching & Learning S",1
-"dd8116d3e74520f9f97207994ef128b2",2114,"SBS","400S",1,"Senior Capstone I/SL",1
-"62929c2bd8065e7bfcbf9e0b6ba67593",2114,"SBS","320S",1,"Hispanic Calif - 1542 to 1848",1
-"359c9364ee10e8b1612576a7a9c80225",2114,"BIO","379S",1,"Biology Education Serv Learn",1
-"486ab8a10dfe09c5573113a7cfba607f",2114,"SBS","384S",1,"Cult/Contexts/Bilingual/Educat",1
-"d4683f35e9cf2a9133dd4ee6da413dd0",2114,"HCOM","395S",1,"Special Topic:Service Learning",1
+"course_id","term","subject","catalog_number","section","title","status","program"
+"a7095c3e2ced5b12fa14ae4e2a01cc22",2114,"SL","200S",1,"Intro to Service",1,"Service Learning"
+"26593b6f96aafedd3a4d9d0bf49743ce",2114,"SL","200S",2,"Intro to Service",1,"Service Learning"
+"d2d59a5b9d84ed52d847568f5044bc8a",2114,"SL","200S",3,"Intro to Service",1,"Service Learning"
+"26be60f7709833fedbd974d7e977934b",2114,"SL","200S",4,"Intro to Service",1,"Service Learning"
+"8943316de06f61be2c2d0dc64c481ed6",2114,"TAT","399S",1,"TAT in the Community",1,"Service Learning"
+"3637c95b1f434ff8e5214cbc505f71ee",2114,"SL","201S",1,"Intro to Service",1,"Service Learning"
+"1aaafabda071d938ff29374cf9f2078c",2114,"SL","201S",2,"Intro to Service",1,"Service Learning"
+"ddcfd70143fc149d78850fc41f6b5da7",2114,"SL","295S",1,"SL Leadership Training",1,"Service Learning"
+"41b2c6064c43757cb7bca69e94154efe",2114,"SL","497S",2,"Independent Study",1,"Service Learning"
+"8e42abe73fde3115065d79784ecf8bf5",2114,"VPA","306S",1,"Digital Public Art",1,"Service Learning"
+"029d50d360d514fe2c959858c3a68f0a",2114,"SBS","324S",1,"Archaeology/Map to Museum",1,"Service Learning"
+"beab53b781babc3f7d760bd73569c6bc",2114,"LS","298S",1,"Intro to Teaching & Learning S",1,"Service Learning"
+"8c35bd2b1c889b34210b6f39bf9b30b2",2114,"LS","298S",2,"Intro to Teaching & Learning S",1,"Service Learning"
+"0b7a97e8fbdf4e2e6484b6bb458d56ef",2114,"LS","298S",3,"Intro to Teaching & Learning S",1,"Service Learning"
+"b79695759026c4e4fc95f08dc51e0bd1",2114,"LS","394S",2,"Multi Lit Chld & Yng Adults",1,"Service Learning"
+"6ce7e77344ab9981362b0d2be606df69",2114,"SPAN","301S",1,"Comp/Oral Practice SL",1,"Service Learning"
+"caf75e47cd29520fc2f5986e172fb056",2114,"KIN","471S",1,"Service Learning: KIN Majors",1,"Service Learning"
+"bb39647c56bfad8ec8edfe56b1ec5bac",2114,"GS","380S",1,"Int'l Organizations & SL",1,"Service Learning"
+"b55313deaf245a8c4dff9e6152256240",2114,"CST","361S",90,"Technology Tutors",1,"Service Learning"
+"cc4a9dffd8b714efd9722faf9f983979",2114,"MATH","361S",1,"Mathematics Tutors",1,"Service Learning"
+"528e079f134eda2cf62a67d18d65da9e",2114,"HCOM","307S",1,"Soc Impct Of Mass Media SL",1,"Service Learning"
+"ba5f8970d68351d074919fb9fa1adf70",2114,"BUS","303S",1,"Partic in Comm Econ Devel",1,"Service Learning"
+"6ee5fa583de16915691122714514c7b0",2114,"BUS","303S",2,"Partic in Comm Econ Devel",1,"Service Learning"
+"ff00d21042633c9728538e4595c8bf1b",2114,"VPA","320S",1,"Museum Studies",1,"Service Learning"
+"8d69a25d6ab0b3165d7c620f187befc6",2114,"SL","497S",1,"Independent Study",1,"Service Learning"
+"f88458233ed35e86395e6920bacad35a",2114,"ENVS","384S",1,"Social andEcologicalJustice SL",1,"Service Learning"
+"2b65538d4f0c25beee6e5c46e6f90269",2114,"LS","398S",1,"Soc Found of Multicult Ed S",1,"Service Learning"
+"ff20fc37917757d5a87ff2afba98848f",2114,"HCOM","340S",1,"Topics in Social Movements SL",1,"Service Learning"
+"4efbbb55ddc5b0f2f4717b6e20f8444f",2114,"LS","394S",1,"Multi Lit Chld & Yng Adults",1,"Service Learning"
+"1549a99651f9094fbdef430192424c81",2114,"ENVS","349S",1,"Natural History Interpretation",1,"Service Learning"
+"fac6504a36906835dcddd1380cb38d9e",2114,"SL","200S",5,"Intro to Service",1,"Service Learning"
+"035a5f01ebe9d366bc66c8d9aa361d11",2114,"HCOM","350S",1,"Oral Hist/Comm Mem SL",1,"Service Learning"
+"1119b680e31631594a87f5d41bed7127",2114,"SL","300S",1,"SL Design & Pedagogy",1,"Service Learning"
+"b91e5616bb6e429a732d1043b526af0b",2114,"KIN","471S",2,"Service Learning: KIN Majors",1,"Service Learning"
+"0f2f46234928dcce73ec5dbb683bd17a",2114,"JAPN","301S",1,"Advanced Japanese SL",1,"Service Learning"
+"afebea7a72a7455441a026c7134b4b1c",2114,"LS","298S",5,"Intro to Teaching & Learning S",1,"Service Learning"
+"2bc268ed04a0a3d541055ffb57194513",2114,"SL","200S",6,"Intro to Service",1,"Service Learning"
+"e56006144450b9593931a3af0a462d20",2114,"SL","200S",8,"Intro to Service",1,"Service Learning"
+"ad5918dc7b9d6e829263a7dfe475f7e5",2114,"SL","397S",1,"SL Pedagogy & Partner Support",1,"Service Learning"
+"76dc32a049670ff33636396b6a148030",2114,"CHHS","396S",1,"Jr Field Pract Seminar A: SL",1,"Service Learning"
+"924aba7f43c50700c8b6da527117483e",2114,"CHHS","398S",1,"Jr Field Pract Seminar B: SL",1,"Service Learning"
+"f0b6ab0b0340041e4f5ccef642294001",2114,"HCOM","432S",1,"Social Action Writing",1,"Service Learning"
+"06fced581761312144a52662d177a750",2114,"SL","200S",7,"Intro to Service",1,"Service Learning"
+"e2c822b71f9282d552959724432c65df",2114,"SL","397S",2,"SL Pedagogy & Partner Support",1,"Service Learning"
+"7acc931bb82f16387fb1f227f6ccfac4",2114,"SL","492S",1,"SL:Community Research SL",1,"Service Learning"
+"e9bb89d4729e18d82bfe6186f95439ce",2114,"LS","398S",2,"Soc Found of Multicult Ed S",1,"Service Learning"
+"a062fda62edb9dca5fcc3c6f789e7bf2",2114,"HDEV","380S",1,"Service Learning Human Dev",1,"Service Learning"
+"95c7974f64c7f081fa6d14597eb60696",2114,"LS","398S",3,"Soc Found of Multicult Ed S",1,"Service Learning"
+"ca8a87f602785836e35b769f4c6855f5",2114,"LS","298S",4,"Intro to Teaching & Learning S",1,"Service Learning"
+"dd8116d3e74520f9f97207994ef128b2",2114,"SBS","400S",1,"Senior Capstone I/SL",1,"Service Learning"
+"62929c2bd8065e7bfcbf9e0b6ba67593",2114,"SBS","320S",1,"Hispanic Calif - 1542 to 1848",1,"Service Learning"
+"359c9364ee10e8b1612576a7a9c80225",2114,"BIO","379S",1,"Biology Education Serv Learn",1,"Service Learning"
+"486ab8a10dfe09c5573113a7cfba607f",2114,"SBS","384S",1,"Cult/Contexts/Bilingual/Educat",1,"Service Learning"
+"d4683f35e9cf2a9133dd4ee6da413dd0",2114,"HCOM","395S",1,"Special Topic:Service Learning",1,"Service Learning"
