@@ -715,15 +715,15 @@ function s4_core_get_entity($data, $type, $id_only = FALSE) {
 /**
  * Implements hook_form_FORM_ID_alter().
  */
-function s4_core_form_taxonomy_term_form_alter(&$form) {
+function s4_core_form_taxonomy_form_term_alter(&$form) {
 
   if (module_exists('token')) {
     $form['tokens'] = array(
       '#theme' => 'token_tree',
       '#token_types' => array('s4_signup'),
+      '#weight' => $form['field_confirmation_email']['#weight'] + 1,
     );
   }
-  dpm($form);
 }
 
 /**
