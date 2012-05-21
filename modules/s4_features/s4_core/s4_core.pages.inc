@@ -73,6 +73,7 @@ function s4_core_signup($type, $nid) {
       $instruction_text = field_get_items('node', $site, 'field_site_instructions');
       $locations = field_get_items('node', $site, 'field_location');
       $form_terms = s4_core_site_has_downloadable_forms($site);
+      $program_forms = s4_core_program_has_downloadable_forms($_SESSION['s4_signup_program']);
       if ($_GET['agreed']) {
         $_SESSION['s4_signup_agreed'] = TRUE;
       }
@@ -96,7 +97,7 @@ function s4_core_signup($type, $nid) {
            drupal_set_title(t('Service hours'));
            return drupal_get_form('s4_core_student_signup_hours');
         }
-        if ($form_terms && !$_SESSION['s4_core_viewed_downloadable_forms']) {
+        if (($program_forms || $form_terms) && !$_SESSION['s4_core_viewed_downloadable_forms']) {
           $_SESSION['s4_core_viewed_downloadable_forms'] = TRUE;
           drupal_goto('forms/download/' . implode('+', $form_terms));
         }

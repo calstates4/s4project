@@ -516,6 +516,7 @@ function s4_core_user_signup_completed($sid = 0) {
           'coordinator' => $_SESSION['s4_signup_coordinator'],
           'location' => $_SESSION['s4_signup_location'],
           'hours' => $_SESSION['s4_signup_hours'],
+          'program' => $_SESSION['s4_signup_program'],
           'signup_sid' => $sid);
   _s4_core_create_signup($user->uid, $signup);
   unset($_SESSION['s4_signup_course']);
@@ -523,6 +524,7 @@ function s4_core_user_signup_completed($sid = 0) {
   unset($_SESSION['s4_signup_coordinator']);
   unset($_SESSION['s4_signup_hours']);
   unset($_SESSION['s4_signup_agreed']);
+  unset($_SESSION['s4_signup_program']);
   drupal_set_message(t('Congratulations, you are signed up!'));
   drupal_goto('<front>', array('query' => array('finished' => 'finished')));
 }
@@ -568,7 +570,8 @@ function _s4_core_create_signup($uid = 0, $signup = array()) {
            'coordinator' => 0,
            'location' => 0,
            'signup_sid' => 0,
-           'hours' => 0, 
+           'hours' => 0,
+           'program' => 0,
            );
   $node = new stdClass();
   $node->type = 'signup';
@@ -579,10 +582,20 @@ function _s4_core_create_signup($uid = 0, $signup = array()) {
   $node->language = LANGUAGE_NONE;
   $node->field_user[$node->language][0]['uid'] = $signup['user'];
   $node->field_site[$node->language][0]['nid'] = $signup['site'];
-  $node->field_course[$node->language][0]['nid'] = $signup['course'];
+  if($signup['course']) {
+    $node->field_course[$node->language][0]['nid'] = $signup['course'];
+  }
   $node->field_coordinator[$node->language][0]['nid'] = $signup['coordinator'];
   $node->field_form_signup_sid[$node->language][0]['value'] = $signup['signup_sid'];
   $node->field_signup_hours[$node->language][0]['value'] = $signup['hours'];
+  if ($signup['program']) {
+    if(is_array($signup['program'])) {
+      $node->field_site_restrict[$node->language] = $signup['program'];
+    }
+    else {
+      $node->field_site_restrict[$node->language][0]['tid'] = $signup['program'];
+    }
+  }
   if ($signup['location']) {
     $node->field_signup_location[$node->language][0]['lid'] = $signup['location'];
   }
@@ -594,7 +607,7 @@ function _s4_core_create_signup($uid = 0, $signup = array()) {
     if (is_array($date)) {
       $start_date[$date['start_date']['weight']] = $date['start_date']['date'];
       $end_date[$date['end_date']['weight']] = $date['end_date']['date'];
-  }
+    }
   }
   ksort($start_date);
   ksort($end_date);
@@ -603,7 +616,6 @@ function _s4_core_create_signup($uid = 0, $signup = array()) {
   $node->field_signup_last_date[$node->language][0]['value'] = date('Y-m-d', $end_date);
 
   $node->field_signup_start_date[$node->language][0]['value'] = date('Y-m-d', $start_date);
-
   node_save($node);
   $node->title = t('Signup #!nid', array('!nid' => $node->nid));
   node_save($node);
@@ -776,20 +788,21 @@ function s4_core_node_delete($node) {
     $eval_sid = field_get_items('node', $node, 'field_form_evaluation_sid');
 
     $site = field_get_items('node', $node, 'field_site');
-    $site = node_load($site[0]['nid']);
+    if($site[0]['nid']) {
+      $site = node_load($site[0]['nid']);
 
-    $site_form = field_get_items('node', $site, 'field_site_form');
-    if ($site_form) {
-      $site_form = node_load($site_form[0]['nid']);
-      webform_submission_delete($site_node, $signup_sid);
+      $site_form = field_get_items('node', $site, 'field_site_form');
+      if ($site_form[0]['nid']) {
+        $site_form = node_load($site_form[0]['nid']);
+        webform_submission_delete($site_node, $signup_sid);
+      }
+
+      $eval_form = field_get_items('node', $site, 'field_site_eval_form');
+      if ($eval_form[0]['nid']) {
+        $eval_form = node_load($eval_form[0]['nid']);
+        webform_submission_delete($eval_form, $eval_sid);
+      }
     }
-
-    $eval_form = field_get_items('node', $site, 'field_site_eval_form');
-    if ($eval_form) {
-      $eval_form = node_load($eval_form[0]['nid']);
-      webform_submission_delete($eval_form, $eval_sid);
-    }
-
   }
 }
 
@@ -1150,6 +1163,19 @@ function s4_core_site_has_downloadable_forms($node) {
            ->fields('r', array('entity_id'))
            ->condition('bundle', 'downloadable_form')
            ->condition('field_site_restrict_tid', $terms, 'IN')
+           ->execute()
+           ->fetchAllKeyed(0, 0);
+  return (count($forms)) ? $terms : FALSE;
+}
+
+function s4_core_program_has_downloadable_forms($tid) {
+  if(!$tid) {
+    return;
+  }
+  $forms = db_select('field_data_field_site_restrict', 'r')
+           ->fields('r', array('entity_id'))
+           ->condition('bundle', 'downloadable_form')
+           ->condition('field_site_restrict_tid', $tid)
            ->execute()
            ->fetchAllKeyed(0, 0);
   return (count($forms)) ? $terms : FALSE;

@@ -10,72 +10,6 @@
 function s4_users_field_default_fields() {
   $fields = array();
 
-  // Exported field: 'user-user-field_course_ignore'
-  $fields['user-user-field_course_ignore'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '1',
-      'deleted' => '0',
-      'entity_types' => array(),
-      'field_name' => 'field_course_ignore',
-      'foreign keys' => array(),
-      'global_block_settings' => '1',
-      'indexes' => array(
-        'value' => array(
-          0 => 'value',
-        ),
-      ),
-      'module' => 'list',
-      'settings' => array(
-        'allowed_values' => array(
-          0 => '',
-          1 => '',
-        ),
-        'allowed_values_function' => '',
-        'allowed_values_php' => '',
-      ),
-      'translatable' => '1',
-      'type' => 'list_boolean',
-    ),
-    'field_instance' => array(
-      'bundle' => 'user',
-      'default_value' => array(
-        0 => array(
-          'value' => 0,
-        ),
-      ),
-      'default_value_function' => '',
-      'default_value_php' => '',
-      'deleted' => '0',
-      'description' => 'If checked, the user will always be able to register with a site regardless of any membership in a course.',
-      'display' => array(
-        'default' => array(
-          'label' => 'above',
-          'module' => 'list',
-          'settings' => array(),
-          'type' => 'list_default',
-          'weight' => 3,
-        ),
-      ),
-      'entity_type' => 'user',
-      'field_name' => 'field_course_ignore',
-      'label' => 'User is not restricted to a course',
-      'required' => 0,
-      'settings' => array(
-        'user_register_form' => 0,
-      ),
-      'widget' => array(
-        'active' => 1,
-        'module' => 'options',
-        'settings' => array(
-          'display_label' => 1,
-        ),
-        'type' => 'options_onoff',
-        'weight' => '8',
-      ),
-    ),
-  );
-
   // Exported field: 'user-user-field_first_name'
   $fields['user-user-field_first_name'] = array(
     'field_config' => array(
@@ -409,10 +343,8 @@ Grants & contracts',
   t('Approval access');
   t('Available programs');
   t('First Name');
-  t('If checked, the user will always be able to register with a site regardless of any membership in a course.');
   t('Last Name');
   t('SIS ID');
-  t('User is not restricted to a course');
 
   return $fields;
 }

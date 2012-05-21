@@ -21,7 +21,7 @@ function s4_core_block_user_progress() {
   if (isset($site)) {
     $site_selection = '<div class="selection">' . l($site->title, 'node/' . $site->nid) . '</div>';
   }
-  if (isset($_SESSION['s4_signup_program'])) {
+  if (isset($_SESSION['s4_signup_program']) && !isset($_SESSION['s4_signup_course'])) {
     $program = taxonomy_term_load($_SESSION['s4_signup_program']);
     $status['program'] = array('data'  => 'Program',
             'id'     => 'status-program',

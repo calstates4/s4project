@@ -4199,7 +4199,7 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['operator_id'] = 'field_site_restrict_tid_op';
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['label'] = 'Available programs';
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['operator'] = 'field_site_restrict_tid_op';
-  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['identifier'] = 'field_site_restrict_tid';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['identifier'] = 'program';
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['remember'] = 1;
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['multiple'] = 1;
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['reduce'] = 0;
@@ -4242,8 +4242,8 @@ function s4_sites_views_default_views() {
     'site_restrictions' => 'site_restrictions',
   );
   $handler->display->display_options['arguments']['tid']['validate_options']['type'] = 'convert';
-  $handler->display->display_options['arguments']['tid']['validate_options']['transform'] = 0;
-  $handler->display->display_options['arguments']['tid']['break_phrase'] = 0;
+  $handler->display->display_options['arguments']['tid']['validate_options']['transform'] = '1';
+  $handler->display->display_options['arguments']['tid']['break_phrase'] = 1;
   $handler->display->display_options['arguments']['tid']['add_table'] = 0;
   $handler->display->display_options['arguments']['tid']['require_value'] = 0;
   $handler->display->display_options['arguments']['tid']['reduce_duplicates'] = 0;

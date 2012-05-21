@@ -285,7 +285,7 @@ function _s4_courses_get_current_terms() {
 * Implements hook_s4_user_status
 */
 function s4_courses_s4_user_status(&$status) {
-  if (isset($_SESSION['s4_signup_program'])) {
+  if (isset($_SESSION['s4_signup_program']) && !isset($_SESSION['s4_signup_course'])) {
     return;
   }
   if (isset($_SESSION['s4_signup_course'])) {
@@ -315,15 +315,14 @@ function s4_courses_s4_signup($type, $nid) {
       $program_terms = array();
       foreach($programs as $program) {
         $program = taxonomy_term_load($program['tid']);
-        $program_terms[$program->tid] = $program->name;
+        $program_terms[$program->tid] = str_replace(' ', '-', $program->name);
       }
-      $_SESSION['s4_signup_programs'] = $program_terms;
+      $_SESSION['s4_signup_program'] = $programs;
       $sites = field_get_items('node', $course, 'field_sites');
       if (!$sites || !count($sites)) {
         drupal_goto('site-list/all/'. implode('+', $program_terms));
       }
       else {
-        
         $argument = array();
         foreach ($sites as $site) {
           $argument[] = $site['nid'];
