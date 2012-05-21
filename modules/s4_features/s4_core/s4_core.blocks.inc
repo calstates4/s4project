@@ -69,8 +69,13 @@ function s4_core_block_user_progress() {
               );
     }
     $form_terms = s4_core_site_has_downloadable_forms($site);
-    if ($status['form'] && count($form_terms) && !$_SESSION['s4_core_viewed_downloadable_forms']) {
-      $status['form']['href'] = 'forms/download/' . implode('+', $form_terms);
+    if (count($form_terms) && !$_SESSION['s4_core_viewed_downloadable_forms']) {
+      $status['form'] = array('data' => 'Forms',
+              'id'   => 'status-form',
+                'class'   => (isset($form_done)) ? array('done') : array(),
+              'href' => 'forms/download/' . implode('+', $form_terms),
+              'selection' => FALSE
+              );
     }
   }
 

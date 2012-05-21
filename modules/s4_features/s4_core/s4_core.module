@@ -525,6 +525,7 @@ function s4_core_user_signup_completed($sid = 0) {
   unset($_SESSION['s4_signup_hours']);
   unset($_SESSION['s4_signup_agreed']);
   unset($_SESSION['s4_signup_program']);
+  unset($_SESSION['s4_core_viewed_downloadable_forms']);
   drupal_set_message(t('Congratulations, you are signed up!'));
   drupal_goto('<front>', array('query' => array('finished' => 'finished')));
 }
