@@ -462,8 +462,8 @@ function s4_core_user_can_signup($user = FALSE) {
   if (!user_access('signup for service', $user)) {
     return FALSE;
   }
-  $ignore_courses = field_get_items('user', $user, 'field_course_ignore');
-  if ($ignore_courses[0]['value'] || !module_exists('s4_courses')) {
+  $programs = field_get_items('user', $user, 'field_site_restrict');
+  if ($ignore_courses[0]['tid'] || !module_exists('s4_courses')) {
     return TRUE;
   }
   if (module_exists('views')

@@ -62,6 +62,10 @@ function s4_core_add_site_to_course($op = 'add', $course, $site) {
 */
 function s4_core_signup($type, $nid) {
   module_invoke_all('s4_signup', $type, $nid);
+  if ($type == 'program') {
+    $_SESSION['s4_signup_program'] = $nid;
+    drupal_goto('site-list', array('query' => array('program[]' => $nid)));
+  }
   if ($type == 'site') {
     $site = node_load($nid);
     if ($site->type == 'site') {

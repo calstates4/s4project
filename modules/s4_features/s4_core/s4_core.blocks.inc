@@ -21,6 +21,15 @@ function s4_core_block_user_progress() {
   if (isset($site)) {
     $site_selection = '<div class="selection">' . l($site->title, 'node/' . $site->nid) . '</div>';
   }
+  if (isset($_SESSION['s4_signup_program'])) {
+    $program = taxonomy_term_load($_SESSION['s4_signup_program']);
+    $status['program'] = array('data'  => 'Program',
+            'id'     => 'status-program',
+            'class'  => array('done'),
+            'href'  => null,
+            'selection' => '<div class="selection">' . $program->name .'</div>',
+            );
+  }
   $status['site'] = array('data'  => 'Site',
             'id'     => 'status-site',
             'class'   => (isset($site)) ? array('done') : array(),
@@ -60,7 +69,7 @@ function s4_core_block_user_progress() {
               );
     }
     $form_terms = s4_core_site_has_downloadable_forms($site);
-    if (count($form_terms) && !$_SESSION['s4_core_viewed_downloadable_forms']) {
+    if ($status['form'] && count($form_terms) && !$_SESSION['s4_core_viewed_downloadable_forms']) {
       $status['form']['href'] = 'forms/download/' . implode('+', $form_terms);
     }
   }

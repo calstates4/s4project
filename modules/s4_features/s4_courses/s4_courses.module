@@ -285,6 +285,9 @@ function _s4_courses_get_current_terms() {
 * Implements hook_s4_user_status
 */
 function s4_courses_s4_user_status(&$status) {
+  if (isset($_SESSION['s4_signup_program'])) {
+    return;
+  }
   if (isset($_SESSION['s4_signup_course'])) {
     $course = node_load($_SESSION['s4_signup_course']);  
   }

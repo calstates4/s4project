@@ -98,6 +98,19 @@ function s4_core_views_data() {
     ),
   );
 
+
+  $data['s4_user_signup']['user_program_select'] = array(
+    'title' => t('User select program'),
+    'help' => t('The end user is selecting this program to signup with.'),
+    'field' => array(
+      'handler' => 'views_handler_s4_user_program_select',
+      'click sortable' => FALSE,
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort',
+    ),
+  );
+
   return $data;
 }
 

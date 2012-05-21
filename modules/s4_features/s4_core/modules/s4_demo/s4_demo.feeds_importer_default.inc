@@ -529,11 +529,6 @@ function s4_demo_feeds_importer_default() {
             'unique' => FALSE,
           ),
           6 => array(
-            'source' => 'constant_registration',
-            'target' => 'field_course_ignore',
-            'unique' => FALSE,
-          ),
-          7 => array(
             'source' => 'user_id',
             'target' => 'guid',
             'unique' => 1,
