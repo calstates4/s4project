@@ -11,7 +11,7 @@ include_once('s4_courses.features.inc');
 */
 function s4_courses_menu() {
   $items = array();
-  
+
   $items['admin/config/s4/courses'] = array(
     'title' => 'Course Integration',
     'description' => 'Manage how courses are imported and managed.',
@@ -20,12 +20,12 @@ function s4_courses_menu() {
     'file' => 's4_courses.admin.inc',
     'access arguments' => array('administer site configuration'),
   );
-  
+
   return $items;
 }
 
 function s4_courses_get_term_codes($requested_code = FALSE) {
-  
+
   return $term_codes;
 }
 
@@ -47,7 +47,7 @@ function s4_courses_s4_site_configuration() {
 *  Implementation of s4_core_field_access
 */
 function s4_courses_s4_field_access() {
-  
+
   return array('course' => array(
             'field_course_students',
             'field_course_faculty',
@@ -66,7 +66,7 @@ function s4_courses_s4_field_access() {
             'field_term_date_start',
             'field_term_filter',
         ),
-        
+
   );
 }
 
@@ -113,8 +113,8 @@ function s4_courses_cron() {
   }
     variable_set('s4_courses_cron_last_update', time());
   }
-  
-  
+
+
 }
 
 /**
@@ -129,15 +129,15 @@ function s4_courses_user_login(&$edit, $account) {
     return NULL;
   }
   $user_id = $user_id[0]['value'];
-  $hooks = array('s4_get_user_enrollment' => 'students', 
+  $hooks = array('s4_get_user_enrollment' => 'students',
            's4_get_faculty_courses' => 'faculty');
   foreach (_s4_courses_get_current_terms() as $term) {
-    
+
     foreach ($hooks as $hook => $course_role) {
       $courses = module_invoke_all($hook, $user_id, $term);
       foreach ($courses as $course) {
         s4_courses_create_course($course, $account->uid, $course_role);
-      } 
+      }
     }
   }
 }
@@ -168,12 +168,12 @@ function s4_courses_create_term($term) {
 *  @param add_user An additional user ID to add, useful if this is
 *          being called as part of a known user's enrollment
 *  @param add_user If a user is set above, also set the role -
-            either "students" or "faculty"
+*            either "students" or "faculty"
 */
 function s4_courses_create_course($course, $add_user= FALSE, $add_role = FALSE) {
   $course_node = s4_core_get_entity($course, 'course');
   if (!$course_node) {
-    
+
     $course_node = new stdClass();
     $course_node->type = 'course';
     $course_node->language = language_default()->language;
@@ -242,7 +242,7 @@ function _s4_courses_get_term_nid($code) {
 /**
 *  Retrieves all field mappings from Drupal fields to
 *  the array keys returned by S4 hooks.
-*  @todo - This should probably be a bit smarter than a 
+*  @todo - This should probably be a bit smarter than a
 *  single array.
 */
 function _s4_courses_get_field_mapping($type = 'course') {
@@ -266,8 +266,8 @@ function _s4_courses_get_current_terms() {
   if ($cache = cache_get('s4_core_current_terms', FALSE)) {
     return $cache->data;
   }
-  $terms = db_query('SELECT entity_id FROM {field_data_field_term_date_start} WHERE 
-             field_term_date_start_value <= NOW() 
+  $terms = db_query('SELECT entity_id FROM {field_data_field_term_date_start} WHERE
+             field_term_date_start_value <= NOW()
              AND field_term_date_start_value2 >= NOW()
              ORDER BY field_term_date_start_value');
   $term_results = array();
@@ -289,7 +289,7 @@ function s4_courses_s4_user_status(&$status) {
     return;
   }
   if (isset($_SESSION['s4_signup_course'])) {
-    $course = node_load($_SESSION['s4_signup_course']);  
+    $course = node_load($_SESSION['s4_signup_course']);
   }
   if (isset($course)) {
     $selection = '<div class="selection">' . l($course->title, 'node/' . $course->nid) . '</div>';
@@ -337,6 +337,27 @@ function s4_courses_s4_signup($type, $nid) {
   }
 }
 
+function s4_courses_form_views_form_course_students_block_alter(&$form, &$form_state) {
+  if ($form_state['values']['site']) {
+    $site_staff = db_select('field_data_field_site', 's')
+            ->fields('s', array('entity_id'))
+            ->condition('s.bundle', 'coordinator')
+            ->condition('s.field_site_nid', $form_state['values']['site'])
+            ->execute()
+            ->fetchCol();
+    foreach ($site_staff as $staff) {
+      $staff = node_load($staff);
+      $available = field_get_items('node', $staff, 'field_staff_signup_available');
+      if ($available[0]['value']) {
+        $role = field_get_items('node', $staff, 'field_staff_role');
+        $role = taxonomy_term_load($role[0]['tid']);
+        $form['site-staff']['#options'][$staff->nid] = t('@title (@role)', array('@title' => $staff->title,
+                                       '@role' => $role->name));
+      }
+    }
+  }
+}
+
 function s4_courses_s4_signup_dates($node) {
   $course = node_load($node->field_course[$node->language][0]['nid']);
   if (!$course) {
@@ -379,10 +400,10 @@ function s4_courses_block_view($delta) {
   switch ($delta) {
     case 's4_courses_add_course':
       if (user_access('create course content')) {
-        return array('content' => l(t('<span class="add"></span>Add new course'), 
-                  'node/add/course', 
+        return array('content' => l(t('<span class="add"></span>Add new course'),
+                  'node/add/course',
                   array('html' => TRUE,
-                       'attributes' => 
+                       'attributes' =>
                       array('class' => 'button add')
                   )
                   )
@@ -415,18 +436,19 @@ function s4_courses_block_view($delta) {
             $query = array(0 => $node->nid, 'destination' => 'node/' . $node->nid);
             $class = 'not-subscribed';
           }
-          return array('content' => l($text, $url, 
-                        array('query' => $query, 
+          return array('content' => l($text, $url,
+                        array('query' => $query,
                             'html' => TRUE,
-                            'attributes' => 
+                            'attributes' =>
                               array('class' => 'subscription-button ' . $class)
                             )
-                        )
+                        ) .
+                        '<div class="small">' . t('Receive an email when a student signs up with a site.') .'</div>'
                 );
         }
       }
       break;
-    case 's4_courses_restriction_form': 
+    case 's4_courses_restriction_form':
       $node = menu_get_object();
       global $user;
       if ($node->type != 'course') {
@@ -451,35 +473,41 @@ function s4_courses_block_view($delta) {
 function s4_courses_edit_course_restrict_form() {
   $node = menu_get_object();
   $form = array();
-  
+
   $default = field_get_items('node', $node, 'field_site_restrict_to_list');
   $default_email = field_get_items('node', $node, 'field_course_faculty_email');
-  
+
+  $form['message'] = array(
+    '#markup' => t('You can add sites to your course by browsing the !link and clicking the "Add to my course" buttons on the right.',
+      array('!link' => l(t('site list'), 'site-list'))),
+  );
+
   $form['field_site_restrict_to_list'] = array(
-    '#type' => 'checkbox', 
-    '#title' => 'Restrict students to only selected sites',
+    '#type' => 'checkbox',
+    '#title' => t('Restrict students to only selected sites'),
+    '#description' => t('When checked, students will not be able to register for any other sites.'),
     '#default_value' => $default[0]['value'],
   );
-  
+
   $form['field_course_faculty_email'] = array(
-    '#type' => 'checkbox', 
-    '#title' => 'Send evaluation reminders from my email account',
+    '#type' => 'checkbox',
+    '#title' => t('Send evaluation reminders from my email account'),
     '#default_value' => $default_email[0]['value'],
   );
-  
+
   $form['submit'] = array(
     '#type' => 'submit',
     '#value' => 'Update',
   );
-  
+
   return $form;
 }
 
 function s4_courses_edit_course_restrict_form_submit($form, $form_state) {
   $node = menu_get_object();
-  $node->field_site_restrict_to_list[$node->language][0]['value'] = 
+  $node->field_site_restrict_to_list[$node->language][0]['value'] =
      $form_state['values']['field_site_restrict_to_list'];
-  $node->field_course_faculty_email[$node->language][0]['value'] = 
+  $node->field_course_faculty_email[$node->language][0]['value'] =
     $form_state['values']['field_course_faculty_email'];
   node_save($node);
   drupal_set_message('Your course has been updated.');
@@ -538,10 +566,10 @@ function s4_courses_notifications($op) {
         '#description' => t('Subscription links will be displayed for full node pages.'),
       );
       return $options;
-      
+
     case 'event classes':
       return array('node' => t('Node'));
-      
+
     case 'event actions':
       return array(
         'course_signup' => t('Creation'),
@@ -554,7 +582,7 @@ function s4_courses_notifications($op) {
 */
 function s4_courses_signup_post_action($node, $context = array()) {
   $node = $context['node'];
-  if ($node->type == 'course') { 
+  if ($node->type == 'course') {
      s4_courses_node_event('course_signup', $node)->trigger();
   }
 }
@@ -661,11 +689,11 @@ function s4_courses_notifications_subscription($op, $subscription = NULL) {
       $objects = array();
       // Return objects on current page to which we can subscribe
       if (arg(0) == 'node' && is_numeric(arg(1)) && ($node = menu_get_object('node')) && $node->type == 'course') {
-        $objects[] = notifications_object('signup', $node);  
+        $objects[] = notifications_object('signup', $node);
       }
       return $objects;
       break;
-  }  
+  }
 }
 
 /**
@@ -722,7 +750,7 @@ function s4_courses_token_info() {
     'name' => t('Student course'),
     'description' => t('Tokens related to a student\'s course that they used to signup with.'),
   );
-  
+
   $tokens['course_short'] = array('name' => 'Short course name',
                        'description' => t('The subject, catalog number, and section'));
     $tokens['course_long'] = array('name' => 'Long course name',
@@ -733,8 +761,8 @@ function s4_courses_token_info() {
                        'description' => t('The term (i.e "Fall 2011")'));
     $tokens['course_faculty'] = array('name' => 'Faculty',
                        'description' => t('A list of the course faculty names'));
-    
-    
+
+
     return array(
       'types' => array('s4_courses' => $type),
       'tokens' => array('s4_courses' => $tokens),
@@ -815,7 +843,7 @@ function s4_courses_s4_reporting_term_report($report_criteria) {
             'hours' => array('count' => 0,
                       'title' => t('Total service hours')),
           );
-  $courses = array();      
+  $courses = array();
   $query = db_select('node_revision', 'r')
            ->fields('r', array('nid', 'status'));
     $query->leftJoin('field_data_field_term', 't', 't.entity_id = r.nid AND t.bundle = :course', array(':course' => 'course'));
@@ -830,7 +858,7 @@ function s4_courses_s4_reporting_term_report($report_criteria) {
   $query->leftJoin('field_data_field_course_students', 's', 's.entity_id = r.nid AND s.bundle = :course', array(':course' => 'course'));
   $query->leftJoin('field_data_field_user', 'u', 's.field_course_students_uid = u.field_user_uid AND u.bundle = :signup', array(':signup' => 'signup'));
   $query->leftJoin('field_data_field_course', 'c', 'c.field_course_nid = r.nid AND c.bundle = :signup', array(':signup' => 'signup'));
-  
+
   $query->leftJoin('field_data_field_course_catalog_number', 'cn', 'cn.entity_id = t.entity_id AND cn.bundle = t.bundle');
   $query->leftJoin('field_data_field_signup_hours', 'h', 'h.entity_id = c.entity_id AND h.bundle = c.bundle');
   $query->fields('h', array('field_signup_hours_value'));
@@ -840,7 +868,7 @@ function s4_courses_s4_reporting_term_report($report_criteria) {
   $query->leftJoin('node', 'n', 'n.vid = r.vid');
   $query->condition('n.type', 'course');
   $results = $query->execute()->fetchAll();
-  
+
   foreach($results as $result) {
     $courses[$result->nid] = $result->nid;
     $students[$result->field_course_students_uid] = $result->field_course_students_uid;
@@ -861,8 +889,8 @@ function s4_courses_s4_reporting_term_report($report_criteria) {
   $totals['placements']['count'] = count($signups);
   $totals['ud-courses']['count'] = count($ud_courses);
   $totals['ld-courses']['count'] = count($ld_courses);
-  
-  
+
+
   return array('totals' => $totals,
          'output' => $output,
         );

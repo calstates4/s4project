@@ -1997,6 +1997,8 @@ function s4_core_views_default_views() {
 
   /* Display: Current users sites */
   $handler = $view->new_display('block', 'Current users sites', 'block');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'View your current placements';
 
   /* Display: User profile sites */
   $handler = $view->new_display('block', 'User profile sites', 'block_1');
@@ -2038,6 +2040,7 @@ function s4_core_views_default_views() {
     t('Date'),
     t('All'),
     t('Current users sites'),
+    t('View your current placements'),
     t('User profile sites'),
     t('Sites'),
   );

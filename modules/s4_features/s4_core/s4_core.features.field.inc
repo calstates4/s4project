@@ -1993,7 +1993,73 @@ function s4_core_field_default_fields() {
           'rows' => '15',
         ),
         'type' => 'text_textarea',
-        'weight' => '5',
+        'weight' => '9',
+      ),
+    ),
+  );
+
+  // Exported field: 'taxonomy_term-site_restrictions-field_confirmation_send_email'
+  $fields['taxonomy_term-site_restrictions-field_confirmation_send_email'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_confirmation_send_email',
+      'foreign keys' => array(),
+      'indexes' => array(
+        'value' => array(
+          0 => 'value',
+        ),
+      ),
+      'module' => 'list',
+      'settings' => array(
+        'allowed_values' => array(
+          0 => '',
+          1 => '',
+        ),
+        'allowed_values_function' => '',
+        'allowed_values_php' => '',
+      ),
+      'translatable' => '0',
+      'type' => 'list_boolean',
+    ),
+    'field_instance' => array(
+      'bundle' => 'site_restrictions',
+      'default_value' => array(
+        0 => array(
+          'value' => 0,
+        ),
+      ),
+      'default_value_function' => '',
+      'default_value_php' => '',
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'list',
+          'settings' => array(),
+          'type' => 'list_default',
+          'weight' => 4,
+        ),
+      ),
+      'display_label' => '',
+      'entity_type' => 'taxonomy_term',
+      'field_name' => 'field_confirmation_send_email',
+      'label' => 'Send confirmation email when someone is signed up',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(
+          'display_label' => 1,
+        ),
+        'type' => 'options_onoff',
+        'weight' => '7',
       ),
     ),
   );
@@ -2056,7 +2122,7 @@ function s4_core_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '4',
+        'weight' => '8',
       ),
     ),
   );
@@ -2079,6 +2145,7 @@ function s4_core_field_default_fields() {
   t('Let us know the last date you will be working on this site. This can be an approximation, and if you are singing up as part of a course, this will be automatically the last day of the semester.');
   t('Location');
   t('Program');
+  t('Send confirmation email when someone is signed up');
   t('Service hours');
   t('Show on signup');
   t('Signup Form Results');
