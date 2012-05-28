@@ -17,7 +17,7 @@ function s4_reporting_views_default_views() {
   $view->base_table = 'node';
   $view->human_name = 'Report: Students';
   $view->core = 7;
-  $view->api_version = '3.0-alpha1';
+  $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -38,13 +38,15 @@ function s4_reporting_views_default_views() {
   $handler->display->display_options['exposed_form']['options']['autosubmit'] = 0;
   $handler->display->display_options['exposed_form']['options']['autosubmit_hide'] = 1;
   $handler->display->display_options['exposed_form']['options']['s4_reporting'] = array(
-    'group-dyfield' => '2',
-    'group-field_site_nid' => '1',
-    'group-field_term_nid' => '0',
-    'group-field_course_subject_value' => '0',
-    'group-field_course_catalog_number_value' => '0',
-    'group-field_course_section_value' => '0',
-    'groups' => 'Course
+    'group-dyfield' => '3',
+    'group-field_site_nid' => '2',
+    'group-field_term_nid' => '1',
+    'group-field_course_subject_value' => '1',
+    'group-field_course_catalog_number_value' => '1',
+    'group-field_course_section_value' => '1',
+    'group-field_site_restrict_tid' => '0',
+    'groups' => 'Signup
+Course
 Specific Site(s)
 Fields',
   );
@@ -315,7 +317,7 @@ Fields',
   $handler->display->display_options['fields']['title_2']['link_to_node'] = 1;
   /* Field: Content: Edit link */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['table'] = 'node';
+  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['exclude'] = TRUE;
   $handler->display->display_options['fields']['edit_node']['alter']['alter_text'] = 0;
@@ -430,54 +432,6 @@ Fields',
     'prefix_suffix' => 1,
   );
   $handler->display->display_options['fields']['field_form_signup_sid']['field_api_classes'] = 0;
-  /* Field: Content: Evaluation Form */
-  $handler->display->display_options['fields']['field_site_eval_form']['id'] = 'field_site_eval_form';
-  $handler->display->display_options['fields']['field_site_eval_form']['table'] = 'field_data_field_site_eval_form';
-  $handler->display->display_options['fields']['field_site_eval_form']['field'] = 'field_site_eval_form';
-  $handler->display->display_options['fields']['field_site_eval_form']['relationship'] = 'field_site_nid';
-  $handler->display->display_options['fields']['field_site_eval_form']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['field_site_eval_form']['alter']['alter_text'] = 0;
-  $handler->display->display_options['fields']['field_site_eval_form']['alter']['make_link'] = 0;
-  $handler->display->display_options['fields']['field_site_eval_form']['alter']['absolute'] = 0;
-  $handler->display->display_options['fields']['field_site_eval_form']['alter']['external'] = 0;
-  $handler->display->display_options['fields']['field_site_eval_form']['alter']['replace_spaces'] = 0;
-  $handler->display->display_options['fields']['field_site_eval_form']['alter']['trim_whitespace'] = 0;
-  $handler->display->display_options['fields']['field_site_eval_form']['alter']['nl2br'] = 0;
-  $handler->display->display_options['fields']['field_site_eval_form']['alter']['word_boundary'] = 1;
-  $handler->display->display_options['fields']['field_site_eval_form']['alter']['ellipsis'] = 1;
-  $handler->display->display_options['fields']['field_site_eval_form']['alter']['strip_tags'] = 0;
-  $handler->display->display_options['fields']['field_site_eval_form']['alter']['trim'] = 0;
-  $handler->display->display_options['fields']['field_site_eval_form']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['field_site_eval_form']['element_label_colon'] = 1;
-  $handler->display->display_options['fields']['field_site_eval_form']['element_default_classes'] = 1;
-  $handler->display->display_options['fields']['field_site_eval_form']['hide_empty'] = 0;
-  $handler->display->display_options['fields']['field_site_eval_form']['empty_zero'] = 0;
-  $handler->display->display_options['fields']['field_site_eval_form']['hide_alter_empty'] = 0;
-  $handler->display->display_options['fields']['field_site_eval_form']['field_api_classes'] = 0;
-  /* Field: Content: Signup form */
-  $handler->display->display_options['fields']['field_site_form']['id'] = 'field_site_form';
-  $handler->display->display_options['fields']['field_site_form']['table'] = 'field_data_field_site_form';
-  $handler->display->display_options['fields']['field_site_form']['field'] = 'field_site_form';
-  $handler->display->display_options['fields']['field_site_form']['relationship'] = 'field_site_nid';
-  $handler->display->display_options['fields']['field_site_form']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['field_site_form']['alter']['alter_text'] = 0;
-  $handler->display->display_options['fields']['field_site_form']['alter']['make_link'] = 0;
-  $handler->display->display_options['fields']['field_site_form']['alter']['absolute'] = 0;
-  $handler->display->display_options['fields']['field_site_form']['alter']['external'] = 0;
-  $handler->display->display_options['fields']['field_site_form']['alter']['replace_spaces'] = 0;
-  $handler->display->display_options['fields']['field_site_form']['alter']['trim_whitespace'] = 0;
-  $handler->display->display_options['fields']['field_site_form']['alter']['nl2br'] = 0;
-  $handler->display->display_options['fields']['field_site_form']['alter']['word_boundary'] = 1;
-  $handler->display->display_options['fields']['field_site_form']['alter']['ellipsis'] = 1;
-  $handler->display->display_options['fields']['field_site_form']['alter']['strip_tags'] = 0;
-  $handler->display->display_options['fields']['field_site_form']['alter']['trim'] = 0;
-  $handler->display->display_options['fields']['field_site_form']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['field_site_form']['element_label_colon'] = 1;
-  $handler->display->display_options['fields']['field_site_form']['element_default_classes'] = 1;
-  $handler->display->display_options['fields']['field_site_form']['hide_empty'] = 0;
-  $handler->display->display_options['fields']['field_site_form']['empty_zero'] = 0;
-  $handler->display->display_options['fields']['field_site_form']['hide_alter_empty'] = 0;
-  $handler->display->display_options['fields']['field_site_form']['field_api_classes'] = 0;
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -600,6 +554,21 @@ Fields',
   $handler->display->display_options['filters']['field_course_section_value']['expose']['operator'] = 'field_course_section_value_op';
   $handler->display->display_options['filters']['field_course_section_value']['expose']['identifier'] = 'field_course_section_value';
   $handler->display->display_options['filters']['field_course_section_value']['expose']['multiple'] = FALSE;
+  /* Filter criterion: Field: Available programs (field_site_restrict) */
+  $handler->display->display_options['filters']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['operator_id'] = 'field_site_restrict_tid_op';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['label'] = 'Program';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['operator'] = 'field_site_restrict_tid_op';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['identifier'] = 'field_site_restrict_tid';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['multiple'] = 1;
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['reduce'] = 0;
+  $handler->display->display_options['filters']['field_site_restrict_tid']['reduce_duplicates'] = 0;
+  $handler->display->display_options['filters']['field_site_restrict_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['vocabulary'] = 'site_restrictions';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['error_message'] = 1;
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -672,12 +641,12 @@ Fields',
     t('[edit_node] | [title_4]'),
     t('Evaluation Form'),
     t('Signup Form'),
-    t('Signup form'),
     t('Select fields'),
     t('Site(s)'),
     t('Course Prefix'),
     t('Course number'),
     t('Section'),
+    t('Program'),
     t('Page'),
     t('Data export : CSV'),
     t('Data export : XLS'),
@@ -692,7 +661,7 @@ Fields',
   $view->base_table = 'node';
   $view->human_name = 'Reports: Courses';
   $view->core = 7;
-  $view->api_version = '3.0-alpha1';
+  $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -970,7 +939,7 @@ Fields',
   $handler->display->display_options['fields']['field_course_signups']['field_api_classes'] = 0;
   /* Field: Content: Link */
   $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
-  $handler->display->display_options['fields']['view_node']['table'] = 'node';
+  $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
   $handler->display->display_options['fields']['view_node']['label'] = 'View';
   $handler->display->display_options['fields']['view_node']['alter']['alter_text'] = 0;
@@ -1380,7 +1349,7 @@ Fields',
   $view->base_table = 'node';
   $view->human_name = 'Reports: sites';
   $view->core = 7;
-  $view->api_version = '3.0-alpha1';
+  $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
@@ -2133,7 +2102,7 @@ Fields',
   $handler->display->display_options['fields']['field_site_hours']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_site_hours']['delta_reversed'] = 0;
   $handler->display->display_options['fields']['field_site_hours']['field_api_classes'] = 0;
-  /* Field: Content: Evaluation Form */
+  /* Field: Field collection item: Form */
   $handler->display->display_options['fields']['field_site_eval_form']['id'] = 'field_site_eval_form';
   $handler->display->display_options['fields']['field_site_eval_form']['table'] = 'field_data_field_site_eval_form';
   $handler->display->display_options['fields']['field_site_eval_form']['field'] = 'field_site_eval_form';
@@ -2277,7 +2246,7 @@ Fields',
   $handler->display->display_options['fields']['field_health_risk']['empty_zero'] = 0;
   $handler->display->display_options['fields']['field_health_risk']['hide_alter_empty'] = 0;
   $handler->display->display_options['fields']['field_health_risk']['field_api_classes'] = 0;
-  /* Field: Content: Signup form */
+  /* Field: Field collection item: Form */
   $handler->display->display_options['fields']['field_site_form']['id'] = 'field_site_form';
   $handler->display->display_options['fields']['field_site_form']['table'] = 'field_data_field_site_form';
   $handler->display->display_options['fields']['field_site_form']['field'] = 'field_site_form';
@@ -2533,7 +2502,7 @@ Fields',
   $handler->display->display_options['fields']['field_site_language']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_site_language']['delta_reversed'] = 0;
   $handler->display->display_options['fields']['field_site_language']['field_api_classes'] = 0;
-  /* Field: Field: Restricted to */
+  /* Field: Field: Available programs */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
@@ -2558,7 +2527,7 @@ Fields',
   $handler->display->display_options['fields']['field_site_restrict']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_site_restrict']['delta_reversed'] = 0;
   $handler->display->display_options['fields']['field_site_restrict']['field_api_classes'] = 0;
-  /* Field: Content: Status */
+  /* Field: : field_workflow_status */
   $handler->display->display_options['fields']['field_workflow_status']['id'] = 'field_workflow_status';
   $handler->display->display_options['fields']['field_workflow_status']['table'] = 'field_data_field_workflow_status';
   $handler->display->display_options['fields']['field_workflow_status']['field'] = 'field_workflow_status';
@@ -2918,13 +2887,12 @@ Fields',
     t('Special projects'),
     t('Demographic'),
     t('Hours'),
-    t('Evaluation Form'),
+    t('Form'),
     t('Issues addressed'),
     t('Max students'),
     t('Organization type'),
     t('Phone number'),
     t('Risk Identification'),
-    t('Signup form'),
     t('Site has special requirements'),
     t('Site special requirements'),
     t('Site Tour'),
@@ -2934,8 +2902,8 @@ Fields',
     t('Training & orientation'),
     t('Minimum hours'),
     t('Languages'),
-    t('Restricted to'),
-    t('Status'),
+    t('Available programs'),
+    t('field_workflow_status'),
     t('Org. type'),
     t('Fields'),
     t('Had a student in'),

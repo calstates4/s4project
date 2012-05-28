@@ -22,5 +22,8 @@ function s4_reporting_ctools_plugin_api() {
  * Implements hook_views_api().
  */
 function s4_reporting_views_api() {
-  return array("version" => "3.0");
+  list($module, $api) = func_get_args();
+  if ($module == "views" && $api == "views_default") {
+    return array("version" => "3.0");
+  }
 }

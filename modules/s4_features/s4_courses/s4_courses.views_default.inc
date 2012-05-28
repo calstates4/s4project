@@ -2951,6 +2951,8 @@ function s4_courses_views_default_views() {
 
   /* Display: Student course block */
   $handler = $view->new_display('block', 'Student course block', 'block_2');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Sign up as part of a course';
   $handler->display->display_options['defaults']['header'] = FALSE;
   /* Header: Global: Text area */
   $handler->display->display_options['header']['area']['id'] = 'area';
@@ -3192,6 +3194,7 @@ function s4_courses_views_default_views() {
     t('<div class="signup add"><div class="icon"></div><a href="s4/course-list/[nid]">Add to [title]</a></div>'),
     t('Sites'),
     t('Student course block'),
+    t('Sign up as part of a course'),
     t('Directions'),
     t('<p class="intro">To begin looking for a site, click the <strong>Select this Course</strong> link near the course you are taking for this service.</p>'),
   );

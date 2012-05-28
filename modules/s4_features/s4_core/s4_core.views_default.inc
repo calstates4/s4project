@@ -1202,14 +1202,15 @@ function s4_core_views_default_views() {
   $handler->display->display_options['filters']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';
   $handler->display->display_options['filters']['field_site_restrict_tid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['operator_id'] = 'field_site_restrict_tid_op';
-  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['label'] = 'Site restrictions';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['label'] = 'Program';
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['operator'] = 'field_site_restrict_tid_op';
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['identifier'] = 'field_site_restrict_tid';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['multiple'] = 1;
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['reduce'] = 0;
-  $handler->display->display_options['filters']['field_site_restrict_tid']['reduce_duplicates'] = 0;
+  $handler->display->display_options['filters']['field_site_restrict_tid']['reduce_duplicates'] = 1;
   $handler->display->display_options['filters']['field_site_restrict_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_site_restrict_tid']['vocabulary'] = 'site_restrictions';
-  $handler->display->display_options['filters']['field_site_restrict_tid']['error_message'] = 1;
+  $handler->display->display_options['filters']['field_site_restrict_tid']['error_message'] = 0;
   /* Filter criterion: User: Name */
   $handler->display->display_options['filters']['uid']['id'] = 'uid';
   $handler->display->display_options['filters']['uid']['table'] = 'users';
@@ -1247,7 +1248,7 @@ function s4_core_views_default_views() {
     t('Add signup'),
     t('Sign-up student'),
     t('signup/create/[uid]'),
-    t('Site restrictions'),
+    t('Program'),
     t('Page'),
   );
   $export['s4_students'] = $view;
