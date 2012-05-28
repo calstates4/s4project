@@ -40,7 +40,7 @@ function s4_core_menu_default_menu_links() {
     'external' => '0',
     'has_children' => '0',
     'expanded' => '0',
-    'weight' => '-46',
+    'weight' => '-45',
   );
   // Exported menu link: main-menu:forms/public
   $menu_links['main-menu:forms/public'] = array(
@@ -58,7 +58,7 @@ function s4_core_menu_default_menu_links() {
     'external' => '0',
     'has_children' => '0',
     'expanded' => '0',
-    'weight' => '-45',
+    'weight' => '-44',
   );
   // Exported menu link: main-menu:reports
   $menu_links['main-menu:reports'] = array(
@@ -78,24 +78,6 @@ function s4_core_menu_default_menu_links() {
     'expanded' => '0',
     'weight' => '-49',
   );
-  // Exported menu link: main-menu:students
-  $menu_links['main-menu:students'] = array(
-    'menu_name' => 'main-menu',
-    'link_path' => 'students',
-    'router_path' => 'students',
-    'link_title' => 'Students',
-    'options' => array(
-      'attributes' => array(
-        'title' => '',
-      ),
-    ),
-    'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '-44',
-  );
   // Exported menu link: main-menu:user/logout
   $menu_links['main-menu:user/logout'] = array(
     'menu_name' => 'main-menu',
@@ -113,6 +95,24 @@ function s4_core_menu_default_menu_links() {
     'has_children' => '0',
     'expanded' => '0',
     'weight' => '-50',
+  );
+  // Exported menu link: main-menu:users
+  $menu_links['main-menu:users'] = array(
+    'menu_name' => 'main-menu',
+    'link_path' => 'users',
+    'router_path' => 'users',
+    'link_title' => 'Users',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+    ),
+    'module' => 'menu',
+    'hidden' => '0',
+    'external' => '0',
+    'has_children' => '0',
+    'expanded' => '0',
+    'weight' => '-46',
   );
   // Exported menu link: menu-add-content:node/add/site
   $menu_links['menu-add-content:node/add/site'] = array(
@@ -139,7 +139,7 @@ function s4_core_menu_default_menu_links() {
   t('Logout');
   t('Reports');
   t('Site or Community Partner');
-  t('Students');
+  t('Users');
 
 
   return $menu_links;

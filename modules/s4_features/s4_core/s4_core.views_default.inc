@@ -886,14 +886,14 @@ function s4_core_views_default_views() {
   $view->description = '';
   $view->tag = 'default';
   $view->base_table = 'users';
-  $view->human_name = 'S4: Students';
+  $view->human_name = 'S4: Users';
   $view->core = 7;
   $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Students';
+  $handler->display->display_options['title'] = 'Users';
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['access']['perm'] = 'access user profiles';
   $handler->display->display_options['cache']['type'] = 'none';
@@ -1221,10 +1221,10 @@ function s4_core_views_default_views() {
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
-  $handler->display->display_options['path'] = 'students';
+  $handler->display->display_options['path'] = 'users';
   $translatables['s4_students'] = array(
     t('Master'),
-    t('Students'),
+    t('Users'),
     t('more'),
     t('Apply'),
     t('Reset'),
