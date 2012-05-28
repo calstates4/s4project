@@ -635,6 +635,7 @@ function _s4_core_create_signup($uid = 0, $signup = array()) {
       $params['subject'] = $field_confirmation_subject[0]['value'];
       $params['signup'] = $node;
       $params['program'] = $program;
+      $params['site_staff'] = node_load($signup['coordinator']);
       $params['site'] = node_load($node->field_site[$node->language][0]['nid']);
       if($node->field_course[$node->language][0]['nid']) {
         $params['course'] = node_load($node->field_course[$node->language][0]['nid']);
@@ -1150,7 +1151,11 @@ function s4_core_mail($key, &$message, $params) {
       break;
     case 'signup_confirmation':
       $message['subject'] = $params['subject'];
-      $message['body'][] = $params['body'];
+      $body = token_replace($params['body'], array('s4_site_staff' => $params['site_staff'],
+                                                   's4_course' => $params['course'],
+                                                   's4_signup' => $params['signup'],
+                                                   's4_site' => $params['site']));
+      $message['body'][] = $body;
       break;
   }
 }
@@ -1439,28 +1444,75 @@ function s4_core_get_site_form($site, $term) {
 
 
 function s4_core_tokens($type, $tokens, array $data = array(), array $options = array()) {
+  module_load_include('inc', 'token', 'token.tokens');
   if ($type == 's4_signup') {
-    $signup = $object;
     $tokens['site'] = 'your site';
-    return $tokens;
   }
+  if($type == 's4_site') {
+    $tokens['site_name'] = $data->title;
+  }
+  $tokens += field_tokens('node', $tokens, $data);
+  return $tokens;
 }
 
 function s4_core_token_info() {
-  $type = array(
-    'name' => t('Student signup record'),
-    'description' => t('Tokens related to a student\'s signup record.'),
+  $types = array('s4_signup' => array(
+      'name' => t('Student signup record'),
+      'description' => t('Tokens related to a student\'s signup record.'),
+    ),
+    's4_site_staff' => array(
+      'name' => t('Student site staff'),
+      'description' => t('Tokens related to a student\'s chosen site staff.'),
+    ),
+    's4_course' => array(
+      'name' => t('Student course'),
+      'description' => t('Tokens related to a student\'s course.'),
+    ),
+    's4_site' => array(
+      'name' => t('Student site'),
+      'description' => t('Tokens related to the site the student signed up with.'),
+    ),
   );
 
-    $tokens['site'] = array('name' => 'Site name',
+    $tokens['s4_site']['site_name'] = array('name' => 'Site name',
                        'description' => t('The name of the site'));
-    $tokens['coordinator'] = array('name' => 'Site coordinator',
-                       'description' => t('The name of the coordinator'));
-    $tokens['evaluation_link'] = array('name' => 'Evaluation link',
+    $tokens['s4_signup']['site'] = array('name' => 'Site name',
+                       'description' => t('The name of the site'));
+    $tokens['s4_signup']['evaluation_link'] = array('name' => 'Evaluation link',
                        'description' => t('A link to the user\'s site evaluation'));
+    $tokens['s4_signup']['program_forms'] = array('name' => 'Program forms',
+                       'description' => t('A list of downloadable forms related to the program'));
+    
+    $fields = field_info_fields();
+    $instances = field_info_instances();
+    $bundle_tokens = array('coordinator' => 's4_site_staff',
+                           'site' => 's4_site',
+                           'course' => 's4_course',
+                           'signup' => 's4_signup');
+    
+    foreach ($fields as $field_name => $field) {
+      if (!empty($field['bundles'])) {
+        foreach ($field['bundles'] as $entity_key => $entity) {
+          if($entity_key == 'node') {
+            foreach($entity as $entity_type) {
+              if($bundle_tokens[$entity_type]) {
+                $field_token_type = strtr($field['type'], '_', '-') . '-field';
+                $field_token_name = strtr($field_name, '_', '-');
+                $tokens[$bundle_tokens[$entity_type]][$field_token_name] = array(
+                  // @todo How the &#!% do we figure out what this token should be
+                  // named when each bundle can have a different label???
+                  'name' => $field_token_name,
+                  'description' => '',
+                );
+              }
+            }   
+          }
+        }
+      }
+    }
     return array(
-      'types' => array('s4_signup' => $type),
-      'tokens' => array('s4_signup' => $tokens),
+      'types' => $types,
+      'tokens' => $tokens,
     );
 }
 
@@ -1666,6 +1718,6 @@ function s4_core_s4_help($path) {
   return _s4_core_help($path);
 }
 
-function s4_core_site_staff_choice(&$form, $form_state) {
-  return $form['site-staff'];
+function s4_core_site_options_choice(&$form, $form_state) {
+  return $form['site_options'];
 }

@@ -256,16 +256,17 @@ function s4_core_create_signup_form($form, $form_state, $uid, $courses = true) {
     '#required' => TRUE,
     '#empty_option' => t('-- Select a site --'),
     '#ajax' => array(
-      'callback' => 's4_core_site_staff_choice',
-      'wrapper' => 'site-staff-select',
+      'callback' => 's4_core_site_options_choice',
+      'wrapper' => 'site-options',
       'progress' => array(
         'type' => 'throbber',
-        'message' => 'Looking up site staff',
+        'message' => t('Looking up site information'),
       ),
     ),
   );
 
   $site_staff_options = array();
+  $program_options = array();
   if ($form_state['values']['site']) {
     $site_staff = db_select('field_data_field_site', 's')
             ->fields('s', array('entity_id'))
@@ -283,14 +284,30 @@ function s4_core_create_signup_form($form, $form_state, $uid, $courses = true) {
                                        '@role' => $role->name));
       }
     }
+    $site = node_load($form_state['values']['site']);
+    $program_options = array();
+    foreach(field_get_items('node', $site, 'field_site_restrict') as $program) {
+      $program = taxonomy_term_load($program['tid']);
+      $program_options[$program->tid] = $program->name;
+    }
   }
-
-  $form['site-staff'] = array(
-    '#type' => 'radios',
-    '#prefix' => '<div id="site-staff-select">',
+  $form['site_options'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Site options'),
+    '#prefix' => '<div id="site-options">',
     '#suffix' => '</div>',
+  );
+  
+  $form['site_options']['site-staff'] = array(
+    '#type' => 'radios',
     '#title' => 'Site staff',
     '#options' => $site_staff_options,
+  );
+
+  $form['site_options']['program'] = array(
+    '#type' => 'radios',
+    '#title' => 'Related program',
+    '#options' => $program_options,
   );
 
   $form['hours'] = array(
@@ -324,7 +341,8 @@ function s4_core_create_signup_form_submit($form, $form_state) {
            'site' => $form_state['values']['site'],
            'course' => $form_state['values']['course'],
            'coordinator' => ($form_state['values']['site-staff']) ? $form_state['values']['site-staff'] : 0,
-           'hours' => $form_state['values']['hours']
+           'hours' => $form_state['values']['hours'],
+           'program' => $form_state['values']['program']
           );
   $signup = _s4_core_create_signup($form_state['values']['user'], $signup);
   drupal_set_message(t('Created !signup record', array('!signup' => l(t('signup #@number', array('@number' => $signup->nid)), 'node/' . $signup->nid))));

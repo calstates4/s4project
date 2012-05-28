@@ -743,33 +743,6 @@ function s4_courses_tokens($type, $tokens, array $data = array(), array $options
 }
 
 /**
-*  Implementation of hook_token_info
-*/
-function s4_courses_token_info() {
-  $type = array(
-    'name' => t('Student course'),
-    'description' => t('Tokens related to a student\'s course that they used to signup with.'),
-  );
-
-  $tokens['course_short'] = array('name' => 'Short course name',
-                       'description' => t('The subject, catalog number, and section'));
-    $tokens['course_long'] = array('name' => 'Long course name',
-                       'description' => t('The full subject, catalog number, section, and title of the course'));
-    $tokens['course_link'] = array('name' => 'Course link',
-                       'description' => t('A link to the course'));
-    $tokens['course_term'] = array('name' => 'Term',
-                       'description' => t('The term (i.e "Fall 2011")'));
-    $tokens['course_faculty'] = array('name' => 'Faculty',
-                       'description' => t('A list of the course faculty names'));
-
-
-    return array(
-      'types' => array('s4_courses' => $type),
-      'tokens' => array('s4_courses' => $tokens),
-    );
-}
-
-/**
 *  Implementation of hook_context_plugins
 */
 function s4_courses_context_plugins() {
