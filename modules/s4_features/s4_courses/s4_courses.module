@@ -470,6 +470,22 @@ function s4_courses_block_view($delta) {
   }
 }
 
+function s4_courses_node_access($node, $op, $account) {
+  if($node->type != 'signup') {
+    return;
+  }
+  $course = field_get_items('node', $node, 'field_course');
+  if($course[0]['nid']) {
+    $course = node_load($course[0]['nid']);
+    $faculty = field_get_items('node', $course, 'field_course_faculty');
+    foreach($faculty as $instructor) {
+      if($instructor['uid'] == $account->uid && user_access('manage course students', $account)) {
+        return NODE_ACCESS_ALLOW;
+      }
+    }
+  }
+}
+
 function s4_courses_edit_course_restrict_form() {
   $node = menu_get_object();
   $form = array();
@@ -883,6 +899,10 @@ function s4_courses_permission() {
   return array(
     'signup course students' => array(
       'title' => t('Sign up students in assigned courses'),
+      'description' => t('Users can sign up other people who are in courses assigned to them as faculty.'),
+    ),
+    'manage course students' => array(
+      'title' => t('Manage (delete or edit signups) students in assigned courses'),
       'description' => t('Users can sign up other people who are in courses assigned to them as faculty.'),
     ),
   );
