@@ -732,17 +732,6 @@ function s4_courses_trigger_info() {
 }
 
 /**
-*  Course tokens
-*/
-function s4_courses_tokens($type, $tokens, array $data = array(), array $options = array()) {
-  if ($type == 's4_signup') {
-    $signup = $object;
-    $tokens['site'] = 'your site';
-    return $tokens;
-  }
-}
-
-/**
 *  Implementation of hook_context_plugins
 */
 function s4_courses_context_plugins() {

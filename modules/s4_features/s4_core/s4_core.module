@@ -630,7 +630,7 @@ function _s4_core_create_signup($uid = 0, $signup = array()) {
       $$field = field_get_items('taxonomy_term', $program, $field);
     }
     if($field_confirmation_send_email[0]['value']) {
-      $user = user_load($node->field_user[$node->language][0]['uid']);
+      $signup_user = user_load($node->field_user[$node->language][0]['uid']);
       $params['body'] = $field_confirmation_email[0]['value'];
       $params['subject'] = $field_confirmation_subject[0]['value'];
       $params['signup'] = $node;
@@ -643,7 +643,7 @@ function _s4_core_create_signup($uid = 0, $signup = array()) {
       $sender = ($field_confirmation_email_sender[0]['email'])
                 ? $field_confirmation_email_sender[0]['email']
                 : variable_get('site_mail', '');
-      drupal_mail('s4_core', 'signup_confirmation', $user->mail, $node->language, $params, $sender);
+      drupal_mail('s4_core', 'signup_confirmation', $signup_user->mail, $node->language, $params, $sender);
     }
   }
   return $node;
@@ -1444,15 +1444,43 @@ function s4_core_get_site_form($site, $term) {
 
 
 function s4_core_tokens($type, $tokens, array $data = array(), array $options = array()) {
-  module_load_include('inc', 'token', 'token.tokens');
   if ($type == 's4_signup') {
-    $tokens['site'] = 'your site';
+    $program = field_get_items('node', $data['s4_signup'], 'field_site_restrict');
+    if($program) {
+      $forms_view = views_get_view('site_forms');
+      $forms_view->set_arguments(array($program[0]['tid']));
+      $forms_view->set_display('page_3');
+      $forms_view->execute();
+      $replacements['[s4_signup:program_forms]'] = $forms_view->render();
+    }
   }
   if($type == 's4_site') {
-    $tokens['site_name'] = $data->title;
+    $replacements['[s4_site:site_name]'] = $data[$type]->title;
   }
-  $tokens += field_tokens('node', $tokens, $data);
-  return $tokens;
+  if(is_object($data[$type])) {
+    $entity = clone $data[$type];
+    list($id, $vid, $bundle) = entity_extract_ids('node', $entity);
+    $fields = field_info_instances('node', $bundle);
+
+    foreach ($fields as $field_name => $field_instance) {
+      if (empty($entity->{$field_name})) {
+        continue;
+      }
+      $field_token_name = strtr($field_name, '_', '-');
+      // Replace the [entity:field-name] token.
+      $original = $tokens[$field_token_name];
+      if($original) {
+        $field_output = field_view_field('node', $entity, $field_name);
+        $output = array();
+        foreach (element_children($field_output) as $key) {
+          $output[$key] = $field_output[$key];
+        }
+        $replacements[$original] = render($output);
+      }
+    }
+    unset($entity);
+  }
+  return $replacements;
 }
 
 function s4_core_token_info() {
@@ -1475,13 +1503,14 @@ function s4_core_token_info() {
   );
 
     $tokens['s4_site']['site_name'] = array('name' => 'Site name',
-                       'description' => t('The name of the site'));
-    $tokens['s4_signup']['site'] = array('name' => 'Site name',
-                       'description' => t('The name of the site'));
+                       'description' => t('The name of the site'),
+                       'module' => 's4_core');
     $tokens['s4_signup']['evaluation_link'] = array('name' => 'Evaluation link',
-                       'description' => t('A link to the user\'s site evaluation'));
+                       'description' => t('A link to the user\'s site evaluation'),
+                       'module' => 's4_core');
     $tokens['s4_signup']['program_forms'] = array('name' => 'Program forms',
-                       'description' => t('A list of downloadable forms related to the program'));
+                       'description' => t('A list of downloadable forms related to the program'),
+                       'module' => 's4_core');
     
     $fields = field_info_fields();
     $instances = field_info_instances();
@@ -1503,6 +1532,7 @@ function s4_core_token_info() {
                   // named when each bundle can have a different label???
                   'name' => $field_token_name,
                   'description' => '',
+                  'module' => 's4_core',
                 );
               }
             }   

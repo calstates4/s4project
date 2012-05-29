@@ -341,7 +341,7 @@ function s4_core_create_signup_form_submit($form, $form_state) {
            'site' => $form_state['values']['site'],
            'course' => $form_state['values']['course'],
            'coordinator' => ($form_state['values']['site-staff']) ? $form_state['values']['site-staff'] : 0,
-           'hours' => $form_state['values']['hours'],
+           'hours' => ($form_state['values']['hours']) ? $form_state['values']['hours'] : 0,
            'program' => $form_state['values']['program']
           );
   $signup = _s4_core_create_signup($form_state['values']['user'], $signup);
