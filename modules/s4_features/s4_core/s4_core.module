@@ -1457,7 +1457,7 @@ function s4_core_tokens($type, $tokens, array $data = array(), array $options = 
   if($type == 's4_site') {
     $replacements['[s4_site:site_name]'] = $data[$type]->title;
   }
-  if(is_object($data[$type])) {
+  if(is_object($data[$type]) && $data[$type]->type) {
     $entity = clone $data[$type];
     list($id, $vid, $bundle) = entity_extract_ids('node', $entity);
     $fields = field_info_instances('node', $bundle);
