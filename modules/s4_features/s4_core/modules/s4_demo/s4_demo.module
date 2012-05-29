@@ -5,3 +5,80 @@
  */
 
 include_once('s4_demo.features.inc');
+
+function s4_demo_menu() {
+	$items = array();
+	
+	$items['admin/config/s4/generate'] = array(
+		'title' => 'Generate signups',
+		'description' => 'Generate fake signup records.',
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('s4_demo_form'),
+		'access arguments' => array('administer site configuration'),
+	);
+	
+	return $items;
+}
+
+function s4_demo_form() {
+	$form = array();
+	
+	$form['number'] = array(
+		'#type' => 'textfield',
+		'#title' => 'Number of signups to generate',
+	);
+	
+	$form['submit'] = array(
+		'#type' => 'submit',
+		'#value' => 'Generate',
+	);
+	
+	return $form;
+}
+
+function s4_demo_form_submit($formm, $form_state) {
+	$batch = array(
+	    'finished' => 's4_demo_finished',
+	    'title' => t('Generating signup records'),
+	    'init_message' => t('Starting to generate.'),
+	    'progress_message' => t('Processed @current out of @total.'),
+	    'error_message' => t('Whoops, we have encountered an error.'),
+  	);
+	for($i = 0; $i < intval($form_state['values']['number']); $i++) {
+		$batch['operations'][] = array('s4_demo_generate_signup', array());
+	}
+  	batch_set($batch);
+}
+
+function s4_demo_generate_signup() {
+  $course = db_query('SELECT entity_id, field_course_students_uid FROM field_data_field_course_students WHERE entity_id = (select nid from node where type = :course order by rand() limit 1) AND field_course_students_uid NOT IN (SELECT uid FROM node WHERE type = :signup) order by rand() limit 1', array(':course' => 'course', ':signup' => 'signup'));
+  $course = $course->fetchAssoc();
+  if (!$course) {
+  	return null;
+  }
+  $site = db_query('SELECT nid FROM node WHERE type = :site order by RAND() limit 1', array(':site' => 'site'));
+  if ($site) {
+	  $settings = array('user' => $course['field_course_students_uid'],
+	           'site' => $site->fetchField(),
+	           'course' => $course['entity_id'],
+	           'coordinator' => 0,
+	           'location' => 0,
+	           'signup_sid' => 0,
+	           'hours' => 30,);
+	  _s4_core_create_signup($course['field_course_students_uid'], $settings);
+  }
+}
+
+function s4_demo_finished($success, $results, $operations) {
+  if ($success) {
+    $message = count($results) .' processed.';
+    $message .= theme('item_list', $results);
+  }
+  else {
+    // An error occurred.
+    // $operations contains the operations that remained unprocessed.
+    $error_operation = reset($operations);
+    $message = t('An error occurred while processing %error_operation with arguments: @arguments', array('%error_operation' => $error_operation[0], '@arguments' => print_r($error_operation[1], TRUE)));
+  }
+  drupal_set_message($message);
+}

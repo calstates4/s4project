@@ -1,4 +1,0 @@
-name=S4 Generate
-package=S4
-description=Testing interface that builds site signup records
-core=7.x
