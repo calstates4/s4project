@@ -653,20 +653,125 @@ function s4_courses_bulk_signup_students_action_form($context) {
   if(!user_access('signup course students') && !user_access('create signups for other users')) {
     return array();
   }
-  $node = ($context['course']) ? node_load($context['course']) : node_load(arg(1));
-  if(!$node || $node->type != 'course') {
-    drupal_set_message(t('This action can only be called when viewing a course'), 'warning');
-    return array();
-  }
+  $node = ($context['course']) ? node_load($context['settings']['course']) : node_load(arg(1));
   module_load_include('inc', 's4_core', 's4_core.pages');
-  $form_state = array('values' => $context);
-  $form = s4_core_create_signup_form(array(), $form_state, 0, false);
+  $form_state = array('values' => $context['settings']);
+  $settings = _s4_courses_bulk_signup_students_action_settings();
+  $form = array();
+  global $user;
+  $form['user'] = array(
+    '#type' => 'hidden',
+    '#value' => $user->uid,
+  );
+
   $form['course'] = array(
     '#type' => 'hidden',
     '#value' => $node->nid,
-    );
-  unset($form['submit']);
+  );
+
+  $sites = array();
+  $query = db_select('node', 'n')
+       ->fields('n', array('nid', 'title'))
+       ->condition('type', 'site')
+       ->orderBy('title', 'ASC');
+  $results = $query->execute();
+  foreach ($results as $result) {
+    $sites[$result->nid] = $result->title;
+  }
+  $form['site'] = array(
+    '#type' => 'select',
+    '#title' => 'Site',
+    '#options' => $sites,
+    '#attributes' => array('class' => array('chosen')),
+    '#required' => TRUE,
+    '#empty_option' => t('-- Select a site --'),
+    '#ajax' => array(
+      'callback' => 's4_core_site_options_choice',
+      'wrapper' => 'site-options',
+      'progress' => array(
+        'type' => 'throbber',
+        'message' => t('Looking up site information'),
+      ),
+    ),
+  );
+
+  $site_staff_options = array();
+  $program_options = array();
+  if ($settings['site']) {
+    $site_staff = db_select('field_data_field_site', 's')
+            ->fields('s', array('entity_id'))
+            ->condition('s.bundle', 'coordinator')
+            ->condition('s.field_site_nid', $settings['site'])
+            ->execute()
+            ->fetchCol();
+    foreach ($site_staff as $staff) {
+      $staff = node_load($staff);
+      $available = field_get_items('node', $staff, 'field_staff_signup_available');
+      if ($available[0]['value']) {
+        $role = field_get_items('node', $staff, 'field_staff_role');
+        $role = taxonomy_term_load($role[0]['tid']);
+        $site_staff_options[$staff->nid] = t('@title (@role)', array('@title' => $staff->title,
+                                       '@role' => $role->name));
+      }
+    }
+    $site = node_load($settings['site']);
+    $program_options = array();
+    foreach(field_get_items('node', $site, 'field_site_restrict') as $program) {
+      $program = taxonomy_term_load($program['tid']);
+      $program_options[$program->tid] = $program->name;
+    }
+  }
+  $form['site_options'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Site options'),
+    '#prefix' => '<div id="site-options">',
+    '#suffix' => '</div>',
+  );
+  
+  $form['site_options']['site-staff'] = array(
+    '#type' => 'radios',
+    '#title' => 'Site staff',
+    '#options' => $site_staff_options,
+  );
+
+  $form['site_options']['program'] = array(
+    '#type' => 'radios',
+    '#title' => 'Related program',
+    '#options' => $program_options,
+  );
+
+  $form['hours'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Number of expected hours of services',
+    '#size' => 6,
+  );
+
   return $form;
+}
+
+/** 
+ * Total hack to store the settings a user selects on the bulk signup action.
+ */
+function _s4_courses_bulk_signup_students_action_settings($settings = FALSE) {
+  static $internal_settings;
+  if($settings) {
+    $internal_settings = $settings;
+  }
+  return $internal_settings;
+}
+
+/** 
+ * Validate the bulk operation form. Here we pull a hack and store it in a static array.
+ */
+function s4_courses_bulk_signup_students_action_validate($form, &$form_state) {
+  $params = array(
+    'course'   => $form_state['values']['course'],
+    'site'   => $form_state['values']['site'],
+    'site-staff'   => $form_state['values']['site-staff'],
+    'hours'   => $form_state['values']['hours'],
+    'email-student' => $form_state['values']['email-student'],
+  );
+  _s4_courses_bulk_signup_students_action_settings($params);
 }
 
 /**
