@@ -94,11 +94,15 @@ Use the custom S4 *Course faculty processor* and make sure to provide the follow
 4. *GUID* - A unique ID to identify this assignment record. For example, this could be a concatenation of the course ID as well as the user ID.
 
 .. _feeds-tamper:
+===============
 Tampering Feeds
 ===============
-"Tampering" feeds allows you to alter the default way that data is handled between the steps of parsing and processing the data. 
+"Tampering" feeds allows you to alter the default way that data is handled between the steps of parsing and processing the data. The most common use of tampering is to split a field into multiple values, for example, you might want users to have access to two kinds of programs within S4.
+
+To tamper a field, go to ``admin/structure/feeds`` and click on *Tamper* next to the feed you want to alter. You will then see a list of field mappings from your importer. If we wanted to split "Available Programs" for users, for example, we would click on the *Add plugin* link below the corresponding mapping (maybe it would read "program -> Available Programs"), and then under *Plugin to add* select "Explode". We would then enter the Separator (like Pipe |) and click *Add*. `Read more about the available tamper plugins <http://drupal.org/node/1246578>`_.
 
 .. _extending-feeds:
+===============
 Extending Feeds
 ===============
 The following modules should be downloaded and installed if you need them, as S4 does not come wiht all methods of pulling data from external systems:
