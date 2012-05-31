@@ -13,6 +13,14 @@ This project is a collaboration between the CSUMB Web Services department and th
 We're tracking the project at the Project Site: http://s4.csumb.edu/project
 
 
+Installation
+===============
+
+.. toctree::
+   :maxdepth: 2
+   :glob:
+   
+   installation/*
 
 Indices and tables
 ==================
