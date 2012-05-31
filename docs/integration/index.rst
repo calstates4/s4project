@@ -104,6 +104,16 @@ Tampering Feeds
 
 To tamper a field, go to ``admin/structure/feeds`` and click on *Tamper* next to the feed you want to alter. You will then see a list of field mappings from your importer. If we wanted to split "Available Programs" for users, for example, we would click on the *Add plugin* link below the corresponding mapping (maybe it would read "program -> Available Programs"), and then under *Plugin to add* select "Explode". We would then enter the Separator (like Pipe |) and click *Add*. `Read more about the available tamper plugins <http://drupal.org/node/1246578>`_.
 
+===========================
+Starting the import process
+===========================
+
+Once you have a feed importer setup, it's not processing any data yet! To get started, to go ``http://mysite.edu/import`` or click on *Site settings* and under *SIS Integration* select "Run and monitor feed importers." You will see a list of your importers. Click on the one you want to setup, and fill out the form. If you are using a File fetcher, for example, it might ask you to upload a file or type in the path to where your batch file is being added.
+
+From here you can also view how many items have been imported with this feeds importer, and view a log that details what happened every time an import was run and provides details on errors.
+
+If you are playing around and find you screwed up an import, you can also delete all the items associated with that feed importer by clicking the *Delete items* tab. 
+
 .. _extending-feeds:
 ===============
 Extending Feeds
@@ -113,6 +123,8 @@ The following modules should be downloaded and installed if you need them, as S4
 `Feeds SQL <http://drupal.org/project/feeds_sql>`_
 --------------------------------------------------
 Allows feeds to pull data from external database queries. All your database connection information is stored in non-readable config files for maximum security. To add a database to your site, edit the ``settings.php`` file located in the ``sites/default`` directory. The configuration is standard PHP Data Object (PDO) drivers, so you should consult the options for the database you're connecting to. Depending on your server environment, you might need to install the PDO driver as an extra, especially for less standard PHP databases like Oracle or MS SQL. `Read more about PDO and connection options <http://php.net/manual/en/pdo.drivers.php>`_.
+
+Note that this module adds both a fetcher and parser for databases, and they should generally be used together.
 
 .. code-block:: php
 
@@ -125,3 +137,11 @@ Allows feeds to pull data from external database queries. All your database conn
     'prefix' => 'main_',
     'collation' => 'utf8_general_ci',
   );
+  
+`LDAP Query Fetcher & Parser <http://drupal.org/project/ldap>`_
+----------------------------------------------------
+If all your user information is already in LDAP, you can fetch LDAP entries for specific subsets of users based on LDAP queries and bring over their information into S4.
+
+`Excel parser <http://drupal.org/project/feeds_excel>`_
+-------------------------------------------------------
+Useful if you have an excel file to test with, you can upload via a File fetcher an excel file of data and have it parsed in it's native format.
