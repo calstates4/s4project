@@ -30,3 +30,23 @@ function s4_feeds_feeds_plugins() {
   
   return $info;
 }
+
+/**
+* Implements hook_s4_site_configuration
+*/
+function s4_feeds_s4_site_configuration() {
+	return array(
+		's4_feeds_importers' => array(
+			'group' => t('SIS integration'),
+			'title' => t('Setup Feed Importers'),
+			'description' => t('Build and maintain feed importers.'),
+			'href' => 'admin/structure/feeds',
+		),
+		's4_feeds_import' => array(
+			'group' => t('SIS integration'),
+			'title' => t('Run and monitor feed importers'),
+			'description' => t('Start off feed importers and check on the status of importers.'),
+			'href' => 'import',
+		),
+	);
+}
