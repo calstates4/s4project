@@ -1,7 +1,8 @@
-.. QUAIL: Accessibility Information Library documentation master file, created by
-   sphinx-quickstart on Wed Apr 11 20:34:30 2012.
+.. S4: Student Signup for Service and Stuff documentation master file, created by
+   sphinx-quickstart on Wed May 30 21:17:25 2012.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
+
 
 S4: Students Signup for Service and Stuff
 ========================================
@@ -31,6 +32,7 @@ Integration
    :glob:
    
    integration/*
+
 
 Indices and tables
 ==================
