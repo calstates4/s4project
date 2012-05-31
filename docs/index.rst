@@ -21,6 +21,16 @@ Installation
    :glob:
    
    installation/*
+   
+
+Integration
+===============
+
+.. toctree::
+   :maxdepth: 2
+   :glob:
+   
+   integration/*
 
 Indices and tables
 ==================
