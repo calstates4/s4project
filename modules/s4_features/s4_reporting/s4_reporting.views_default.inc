@@ -166,18 +166,44 @@ Fields',
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['relationship'] = 'field_user_uid';
   $handler->display->display_options['fields']['field_first_name']['hide_alter_empty'] = FALSE;
-  /* Field: Content: Title */
-  $handler->display->display_options['fields']['title_3']['id'] = 'title_3';
-  $handler->display->display_options['fields']['title_3']['table'] = 'node';
-  $handler->display->display_options['fields']['title_3']['field'] = 'title';
-  $handler->display->display_options['fields']['title_3']['relationship'] = 'field_term_nid';
-  $handler->display->display_options['fields']['title_3']['label'] = 'Term';
-  /* Field: Content: Title */
-  $handler->display->display_options['fields']['title']['id'] = 'title';
-  $handler->display->display_options['fields']['title']['table'] = 'node';
-  $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['relationship'] = 'field_course_nid';
-  $handler->display->display_options['fields']['title']['label'] = 'Course';
+  /* Field: Content: Term Code */
+  $handler->display->display_options['fields']['field_term_code']['id'] = 'field_term_code';
+  $handler->display->display_options['fields']['field_term_code']['table'] = 'field_data_field_term_code';
+  $handler->display->display_options['fields']['field_term_code']['field'] = 'field_term_code';
+  $handler->display->display_options['fields']['field_term_code']['relationship'] = 'field_course_nid';
+  /* Field: Content: Term */
+  $handler->display->display_options['fields']['field_term']['id'] = 'field_term';
+  $handler->display->display_options['fields']['field_term']['table'] = 'field_data_field_term';
+  $handler->display->display_options['fields']['field_term']['field'] = 'field_term';
+  $handler->display->display_options['fields']['field_term']['relationship'] = 'field_course_nid';
+  $handler->display->display_options['fields']['field_term']['type'] = 'node_reference_plain';
+  /* Field: Content: Subject */
+  $handler->display->display_options['fields']['field_course_subject']['id'] = 'field_course_subject';
+  $handler->display->display_options['fields']['field_course_subject']['table'] = 'field_data_field_course_subject';
+  $handler->display->display_options['fields']['field_course_subject']['field'] = 'field_course_subject';
+  $handler->display->display_options['fields']['field_course_subject']['relationship'] = 'field_course_nid';
+  /* Field: Content: Catalog number */
+  $handler->display->display_options['fields']['field_course_catalog_number']['id'] = 'field_course_catalog_number';
+  $handler->display->display_options['fields']['field_course_catalog_number']['table'] = 'field_data_field_course_catalog_number';
+  $handler->display->display_options['fields']['field_course_catalog_number']['field'] = 'field_course_catalog_number';
+  $handler->display->display_options['fields']['field_course_catalog_number']['relationship'] = 'field_course_nid';
+  $handler->display->display_options['fields']['field_course_catalog_number']['label'] = 'Course number';
+  /* Field: Content: Section number */
+  $handler->display->display_options['fields']['field_course_section']['id'] = 'field_course_section';
+  $handler->display->display_options['fields']['field_course_section']['table'] = 'field_data_field_course_section';
+  $handler->display->display_options['fields']['field_course_section']['field'] = 'field_course_section';
+  $handler->display->display_options['fields']['field_course_section']['relationship'] = 'field_course_nid';
+  $handler->display->display_options['fields']['field_course_section']['label'] = 'Section';
+  $handler->display->display_options['fields']['field_course_section']['settings'] = array(
+    'thousand_separator' => ' ',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Content: Faculty */
+  $handler->display->display_options['fields']['field_course_faculty']['id'] = 'field_course_faculty';
+  $handler->display->display_options['fields']['field_course_faculty']['table'] = 'field_data_field_course_faculty';
+  $handler->display->display_options['fields']['field_course_faculty']['field'] = 'field_course_faculty';
+  $handler->display->display_options['fields']['field_course_faculty']['relationship'] = 'field_course_nid';
+  $handler->display->display_options['fields']['field_course_faculty']['delta_offset'] = '0';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title_1']['id'] = 'title_1';
   $handler->display->display_options['fields']['title_1']['table'] = 'node';
@@ -229,6 +255,146 @@ Fields',
     'thousand_separator' => ' ',
     'prefix_suffix' => 1,
   );
+  /* Field: Content: Briefly describe any ongoing needs or special projects with which students can assist agency staff */
+  $handler->display->display_options['fields']['field_site_projects']['id'] = 'field_site_projects';
+  $handler->display->display_options['fields']['field_site_projects']['table'] = 'field_data_field_site_projects';
+  $handler->display->display_options['fields']['field_site_projects']['field'] = 'field_site_projects';
+  $handler->display->display_options['fields']['field_site_projects']['label'] = 'Site special projects';
+  /* Field: Content: By percentage, what is the demographic of the population you serve? */
+  $handler->display->display_options['fields']['field_site_demographics']['id'] = 'field_site_demographics';
+  $handler->display->display_options['fields']['field_site_demographics']['table'] = 'field_data_field_site_demographics';
+  $handler->display->display_options['fields']['field_site_demographics']['field'] = 'field_site_demographics';
+  $handler->display->display_options['fields']['field_site_demographics']['relationship'] = 'field_site_nid';
+  $handler->display->display_options['fields']['field_site_demographics']['label'] = 'Site demographics';
+  $handler->display->display_options['fields']['field_site_demographics']['delta_offset'] = '0';
+  /* Field: Content: By percentage, what is the demographic of the population you serve? (field_site_demographics:delta) */
+  $handler->display->display_options['fields']['delta']['id'] = 'delta';
+  $handler->display->display_options['fields']['delta']['table'] = 'field_data_field_site_demographics';
+  $handler->display->display_options['fields']['delta']['field'] = 'delta';
+  $handler->display->display_options['fields']['delta']['relationship'] = 'field_site_nid';
+  $handler->display->display_options['fields']['delta']['label'] = 'Site population demographics';
+  /* Field: Content: Contact email */
+  $handler->display->display_options['fields']['field_site_email']['id'] = 'field_site_email';
+  $handler->display->display_options['fields']['field_site_email']['table'] = 'field_data_field_site_email';
+  $handler->display->display_options['fields']['field_site_email']['field'] = 'field_site_email';
+  $handler->display->display_options['fields']['field_site_email']['relationship'] = 'field_site_nid';
+  $handler->display->display_options['fields']['field_site_email']['label'] = 'Site email';
+  $handler->display->display_options['fields']['field_site_email']['type'] = 'email_default';
+  /* Field: Content: Federal district */
+  $handler->display->display_options['fields']['field_district_federal']['id'] = 'field_district_federal';
+  $handler->display->display_options['fields']['field_district_federal']['table'] = 'field_data_field_district_federal';
+  $handler->display->display_options['fields']['field_district_federal']['field'] = 'field_district_federal';
+  $handler->display->display_options['fields']['field_district_federal']['relationship'] = 'field_site_nid';
+  $handler->display->display_options['fields']['field_district_federal']['label'] = 'Site Federal district';
+  /* Field: Content: Issues addressed */
+  $handler->display->display_options['fields']['field_csu_facility']['id'] = 'field_csu_facility';
+  $handler->display->display_options['fields']['field_csu_facility']['table'] = 'field_data_field_csu_facility';
+  $handler->display->display_options['fields']['field_csu_facility']['field'] = 'field_csu_facility';
+  $handler->display->display_options['fields']['field_csu_facility']['relationship'] = 'field_site_nid';
+  $handler->display->display_options['fields']['field_csu_facility']['delta_offset'] = '0';
+  /* Field: Content: Location(s) */
+  $handler->display->display_options['fields']['field_location']['id'] = 'field_location';
+  $handler->display->display_options['fields']['field_location']['table'] = 'field_data_field_location';
+  $handler->display->display_options['fields']['field_location']['field'] = 'field_location';
+  $handler->display->display_options['fields']['field_location']['relationship'] = 'field_site_nid';
+  $handler->display->display_options['fields']['field_location']['label'] = 'Site Location(s)';
+  $handler->display->display_options['fields']['field_location']['delta_offset'] = '0';
+  /* Field: Content: Maximum number of students */
+  $handler->display->display_options['fields']['field_signups_max']['id'] = 'field_signups_max';
+  $handler->display->display_options['fields']['field_signups_max']['table'] = 'field_data_field_signups_max';
+  $handler->display->display_options['fields']['field_signups_max']['field'] = 'field_signups_max';
+  $handler->display->display_options['fields']['field_signups_max']['relationship'] = 'field_site_nid';
+  $handler->display->display_options['fields']['field_signups_max']['label'] = 'Site max students';
+  $handler->display->display_options['fields']['field_signups_max']['settings'] = array(
+    'thousand_separator' => ' ',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Content: Organization type */
+  $handler->display->display_options['fields']['field_csu_org_type']['id'] = 'field_csu_org_type';
+  $handler->display->display_options['fields']['field_csu_org_type']['table'] = 'field_data_field_csu_org_type';
+  $handler->display->display_options['fields']['field_csu_org_type']['field'] = 'field_csu_org_type';
+  $handler->display->display_options['fields']['field_csu_org_type']['relationship'] = 'field_site_nid';
+  $handler->display->display_options['fields']['field_csu_org_type']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_csu_org_type']['delta_offset'] = '0';
+  /* Field: Content: Phone number */
+  $handler->display->display_options['fields']['field_phone']['id'] = 'field_phone';
+  $handler->display->display_options['fields']['field_phone']['table'] = 'field_data_field_phone';
+  $handler->display->display_options['fields']['field_phone']['field'] = 'field_phone';
+  $handler->display->display_options['fields']['field_phone']['relationship'] = 'field_site_nid';
+  $handler->display->display_options['fields']['field_phone']['label'] = 'Site phone';
+  $handler->display->display_options['fields']['field_phone']['click_sort_column'] = 'number';
+  /* Field: Content: Risk Identification */
+  $handler->display->display_options['fields']['field_health_risk']['id'] = 'field_health_risk';
+  $handler->display->display_options['fields']['field_health_risk']['table'] = 'field_data_field_health_risk';
+  $handler->display->display_options['fields']['field_health_risk']['field'] = 'field_health_risk';
+  $handler->display->display_options['fields']['field_health_risk']['relationship'] = 'field_site_nid';
+  /* Field: Content: Site special requirements */
+  $handler->display->display_options['fields']['field_site_requirements']['id'] = 'field_site_requirements';
+  $handler->display->display_options['fields']['field_site_requirements']['table'] = 'field_data_field_site_requirements';
+  $handler->display->display_options['fields']['field_site_requirements']['field'] = 'field_site_requirements';
+  $handler->display->display_options['fields']['field_site_requirements']['relationship'] = 'field_site_nid';
+  $handler->display->display_options['fields']['field_site_requirements']['delta_offset'] = '0';
+  /* Field: Content: Site Tour */
+  $handler->display->display_options['fields']['field_site_tour']['id'] = 'field_site_tour';
+  $handler->display->display_options['fields']['field_site_tour']['table'] = 'field_data_field_site_tour';
+  $handler->display->display_options['fields']['field_site_tour']['field'] = 'field_site_tour';
+  $handler->display->display_options['fields']['field_site_tour']['relationship'] = 'field_site_nid';
+  /* Field: Content: Social network page */
+  $handler->display->display_options['fields']['field_site_facebook_page']['id'] = 'field_site_facebook_page';
+  $handler->display->display_options['fields']['field_site_facebook_page']['table'] = 'field_data_field_site_facebook_page';
+  $handler->display->display_options['fields']['field_site_facebook_page']['field'] = 'field_site_facebook_page';
+  $handler->display->display_options['fields']['field_site_facebook_page']['relationship'] = 'field_site_nid';
+  $handler->display->display_options['fields']['field_site_facebook_page']['label'] = 'Site Social network';
+  $handler->display->display_options['fields']['field_site_facebook_page']['click_sort_column'] = 'url';
+  /* Field: Content: Special site instructions */
+  $handler->display->display_options['fields']['field_site_instructions']['id'] = 'field_site_instructions';
+  $handler->display->display_options['fields']['field_site_instructions']['table'] = 'field_data_field_site_instructions';
+  $handler->display->display_options['fields']['field_site_instructions']['field'] = 'field_site_instructions';
+  $handler->display->display_options['fields']['field_site_instructions']['relationship'] = 'field_site_nid';
+  /* Field: Content: State lower district */
+  $handler->display->display_options['fields']['field_district_state_lower']['id'] = 'field_district_state_lower';
+  $handler->display->display_options['fields']['field_district_state_lower']['table'] = 'field_data_field_district_state_lower';
+  $handler->display->display_options['fields']['field_district_state_lower']['field'] = 'field_district_state_lower';
+  $handler->display->display_options['fields']['field_district_state_lower']['relationship'] = 'field_site_nid';
+  $handler->display->display_options['fields']['field_district_state_lower']['label'] = 'Site state lower district';
+  /* Field: Content: State upper district */
+  $handler->display->display_options['fields']['field_district_state_upper']['id'] = 'field_district_state_upper';
+  $handler->display->display_options['fields']['field_district_state_upper']['table'] = 'field_data_field_district_state_upper';
+  $handler->display->display_options['fields']['field_district_state_upper']['field'] = 'field_district_state_upper';
+  $handler->display->display_options['fields']['field_district_state_upper']['relationship'] = 'field_site_nid';
+  $handler->display->display_options['fields']['field_district_state_upper']['label'] = 'Site state upper district';
+  /* Field: Content: Tags */
+  $handler->display->display_options['fields']['field_tags']['id'] = 'field_tags';
+  $handler->display->display_options['fields']['field_tags']['table'] = 'field_data_field_tags';
+  $handler->display->display_options['fields']['field_tags']['field'] = 'field_tags';
+  $handler->display->display_options['fields']['field_tags']['relationship'] = 'field_site_nid';
+  $handler->display->display_options['fields']['field_tags']['label'] = 'Site tags';
+  $handler->display->display_options['fields']['field_tags']['delta_offset'] = '0';
+  /* Field: Content: Training and orientation information */
+  $handler->display->display_options['fields']['field_site_health_training']['id'] = 'field_site_health_training';
+  $handler->display->display_options['fields']['field_site_health_training']['table'] = 'field_data_field_site_health_training';
+  $handler->display->display_options['fields']['field_site_health_training']['field'] = 'field_site_health_training';
+  $handler->display->display_options['fields']['field_site_health_training']['relationship'] = 'field_site_nid';
+  $handler->display->display_options['fields']['field_site_health_training']['label'] = 'Site training and orientation information';
+  /* Field: Content: Website */
+  $handler->display->display_options['fields']['field_website']['id'] = 'field_website';
+  $handler->display->display_options['fields']['field_website']['table'] = 'field_data_field_website';
+  $handler->display->display_options['fields']['field_website']['field'] = 'field_website';
+  $handler->display->display_options['fields']['field_website']['relationship'] = 'field_site_nid';
+  $handler->display->display_options['fields']['field_website']['click_sort_column'] = 'url';
+  /* Field: Content: What is the minimum number of hours you would require of a student in service per term */
+  $handler->display->display_options['fields']['field_site_hours_minimum']['id'] = 'field_site_hours_minimum';
+  $handler->display->display_options['fields']['field_site_hours_minimum']['table'] = 'field_data_field_site_hours_minimum';
+  $handler->display->display_options['fields']['field_site_hours_minimum']['field'] = 'field_site_hours_minimum';
+  $handler->display->display_options['fields']['field_site_hours_minimum']['relationship'] = 'field_site_nid';
+  $handler->display->display_options['fields']['field_site_hours_minimum']['label'] = 'Site minimum hours';
+  /* Field: Content: What languages would you like students to speak other than English? */
+  $handler->display->display_options['fields']['field_site_language']['id'] = 'field_site_language';
+  $handler->display->display_options['fields']['field_site_language']['table'] = 'field_data_field_site_language';
+  $handler->display->display_options['fields']['field_site_language']['field'] = 'field_site_language';
+  $handler->display->display_options['fields']['field_site_language']['relationship'] = 'field_site_nid';
+  $handler->display->display_options['fields']['field_site_language']['label'] = 'Site languages';
+  $handler->display->display_options['fields']['field_site_language']['delta_offset'] = '0';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -263,25 +429,77 @@ Fields',
     'nid' => 'nid',
     'field_last_name' => 'field_last_name',
     'field_first_name' => 'field_first_name',
-    'title_3' => 'title_3',
-    'title' => 'title',
+    'field_term_code' => 'field_term_code',
+    'field_term' => 'field_term',
+    'field_course_subject' => 'field_course_subject',
+    'field_course_catalog_number' => 'field_course_catalog_number',
+    'field_course_section' => 'field_course_section',
+    'field_course_faculty' => 'field_course_faculty',
     'title_1' => 'title_1',
     'title_2' => 'title_2',
     'nothing' => 'nothing',
     'field_form_evaluation_sid' => 'field_form_evaluation_sid',
     'field_form_signup_sid' => 'field_form_signup_sid',
+    'field_site_projects' => 'field_site_projects',
+    'field_site_demographics' => 'field_site_demographics',
+    'delta' => 'delta',
+    'field_site_email' => 'field_site_email',
+    'field_district_federal' => 'field_district_federal',
+    'field_csu_facility' => 'field_csu_facility',
+    'field_location' => 'field_location',
+    'field_signups_max' => 'field_signups_max',
+    'field_csu_org_type' => 'field_csu_org_type',
+    'field_phone' => 'field_phone',
+    'field_health_risk' => 'field_health_risk',
+    'field_site_requirements' => 'field_site_requirements',
+    'field_site_tour' => 'field_site_tour',
+    'field_site_facebook_page' => 'field_site_facebook_page',
+    'field_site_instructions' => 'field_site_instructions',
+    'field_district_state_lower' => 'field_district_state_lower',
+    'field_district_state_upper' => 'field_district_state_upper',
+    'field_tags' => 'field_tags',
+    'field_site_health_training' => 'field_site_health_training',
+    'field_website' => 'field_website',
+    'field_site_hours_minimum' => 'field_site_hours_minimum',
+    'field_site_language' => 'field_site_language',
   );
   $handler->display->display_options['filters']['dyfield']['defaults_filterable_fields'] = array(
     'nid' => 'nid',
     'field_last_name' => 'field_last_name',
     'field_first_name' => 'field_first_name',
-    'title_3' => 'title_3',
-    'title' => 'title',
+    'field_term_code' => 'field_term_code',
+    'field_term' => 'field_term',
+    'field_course_subject' => 'field_course_subject',
+    'field_course_catalog_number' => 'field_course_catalog_number',
+    'field_course_section' => 'field_course_section',
     'title_1' => 'title_1',
+    'field_course_faculty' => 0,
     'title_2' => 0,
     'nothing' => 0,
     'field_form_evaluation_sid' => 0,
     'field_form_signup_sid' => 0,
+    'field_site_projects' => 0,
+    'field_site_demographics' => 0,
+    'delta' => 0,
+    'field_site_email' => 0,
+    'field_district_federal' => 0,
+    'field_csu_facility' => 0,
+    'field_location' => 0,
+    'field_signups_max' => 0,
+    'field_csu_org_type' => 0,
+    'field_phone' => 0,
+    'field_health_risk' => 0,
+    'field_site_requirements' => 0,
+    'field_site_tour' => 0,
+    'field_site_facebook_page' => 0,
+    'field_site_instructions' => 0,
+    'field_district_state_lower' => 0,
+    'field_district_state_upper' => 0,
+    'field_tags' => 0,
+    'field_site_health_training' => 0,
+    'field_website' => 0,
+    'field_site_hours_minimum' => 0,
+    'field_site_language' => 0,
   );
   $handler->display->display_options['filters']['dyfield']['sortability'] = 1;
   $handler->display->display_options['filters']['dyfield']['checkboxes'] = 1;
@@ -360,8 +578,9 @@ Fields',
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['path'] = 'reports/students';
   $handler->display->display_options['menu']['type'] = 'tab';
-  $handler->display->display_options['menu']['title'] = 'Students';
+  $handler->display->display_options['menu']['title'] = 'Students & Courses';
   $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['context'] = 0;
 
   /* Display: Data export : CSV */
   $handler = $view->new_display('views_data_export', 'Data export : CSV', 'views_data_export_1');
@@ -421,8 +640,12 @@ Fields',
     t('ID'),
     t('Last Name'),
     t('First Name'),
+    t('Term Code'),
     t('Term'),
-    t('Course'),
+    t('Subject'),
+    t('Course number'),
+    t('Section'),
+    t('Faculty'),
     t('Site'),
     t('Site staff'),
     t('Edit link'),
@@ -431,11 +654,33 @@ Fields',
     t('[edit_node] | [title_4]'),
     t('Evaluation Form'),
     t('Signup Form'),
+    t('Site special projects'),
+    t('Site demographics'),
+    t('Site population demographics'),
+    t('.'),
+    t(','),
+    t('Site email'),
+    t('Site Federal district'),
+    t('Issues addressed'),
+    t('Site Location(s)'),
+    t('Site max students'),
+    t('Organization type'),
+    t('Site phone'),
+    t('Risk Identification'),
+    t('Site special requirements'),
+    t('Site Tour'),
+    t('Site Social network'),
+    t('Special site instructions'),
+    t('Site state lower district'),
+    t('Site state upper district'),
+    t('Site tags'),
+    t('Site training and orientation information'),
+    t('Website'),
+    t('Site minimum hours'),
+    t('Site languages'),
     t('Select fields'),
     t('Site(s)'),
     t('Course Prefix'),
-    t('Course number'),
-    t('Section'),
     t('Program'),
     t('Page'),
     t('Data export : CSV'),
