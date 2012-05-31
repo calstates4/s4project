@@ -24,7 +24,7 @@ Installation
    
    installation/*
 
-Integration with Student Information Systems
+Integration with campus systems
 ===============
 
 .. toctree::

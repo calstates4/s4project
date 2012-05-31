@@ -14,7 +14,8 @@ Feed importers consist of four different sections: Basic Settings, Fetchers, Par
 For Fetchers, Parsers, and Processors, you have two options: one is to *Change* the method of fetching, etc.; while another is to fiddle with the *Settings* of the chosen item.
 
 All of these pieces fit together to build a modular "factory" that can, for example, retrieve a CSV file and create users:
-.. image:: /images/feeds-importer.png
+
+.. image:: images/feeds-importer.png
 
 Basic Settings
 ^^^^^^^^^^^^^^
@@ -69,6 +70,8 @@ Again, use the *Node processor* and under settings use the same options as we ou
 You should generate a unique ID for each course in your export of data. For example, you could concatenate together BIO 100 section 1 meeting in Fall 2012 to have an ID of "Fall2012BIO1001". IDs must be unique to each course, but can be alphanumeric. This field should be mapped to the GUID target, which we will then use to connect students and faculty with the course.
 
 You should map the actual term code (whatever kind of code you used for the GUID of your terms in the previous importers) to the target "Term (Node reference by Feeds GUID) -- allow duplicate nodes" to make sure S4 knows what term goes with what course.
+
+.. _user-import:
 
 Importing Students and Faculty
 """"""""""""""""""""""""""""""
