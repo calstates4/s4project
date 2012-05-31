@@ -12,8 +12,8 @@ http://s4.csumb.edu/downloads/s4_head.tar.gz
 Building using Drush
 --------------------
 
-You can also build S4 using [drush](http:// drush.ws)
+You can also build S4 using `drush <http:// drush.ws>`
 
-.. code-block::bash
+.. code-block:: console
 
   drush make https://raw.github.com/kevee/csu_student_signup/master/distro.make mydirectory
