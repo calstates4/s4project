@@ -31,7 +31,7 @@ Integration with Student Information Systems
    :maxdepth: 2
    :glob:
    
-   installation/*
+   integration/*
 
 Indices and tables
 ==================
