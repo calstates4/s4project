@@ -12,7 +12,7 @@ Students need to sign up for lots of things besides courses. Things like service
 
 This project is a collaboration between the CSUMB Web Services department and the Center for Community Engagement
 
-We're tracking the project at the `S4 project site <http://s4.csumb.edu/project>`.
+We're tracking the project at the `S4 project site <http://s4.csumb.edu/project>`_.
 
 
 Installation
