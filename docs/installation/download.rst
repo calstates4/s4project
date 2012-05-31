@@ -14,6 +14,6 @@ Building using Drush
 
 You can also build S4 using [drush](http:// drush.ws)
 
-.. code-block:: bash
+.. code-block::bash
 
   drush make https://raw.github.com/kevee/csu_student_signup/master/distro.make mydirectory

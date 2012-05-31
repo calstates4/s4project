@@ -4,8 +4,9 @@
    contain the root `toctree` directive.
 
 
+=========================================
 S4: Students Signup for Service and Stuff
-========================================
+=========================================
 
 Students need to sign up for lots of things besides courses. Things like service learning, teacher education, or social work programs all need to track students outside the scope of a course or even a semester. The Signup Project will provide a way for a campus to track the relationships between community partners, site coordinators, students, faculty, courses, and programs; while being simple to maintain and easy (even fun!) to use.
 
@@ -23,6 +24,14 @@ Installation
    
    installation/*
 
+Integration with Student Information Systems
+===============
+
+.. toctree::
+   :maxdepth: 2
+   :glob:
+   
+   installation/*
 
 Indices and tables
 ==================
