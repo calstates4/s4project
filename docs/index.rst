@@ -49,7 +49,7 @@ Running and using S4
    :maxdepth: 2
    :glob:
    
-   setup/*
+   running/*
    
 Indices and tables
 ==================
