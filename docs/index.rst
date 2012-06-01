@@ -16,7 +16,7 @@ We're tracking the project at the `S4 project site <http://s4.csumb.edu/project>
 
 
 Installation
-===============
+============
 
 .. toctree::
    :maxdepth: 2
@@ -25,7 +25,7 @@ Installation
    installation/*
 
 Integration with campus systems
-===============
+===============================
 
 .. toctree::
    :maxdepth: 2
@@ -33,6 +33,24 @@ Integration with campus systems
    
    integration/*
 
+Setting up S4
+=============
+
+.. toctree::
+   :maxdepth: 2
+   :glob:
+   
+   setup/*
+
+Running and using S4
+====================
+
+.. toctree::
+   :maxdepth: 2
+   :glob:
+   
+   setup/*
+   
 Indices and tables
 ==================
 
