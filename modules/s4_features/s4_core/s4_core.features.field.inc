@@ -1993,7 +1993,56 @@ function s4_core_field_default_fields() {
           'rows' => '15',
         ),
         'type' => 'text_textarea',
-        'weight' => '9',
+        'weight' => '10',
+      ),
+    ),
+  );
+
+  // Exported field: 'taxonomy_term-site_restrictions-field_confirmation_email_sender'
+  $fields['taxonomy_term-site_restrictions-field_confirmation_email_sender'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_confirmation_email_sender',
+      'foreign keys' => array(),
+      'indexes' => array(),
+      'module' => 'email',
+      'settings' => array(),
+      'translatable' => '0',
+      'type' => 'email',
+    ),
+    'field_instance' => array(
+      'bundle' => 'site_restrictions',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => 'This is the address the user would reply to the message from.',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => NULL,
+          'settings' => array(),
+          'type' => 'default',
+          'weight' => 5,
+        ),
+      ),
+      'display_label' => '',
+      'entity_type' => 'taxonomy_term',
+      'field_name' => 'field_confirmation_email_sender',
+      'label' => 'Reply-to address',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'email',
+        'settings' => array(
+          'size' => '60',
+        ),
+        'type' => 'email_textfield',
+        'weight' => '8',
       ),
     ),
   );
@@ -2122,7 +2171,7 @@ function s4_core_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '8',
+        'weight' => '9',
       ),
     ),
   );
@@ -2145,6 +2194,7 @@ function s4_core_field_default_fields() {
   t('Let us know the last date you will be working on this site. This can be an approximation, and if you are singing up as part of a course, this will be automatically the last day of the semester.');
   t('Location');
   t('Program');
+  t('Reply-to address');
   t('Send confirmation email when someone is signed up');
   t('Service hours');
   t('Show on signup');
@@ -2154,6 +2204,7 @@ function s4_core_field_default_fields() {
   t('Student confirmation email');
   t('Student confirmation subject');
   t('The program this signup is a part of.');
+  t('This is the address the user would reply to the message from.');
   t('Type the name of the user who you will be signing up for.');
   t('User');
   t('When a student is signed up with a site, this is the confirmation email that is sent to them.');

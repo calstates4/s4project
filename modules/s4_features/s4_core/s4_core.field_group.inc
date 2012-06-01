@@ -26,6 +26,7 @@ function s4_core_field_group_info() {
       0 => 'field_confirmation_email',
       1 => 'field_confirmation_subject',
       2 => 'field_confirmation_send_email',
+      3 => 'field_confirmation_email_sender',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
