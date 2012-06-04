@@ -136,13 +136,19 @@ function s4_core_signup($type, $nid) {
     }
   }
   if ($type == 'coordinator' || ($type == 'site' && $site_skip_coordinator)) {
-    $form = field_get_items('node', $site, 'field_site_form');
-    if ($form !== FALSE && count($form)) {
-      drupal_goto('node/' . $form[0]['nid']);
+    $forms = field_get_items('node', $site, 'field_site_signup_group');
+    foreach($forms as $form) {
+      $form = field_collection_item_load($form['value']);
+      $programs = field_get_items('field_collection_item', $form, 'field_site_restrict');
+      foreach($programs as $k => $program) {
+        if($program['tid'] == $_SESSION['s4_signup_program']) {
+          $webform = field_get_items('field_collection_item', $form, 'field_site_form');
+          drupal_goto('node/' . $webform[$k]['nid']);
+          return;
+        }
+      }
     }
-    else {
-      s4_core_user_signup_completed();
-    }
+    s4_core_user_signup_completed();
   }
 
   drupal_set_message(t($message));
