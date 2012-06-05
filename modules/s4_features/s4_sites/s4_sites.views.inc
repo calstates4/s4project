@@ -40,6 +40,18 @@ function s4_sites_views_data() {
     ),
   );
   
+  $data['s4_sites']['evaluation_link'] = array(
+    'title' => t('Evaluation link'),
+    'help' => t('Link for a user to complete a site evalution.'),
+    'field' => array(
+      'handler' => 'views_handler_s4_sites_evaluation_link',
+      'click sortable' => FALSE,
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort',
+    ),
+  );
+  
   return $data;
 }
 

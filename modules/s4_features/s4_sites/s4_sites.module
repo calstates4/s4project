@@ -60,7 +60,7 @@ function s4_sites_menu() {
 
 function s4_sites_evaluation_form($node) {
   $site = field_get_items('node', $node, 'field_site');
-  $site = $site[0]['nid'];
+  $site = node_load($site[0]['nid']);
   $signup_program = field_get_items('node', $node, 'field_site_restrict');
   $forms = field_get_items('node', $site, 'field_site_evaluation_group');
   foreach($forms as $form) {
@@ -68,7 +68,7 @@ function s4_sites_evaluation_form($node) {
     $programs = field_get_items('field_collection_item', $form, 'field_site_restrict');
     foreach($programs as $k => $program) {
       if($program['tid'] == $signup_program[0]['tid']) {
-        $webform = field_get_items('field_collection_item', $form, 'field_site_form');
+        $webform = field_get_items('field_collection_item', $form, 'field_site_eval_form');
         $_SESSION['s4_sites_evaluation_nid'] = $node->nid;
         drupal_goto('node/' . $webform[$k]['nid']);
       }
@@ -217,9 +217,10 @@ function s4_sites_webform_submission_insert($node, $submission) {
     global $user;
     $signup = node_load( $_SESSION['s4_sites_evaluation_nid']);
     $signup_user = field_get_items('node', $signup, 'field_user');
-    if($signup_user == $user->uid) {
+    if($signup_user[0]['uid'] == $user->uid) {
       $signup->field_form_evaluation_sid[$signup->language][0]['value'] = $submission->sid;
       node_save($signup);
+      $_SESSION['s4_sites_evaluation_nid'] = 0;
     }
   }
   if (!$_SESSION['s4_sites_user_form_site']) {
@@ -625,11 +626,11 @@ function s4_sites_form_s4_core_admin_form_alter(&$form, $form_state) {
     '#title' => t('Lead time for sending evaluation reminders'),
     '#type' => 'select',
     '#description' => t('The number of days before a student\'s service ends where an email should be sent.'),
-    '#default_value' => variable_get('s4_sites_evaluation_form_lead_time', '+2 weeks'),
-    '#options' => array('+5 days' => '5 days',
-                        '+7 days' => '1 week',
-                        '+2 weeks' => '2 weeks',
-                        '+3 weeks' => '3 weeks'),
+    '#default_value' => variable_get('s4_sites_evaluation_form_lead_time', '14'),
+    '#options' => array('5',
+                        '7',
+                        '14',
+                        '21'),
     );
 }
 
@@ -643,7 +644,7 @@ function s4_sites_cron() {
   $queue = DrupalQueue::get('s4_site_evaluation_queue');
   
   $query = db_select('field_data_field_signup_last_date', 'd')
-              ->condition('d.field_signup_last_date_value', date('Y-m-d', strtotime(variable_get('s4_sites_evaluation_form_lead_time', '+2 weeks'))), '=')
+              ->condition('d.field_signup_last_date_value', date('Y-m-d', time() + (variable_get('s4_sites_evaluation_form_lead_time', '14') * (24 * 60 * 60))), '=')
               ->condition('d.entity_type', 'node')
               ->condition('d.bundle', 'signup')
               ->fields('d', array('entity_id'));
@@ -686,7 +687,6 @@ function s4_sites_send_evaluation($signup) {
   $params['body'] = token_replace($params['body'], array('s4_signup' => $signup,
                                                's4_site' => $site,
                                                'user' => $user));
-  dpm($params);
   drupal_mail('s4_site', 'site_evaluation', $user->mail, language_default(), $params);
 }
 
