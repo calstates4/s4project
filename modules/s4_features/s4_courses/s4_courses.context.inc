@@ -174,8 +174,8 @@ function s4_courses_context_default_contexts() {
   $context->conditions = array(
     'path' => array(
       'values' => array(
-        'dashboard' => '<front>',
-        'dashboard/*' => 'homepage',
+        '<front>' => '<front>',
+        'homepage' => 'homepage',
       ),
     ),
     'user' => array(
@@ -187,16 +187,22 @@ function s4_courses_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
-        'views-user_courses-block_2' => array(
-          'module' => 'views',
-          'delta' => 'user_courses-block_2',
-          'region' => 'content',
+        's4_courses-s4_courses_faculty_help' => array(
+          'module' => 's4_courses',
+          'delta' => 's4_courses_faculty_help',
+          'region' => 'content_top_left',
           'weight' => '-10',
         ),
         'views-user_courses-block' => array(
           'module' => 'views',
           'delta' => 'user_courses-block',
-          'region' => 'content_right',
+          'region' => 'content_top_right',
+          'weight' => '-10',
+        ),
+        'views-user_courses-block_2' => array(
+          'module' => 'views',
+          'delta' => 'user_courses-block_2',
+          'region' => 'content',
           'weight' => '-10',
         ),
       ),

@@ -383,6 +383,21 @@ function s4_courses_s4_signup_dates($node) {
   return false;
 }
 
+
+/**
+ * Implements hook_form_alter().
+ */
+function s4_courses_form_s4_core_admin_form_alter(&$form, $form_state) {
+  $message = variable_get('s4_courses_faculty_help', array('value' => t('You can quickly search for a student below, or manage your courses to the right, where you can edit your course settings. To restrict students to a course, visit the !link, click on a site, and click the "Add to course" button.', array('!link' => l('site listing page', 'site-list'))), 'format' => FILTER_FORMAT_DEFAULT));
+  $form['s4_courses_faculty_help'] = array(
+    '#title' => t('Welcome message for faculty'),
+    '#type' => 'text_format',
+    '#description' => t('The number of days before a student\'s service ends where an email should be sent.'),
+    '#default_value' => $message['value'],
+    '#text_format' => $message['format'],
+    );
+}
+
 /**
 * Implements hook_block_info
 */
@@ -390,6 +405,7 @@ function s4_courses_block_info() {
   $blocks['s4_courses_add_course'] = array('info' => 'Add new course button');
   $blocks['s4_courses_subscriptions'] = array('info' => 'Subscribe to new signups');
   $blocks['s4_courses_restriction_form'] = array('info' => 'Edit course site restriction');
+  $blocks['s4_courses_faculty_help'] = array('info' => 'Faculty help');
   return $blocks;
 }
 
@@ -398,6 +414,18 @@ function s4_courses_block_info() {
 */
 function s4_courses_block_view($delta) {
   switch ($delta) {
+    case 's4_courses_faculty_help':
+      global $user;
+      $view = views_get_view('user_courses');
+      $view->set_display('block');
+      $view->set_arguments(array($user->uid));
+      $view->preview();
+      if(!count($view->result)) {
+        return;
+      }
+      $message = variable_get('s4_courses_faculty_help', array('value' => t('You can quickly search for a student below, or manage your courses to the right, where you can edit your course settings. To restrict students to a course, visit the !link, click on a site, and click the "Add to course" button.', array('!link' => l('site listing page', 'site-list'))), 'format' => FILTER_FORMAT_DEFAULT));
+      return array('subject' => t('Get started'),
+                   'content' => check_markup($message['value'], $message['format']));
     case 's4_courses_add_course':
       if (user_access('create course content')) {
         return array('content' => l(t('<span class="add"></span>Add new course'),

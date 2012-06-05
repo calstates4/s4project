@@ -312,7 +312,7 @@ function s4_courses_views_default_views() {
   /* Display: All faculty students */
   $handler = $view->new_display('block', 'All faculty students', 'block_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Recent student signups';
+  $handler->display->display_options['title'] = 'Search your students';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '20';
@@ -694,7 +694,7 @@ function s4_courses_views_default_views() {
     t('All'),
     t('Bulk operations'),
     t('All faculty students'),
-    t('Recent student signups'),
+    t('Search your students'),
     t('Items per page'),
     t('- All -'),
     t('Offset'),
@@ -1364,7 +1364,7 @@ function s4_courses_views_default_views() {
   /* Display: Faculty Course List */
   $handler = $view->new_display('block', 'Faculty Course List', 'block');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Courses you are teaching';
+  $handler->display->display_options['title'] = 'Manage your courses';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '5';
@@ -1855,7 +1855,7 @@ function s4_courses_views_default_views() {
     t('All'),
     t('Page'),
     t('Faculty Course List'),
-    t('Courses you are teaching'),
+    t('Manage your courses'),
     t('Staff course listing'),
     t('Courses'),
     t('field_course_faculty'),
