@@ -6,7 +6,7 @@ Sites
 
 Sites are a general term given to a location where a student can sign up. Some programs call them "community partners," or other terms, but they are essentially all the same thing: an organization that the university has a relationship with, and where students can sign up to do something with.
 
-
+.. _approval:
 Approval
 --------
 

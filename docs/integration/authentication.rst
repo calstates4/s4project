@@ -12,6 +12,6 @@ These modules are not maintined by the S4 project, but we will provide additiona
 2. `Shibboleth <drupal.org/project/shib_auth/>`_
 3. `CAS single-signon & SAML <drupal.org/project/cas/>`_
 
-Once you download and install an authentication module, follow the module's project page for instructions on installation and setup. Once your authentication module is setup, click the *Site settings* link and then *General configuration*. From here, you can select which form of authentication different kinds of users should be using. 
+Once you download and install an authentication module (see :ref:`drupal`), follow the module's project page for instructions on installation and setup. Once your authentication module is setup, click the *Site settings* link and then *General configuration*. From here, you can select which form of authentication different kinds of users should be using. 
 
 Make sure that the username returned by any authentication system matches the username your authentication system uses is the same as the username found in the User Importers (see :ref:`user-import`).
