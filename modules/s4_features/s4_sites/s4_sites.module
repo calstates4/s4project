@@ -47,8 +47,33 @@ function s4_sites_menu() {
     'page arguments' => array(2),
     'access arguments' => array('create site content'),
   );
+  
+  $items['signup/%node/evaluation'] = array(
+    'title' => 'Complete evaluation form',
+    'page callback' => 's4_sites_evaluation_form',
+    'page arguments' => array(1),
+    'access arguments' => array('signup for service'),
+  );
 
   return $items;
+}
+
+function s4_sites_evaluation_form($node) {
+  $site = field_get_items('node', $node, 'field_site');
+  $site = $site[0]['nid'];
+  $signup_program = field_get_items('node', $node, 'field_site_restrict');
+  $forms = field_get_items('node', $site, 'field_site_evaluation_group');
+  foreach($forms as $form) {
+    $form = field_collection_item_load($form['value']);
+    $programs = field_get_items('field_collection_item', $form, 'field_site_restrict');
+    foreach($programs as $k => $program) {
+      if($program['tid'] == $signup_program[0]['tid']) {
+        $webform = field_get_items('field_collection_item', $form, 'field_site_form');
+        $_SESSION['s4_sites_evaluation_nid'] = $node->nid;
+        drupal_goto('node/' . $webform[$k]['nid']);
+      }
+    }
+  }
 }
 
 /**
@@ -188,6 +213,15 @@ function s4_sites_s4_field_access() {
 *  them to a form record.
 */
 function s4_sites_webform_submission_insert($node, $submission) {
+  if( $_SESSION['s4_sites_evaluation_nid']) {
+    global $user;
+    $signup = node_load( $_SESSION['s4_sites_evaluation_nid']);
+    $signup_user = field_get_items('node', $signup, 'field_user');
+    if($signup_user == $user->uid) {
+      $signup->field_form_evaluation_sid[$signup->language][0]['value'] = $submission->sid;
+      node_save($signup);
+    }
+  }
   if (!$_SESSION['s4_sites_user_form_site']) {
     return null;
   }
@@ -394,6 +428,10 @@ function s4_sites_mail($key, &$message, $params) {
       $message['body'][] = 'You can complete the form online here.';
       $message['body'][] = url('sites/form/' . $params['site'] .'/'. $params['form'] .'/'. $params['email'] .'/'. $params['key'], array('absolute' => true));
       break;
+    case 'site_evaluation':
+      $message['body'][] = $params['body'];
+      $message['subject'] = $params['subject'];
+      break;
   }
 
 }
@@ -577,6 +615,80 @@ function _s4_sites_format_phone($number) {
     return $cc['code'] . ' (' . $matches[1] . ') ' . $matches[2] . '-' . $matches[3];
   }
   return '';
+}
+
+/**
+* Implements hook_cron().
+*/
+function s4_sites_cron() {
+  if(variable_get('s4_site_cron_last_date', FALSE) == date('Y-m-d')) {
+    return;
+  }
+  $queue = DrupalQueue::get('s4_site_evaluation_queue');
+  
+  $query = db_select('field_data_field_signup_last_date', 'd')
+              ->condition('d.field_signup_last_date_value', date('Y-m-d', strtotime('+2 weeks')), '=')
+              ->condition('d.entity_type', 'node')
+              ->condition('d.bundle', 'signup')
+              ->fields('d', array('entity_id'));
+  $query->leftJoin('field_data_field_form_evaluation_sid', 's', 's.entity_type = d.entity_type AND s.bundle = d.bundle AND s.entity_id = d.entity_id AND s.revision_id = d.revision_id');
+  $query->isNull('s.field_form_evaluation_sid_value');
+  $results = $query->execute();
+              
+  foreach($results->fetchAll() as $row) {
+    $queue->createItem($row->entity_id);
+  }
+  variable_set('s4_site_cron_last_date', date('Y-m-d'));
+}
+
+/**
+ * Implements hook_cron_queue_info().
+ */
+function s4_sites_queue_info() {
+  $queues['s4_site_evaluation_queue'] = array(
+    'worker callback' => 's4_sites_send_evaluation', 
+    'time' => 60,
+  );
+  return $queues;
+}
+
+/**
+ * 
+ */
+function s4_sites_send_evaluation($signup) {
+  $params = array();
+  $signup = node_load($signup);
+  $site = field_get_items('node', $signup, 'field_site');
+  $site = node_load($site[0]['nid']);
+  $program = field_get_items('node', $signup, 'field_site_restrict');
+  $program = taxonomy_term_load($program[0]['tid']);
+  $user = field_get_items('node', $signup, 'field_user');
+  $user = user_load($user[0]['uid']);
+
+  $params['subject'] = field_get_items('taxonomy_term', $program, 'field_evaluation_email_subject');
+  $params['body'] = field_get_items('taxonomy_term', $program, 'field_evaluation_email_body');
+  $params['body'] = token_replace($params['body'], array('s4_signup' => $signup,
+                                               's4_site' => $site,
+                                               'user' => $user));
+  dpm($params);
+  drupal_mail('s4_site', 'site_evaluation', $user->mail, language_default(), $params);
+}
+
+function s4_sites_token_info() {
+  $tokens['s4_signup']['evaluation_link'] = array('name' => t('Evaluation link'),
+                       'description' => t('Link to complete the site evaluation.'),
+                       'module' => 's4_sites');
+  return array(
+    'tokens' => $tokens,
+  );
+}
+
+function s4_sites_tokens($type, $tokens, array $data = array(), array $options = array()) {
+  $replacements = array();
+  if ($type == 's4_signup') {
+    $replacements['[s4_signup:evaluation_link]'] = url('signup/'. $data['s4_signup']->nid .'/evaluation', array('absolute' => TRUE));
+  }
+  return $replacements;
 }
 
 /**

@@ -2176,6 +2176,130 @@ function s4_core_field_default_fields() {
     ),
   );
 
+  // Exported field: 'taxonomy_term-site_restrictions-field_evaluation_email_body'
+  $fields['taxonomy_term-site_restrictions-field_evaluation_email_body'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_evaluation_email_body',
+      'foreign keys' => array(
+        'format' => array(
+          'columns' => array(
+            'format' => 'format',
+          ),
+          'table' => 'filter_format',
+        ),
+      ),
+      'indexes' => array(
+        'format' => array(
+          0 => 'format',
+        ),
+      ),
+      'module' => 'text',
+      'settings' => array(),
+      'translatable' => '0',
+      'type' => 'text_long',
+    ),
+    'field_instance' => array(
+      'bundle' => 'site_restrictions',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => 7,
+        ),
+      ),
+      'display_label' => '',
+      'entity_type' => 'taxonomy_term',
+      'field_name' => 'field_evaluation_email_body',
+      'label' => 'Evaluation email body',
+      'required' => 0,
+      'settings' => array(
+        'text_processing' => '0',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'text',
+        'settings' => array(
+          'rows' => '5',
+        ),
+        'type' => 'text_textarea',
+        'weight' => '7',
+      ),
+    ),
+  );
+
+  // Exported field: 'taxonomy_term-site_restrictions-field_evaluation_email_subject'
+  $fields['taxonomy_term-site_restrictions-field_evaluation_email_subject'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_evaluation_email_subject',
+      'foreign keys' => array(
+        'format' => array(
+          'columns' => array(
+            'format' => 'format',
+          ),
+          'table' => 'filter_format',
+        ),
+      ),
+      'indexes' => array(
+        'format' => array(
+          0 => 'format',
+        ),
+      ),
+      'module' => 'text',
+      'settings' => array(
+        'max_length' => '255',
+      ),
+      'translatable' => '0',
+      'type' => 'text',
+    ),
+    'field_instance' => array(
+      'bundle' => 'site_restrictions',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => 6,
+        ),
+      ),
+      'display_label' => '',
+      'entity_type' => 'taxonomy_term',
+      'field_name' => 'field_evaluation_email_subject',
+      'label' => 'Evaluation email subject',
+      'required' => 0,
+      'settings' => array(
+        'text_processing' => '0',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'text',
+        'settings' => array(
+          'size' => '60',
+        ),
+        'type' => 'text_textfield',
+        'weight' => '6',
+      ),
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Assessment results');
@@ -2184,6 +2308,8 @@ function s4_core_field_default_fields() {
   t('Course');
   t('Estimate the total number of hours you have worked at this site.');
   t('Evaluation Form Results');
+  t('Evaluation email body');
+  t('Evaluation email subject');
   t('File');
   t('File description');
   t('Files');

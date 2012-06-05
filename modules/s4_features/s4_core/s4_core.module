@@ -759,7 +759,7 @@ function s4_core_form_taxonomy_form_term_alter(&$form) {
   if (module_exists('token')) {
     $form['tokens'] = array(
       '#theme' => 'token_tree',
-      '#token_types' => array('s4_signup'),
+      '#token_types' => array('s4_signup', 'user'),
       '#weight' => $form['field_confirmation_email']['#weight'] + 1,
     );
   }
@@ -1503,13 +1503,13 @@ function s4_core_token_info() {
     ),
   );
 
-    $tokens['s4_site']['site_name'] = array('name' => 'Site name',
+    $tokens['s4_site']['site_name'] = array('name' => t('Site name'),
                        'description' => t('The name of the site'),
                        'module' => 's4_core');
-    $tokens['s4_signup']['evaluation_link'] = array('name' => 'Evaluation link',
+    $tokens['s4_signup']['evaluation_link'] = array('name' => t('Evaluation link'),
                        'description' => t('A link to the user\'s site evaluation'),
                        'module' => 's4_core');
-    $tokens['s4_signup']['program_forms'] = array('name' => 'Program forms',
+    $tokens['s4_signup']['program_forms'] = array('name' => t('Program forms'),
                        'description' => t('A list of downloadable forms related to the program'),
                        'module' => 's4_core');
     
