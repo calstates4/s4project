@@ -106,7 +106,7 @@ function s4_pages_add_site_file() {
 function s4_pages_theme() {
   return array(
     'overview_paragraph' => array(
-      'variables' => array('data' => array()),
+      'variables' => array('paragraph' => '', 'registration' => true),
       'template'  => 'overview_paragraph',
     ),
   );
@@ -117,36 +117,10 @@ function s4_pages_theme() {
 */
 function s4_pages_overview_paragraph() {
   drupal_add_css(drupal_get_path('module', 's4_pages') . '/css/overview.css');
-  if ($cache = cache_get('s4_pages_overview_data')) {
-    $data = $cache->data;
-  }
-  else {
-    $data = array();
-    $query = db_select('location', 'l')
-         ->fields('l', array('city', 'province'))
-         ->distinct();
-    $data['cities'] = $query->countQuery()->execute()->fetchField();
-
-    $query = db_select('node', 'n')
-         ->fields('n', array('nid'))
-         ->condition('type', 'site')
-         ->condition('status', 1)
-         ->distinct();
-    $data['sites'] = $query->countQuery()->execute()->fetchField();
-    
-    $query = db_select('node', 'n')
-         ->fields('n', array('nid'))
-         ->condition('type', 'signup')
-         ->condition('status', 1)
-         ->distinct();
-    $data['students'] = $query->countQuery()->execute()->fetchField();
-    cache_set('s4_pages_overview_data', $data, 'cache', CACHE_TEMPORARY);
-  }
-  if ($data['sites'] == 0) {
-  	return null;
-  }
+  $message = variable_get('s4_pages_welcome_message', 'Together, we have placed [s4_welcome:students_count] students with [s4_welcome:sites_count] sites in [s4_welcome:cities_count] different cities.');
+  $message = token_replace(check_plain($message), array());
   return array('subject' => NULL,
-         'content' => theme('overview_paragraph', array('data' => $data)));
+         'content' => theme('overview_paragraph', array('paragraph' => $message, 'registration' => user_access('create site content'))));
 }
 
 /**
@@ -171,4 +145,84 @@ function s4_pages_dashboard_title() {
                  array('@name' => $name));
   return array('subject' => NULL,
          'content' => '<h1>' . $title . '</h1>');
+}
+
+/**
+ * Implements hook_tokens().
+ */
+function s4_pages_tokens($type, $tokens, array $data = array(), array $options = array()) {
+  $replacements = array();
+  if ($type == 's4_welcome') {
+    $query = db_select('location', 'l')
+         ->fields('l', array('city', 'province'))
+         ->distinct();
+    $replacements['[s4_welcome:cities_count]'] = $query->countQuery()->execute()->fetchField();
+
+    $query = db_select('node', 'n')
+         ->fields('n', array('nid'))
+         ->condition('type', 'site')
+         ->condition('status', 1)
+         ->distinct();
+    $replacements['[s4_welcome:sites_count]'] = $query->countQuery()->execute()->fetchField();
+    
+    $query = db_select('node', 'n')
+         ->fields('n', array('nid'))
+         ->condition('type', 'signup')
+         ->condition('status', 1)
+         ->distinct();
+    $replacements['[s4_welcome:students_count]'] = $query->countQuery()->execute()->fetchField();
+  }
+  return $replacements;
+}
+
+/**
+ * Implements hook_token_info().
+ */
+function s4_pages_token_info() {
+  $types = array('s4_welcome' => array(
+      'name' => t('Homepage welcome message'),
+      'description' => t('Tokens for the welcome message.'),
+    )
+  );
+
+    $tokens['s4_welcome']['cities_count'] = array('name' => t('Total number of cities'),
+                       'description' => t('The number of cities served by your sites.'),
+                       'module' => 's4_pages');
+    $tokens['s4_welcome']['sites_count'] = array('name' => t('Total number of sites'),
+                       'description' => t('The number of sites your students can signup with.'),
+                       'module' => 's4_pages');
+    $tokens['s4_welcome']['students_count'] = array('name' => t('Total number of students'),
+                       'description' => t('Number of students who have signed up with a site.'),
+                       'module' => 's4_pages');
+    $tokens['s4_welcome']['hours_count'] = array('name' => t('Total number of hours'),
+                       'description' => t('Number of hours students have worked at your sites.'),
+                       'module' => 's4_pages');
+    return array(
+      'types' => $types,
+      'tokens' => $tokens,
+    );
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function s4_pages_form_s4_core_admin_form_alter(&$form, $form_state) {
+  $form['s4_pages'] = array(
+    '#type' => 'fieldset',
+    '#title' => 'Welcome message',
+  );
+  
+  $form['s4_pages']['s4_pages_welcome_message'] = array(
+    '#title' => t('The welcome message appearing on the left of the homepage'),
+    '#type' => 'textarea',
+    '#description' => t('The number of days before a student\'s service ends where an email should be sent.'),
+    '#default_value' => variable_get('s4_pages_welcome_message', 'Together, we have placed [s4_welcome:students_count] students with [s4_welcome:sites_count] sites in [s4_welcome:cities_count] different cities.'),
+    );
+    
+  if (module_exists('token')) {
+    $form['tokens'] = array(
+      '#theme' => 'token_tree',
+      '#token_types' => array('s4_pages'),
+    );
+  }
 }
