@@ -1287,6 +1287,19 @@ function s4_core_views_default_views() {
   $handler->display->display_options['fields']['created']['field'] = 'created';
   $handler->display->display_options['fields']['created']['label'] = 'Date';
   $handler->display->display_options['fields']['created']['date_format'] = 'long';
+  /* Field: Content: Last expected date of service */
+  $handler->display->display_options['fields']['field_signup_last_date']['id'] = 'field_signup_last_date';
+  $handler->display->display_options['fields']['field_signup_last_date']['table'] = 'field_data_field_signup_last_date';
+  $handler->display->display_options['fields']['field_signup_last_date']['field'] = 'field_signup_last_date';
+  $handler->display->display_options['fields']['field_signup_last_date']['label'] = 'End date';
+  $handler->display->display_options['fields']['field_signup_last_date']['settings'] = array(
+    'format_type' => 'short',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_repeat_rule' => 'show',
+  );
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -1320,6 +1333,59 @@ function s4_core_views_default_views() {
   $handler = $view->new_display('block', 'Current users sites', 'block');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'View your current placements';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = 'View';
+  $handler->display->display_options['fields']['nid']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['nid']['alter']['text'] = 'Record # [nid]';
+  $handler->display->display_options['fields']['nid']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['nid']['alter']['path'] = 'node/[nid]';
+  /* Field: Content: Course */
+  $handler->display->display_options['fields']['field_course']['id'] = 'field_course';
+  $handler->display->display_options['fields']['field_course']['table'] = 'field_data_field_course';
+  $handler->display->display_options['fields']['field_course']['field'] = 'field_course';
+  /* Field: Field: Available programs */
+  $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
+  $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
+  $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
+  $handler->display->display_options['fields']['field_site_restrict']['label'] = 'Program';
+  $handler->display->display_options['fields']['field_site_restrict']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_site_restrict']['delta_offset'] = '0';
+  /* Field: Content: Site */
+  $handler->display->display_options['fields']['field_site']['id'] = 'field_site';
+  $handler->display->display_options['fields']['field_site']['table'] = 'field_data_field_site';
+  $handler->display->display_options['fields']['field_site']['field'] = 'field_site';
+  /* Field: Content: Site staff */
+  $handler->display->display_options['fields']['field_coordinator']['id'] = 'field_coordinator';
+  $handler->display->display_options['fields']['field_coordinator']['table'] = 'field_data_field_coordinator';
+  $handler->display->display_options['fields']['field_coordinator']['field'] = 'field_coordinator';
+  /* Field: Content: Post date */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'node';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = 'Date';
+  $handler->display->display_options['fields']['created']['date_format'] = 'short';
+  /* Field: Content: Last expected date of service */
+  $handler->display->display_options['fields']['field_signup_last_date']['id'] = 'field_signup_last_date';
+  $handler->display->display_options['fields']['field_signup_last_date']['table'] = 'field_data_field_signup_last_date';
+  $handler->display->display_options['fields']['field_signup_last_date']['field'] = 'field_signup_last_date';
+  $handler->display->display_options['fields']['field_signup_last_date']['label'] = 'End date';
+  $handler->display->display_options['fields']['field_signup_last_date']['settings'] = array(
+    'format_type' => 'short',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_repeat_rule' => 'show',
+  );
+  /* Field: Site Data: Evaluation link */
+  $handler->display->display_options['fields']['evaluation_link']['id'] = 'evaluation_link';
+  $handler->display->display_options['fields']['evaluation_link']['table'] = 's4_sites';
+  $handler->display->display_options['fields']['evaluation_link']['field'] = 'evaluation_link';
+  $handler->display->display_options['fields']['evaluation_link']['label'] = 'Complete evaluation';
 
   /* Display: User profile sites */
   $handler = $view->new_display('block', 'User profile sites', 'block_1');
@@ -1360,9 +1426,12 @@ function s4_core_views_default_views() {
     t('Site'),
     t('Site staff'),
     t('Date'),
+    t('End date'),
     t('All'),
     t('Current users sites'),
     t('View your current placements'),
+    t('Program'),
+    t('Complete evaluation'),
     t('User profile sites'),
     t('Sites'),
   );

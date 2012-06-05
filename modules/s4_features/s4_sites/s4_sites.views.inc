@@ -52,6 +52,18 @@ function s4_sites_views_data() {
     ),
   );
   
+  $data['s4_sites']['evaluation_completed'] = array(
+    'title' => t('Evaluation completed'),
+    'help' => t('Lists whether a user completed an evaluation.'),
+    'field' => array(
+      'handler' => 'views_handler_s4_sites_evaluation_status',
+      'click sortable' => FALSE,
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort',
+    ),
+  );
+  
   return $data;
 }
 
