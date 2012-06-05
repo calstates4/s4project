@@ -55,7 +55,12 @@ Processors actually handle how your now fetched and parsed data matches to data 
 
 Processors also handle **mapping**, which is how S4 tells what part of parsed data goes where. For example, our CSV file might have a column called "first_name" (the source) which we can then map to the "First Name" (the target) field for students.
 
-An important thing to keep in mind when handling processors is to think about your Globally Unique Identifier (GUID). S4 uses the GUID to determine if a record being imported has  already been imported and should be updated, or to connect some previously imported information like a course and student and then link them together. We'll go over each type of importer and outline it's uses. Under the **mapping** section of each processor, you can add a field multiple times, so you can, for example map a student's ID to both a Student ID field as well as the GUID field. When adding a GUID field, also make sure to check the **Unique Target** checkbox. 
+An important thing to keep in mind when handling processors is to think about your Globally Unique Identifier (GUID). S4 uses the GUID to determine if a record being imported has  already been imported and should be updated, or to connect some previously imported information like a course and student and then link them together. We'll go over each type of importer and outline it's uses. Under the **mapping** section of each processor, you can add a field multiple times, so you can, for example map a student's ID to both a Student ID field as well as the GUID field. When adding a GUID field, also make sure to check the **Unique Target** checkbox.
+ 
+.. _data:
+
+Required data and feed importers
+================================
 
 Importing Terms (semesters, quarters)
 """""""""""""""""""""""""""""""""""""

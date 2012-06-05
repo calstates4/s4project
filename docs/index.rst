@@ -14,6 +14,16 @@ This project is a collaboration between the CSUMB Web Services department and th
 
 We're tracking the project at the `S4 project site <http://s4.csumb.edu/project>`_.
 
+Who needs to be involved in making S4 work on your campus
+=========================================================
+
+Making any web application project successful requires a close partnership between a number of key people or departments. This documentation will refer to a number of people who can do different things, and it's important to make sure you know who all these poeple are:
+
+1. **System administrator** - Typically someone in your IT department, this is the person who will create a database and keep the server running. They will usually not be involved much directly with your department, unless they are serving multiple roles.
+2. **Technical administrator** - The person who has access to the "superuser" of S4. While different roles can be made in S4 to add/remove permission to do things, the technical administrator is someone who can setup integration with your SIS, add authentication to your campus login systems, and do other administrative tasks.
+3. **SIS partner** - Integrating S4 with your Student Information System (SIS) usually requires working with an SIS office, and requesting access to specific data elements in your SIS (see :ref:`data`).
+4. **Department staff** - These are people who will be doing the bulk of the work in S4. These could be managers and staff of your Service Learning department, or an internship program. Department staff add and maintain sites, can manage students and their signups, and generally run the show.
+5. **Faculty** - Someone who is associated with a course that has been imported into S4.
 
 Installation
 ============
