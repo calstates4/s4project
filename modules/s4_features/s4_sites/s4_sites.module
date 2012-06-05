@@ -618,6 +618,22 @@ function _s4_sites_format_phone($number) {
 }
 
 /**
+ * Implements hook_form_alter().
+ */
+function s4_sites_form_s4_core_admin_form_alter(&$form, $form_state) {
+  $form['s4_sites_evaluation_form_lead_time'] = array(
+    '#title' => t('Lead time for sending evaluation reminders'),
+    '#type' => 'select',
+    '#description' => t('The number of days before a student\'s service ends where an email should be sent.'),
+    '#default_value' => variable_get('s4_sites_evaluation_form_lead_time', '+2 weeks'),
+    '#options' => array('+5 days' => '5 days',
+                        '+7 days' => '1 week',
+                        '+2 weeks' => '2 weeks',
+                        '+3 weeks' => '3 weeks'),
+    );
+}
+
+/**
 * Implements hook_cron().
 */
 function s4_sites_cron() {
@@ -627,7 +643,7 @@ function s4_sites_cron() {
   $queue = DrupalQueue::get('s4_site_evaluation_queue');
   
   $query = db_select('field_data_field_signup_last_date', 'd')
-              ->condition('d.field_signup_last_date_value', date('Y-m-d', strtotime('+2 weeks')), '=')
+              ->condition('d.field_signup_last_date_value', date('Y-m-d', strtotime(variable_get('s4_sites_evaluation_form_lead_time', '+2 weeks'))), '=')
               ->condition('d.entity_type', 'node')
               ->condition('d.bundle', 'signup')
               ->fields('d', array('entity_id'));
