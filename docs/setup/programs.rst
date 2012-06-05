@@ -16,6 +16,7 @@ Programs in S4 are ways to divide up sites, courses, and students, and to let S4
 
 For example, a high school (the site) may also have an after-school program. While a few teachers are available to mentor under for the teacher education department, there are also coordinators of the after-school program who can accept service learners. Some of these coordinators are also teachers and can mentor student teachers. If the site itself is setup to accept both service learners and teacher education students, each site staff can be restricted to just service learning, just teacher ed, or both (there are more options for site staff, see :ref:`site-staff`).
 
+.. _program-options:
 Program options
 ---------------
 

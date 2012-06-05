@@ -180,7 +180,7 @@ function s4_pages_tokens($type, $tokens, array $data = array(), array $options =
  */
 function s4_pages_token_info() {
   $types = array('s4_welcome' => array(
-      'name' => t('Homepage welcome message'),
+      'name' => t('Homepage statistics message'),
       'description' => t('Tokens for the welcome message.'),
     )
   );
@@ -209,11 +209,11 @@ function s4_pages_token_info() {
 function s4_pages_form_s4_core_admin_form_alter(&$form, $form_state) {
   $form['s4_pages'] = array(
     '#type' => 'fieldset',
-    '#title' => 'Welcome message',
+    '#title' => 'Statistics message',
   );
   
   $form['s4_pages']['s4_pages_welcome_message'] = array(
-    '#title' => t('The welcome message appearing on the left of the homepage'),
+    '#title' => t('The statistics message appearing on the left of the homepage'),
     '#type' => 'textarea',
     '#description' => t('The number of days before a student\'s service ends where an email should be sent.'),
     '#default_value' => variable_get('s4_pages_welcome_message', 'Together, we have placed [s4_welcome:students_count] students with [s4_welcome:sites_count] sites in [s4_welcome:cities_count] different cities.'),

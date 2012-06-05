@@ -97,29 +97,6 @@ function s4_core_admin_form() {
     '#default_value' => $message['value'],
   );
 
-  $form['evaluation_reminder'] = array(
-    '#type' => 'fieldset',
-    '#title' => 'Evaluation email message',
-  );
-
-  $form['evaluation_reminder']['s4_core_reminder_email_subject'] = array(
-    '#type' => 'textfield',
-    '#title' => 'Email subject',
-    '#default_value' => variable_get('s4_core_reminder_email_subject', ''),
-  );
-
-  $form['evaluation_reminder']['s4_core_reminder_email_body'] = array(
-    '#type' => 'textarea',
-    '#title' => 'Email message',
-    '#description' => 'The email body to be sent when reminding users to complete their evaluations',
-    '#default_value' => variable_get('s4_core_reminder_email_body', ''),
-  );
-
-  $form['signup_reminder'] = array(
-    '#type' => 'fieldset',
-    '#title' => 'Signup email',
-  );
-
   return system_settings_form($form);
 }
 

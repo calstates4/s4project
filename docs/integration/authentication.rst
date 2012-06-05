@@ -1,3 +1,4 @@
+.. _authentication:
 ===================
 User authentication
 ===================

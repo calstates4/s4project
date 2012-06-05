@@ -9,6 +9,15 @@ Site-wide settings
 
 To rename your website, click on **Site settings** then **Site name** under "General configuration, or going to ``admin/config/system/site-information``. From this form you can rename the site, and change the email address the site uses to send generic messages. You should not change the site homepage from the deafult "homepage."
 
+The rest of your general site configuration can be found by going to **Site settings** then selecting **General configuration**. From here you can tweak the basic behavior of S4:
+
+1. **Signing up with a site staff** - You can disable signing up with a site staff, which is useful if no programs on your campus use site staff for anything other than contact tracking (see :ref:`site-staff`).
+2. **Enable registering as part of a course** - When disabled, registration is only avaialble to students who are part of a program, useful of no programs are using courses to track student service.
+3. **Default length of service** - The number of days a typical signup will last. When a student registers with a site as part of a course, their last day is automatically the last day of the term (semester, etc.) the course belongs to. This can be tweaked on a per-course basis.
+4. **Authentication** - When you setup authentication, you need to select which authentication method different users should use. This is used to generate the login links on the homepage (see :ref:`authentication`). The **Custom message* is displayed next to the login form (which users don't see if you use Shibboleth or CAS, as they are redirected to your single-signon page), and is useful to let users who might be logging in via LDAP that they should use their campus ID and hwo to change their password, etc.
+5. **Welcome message** - Displayed on the right-hand side of the homepage for users who aren't logged in.
+6. **Statistics message** - Displayed above the login information on the left-side of the website's homepage, the statistics message uses tokens (see :ref:`tokens`) to build a nice message illustrating the impact of your programs.
+7. **Lead time for evaluation reminders** - How many days before a student's signup expires when an evaluation email should be sent out. While programs have control over the messaging of evaluation reminders, all programs have to have the same lead-time for sending evaluation email reminders (see :ref:`program-options`).
 
 Adding CAPTCHA protection to the site proposal form
 ---------------------------------------------------
