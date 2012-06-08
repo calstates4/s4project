@@ -58,6 +58,17 @@ Adding online forms
 
 You can also fill out an online form (see :ref:`online-forms`) about a site yourself, by seleing the appropriate form from the **Attach a form.** Once you fill out the form, it will be attached to the site. If you need someone else to fill out the form, click the **Email form to someone else** link and either select the site staff who needs to fill the form out, or type in an email address. You should also provide a subject and message so the person knows what this email is about. At the end of your message, the link to fill ou thte form will be added.
 
+.. _notes:
+Notes
+-----
+
+Notes are useful way to track your communications and site visits, or leave any other notes for others about the site. To view or create new notes, click the **Notes** tab when viewing a site. You can add a note by clicking the **Add new note** button, and have the following options:
+
+1. **Title** - The title of your note
+2. **Contact type** - A phone call? A site visit?
+3. **Contact tags** - Tag this note to help categorize it later.
+4. **Files** - If you have any scanned notes you want to upload, you can add a file to a note (although you might want to add it as a form if this is a form).
+
 .. _signup-forms:
 Signup forms
 ------------
