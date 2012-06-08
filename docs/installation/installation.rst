@@ -32,4 +32,4 @@ There are a few things that might trip you up, including:
   * Aggregate and compress CSS files
   * Aggregate JavaScript files.
 
-Still having problems? You might want to read the `Troubleshooting installation problems page <http://drupal.org/documentation/install/troubleshoot>` on Drupal.org.
+Still having problems? You might want to read the `Troubleshooting installation problems page <http://drupal.org/documentation/install/troubleshoot>`_ on Drupal.org.

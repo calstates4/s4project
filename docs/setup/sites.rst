@@ -35,7 +35,30 @@ While there are usually only up to two versions of a site available at a time, t
 .. _site-forms:
 Site Forms
 ----------
+Every campus and department has numerous types of forms they need to fill out. These could be risk management forms, agency agreements, or site visit checklists. To manage any site's forms, click the "Forms" tab when viewing a site. This means all the forms you collect from a site can be found in a single location, and we can do some whizbang things like give you an overview of the status of all your sites and whether they have a form about to expire, and email you when a form that requires refreshing every few years.
 
+Uploading a paper form
+^^^^^^^^^^^^^^^^^^^^^^
+
+To start, we can upload a simple form. These might be a PDF you have filled out with a site, or a scan of a paper form. To add this form to a site, click the **Forms** tab under the site, and click the **Add new form** button. You have the following options:
+
+1. **File name** - The name of your file.
+2. **File description or notes** - A quick note about the file you are uploading
+3. **File category** - The type of file you are uploading (see :ref:file-categories_)
+4. **Tags** - A quick way to categorize this file, for example "Needs review"
+5. **Expiration date** - When this file will expire, if ever.
+6. **Enable expiration reminder** - When checked, an email will go out to anyone who is subscribed to S4's expiration notifications when this file will expire.
+7. **Reminder date** - The date when this reminder should be sent out.
+8. **Files** - The actual scanned or digital copy of the form. 
+
+If you want to be notified when a form is about to expire, click the **Email me when a form expires** button under the **Forms** tab.
+
+Adding online forms
+^^^^^^^^^^^^^^^^^^^
+
+You can also fill out an online form (see :ref:online-forms_) about a site yourself, by seleing the appropriate form from the **Attach a form.** Once you fill out the form, it will be attached to the site. If you need someone else to fill out the form, click the **Email form to someone else** link and either select the site staff who needs to fill the form out, or type in an email address. You should also provide a subject and message so the person knows what this email is about. At the end of your message, the link to fill ou thte form will be added.
+
+.. _signup-forms:
 Signup forms
 ------------
 
