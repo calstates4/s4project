@@ -44,7 +44,7 @@ To start, we can upload a simple form. These might be a PDF you have filled out 
 
 1. **File name** - The name of your file.
 2. **File description or notes** - A quick note about the file you are uploading
-3. **File category** - The type of file you are uploading (see :ref:file-categories_)
+3. **File category** - The type of file you are uploading (see :ref:`file-categories`)
 4. **Tags** - A quick way to categorize this file, for example "Needs review"
 5. **Expiration date** - When this file will expire, if ever.
 6. **Enable expiration reminder** - When checked, an email will go out to anyone who is subscribed to S4's expiration notifications when this file will expire.
@@ -56,7 +56,7 @@ If you want to be notified when a form is about to expire, click the **Email me 
 Adding online forms
 ^^^^^^^^^^^^^^^^^^^
 
-You can also fill out an online form (see :ref:online-forms_) about a site yourself, by seleing the appropriate form from the **Attach a form.** Once you fill out the form, it will be attached to the site. If you need someone else to fill out the form, click the **Email form to someone else** link and either select the site staff who needs to fill the form out, or type in an email address. You should also provide a subject and message so the person knows what this email is about. At the end of your message, the link to fill ou thte form will be added.
+You can also fill out an online form (see :ref:`online-forms`) about a site yourself, by seleing the appropriate form from the **Attach a form.** Once you fill out the form, it will be attached to the site. If you need someone else to fill out the form, click the **Email form to someone else** link and either select the site staff who needs to fill the form out, or type in an email address. You should also provide a subject and message so the person knows what this email is about. At the end of your message, the link to fill ou thte form will be added.
 
 .. _signup-forms:
 Signup forms
