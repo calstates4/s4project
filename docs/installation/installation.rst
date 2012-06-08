@@ -27,5 +27,9 @@ There are a few things that might trip you up, including:
 1. `Changing the permission on the files directory <http://drupal.org/node/394704>`_ - The files directory stores any uploaded files to S4, sometimes this directory needs to have permissions setup manually.
 2. `Setting up clean URLs <http://drupal.org/getting-started/clean-urls>`_ - Clean URLs means your site's URLS will look like http://mysite.edu/sites/my-site-name, instead of http://mysite.edu/?q=sites/my-site-name.
 3. `Setup Cron <http://drupal.org/cron>`_ - Cron is used to do periodic maintenance tasks. For example, when you send emails, they are actually stored to be sent in batches throughout the day so S4 doesn't overwhelm your email server and potentially have it's emails marked as spam. Cron is an important thing to setup to ensrue your site is running smoothly.
+4. Tune site performance - Your technical admin should visit ``admin/config/development/performance`` and enable the following settings:
+  * Cache pages for anonymous users
+  * Aggregate and compress CSS files
+  * Aggregate JavaScript files.
 
 Still having problems? You might want to read the `Troubleshooting installation problems page <http://drupal.org/documentation/install/troubleshoot>` on Drupal.org.
