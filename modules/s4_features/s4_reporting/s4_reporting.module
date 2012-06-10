@@ -70,7 +70,31 @@ function s4_reporting_form_views_exposed_form_alter(&$form, $form_state) {
 			);
 		}
 	}
-	
+	if($form_state['view']->name == 'reports_sites') {
+  	$district_fields = 
+  	 array('field_district_federal_value' => 'field_data_field_district_federal',
+  	       'field_district_state_lower_value' => 'field_data_field_district_state_lower',
+  	       'field_district_state_upper_value' => 'field_data_field_district_state_upper');
+  	
+  	foreach($form['filters'] as &$filter) {
+    	if(is_array($filter)) {
+      	foreach($filter as $field_name => &$field) {
+        	if(isset($district_fields[$field_name])) {
+          	$field['#type'] = 'select';
+          	$field['#options'] = array();
+          	unset($field['#size']);
+          	$field['#empty_option'] = t('-- Any --');
+          	$query = db_select($district_fields[$field_name], 'd');
+          	$query->addField('d', $field_name, 'value');
+          	$query->distinct();
+          	$districts = $query->execute();
+            $field['#options'] = $districts->fetchCol(0);
+          	             
+        	}
+      	}
+    	}
+  	}
+	}
 }
 
 function s4_reporting_form_views_savedsearches_delete_search_form_alter(&$form, $form_state) {
