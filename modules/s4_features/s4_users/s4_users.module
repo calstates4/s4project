@@ -9,6 +9,9 @@ include_once('s4_users.features.inc');
 */
 function s4_users_user_view($account, $view_mode, $langcode) {
   $account->content['#pre_render'][] = '_s4_users_user_view_pre_render';
+  $first_name = field_get_items('user', $account, 'field_first_name');
+  $last_name = field_get_items('user', $account, 'field_last_name');
+  drupal_set_title(check_plain($first_name[0]['value'] . ' ' . $last_name[0]['value']));
   return $account;
 }
 

@@ -46,11 +46,11 @@ function s4_users_field_default_fields() {
       'description' => '',
       'display' => array(
         'default' => array(
-          'label' => 'above',
+          'label' => 'inline',
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => 0,
+          'weight' => '0',
         ),
       ),
       'entity_type' => 'user',
@@ -109,11 +109,11 @@ function s4_users_field_default_fields() {
       'description' => '',
       'display' => array(
         'default' => array(
-          'label' => 'above',
+          'label' => 'inline',
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => 1,
+          'weight' => '1',
         ),
       ),
       'entity_type' => 'user',
@@ -171,11 +171,11 @@ function s4_users_field_default_fields() {
       'description' => '',
       'display' => array(
         'default' => array(
-          'label' => 'above',
+          'label' => 'inline',
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => 6,
+          'weight' => '3',
         ),
       ),
       'entity_type' => 'user',
@@ -241,8 +241,8 @@ function s4_users_field_default_fields() {
           'label' => 'above',
           'module' => 'taxonomy',
           'settings' => array(),
-          'type' => 'taxonomy_term_reference_link',
-          'weight' => 2,
+          'type' => 'taxonomy_term_reference_plain',
+          'weight' => '4',
         ),
       ),
       'display_label' => '',
