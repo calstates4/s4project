@@ -263,84 +263,8 @@ function s4_users_field_default_fields() {
     ),
   );
 
-  // Exported field: 'user-user-field_workflow_approved'
-  $fields['user-user-field_workflow_approved'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '-1',
-      'deleted' => '0',
-      'entity_types' => array(),
-      'field_name' => 'field_workflow_approved',
-      'foreign keys' => array(
-        'format' => array(
-          'columns' => array(
-            'format' => 'format',
-          ),
-          'table' => 'filter_format',
-        ),
-      ),
-      'global_block_settings' => '1',
-      'indexes' => array(
-        'format' => array(
-          0 => 'format',
-        ),
-      ),
-      'module' => 'text',
-      'settings' => array(
-        'max_length' => '255',
-      ),
-      'translatable' => '1',
-      'type' => 'text',
-    ),
-    'field_instance' => array(
-      'bundle' => 'user',
-      'default_value' => NULL,
-      'deleted' => '0',
-      'description' => '',
-      'display' => array(
-        'default' => array(
-          'label' => 'above',
-          'module' => 'text',
-          'settings' => array(),
-          'type' => 'text_default',
-          'weight' => 5,
-        ),
-      ),
-      'display_label' => '',
-      'entity_type' => 'user',
-      'field_name' => 'field_workflow_approved',
-      'label' => 'Approval access',
-      'required' => 0,
-      'settings' => array(
-        'text_processing' => '0',
-        'user_register_form' => 0,
-      ),
-      'widget' => array(
-        'active' => 1,
-        'module' => 'select_or_other',
-        'settings' => array(
-          'available_options' => 'Risk management
-Grants & contracts',
-          'available_options_fieldset' => array(
-            'advanced_options' => array(
-              'available_options_php' => '',
-            ),
-          ),
-          'available_options_php' => '',
-          'markup_available_options_php' => '&lt;none&gt;',
-          'other' => 'Other',
-          'other_unknown_defaults' => 'other',
-          'sort_options' => 0,
-        ),
-        'type' => 'select_or_other_buttons',
-        'weight' => '4',
-      ),
-    ),
-  );
-
   // Translatables
   // Included for use with string extractors like potx.
-  t('Approval access');
   t('Available programs');
   t('First Name');
   t('Last Name');

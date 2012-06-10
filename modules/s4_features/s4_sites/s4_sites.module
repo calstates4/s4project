@@ -884,12 +884,6 @@ function s4_sites_s4_help($path) {
 
 function s4_sites_s4_site_configuration() {
   return array(
-    'workflow_settings' => array(
-      'group' => t('General settings'),
-      'title' => t('Workflow settings'),
-      'description' => t('Set up how sites are approved or rejected.'),
-      'href' => 'admin/config/s4/workflow',
-    ),
     'category_restrictions' => array(
       'group' => t('Categories'),
       'title' => t('Programs'),
