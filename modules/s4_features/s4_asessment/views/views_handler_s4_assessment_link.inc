@@ -61,7 +61,7 @@ class views_handler_s4_assessment_link extends views_handler_field {
     	return 'Assessment completed';
     }
     if($signup) {
-	    return l('Complete assessment', 
+	    return l(t('Complete assessment'), 
 	    		 'node/'. $assessment_form, 
 	    		 array('query' => array('signup' => $signup,
 	    		 						'destination' => 'node/'. $node->nid

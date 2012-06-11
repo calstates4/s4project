@@ -27,7 +27,7 @@ class views_handler_s4_sites_evaluation_link extends views_handler_field {
       $programs = field_get_items('field_collection_item', $form, 'field_site_restrict');
       foreach($programs as $k => $program) {
         if($program['tid'] == $signup_program[0]['tid']) {
-          return l('Complete evaluation', 'signup/'. $values->nid .'/evaluation');
+          return l(t('Complete evaluation'), 'signup/'. $values->nid .'/evaluation');
         }
       }
     }

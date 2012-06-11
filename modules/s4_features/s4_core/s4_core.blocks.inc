@@ -284,7 +284,7 @@ function s4_core_block_s4_add_new_site() {
 function s4_core_block_s4_add_new_coordinator() {
   if (user_access('create site content')) {
     $node = node_load(check_plain(arg(1)));
-    return array('content' => l('<span class="add"></span>' . t('Add new site staff'),
+    return array('content' => l(t('<span class="add"></span>Add new site staff'),
                   'node/add/coordinator/' . $node->nid,
                   array('html' => TRUE,
                       'query' => array('destination' => 'node/' . $node->nid . '/site-staff'),
@@ -384,6 +384,6 @@ function s4_core_block_s4_signup_forms() {
     return;
   }
   return array('content' => '<div class="signup"><div class="icon"></div>' .
-                            l('Continue signing up', 's4/signup/site/' . $_SESSION['s4_signup_site'])
+                            l(t('Continue signing up'), 's4/signup/site/' . $_SESSION['s4_signup_site'])
                             . '</div>');
 }

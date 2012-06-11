@@ -13,19 +13,19 @@ function s4_sites_install() {
         ->execute();
     
   $states = array(
-    'approved_by_purchasing' => array('label' => t('Approved by purchasing'),
+    'approved_by_purchasing' => array('label' => st('Approved by purchasing'),
                                       'description' => '',
                                       'weight' => -6),
-    'approved_by_risk_manager' => array('label' => t('Approved by risk manager'),
+    'approved_by_risk_manager' => array('label' => st('Approved by risk manager'),
                                         'description' => '',
                                         'weight' => -8),
-    'needs_purchasing_approval' => array('label' => t('Needs purchasing approval'),
+    'needs_purchasing_approval' => array('label' => st('Needs purchasing approval'),
                                          'description' => '',
                                          'weight' => -7),
-    'needs_risk_manager_approval' => array('label' => t('Needs risk manager approval'),
+    'needs_risk_manager_approval' => array('label' => st('Needs risk manager approval'),
                                           'description' => '',
                                           'weight' => -9),
-    'program_approval' => array('label' => t('Program approval'),
+    'program_approval' => array('label' => st('Program approval'),
                                              'description' => '',
                                              'weight' => -5),
   );

@@ -114,8 +114,8 @@ function s4_sites_propose_site_form() {
   foreach($terms as $t) {
     $form['terms_'. $t->tid] = array(
       '#type' => 'checkbox',
-      '#title' => $t->name,
-      '#description' => $t->description,
+      '#title' => check_plain($t->name),
+      '#description' => check_plain($t->description),
     );
   }
 
@@ -239,7 +239,7 @@ function s4_sites_webform_submission_insert($node, $submission) {
   if (user_access('administer nodes')) {
     drupal_goto('node/'. $form->field_site[$form->language][0]['nid'] .'/forms');
   }
-  drupal_set_message('Thanks for submitting your form!');
+  drupal_set_message(t('Thanks for submitting your form!'));
   drupal_goto('<front>');
 }
 
@@ -418,7 +418,7 @@ function s4_sites_send_site_form_submit($form, &$form_state) {
             'email' => $email,
             'key' => drupal_hmac_base64($form_state['values']['site'] .'_'. $form_state['values']['form'] .'_'. $email, drupal_get_private_key() . drupal_get_hash_salt()),
         ));
-  drupal_set_message('Your message has been sent.');
+  drupal_set_message(t('Your message has been sent.'));
 }
 
 function s4_sites_mail($key, &$message, $params) {
@@ -520,7 +520,7 @@ function s4_sites_node_presave($node) {
      $user = user_load($node->uid);
      if (!user_access('moderate site information') && !$node->s4_sites_import) {
        $node->status = 0;
-       drupal_set_message('Thanks for your site recommendation. We will be contacting you shortly.');
+       drupal_set_message(t('Thanks for your site recommendation. We will be contacting you shortly.'));
      }
   }
 }

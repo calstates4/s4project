@@ -167,7 +167,7 @@ function s4_assessment_webform_submission_insert($node, $submission) {
 	$signup->field_form_assessment_sid[$signup->language][]['value'] = $submission->sid;
 	node_save($signup);
 	unset($_SESSION['s4_assessment_signup']);
-	drupal_set_message('Your assessment has been recorded.');
+	drupal_set_message(t('Your assessment has been recorded.'));
 }
 
 function theme_s4_assessment_webform_components_form($variables) {

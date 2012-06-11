@@ -6,7 +6,7 @@
 function s4_districts_admin_districts_form() {
   $form = array();
   
-  $form['rebuild']['#markup'] = l('Rebuild relationships between sites and districts', 'admin/config/s4/districts/rebuild');
+  $form['rebuild']['#markup'] = l(t('Rebuild relationships between sites and districts'), 'admin/config/s4/districts/rebuild');
   
   $form['s4_districts_district_lookup_service'] = array(
     '#type' => 'textfield',

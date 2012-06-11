@@ -151,7 +151,7 @@ function s4_core_signup($type, $nid) {
     s4_core_user_signup_completed();
   }
 
-  drupal_set_message(t($message));
+  drupal_set_message(check_plain(t($message)));
   drupal_goto('node/' . $nid);
 }
 

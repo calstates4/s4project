@@ -27,14 +27,14 @@ class s4_reporting_exposed_form_plugin extends views_plugin_exposed_form_basic {
       }
       $form['s4_reporting']['group-'. $label] = array(
       	'#type' => 'select',
-      	'#title' => 'Group for '. $label,
+      	'#title' => t('Group for @label', array('@label' => check_plain($label))),
       	'#options' => $groups,
       	'#default_value' => $this->options['s4_reporting']['group-'. $label]
       );
     }
     $form['s4_reporting']['groups'] = array(
     	'#type' => 'textarea',
-    	'#title' => 'Groups',
+    	'#title' => t('Groups'),
     	'#description' => 'Enter a list of groups to include in this form',
     	'#default_value' => $this->options['s4_reporting']['groups'],
     );
@@ -56,7 +56,7 @@ class s4_reporting_exposed_form_plugin extends views_plugin_exposed_form_basic {
     foreach($groups as $key => $group) {
 		$form['filters'][$key] = array(
 			'#type' => 'fieldset',
-			'#title' => $group,
+			'#title' => check_plain($group),
 		);
 	}
 	$fields = $this->options['s4_reporting'];
@@ -65,7 +65,7 @@ class s4_reporting_exposed_form_plugin extends views_plugin_exposed_form_basic {
 		$field = str_replace('group-', '', $field);
 		if (is_array($form[$field])) {
 			$form['filters'][$group][$field] = $form[$field] + 
-				array('#title' => $form['#info']['filter-'. $field]['label']);
+				array('#title' => check_plain($form['#info']['filter-'. $field]['label']));
 			unset($form[$field]);
 		}
 	}

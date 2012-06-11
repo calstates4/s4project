@@ -85,7 +85,7 @@ function s4_assessment_rubric_form($form, $form_state, $node, $component) {
 		foreach($options as $option_key => $option) {
 			$form[$question_key .'-'. $option_key] = array(
 				'#type' => 'textarea',
-				'#title' => $question .': Option '. $option,
+				'#title' => check_plain(t('@question: Option @option', array('@question' => $question, '@option' => $option))),
 				'#default_value' => $component['extra']['rubric'][$question_key][$option_key],
 			);
 		}
