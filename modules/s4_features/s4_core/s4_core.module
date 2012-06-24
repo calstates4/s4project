@@ -573,6 +573,7 @@ function _s4_core_create_signup($uid = 0, $signup = array()) {
            'signup_sid' => 0,
            'hours' => 0,
            'program' => 0,
+           'cc_faculty' => FALSE,
            );
   $node = new stdClass();
   $node->type = 'signup';
@@ -643,6 +644,16 @@ function _s4_core_create_signup($uid = 0, $signup = array()) {
       $sender = ($field_confirmation_email_sender[0]['email'])
                 ? $field_confirmation_email_sender[0]['email']
                 : variable_get('site_mail', '');
+      $params['cc'] = array();
+      if($signup['cc_faculty'] && $signup['course']) {
+        $course = node_load($signup['course']);
+        $faculty = field_get_items('node', $course, 'field_course_faculty');
+        foreach($faculty as $instructor) {
+          $user = user_load($instructor['uid']);
+          $params['cc'][$user->uid] = $user->mail;
+        }
+        
+      }
       drupal_mail('s4_core', 'signup_confirmation', $signup_user->mail, $node->language, $params, $sender);
     }
   }
@@ -1156,6 +1167,9 @@ function s4_core_mail($key, &$message, $params) {
                                                    's4_signup' => $params['signup'],
                                                    's4_site' => $params['site']));
       $message['body'][] = $body;
+      if($params['cc']) {
+        $message['headers']['Cc'] = implode(', ', $params['cc']);
+      }
       break;
   }
 }

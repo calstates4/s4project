@@ -243,6 +243,7 @@ function s4_core_create_signup_form($form, $form_state, $uid, $courses = true) {
       '#options' => $courses,
       '#attributes' => array('class' => array('chosen')),
     );
+    
   }
 
   $sites = array();
@@ -315,6 +316,9 @@ function s4_core_create_signup_form($form, $form_state, $uid, $courses = true) {
     '#title' => 'Related program',
     '#options' => $program_options,
   );
+  if($program_options) {
+    $form['site_options']['program']['#required'] = TRUE;
+  }
 
   $form['hours'] = array(
     '#type' => 'textfield',
@@ -322,11 +326,18 @@ function s4_core_create_signup_form($form, $form_state, $uid, $courses = true) {
     '#size' => 6,
   );
 
-  $form['email-student'] = array(
+  $form['email_student'] = array(
     '#type' => 'checkbox',
     '#title' => 'Send student email to complete a signup form (if the site has one)',
     '#default_value' => 1,
   );
+  
+  if(module_exists('s4_courses') && $courses) {
+    $form['email_faculty'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Also email faculty about signup'),
+    );
+  }
 
   $form['submit'] = array(
     '#type' => 'submit',
@@ -350,11 +361,14 @@ function s4_core_create_signup_form_submit($form, $form_state) {
            'hours' => ($form_state['values']['hours']) ? $form_state['values']['hours'] : 0,
            'program' => $form_state['values']['program']
           );
+  if ($form_state['values']['email_faculty'] && $form_state['values']['course']) {
+    $signup['cc_faculty'] = TRUE;
+  }
   $signup = _s4_core_create_signup($form_state['values']['user'], $signup);
   drupal_set_message(t('Created !signup record', array('!signup' => l(t('signup #@number', array('@number' => $signup->nid)), 'node/' . $signup->nid))));
   $site = node_load($form_state['values']['site']);
   $form = field_get_items('node', $site, 'field_site_form');
-  if ($form[0]['nid'] && $form_state['values']['email-student']) {
+  if ($form[0]['nid'] && $form_state['values']['email_student']) {
 
   }
   drupal_goto($form_state['values']['destination']);
