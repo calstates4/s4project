@@ -569,7 +569,7 @@ function s4_core_context_default_contexts() {
         'views-user_signups-block_1' => array(
           'module' => 'views',
           'delta' => 'user_signups-block_1',
-          'region' => 'content',
+          'region' => 'content_bottom',
           'weight' => '-10',
         ),
       ),

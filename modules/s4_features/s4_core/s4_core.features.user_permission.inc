@@ -896,6 +896,15 @@ function s4_core_user_default_permissions() {
     'module' => 'user',
   );
 
+  // Exported permission: send bulk emails
+  $permissions['send bulk emails'] = array(
+    'name' => 'send bulk emails',
+    'roles' => array(
+      0 => 'staff',
+    ),
+    'module' => 's4_core',
+  );
+
   // Exported permission: show input filter select menu
   $permissions['show input filter select menu'] = array(
     'name' => 'show input filter select menu',

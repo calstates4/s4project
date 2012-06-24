@@ -115,11 +115,8 @@ function s4_core_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Email: Students';
-  $handler->display->display_options['access']['type'] = 'role';
-  $handler->display->display_options['access']['role'] = array(
-    4 => '4',
-    5 => '5',
-  );
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['perm'] = 'send bulk emails';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['query_comment'] = FALSE;
@@ -239,16 +236,6 @@ function s4_core_views_default_views() {
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['multiple'] = TRUE;
   $handler->display->display_options['filters']['field_site_restrict_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_site_restrict_tid']['vocabulary'] = 'site_restrictions';
-  /* Filter criterion: Field collection item: Form (field_site_eval_form) */
-  $handler->display->display_options['filters']['field_site_eval_form_nid']['id'] = 'field_site_eval_form_nid';
-  $handler->display->display_options['filters']['field_site_eval_form_nid']['table'] = 'field_data_field_site_eval_form';
-  $handler->display->display_options['filters']['field_site_eval_form_nid']['field'] = 'field_site_eval_form_nid';
-  $handler->display->display_options['filters']['field_site_eval_form_nid']['relationship'] = 'field_site_nid';
-  $handler->display->display_options['filters']['field_site_eval_form_nid']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_site_eval_form_nid']['expose']['operator_id'] = 'field_site_eval_form_nid_op';
-  $handler->display->display_options['filters']['field_site_eval_form_nid']['expose']['label'] = 'Evaluation Form';
-  $handler->display->display_options['filters']['field_site_eval_form_nid']['expose']['operator'] = 'field_site_eval_form_nid_op';
-  $handler->display->display_options['filters']['field_site_eval_form_nid']['expose']['identifier'] = 'field_site_eval_form_nid';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -281,7 +268,6 @@ function s4_core_views_default_views() {
     t('Site'),
     t('Term'),
     t('Student site access'),
-    t('Evaluation Form'),
     t('Page'),
   );
   $export['email_students'] = $view;

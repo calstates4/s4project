@@ -433,8 +433,12 @@ function s4_core_permission() {
       'description' => t('Allow the user to receive notifications about files close to expiring'),
     ),
     'view all webform fields' => array(
-      'title' => t('View all webform private fields.'),
+      'title' => t('View all webform private fields'),
       'description' => t('Allows users to view information in "private" fields.'),
+    ),
+    'send bulk emails' => array(
+      'title' => t('Send bulk emails'),
+      'description' => t('Allows users to send bulk emails to users and site staff.'),
     ),
     'access s4 site settings' => array(
       'title' => t('Access S4 site settings'),
