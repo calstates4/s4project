@@ -1229,28 +1229,5 @@ function s4_sites_strongarm() {
   );
   $export['s4_sites_field_access'] = $strongarm;
 
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'tac_lite_categories';
-  $strongarm->value = array(
-    7 => '7',
-  );
-  $export['tac_lite_categories'] = $strongarm;
-
-  $strongarm = new stdClass;
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'tac_lite_config_scheme_1';
-  $strongarm->value = array(
-    'name' => 'Edit sites',
-    'perms' => array(
-      'grant_update' => 'grant_update',
-      'grant_delete' => 'grant_delete',
-    ),
-    'term_visibility' => 0,
-  );
-  $export['tac_lite_config_scheme_1'] = $strongarm;
-
   return $export;
 }

@@ -149,9 +149,6 @@ projects[select_or_other][version] = "2.0"
 projects[strongarm][subdir] = "contrib"
 projects[strongarm][version] = "2.0-beta2"
 
-projects[tac_lite][subdir] = "contrib"
-projects[tac_lite][version] = "1.x-dev"
-
 projects[textcaptcha][subdir] = "contrib"
 projects[textcaptcha][version] = "1.2"
 
