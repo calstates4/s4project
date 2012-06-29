@@ -117,7 +117,6 @@ dependencies[] = user_reference
 dependencies[] = view_unpublished
 dependencies[] = views
 dependencies[] = views_bulk_operations
-dependencies[] = views_calc
 dependencies[] = views_data_export
 dependencies[] = views_json
 dependencies[] = views_dynamic_fields

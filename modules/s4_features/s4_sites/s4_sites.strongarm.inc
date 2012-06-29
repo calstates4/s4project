@@ -657,6 +657,29 @@ function s4_sites_strongarm() {
         'priority' => '2',
       ),
     ),
+    'coordinator' => array(
+      'field_site_staff_user' => array(
+        'referenced' => array(
+          'view' => 'view',
+          'update' => 'update',
+          'delete' => 0,
+        ),
+        'author' => array(
+          'view' => 'view',
+          'update' => 'update',
+          'delete' => 'delete',
+        ),
+        'all' => array(
+          'view' => 0,
+        ),
+        'unused' => '0',
+        'views' => array(
+          'view' => '',
+          'view_args' => '',
+        ),
+        'priority' => '0',
+      ),
+    ),
   );
   $export['nodeaccess_userreference'] = $strongarm;
 

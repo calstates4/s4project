@@ -164,9 +164,6 @@ projects[views][version] = "3.x-dev"
 projects[views_bulk_operations][subdir] = "contrib"
 projects[views_bulk_operations][version] = "3.x-dev"
 
-projects[views_calc][subdir] = "contrib"
-projects[views_calc][version] = "1.x-dev"
-
 projects[views_data_export][subdir] = "contrib"
 projects[views_data_export][version] = "3.0-beta4"
 

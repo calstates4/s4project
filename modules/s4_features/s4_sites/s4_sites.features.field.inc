@@ -1633,6 +1633,119 @@ function s4_sites_field_default_fields() {
     ),
   );
 
+  // Exported field: 'node-coordinator-field_site_staff_user'
+  $fields['node-coordinator-field_site_staff_user'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_site_staff_user',
+      'foreign keys' => array(
+        'uid' => array(
+          'columns' => array(
+            'uid' => 'uid',
+          ),
+          'table' => 'users',
+        ),
+      ),
+      'indexes' => array(
+        'uid' => array(
+          0 => 'uid',
+        ),
+      ),
+      'module' => 'user_reference',
+      'settings' => array(
+        'nodeaccess_userreference' => array(
+          'all' => array(
+            'view' => 0,
+          ),
+          'author' => array(
+            'delete' => 'delete',
+            'update' => 'update',
+            'view' => 'view',
+          ),
+          'priority' => '0',
+          'referenced' => array(
+            'delete' => 0,
+            'update' => 'update',
+            'view' => 'view',
+          ),
+          'unused' => '0',
+          'views' => array(
+            'view' => '',
+            'view_args' => '',
+          ),
+        ),
+        'referenceable_roles' => array(
+          2 => 0,
+          3 => 0,
+          4 => 0,
+          5 => 0,
+          6 => 0,
+          7 => 0,
+        ),
+        'referenceable_status' => array(
+          0 => 0,
+          1 => '1',
+        ),
+        'view' => array(
+          'args' => array(),
+          'display_name' => '',
+          'view_name' => '',
+        ),
+      ),
+      'translatable' => '0',
+      'type' => 'user_reference',
+    ),
+    'field_instance' => array(
+      'bundle' => 'coordinator',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => 'If this site staff needs to login and view their students, ask them to create a user account and then enter that account name here.',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'user_reference',
+          'settings' => array(),
+          'type' => 'user_reference_default',
+          'weight' => 10,
+        ),
+        'notifications' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'display_label' => '',
+      'entity_type' => 'node',
+      'field_name' => 'field_site_staff_user',
+      'label' => 'Related user',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'user_reference',
+        'settings' => array(
+          'autocomplete_match' => 'contains',
+          'autocomplete_path' => 'user_reference/autocomplete',
+          'size' => '60',
+        ),
+        'type' => 'user_reference_autocomplete',
+        'weight' => '10',
+      ),
+    ),
+  );
+
   // Exported field: 'node-coordinator-field_staff_role'
   $fields['node-coordinator-field_staff_role'] = array(
     'field_config' => array(
@@ -5401,6 +5514,7 @@ function s4_sites_field_default_fields() {
   t('First Name');
   t('Form');
   t('How many people does your organization serve?');
+  t('If this site staff needs to login and view their students, ask them to create a user account and then enter that account name here.');
   t('If you have multiple location sites that you would like students to be placed at, please provide specific location information. (You may add additional locations using the \'Add another\' button below.)');
   t('If your organization has a presence on Facebook, Twitter, or another social network, please provide the address.');
   t('Issues addressed');
@@ -5415,6 +5529,7 @@ function s4_sites_field_default_fields() {
   t('Phone number');
   t('Program');
   t('Provide an overview description of your organization, i.e. who you are, what you do, and who you serve.');
+  t('Related user');
   t('Reminder date');
   t('Reminder period (days)');
   t('Restrict this site staff to the following types of students.');

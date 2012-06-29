@@ -434,15 +434,6 @@ function s4_core_user_default_permissions() {
     'module' => 'views',
   );
 
-  // Exported permission: administer views calc
-  $permissions['administer views calc'] = array(
-    'name' => 'administer views calc',
-    'roles' => array(
-      0 => 'administrator',
-    ),
-    'module' => 'views_calc',
-  );
-
   // Exported permission: block IP addresses
   $permissions['block IP addresses'] = array(
     'name' => 'block IP addresses',
@@ -543,15 +534,6 @@ function s4_core_user_default_permissions() {
       0 => 'administrator',
     ),
     'module' => 'path',
-  );
-
-  // Exported permission: create views calc
-  $permissions['create views calc'] = array(
-    'name' => 'create views calc',
-    'roles' => array(
-      0 => 'administrator',
-    ),
-    'module' => 'views_calc',
   );
 
   // Exported permission: create webform content

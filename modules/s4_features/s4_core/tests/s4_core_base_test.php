@@ -129,7 +129,6 @@ class s4WebTestCase extends DrupalWebTestCase {
           'user_reference',
           'views',
           'views_bulk_operations',
-          'views_calc',
           'views_data_export',
           'views_dynamic_fields',
           'views_json',
