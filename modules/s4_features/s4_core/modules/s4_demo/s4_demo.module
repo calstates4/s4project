@@ -57,6 +57,10 @@ function s4_demo_generate_signup() {
   	return null;
   }
   $site = db_query('SELECT nid FROM node WHERE type = :site order by RAND() limit 1', array(':site' => 'site'));
+  $program = db_query('select tid from taxonomy_term_data where vid = 
+(select vid from taxonomy_vocabulary where machine_name = 'site_restrictions')
+ORDER BY RAND() LIMIT 1');
+  $program = $program->fetchAssoc();
   if ($site) {
 	  $settings = array('user' => $course['field_course_students_uid'],
 	           'site' => $site->fetchField(),
@@ -64,6 +68,7 @@ function s4_demo_generate_signup() {
 	           'coordinator' => 0,
 	           'location' => 0,
 	           'signup_sid' => 0,
+	           'program' => $program['tid'],
 	           'hours' => 30,);
 	  _s4_core_create_signup($course['field_course_students_uid'], $settings);
   }

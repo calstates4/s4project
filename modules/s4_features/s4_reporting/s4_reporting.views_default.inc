@@ -988,16 +988,6 @@ Fields',
       'empty_column' => 0,
     ),
   );
-  /* Relationship: Content: Site (field_site) - reverse */
-  $handler->display->display_options['relationships']['reverse_field_site_node']['id'] = 'reverse_field_site_node';
-  $handler->display->display_options['relationships']['reverse_field_site_node']['table'] = 'node';
-  $handler->display->display_options['relationships']['reverse_field_site_node']['field'] = 'reverse_field_site_node';
-  /* Relationship: Content: Course (field_course) */
-  $handler->display->display_options['relationships']['field_course_nid']['id'] = 'field_course_nid';
-  $handler->display->display_options['relationships']['field_course_nid']['table'] = 'field_data_field_course';
-  $handler->display->display_options['relationships']['field_course_nid']['field'] = 'field_course_nid';
-  $handler->display->display_options['relationships']['field_course_nid']['relationship'] = 'reverse_field_site_node';
-  $handler->display->display_options['relationships']['field_course_nid']['delta'] = '-1';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -1445,10 +1435,9 @@ Fields',
   $handler->display->display_options['filters']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
   $handler->display->display_options['filters']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['filters']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';
-  $handler->display->display_options['filters']['field_site_restrict_tid']['relationship'] = 'reverse_field_site_node';
   $handler->display->display_options['filters']['field_site_restrict_tid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['operator_id'] = 'field_site_restrict_tid_op';
-  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['label'] = 'Available Programs';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['label'] = 'Available programs (field_site_restrict)';
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['operator'] = 'field_site_restrict_tid_op';
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['identifier'] = 'field_site_restrict_tid';
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['multiple'] = TRUE;
@@ -1518,8 +1507,6 @@ Fields',
     t('‹ previous'),
     t('next ›'),
     t('last »'),
-    t('field_site'),
-    t('field_course'),
     t('Site'),
     t('Website'),
     t('<strong>Website:</strong> <a href="[field_website-url]">View website</a>'),
@@ -1565,7 +1552,7 @@ Fields',
     t('Course Catalog Number'),
     t('Distance / Proximity'),
     t('[gmap ]'),
-    t('Available Programs'),
+    t('Available programs (field_site_restrict)'),
     t('Data report page'),
     t('Data export: CSV'),
     t('Data export: XLS'),
