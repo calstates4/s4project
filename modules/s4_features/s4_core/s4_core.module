@@ -1751,7 +1751,7 @@ function s4_core_views_check_node_type_roles($rids, $type, $view, $account = NUL
   return (array_intersect(array_filter($rids), $roles) && $node->type == $type);
 }
 
-function s4_core_views_check_reverse_view_roles($rids, $type, $view, $account = NULL) {
+function s4_core_views_check_reverse_view_roles($rids, $view, $account = NULL) {
   global $user;
   if (user_access('administer views')) {
     return TRUE;
