@@ -69,7 +69,7 @@ features[views_view][] = "user_courses"
 files[] = "views_handler_s4_courses_student_count.inc"
 files[] = "s4_courses.inc"
 files[] = "views/s4_courses_views_access_course_faculty.inc"
-files[] = "tests/s4_courses.test"
+
 name = "S4 Courses"
 package = "S4"
 php = "5.2.4"
