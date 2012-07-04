@@ -2300,6 +2300,67 @@ function s4_core_field_default_fields() {
     ),
   );
 
+  // Exported field: 'taxonomy_term-site_restrictions-field_program_error'
+  $fields['taxonomy_term-site_restrictions-field_program_error'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_program_error',
+      'foreign keys' => array(
+        'format' => array(
+          'columns' => array(
+            'format' => 'format',
+          ),
+          'table' => 'filter_format',
+        ),
+      ),
+      'indexes' => array(
+        'format' => array(
+          0 => 'format',
+        ),
+      ),
+      'module' => 'text',
+      'settings' => array(),
+      'translatable' => '0',
+      'type' => 'text_long',
+    ),
+    'field_instance' => array(
+      'bundle' => 'site_restrictions',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => 'This is the message students see when they cannot register for any sites. Provide information about registering for courses, or who to talk to if they login and cannot register.',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => 8,
+        ),
+      ),
+      'display_label' => '',
+      'entity_type' => 'taxonomy_term',
+      'field_name' => 'field_program_error',
+      'label' => 'Student error message',
+      'required' => 0,
+      'settings' => array(
+        'text_processing' => '0',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'text',
+        'settings' => array(
+          'rows' => '5',
+        ),
+        'type' => 'text_textarea',
+        'weight' => '11',
+      ),
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Assessment results');
@@ -2329,8 +2390,10 @@ function s4_core_field_default_fields() {
   t('Site staff');
   t('Student confirmation email');
   t('Student confirmation subject');
+  t('Student error message');
   t('The program this signup is a part of.');
   t('This is the address the user would reply to the message from.');
+  t('This is the message students see when they cannot register for any sites. Provide information about registering for courses, or who to talk to if they login and cannot register.');
   t('Type the name of the user who you will be signing up for.');
   t('User');
   t('When a student is signed up with a site, this is the confirmation email that is sent to them.');

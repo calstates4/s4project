@@ -34,6 +34,7 @@ function s4_core_block_info() {
   $blocks['s4_site_settings'] = array('info' => 'S4 site settings');
   $blocks['s4_welcome_message'] = array('info' => 'S4 Welcome Message');
   $blocks['s4_signup_forms'] = array('info' => 'S4 Signup form jump link');
+  $blocks['s4_signup_error'] = array('info' => 'S4 Signup student error');
   return $blocks;
 }
 

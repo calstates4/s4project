@@ -1437,7 +1437,7 @@ Fields',
   $handler->display->display_options['filters']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';
   $handler->display->display_options['filters']['field_site_restrict_tid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['operator_id'] = 'field_site_restrict_tid_op';
-  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['label'] = 'Available programs (field_site_restrict)';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['label'] = 'Available programs';
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['operator'] = 'field_site_restrict_tid_op';
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['identifier'] = 'field_site_restrict_tid';
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['multiple'] = TRUE;
@@ -1552,7 +1552,6 @@ Fields',
     t('Course Catalog Number'),
     t('Distance / Proximity'),
     t('[gmap ]'),
-    t('Available programs (field_site_restrict)'),
     t('Data report page'),
     t('Data export: CSV'),
     t('Data export: XLS'),

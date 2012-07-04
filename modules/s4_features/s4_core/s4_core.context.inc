@@ -203,6 +203,12 @@ function s4_core_context_default_contexts() {
           'region' => 'content',
           'weight' => '-46',
         ),
+        's4_core-s4_signup_error' => array(
+          'module' => 's4_core',
+          'delta' => 's4_signup_error',
+          'region' => 'content',
+          'weight' => '-10',
+        ),
         'views-65656e1f5a12cde25f0722f735fe7969' => array(
           'module' => 'views',
           'delta' => '65656e1f5a12cde25f0722f735fe7969',

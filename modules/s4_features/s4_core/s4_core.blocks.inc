@@ -368,6 +368,39 @@ function s4_core_block_s4_site_settings() {
   return array('content' => l(t('Site settings'), 's4/settings', array('attributes' => array('class' => array('s4-site-settings')))));
 }
 
+function s4_core_block_s4_signup_error() {
+  $return = false;
+  if(module_exists('s4_courses')) {
+    $view = views_get_view('user_courses');
+    $view->set_display('block_2');
+    $view->execute();
+    if(count($view->result)) {
+      return;
+    }
+  }
+  global $user;
+  $programs = field_get_items('user', $user, 'field_site_restrict');
+  if($programs && count($programs)) {
+    return;
+  }
+  $vid = db_select('taxonomy_vocabulary', 'v')
+         ->fields('v', array('vid'))
+         ->condition('v.machine_name', 'site_restrictions')
+         ->execute()
+         ->fetchField();
+  $output = t('<h2>Cannnot register</h2>');
+  $output = '<p class="intro">'. t('You cannot register for a placement. The following information may help you if you are part of a course or program and think you should be able to register.') .'</p>';
+  foreach(taxonomy_get_tree($vid) as $term) {
+    $term = taxonomy_term_load($term->tid);
+    $message = field_get_items('taxonomy_term', $term, 'field_program_error');
+    if($message[0]['value']) {
+      $output .= '<h3>' . $term->name . '</h3>';
+      $output .= '<p>' . $message[0]['value'] . '</p>';
+    }
+  }
+  return array('content' => $output);
+}
+
 function s4_core_block_s4_welcome_message() {
   $message = variable_get('s4_core_welcome_message', array('value' => FALSE));
   if (!$message['value']) {
