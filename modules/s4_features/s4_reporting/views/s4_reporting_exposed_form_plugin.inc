@@ -41,33 +41,43 @@ class s4_reporting_exposed_form_plugin extends views_plugin_exposed_form_basic {
   }
 
   /*
-   * Tweak the exposed filter form to show Better Exposed Filter options.
+   * Tweak the exposed filter form to show groupings.
    */
-  function exposed_form_alter(&$form, &$form_state) {
-	
-	drupal_add_css(drupal_get_path('module', 's4_reporting') .'/css/s4_reporting.views.css');
-    $form['#theme'] = array();
-    $form['filters'] = array(
-		'#type' => 'vertical_tabs',
-		'#weight' => -10,
-	);
-	$groups = explode("\n", $this->options['s4_reporting']['groups']);
-    array_walk($groups, 'trim');
-    foreach($groups as $key => $group) {
-		$form['filters'][$key] = array(
-			'#type' => 'fieldset',
-			'#title' => check_plain($group),
-		);
-	}
-	$fields = $this->options['s4_reporting'];
-	unset($fields['groups']);
-	foreach($fields as $field => $group) {
-		$field = str_replace('group-', '', $field);
-		if (is_array($form[$field])) {
-			$form['filters'][$group][$field] = $form[$field] + 
-				array('#title' => check_plain($form['#info']['filter-'. $field]['label']));
-			unset($form[$field]);
-		}
-	}
+  function exposed_form_alter(&$form, &$form_state) {	
+  	drupal_add_css(drupal_get_path('module', 's4_reporting') .'/css/s4_reporting.views.css');
+      $form['#theme'] = array();
+      $form['filters'] = array(
+  		'#type' => 'vertical_tabs',
+  		'#weight' => -10,
+  	);
+  	$groups = explode("\n", $this->options['s4_reporting']['groups']);
+      array_walk($groups, 'trim');
+      foreach($groups as $key => $group) {
+  		$form['filters'][$key] = array(
+  			'#type' => 'fieldset',
+  			'#title' => check_plain($group),
+  		);
+  	}
+  	$fields = $this->options['s4_reporting'];
+  	unset($fields['groups']);
+  	foreach($fields as $field => $group) {
+  		$field = str_replace('group-', '', $field);
+  		if(is_array($form[$field .'_op'])) {
+  		  $form['filters'][$group][$field .'_group'] = array(
+  		    '#type' => 'fieldset',
+  		    '#title' => check_plain($form['#info']['filter-'. $field]['label']),
+  		  );
+    		$form['filters'][$group][$field .'_group'][$field .'_group'][$field .'_op'] = $form[$field .'_op'];
+    		$form['filters'][$group][$field .'_group'][$field] = $form[$field];
+  			unset($form[$field .'_op']);
+  		}
+  		else {
+    		if (is_array($form[$field])) {
+    			$form['filters'][$group][$field] = $form[$field] + 
+    				array('#title' => check_plain($form['#info']['filter-'. $field]['label']));
+    		}    		
+  		}
+  		unset($form[$field]);
+  	}
   } 
 }
