@@ -369,6 +369,9 @@ function s4_core_block_s4_site_settings() {
 }
 
 function s4_core_block_s4_signup_error() {
+  if(user_access('create signups for other users')) {
+    return;
+  }
   $return = false;
   if(module_exists('s4_courses')) {
     $view = views_get_view('user_courses');
