@@ -10,7 +10,7 @@
 function s4_core_context_default_contexts() {
   $export = array();
 
-  $context = new stdClass;
+  $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'anonymous-site';
@@ -51,7 +51,7 @@ function s4_core_context_default_contexts() {
   t('anonymous');
   $export['anonymous-site'] = $context;
 
-  $context = new stdClass;
+  $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'authenticated';
@@ -90,7 +90,7 @@ function s4_core_context_default_contexts() {
   t('user');
   $export['authenticated'] = $context;
 
-  $context = new stdClass;
+  $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'basic-page';
@@ -114,7 +114,7 @@ function s4_core_context_default_contexts() {
   t('content');
   $export['basic-page'] = $context;
 
-  $context = new stdClass;
+  $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'forms-listing-page';
@@ -152,7 +152,7 @@ function s4_core_context_default_contexts() {
   t('sites');
   $export['forms-listing-page'] = $context;
 
-  $context = new stdClass;
+  $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'frontpage';
@@ -226,7 +226,7 @@ function s4_core_context_default_contexts() {
   t('frontpage');
   $export['frontpage'] = $context;
 
-  $context = new stdClass;
+  $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'frontpage-anonymous';
@@ -283,7 +283,7 @@ function s4_core_context_default_contexts() {
   t('frontpage');
   $export['frontpage-anonymous'] = $context;
 
-  $context = new stdClass;
+  $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'frontpage-staff';
@@ -315,7 +315,7 @@ function s4_core_context_default_contexts() {
   t('frontpage');
   $export['frontpage-staff'] = $context;
 
-  $context = new stdClass;
+  $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'search';
@@ -351,7 +351,7 @@ function s4_core_context_default_contexts() {
   t('search');
   $export['search'] = $context;
 
-  $context = new stdClass;
+  $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'search-staff';
@@ -396,7 +396,7 @@ function s4_core_context_default_contexts() {
   t('search');
   $export['search-staff'] = $context;
 
-  $context = new stdClass;
+  $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'signup-form-page';
@@ -429,7 +429,7 @@ function s4_core_context_default_contexts() {
   t('signup');
   $export['signup-form-page'] = $context;
 
-  $context = new stdClass;
+  $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'sitewide';
@@ -485,7 +485,7 @@ function s4_core_context_default_contexts() {
   t('sitewide');
   $export['sitewide'] = $context;
 
-  $context = new stdClass;
+  $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'staff';
@@ -507,7 +507,7 @@ function s4_core_context_default_contexts() {
   t('user');
   $export['staff'] = $context;
 
-  $context = new stdClass;
+  $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'user-login-page';
@@ -547,7 +547,7 @@ function s4_core_context_default_contexts() {
   t('user');
   $export['user-login-page'] = $context;
 
-  $context = new stdClass;
+  $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'user-profile-view';

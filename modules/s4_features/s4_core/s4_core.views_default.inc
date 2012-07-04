@@ -161,7 +161,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['relationships']['field_site_nid']['table'] = 'field_data_field_site';
   $handler->display->display_options['relationships']['field_site_nid']['field'] = 'field_site_nid';
   $handler->display->display_options['relationships']['field_site_nid']['delta'] = '-1';
-  /* Field: User: Bulk operations */
+  /* Field: Bulk operations: User */
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'users';
   $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
@@ -176,7 +176,6 @@ function s4_core_views_default_views() {
   );
   $handler->display->display_options['fields']['views_bulk_operations']['vbo']['display_type'] = '1';
   $handler->display->display_options['fields']['views_bulk_operations']['vbo']['display_result'] = 1;
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['merge_single_action'] = 0;
   /* Field: Field: First Name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
