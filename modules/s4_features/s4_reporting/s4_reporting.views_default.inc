@@ -720,7 +720,7 @@ Fields',
     'group-city' => '2',
     'group-field_csu_facility_tid' => '1',
     'group-field_csu_org_type_tid' => '1',
-    'group-dyfield' => '3',
+    'group-dyfield' => '4',
     'group-field_term_nid' => '1',
     'group-field_district_federal_value' => '2',
     'group-field_district_state_lower_value' => '2',
@@ -728,9 +728,13 @@ Fields',
     'group-distance' => '2',
     'group-field_site_restrict_tid' => '0',
     'group-field_tags_tid' => '1',
+    'group-field_signup_start_date_value' => '3',
+    'group-field_course_subject_value' => '3',
+    'group-field_term_nid_1' => '3',
     'groups' => 'General
 Categories
 Location
+Placements
 Fields',
   );
   $handler->display->display_options['pager']['type'] = 'full';
@@ -987,6 +991,16 @@ Fields',
       'empty_column' => 0,
     ),
   );
+  /* Relationship: Content: Site (field_site) - reverse */
+  $handler->display->display_options['relationships']['reverse_field_site_node']['id'] = 'reverse_field_site_node';
+  $handler->display->display_options['relationships']['reverse_field_site_node']['table'] = 'node';
+  $handler->display->display_options['relationships']['reverse_field_site_node']['field'] = 'reverse_field_site_node';
+  /* Relationship: Content: Course (field_course) */
+  $handler->display->display_options['relationships']['field_course_nid']['id'] = 'field_course_nid';
+  $handler->display->display_options['relationships']['field_course_nid']['table'] = 'field_data_field_course';
+  $handler->display->display_options['relationships']['field_course_nid']['field'] = 'field_course_nid';
+  $handler->display->display_options['relationships']['field_course_nid']['relationship'] = 'reverse_field_site_node';
+  $handler->display->display_options['relationships']['field_course_nid']['delta'] = '-1';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -1449,6 +1463,43 @@ Fields',
   $handler->display->display_options['filters']['field_tags_tid']['expose']['multiple'] = TRUE;
   $handler->display->display_options['filters']['field_tags_tid']['reduce_duplicates'] = TRUE;
   $handler->display->display_options['filters']['field_tags_tid']['vocabulary'] = 'tags';
+  /* Filter criterion: Content: First day of service (field_signup_start_date) */
+  $handler->display->display_options['filters']['field_signup_start_date_value']['id'] = 'field_signup_start_date_value';
+  $handler->display->display_options['filters']['field_signup_start_date_value']['table'] = 'field_data_field_signup_start_date';
+  $handler->display->display_options['filters']['field_signup_start_date_value']['field'] = 'field_signup_start_date_value';
+  $handler->display->display_options['filters']['field_signup_start_date_value']['relationship'] = 'reverse_field_site_node';
+  $handler->display->display_options['filters']['field_signup_start_date_value']['operator'] = 'between';
+  $handler->display->display_options['filters']['field_signup_start_date_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_signup_start_date_value']['expose']['operator_id'] = 'field_signup_start_date_value_op';
+  $handler->display->display_options['filters']['field_signup_start_date_value']['expose']['label'] = 'Site had at least one student between the following dates';
+  $handler->display->display_options['filters']['field_signup_start_date_value']['expose']['operator'] = 'field_signup_start_date_value_op';
+  $handler->display->display_options['filters']['field_signup_start_date_value']['expose']['identifier'] = 'field_signup_start_date_value';
+  $handler->display->display_options['filters']['field_signup_start_date_value']['granularity'] = 'day';
+  $handler->display->display_options['filters']['field_signup_start_date_value']['form_type'] = 'date_select';
+  $handler->display->display_options['filters']['field_signup_start_date_value']['default_date'] = '';
+  $handler->display->display_options['filters']['field_signup_start_date_value']['default_to_date'] = '';
+  $handler->display->display_options['filters']['field_signup_start_date_value']['year_range'] = '-3:+3';
+  /* Filter criterion: Content: Subject (field_course_subject) */
+  $handler->display->display_options['filters']['field_course_subject_value']['id'] = 'field_course_subject_value';
+  $handler->display->display_options['filters']['field_course_subject_value']['table'] = 'field_data_field_course_subject';
+  $handler->display->display_options['filters']['field_course_subject_value']['field'] = 'field_course_subject_value';
+  $handler->display->display_options['filters']['field_course_subject_value']['relationship'] = 'field_course_nid';
+  $handler->display->display_options['filters']['field_course_subject_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_course_subject_value']['expose']['operator_id'] = 'field_course_subject_value_op';
+  $handler->display->display_options['filters']['field_course_subject_value']['expose']['label'] = 'Who had a student in the following course subject';
+  $handler->display->display_options['filters']['field_course_subject_value']['expose']['operator'] = 'field_course_subject_value_op';
+  $handler->display->display_options['filters']['field_course_subject_value']['expose']['identifier'] = 'field_course_subject_value';
+  /* Filter criterion: Content: Term (field_term) */
+  $handler->display->display_options['filters']['field_term_nid_1']['id'] = 'field_term_nid_1';
+  $handler->display->display_options['filters']['field_term_nid_1']['table'] = 'field_data_field_term';
+  $handler->display->display_options['filters']['field_term_nid_1']['field'] = 'field_term_nid';
+  $handler->display->display_options['filters']['field_term_nid_1']['relationship'] = 'field_course_nid';
+  $handler->display->display_options['filters']['field_term_nid_1']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_term_nid_1']['expose']['operator_id'] = 'field_term_nid_1_op';
+  $handler->display->display_options['filters']['field_term_nid_1']['expose']['label'] = 'Site had a student in the following terms (only applies to students signing up as part of a course)';
+  $handler->display->display_options['filters']['field_term_nid_1']['expose']['operator'] = 'field_term_nid_1_op';
+  $handler->display->display_options['filters']['field_term_nid_1']['expose']['identifier'] = 'field_term_nid_1';
+  $handler->display->display_options['filters']['field_term_nid_1']['expose']['multiple'] = TRUE;
 
   /* Display: Data report page */
   $handler = $view->new_display('page', 'Data report page', 'page');
@@ -1513,6 +1564,8 @@ Fields',
     t('‹ previous'),
     t('next ›'),
     t('last »'),
+    t('field_site'),
+    t('field_course'),
     t('Site'),
     t('Website'),
     t('<strong>Website:</strong> <a href="[field_website-url]">View website</a>'),
@@ -1562,6 +1615,9 @@ Fields',
     t('[gmap ]'),
     t('Available programs'),
     t('Site tags'),
+    t('Site had at least one student between the following dates'),
+    t('Who had a student in the following course subject'),
+    t('Site had a student in the following terms (only applies to students signing up as part of a course)'),
     t('Data report page'),
     t('Data export: CSV'),
     t('Data export: XLS'),
