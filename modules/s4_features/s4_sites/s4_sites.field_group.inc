@@ -10,7 +10,7 @@
 function s4_sites_field_group_info() {
   $export = array();
 
-  $field_group = new stdClass;
+  $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
   $field_group->identifier = 'group_site_contact|node|site|form';
@@ -34,7 +34,7 @@ function s4_sites_field_group_info() {
   );
   $export['group_site_contact|node|site|form'] = $field_group;
 
-  $field_group = new stdClass;
+  $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
   $field_group->identifier = 'group_site_forms|node|site|form';
@@ -62,7 +62,7 @@ function s4_sites_field_group_info() {
   );
   $export['group_site_forms|node|site|form'] = $field_group;
 
-  $field_group = new stdClass;
+  $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
   $field_group->identifier = 'group_site_general|node|site|form';
@@ -96,7 +96,7 @@ function s4_sites_field_group_info() {
   );
   $export['group_site_general|node|site|form'] = $field_group;
 
-  $field_group = new stdClass;
+  $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
   $field_group->identifier = 'group_site_health_safety|node|site|form';
@@ -127,7 +127,7 @@ function s4_sites_field_group_info() {
   );
   $export['group_site_health_safety|node|site|form'] = $field_group;
 
-  $field_group = new stdClass;
+  $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
   $field_group->identifier = 'group_site_instructions|node|site|form';
@@ -157,7 +157,7 @@ function s4_sites_field_group_info() {
   );
   $export['group_site_instructions|node|site|form'] = $field_group;
 
-  $field_group = new stdClass;
+  $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
   $field_group->identifier = 'group_site_locations|node|site|form';
@@ -188,7 +188,7 @@ function s4_sites_field_group_info() {
   );
   $export['group_site_locations|node|site|form'] = $field_group;
 
-  $field_group = new stdClass;
+  $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
   $field_group->identifier = 'group_site_population|node|site|form';
@@ -215,7 +215,7 @@ function s4_sites_field_group_info() {
   );
   $export['group_site_population|node|site|form'] = $field_group;
 
-  $field_group = new stdClass;
+  $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
   $field_group->identifier = 'group_site_tabs|node|site|form';

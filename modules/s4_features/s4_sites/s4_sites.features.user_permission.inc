@@ -148,12 +148,6 @@ function s4_sites_user_default_permissions() {
     'roles' => array(),
   );
 
-  // Exported permission: delete terms in 11
-  $permissions['delete terms in 11'] = array(
-    'name' => 'delete terms in 11',
-    'roles' => array(),
-  );
-
   // Exported permission: delete terms in 2
   $permissions['delete terms in 2'] = array(
     'name' => 'delete terms in 2',
@@ -280,12 +274,6 @@ function s4_sites_user_default_permissions() {
   // Exported permission: edit terms in 10
   $permissions['edit terms in 10'] = array(
     'name' => 'edit terms in 10',
-    'roles' => array(),
-  );
-
-  // Exported permission: edit terms in 11
-  $permissions['edit terms in 11'] = array(
-    'name' => 'edit terms in 11',
     'roles' => array(),
   );
 

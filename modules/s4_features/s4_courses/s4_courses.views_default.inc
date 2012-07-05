@@ -166,7 +166,7 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: User: Bulk operations */
+  /* Field: Bulk operations: User */
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'users';
   $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
@@ -270,7 +270,6 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['fields']['views_bulk_operations']['vbo']['enable_select_all_pages'] = 1;
   $handler->display->display_options['fields']['views_bulk_operations']['vbo']['display_type'] = '1';
   $handler->display->display_options['fields']['views_bulk_operations']['vbo']['display_result'] = 1;
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['merge_single_action'] = 0;
   $handler->display->display_options['fields']['views_bulk_operations']['vbo']['force_single'] = 0;
   /* Field: User: Uid */
   $handler->display->display_options['fields']['uid']['id'] = 'uid';
@@ -533,7 +532,7 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: User: Bulk operations */
+  /* Field: Bulk operations: User */
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'users';
   $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
@@ -639,7 +638,6 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['fields']['views_bulk_operations']['vbo']['enable_select_all_pages'] = 1;
   $handler->display->display_options['fields']['views_bulk_operations']['vbo']['display_type'] = '1';
   $handler->display->display_options['fields']['views_bulk_operations']['vbo']['display_result'] = 1;
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['merge_single_action'] = 1;
   $handler->display->display_options['fields']['views_bulk_operations']['vbo']['force_single'] = 0;
   /* Field: Field: First Name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
@@ -692,7 +690,7 @@ function s4_courses_views_default_views() {
     t('Site'),
     t('Assessment'),
     t('All'),
-    t('Bulk operations'),
+    t('User'),
     t('All faculty students'),
     t('Search your students'),
     t('Items per page'),
@@ -717,286 +715,6 @@ function s4_courses_views_default_views() {
     t('signup/create/[uid]'),
   );
   $export['course_students'] = $view;
-
-  $view = new view();
-  $view->name = 'email_faculty';
-  $view->description = '';
-  $view->tag = 'default';
-  $view->base_table = 'node';
-  $view->human_name = 'Email: Faculty';
-  $view->core = 7;
-  $view->api_version = '3.0';
-  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
-
-  /* Display: Master */
-  $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Faculty';
-  $handler->display->display_options['access']['type'] = 'perm';
-  $handler->display->display_options['access']['perm'] = 'send bulk emails';
-  $handler->display->display_options['cache']['type'] = 'none';
-  $handler->display->display_options['query']['type'] = 'views_query';
-  $handler->display->display_options['query']['options']['disable_sql_rewrite'] = TRUE;
-  $handler->display->display_options['query']['options']['distinct'] = TRUE;
-  $handler->display->display_options['exposed_form']['type'] = 'basic';
-  $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '30';
-  $handler->display->display_options['style_plugin'] = 'table';
-  /* Relationship: Content: Faculty (field_course_faculty) */
-  $handler->display->display_options['relationships']['field_course_faculty_uid']['id'] = 'field_course_faculty_uid';
-  $handler->display->display_options['relationships']['field_course_faculty_uid']['table'] = 'field_data_field_course_faculty';
-  $handler->display->display_options['relationships']['field_course_faculty_uid']['field'] = 'field_course_faculty_uid';
-  $handler->display->display_options['relationships']['field_course_faculty_uid']['delta'] = '-1';
-  /* Relationship: Content: Course (field_course) - reverse */
-  $handler->display->display_options['relationships']['reverse_field_course_node']['id'] = 'reverse_field_course_node';
-  $handler->display->display_options['relationships']['reverse_field_course_node']['table'] = 'node';
-  $handler->display->display_options['relationships']['reverse_field_course_node']['field'] = 'reverse_field_course_node';
-  /* Relationship: Content: Site (field_site) */
-  $handler->display->display_options['relationships']['field_site_nid']['id'] = 'field_site_nid';
-  $handler->display->display_options['relationships']['field_site_nid']['table'] = 'field_data_field_site';
-  $handler->display->display_options['relationships']['field_site_nid']['field'] = 'field_site_nid';
-  $handler->display->display_options['relationships']['field_site_nid']['relationship'] = 'reverse_field_course_node';
-  $handler->display->display_options['relationships']['field_site_nid']['delta'] = '-1';
-  /* Field: User: Bulk operations */
-  $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
-  $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'users';
-  $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
-  $handler->display->display_options['fields']['views_bulk_operations']['relationship'] = 'field_course_faculty_uid';
-  $handler->display->display_options['fields']['views_bulk_operations']['label'] = 'Email';
-  $handler->display->display_options['fields']['views_bulk_operations']['hide_alter_empty'] = FALSE;
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['operations'] = array(
-    'action::s4_core_email_user_action' => array(
-      'selected' => TRUE,
-      'skip_confirmation' => 1,
-    ),
-  );
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['display_type'] = '1';
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['display_result'] = 1;
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['merge_single_action'] = 0;
-  /* Field: Field: First Name */
-  $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
-  $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
-  $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
-  $handler->display->display_options['fields']['field_first_name']['relationship'] = 'field_course_faculty_uid';
-  $handler->display->display_options['fields']['field_first_name']['hide_alter_empty'] = FALSE;
-  /* Field: Field: Last Name */
-  $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
-  $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
-  $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
-  $handler->display->display_options['fields']['field_last_name']['relationship'] = 'field_course_faculty_uid';
-  $handler->display->display_options['fields']['field_last_name']['hide_alter_empty'] = FALSE;
-  /* Field: Content: Catalog number */
-  $handler->display->display_options['fields']['field_course_catalog_number']['id'] = 'field_course_catalog_number';
-  $handler->display->display_options['fields']['field_course_catalog_number']['table'] = 'field_data_field_course_catalog_number';
-  $handler->display->display_options['fields']['field_course_catalog_number']['field'] = 'field_course_catalog_number';
-  $handler->display->display_options['fields']['field_course_catalog_number']['label'] = 'Number';
-  $handler->display->display_options['fields']['field_course_catalog_number']['hide_alter_empty'] = FALSE;
-  /* Field: Content: Course title */
-  $handler->display->display_options['fields']['field_course_title']['id'] = 'field_course_title';
-  $handler->display->display_options['fields']['field_course_title']['table'] = 'field_data_field_course_title';
-  $handler->display->display_options['fields']['field_course_title']['field'] = 'field_course_title';
-  $handler->display->display_options['fields']['field_course_title']['label'] = 'Title';
-  $handler->display->display_options['fields']['field_course_title']['hide_alter_empty'] = FALSE;
-  /* Field: Content: Section number */
-  $handler->display->display_options['fields']['field_course_section']['id'] = 'field_course_section';
-  $handler->display->display_options['fields']['field_course_section']['table'] = 'field_data_field_course_section';
-  $handler->display->display_options['fields']['field_course_section']['field'] = 'field_course_section';
-  $handler->display->display_options['fields']['field_course_section']['label'] = 'Section';
-  $handler->display->display_options['fields']['field_course_section']['hide_alter_empty'] = FALSE;
-  $handler->display->display_options['fields']['field_course_section']['settings'] = array(
-    'thousand_separator' => ' ',
-    'prefix_suffix' => 1,
-  );
-  /* Field: Content: Subject */
-  $handler->display->display_options['fields']['field_course_subject']['id'] = 'field_course_subject';
-  $handler->display->display_options['fields']['field_course_subject']['table'] = 'field_data_field_course_subject';
-  $handler->display->display_options['fields']['field_course_subject']['field'] = 'field_course_subject';
-  $handler->display->display_options['fields']['field_course_subject']['hide_alter_empty'] = FALSE;
-  /* Field: Course: Total course enrollment */
-  $handler->display->display_options['fields']['course_student_enrollment']['id'] = 'course_student_enrollment';
-  $handler->display->display_options['fields']['course_student_enrollment']['table'] = 's4_course';
-  $handler->display->display_options['fields']['course_student_enrollment']['field'] = 'course_student_enrollment';
-  $handler->display->display_options['fields']['course_student_enrollment']['label'] = 'Enrollment';
-  $handler->display->display_options['fields']['course_student_enrollment']['hide_alter_empty'] = FALSE;
-  /* Sort criterion: Content: Post date */
-  $handler->display->display_options['sorts']['created']['id'] = 'created';
-  $handler->display->display_options['sorts']['created']['table'] = 'node';
-  $handler->display->display_options['sorts']['created']['field'] = 'created';
-  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  /* Filter criterion: Content: Published */
-  $handler->display->display_options['filters']['status']['id'] = 'status';
-  $handler->display->display_options['filters']['status']['table'] = 'node';
-  $handler->display->display_options['filters']['status']['field'] = 'status';
-  $handler->display->display_options['filters']['status']['value'] = 1;
-  $handler->display->display_options['filters']['status']['group'] = 0;
-  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Content: Type */
-  $handler->display->display_options['filters']['type']['id'] = 'type';
-  $handler->display->display_options['filters']['type']['table'] = 'node';
-  $handler->display->display_options['filters']['type']['field'] = 'type';
-  $handler->display->display_options['filters']['type']['value'] = array(
-    'course' => 'course',
-  );
-  /* Filter criterion: Content: Subject (field_course_subject) */
-  $handler->display->display_options['filters']['field_course_subject_value']['id'] = 'field_course_subject_value';
-  $handler->display->display_options['filters']['field_course_subject_value']['table'] = 'field_data_field_course_subject';
-  $handler->display->display_options['filters']['field_course_subject_value']['field'] = 'field_course_subject_value';
-  $handler->display->display_options['filters']['field_course_subject_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_course_subject_value']['expose']['operator_id'] = 'field_course_subject_value_op';
-  $handler->display->display_options['filters']['field_course_subject_value']['expose']['label'] = 'Subject code';
-  $handler->display->display_options['filters']['field_course_subject_value']['expose']['operator'] = 'field_course_subject_value_op';
-  $handler->display->display_options['filters']['field_course_subject_value']['expose']['identifier'] = 'field_course_subject_value';
-  $handler->display->display_options['filters']['field_course_subject_value']['expose']['remember'] = TRUE;
-  /* Filter criterion: Content: Term (field_term) */
-  $handler->display->display_options['filters']['field_term_nid']['id'] = 'field_term_nid';
-  $handler->display->display_options['filters']['field_term_nid']['table'] = 'field_data_field_term';
-  $handler->display->display_options['filters']['field_term_nid']['field'] = 'field_term_nid';
-  $handler->display->display_options['filters']['field_term_nid']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_term_nid']['expose']['operator_id'] = 'field_term_nid_op';
-  $handler->display->display_options['filters']['field_term_nid']['expose']['label'] = 'Term';
-  $handler->display->display_options['filters']['field_term_nid']['expose']['operator'] = 'field_term_nid_op';
-  $handler->display->display_options['filters']['field_term_nid']['expose']['identifier'] = 'field_term_nid';
-  $handler->display->display_options['filters']['field_term_nid']['expose']['remember'] = TRUE;
-  /* Filter criterion: Content: Issues addressed (field_csu_facility) */
-  $handler->display->display_options['filters']['field_csu_facility_tid']['id'] = 'field_csu_facility_tid';
-  $handler->display->display_options['filters']['field_csu_facility_tid']['table'] = 'field_data_field_csu_facility';
-  $handler->display->display_options['filters']['field_csu_facility_tid']['field'] = 'field_csu_facility_tid';
-  $handler->display->display_options['filters']['field_csu_facility_tid']['relationship'] = 'field_site_nid';
-  $handler->display->display_options['filters']['field_csu_facility_tid']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_csu_facility_tid']['expose']['operator_id'] = 'field_csu_facility_tid_op';
-  $handler->display->display_options['filters']['field_csu_facility_tid']['expose']['label'] = 'Site issues';
-  $handler->display->display_options['filters']['field_csu_facility_tid']['expose']['operator'] = 'field_csu_facility_tid_op';
-  $handler->display->display_options['filters']['field_csu_facility_tid']['expose']['identifier'] = 'field_csu_facility_tid';
-  $handler->display->display_options['filters']['field_csu_facility_tid']['expose']['multiple'] = TRUE;
-  $handler->display->display_options['filters']['field_csu_facility_tid']['type'] = 'select';
-  $handler->display->display_options['filters']['field_csu_facility_tid']['vocabulary'] = 'issues_addressed';
-  /* Filter criterion: Content: Organization type (field_csu_org_type) */
-  $handler->display->display_options['filters']['field_csu_org_type_tid']['id'] = 'field_csu_org_type_tid';
-  $handler->display->display_options['filters']['field_csu_org_type_tid']['table'] = 'field_data_field_csu_org_type';
-  $handler->display->display_options['filters']['field_csu_org_type_tid']['field'] = 'field_csu_org_type_tid';
-  $handler->display->display_options['filters']['field_csu_org_type_tid']['vocabulary'] = 'organization_type';
-  /* Filter criterion: Location: City */
-  $handler->display->display_options['filters']['city']['id'] = 'city';
-  $handler->display->display_options['filters']['city']['table'] = 'location';
-  $handler->display->display_options['filters']['city']['field'] = 'city';
-  $handler->display->display_options['filters']['city']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['city']['expose']['operator_id'] = 'city_op';
-  $handler->display->display_options['filters']['city']['expose']['label'] = 'City';
-  $handler->display->display_options['filters']['city']['expose']['operator'] = 'city_op';
-  $handler->display->display_options['filters']['city']['expose']['identifier'] = 'city';
-
-  /* Display: Page */
-  $handler = $view->new_display('page', 'Page', 'page');
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
-  $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Content: Published */
-  $handler->display->display_options['filters']['status']['id'] = 'status';
-  $handler->display->display_options['filters']['status']['table'] = 'node';
-  $handler->display->display_options['filters']['status']['field'] = 'status';
-  $handler->display->display_options['filters']['status']['value'] = 1;
-  $handler->display->display_options['filters']['status']['group'] = 0;
-  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Content: Type */
-  $handler->display->display_options['filters']['type']['id'] = 'type';
-  $handler->display->display_options['filters']['type']['table'] = 'node';
-  $handler->display->display_options['filters']['type']['field'] = 'type';
-  $handler->display->display_options['filters']['type']['value'] = array(
-    'course' => 'course',
-  );
-  /* Filter criterion: Content: Subject (field_course_subject) */
-  $handler->display->display_options['filters']['field_course_subject_value']['id'] = 'field_course_subject_value';
-  $handler->display->display_options['filters']['field_course_subject_value']['table'] = 'field_data_field_course_subject';
-  $handler->display->display_options['filters']['field_course_subject_value']['field'] = 'field_course_subject_value';
-  $handler->display->display_options['filters']['field_course_subject_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_course_subject_value']['expose']['operator_id'] = 'field_course_subject_value_op';
-  $handler->display->display_options['filters']['field_course_subject_value']['expose']['label'] = 'Subject code';
-  $handler->display->display_options['filters']['field_course_subject_value']['expose']['operator'] = 'field_course_subject_value_op';
-  $handler->display->display_options['filters']['field_course_subject_value']['expose']['identifier'] = 'field_course_subject_value';
-  $handler->display->display_options['filters']['field_course_subject_value']['expose']['remember'] = TRUE;
-  /* Filter criterion: Content: Term (field_term) */
-  $handler->display->display_options['filters']['field_term_nid']['id'] = 'field_term_nid';
-  $handler->display->display_options['filters']['field_term_nid']['table'] = 'field_data_field_term';
-  $handler->display->display_options['filters']['field_term_nid']['field'] = 'field_term_nid';
-  $handler->display->display_options['filters']['field_term_nid']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_term_nid']['expose']['operator_id'] = 'field_term_nid_op';
-  $handler->display->display_options['filters']['field_term_nid']['expose']['label'] = 'Term';
-  $handler->display->display_options['filters']['field_term_nid']['expose']['operator'] = 'field_term_nid_op';
-  $handler->display->display_options['filters']['field_term_nid']['expose']['identifier'] = 'field_term_nid';
-  $handler->display->display_options['filters']['field_term_nid']['expose']['remember'] = TRUE;
-  /* Filter criterion: Content: Issues addressed (field_csu_facility) */
-  $handler->display->display_options['filters']['field_csu_facility_tid']['id'] = 'field_csu_facility_tid';
-  $handler->display->display_options['filters']['field_csu_facility_tid']['table'] = 'field_data_field_csu_facility';
-  $handler->display->display_options['filters']['field_csu_facility_tid']['field'] = 'field_csu_facility_tid';
-  $handler->display->display_options['filters']['field_csu_facility_tid']['relationship'] = 'field_site_nid';
-  $handler->display->display_options['filters']['field_csu_facility_tid']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_csu_facility_tid']['expose']['operator_id'] = 'field_csu_facility_tid_op';
-  $handler->display->display_options['filters']['field_csu_facility_tid']['expose']['label'] = 'Site issues';
-  $handler->display->display_options['filters']['field_csu_facility_tid']['expose']['operator'] = 'field_csu_facility_tid_op';
-  $handler->display->display_options['filters']['field_csu_facility_tid']['expose']['identifier'] = 'field_csu_facility_tid';
-  $handler->display->display_options['filters']['field_csu_facility_tid']['expose']['multiple'] = TRUE;
-  $handler->display->display_options['filters']['field_csu_facility_tid']['type'] = 'select';
-  $handler->display->display_options['filters']['field_csu_facility_tid']['vocabulary'] = 'issues_addressed';
-  /* Filter criterion: Content: Organization type (field_csu_org_type) */
-  $handler->display->display_options['filters']['field_csu_org_type_tid']['id'] = 'field_csu_org_type_tid';
-  $handler->display->display_options['filters']['field_csu_org_type_tid']['table'] = 'field_data_field_csu_org_type';
-  $handler->display->display_options['filters']['field_csu_org_type_tid']['field'] = 'field_csu_org_type_tid';
-  $handler->display->display_options['filters']['field_csu_org_type_tid']['relationship'] = 'field_site_nid';
-  $handler->display->display_options['filters']['field_csu_org_type_tid']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_csu_org_type_tid']['expose']['operator_id'] = 'field_csu_org_type_tid_op';
-  $handler->display->display_options['filters']['field_csu_org_type_tid']['expose']['label'] = 'Site organization type';
-  $handler->display->display_options['filters']['field_csu_org_type_tid']['expose']['operator'] = 'field_csu_org_type_tid_op';
-  $handler->display->display_options['filters']['field_csu_org_type_tid']['expose']['identifier'] = 'field_csu_org_type_tid';
-  $handler->display->display_options['filters']['field_csu_org_type_tid']['expose']['multiple'] = TRUE;
-  $handler->display->display_options['filters']['field_csu_org_type_tid']['type'] = 'select';
-  $handler->display->display_options['filters']['field_csu_org_type_tid']['vocabulary'] = 'organization_type';
-  /* Filter criterion: Location: City */
-  $handler->display->display_options['filters']['city']['id'] = 'city';
-  $handler->display->display_options['filters']['city']['table'] = 'location';
-  $handler->display->display_options['filters']['city']['field'] = 'city';
-  $handler->display->display_options['filters']['city']['relationship'] = 'field_site_nid';
-  $handler->display->display_options['filters']['city']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['city']['expose']['operator_id'] = 'city_op';
-  $handler->display->display_options['filters']['city']['expose']['label'] = 'City';
-  $handler->display->display_options['filters']['city']['expose']['operator'] = 'city_op';
-  $handler->display->display_options['filters']['city']['expose']['identifier'] = 'city';
-  $handler->display->display_options['path'] = 'email/faculty';
-  $handler->display->display_options['menu']['type'] = 'tab';
-  $handler->display->display_options['menu']['title'] = 'Faculty';
-  $handler->display->display_options['menu']['weight'] = '0';
-  $translatables['email_faculty'] = array(
-    t('Master'),
-    t('Faculty'),
-    t('more'),
-    t('Apply'),
-    t('Reset'),
-    t('Sort by'),
-    t('Asc'),
-    t('Desc'),
-    t('Items per page'),
-    t('- All -'),
-    t('Offset'),
-    t('« first'),
-    t('‹ previous'),
-    t('next ›'),
-    t('last »'),
-    t('field_course_faculty'),
-    t('field_course'),
-    t('field_site'),
-    t('Email'),
-    t('First Name'),
-    t('Last Name'),
-    t('Number'),
-    t('Title'),
-    t('Section'),
-    t('Subject'),
-    t('Enrollment'),
-    t('Subject code'),
-    t('Term'),
-    t('Site issues'),
-    t('City'),
-    t('Page'),
-    t('Site organization type'),
-  );
-  $export['email_faculty'] = $view;
 
   $view = new view();
   $view->name = 'terms';

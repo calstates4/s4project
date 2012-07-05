@@ -10,7 +10,7 @@
 function s4_courses_ds_layout_settings_info() {
   $export = array();
 
-  $ds_layout = new stdClass;
+  $ds_layout = new stdClass();
   $ds_layout->api_version = 1;
   $ds_layout->id = 'node|course|default';
   $ds_layout->entity_type = 'node';

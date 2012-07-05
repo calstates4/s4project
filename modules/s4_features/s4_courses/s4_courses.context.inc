@@ -10,7 +10,7 @@
 function s4_courses_context_default_contexts() {
   $export = array();
 
-  $context = new stdClass;
+  $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'course';
@@ -65,7 +65,7 @@ function s4_courses_context_default_contexts() {
   t('course');
   $export['course'] = $context;
 
-  $context = new stdClass;
+  $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'course-list-staff';
@@ -110,7 +110,7 @@ function s4_courses_context_default_contexts() {
   t('course');
   $export['course-list-staff'] = $context;
 
-  $context = new stdClass;
+  $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'course-staff';
@@ -165,7 +165,7 @@ function s4_courses_context_default_contexts() {
   t('course');
   $export['course-staff'] = $context;
 
-  $context = new stdClass;
+  $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'frontpage-courses';

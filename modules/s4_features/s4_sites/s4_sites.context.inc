@@ -10,7 +10,7 @@
 function s4_sites_context_default_contexts() {
   $export = array();
 
-  $context = new stdClass;
+  $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'map';
@@ -44,7 +44,7 @@ function s4_sites_context_default_contexts() {
   t('sites');
   $export['map'] = $context;
 
-  $context = new stdClass;
+  $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'site';
@@ -99,7 +99,7 @@ function s4_sites_context_default_contexts() {
   t('sites');
   $export['site'] = $context;
 
-  $context = new stdClass;
+  $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'site-file';
@@ -126,7 +126,7 @@ function s4_sites_context_default_contexts() {
   t('site');
   $export['site-file'] = $context;
 
-  $context = new stdClass;
+  $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'site-form-view';
@@ -162,7 +162,7 @@ function s4_sites_context_default_contexts() {
   t('sites');
   $export['site-form-view'] = $context;
 
-  $context = new stdClass;
+  $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'site-forms';
@@ -213,7 +213,7 @@ function s4_sites_context_default_contexts() {
   t('sites');
   $export['site-forms'] = $context;
 
-  $context = new stdClass;
+  $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'site-list';
@@ -270,7 +270,7 @@ function s4_sites_context_default_contexts() {
   t('sites');
   $export['site-list'] = $context;
 
-  $context = new stdClass;
+  $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'site-list-link';
@@ -295,7 +295,7 @@ function s4_sites_context_default_contexts() {
   t('sites');
   $export['site-list-link'] = $context;
 
-  $context = new stdClass;
+  $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'site-list-staff';
@@ -330,7 +330,7 @@ function s4_sites_context_default_contexts() {
   t('sites');
   $export['site-list-staff'] = $context;
 
-  $context = new stdClass;
+  $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'site-location-list';
@@ -366,7 +366,7 @@ function s4_sites_context_default_contexts() {
   t('sites');
   $export['site-location-list'] = $context;
 
-  $context = new stdClass;
+  $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'site-moderation';
@@ -399,7 +399,7 @@ function s4_sites_context_default_contexts() {
   t('sites');
   $export['site-moderation'] = $context;
 
-  $context = new stdClass;
+  $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'site-notes';
@@ -438,7 +438,7 @@ function s4_sites_context_default_contexts() {
   t('sites');
   $export['site-notes'] = $context;
 
-  $context = new stdClass;
+  $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'site-staff';
@@ -477,7 +477,7 @@ function s4_sites_context_default_contexts() {
   t('sites');
   $export['site-staff'] = $context;
 
-  $context = new stdClass;
+  $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'site-students';
@@ -516,7 +516,7 @@ function s4_sites_context_default_contexts() {
   t('site');
   $export['site-students'] = $context;
 
-  $context = new stdClass;
+  $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'views-contact-records';

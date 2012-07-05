@@ -10,7 +10,7 @@
 function s4_sites_ds_layout_settings_info() {
   $export = array();
 
-  $ds_layout = new stdClass;
+  $ds_layout = new stdClass();
   $ds_layout->api_version = 1;
   $ds_layout->id = 'node|file|default';
   $ds_layout->entity_type = 'node';
@@ -44,7 +44,7 @@ function s4_sites_ds_layout_settings_info() {
   );
   $export['node|file|default'] = $ds_layout;
 
-  $ds_layout = new stdClass;
+  $ds_layout = new stdClass();
   $ds_layout->api_version = 1;
   $ds_layout->id = 'node|site|default';
   $ds_layout->entity_type = 'node';
