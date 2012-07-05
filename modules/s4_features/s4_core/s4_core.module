@@ -1074,7 +1074,11 @@ function s4_core_action_info() {
 *  Action to send an email to the selected user
 */
 function s4_core_email_user_action($entity, $context) {
-  drupal_mail('s4_core', 'action_send_email', $entity->mail, language_default(), $context);
+  
+  $reply_to = (valid_email_address($context['reply_to']))
+              ? $context['reply_to']
+              : variable_get('site_mail', '');
+  drupal_mail('s4_core', 'action_send_email', $entity->mail, language_default(), $context, $reply_to);
 }
 
 /**
@@ -1099,7 +1103,10 @@ function s4_core_email_site_coordinator_action($entity, $context) {
   if (!$email[0]['email']) {
     return NULL;
   }
-  drupal_mail('s4_core', 'action_send_email', $email[0]['email'], language_default(), $context);
+  $reply_to = (valid_email_address($context['reply_to']))
+              ? $context['reply_to']
+              : variable_get('site_mail', '');
+  drupal_mail('s4_core', 'action_send_email', $email[0]['email'], language_default(), $context, $reply_to);
 }
 
 /**
@@ -1116,6 +1123,16 @@ function s4_core_email_site_coordinator_action_form($context) {
   if (!isset($context['message'])) {
     $context['message'] = '';
   }
+  if (!isset($context['reply_to'])) {
+    $context['reply_to'] = variable_get('site_mail', '');
+  }
+  $form['reply_to'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Reply-to email'),
+    '#default_value' => $context['reply_to'],
+    '#maxlength' => '254',
+    '#description' => t('The email address users will see when viewing or replying to the message.'),
+  );
   $form['subject'] = array(
     '#type' => 'textfield',
     '#title' => t('Subject'),
@@ -1149,6 +1166,7 @@ function s4_core_email_site_coordinator_action_submit($form, $form_state) {
   $params = array(
     'subject'   => $form_state['values']['subject'],
     'message'   => $form_state['values']['message'],
+    'reply_to'  => $form_state['values']['reply_to'],
   );
   return $params;
 }
