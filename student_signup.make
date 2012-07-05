@@ -180,7 +180,7 @@ projects[workbench_moderation_notes][subdir] = "contrib"
 projects[workbench_moderation_notes][version] = "1.x-dev"
 
 projects[webform][subdir] = "contrib"
-projects[webform][version] = "3.11"
+projects[webform][version] = "3.18"
 
 projects[wysiwyg][subdir] = "contrib"
 projects[wysiwyg][version] = "2.1"
