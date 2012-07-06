@@ -1060,6 +1060,13 @@ function s4_core_action_info() {
         'configurable' => TRUE,
         'triggers' => array('any'),
       ),
+      's4_core_email_site_action' => array(
+        'type' => 'system',
+        'label' => t('Send email to site'),
+        'configurable' => TRUE,
+        'behavior' => array('sends_notification'),
+        'triggers' => array('document_expiration'),
+      ),
       's4_core_document_about_to_expire_action' => array(
         'type' => 'notifications',
         'label' => t('Send notifications about document close to expiration date'),
@@ -1079,6 +1086,32 @@ function s4_core_email_user_action($entity, $context) {
               ? $context['reply_to']
               : variable_get('site_mail', '');
   drupal_mail('s4_core', 'action_send_email', $entity->mail, language_default(), $context, $reply_to);
+}
+
+function s4_core_email_site_action($entity, $context) {
+  $email = field_get_items('node', $entity, 'field_site_email');
+  if(!$email[0]['email']) {
+    return;
+  }
+  $reply_to = (valid_email_address($context['reply_to']))
+              ? $context['reply_to']
+              : variable_get('site_mail', '');
+  drupal_mail('s4_core', 'action_send_email', $email[0]['email'], language_default(), $context, $reply_to);
+}
+
+
+/**
+ * Form callback for s4_core_email_site_action
+ */
+function s4_core_email_site_action_form($context) {
+  return s4_core_email_site_coordinator_action_form($context);
+}
+
+/**
+*  Form submit callback for s4_core_email_user_action
+*/
+function s4_core_email_site_action_submit($form, $form_state) {
+  return s4_core_email_site_coordinator_action_submit($form, $form_state);
 }
 
 /**

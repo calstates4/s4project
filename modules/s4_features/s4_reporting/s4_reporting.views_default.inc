@@ -2064,6 +2064,173 @@ Fields',
   $handler->display->display_options['relationships']['field_course_nid']['field'] = 'field_course_nid';
   $handler->display->display_options['relationships']['field_course_nid']['relationship'] = 'reverse_field_site_node';
   $handler->display->display_options['relationships']['field_course_nid']['delta'] = '-1';
+  /* Field: Bulk operations: Content */
+  $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
+  $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'node';
+  $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
+  $handler->display->display_options['fields']['views_bulk_operations']['label'] = 'Email';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['entity_load_capacity'] = '10';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['operations'] = array(
+    'action::node_assign_owner_action' => array(
+      'selected' => 0,
+      'use_queue' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::views_bulk_operations_delete_item' => array(
+      'selected' => 0,
+      'use_queue' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::system_message_action' => array(
+      'selected' => 0,
+      'use_queue' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::views_bulk_operations_script_action' => array(
+      'selected' => 0,
+      'use_queue' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::flag_node_action' => array(
+      'selected' => 0,
+      'use_queue' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::node_make_sticky_action' => array(
+      'selected' => 0,
+      'use_queue' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::node_make_unsticky_action' => array(
+      'selected' => 0,
+      'use_queue' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::views_bulk_operations_modify_action' => array(
+      'selected' => 0,
+      'use_queue' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+      'settings' => array(
+        'show_all_tokens' => 1,
+        'display_values' => array(
+          '_all_' => '_all_',
+        ),
+      ),
+    ),
+    'action::views_bulk_operations_argument_selector_action' => array(
+      'selected' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+      'settings' => array(
+        'url' => '',
+      ),
+    ),
+    'action::node_promote_action' => array(
+      'selected' => 0,
+      'use_queue' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::node_publish_action' => array(
+      'selected' => 0,
+      'use_queue' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::system_goto_action' => array(
+      'selected' => 0,
+      'use_queue' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::node_unpromote_action' => array(
+      'selected' => 0,
+      'use_queue' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::node_save_action' => array(
+      'selected' => 0,
+      'use_queue' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::system_send_email_action' => array(
+      'selected' => 0,
+      'use_queue' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::s4_core_email_site_action' => array(
+      'selected' => 1,
+      'use_queue' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 1,
+      'label' => 'Send email to main site contact',
+    ),
+    'action::s4_core_email_site_coordinator_action' => array(
+      'selected' => 0,
+      'use_queue' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::s4_core_email_user_action' => array(
+      'selected' => 0,
+      'use_queue' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::s4_courses_bulk_signup_students_action' => array(
+      'selected' => 0,
+      'use_queue' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::node_unpublish_action' => array(
+      'selected' => 0,
+      'use_queue' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::node_unpublish_by_keyword_action' => array(
+      'selected' => 0,
+      'use_queue' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+  );
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['enable_select_all_pages'] = 1;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['display_type'] = '1';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['display_result'] = 1;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['force_single'] = 0;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -2629,10 +2796,10 @@ Fields',
     t('last »'),
     t('field_site'),
     t('field_course'),
+    t('Email'),
     t('Site'),
     t('Website'),
     t('<strong>Website:</strong> <a href="[field_website-url]">View website</a>'),
-    t('Email'),
     t('Contact'),
     t('<strong>Phone:</strong> [field_phone]<br/>
 <strong>Email:</strong> [field_site_email]<br/>
