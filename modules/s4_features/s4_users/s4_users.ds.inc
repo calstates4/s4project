@@ -10,7 +10,7 @@
 function s4_users_ds_field_settings_info() {
   $export = array();
 
-  $ds_fieldsetting = new stdClass;
+  $ds_fieldsetting = new stdClass();
   $ds_fieldsetting->api_version = 1;
   $ds_fieldsetting->id = 'user|user|default';
   $ds_fieldsetting->entity_type = 'user';
@@ -39,7 +39,7 @@ function s4_users_ds_field_settings_info() {
 function s4_users_ds_layout_settings_info() {
   $export = array();
 
-  $ds_layout = new stdClass;
+  $ds_layout = new stdClass();
   $ds_layout->api_version = 1;
   $ds_layout->id = 'user|user|default';
   $ds_layout->entity_type = 'user';

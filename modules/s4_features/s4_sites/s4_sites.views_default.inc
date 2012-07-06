@@ -164,8 +164,9 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['access']['type'] = 'type_role';
   $handler->display->display_options['access']['role'] = array(
     4 => '4',
-    3 => '3',
     5 => '5',
+    3 => '3',
+    6 => '6',
   );
   $handler->display->display_options['access']['node_type'] = 'site';
   $handler->display->display_options['cache']['type'] = 'none';
@@ -1212,7 +1213,7 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['access']['type'] = 'type_role';
   $handler->display->display_options['access']['role'] = array(
     4 => '4',
-    5 => '5',
+    6 => '6',
   );
   $handler->display->display_options['access']['node_type'] = 'site';
   $handler->display->display_options['cache']['type'] = 'none';

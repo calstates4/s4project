@@ -9,11 +9,11 @@
  */
 function s4_users_ctools_plugin_api() {
   list($module, $api) = func_get_args();
-  if ($module == "context" && $api == "context") {
+  if ($module == "context") {
     return array("version" => "3");
   }
   list($module, $api) = func_get_args();
-  if ($module == "ds" && $api == "ds") {
+  if ($module == "ds") {
     return array("version" => "1");
   }
 }
@@ -23,7 +23,7 @@ function s4_users_ctools_plugin_api() {
  */
 function s4_users_views_api() {
   list($module, $api) = func_get_args();
-  if ($module == "views" && $api == "views_default") {
+  if ($module == "views") {
     return array("version" => "3.0");
   }
 }
