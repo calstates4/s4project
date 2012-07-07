@@ -77,17 +77,11 @@ projects[field_collection_table][version] = "1.0-beta1"
 projects[flag][subdir] = "contrib"
 projects[flag][version] = "2.0-beta6"
 
-projects[front][subdir] = "contrib"
-projects[front][version] = "2.1"
-
 projects[gmap][subdir] = "contrib"
 projects[gmap][version] = "1.x-dev"
 
 ;projects[Guiders-JS][subdir] = "contrib"
 ;projects[Guiders-JS][version] = "1.x-dev"
-
-projects[homebox][subdir] = "contrib"
-projects[homebox][version] = "2.0-beta6"
 
 projects[imce][subdir] = "contrib"
 projects[imce][version] = "1.5"

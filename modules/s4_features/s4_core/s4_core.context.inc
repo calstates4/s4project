@@ -303,6 +303,28 @@ function s4_core_context_default_contexts() {
     ),
   );
   $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        's4_reporting-site_summary' => array(
+          'module' => 's4_reporting',
+          'delta' => 'site_summary',
+          'region' => 'content_top_left',
+          'weight' => '-47',
+        ),
+        'views-manage_sites-block_1' => array(
+          'module' => 'views',
+          'delta' => 'manage_sites-block_1',
+          'region' => 'content_top_left',
+          'weight' => '-46',
+        ),
+        's4_reporting-course_summary' => array(
+          'module' => 's4_reporting',
+          'delta' => 'course_summary',
+          'region' => 'content_top_right',
+          'weight' => '-10',
+        ),
+      ),
+    ),
     'theme_html' => array(
       'class' => 'staff-frontpage',
     ),
