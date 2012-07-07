@@ -1208,6 +1208,13 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['fields']['title_1']['relationship'] = 'field_term_nid';
   $handler->display->display_options['fields']['title_1']['label'] = 'Term';
   $handler->display->display_options['fields']['title_1']['link_to_node'] = FALSE;
+  /* Field: Field: Available programs */
+  $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
+  $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
+  $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
+  $handler->display->display_options['fields']['field_site_restrict']['label'] = 'Programs';
+  $handler->display->display_options['fields']['field_site_restrict']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_site_restrict']['delta_offset'] = '0';
   /* Field: Field: Last Name */
   $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
   $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
@@ -1320,6 +1327,20 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['filters']['field_term_nid']['expose']['identifier'] = 'field_term_nid';
   $handler->display->display_options['filters']['field_term_nid']['expose']['remember'] = TRUE;
   $handler->display->display_options['filters']['field_term_nid']['expose']['multiple'] = TRUE;
+  /* Filter criterion: Field: Available programs (field_site_restrict) */
+  $handler->display->display_options['filters']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['operator_id'] = 'field_site_restrict_tid_op';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['label'] = 'Course programs';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['operator'] = 'field_site_restrict_tid_op';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['identifier'] = 'field_site_restrict_tid';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_site_restrict_tid']['reduce_duplicates'] = TRUE;
+  $handler->display->display_options['filters']['field_site_restrict_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['vocabulary'] = 'site_restrictions';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['error_message'] = FALSE;
   $handler->display->display_options['path'] = 'courses';
 
   /* Display: Student course list */
@@ -1581,6 +1602,7 @@ function s4_courses_views_default_views() {
     t('Section'),
     t('Title'),
     t('Term'),
+    t('Programs'),
     t('Last Name'),
     t('Faculty'),
     t('[field_last_name], [field_first_name]'),
@@ -1588,6 +1610,7 @@ function s4_courses_views_default_views() {
     t('Enrollment'),
     t('Edit'),
     t('Catalog number'),
+    t('Course programs'),
     t('Student course list'),
     t('Course'),
     t('[field_course_subject] [field_course_catalog_number]'),
