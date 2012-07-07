@@ -84,33 +84,6 @@ function student_signup_install_cache_clear(&$context) {
  * Install batch callback that sets up role-based homepages.
  */
 function student_signup_setup_homepage(&$context) {
-  foreach(user_roles() as $rid => $name) {
-    db_delete('front_page')
-         ->condition('rid', $rid)
-         ->execute();
-    if($name == 'staff') {
-      $result = db_insert('front_page')
-      ->fields(array('rid' => $rid,
-               'mode' => 'alias',
-               'data' => 'home',
-               'filter_format' => '',
-               'weight' => 0))
-      ->execute();
-      //While we are here, add the role "staff" to user 1.
-      $user = user_load(1);
-      $user->roles[$rid] = $name;
-      user_save($user);
-    }
-    else {
-      db_insert('front_page')
-      ->fields(array('rid' => $rid,
-               'mode' => '',
-               'data' => '',
-               'filter_format' => '',
-               'weight' => 0))
-      ->execute();
-    }
-  }
   // Disable all DB blocks
   if (module_exists('block')) {
     db_query("UPDATE {block} SET status = 0, region = ''");
