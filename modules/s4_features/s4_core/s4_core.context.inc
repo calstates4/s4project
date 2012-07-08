@@ -317,11 +317,17 @@ function s4_core_context_default_contexts() {
           'region' => 'content_top_left',
           'weight' => '-46',
         ),
+        'menu-menu-staff-actions' => array(
+          'module' => 'menu',
+          'delta' => 'menu-staff-actions',
+          'region' => 'content_top_right',
+          'weight' => '-10',
+        ),
         's4_reporting-course_summary' => array(
           'module' => 's4_reporting',
           'delta' => 'course_summary',
           'region' => 'content_top_right',
-          'weight' => '-10',
+          'weight' => '-9',
         ),
       ),
     ),
