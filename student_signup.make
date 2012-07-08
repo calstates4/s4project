@@ -74,9 +74,6 @@ projects[field_collection][version] = "1.0-beta3"
 projects[field_collection_table][subdir] = "contrib"
 projects[field_collection_table][version] = "1.0-beta1"
 
-projects[flag][subdir] = "contrib"
-projects[flag][version] = "2.0-beta6"
-
 projects[gmap][subdir] = "contrib"
 projects[gmap][version] = "1.x-dev"
 

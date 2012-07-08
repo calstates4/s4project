@@ -233,15 +233,6 @@ function s4_core_user_default_permissions() {
     'module' => 'filter',
   );
 
-  // Exported permission: administer flags
-  $permissions['administer flags'] = array(
-    'name' => 'administer flags',
-    'roles' => array(
-      0 => 'administrator',
-    ),
-    'module' => 'flag',
-  );
-
   // Exported permission: administer image styles
   $permissions['administer image styles'] = array(
     'name' => 'administer image styles',
