@@ -22,7 +22,43 @@ function s4_core_menu_default_menu_links() {
     'external' => '1',
     'has_children' => '0',
     'expanded' => '0',
-    'weight' => '-42',
+    'weight' => '-43',
+  );
+  // Exported menu link: main-menu:forms
+  $menu_links['main-menu:forms'] = array(
+    'menu_name' => 'main-menu',
+    'link_path' => 'forms',
+    'router_path' => 'forms',
+    'link_title' => 'Forms',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+    ),
+    'module' => 'menu',
+    'hidden' => '0',
+    'external' => '0',
+    'has_children' => '0',
+    'expanded' => '0',
+    'weight' => '-47',
+  );
+  // Exported menu link: main-menu:forms/public
+  $menu_links['main-menu:forms/public'] = array(
+    'menu_name' => 'main-menu',
+    'link_path' => 'forms/public',
+    'router_path' => 'forms/public',
+    'link_title' => 'Forms',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+    ),
+    'module' => 'menu',
+    'hidden' => '0',
+    'external' => '0',
+    'has_children' => '0',
+    'expanded' => '0',
+    'weight' => '-48',
   );
   // Exported menu link: main-menu:reports
   $menu_links['main-menu:reports'] = array(
@@ -60,6 +96,24 @@ function s4_core_menu_default_menu_links() {
     'expanded' => '0',
     'weight' => '-50',
   );
+  // Exported menu link: main-menu:users
+  $menu_links['main-menu:users'] = array(
+    'menu_name' => 'main-menu',
+    'link_path' => 'users',
+    'router_path' => 'users',
+    'link_title' => 'Users',
+    'options' => array(
+      'attributes' => array(
+        'title' => '',
+      ),
+    ),
+    'module' => 'menu',
+    'hidden' => '0',
+    'external' => '0',
+    'has_children' => '0',
+    'expanded' => '0',
+    'weight' => '-45',
+  );
   // Exported menu link: menu-add-content:node/add/site
   $menu_links['menu-add-content:node/add/site'] = array(
     'menu_name' => 'menu-add-content',
@@ -80,10 +134,12 @@ function s4_core_menu_default_menu_links() {
   );
   // Translatables
   // Included for use with string extractors like potx.
+  t('Forms');
   t('Home');
   t('Logout');
   t('Reports');
   t('Site or Community Partner');
+  t('Users');
 
 
   return $menu_links;
