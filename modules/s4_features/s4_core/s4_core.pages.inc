@@ -140,10 +140,10 @@ function s4_core_signup($type, $nid) {
     foreach($forms as $form) {
       $form = field_collection_item_load($form['value']);
       $programs = field_get_items('field_collection_item', $form, 'field_site_restrict');
+      $webform = field_get_items('field_collection_item', $form, 'field_site_form');
       foreach($programs as $k => $program) {
-        if($program['tid'] == $_SESSION['s4_signup_program']) {
-          $webform = field_get_items('field_collection_item', $form, 'field_site_form');
-          drupal_goto('node/' . $webform[$k]['nid']);
+        if($program['tid'] == $_SESSION['s4_signup_program'] || $_SESSION['s4_signup_program'][$program['tid']]) {
+          drupal_goto('node/' . $webform[0]['nid']);
           return;
         }
       }
