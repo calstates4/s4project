@@ -18,7 +18,7 @@ class views_handler_s4_user_coordinator_select extends views_handler_field {
       return '<div class="signup signed-up"><div class="icon"></div>Site staff selected</div>';
     }
     return '<div class="signup"><div class="icon"></div>' .
-      l(t('Select this coordinator'), 's4/signup/coordinator/' . $values->nid,
+      l(t('Select this site staff'), 's4/signup/coordinator/' . $values->nid,
         array('attributes' => array('data-target' => 'signup-course')))
       . '</div>';
   }
