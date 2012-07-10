@@ -6,11 +6,9 @@ function s4_reporting_schema() {
   $schema['s4_reporting'] = array(
     'description' => 'Reporting data',
     'fields' => array(
-      'nid' => array('type' => 'int','not NULL' => TRUE, 'default' => 0),
-      'vid' => array('type' => 'int','not NULL' => TRUE, 'default' => 0), 
-      'filters' => array('type' => 'text', 'size' => 'big', 'not NULL' => TRUE),
-      'fields' =>  array('type' => 'text', 'size' => 'big', 'not NULL' => TRUE),
-      'data' =>    array('type' => 'text', 'size' => 'big', 'not NULL' => TRUE),
+      'report_key' => array('type' => 'text', 'size' => 'medium', 'not null' => TRUE),
+      'date' => array('type' => 'int', 'not null' => TRUE),
+      'data' =>    array('type' => 'text', 'size' => 'big', 'not null' => TRUE),
     ),  
   );
   

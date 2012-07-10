@@ -198,3 +198,193 @@ function _s4_reporting_get_site_sids($node, $type = 'signup') {
 	}
 	return $sids;
 }
+
+function s4_reporting_view_form_report($report_key) {
+	module_load_include('inc', 'webform', 'includes/webform.report');
+  $data = _s4_reporting_load_form_report($report_key);
+  $form = node_load($data['options']['webform']);
+  return webform_results_analysis($form, $data['submissions']);
+}
+
+function s4_reporting_view_form_report_form($form, $form_state, $report_key) {
+  module_load_include('inc', 'webform', 'includes/webform.report');
+  module_load_include('inc', 'webform', 'includes/webform.export');
+  module_load_include('inc', 'webform', 'includes/webform.components');
+
+  $form = array();
+  
+  $form['report_key'] = array(
+    '#type' => 'hidden',
+    '#value' => $report_key,
+  );
+  
+  $form['format'] = array(
+    '#type' => 'radios',
+    '#title' => t('Export format'),
+    '#options' => webform_export_list(),
+    '#default_value' => variable_get('webform_export_format', 'delimited'),
+  );
+
+  $form['delimiter'] = array(
+    '#type' => 'select',
+    '#title' => t('Delimited text format'),
+    '#description' => t('This is the delimiter used in the CSV/TSV file when downloading report results. Using tabs in the export is the most reliable method for preserving non-latin characters. You may want to change this to another character depending on the program with which you anticipate importing results.'),
+    '#default_value' => variable_get('webform_csv_delimiter', '\t'),
+    '#options' => array(
+      ','  => t('Comma (,)'),
+      '\t' => t('Tab (\t)'),
+      ';'  => t('Semicolon (;)'),
+      ':'  => t('Colon (:)'),
+      '|'  => t('Pipe (|)'),
+      '.'  => t('Period (.)'),
+      ' '  => t('Space ( )'),
+    ),
+  );
+  
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Download report'),
+  );
+  
+  return $form;
+}
+
+function s4_reporting_view_form_report_form_submit($form, $form_state) {
+  module_load_include('inc', 'webform', 'includes/webform.report');
+  module_load_include('inc', 'webform', 'includes/webform.export');
+  module_load_include('inc', 'webform', 'includes/webform.components');
+	$table = _s4_reporting_get_form_report_results($form_state['values']['report_key']);
+  
+  $options = array(
+    'delimiter' => ($form_state['values']['delimiter'])
+                      ? $form_state['values']['delimiter']
+                      : variable_get('webform_csv_delimiter', '\t'),
+    'select_keys' => 0,
+    'select_format' => 'separate',
+  );
+
+  $exporter = webform_export_create_handler($form_state['values']['format'], $options);
+  
+  $file_name = drupal_tempnam('temporary://', 'form_report_');
+  $handle = @fopen($file_name, 'w'); // The @ suppresses errors.
+  $exporter->bof($handle);
+  dpm($table);
+  foreach($table['header'] as $k => $head) {
+    if(is_array($head)) {
+      $table['header'][$k] = check_plain($head['value']);
+    }
+  }
+
+  $exporter->add_row($handle, $table['header']);
+  foreach($table['rows'] as $row) {
+    foreach($row as $r => $d) {
+      $row[$r] = strip_tags(str_replace('<br>', "\n", $d));
+    }
+    $exporter->add_row($handle, $row);
+  }
+  $exporter->eof($handle);
+
+  // Close the file.
+  @fclose($handle);
+
+  $export_name = _webform_safe_name($node->title);
+  $exporter->set_headers($export_name);
+  @readfile($file_name);  // The @ makes it silent.
+  @unlink($file_name);  // Clean up, the @ makes it silent.
+  exit();
+}
+
+function s4_reporting_view_form_title($report_key) {
+  $data = _s4_reporting_load_form_report($report_key);
+  $form = node_load($data['options']['webform']);
+  return t('Report for @form', array('@form' => check_plain($form->title)));
+}
+
+
+function s4_reporting_view_form_report_responses($report_key) {
+	$table = _s4_reporting_get_form_report_results($report_key);
+
+  return theme('table', array('header' => $table['header'], 'rows' => $table['rows']));
+}
+
+function _s4_reporting_load_form_report($report_key) {
+  $result = db_select('s4_reporting', 'r')
+            ->fields('r', array('data'))
+            ->condition('report_key', check_plain($report_key))
+            ->execute()
+            ->fetchField();
+  $result = unserialize($result);
+  return $result;
+}
+
+function _s4_reporting_get_form_report_results($report_key) {
+  module_load_include('inc', 'webform', 'includes/webform.report');
+	module_load_include('inc', 'webform', 'includes/webform.submissions');
+  $data = _s4_reporting_load_form_report($report_key);
+  $node = node_load($data['options']['webform']);
+  if (isset($_GET['results']) && is_numeric($_GET['results'])) {
+    $pager_count = $_GET['results'];
+  }
+
+  // Get all the submissions for the node.
+  
+  $header = theme('webform_results_table_header', array('node' => $node));
+  $submissions = webform_get_submissions($node->nid, $header, $pager_count);
+  // Generate a row for each submission.
+  foreach ($submissions as $sid => $submission) {
+    if($data['submissions'][$sid]) {
+      $signup = node_load($data['signups'][$sid]);
+      $student = field_get_items('node', $signup, 'field_user');
+      $student = user_load($student[0]['uid']);
+      $site = field_get_items('node', $signup, 'field_site');
+      $site = node_load($site[0]['nid']);
+      $last_name = field_get_items('user', $student, 'field_last_name');
+      $first_name = field_get_items('user', $student, 'field_first_name');
+      $site_staff = field_get_items('node', $signup, 'field_coordinator');
+      $site_staff = node_load($site_staff[0]['nid']);
+      $program = field_get_items('node', $signup, 'field_site_restrict');
+      $program = taxonomy_term_load($program[0]['tid']);
+      $course = field_get_items('node', $signup, 'field_course');
+      $course = node_load($course[0]['nid']);
+      $cell[] = t('@first_name @last_name', array('@first_name' => $first_name[0]['value'],
+                                                  '@last_name'  => $last_name[0]['value']));
+      $cell[] = l($site->title, 'node/'. $site->nid);
+      $cell[] = ($site_staff) ? l($site_staff->title, 'node/'. $site_staff->nid) : t('none');
+      $cell[] = ($program) ? $program->name : t('none');
+      $cell[] = ($course) ? l($course->title, 'node/'. $course->nid) : t('none');
+      $cell[] = format_date($submission->submitted, 'small');
+      $component_headers = array();
+  
+      // Generate a cell for each component.
+      foreach ($node->webform['components'] as $component) {
+        $data = isset($submission->data[$component['cid']]['value']) ? $submission->data[$component['cid']]['value'] : NULL;
+        $submission_output = webform_component_invoke($component['type'], 'table', $component, $data);
+        if ($submission_output !== NULL) {
+          $component_headers[] = check_plain($component['name']);
+          $cell[] = $submission_output;
+        }
+      }
+  
+      $rows[] = $cell;
+      unset($cell);
+    }
+  }
+  if (!empty($component_headers)) {
+    $header = array_merge($header, $component_headers);
+  }
+  $header = array_merge(array(t('Student'),
+                              t('Site'),
+                              t('Site staff'),
+                              t('Program'),
+                              t('Course'),
+                              ), $header);
+  foreach($header as $h => $head) {
+    if(in_array($head['data'], array('#', t('IP Address'), t('User')))) {
+      unset($header[$h]);
+    }
+  }
+  if (count($rows) == 0) {
+    $rows[] = array(array('data' => t('There are no submissions for this form. <a href="!url">View this form</a>.', array('!url' => url('node/' . $node->nid))), 'colspan' => 4));
+  }
+  return array('header' => $header, 'rows' => $rows);
+}

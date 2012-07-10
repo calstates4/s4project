@@ -1839,8 +1839,8 @@ Fields',
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'node';
   $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
-  $handler->display->display_options['fields']['views_bulk_operations']['label'] = 'Email';
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['entity_load_capacity'] = '10';
+  $handler->display->display_options['fields']['views_bulk_operations']['label'] = 'Bulk operations';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['entity_load_capacity'] = '3';
   $handler->display->display_options['fields']['views_bulk_operations']['vbo']['operations'] = array(
     'action::node_assign_owner_action' => array(
       'selected' => 0,
@@ -1864,13 +1864,6 @@ Fields',
       'label' => '',
     ),
     'action::views_bulk_operations_script_action' => array(
-      'selected' => 0,
-      'use_queue' => 0,
-      'skip_confirmation' => 0,
-      'override_label' => 0,
-      'label' => '',
-    ),
-    'action::flag_node_action' => array(
       'selected' => 0,
       'use_queue' => 0,
       'skip_confirmation' => 0,
@@ -1935,6 +1928,20 @@ Fields',
       'label' => '',
     ),
     'action::node_unpromote_action' => array(
+      'selected' => 0,
+      'use_queue' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::s4_reporting_forms_site' => array(
+      'selected' => 1,
+      'use_queue' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 1,
+      'label' => 'Run form report',
+    ),
+    'action::s4_reporting_forms_signup' => array(
       'selected' => 0,
       'use_queue' => 0,
       'skip_confirmation' => 0,
@@ -2123,6 +2130,7 @@ Fields',
   $handler->display->display_options['fields']['field_csu_facility']['field'] = 'field_csu_facility';
   $handler->display->display_options['fields']['field_csu_facility']['label'] = 'Issues addressed ';
   $handler->display->display_options['fields']['field_csu_facility']['hide_alter_empty'] = FALSE;
+  $handler->display->display_options['fields']['field_csu_facility']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_csu_facility']['delta_offset'] = '0';
   /* Field: Content: Maximum number of students */
   $handler->display->display_options['fields']['field_signups_max']['id'] = 'field_signups_max';
@@ -2567,10 +2575,11 @@ Fields',
     t('last »'),
     t('field_site'),
     t('field_course'),
-    t('Email'),
+    t('Bulk operations'),
     t('Site'),
     t('Website'),
     t('<strong>Website:</strong> <a href="[field_website-url]">View website</a>'),
+    t('Email'),
     t('Contact'),
     t('<strong>Phone:</strong> [field_phone]<br/>
 <strong>Email:</strong> [field_site_email]<br/>
@@ -2735,13 +2744,6 @@ Fields',
       'override_label' => 0,
       'label' => '',
     ),
-    'action::flag_user_action' => array(
-      'selected' => 0,
-      'use_queue' => 0,
-      'skip_confirmation' => 0,
-      'override_label' => 0,
-      'label' => '',
-    ),
     'action::views_bulk_operations_modify_action' => array(
       'selected' => 0,
       'use_queue' => 0,
@@ -2777,6 +2779,20 @@ Fields',
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+    ),
+    'action::s4_reporting_forms_site' => array(
+      'selected' => 0,
+      'use_queue' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::s4_reporting_forms_signup' => array(
+      'selected' => 1,
+      'use_queue' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 1,
+      'label' => 'Run form report',
     ),
     'action::system_send_email_action' => array(
       'selected' => 0,

@@ -317,7 +317,7 @@ function s4_courses_s4_signup($type, $nid) {
         $program = taxonomy_term_load($program['tid']);
         $program_terms[$program->tid] = str_replace(' ', '-', $program->name);
       }
-      $_SESSION['s4_signup_program'] = $programs;
+      $_SESSION['s4_signup_program'] = $program_terms;
       $sites = field_get_items('node', $course, 'field_sites');
       if (!$sites || !count($sites)) {
         drupal_goto('site-list/all/'. implode('+', $program_terms));

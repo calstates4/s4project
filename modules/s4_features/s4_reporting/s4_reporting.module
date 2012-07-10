@@ -50,6 +50,43 @@ function s4_reporting_menu() {
 		'access arguments' => array('view all webform fields'),
 		'file' => 's4_reporting.pages.inc',
 	);
+	
+	$items['reports-forms/%'] = array(
+	 'title' => 'View report',	 
+	 'title callback' => 's4_reporting_view_form_title',
+	 'title arguments' => array(1),
+	 'page callback' => 's4_reporting_view_form_report',
+	 'page arguments' => array(1),
+	 'access arguments' => array('access s4 reporting'),
+		'file' => 's4_reporting.pages.inc',
+	);
+	
+	$items['reports-forms/%/summary'] = array(
+	 'title' => 'Summary',
+	 'type' => MENU_DEFAULT_LOCAL_TASK,
+	 'page callback' => 's4_reporting_view_form_report',
+	 'page arguments' => array(1),
+	 'access arguments' => array('access s4 reporting'),
+		'file' => 's4_reporting.pages.inc',
+	);
+	
+	$items['reports-forms/%/download'] = array(
+	 'title' => 'Download',
+	 'type' => MENU_LOCAL_TASK,
+	 'page callback' => 'drupal_get_form',
+	 'page arguments' => array('s4_reporting_view_form_report_form', 1),
+	 'access arguments' => array('access s4 reporting'),
+		'file' => 's4_reporting.pages.inc',
+	);
+	
+	$items['reports-forms/%/responses'] = array(
+	 'title' => 'Responses',
+	 'type' => MENU_LOCAL_TASK,
+	 'page callback' => 's4_reporting_view_form_report_responses',
+	 'page arguments' => array(1),
+	 'access arguments' => array('access s4 reporting'),
+		'file' => 's4_reporting.pages.inc',
+	);
 
 	return $items;
 }
@@ -355,6 +392,173 @@ function s4_reporting_permission() {
   return array('access s4 reporting' => array('title' => t('Access S4 reports'),
                 'description' => t('User can run reports on students, sites, and site staff.')),
                 );
+}
+
+function s4_reporting_action_info() {
+  return array(
+    's4_reporting_forms_signup' => array(
+      'type' => 'system',
+      'label' => t('Report on user responses to forms'),
+      'configurable' => TRUE,
+      'triggers' => array('any'),
+    ),
+    's4_reporting_forms_site' => array(
+      'type' => 'system',
+      'label' => t('Report on forms for a site'),
+      'configurable' => TRUE,
+      'triggers' => array('any'),
+    ),
+  );
+}
+
+function s4_reporting_forms_signup($entity, $context) {
+  
+}
+
+function s4_reporting_forms_site($entity, &$context) {
+  $signups = db_select('field_data_field_site', 's')
+               ->fields('s', array('entity_id'))
+               ->condition('entity_type', 'node')
+               ->condition('bundle' , 'signup')
+               ->condition('field_site_nid', $entity->nid)
+               ->execute()
+               ->fetchAll();
+  $set = true;
+  foreach($signups as $signup) {
+    $signup = node_load($signup->entity_id);
+    if($context['course_term']) {
+      $course = field_get_items('node', $signup, 'field_course');
+      $course = node_load($course[0]['nid']);
+      $term = field_get_items('node', $course, 'field_term');
+      if(!$context['course_term'][$term[0]['nid']]) {
+        $set = false;
+      }
+    }
+    
+    $form = field_get_items('node', $signup, $context['form_type']);
+    $submission = db_select('webform_submissions', 'w')
+                    ->fields('w', array('sid', 'nid'))
+                    ->condition('sid', $form[0]['value'])
+                    ->condition('nid', $context['webform'])
+                    ->execute()
+                    ->fetchAssoc();
+    if(!$submission) {
+      $set = false;
+    }
+    if($set) {
+      _s4_reporting_add_submission($context['report_key'], $submission['sid'],$submission['nid'], $signup->nid);
+    }
+  }
+  if($context['progress']['current'] >= $context['progress']['total']) {
+    drupal_set_message(t('Your report is ready. !link', array('!link' => l('View form report', 'reports-forms/'. $context['report_key']))));
+  }
+}
+
+function _s4_reporting_add_submission($key, $sid, $nid, $signup) {
+  $result = db_select('s4_reporting', 'r')
+              ->fields('r', array('data'))
+              ->condition('report_key', $key)
+              ->execute()
+              ->fetchAssoc();
+  $result['data'] = unserialize($result['data']);
+  $result['data']['signups'][$sid] = $signup;
+  $result['data']['submissions'][$sid] = $sid;
+  db_update('s4_reporting')
+    ->condition('report_key', $key)
+    ->fields(array('data' => serialize($result['data'])))
+    ->execute();
+}
+
+function s4_reporting_forms_signup_form($context) {
+  return s4_reporting_forms_site_form($context);
+}
+
+function s4_reporting_forms_site_form($context) {
+  $webforms = db_select('node', 'n')
+                ->fields('n', array('nid', 'title'))
+                ->condition('type', 'webform')
+                ->condition('status', 1)
+                ->execute()
+                ->fetchAllKeyed();
+  
+  $terms = db_select('node', 'n')
+             ->fields('n', array('nid', 'title'))
+             ->condition('type', 'course_term')
+             ->condition('status', 1)
+             ->execute()
+             ->fetchAllKeyed();
+             
+  $form['webform'] = array(
+    '#type' => 'select',
+    '#title' => t('Select the form you would like to report on'),
+    '#options' => $webforms,
+    '#required' => TRUE,
+  );
+  
+  $form['form_type'] = array(
+    '#type' => 'radios',
+    '#title' => t('Form type'),
+    '#options' => array('field_form_signup_sid' => t('Signup form'),
+                        'field_form_evaluation_sid' => t('Evaluation form'),
+                        'field_form_assessment_sid' => t('Assessment by faculty')
+                        ),
+    '#required' => TRUE,
+  );
+  
+  $form['course_term'] = array(
+    '#type' => 'select',
+    '#title' => t('Placements in a specific term'),
+    '#options' => $terms,
+    '#multiple' => TRUE,
+  );
+  
+  $form['date'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Find placements without courses'),
+  );
+  
+  $form['date']['signup_date_start'] = array(
+    '#type' => 'date_select',
+    '#title' => t('Placements starts on or after'),
+    '#date_format' => 'Y-m-d',
+    '#date_year_range' => '-10:+1',
+    '#multiple' => TRUE,
+  );
+  
+  $form['date']['signup_date_end'] = array(
+    '#type' => 'date_select',
+    '#title' => t('Placements starts before'),
+    '#date_format' => 'Y-m-d',
+    '#date_year_range' => '-10:+1',
+    '#multiple' => TRUE,
+  );
+  
+  $form['report_key'] = array(
+    '#type' => 'hidden',
+    '#value' => md5($context['view']->name . serialize($context['view']->exposed_raw_input)),
+  );
+  
+  return $form;
+}
+
+function s4_reporting_forms_site_submit($form, $form_state) {
+  db_delete('s4_reporting')
+    ->condition('report_key', $form_state['values']['report_key'])
+    ->execute();
+  db_insert('s4_reporting')
+    ->fields(array('report_key' => $form_state['values']['report_key'],
+                   'date' => time(),
+                   'data' => serialize(array('options' => $form_state['values'])),
+                  )
+                )
+    ->execute();
+  return $form_state['values'];
+}
+
+function s4_reporting_cron() {
+  db_delete('s4_reporting')
+    ->condition('date', time() - (4 * 60 * 60), '<')
+    ->execute();
 }
 
 function s4_reporting_s4_reporting_term_report($report_criteria) {
