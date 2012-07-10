@@ -15,24 +15,6 @@ function s4_assessment_menu() {
 		'file' => 's4_assessment.admin.inc',
 	);
 	
-	$items['node/%node/assessment'] = array(
-		'title' => 'Assessment',
-		'type' => MENU_LOCAL_TASK,
-		'page callback' => 's4_assessment_node_report',
-		'page arguments' => array(1),
-		'access callback' => 's4_assessment_report_access',
-		'access arguments' => array(1),
-		'file' => 's4_assessment.pages.inc',
-	);
-	
-	$items['reports/assessments'] = array(
-		'title' => 'Assessment',
-		'type' => MENU_LOCAL_TASK,
-		'page callback' => 's4_assessment_report',
-		'access arguments' => array('view assessment reports'),
-		'file' => 's4_assessment.pages.inc',
-	);
-	
 	$items['node/%node/webform/components/rubric/%'] = array(
 		'title' => 'Edit rubric',
 		'page callback' => 'drupal_get_form',
