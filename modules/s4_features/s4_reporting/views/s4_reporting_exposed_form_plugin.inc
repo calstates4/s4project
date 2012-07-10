@@ -79,5 +79,6 @@ class s4_reporting_exposed_form_plugin extends views_plugin_exposed_form_basic {
   		}
   		unset($form[$field]);
   	}
+  	$form['submit']['#value'] = t('Search');
   } 
 }

@@ -412,10 +412,22 @@ function s4_reporting_action_info() {
 }
 
 function s4_reporting_forms_signup($entity, $context) {
+  $signups = db_select('field_data_field_user', 's')
+               ->fields('s', array('entity_id'))
+               ->condition('entity_type', 'node')
+               ->condition('bundle' , 'signup')
+               ->condition('field_user_uid', $entity->uid)
+               ->execute()
+               ->fetchAll();
+  dpm($signups);
+  _s4_reporting_forms_process_submissions($signups, $context);
   
+  if($context['progress']['current'] >= $context['progress']['total']) {
+    drupal_set_message(t('Your report is ready. !link', array('!link' => l('View form report', 'reports-forms/'. $context['report_key']))));
+  }
 }
 
-function s4_reporting_forms_site($entity, &$context) {
+function s4_reporting_forms_site($entity, $context) {
   $signups = db_select('field_data_field_site', 's')
                ->fields('s', array('entity_id'))
                ->condition('entity_type', 'node')
@@ -423,8 +435,19 @@ function s4_reporting_forms_site($entity, &$context) {
                ->condition('field_site_nid', $entity->nid)
                ->execute()
                ->fetchAll();
-  $set = true;
+  _s4_reporting_forms_process_submissions($signups, $context);
+  
+  if($context['progress']['current'] >= $context['progress']['total']) {
+    drupal_set_message(t('Your report is ready. !link', array('!link' => l('View form report', 'reports-forms/'. $context['report_key']))));
+  }
+}
+
+function _s4_reporting_forms_process_submissions($signups, $context) {
+  if(!is_array($signups)) {
+    return;
+  }
   foreach($signups as $signup) {
+    $set = true;
     $signup = node_load($signup->entity_id);
     if($context['course_term']) {
       $course = field_get_items('node', $signup, 'field_course');
@@ -433,6 +456,13 @@ function s4_reporting_forms_site($entity, &$context) {
       if(!$context['course_term'][$term[0]['nid']]) {
         $set = false;
       }
+    }
+    elseif($context['signup_date_start'] && $context['signup_date_end']) {
+      $start_date = field_get_items('node', $signup, 'field_signup_start_date');
+      if(strtotime($start_date) < strtotime($context['signup_date_start']) ||
+         strtotime($start_date) > strtotime($context['signup_date_end']) ) {
+           $set = false;
+         }
     }
     
     $form = field_get_items('node', $signup, $context['form_type']);
@@ -446,11 +476,8 @@ function s4_reporting_forms_site($entity, &$context) {
       $set = false;
     }
     if($set) {
-      _s4_reporting_add_submission($context['report_key'], $submission['sid'],$submission['nid'], $signup->nid);
+      _s4_reporting_add_submission($context['report_key'], $submission['sid'], $submission['nid'], $signup->nid);
     }
-  }
-  if($context['progress']['current'] >= $context['progress']['total']) {
-    drupal_set_message(t('Your report is ready. !link', array('!link' => l('View form report', 'reports-forms/'. $context['report_key']))));
   }
 }
 
@@ -537,14 +564,39 @@ function s4_reporting_forms_site_form($context) {
     '#type' => 'hidden',
     '#value' => md5($context['view']->name . serialize($context['view']->exposed_raw_input)),
   );
-  
+    
   return $form;
+}
+
+function s4_reporting_forms_site_validate($form, $form_state) {
+  $terms = 0;
+  foreach($form_state['values']['course_term'] as $term) {
+    if($term) {
+      $terms++;
+    }
+  }
+  if(!$terms && !$form_state['values']['signup_date_start']) {
+    form_set_error('signup_date_start', t('You must have either a course term or date range selected.'));
+  }
+  if($form_state['values']['signup_date_start'] && 
+     strtotime($form_state['values']['signup_date_start']) >= strtotime($form_state['values']['signup_date_end'])) {
+    form_set_error('signup_date_start', t('The end date must be later than the start date.'));
+  }
+}
+
+function s4_reporting_forms_signup_validate($form, $form_state) {
+  return s4_reporting_forms_site_validate($form, $form_state);
+}
+
+function s4_reporting_forms_signup_submit($form, $form_state) {
+  return s4_reporting_forms_site_submit($form, $form_state);
 }
 
 function s4_reporting_forms_site_submit($form, $form_state) {
   db_delete('s4_reporting')
     ->condition('report_key', $form_state['values']['report_key'])
     ->execute();
+  $form_state['values']['report_key'] = md5($form_state['values']['report_key'] . serialize($form_state['values']));
   db_insert('s4_reporting')
     ->fields(array('report_key' => $form_state['values']['report_key'],
                    'date' => time(),

@@ -2706,7 +2706,7 @@ Fields',
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'users';
   $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
-  $handler->display->display_options['fields']['views_bulk_operations']['label'] = 'Email';
+  $handler->display->display_options['fields']['views_bulk_operations']['label'] = 'Bulk operations';
   $handler->display->display_options['fields']['views_bulk_operations']['vbo']['entity_load_capacity'] = '10';
   $handler->display->display_options['fields']['views_bulk_operations']['vbo']['operations'] = array(
     'action::system_block_ip_action' => array(
@@ -2990,6 +2990,9 @@ Fields',
   $handler->display->display_options['filters']['dyfield']['expose']['identifier'] = 'dyfield';
   $handler->display->display_options['filters']['dyfield']['expose']['multiple'] = TRUE;
   $handler->display->display_options['filters']['dyfield']['filterable_fields'] = array(
+    'views_bulk_operations' => 'views_bulk_operations',
+    'field_last_name' => 'field_last_name',
+    'field_first_name' => 'field_first_name',
     'field_site_restrict' => 'field_site_restrict',
     'authname' => 'authname',
     'mail' => 'mail',
@@ -3002,9 +3005,6 @@ Fields',
     'title' => 'title',
     'field_first_name_1' => 'field_first_name_1',
     'field_last_name_1' => 'field_last_name_1',
-    'views_bulk_operations' => 0,
-    'field_last_name' => 0,
-    'field_first_name' => 0,
   );
   $handler->display->display_options['filters']['dyfield']['defaults_filterable_fields'] = array(
     'views_bulk_operations' => 'views_bulk_operations',
@@ -3024,7 +3024,7 @@ Fields',
     'field_last_name_1' => 0,
   );
   $handler->display->display_options['filters']['dyfield']['sortability'] = 1;
-  $handler->display->display_options['filters']['dyfield']['checkboxes'] = 1;
+  $handler->display->display_options['filters']['dyfield']['checkboxes'] = 0;
   /* Filter criterion: Content: Term (field_term) */
   $handler->display->display_options['filters']['field_term_nid']['id'] = 'field_term_nid';
   $handler->display->display_options['filters']['field_term_nid']['table'] = 'field_data_field_term';
@@ -3172,7 +3172,7 @@ Fields',
     t('field_site'),
     t('field_coordinator'),
     t('field_signup_course'),
-    t('Email'),
+    t('Bulk operations'),
     t('Last name'),
     t('user/[uid]'),
     t('First name'),
