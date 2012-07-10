@@ -3,7 +3,7 @@ Before you start
 ================
 
 Integrating your S4 website with your Student Information System will require working together with your IT department to do the actual integration, and the people on your campus who own the data you would like to access. Data access, especially data which is covered under FERPA, is the first step to integrating S4. The following data elements are required for S4:
-
+.. _integrationusers:
 User information (students and faculty)
 ---------------------------------------
 * Login ID (the user's campus login name)

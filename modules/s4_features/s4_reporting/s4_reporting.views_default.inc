@@ -1565,6 +1565,8 @@ Fields',
     'group-field_signup_start_date_value' => '3',
     'group-field_course_subject_value' => '3',
     'group-field_term_nid_1' => '3',
+    'group-title' => '0',
+    'group-field_signups_max_value' => '0',
     'groups' => 'General
 Categories
 Location
@@ -2509,6 +2511,28 @@ Fields',
   $handler->display->display_options['filters']['field_term_nid_1']['expose']['operator'] = 'field_term_nid_1_op';
   $handler->display->display_options['filters']['field_term_nid_1']['expose']['identifier'] = 'field_term_nid_1';
   $handler->display->display_options['filters']['field_term_nid_1']['expose']['multiple'] = TRUE;
+  /* Filter criterion: Content: Title */
+  $handler->display->display_options['filters']['title']['id'] = 'title';
+  $handler->display->display_options['filters']['title']['table'] = 'node';
+  $handler->display->display_options['filters']['title']['field'] = 'title';
+  $handler->display->display_options['filters']['title']['operator'] = 'starts';
+  $handler->display->display_options['filters']['title']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['label'] = 'Site name';
+  $handler->display->display_options['filters']['title']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
+  /* Filter criterion: Content: Maximum number of students (field_signups_max) */
+  $handler->display->display_options['filters']['field_signups_max_value']['id'] = 'field_signups_max_value';
+  $handler->display->display_options['filters']['field_signups_max_value']['table'] = 'field_data_field_signups_max';
+  $handler->display->display_options['filters']['field_signups_max_value']['field'] = 'field_signups_max_value';
+  $handler->display->display_options['filters']['field_signups_max_value']['operator'] = '>=';
+  $handler->display->display_options['filters']['field_signups_max_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_signups_max_value']['expose']['operator_id'] = 'field_signups_max_value_op';
+  $handler->display->display_options['filters']['field_signups_max_value']['expose']['label'] = 'Maximum number of students';
+  $handler->display->display_options['filters']['field_signups_max_value']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['field_signups_max_value']['expose']['operator'] = 'field_signups_max_value_op';
+  $handler->display->display_options['filters']['field_signups_max_value']['expose']['identifier'] = 'field_signups_max_value';
 
   /* Display: Data report page */
   $handler = $view->new_display('page', 'Data report page', 'page');
@@ -2628,6 +2652,8 @@ Fields',
     t('Site had at least one student between the following dates'),
     t('Who had a student in the following course subject'),
     t('Site had a student in the following terms (only applies to students signing up as part of a course)'),
+    t('Site name'),
+    t('Maximum number of students'),
     t('Data report page'),
     t('Data export: CSV'),
     t('Data export: XLS'),
