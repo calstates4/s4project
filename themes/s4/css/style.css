@@ -1005,15 +1005,13 @@ table#webform-components {
 .node-type-site .view-site-fields .views-field {
   margin: 0 0 10px 0;
 }
-/** Homebox tweaks **/
-.portlet-maximize {
-  display: none;
+/** Homepage boxes **/
+.staff-frontpage #page .block {
+  margin: 0 10px;
+  padding: 15px;
 }
-.homebox-maximized {
-  clear: both;
-}
-#page #homebox .homebox-portlet {
-  border: 0px;
+.staff-frontpage #page .block h2.block-title {
+  color: #000000;
 }
 /** Form accordions **/
 #page .field-group-accordion-wrapper {
