@@ -32,11 +32,10 @@ S4 filters input from users, including administrators and site staff, to make su
 
 Technical administrators can find input filters under Admin > Configuration > Content Authoring > Text formats or at ``admin/config/content/formats``. S4 comes with two default formats, **Full HTML** and **Filtered HTML**. Only techincal administrators can use Full HTML, and everyone else is limited to using Filtered HTML. There are two other default formats that should be left alone and are not editable, Plain text and Display Suite code.
 
-You can edit the Filtered HTML format and change the allowed tags by clicking edit and scrolling down to the **Filter settings** area of the form. By default, Filtered HTML only allows the following tags:
+You can edit the Filtered HTML format and change the allowed tags by clicking edit and scrolling down to the **Filter settings** area of the form. By default, Filtered HTML only allows the following tags::
 
-``
-<a> <p> <br> <em> <strong> <img> <h2> <h3> <h4> <h5> <h6> <blockquote> <ul> <ol> <li> <dl> <dt> <dd>
-``
+  <a> <p> <br> <em> <strong> <img> <h2> <h3> <h4> <h5> <h6> <blockquote> <ul> <ol> <li> <dl> <dt> <dd>
+
 
 You can add other tags to this list if your users need them, but even if you add the ``<script>`` tag, it will be cleaned for cross-site scripts. Note also that even if you add a tag to the list, most users will also need their WYSIWYG editor tweaked to add that corresponding feature (see :ref:`texteditor`).
 
