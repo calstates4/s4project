@@ -1,4 +1,4 @@
--- :chosen_
+.. _chosen:
 
 The multi-option widget in S4
 =============================
