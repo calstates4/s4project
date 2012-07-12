@@ -43,12 +43,13 @@ function s4_reporting_menu() {
 	);
 	
 	$items['reports/terms'] = array(
-		'title' => 'Terms',
+		'title' => 'Term Summary',
 		'type' => MENU_LOCAL_TASK,
 		'page callback' => 'drupal_get_form',
 		'page arguments' => array('s4_reporting_term_report'),
 		'access arguments' => array('view all webform fields'),
 		'file' => 's4_reporting.pages.inc',
+		'weight' => 9,
 	);
 	
 	$items['reports-forms/%'] = array(
