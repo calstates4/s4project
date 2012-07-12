@@ -305,21 +305,21 @@ function s4_core_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
-        's4_reporting-site_summary' => array(
-          'module' => 's4_reporting',
-          'delta' => 'site_summary',
+        'menu-menu-staff-actions' => array(
+          'module' => 'menu',
+          'delta' => 'menu-staff-actions',
           'region' => 'content_top_left',
-          'weight' => '-47',
+          'weight' => '-9',
         ),
         'views-manage_sites-block_1' => array(
           'module' => 'views',
           'delta' => 'manage_sites-block_1',
           'region' => 'content_top_left',
-          'weight' => '-46',
+          'weight' => '-8',
         ),
-        'menu-menu-staff-actions' => array(
-          'module' => 'menu',
-          'delta' => 'menu-staff-actions',
+        's4_reporting-site_summary' => array(
+          'module' => 's4_reporting',
+          'delta' => 'site_summary',
           'region' => 'content_top_right',
           'weight' => '-10',
         ),
@@ -328,6 +328,12 @@ function s4_core_context_default_contexts() {
           'delta' => 'course_summary',
           'region' => 'content_top_right',
           'weight' => '-9',
+        ),
+        'views-recent_actions-block' => array(
+          'module' => 'views',
+          'delta' => 'recent_actions-block',
+          'region' => 'content',
+          'weight' => '-10',
         ),
       ),
     ),

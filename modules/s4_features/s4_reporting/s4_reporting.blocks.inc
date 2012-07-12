@@ -2,6 +2,7 @@
 
 function s4_reporting_block_site_summary() {
 	$states = workbench_moderation_states();
+	$items = array();
 	foreach($states as $state) {
 		$query = db_select('workbench_moderation_node_history', 'h');
 		$query->leftJoin('node', 'n', 'n.nid = h.nid');
@@ -11,11 +12,13 @@ function s4_reporting_block_site_summary() {
 		      	->addExpression('COUNT(h.nid)', 'entity_count');
 		$result = $query->execute();
 		$count = $result->fetchField();
-		$items[$state->name] = '<strong>'. $state->label .':</strong> '. l($count, 'site-list/manage/', array('query' => array('status[]' => $state->name)));
+		$items[$state->name] = array('<strong>'. $state->label .':</strong>',
+		  l($count, 'site-list/manage/', array('query' => array('status[]' => $state->name)))
+		  );
 	}
-
+	$header = array(t('Status'), t('Count'));
 	return array('subject' => 'Site overview',
-				 'content' => theme('item_list', array('items' => $items)));
+				 'content' => theme('table', array('header' => $header, 'rows' => $items)));
 }
 
 function s4_reporting_block_course_summary() {
