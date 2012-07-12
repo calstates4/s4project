@@ -389,7 +389,7 @@ Fields',
   $handler = $view->new_display('views_data_export', 'Export CSV', 'views_data_export_1');
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
-  $handler->display->display_options['path'] = 'reports/students/export/csv';
+  $handler->display->display_options['path'] = 'reports/faculty/export/csv';
   $handler->display->display_options['displays'] = array(
     'page' => 'page',
     'default' => 0,
@@ -401,7 +401,7 @@ Fields',
   $handler->display->display_options['style_plugin'] = 'views_data_export_xls';
   $handler->display->display_options['style_options']['provide_file'] = 0;
   $handler->display->display_options['style_options']['parent_sort'] = 0;
-  $handler->display->display_options['path'] = 'reports/students/export/xls';
+  $handler->display->display_options['path'] = 'reports/faculty/export/xls';
   $handler->display->display_options['displays'] = array(
     'page' => 'page',
     'default' => 0,
@@ -413,7 +413,7 @@ Fields',
   $handler->display->display_options['style_plugin'] = 'views_data_export_doc';
   $handler->display->display_options['style_options']['provide_file'] = 0;
   $handler->display->display_options['style_options']['parent_sort'] = 0;
-  $handler->display->display_options['path'] = 'reports/students/export/doc';
+  $handler->display->display_options['path'] = 'reports/faculty/export/doc';
   $handler->display->display_options['displays'] = array(
     'page' => 'page',
     'default' => 0,
@@ -2725,7 +2725,7 @@ Fields',
   $handler->display->display_options['relationships']['field_course_nid']['id'] = 'field_course_nid';
   $handler->display->display_options['relationships']['field_course_nid']['table'] = 'field_data_field_course';
   $handler->display->display_options['relationships']['field_course_nid']['field'] = 'field_course_nid';
-  $handler->display->display_options['relationships']['field_course_nid']['relationship'] = 'reverse_field_course_students_node';
+  $handler->display->display_options['relationships']['field_course_nid']['relationship'] = 'reverse_field_user_node';
   $handler->display->display_options['relationships']['field_course_nid']['label'] = 'field_signup_course';
   $handler->display->display_options['relationships']['field_course_nid']['delta'] = '-1';
   /* Field: Bulk operations: User */

@@ -21,6 +21,9 @@
 			$('select[multiple=multiple], select.chosen').each(function() {
 				$(this).chosen();
 			});
+			$('.chosen-widget').each(function() {
+			 $(this).css('min-width', '150px');
+			});
 		}
 	};
 })(jQuery);
