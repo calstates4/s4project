@@ -340,8 +340,9 @@ ul.pager { margin: 15px 0; }
 .node-type-site .view-site-fields .views-field { margin: 0 0 10px 0; }
 
 /** Homepage boxes **/
-.staff-frontpage #page .block {  margin: 0 10px; padding: 15px; }
-  .staff-frontpage #page .block h2.block-title { color: @text-color; }
+.staff-frontpage #page .block {  margin: 0 0 15px 0; padding: 15px; border: 1px solid darken(@body-background, 20%); .round-corner(4px);}
+  .staff-frontpage #page .block h2.block-title { color: @text-color; border-bottom: 1px solid darken(@body-background, 20%); font-size: 120%; margin: -15px -15px 15px -15px; padding: 5px; .gradient(darken(@body-background, 15%), darken(@body-background, 5%)); font-weight: bold; text-shadow: 1px 1px 1px @body-background;}
+  .staff-frontpage #page .block table { width: 100%; }
 
 /** Form accordions **/
 #page .field-group-accordion-wrapper {font-family:"Helvetica Neue",Arial,Helvetica,sans-serif; font-size:1em; line-height:1.4; }
