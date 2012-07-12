@@ -656,7 +656,7 @@ function s4_courses_action_info() {
 *  Action to send an email to the selected user
 */
 function s4_courses_bulk_signup_students_action($entity, $context) {
-  if(!user_access('signup course students') && !user_access('create signups for other users')) {
+  if(!user_access('manage course students') && !user_access('create signups for other users')) {
     return;
   }
   global $user;
@@ -678,7 +678,7 @@ function s4_courses_bulk_signup_students_action($entity, $context) {
 *  Form callback for s4_core_email_user_action
 */
 function s4_courses_bulk_signup_students_action_form($context) {
-  if(!user_access('signup course students') && !user_access('create signups for other users')) {
+  if(!user_access('manage course students') && !user_access('create signups for other users')) {
     return array();
   }
   $node = ($context['course']) ? node_load($context['settings']['course']) : node_load(arg(1));
@@ -822,7 +822,7 @@ function s4_courses_views_pre_view(&$view, $display_id, &$args) {
   }
   foreach($view->display_handler->options['fields'] as $field_name => $field) {
     if($field['field'] == 'views_bulk_operations' && $field['vbo']['operations']['action::s4_courses_bulk_signup_students_action']['selected']) {
-      if(!user_access('signup course students') && !user_access('create signups for other users')) {
+      if(!user_access('manage course students') && !user_access('create signups for other users')) {
         unset($view->display_handler->options['fields'][$field_name]);
       }
     }
@@ -1030,10 +1030,6 @@ function s4_courses_views_check_faculty_access() {
 */
 function s4_courses_permission() {
   return array(
-    'signup course students' => array(
-      'title' => t('Sign up students in assigned courses'),
-      'description' => t('Users can sign up other people who are in courses assigned to them as faculty.'),
-    ),
     'manage course students' => array(
       'title' => t('Manage (delete or edit signups) students in assigned courses'),
       'description' => t('Users can sign up other people who are in courses assigned to them as faculty.'),
