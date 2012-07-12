@@ -25,6 +25,7 @@ Important permissions
 
 There are literally hundreds of kinds of permissions available in S4, and most of them are pretty self-explanatory, but a few should be kept an eye on when you are setting up a role:
 
+.. _textformats:
 
 Text formats
 ============

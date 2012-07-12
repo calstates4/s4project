@@ -88,6 +88,13 @@ function student_signup_setup_homepage(&$context) {
   if (module_exists('block')) {
     db_query("UPDATE {block} SET status = 0, region = ''");
   }
+  foreach(user_roles() as $rid => $role) {
+    if($role == 'staff') {
+      $admin = user_load(1);
+      $admin->roles[$rid] = $role;
+      user_save($admin);
+    }
+  }
   $context['messages'] = t('Setting up homepage');
   $context['results'][] = 'homepage';
 }
