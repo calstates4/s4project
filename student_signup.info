@@ -109,6 +109,7 @@ dependencies[] = select_or_other
 dependencies[] = strongarm
 dependencies[] = textcaptcha
 dependencies[] = token
+dependencies[] = uuid
 dependencies[] = user_reference
 dependencies[] = view_unpublished
 dependencies[] = views
