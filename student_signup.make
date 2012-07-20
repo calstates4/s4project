@@ -45,7 +45,7 @@ projects[edit_limit][subdir] = "contrib"
 projects[edit_limit][version] = "1.0-beta4"
 
 projects[email][subdir] = "contrib"
-projects[email][version] = "1.0-beta1"
+projects[email][version] = "1.1"
 
 projects[entity][subdir] = "contrib"
 projects[entity][version] = "1.0-rc2"
