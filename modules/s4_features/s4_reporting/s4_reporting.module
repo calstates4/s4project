@@ -228,6 +228,7 @@ function s4_reporting_object_report_access($node) {
 function s4_reporting_block_info() {
 	$blocks['site_summary'] = array('info' => 'Site summary');
 	$blocks['course_summary'] = array('info' => 'Course summary');
+	$blocks['frontpage_demographics'] = array('info' => 'Frontpage: Demographics');
 	return $blocks;
 }
 

@@ -79,3 +79,9 @@ function s4_reporting_block_course_summary() {
 	cache_set('s4_erporting_courses', $result, 'cache', time() + (3 * 60));
 	return $result;
 }
+
+function s4_reporting_block_frontpage_demographics() {
+  $field = field_info_field('field_site_demographics');
+  $settings = unserialize($field['settings']['settings']);
+  $totals = db_query('select field_site_demographics_row, avg(field_site_demographics_value) from field_data_field_site_demographics group by field_site_demographics_row');
+}

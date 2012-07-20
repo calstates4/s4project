@@ -25,6 +25,11 @@ Important permissions
 
 There are literally hundreds of kinds of permissions available in S4, and most of them are pretty self-explanatory, but a few should be kept an eye on when you are setting up a role:
 
+Private files
+=============
+
+Files that are attached to things like site visit checklists or communication with a site are considered "private" in that you can't just open the link to view a file, you must be logged in to download it. You should ensure that the "private" file directory (as defined in ``admin/config/media/file-system``) is not readable on the web. `Learn more about the file system and how to secure private files <http://drupal.org/documentation/modules/file>`_.
+
 .. _textformats:
 
 Text formats
