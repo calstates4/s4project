@@ -625,7 +625,7 @@ function s4_sites_field_default_fields() {
       'settings' => array(
         'display_default' => 1,
         'display_field' => 1,
-        'uri_scheme' => 'public',
+        'uri_scheme' => 'private',
       ),
       'translatable' => '1',
       'type' => 'file',
@@ -654,6 +654,7 @@ function s4_sites_field_default_fields() {
           'weight' => 0,
         ),
       ),
+      'display_label' => '',
       'entity_type' => 'node',
       'field_name' => 'field_files',
       'label' => 'Files',
@@ -2491,7 +2492,7 @@ function s4_sites_field_default_fields() {
       'settings' => array(
         'display_default' => 1,
         'display_field' => 1,
-        'uri_scheme' => 'public',
+        'uri_scheme' => 'private',
       ),
       'translatable' => '1',
       'type' => 'file',
@@ -2528,6 +2529,7 @@ function s4_sites_field_default_fields() {
           'weight' => 0,
         ),
       ),
+      'display_label' => '',
       'entity_type' => 'node',
       'field_name' => 'field_files',
       'label' => 'Files',

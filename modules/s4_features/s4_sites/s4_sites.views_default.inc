@@ -710,8 +710,8 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['empty']['area']['table'] = 'views';
   $handler->display->display_options['empty']['area']['field'] = 'area';
   $handler->display->display_options['empty']['area']['empty'] = FALSE;
-  $handler->display->display_options['empty']['area']['content'] = 'You haven\'t created or edited any content.';
-  $handler->display->display_options['empty']['area']['format'] = '1';
+  $handler->display->display_options['empty']['area']['content'] = 'No pending sites.';
+  $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   /* Relationship: Content revision: User */
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';
   $handler->display->display_options['relationships']['uid']['table'] = 'node_revision';
@@ -735,7 +735,8 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['fields']['field_site_restrict-revision_id']['id'] = 'field_site_restrict-revision_id';
   $handler->display->display_options['fields']['field_site_restrict-revision_id']['table'] = 'field_revision_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict-revision_id']['field'] = 'field_site_restrict-revision_id';
-  $handler->display->display_options['fields']['field_site_restrict-revision_id']['label'] = 'Program';
+  $handler->display->display_options['fields']['field_site_restrict-revision_id']['label'] = 'Programs';
+  $handler->display->display_options['fields']['field_site_restrict-revision_id']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_site_restrict-revision_id']['group_column'] = 'entity_id';
   $handler->display->display_options['fields']['field_site_restrict-revision_id']['delta_offset'] = '0';
   /* Field: Workbench Moderation: Published */
@@ -849,8 +850,8 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['empty']['area']['table'] = 'views';
   $handler->display->display_options['empty']['area']['field'] = 'area';
   $handler->display->display_options['empty']['area']['empty'] = FALSE;
-  $handler->display->display_options['empty']['area']['content'] = 'This list displays content in the "Needs Review" state that you can moderate. Currently there is no such content.';
-  $handler->display->display_options['empty']['area']['format'] = 'plain_text';
+  $handler->display->display_options['empty']['area']['content'] = 'There are no sites yet!';
+  $handler->display->display_options['empty']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Workbench Moderation: Current */
@@ -936,17 +937,6 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['pager']['options']['id'] = '0';
   $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['pager']['options']['expose']['items_per_page_options'] = '10, 25, 50, 100, 200';
-  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
-  $handler->display->display_options['style_plugin'] = 'list';
-  $handler->display->display_options['style_options']['grouping'] = '';
-  $handler->display->display_options['defaults']['style_options'] = FALSE;
-  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
-  $handler->display->display_options['row_plugin'] = 'fields';
-  $handler->display->display_options['row_options']['inline'] = array(
-    'title' => 'title',
-    'state' => 'state',
-  );
-  $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid_1']['id'] = 'nid_1';
@@ -958,7 +948,7 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['label'] = 'Name';
   $handler->display->display_options['fields']['title']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['path'] = 'node/[nid_1]';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
@@ -970,7 +960,7 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['fields']['state']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['fields']['state']['field'] = 'state';
   $handler->display->display_options['fields']['state']['ui_name'] = 'Moderation State';
-  $handler->display->display_options['fields']['state']['label'] = '';
+  $handler->display->display_options['fields']['state']['label'] = 'Status';
   $handler->display->display_options['fields']['state']['alter']['text'] = '<div>[state]</div><div>[workbench_moderation_history_link]</div>';
   $handler->display->display_options['fields']['state']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['state']['hide_alter_empty'] = FALSE;
@@ -1029,12 +1019,12 @@ function s4_sites_views_default_views() {
     t('‹ previous'),
     t('next ›'),
     t('last »'),
-    t('You haven\'t created or edited any content.'),
+    t('No pending sites.'),
     t('revision user'),
     t('Nid'),
     t('Title'),
     t('node/[nid_1]'),
-    t('Program'),
+    t('Programs'),
     t('Published'),
     t('Previous status'),
     t('Current Status'),
@@ -1050,13 +1040,13 @@ function s4_sites_views_default_views() {
     t('Manage Sites Page'),
     t('Manage sites'),
     t('more'),
-    t('This list displays content in the "Needs Review" state that you can moderate. Currently there is no such content.'),
+    t('There are no sites yet!'),
     t('Status'),
-    t('Programs'),
     t('Issues addressed'),
     t('Organization type'),
     t('Pending sites block'),
     t('Pending sites'),
+    t('Name'),
   );
   $export['manage_sites'] = $view;
 
