@@ -475,11 +475,8 @@ Fields',
   $handler->display->display_options['title'] = 'Site staff report';
   $handler->display->display_options['css_class'] = 'report-view';
   $handler->display->display_options['link_display'] = 'page';
-  $handler->display->display_options['access']['type'] = 'role';
-  $handler->display->display_options['access']['role'] = array(
-    4 => '4',
-    5 => '5',
-  );
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['perm'] = 'access s4 reporting';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['distinct'] = TRUE;
@@ -1538,11 +1535,8 @@ Fields',
   $handler->display->display_options['title'] = 'Site Report';
   $handler->display->display_options['css_class'] = 'report-view';
   $handler->display->display_options['link_display'] = 'page';
-  $handler->display->display_options['access']['type'] = 'role';
-  $handler->display->display_options['access']['role'] = array(
-    4 => '4',
-    5 => '5',
-  );
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['perm'] = 'access s4 reporting';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['distinct'] = TRUE;
