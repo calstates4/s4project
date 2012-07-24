@@ -311,12 +311,6 @@ function s4_core_context_default_contexts() {
           'region' => 'content_top_left',
           'weight' => '-9',
         ),
-        'views-manage_sites-block_1' => array(
-          'module' => 'views',
-          'delta' => 'manage_sites-block_1',
-          'region' => 'content_top_left',
-          'weight' => '-8',
-        ),
         's4_reporting-site_summary' => array(
           'module' => 's4_reporting',
           'delta' => 'site_summary',
