@@ -53,7 +53,7 @@ This query is pulling all courses with a specific "SL" attribute, and also adds 
   WHERE  a.crse_attr_value = 'Y' 
          AND c.strm = (SELECT Min(strm) 
                        FROM   mb_ps_term_tbl 
-                       WHERE  term_begin_dt >= SYSDATE 
+                       WHERE  term_begin_dt <= SYSDATE 
                               AND session_code = '1') 
 
 Users
@@ -94,7 +94,7 @@ A union of multiple queries to pick up students in specific programs, students e
                           FROM   mb_ps_class_instr i 
                           WHERE  i.strm = (SELECT Min(strm) 
                                            FROM   mb_ps_term_tbl 
-                                           WHERE  term_begin_dt >= SYSDATE 
+                                           WHERE  term_begin_dt <= SYSDATE 
                                                   AND session_code = '1') 
                                  AND i.crse_id IN (SELECT c.crse_id 
                                                    FROM   mb_ps_class_tbl c 
@@ -114,7 +114,7 @@ A union of multiple queries to pick up students in specific programs, students e
                           FROM   mb_ps_stdnt_enrl e 
                           WHERE  e.strm = (SELECT Min(strm) 
                                            FROM   mb_ps_term_tbl 
-                                           WHERE  term_begin_dt >= SYSDATE 
+                                           WHERE  term_begin_dt <= SYSDATE 
                                                   AND session_code = '1') 
                                  AND e.class_nbr IN (SELECT c.class_nbr 
                                                      FROM   mb_ps_class_tbl c 
@@ -153,7 +153,7 @@ CMS PeopleSoft has a really terrible lack of consistency when it comes to course
   FROM   mb_ps_stdnt_enrl e 
   WHERE  e.strm = (SELECT Min(strm) 
                    FROM   mb_ps_term_tbl 
-                   WHERE  term_begin_dt >= SYSDATE 
+                   WHERE  term_begin_dt <= SYSDATE 
                           AND session_code = '1') 
          AND e.class_nbr IN (SELECT c.class_nbr 
                              FROM   mb_ps_class_tbl c 
@@ -186,7 +186,7 @@ Again we reconstruct the unique course ID consisting of the term code and the co
   FROM   mb_ps_class_instr i 
   WHERE  i.strm = (SELECT Min(strm) 
                    FROM   mb_ps_term_tbl 
-                   WHERE  term_begin_dt >= SYSDATE 
+                   WHERE  term_begin_dt <= SYSDATE 
                           AND session_code = '1') 
          AND i.crse_id IN (SELECT c.crse_id 
                            FROM   mb_ps_class_tbl c 
