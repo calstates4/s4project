@@ -267,7 +267,7 @@ function s4_core_block_s4_add_new_site() {
                 )
                 );
     $manage_link = l(t('Manage sites'),
-                'site-list/manage-sites',
+                'site-list/manage',
                 array('html' => TRUE,
                      'attributes' =>
                     array('class' => 'button add')
