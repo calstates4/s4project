@@ -27,6 +27,7 @@ function s4_reporting_views_default_views() {
   $handler->display->display_options['access']['perm'] = 'access s4 reporting';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['disable_sql_rewrite'] = TRUE;
   $handler->display->display_options['query']['options']['distinct'] = TRUE;
   $handler->display->display_options['exposed_form']['type'] = 's4_reporting';
   $handler->display->display_options['exposed_form']['options']['s4_reporting'] = array(
@@ -479,8 +480,8 @@ Fields',
   $handler->display->display_options['access']['perm'] = 'access s4 reporting';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['disable_sql_rewrite'] = TRUE;
   $handler->display->display_options['query']['options']['distinct'] = TRUE;
-  $handler->display->display_options['query']['options']['query_comment'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 's4_reporting';
   $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Search';
   $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
@@ -504,6 +505,7 @@ Fields',
     'group-field_staff_signup_available_value' => '0',
     'group-field_site_restrict_tid_1' => '0',
     'group-field_staff_role_tid' => '0',
+    'group-field_site_restrict_tid_2' => '3',
     'groups' => 'Site staff
 Site categories
 Site location
@@ -1402,6 +1404,20 @@ Fields',
   $handler->display->display_options['filters']['field_staff_role_tid']['expose']['multiple'] = TRUE;
   $handler->display->display_options['filters']['field_staff_role_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_staff_role_tid']['vocabulary'] = 'site_staff_role';
+  /* Filter criterion: Field: Available programs (field_site_restrict) */
+  $handler->display->display_options['filters']['field_site_restrict_tid_2']['id'] = 'field_site_restrict_tid_2';
+  $handler->display->display_options['filters']['field_site_restrict_tid_2']['table'] = 'field_data_field_site_restrict';
+  $handler->display->display_options['filters']['field_site_restrict_tid_2']['field'] = 'field_site_restrict_tid';
+  $handler->display->display_options['filters']['field_site_restrict_tid_2']['relationship'] = 'reverse_field_coordinator_node';
+  $handler->display->display_options['filters']['field_site_restrict_tid_2']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_site_restrict_tid_2']['expose']['operator_id'] = 'field_site_restrict_tid_2_op';
+  $handler->display->display_options['filters']['field_site_restrict_tid_2']['expose']['label'] = 'Program';
+  $handler->display->display_options['filters']['field_site_restrict_tid_2']['expose']['operator'] = 'field_site_restrict_tid_2_op';
+  $handler->display->display_options['filters']['field_site_restrict_tid_2']['expose']['identifier'] = 'field_site_restrict_tid_2';
+  $handler->display->display_options['filters']['field_site_restrict_tid_2']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_site_restrict_tid_2']['type'] = 'select';
+  $handler->display->display_options['filters']['field_site_restrict_tid_2']['vocabulary'] = 'site_restrictions';
+  $handler->display->display_options['filters']['field_site_restrict_tid_2']['error_message'] = FALSE;
 
   /* Display: Data report page */
   $handler = $view->new_display('page', 'Data report page', 'page');
@@ -1513,6 +1529,7 @@ Fields',
     t('Staff is available for placements'),
     t('Site staff programs'),
     t('Site staff role'),
+    t('Program'),
     t('Data report page'),
     t('Data export: CSV'),
     t('Data export: XLS'),
@@ -1539,12 +1556,13 @@ Fields',
   $handler->display->display_options['access']['perm'] = 'access s4 reporting';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['disable_sql_rewrite'] = TRUE;
   $handler->display->display_options['query']['options']['distinct'] = TRUE;
-  $handler->display->display_options['query']['options']['query_comment'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 's4_reporting';
   $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Search';
   $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['exposed_form']['options']['s4_reporting'] = array(
+    'group-status' => '0',
     'group-city' => '2',
     'group-field_csu_facility_tid' => '1',
     'group-field_csu_org_type_tid' => '1',
@@ -2238,9 +2256,13 @@ Fields',
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
-  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['filters']['status']['group'] = 1;
-  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  $handler->display->display_options['filters']['status']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['status']['expose']['operator_id'] = '';
+  $handler->display->display_options['filters']['status']['expose']['label'] = 'Published';
+  $handler->display->display_options['filters']['status']['expose']['operator'] = 'status_op';
+  $handler->display->display_options['filters']['status']['expose']['identifier'] = 'status';
   /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
@@ -2632,6 +2654,7 @@ Fields',
     t('Minimum hours'),
     t('Languages'),
     t('Related programs'),
+    t('Published'),
     t('Issues addressed'),
     t('Org. type'),
     t('Fields'),
@@ -2672,6 +2695,7 @@ Fields',
   $handler->display->display_options['access']['perm'] = 'access s4 reporting';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['disable_sql_rewrite'] = TRUE;
   $handler->display->display_options['query']['options']['distinct'] = TRUE;
   $handler->display->display_options['exposed_form']['type'] = 's4_reporting';
   $handler->display->display_options['exposed_form']['options']['s4_reporting'] = array(
