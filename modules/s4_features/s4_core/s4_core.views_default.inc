@@ -181,13 +181,6 @@ function s4_core_views_default_views() {
   $handler->display->display_options['sorts']['timestamp']['table'] = 'node_revision';
   $handler->display->display_options['sorts']['timestamp']['field'] = 'timestamp';
   $handler->display->display_options['sorts']['timestamp']['order'] = 'DESC';
-  /* Filter criterion: Content: Published */
-  $handler->display->display_options['filters']['status']['id'] = 'status';
-  $handler->display->display_options['filters']['status']['table'] = 'node';
-  $handler->display->display_options['filters']['status']['field'] = 'status';
-  $handler->display->display_options['filters']['status']['value'] = '1';
-  $handler->display->display_options['filters']['status']['group'] = 1;
-  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
   /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
@@ -198,6 +191,13 @@ function s4_core_views_default_views() {
     'site' => 'site',
     'coordinator' => 'coordinator',
   );
+  /* Filter criterion: Content revision: Updated date */
+  $handler->display->display_options['filters']['timestamp']['id'] = 'timestamp';
+  $handler->display->display_options['filters']['timestamp']['table'] = 'node_revision';
+  $handler->display->display_options['filters']['timestamp']['field'] = 'timestamp';
+  $handler->display->display_options['filters']['timestamp']['operator'] = '>=';
+  $handler->display->display_options['filters']['timestamp']['value']['value'] = '-30 days';
+  $handler->display->display_options['filters']['timestamp']['value']['type'] = 'offset';
 
   /* Display: Recent activity block */
   $handler = $view->new_display('block', 'Recent activity block', 'block');

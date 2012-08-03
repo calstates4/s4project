@@ -354,7 +354,9 @@ function s4_core_block_s4_current_user_link() {
   if (isset($_SESSION['masquerading'])) {
     $masquerade_switch = l(t('switch back'), 'masquerade/unswitch', array('attributes' => array('class' => 'switch-link'), 'query' => array('token' => drupal_get_token('masquerade/unswitch'))));
   }
-  return array('content' => l(t('Hello <strong>@username</strong>', array('@username' => format_username($user))), 'user/' . $user->uid, array('html' => TRUE)) . $masquerade_switch);
+  $user = user_load($user->uid);
+  $first_name = field_get_items('user', $user, 'field_first_name');
+  return array('content' => l(t('Hello <strong>@username</strong>', array('@username' => $first_name[0]['value'])), 'user/' . $user->uid, array('html' => TRUE)) . $masquerade_switch);
 
 }
 

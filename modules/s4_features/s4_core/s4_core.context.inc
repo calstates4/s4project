@@ -309,19 +309,19 @@ function s4_core_context_default_contexts() {
           'module' => 'menu',
           'delta' => 'menu-staff-actions',
           'region' => 'content_top_left',
-          'weight' => '-9',
+          'weight' => '-47',
+        ),
+        's4_reporting-course_summary' => array(
+          'module' => 's4_reporting',
+          'delta' => 'course_summary',
+          'region' => 'content_top_left',
+          'weight' => '-46',
         ),
         's4_reporting-site_summary' => array(
           'module' => 's4_reporting',
           'delta' => 'site_summary',
           'region' => 'content_top_right',
           'weight' => '-10',
-        ),
-        's4_reporting-course_summary' => array(
-          'module' => 's4_reporting',
-          'delta' => 'course_summary',
-          'region' => 'content_top_right',
-          'weight' => '-9',
         ),
         'views-recent_actions-block' => array(
           'module' => 'views',
