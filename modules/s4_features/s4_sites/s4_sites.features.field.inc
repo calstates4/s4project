@@ -3631,7 +3631,7 @@ function s4_sites_field_default_fields() {
       'field_name' => 'field_population_size',
       'label' => 'How many people does your organization serve?',
       'required' => 0,
-      's4_sites_field_access' => 0,
+      's4_sites_field_access' => 1,
       'settings' => array(
         'max' => '',
         'min' => '0',
@@ -3830,8 +3830,8 @@ function s4_sites_field_default_fields() {
       'entity_type' => 'node',
       'field_name' => 'field_site_demographics',
       'label' => 'By percentage, what is the demographic of the population you serve?',
-      'required' => FALSE,
-      's4_sites_field_access' => 0,
+      'required' => 0,
+      's4_sites_field_access' => 1,
       'settings' => array(
         'user_register_form' => FALSE,
       ),
@@ -5421,7 +5421,7 @@ function s4_sites_field_default_fields() {
           'rows' => '5',
         ),
         'type' => 'text_textarea',
-        'weight' => '3',
+        'weight' => '4',
       ),
     ),
   );
@@ -5483,7 +5483,7 @@ function s4_sites_field_default_fields() {
           'rows' => '5',
         ),
         'type' => 'text_textarea',
-        'weight' => '2',
+        'weight' => '3',
       ),
     ),
   );

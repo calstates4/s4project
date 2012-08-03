@@ -154,6 +154,13 @@ function s4_sites_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'language_content_type_contact_record';
+  $strongarm->value = '0';
+  $export['language_content_type_contact_record'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'language_content_type_coordinator';
   $strongarm->value = '0';
   $export['language_content_type_coordinator'] = $strongarm;
@@ -394,7 +401,6 @@ function s4_sites_strongarm() {
   $strongarm->name = 'node_options_contact_record';
   $strongarm->value = array(
     0 => 'status',
-    1 => 'revision',
   );
   $export['node_options_contact_record'] = $strongarm;
 
@@ -414,7 +420,6 @@ function s4_sites_strongarm() {
   $strongarm->name = 'node_options_file';
   $strongarm->value = array(
     0 => 'status',
-    1 => 'revision',
   );
   $export['node_options_file'] = $strongarm;
 
