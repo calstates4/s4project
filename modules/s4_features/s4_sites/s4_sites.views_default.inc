@@ -624,7 +624,22 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['distinct'] = TRUE;
-  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['type'] = 's4_reporting';
+  $handler->display->display_options['exposed_form']['options']['s4_reporting'] = array(
+    'group-field_csu_org_type_tid' => '0',
+    'group-field_csu_facility_tid' => '0',
+    'group-field_site_restrict_tid' => '0',
+    'group-keys' => '0',
+    'group-city' => '2',
+    'group-province' => '2',
+    'group-field_district_state_lower_value' => '2',
+    'group-field_district_state_upper_value' => '2',
+    'group-status' => '1',
+    'group-state' => '1',
+    'groups' => 'Site
+Status
+Location',
+  );
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '40';
   $handler->display->display_options['style_plugin'] = 'table';
@@ -712,15 +727,18 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'site' => 'site',
   );
+  $handler->display->display_options['filters']['type']['group'] = 1;
   /* Filter criterion: Workbench Moderation: Current */
   $handler->display->display_options['filters']['current']['id'] = 'current';
   $handler->display->display_options['filters']['current']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['filters']['current']['field'] = 'current';
   $handler->display->display_options['filters']['current']['value'] = '1';
+  $handler->display->display_options['filters']['current']['group'] = 1;
   /* Filter criterion: Content: Organization type (field_csu_org_type) */
   $handler->display->display_options['filters']['field_csu_org_type_tid']['id'] = 'field_csu_org_type_tid';
   $handler->display->display_options['filters']['field_csu_org_type_tid']['table'] = 'field_data_field_csu_org_type';
   $handler->display->display_options['filters']['field_csu_org_type_tid']['field'] = 'field_csu_org_type_tid';
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['group'] = 1;
   $handler->display->display_options['filters']['field_csu_org_type_tid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_csu_org_type_tid']['expose']['operator_id'] = 'field_csu_org_type_tid_op';
   $handler->display->display_options['filters']['field_csu_org_type_tid']['expose']['label'] = 'Organization type';
@@ -733,6 +751,7 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['filters']['field_csu_facility_tid']['id'] = 'field_csu_facility_tid';
   $handler->display->display_options['filters']['field_csu_facility_tid']['table'] = 'field_data_field_csu_facility';
   $handler->display->display_options['filters']['field_csu_facility_tid']['field'] = 'field_csu_facility_tid';
+  $handler->display->display_options['filters']['field_csu_facility_tid']['group'] = 1;
   $handler->display->display_options['filters']['field_csu_facility_tid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_csu_facility_tid']['expose']['operator_id'] = 'field_csu_facility_tid_op';
   $handler->display->display_options['filters']['field_csu_facility_tid']['expose']['label'] = 'Issues addressed';
@@ -745,6 +764,7 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['filters']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
   $handler->display->display_options['filters']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['filters']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['group'] = 1;
   $handler->display->display_options['filters']['field_site_restrict_tid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['operator_id'] = 'field_site_restrict_tid_op';
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['label'] = 'Programs';
@@ -754,6 +774,77 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['filters']['field_site_restrict_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_site_restrict_tid']['vocabulary'] = 'site_restrictions';
   $handler->display->display_options['filters']['field_site_restrict_tid']['error_message'] = FALSE;
+  /* Filter criterion: Search: Search Terms */
+  $handler->display->display_options['filters']['keys']['id'] = 'keys';
+  $handler->display->display_options['filters']['keys']['table'] = 'search_index';
+  $handler->display->display_options['filters']['keys']['field'] = 'keys';
+  $handler->display->display_options['filters']['keys']['group'] = 1;
+  $handler->display->display_options['filters']['keys']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['keys']['expose']['operator_id'] = 'keys_op';
+  $handler->display->display_options['filters']['keys']['expose']['label'] = 'Search Terms';
+  $handler->display->display_options['filters']['keys']['expose']['operator'] = 'keys_op';
+  $handler->display->display_options['filters']['keys']['expose']['identifier'] = 'keys';
+  /* Filter criterion: Location: City */
+  $handler->display->display_options['filters']['city']['id'] = 'city';
+  $handler->display->display_options['filters']['city']['table'] = 'location';
+  $handler->display->display_options['filters']['city']['field'] = 'city';
+  $handler->display->display_options['filters']['city']['group'] = 1;
+  $handler->display->display_options['filters']['city']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['city']['expose']['operator_id'] = 'city_op';
+  $handler->display->display_options['filters']['city']['expose']['label'] = 'City';
+  $handler->display->display_options['filters']['city']['expose']['operator'] = 'city_op';
+  $handler->display->display_options['filters']['city']['expose']['identifier'] = 'city';
+  /* Filter criterion: Location: Province */
+  $handler->display->display_options['filters']['province']['id'] = 'province';
+  $handler->display->display_options['filters']['province']['table'] = 'location';
+  $handler->display->display_options['filters']['province']['field'] = 'province';
+  $handler->display->display_options['filters']['province']['group'] = 1;
+  $handler->display->display_options['filters']['province']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['province']['expose']['operator_id'] = 'province_op';
+  $handler->display->display_options['filters']['province']['expose']['label'] = 'State';
+  $handler->display->display_options['filters']['province']['expose']['operator'] = 'province_op';
+  $handler->display->display_options['filters']['province']['expose']['identifier'] = 'province';
+  /* Filter criterion: Content: State lower district (field_district_state_lower) */
+  $handler->display->display_options['filters']['field_district_state_lower_value']['id'] = 'field_district_state_lower_value';
+  $handler->display->display_options['filters']['field_district_state_lower_value']['table'] = 'field_data_field_district_state_lower';
+  $handler->display->display_options['filters']['field_district_state_lower_value']['field'] = 'field_district_state_lower_value';
+  $handler->display->display_options['filters']['field_district_state_lower_value']['operator'] = 'starts';
+  $handler->display->display_options['filters']['field_district_state_lower_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_district_state_lower_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_district_state_lower_value']['expose']['operator_id'] = 'field_district_state_lower_value_op';
+  $handler->display->display_options['filters']['field_district_state_lower_value']['expose']['label'] = 'State lower district';
+  $handler->display->display_options['filters']['field_district_state_lower_value']['expose']['operator'] = 'field_district_state_lower_value_op';
+  $handler->display->display_options['filters']['field_district_state_lower_value']['expose']['identifier'] = 'field_district_state_lower_value';
+  /* Filter criterion: Content: State upper district (field_district_state_upper) */
+  $handler->display->display_options['filters']['field_district_state_upper_value']['id'] = 'field_district_state_upper_value';
+  $handler->display->display_options['filters']['field_district_state_upper_value']['table'] = 'field_data_field_district_state_upper';
+  $handler->display->display_options['filters']['field_district_state_upper_value']['field'] = 'field_district_state_upper_value';
+  $handler->display->display_options['filters']['field_district_state_upper_value']['operator'] = 'starts';
+  $handler->display->display_options['filters']['field_district_state_upper_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_district_state_upper_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_district_state_upper_value']['expose']['operator_id'] = 'field_district_state_upper_value_op';
+  $handler->display->display_options['filters']['field_district_state_upper_value']['expose']['label'] = 'State upper district';
+  $handler->display->display_options['filters']['field_district_state_upper_value']['expose']['operator'] = 'field_district_state_upper_value_op';
+  $handler->display->display_options['filters']['field_district_state_upper_value']['expose']['identifier'] = 'field_district_state_upper_value';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['status']['expose']['operator_id'] = '';
+  $handler->display->display_options['filters']['status']['expose']['label'] = 'Published';
+  $handler->display->display_options['filters']['status']['expose']['operator'] = 'status_op';
+  $handler->display->display_options['filters']['status']['expose']['identifier'] = 'status';
+  $handler->display->display_options['filters']['status']['expose']['required'] = TRUE;
+  /* Filter criterion: Workbench Moderation: State */
+  $handler->display->display_options['filters']['state']['id'] = 'state';
+  $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['filters']['state']['field'] = 'state';
+  $handler->display->display_options['filters']['state']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['state']['expose']['operator_id'] = 'state_op';
+  $handler->display->display_options['filters']['state']['expose']['label'] = 'Status';
+  $handler->display->display_options['filters']['state']['expose']['operator'] = 'state_op';
+  $handler->display->display_options['filters']['state']['expose']['identifier'] = 'state';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -781,6 +872,11 @@ function s4_sites_views_default_views() {
     t('Status'),
     t('Organization type'),
     t('Issues addressed'),
+    t('Search Terms'),
+    t('City'),
+    t('State'),
+    t('State lower district'),
+    t('State upper district'),
     t('Page'),
   );
   $export['s4_manage_sites'] = $view;
