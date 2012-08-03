@@ -95,7 +95,7 @@ function s4_courses_strongarm() {
       'region' => 'right',
       'weight' => '4',
       'has_required' => FALSE,
-      'title' => 'Course access permissions',
+      'title' => 'Available programs',
       'hidden' => 0,
     ),
     'field_sites' => array(
@@ -159,12 +159,6 @@ function s4_courses_strongarm() {
       'collapsed' => 0,
       'hidden' => 1,
     ),
-    'title' => array(
-      'region' => 'main',
-      'weight' => '0',
-      'has_required' => TRUE,
-      'title' => 'Course Name',
-    ),
     'field_course_signups' => array(
       'region' => 'main',
       'weight' => '2',
@@ -184,6 +178,13 @@ function s4_courses_strongarm() {
       'weight' => '10',
       'has_required' => FALSE,
       'title' => 'Allow system to send emails on behalf of faculty members',
+      'hidden' => 0,
+    ),
+    'field_max_placements' => array(
+      'region' => 'right',
+      'weight' => '2',
+      'has_required' => FALSE,
+      'title' => 'Maximum number of placements per student',
       'hidden' => 0,
     ),
   );

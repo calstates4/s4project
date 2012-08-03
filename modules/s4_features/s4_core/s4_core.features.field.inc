@@ -2357,7 +2357,7 @@ function s4_core_field_default_fields() {
           'rows' => '5',
         ),
         'type' => 'text_textarea',
-        'weight' => '11',
+        'weight' => '7',
       ),
     ),
   );

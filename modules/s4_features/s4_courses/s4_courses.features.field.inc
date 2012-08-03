@@ -50,7 +50,7 @@ function s4_courses_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => '13',
+          'weight' => '14',
         ),
         'full' => array(
           'label' => 'above',
@@ -168,7 +168,7 @@ function s4_courses_field_default_fields() {
           'module' => 'user_reference',
           'settings' => array(),
           'type' => 'user_reference_default',
-          'weight' => '3',
+          'weight' => '2',
         ),
         'full' => array(
           'label' => 'above',
@@ -262,7 +262,7 @@ function s4_courses_field_default_fields() {
           'module' => 'list',
           'settings' => array(),
           'type' => 'list_default',
-          'weight' => '12',
+          'weight' => '13',
         ),
         'full' => array(
           'label' => 'above',
@@ -339,7 +339,7 @@ function s4_courses_field_default_fields() {
             'thousand_separator' => ' ',
           ),
           'type' => 'number_integer',
-          'weight' => '14',
+          'weight' => '15',
         ),
         'full' => array(
           'label' => 'above',
@@ -408,7 +408,7 @@ function s4_courses_field_default_fields() {
           'module' => 'nodereference_count',
           'settings' => array(),
           'type' => 'nodereference_count_default',
-          'weight' => '18',
+          'weight' => '19',
         ),
         'full' => array(
           'label' => 'above',
@@ -525,7 +525,7 @@ function s4_courses_field_default_fields() {
           'module' => 'user_reference',
           'settings' => array(),
           'type' => 'user_reference_default',
-          'weight' => '17',
+          'weight' => '18',
         ),
         'full' => array(
           'label' => 'above',
@@ -608,7 +608,7 @@ function s4_courses_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => '11',
+          'weight' => '12',
         ),
         'full' => array(
           'label' => 'above',
@@ -696,7 +696,7 @@ function s4_courses_field_default_fields() {
           'module' => 'file',
           'settings' => array(),
           'type' => 'file_default',
-          'weight' => '10',
+          'weight' => '11',
         ),
         'full' => array(
           'label' => 'above',
@@ -792,7 +792,7 @@ function s4_courses_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => '15',
+          'weight' => '16',
         ),
         'full' => array(
           'label' => 'above',
@@ -829,6 +829,78 @@ function s4_courses_field_default_fields() {
         ),
         'type' => 'text_textfield',
         'weight' => '12',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-course-field_max_placements'
+  $fields['node-course-field_max_placements'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_max_placements',
+      'foreign keys' => array(),
+      'indexes' => array(),
+      'module' => 'number',
+      'settings' => array(),
+      'translatable' => '0',
+      'type' => 'number_integer',
+    ),
+    'field_instance' => array(
+      'bundle' => 'course',
+      'default_value' => array(
+        0 => array(
+          'value' => '1',
+        ),
+      ),
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'number',
+          'settings' => array(
+            'decimal_separator' => '.',
+            'prefix_suffix' => TRUE,
+            'scale' => 0,
+            'thousand_separator' => ' ',
+          ),
+          'type' => 'number_integer',
+          'weight' => '3',
+        ),
+        'notifications' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'display_label' => '',
+      'entity_type' => 'node',
+      'field_name' => 'field_max_placements',
+      'label' => 'Maximum number of placements per student',
+      'required' => 0,
+      'settings' => array(
+        'max' => '',
+        'min' => '0',
+        'prefix' => '',
+        'suffix' => '',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 0,
+        'module' => 'number',
+        'settings' => array(),
+        'type' => 'number',
+        'weight' => '15',
       ),
     ),
   );
@@ -876,7 +948,7 @@ function s4_courses_field_default_fields() {
             'show_repeat_rule' => 'show',
           ),
           'type' => 'date_default',
-          'weight' => '9',
+          'weight' => '10',
         ),
         'full' => array(
           'label' => 'above',
@@ -972,7 +1044,7 @@ function s4_courses_field_default_fields() {
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_plain',
-          'weight' => '2',
+          'weight' => '4',
         ),
         'full' => array(
           'label' => 'above',
@@ -1310,7 +1382,7 @@ function s4_courses_field_default_fields() {
           'module' => 'node_reference',
           'settings' => array(),
           'type' => 'node_reference_default',
-          'weight' => '16',
+          'weight' => '17',
         ),
         'full' => array(
           'label' => 'above',
@@ -1618,6 +1690,7 @@ function s4_courses_field_default_fields() {
   t('Faculty');
   t('If you want only a handful of sites which are recommended or required, select those sites here.');
   t('If your SIS import tool does not filter out service learning courses, you can enter a filter pattern here. If your import tool already does the filtering for you, leave this blank. If you enter content into this field, it will override the default filter.');
+  t('Maximum number of placements per student');
   t('On this date, evaluation forms will start being sent to students via email and also be available on the site itself.');
   t('Restrict students to only these sites');
   t('Section number');

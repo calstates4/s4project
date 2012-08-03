@@ -21,12 +21,12 @@ function s4_core_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Confirmation Email',
-    'weight' => '4',
+    'weight' => '5',
     'children' => array(
       0 => 'field_confirmation_email',
-      1 => 'field_confirmation_subject',
+      1 => 'field_confirmation_email_sender',
       2 => 'field_confirmation_send_email',
-      3 => 'field_confirmation_email_sender',
+      3 => 'field_confirmation_subject',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -51,10 +51,10 @@ function s4_core_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Evaluation email',
-    'weight' => '5',
+    'weight' => '6',
     'children' => array(
-      0 => 'field_evaluation_email_subject',
-      1 => 'field_evaluation_email_body',
+      0 => 'field_evaluation_email_body',
+      1 => 'field_evaluation_email_subject',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(

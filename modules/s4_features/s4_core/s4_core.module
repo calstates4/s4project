@@ -468,21 +468,25 @@ function s4_core_user_can_signup($user = FALSE) {
     return FALSE;
   }
   $programs = field_get_items('user', $user, 'field_site_restrict');
-  if ($ignore_courses[0]['tid'] || !module_exists('s4_courses')) {
+  if ((count($programs) && $programs[0]['tid']) || !module_exists('s4_courses')) {
     return TRUE;
   }
   if (module_exists('views')
      && module_exists('s4_courses')
      && $view = views_get_view_result('user_courses', 'block_2', $user->uid)) {
     $courses = array();
-    $result = db_query('select f.entity_id, c.field_course_nid FROM {field_data_field_user} f LEFT JOIN {node} n ON n.nid = f.entity_id LEFT JOIN {field_data_field_course} c ON c.entity_id = f.entity_id WHERE f.field_user_uid = :uid AND n.type = :type AND n.status = 1',
+    $result = db_query('select f.entity_id, c.field_course_nid, p.field_max_placements_value FROM {field_data_field_user} f LEFT JOIN {node} n ON n.nid = f.entity_id LEFT JOIN {field_data_field_course} c ON c.entity_id = f.entity_id LEFT JOIN {field_data_field_max_placements} p ON p.entity_id = c.field_course_nid WHERE f.field_user_uid = :uid AND n.type = :type AND n.status = 1',
         array(':uid' =>  $user->uid,
               ':type' => 'signup'));
     foreach ($result as $row) {
-      $courses[$row->field_course_nid] = $row->field_course_nid;
+      $courses[$row->field_course_nid]['count'] = ($courses[$row->field_course_nid]['count']) ?
+      $courses[$row->field_course_nid] : 1;
+      $courses[$row->field_course_nid]['max'] = $row->field_max_placements_value;
+      $courses[$row->field_course_nid]['count']++;
     }
     foreach ($view as $row) {
-      if (!$courses[$row->nid]) {
+
+      if ($courses[$row->nid]['count'] <= $courses[$row->nid]['max'] || $courses[$row->nid]['max'] == 0) {
         return TRUE;
       }
     }

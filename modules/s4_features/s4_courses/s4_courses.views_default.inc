@@ -1548,12 +1548,6 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['fields']['field_course_title']['table'] = 'field_data_field_course_title';
   $handler->display->display_options['fields']['field_course_title']['field'] = 'field_course_title';
   $handler->display->display_options['fields']['field_course_title']['label'] = 'Title';
-  /* Field: Content: Faculty */
-  $handler->display->display_options['fields']['field_course_faculty']['id'] = 'field_course_faculty';
-  $handler->display->display_options['fields']['field_course_faculty']['table'] = 'field_data_field_course_faculty';
-  $handler->display->display_options['fields']['field_course_faculty']['field'] = 'field_course_faculty';
-  $handler->display->display_options['fields']['field_course_faculty']['type'] = 'user_reference_plain';
-  $handler->display->display_options['fields']['field_course_faculty']['delta_offset'] = '0';
   /* Field: Signup: User select course */
   $handler->display->display_options['fields']['user_course_select']['id'] = 'user_course_select';
   $handler->display->display_options['fields']['user_course_select']['table'] = 's4_signup';
