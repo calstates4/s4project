@@ -14,11 +14,13 @@ function s4_demo_install() {
   $user = user_load(1);
   foreach ($feeds as $feed_name => $file) {
     $feed = feeds_source($feed_name, 0);
+    $source = drupal_realpath(drupal_get_path('module', 's4_demo') . 
+                  '/data/' . $file);
     $config = array(
       'FeedsFileFetcher' => array(
-      'source' => drupal_realpath(drupal_get_path('module', 's4_demo') . 
-                  '/data/' . $file)));
+      'source' => $source));
     $feed->addConfig($config);
+    drupal_set_message(t('Starting to import %path', array('%path' => $source)));
     while (FEEDS_BATCH_COMPLETE != $feed->import());  
   }
   $user = $current_user;
