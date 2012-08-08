@@ -138,7 +138,7 @@ projects[select_or_other][subdir] = "contrib"
 projects[select_or_other][version] = "2.0"
 
 projects[strongarm][subdir] = "contrib"
-projects[strongarm][version] = "2.0-beta2"
+projects[strongarm][version] = "2.0"
 
 projects[textcaptcha][subdir] = "contrib"
 projects[textcaptcha][version] = "1.2"
