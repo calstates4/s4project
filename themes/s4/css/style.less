@@ -295,13 +295,14 @@ input.form-button-disabled:active { background: #eee none; border-color: #eee; t
 #site-list-map { margin: 0;  width: ((@container-width - @column-padding) / 2.5); }
 /** PAGER **/
 ul.pager { margin: 15px 0; }
-	ul.pager li { padding: 0; margin: .25em 0; }
+	.item-list ul.pager li { padding: 0; margin: 1em .25em .25em .25em; display: inline-block; }
 	ul.pager a { background: #f3f3f3; .round-corner(4px); font-weight: bold; text-decoration: none; padding: 0.5em; }
-	ul.pager li.pager-current { background: #e15440; color: #fff; .round-corner(4px);}
+	ul.pager li.pager-current { background: #e15440; color: #fff; .round-corner(4px); padding: 0.5em; }
 		ul.pager li.pager-current, ul.pager a { .box-shadow (1px, 1px, 1px, 0.2 ); }
 	ul.pager a:hover { background: @branding-top; color: #fff; }
 	ul.pager .pager-next a, ul.pager .pager-last a { width: 70px; }
 
+.site-list ul.pager { float: left; margin-top: 30px; }
 /** MESSAGES **/
 #messages .messages { border-left: 0px; border-right: 0px; background-image: none; margin: 0;}
 	#messages .messages .container { font-size: 16px; position: relative; padding-left: 32px; }

@@ -856,9 +856,10 @@ input.form-button-disabled:active {
 ul.pager {
   margin: 15px 0;
 }
-ul.pager li {
+.item-list ul.pager li {
   padding: 0;
-  margin: .25em 0;
+  margin: 1em .25em .25em .25em;
+  display: inline-block;
 }
 ul.pager a {
   background: #f3f3f3;
@@ -875,6 +876,7 @@ ul.pager li.pager-current {
   border-radius: 4px;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
+  padding: 0.5em;
 }
 ul.pager li.pager-current,
 ul.pager a {
@@ -889,6 +891,10 @@ ul.pager a:hover {
 ul.pager .pager-next a,
 ul.pager .pager-last a {
   width: 70px;
+}
+.site-list ul.pager {
+  float: left;
+  margin-top: 30px;
 }
 /** MESSAGES **/
 #messages .messages {
