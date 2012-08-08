@@ -450,6 +450,12 @@ function s4_sites_send_site_form_submit($form, &$form_state) {
   drupal_set_message(t('Your message has been sent.'));
 }
 
+function s4_sites_form_views_savedsearches_save_search_form_alter(&$form, $form_state) {
+  if($form['variables']['display']['#value'] == 'attachment_1') {
+    $form = array();
+  }
+}
+
 function s4_sites_mail($key, &$message, $params) {
   switch($key) {
     case 'send_site_form':

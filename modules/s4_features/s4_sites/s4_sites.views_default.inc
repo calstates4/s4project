@@ -619,7 +619,7 @@ function s4_sites_views_default_views() {
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'S4: Manage sites';
+  $handler->display->display_options['title'] = 'Manage sites';
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -632,10 +632,10 @@ function s4_sites_views_default_views() {
     'group-keys' => '0',
     'group-city' => '2',
     'group-province' => '2',
+    'group-state' => '1',
+    'group-status' => '1',
     'group-field_district_state_lower_value' => '2',
     'group-field_district_state_upper_value' => '2',
-    'group-status' => '1',
-    'group-state' => '1',
     'groups' => 'Site
 Status
 Location',
@@ -720,6 +720,18 @@ Location',
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Contextual filter: Content: Title */
+  $handler->display->display_options['arguments']['title']['id'] = 'title';
+  $handler->display->display_options['arguments']['title']['table'] = 'node';
+  $handler->display->display_options['arguments']['title']['field'] = 'title';
+  $handler->display->display_options['arguments']['title']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['title']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['title']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['title']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['title']['glossary'] = TRUE;
+  $handler->display->display_options['arguments']['title']['limit'] = '1';
+  $handler->display->display_options['arguments']['title']['case'] = 'upper';
+  $handler->display->display_options['arguments']['title']['path_case'] = 'lower';
   /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
@@ -804,6 +816,26 @@ Location',
   $handler->display->display_options['filters']['province']['expose']['label'] = 'State';
   $handler->display->display_options['filters']['province']['expose']['operator'] = 'province_op';
   $handler->display->display_options['filters']['province']['expose']['identifier'] = 'province';
+  /* Filter criterion: Workbench Moderation: State */
+  $handler->display->display_options['filters']['state']['id'] = 'state';
+  $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['filters']['state']['field'] = 'state';
+  $handler->display->display_options['filters']['state']['group'] = 1;
+  $handler->display->display_options['filters']['state']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['state']['expose']['operator_id'] = 'state_op';
+  $handler->display->display_options['filters']['state']['expose']['label'] = 'Approval status';
+  $handler->display->display_options['filters']['state']['expose']['operator'] = 'state_op';
+  $handler->display->display_options['filters']['state']['expose']['identifier'] = 'status';
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['status']['expose']['operator_id'] = '';
+  $handler->display->display_options['filters']['status']['expose']['label'] = 'Status';
+  $handler->display->display_options['filters']['status']['expose']['operator'] = 'status_op';
+  $handler->display->display_options['filters']['status']['expose']['identifier'] = 'state';
   /* Filter criterion: Content: State lower district (field_district_state_lower) */
   $handler->display->display_options['filters']['field_district_state_lower_value']['id'] = 'field_district_state_lower_value';
   $handler->display->display_options['filters']['field_district_state_lower_value']['table'] = 'field_data_field_district_state_lower';
@@ -826,32 +858,46 @@ Location',
   $handler->display->display_options['filters']['field_district_state_upper_value']['expose']['label'] = 'State upper district';
   $handler->display->display_options['filters']['field_district_state_upper_value']['expose']['operator'] = 'field_district_state_upper_value_op';
   $handler->display->display_options['filters']['field_district_state_upper_value']['expose']['identifier'] = 'field_district_state_upper_value';
-  /* Filter criterion: Content: Published */
-  $handler->display->display_options['filters']['status']['id'] = 'status';
-  $handler->display->display_options['filters']['status']['table'] = 'node';
-  $handler->display->display_options['filters']['status']['field'] = 'status';
-  $handler->display->display_options['filters']['status']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['status']['expose']['operator_id'] = '';
-  $handler->display->display_options['filters']['status']['expose']['label'] = 'Published';
-  $handler->display->display_options['filters']['status']['expose']['operator'] = 'status_op';
-  $handler->display->display_options['filters']['status']['expose']['identifier'] = 'status';
-  $handler->display->display_options['filters']['status']['expose']['required'] = TRUE;
-  /* Filter criterion: Workbench Moderation: State */
-  $handler->display->display_options['filters']['state']['id'] = 'state';
-  $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['filters']['state']['field'] = 'state';
-  $handler->display->display_options['filters']['state']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['state']['expose']['operator_id'] = 'state_op';
-  $handler->display->display_options['filters']['state']['expose']['label'] = 'Status';
-  $handler->display->display_options['filters']['state']['expose']['operator'] = 'state_op';
-  $handler->display->display_options['filters']['state']['expose']['identifier'] = 'state';
 
-  /* Display: Page */
-  $handler = $view->new_display('page', 'Page', 'page');
+  /* Display: Manage sites page */
+  $handler = $view->new_display('page', 'Manage sites page', 'page');
   $handler->display->display_options['path'] = 'site-list/manage';
+
+  /* Display: Glossary attachment */
+  $handler = $view->new_display('attachment', 'Glossary attachment', 'attachment_1');
+  $handler->display->display_options['defaults']['query'] = FALSE;
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['defaults']['exposed_form'] = FALSE;
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Title */
+  $handler->display->display_options['arguments']['title']['id'] = 'title';
+  $handler->display->display_options['arguments']['title']['table'] = 'node';
+  $handler->display->display_options['arguments']['title']['field'] = 'title';
+  $handler->display->display_options['arguments']['title']['default_action'] = 'summary';
+  $handler->display->display_options['arguments']['title']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['title']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['title']['summary']['format'] = 'unformatted_summary';
+  $handler->display->display_options['arguments']['title']['summary_options']['count'] = FALSE;
+  $handler->display->display_options['arguments']['title']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['title']['summary_options']['inline'] = TRUE;
+  $handler->display->display_options['arguments']['title']['summary_options']['separator'] = ' | ';
+  $handler->display->display_options['arguments']['title']['specify_validation'] = TRUE;
+  $handler->display->display_options['arguments']['title']['glossary'] = TRUE;
+  $handler->display->display_options['arguments']['title']['limit'] = '1';
+  $handler->display->display_options['arguments']['title']['case'] = 'upper';
+  $handler->display->display_options['arguments']['title']['path_case'] = 'lower';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  $handler->display->display_options['displays'] = array(
+    'page' => 'page',
+    'default' => 0,
+  );
   $translatables['s4_manage_sites'] = array(
     t('Master'),
-    t('S4: Manage sites'),
+    t('Manage sites'),
     t('more'),
     t('Apply'),
     t('Reset'),
@@ -870,14 +916,17 @@ Location',
     t('Published'),
     t('Updated date'),
     t('Status'),
+    t('All'),
     t('Organization type'),
     t('Issues addressed'),
     t('Search Terms'),
     t('City'),
     t('State'),
+    t('Approval status'),
     t('State lower district'),
     t('State upper district'),
-    t('Page'),
+    t('Manage sites page'),
+    t('Glossary attachment'),
   );
   $export['s4_manage_sites'] = $view;
 
@@ -1909,41 +1958,16 @@ Location',
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = '';
-  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['element_type'] = 'h4';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['element_default_classes'] = FALSE;
-  /* Field: Content: Issues addressed */
-  $handler->display->display_options['fields']['field_csu_facility']['id'] = 'field_csu_facility';
-  $handler->display->display_options['fields']['field_csu_facility']['table'] = 'field_data_field_csu_facility';
-  $handler->display->display_options['fields']['field_csu_facility']['field'] = 'field_csu_facility';
-  $handler->display->display_options['fields']['field_csu_facility']['label'] = '';
-  $handler->display->display_options['fields']['field_csu_facility']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['field_csu_facility']['element_label_colon'] = FALSE;
-  /* Field: Content: Organization type */
-  $handler->display->display_options['fields']['field_csu_org_type']['id'] = 'field_csu_org_type';
-  $handler->display->display_options['fields']['field_csu_org_type']['table'] = 'field_data_field_csu_org_type';
-  $handler->display->display_options['fields']['field_csu_org_type']['field'] = 'field_csu_org_type';
-  $handler->display->display_options['fields']['field_csu_org_type']['label'] = '';
-  $handler->display->display_options['fields']['field_csu_org_type']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['field_csu_org_type']['element_label_colon'] = FALSE;
-  /* Field: Title and type */
-  $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
-  $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
-  $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
-  $handler->display->display_options['fields']['nothing_1']['ui_name'] = 'Title and type';
-  $handler->display->display_options['fields']['nothing_1']['label'] = '';
-  $handler->display->display_options['fields']['nothing_1']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['nothing_1']['element_wrapper_type'] = 'div';
-  $handler->display->display_options['fields']['nothing_1']['element_wrapper_class'] = 'site-info';
-  $handler->display->display_options['fields']['nothing_1']['element_default_classes'] = FALSE;
-  $handler->display->display_options['fields']['nothing_1']['empty'] = '<h4>[title]</h4><div class="meta">[field_csu_facility] - [field_csu_org_type]</div>';
   /* Field: Field: Available programs */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
+  $handler->display->display_options['fields']['field_site_restrict']['label'] = 'Programs';
   $handler->display->display_options['fields']['field_site_restrict']['element_wrapper_type'] = 'div';
   $handler->display->display_options['fields']['field_site_restrict']['element_wrapper_class'] = 'site-restrictions';
   $handler->display->display_options['fields']['field_site_restrict']['element_default_classes'] = FALSE;
@@ -2049,8 +2073,8 @@ Location',
   $handler->display->display_options['filters']['field_site_restrict_tid']['vocabulary'] = 'site_restrictions';
   $handler->display->display_options['filters']['field_site_restrict_tid']['error_message'] = FALSE;
 
-  /* Display: Page */
-  $handler = $view->new_display('page', 'Page', 'page');
+  /* Display: Site listing page */
+  $handler = $view->new_display('page', 'Site listing page', 'page');
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Content: Nid */
@@ -2128,14 +2152,14 @@ Location',
     t('‹ previous'),
     t('next ›'),
     t('last »'),
-    t('<h4>[title]</h4><div class="meta">[field_csu_facility] - [field_csu_org_type]</div>'),
-    t('Available programs'),
+    t('Programs'),
     t('All'),
     t('Search'),
     t('City'),
     t('Issues addressed'),
     t('Organization type'),
-    t('Page'),
+    t('Available programs'),
+    t('Site listing page'),
     t('Block'),
     t('Newest Sites'),
   );
