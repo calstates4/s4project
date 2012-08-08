@@ -380,8 +380,23 @@ function s4_core_menu() {
     'access arguments' => array(2, 3),
     'file' => 's4_core.pages.inc',
   );
+  
+    
+  $items['form'] = array(
+    'title' => 'Sites',
+    'page callback' => 's4_core_form_redirect',
+    'access arguments' => array('access content'),
+  );
 
   return $items;
+}
+
+function s4_core_form_redirect() {
+  if(user_access('create webform content')) {
+    drupal_goto('forms');
+    return;
+  }
+  drupal_goto('forms/public');
 }
 
 function s4_core_student_signup_complete_access($signup, $key) {

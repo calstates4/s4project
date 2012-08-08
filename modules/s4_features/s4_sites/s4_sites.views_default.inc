@@ -686,6 +686,13 @@ Location',
       'empty_column' => 0,
     ),
   );
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['empty'] = TRUE;
+  $handler->display->display_options['header']['area']['content'] = '<a class="button" href="site-list">View public list</a>';
+  $handler->display->display_options['header']['area']['format'] = 'full_html';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -911,6 +918,7 @@ Location',
     t('‹ previous'),
     t('next ›'),
     t('last »'),
+    t('<a class="button" href="site-list">View public list</a>'),
     t('Title'),
     t('Programs'),
     t('Published'),

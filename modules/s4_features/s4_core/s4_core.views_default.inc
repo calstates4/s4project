@@ -872,7 +872,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['header']['area']['field'] = 'area';
   $handler->display->display_options['header']['area']['empty'] = TRUE;
   $handler->display->display_options['header']['area']['content'] = '<h2>Online Forms</h2>
-<p><a class="button" href="node/add/webform"><span class="add"></span>Add online form</a></p>
+<p><a class="button" href="node/add/webform"><span class="add"></span>Add online form</a> <a class="button" href="forms/public">View public form page</a></p>
 <p><strong>Online forms</strong> resemble paper or database forms and allow users to input new information while also allowing “staff” to query and display existing data in order to run reports. The collected data in the online forms can be downloaded and merged with other data for research purposes. These reports will “tie-back” to the Report tab in S4. </p>
 ';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
@@ -1161,7 +1161,7 @@ function s4_core_views_default_views() {
     t('next ›'),
     t('last »'),
     t('<h2>Online Forms</h2>
-<p><a class="button" href="node/add/webform"><span class="add"></span>Add online form</a></p>
+<p><a class="button" href="node/add/webform"><span class="add"></span>Add online form</a> <a class="button" href="forms/public">View public form page</a></p>
 <p><strong>Online forms</strong> resemble paper or database forms and allow users to input new information while also allowing “staff” to query and display existing data in order to run reports. The collected data in the online forms can be downloaded and merged with other data for research purposes. These reports will “tie-back” to the Report tab in S4. </p>
 '),
     t('No online forms created yet.'),

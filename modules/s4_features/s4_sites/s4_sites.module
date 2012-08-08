@@ -54,8 +54,29 @@ function s4_sites_menu() {
     'page arguments' => array(1),
     'access arguments' => array('signup for service'),
   );
+  
+  $items['site'] = array(
+    'title' => 'Sites',
+    'page callback' => 's4_sites_redirect',
+    'access arguments' => array('access content'),
+  );
+  
+  $items['site'] = array(
+    'title' => 'Sites',
+    'page callback' => 's4_sites_redirect',
+    'access arguments' => array('access content'),
+  );
+
 
   return $items;
+}
+
+function s4_sites_redirect() {
+  if(user_access('moderate site information')) {
+    drupal_goto('site-list/manage');
+    return;
+  }
+  drupal_goto('site-list');
 }
 
 function s4_sites_evaluation_form($node) {

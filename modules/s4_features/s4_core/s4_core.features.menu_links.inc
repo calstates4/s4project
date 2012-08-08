@@ -24,42 +24,6 @@ function s4_core_menu_default_menu_links() {
     'expanded' => '0',
     'weight' => '-43',
   );
-  // Exported menu link: main-menu:forms
-  $menu_links['main-menu:forms'] = array(
-    'menu_name' => 'main-menu',
-    'link_path' => 'forms',
-    'router_path' => 'forms',
-    'link_title' => 'Forms',
-    'options' => array(
-      'attributes' => array(
-        'title' => '',
-      ),
-    ),
-    'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '-47',
-  );
-  // Exported menu link: main-menu:forms/public
-  $menu_links['main-menu:forms/public'] = array(
-    'menu_name' => 'main-menu',
-    'link_path' => 'forms/public',
-    'router_path' => 'forms/public',
-    'link_title' => 'Forms',
-    'options' => array(
-      'attributes' => array(
-        'title' => '',
-      ),
-    ),
-    'module' => 'menu',
-    'hidden' => '0',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '-48',
-  );
   // Exported menu link: main-menu:reports
   $menu_links['main-menu:reports'] = array(
     'menu_name' => 'main-menu',
@@ -246,7 +210,6 @@ function s4_core_menu_default_menu_links() {
   t('Add a new online form');
   t('Add a new site');
   t('Change settings');
-  t('Forms');
   t('Home');
   t('Logout');
   t('Manage programs');
