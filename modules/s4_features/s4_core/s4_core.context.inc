@@ -274,6 +274,9 @@ function s4_core_context_default_contexts() {
         ),
       ),
     ),
+    'theme_html' => array(
+      'class' => 'front',
+    ),
   );
   $context->condition_mode = 1;
 

@@ -19,6 +19,13 @@ function s4_core_admin_form() {
     '#description' => 'If unchecked, students will never be asked to relate their signup with a course. Individual students through your SIS integration can have an option to be given access regardless of their relationship with a course, so it is usually best to keep this on.',
     '#default_value' => variable_get('s4_core_signup_require_course', 1),
   );
+  
+  $form['s4_core_anonymous_site_registration'] = array(
+    '#type' => 'checkbox',
+    '#title' => 'Allow anyone to propose a new site',
+    '#description' => 'Allows anyone to propose a new site (can be overwritten on a program-by-program basis).',
+    '#default_value' => variable_get('s4_core_anonymous_site_registration', 0),
+  );
 
   $form['s4_core_default_service_length'] = array(
     '#type' => 'textfield',

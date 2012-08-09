@@ -132,12 +132,29 @@ function s4_sites_propose_site_form() {
     '#type' => 'markup',
     '#markup' => t('Please select the types of students you would like to have at your site. If you do not know right now, we will contact you once we have reviewed your application.'),
   );
+  $display = FALSE;
   foreach($terms as $t) {
-    $form['terms_'. $t->tid] = array(
-      '#type' => 'checkbox',
-      '#title' => check_plain($t->name),
-      '#description' => check_plain($t->description),
-    );
+    $t = taxonomy_term_load($t->tid);
+    $allowed = field_get_items('taxonomy_term', $t, 'field_program_site_proposal');
+    $message = field_get_items('taxonomy_term', $t, 'field_program_propose_message');
+
+    if($allowed[0]['value']) {
+      $display = TRUE;
+      $form['terms_'. $t->tid] = array(
+        '#type' => 'checkbox',
+        '#title' => check_plain($t->name),
+        '#description' => check_plain($t->description),
+      );
+    }
+    elseif($message[0]['value']) {
+      $display = TRUE;
+      $form['terms_'. $t->tid] = array(
+        '#markup' => '<h2>'. check_plain($t->name) .'</h2>' . check_markup($message[0]['value'], $message[0]['format']),
+      );
+    }
+  }
+  if(!$display) {
+    return array('message' => array('#markup' => t('Sorry, no programs are currently accepting submissions.')));
   }
 
   $form['submit'] = array(

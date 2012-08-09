@@ -4,12 +4,24 @@
 *  Implementaiton of hook_menu
 */
 function s4_pages_menu() {
+  module_load_include('inc', 'pathauto');
   $items = array();
+  
   $items['homepage'] = array(
     'title' => 'Home page',
     'page callback' => '_s4_pages_homepage',
     'access arguments' => array('access content'),
   );
+  $vocabulary = taxonomy_vocabulary_machine_name_load('site_restrictions');
+  $terms = taxonomy_get_tree($vocabulary->vid);
+  foreach($terms as $term) {  
+    $items[pathauto_cleanstring($term->name)] = array(
+      'title' => 'Home page',
+      'page callback' => '_s4_pages_program_homepage',
+      'page arguments' => array((string)$term->tid),
+      'access arguments' => array('access content'),
+    );
+  }
   
   $items['dashboard'] = array(
     'title' => '',
@@ -27,6 +39,30 @@ function s4_pages_menu() {
   );
   
   return $items;
+}
+
+function _s4_pages_program_homepage($term) {
+  global $conf;
+  $term = taxonomy_term_load((int)$term);
+  $title = field_get_items('taxonomy_term', $term, 'field_frontpage_title');
+  drupal_set_title(FALSE);
+  $context = context_load('frontpage-anonymous');
+  context_set('context', 'frontpage-anonymous', $context);
+  if($title[0]['value']) {
+    $conf['site_name'] = ($title[0]['value']) ? check_plain($title[0]['value']) : $term->name;
+  }
+  $welcome_message = field_get_items('taxonomy_term', $term, 'field_statistics_message');
+  if($welcome_message[0]['value']) {
+    $conf['s4_pages_welcome_message'] = check_plain($welcome_message[0]['value']);
+  }
+  $right_message = field_get_items('taxonomy_term', $term, 'field_welcome_message');
+  if($right_message[0]['value']) {
+    $conf['s4_core_welcome_message'] = $right_message[0];
+  }
+  
+  $show_register = field_get_items('taxonomy_term', $term, 'field_program_site_proposal');
+  $conf['s4_core_anonymous_site_registration'] = $show_register[0]['value'];
+  return '';
 }
 
 function _s4_pages_site_student_access($node) {
@@ -119,8 +155,9 @@ function s4_pages_overview_paragraph() {
   drupal_add_css(drupal_get_path('module', 's4_pages') . '/css/overview.css');
   $message = variable_get('s4_pages_welcome_message', 'Together, we have placed [s4_welcome:students_count] students with [s4_welcome:sites_count] sites in [s4_welcome:cities_count] different cities.');
   $message = token_replace(check_plain($message), array());
+  $registration = (user_access('create site content') && variable_get('s4_core_anonymous_site_registration', FALSE));
   return array('subject' => NULL,
-         'content' => theme('overview_paragraph', array('paragraph' => $message, 'registration' => user_access('create site content'))));
+         'content' => theme('overview_paragraph', array('paragraph' => $message, 'registration' => $registration)));
 }
 
 /**
