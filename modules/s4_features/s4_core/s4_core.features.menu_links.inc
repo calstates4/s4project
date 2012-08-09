@@ -42,11 +42,11 @@ function s4_core_menu_default_menu_links() {
     'expanded' => '0',
     'weight' => '-49',
   );
-  // Exported menu link: main-menu:user/logout
-  $menu_links['main-menu:user/logout'] = array(
+  // Exported menu link: main-menu:s4/logout
+  $menu_links['main-menu:s4/logout'] = array(
     'menu_name' => 'main-menu',
-    'link_path' => 'user/logout',
-    'router_path' => 'user/logout',
+    'link_path' => 's4/logout',
+    'router_path' => 's4/logout',
     'link_title' => 'Logout',
     'options' => array(
       'attributes' => array(

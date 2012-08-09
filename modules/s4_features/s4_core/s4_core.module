@@ -387,8 +387,22 @@ function s4_core_menu() {
     'page callback' => 's4_core_form_redirect',
     'access arguments' => array('access content'),
   );
+  
+  $items['s4/logout'] = array(
+    'title' => 'Logout',
+    'page callback' => 's4_core_logout_redirect',
+    'access callback' => 'user_is_logged_in',
+  );
 
   return $items;
+}
+
+function s4_core_logout_redirect() {
+  global $user;
+  if(module_exists('cas') && property_exists($user, 'cas_name')) {
+    drupal_goto('caslogout');
+  }
+  drupal_goto('user/logout');
 }
 
 function s4_core_form_redirect() {
