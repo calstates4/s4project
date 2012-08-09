@@ -88,7 +88,10 @@ var s4Map = {
 			return null;
 		}
 		$('#map-loading-indicator').show();
-		$.getJSON(Drupal.settings.basePath + 'json/map/sites?lat_min=' + boundaries.getSouthWest().lat() +'&lat_max=' + boundaries.getNorthEast().lat() + '&lon_min=' + boundaries.getSouthWest().lng() + '&lon_max=' + boundaries.getNorthEast().lng() ,function(data) {
+		var program = (Drupal.settings.s4_map_program)
+		              ? '/' + Drupal.settings.s4_map_program
+		              : '';
+		$.getJSON(Drupal.settings.basePath + 'json/map/sites' + program + '?lat_min=' + boundaries.getSouthWest().lat() +'&lat_max=' + boundaries.getNorthEast().lat() + '&lon_min=' + boundaries.getSouthWest().lng() + '&lon_max=' + boundaries.getNorthEast().lng() ,function(data) {
 			$.each(data.nodes, function(index, element) {
 				if (typeof s4Map.markers[element.node.nid] == 'undefined') {
 					var hours = '';
