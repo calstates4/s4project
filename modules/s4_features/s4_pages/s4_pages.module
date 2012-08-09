@@ -193,9 +193,15 @@ function s4_pages_dashboard_title() {
 function s4_pages_tokens($type, $tokens, array $data = array(), array $options = array()) {
   $replacements = array();
   if ($type == 's4_welcome') {
+    $program = variable_get('s4_pages_program_homepage', FALSE);
     $query = db_select('location', 'l')
          ->fields('l', array('city', 'province'))
          ->distinct();
+    if($program) {
+      $query->leftJoin('field_data_field_location', 'f', 'f.field_location_lid = l.lid');
+      $query->leftJoin('field_data_field_site_restrict', 'r', 'r.entity_id = f.entity_id AND r.bundle = f.bundle');
+      $query->condition('r.field_site_restrict_tid', $program);
+    }
     $replacements['[s4_welcome:cities_count]'] = $query->countQuery()->execute()->fetchField();
 
     $query = db_select('node', 'n')
@@ -203,6 +209,10 @@ function s4_pages_tokens($type, $tokens, array $data = array(), array $options =
          ->condition('type', 'site')
          ->condition('status', 1)
          ->distinct();
+    if($program) {
+      $query->leftJoin('field_data_field_site_restrict', 'r', 'r.entity_id = n.nid AND r.bundle = n.type');
+      $query->condition('r.field_site_restrict_tid', $program);
+    }
     $replacements['[s4_welcome:sites_count]'] = $query->countQuery()->execute()->fetchField();
     
     $query = db_select('node', 'n')
@@ -210,7 +220,23 @@ function s4_pages_tokens($type, $tokens, array $data = array(), array $options =
          ->condition('type', 'signup')
          ->condition('status', 1)
          ->distinct();
+    if($program) {
+      $query->leftJoin('field_data_field_site_restrict', 'r', 'r.entity_id = n.nid AND r.bundle = n.type');
+      $query->condition('r.field_site_restrict_tid', $program);
+    }
     $replacements['[s4_welcome:students_count]'] = $query->countQuery()->execute()->fetchField();
+    
+    $query = db_select('node', 'n')
+         ->condition('type', 'signup')
+         ->condition('status', 1)
+         ->distinct();
+    $query->leftJoin('field_data_field_signup_hours', 'h', 'h.entity_id = n.nid AND h.bundle = n.type');
+    $query->addExpression('SUM(field_signup_hours_value)', 'total');
+    if($program) {
+      $query->leftJoin('field_data_field_site_restrict', 'r', 'r.entity_id = n.nid AND r.bundle = n.type');
+      $query->condition('r.field_site_restrict_tid', $program);
+    }
+    $replacements['[s4_welcome:hours_count]'] = $query->execute()->fetchField();
   }
   return $replacements;
 }
@@ -267,10 +293,23 @@ function s4_pages_form_s4_core_admin_form_alter(&$form, $form_state) {
   }
 }
 
+function s4_pages_form_taxonomy_form_term_alter(&$form, $form_state) {
+  if (module_exists('token')) {
+    $form['tokens'] = array(
+      '#theme' => 'token_tree',
+      '#token_types' => array('s4_pages'),
+      '#weight' => 90
+    );
+  }
+}
+
 /** 
  * Block displaying all programs' homepages
  */
 function s4_pages_program_listing() {
+  if(variable_get('s4_pages_program_homepage', FALSE)) {
+    return;
+  }
   module_load_include('inc', 'pathauto');
   $vocabulary = taxonomy_vocabulary_machine_name_load('site_restrictions');
   $terms = taxonomy_get_tree($vocabulary->vid);

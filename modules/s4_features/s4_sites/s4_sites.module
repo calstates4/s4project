@@ -60,13 +60,6 @@ function s4_sites_menu() {
     'page callback' => 's4_sites_redirect',
     'access arguments' => array('access content'),
   );
-  
-  $items['site'] = array(
-    'title' => 'Sites',
-    'page callback' => 's4_sites_redirect',
-    'access arguments' => array('access content'),
-  );
-
 
   return $items;
 }
