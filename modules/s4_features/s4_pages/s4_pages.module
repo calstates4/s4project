@@ -92,6 +92,7 @@ function s4_pages_block_info() {
   $blocks['dashboard_title']['info']    = 'Dashboard header';
   $blocks['add_contact_record']['info'] = 'Add contact record button';
   $blocks['add_site_file']['info']    = 'Add site file button';
+  $blocks['program_listing']['info']    = 'Program homepages';
   return $blocks;
 }
 
@@ -264,4 +265,21 @@ function s4_pages_form_s4_core_admin_form_alter(&$form, $form_state) {
       '#token_types' => array('s4_pages'),
     );
   }
+}
+
+/** 
+ * Block displaying all programs' homepages
+ */
+function s4_pages_program_listing() {
+  module_load_include('inc', 'pathauto');
+  $vocabulary = taxonomy_vocabulary_machine_name_load('site_restrictions');
+  $terms = taxonomy_get_tree($vocabulary->vid);
+  if(!count($terms) || count($terms) < 2) {
+    return;
+  }
+  foreach($terms as $term) {
+    $items[] = l($term->name, pathauto_cleanstring($term->name));
+  }
+  return array('subject' => t('View our programs'),
+               'content' => theme('item_list', array('items' => $items)));
 }

@@ -252,13 +252,19 @@ function s4_core_context_default_contexts() {
           'module' => 's4_pages',
           'delta' => 'overview_paragraph',
           'region' => 'content_top_left',
-          'weight' => '-47',
+          'weight' => '-10',
         ),
         's4_core-s4_user_login' => array(
           'module' => 's4_core',
           'delta' => 's4_user_login',
           'region' => 'content_top_left',
-          'weight' => '-46',
+          'weight' => '-9',
+        ),
+        's4_pages-program_listing' => array(
+          'module' => 's4_pages',
+          'delta' => 'program_listing',
+          'region' => 'content_top_left',
+          'weight' => '-8',
         ),
         's4_core-s4_welcome_message' => array(
           'module' => 's4_core',
