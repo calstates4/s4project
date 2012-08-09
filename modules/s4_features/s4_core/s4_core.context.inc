@@ -274,6 +274,7 @@ function s4_core_context_default_contexts() {
         ),
       ),
     ),
+    'menu' => '<front>',
     'theme_html' => array(
       'class' => 'front',
     ),
