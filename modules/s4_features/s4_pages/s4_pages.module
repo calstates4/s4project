@@ -158,7 +158,7 @@ function s4_pages_overview_paragraph() {
   drupal_add_css(drupal_get_path('module', 's4_pages') . '/css/overview.css');
   $message = variable_get('s4_pages_welcome_message', 'Together, we have placed [s4_welcome:students_count] students with [s4_welcome:sites_count] sites in [s4_welcome:cities_count] different cities.');
   $message = token_replace(check_plain($message), array());
-  $registration = (user_access('create site content') && variable_get('s4_core_anonymous_site_registration', FALSE));
+  $registration = (user_access('create site content') && variable_get('s4_core_anonymous_site_registration', TRUE));
   return array('subject' => NULL,
          'content' => theme('overview_paragraph', array('paragraph' => $message, 'registration' => $registration)));
 }
