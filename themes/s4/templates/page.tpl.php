@@ -10,7 +10,13 @@
 				<a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home">
 					<?php print $site_name; ?>
 				</a>
+				<?php if($original_title = variable_get('s4_original_site_title', FALSE)): ?>
+  			 <div class="original-title">
+  			   <?php print t('Part of !link', array('!link' => l($original_title, '<front>'))); ?>
+  			 </div>
+			<?php endif; ?>
 			</h1>
+			
 		<?php endif; ?>
 		
 		<?php if($page['search']): ?>

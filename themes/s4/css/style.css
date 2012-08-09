@@ -175,6 +175,15 @@ a:visited {
   -webkit-text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6);
   -moz-text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6);
 }
+#branding h1 .original-title {
+  color: #000;
+  font-size: .7em;
+}
+#branding h1 .original-title a {
+  text-shadow: none;
+  color: #000;
+  text-decoration: underline;
+}
 #search {
   float: right;
 }

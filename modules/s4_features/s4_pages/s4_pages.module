@@ -43,6 +43,7 @@ function s4_pages_menu() {
 
 function _s4_pages_program_homepage($term) {
   global $conf;
+  $conf['s4_original_site_title'] = variable_get('site_name', 'S4');
   $term = taxonomy_term_load((int)$term);
   $title = field_get_items('taxonomy_term', $term, 'field_frontpage_title');
   drupal_set_title(FALSE);
