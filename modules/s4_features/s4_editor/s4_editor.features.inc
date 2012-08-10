@@ -9,7 +9,7 @@
  */
 function s4_editor_ctools_plugin_api() {
   list($module, $api) = func_get_args();
-  if ($module == "strongarm" && $api == "strongarm") {
+  if ($module == "strongarm") {
     return array("version" => "1");
   }
 }

@@ -39,6 +39,9 @@ function s4_editor_install() {
       'imce' => array(
         'imce' => 1,
       ),
+      'spellchecker' => array(
+        'spellchecker' => 1,
+      ),
     ),
     'toolbar_loc' => 'top',
     'toolbar_align' => 'left',

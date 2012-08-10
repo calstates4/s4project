@@ -10,7 +10,7 @@
 function s4_editor_strongarm() {
   $export = array();
 
-  $strongarm = new stdClass;
+  $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'imce_profiles';
@@ -88,7 +88,7 @@ function s4_editor_strongarm() {
   );
   $export['imce_profiles'] = $strongarm;
 
-  $strongarm = new stdClass;
+  $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'imce_roles_profiles';
@@ -116,35 +116,35 @@ function s4_editor_strongarm() {
   );
   $export['imce_roles_profiles'] = $strongarm;
 
-  $strongarm = new stdClass;
+  $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'imce_settings_absurls';
   $strongarm->value = 0;
   $export['imce_settings_absurls'] = $strongarm;
 
-  $strongarm = new stdClass;
+  $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'imce_settings_disable_private';
   $strongarm->value = 1;
   $export['imce_settings_disable_private'] = $strongarm;
 
-  $strongarm = new stdClass;
+  $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'imce_settings_replace';
   $strongarm->value = '0';
   $export['imce_settings_replace'] = $strongarm;
 
-  $strongarm = new stdClass;
+  $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'imce_settings_textarea';
   $strongarm->value = '';
   $export['imce_settings_textarea'] = $strongarm;
 
-  $strongarm = new stdClass;
+  $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'imce_settings_thumb_method';

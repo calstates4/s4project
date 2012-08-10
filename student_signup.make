@@ -179,6 +179,9 @@ projects[webform][version] = "3.18"
 projects[wysiwyg][subdir] = "contrib"
 projects[wysiwyg][version] = "2.1"
 
+projects[wysiwyg_spellcheck] = "contrib"
+projects[wysiwyg_spellcheck] = "1.1"
+
 ;Modules still in development
 projects[location][type] = module
 projects[location][subdir] = "contrib"

@@ -123,6 +123,7 @@ dependencies[] = webform
 dependencies[] = workbench
 dependencies[] = workbench_moderation
 dependencies[] = wysiwyg
+dependencies[] = wysiwyg_spellcheck
 
 ; Custom
 dependencies[] = s4_core
