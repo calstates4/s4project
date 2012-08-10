@@ -89,7 +89,8 @@ function s4_sites_user_default_permissions() {
   $permissions['delete any file content'] = array(
     'name' => 'delete any file content',
     'roles' => array(
-      0 => 'staff',
+      0 => 'administrator',
+      1 => 'staff',
     ),
     'module' => 'node',
   );
@@ -125,7 +126,8 @@ function s4_sites_user_default_permissions() {
   $permissions['delete own file content'] = array(
     'name' => 'delete own file content',
     'roles' => array(
-      0 => 'staff',
+      0 => 'administrator',
+      1 => 'staff',
     ),
     'module' => 'node',
   );
@@ -218,7 +220,8 @@ function s4_sites_user_default_permissions() {
   $permissions['edit any file content'] = array(
     'name' => 'edit any file content',
     'roles' => array(
-      0 => 'staff',
+      0 => 'administrator',
+      1 => 'staff',
     ),
     'module' => 'node',
   );
@@ -254,7 +257,8 @@ function s4_sites_user_default_permissions() {
   $permissions['edit own file content'] = array(
     'name' => 'edit own file content',
     'roles' => array(
-      0 => 'staff',
+      0 => 'administrator',
+      1 => 'staff',
     ),
     'module' => 'node',
   );

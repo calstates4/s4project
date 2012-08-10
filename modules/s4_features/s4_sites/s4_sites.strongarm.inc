@@ -967,25 +967,18 @@ function s4_sites_strongarm() {
       'title' => 'Site description',
       'hidden' => 0,
     ),
-    'field_site_images' => array(
-      'region' => 'main',
-      'weight' => '10',
-      'has_required' => FALSE,
-      'title' => 'Site Images',
-      'hidden' => 0,
-    ),
     'field_tags' => array(
       'region' => 'right',
-      'weight' => '9',
+      'weight' => '6',
       'has_required' => FALSE,
       'title' => 'Tags',
       'hidden' => 0,
     ),
     'field_site_restrict' => array(
       'region' => 'right',
-      'weight' => '3',
+      'weight' => '1',
       'has_required' => TRUE,
-      'title' => 'Restrict site to',
+      'title' => 'Available programs',
     ),
     'field_location' => array(
       'region' => 'main',
@@ -1003,30 +996,23 @@ function s4_sites_strongarm() {
     ),
     'field_csu_facility' => array(
       'region' => 'right',
-      'weight' => '6',
+      'weight' => '2',
       'has_required' => FALSE,
       'title' => 'Issues addressed',
       'hidden' => 0,
     ),
     'field_csu_org_type' => array(
       'region' => 'right',
-      'weight' => '7',
+      'weight' => '3',
       'has_required' => FALSE,
       'title' => 'Organization type',
       'hidden' => 0,
     ),
     'field_site_users' => array(
       'region' => 'right',
-      'weight' => '10',
+      'weight' => '7',
       'has_required' => FALSE,
       'title' => 'Additional users',
-      'hidden' => 0,
-    ),
-    'field_site_form' => array(
-      'region' => 'right',
-      'weight' => '4',
-      'has_required' => FALSE,
-      'title' => 'Signup form',
       'hidden' => 0,
     ),
     'field_site_instructions' => array(
@@ -1048,13 +1034,6 @@ function s4_sites_strongarm() {
       'weight' => '9',
       'has_required' => FALSE,
       'title' => 'Main phone number',
-      'hidden' => 0,
-    ),
-    'field_site_eval_form' => array(
-      'region' => 'right',
-      'weight' => '5',
-      'has_required' => FALSE,
-      'title' => 'Evaluation Form',
       'hidden' => 0,
     ),
     'notifications' => array(
@@ -1116,7 +1095,7 @@ function s4_sites_strongarm() {
     ),
     'field_site_language' => array(
       'region' => 'right',
-      'weight' => '8',
+      'weight' => '4',
       'has_required' => FALSE,
       'title' => 'What languages would you like students to speak other than English?',
       'hidden' => 0,
@@ -1149,13 +1128,6 @@ function s4_sites_strongarm() {
       'title' => 'Site special requirements',
       'hidden' => 0,
     ),
-    'field_workflow_status' => array(
-      'region' => 'right',
-      'weight' => '2',
-      'has_required' => FALSE,
-      'title' => 'Status',
-      'hidden' => 0,
-    ),
     'field_district_federal' => array(
       'region' => 'main',
       'weight' => '2',
@@ -1184,11 +1156,25 @@ function s4_sites_strongarm() {
       'title' => 'How many people does your organization serve?',
       'hidden' => 0,
     ),
-    'captcha' => array(
-      'region' => 'right',
-      'weight' => '1',
+    'field_site_evaluation_group' => array(
+      'region' => 'main',
+      'weight' => '31',
       'has_required' => FALSE,
-      'title' => 'CAPTCHA',
+      'title' => 'Evaluation forms',
+      'hidden' => 0,
+    ),
+    'field_site_signup_group' => array(
+      'region' => 'main',
+      'weight' => '30',
+      'has_required' => FALSE,
+      'title' => 'Signup forms',
+      'hidden' => 0,
+    ),
+    'field_site_other_csu' => array(
+      'region' => 'right',
+      'weight' => '5',
+      'has_required' => FALSE,
+      'title' => 'Do you have a partnership with another CSU campus?',
       'hidden' => 0,
     ),
   );
@@ -1254,6 +1240,7 @@ function s4_sites_strongarm() {
     'field_location' => FALSE,
     'field_site_signup_group' => FALSE,
     'field_site_evaluation_group' => FALSE,
+    'field_site_other_csu' => FALSE,
   );
   $export['s4_sites_field_access'] = $strongarm;
 
