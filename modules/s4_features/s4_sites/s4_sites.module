@@ -294,24 +294,47 @@ function s4_sites_permission() {
  *
  */
 function s4_sites_node_access($node, $op,  $account) {
-  if(!is_object($node) || $node->type != 'site') {
-    return NODE_ACCESS_IGNORE;
-  }
-  if($op == 'view' || $op == 'create' || user_access('bypass site access control', $account) || !variable_get('s4_sites_enable_program_access', FALSE)) {
-    return NODE_ACCESS_IGNORE;
-  }
-  $programs = field_get_items('node', $node, 'field_site_restrict');
-  $account = user_load($account->uid);
-  $user_programs = field_get_items('user', $account, 'field_site_restrict');
-  $restrict = array();
-  foreach($programs as $program) {
-    foreach($user_programs as $user_program) {
-      if($user_program['tid'] == $program['tid']) {
-        return NODE_ACCESS_ALLOW;
+  if($node->type == 'site') {
+    if($op == 'delete') {
+      $count = db_select('field_data_field_site', 's')
+                 ->condition('field_site_nid', $node->nid)
+                 ->fields('s', array('entity_id'))
+                 ->countQuery()
+                 ->execute()
+                 ->fetchField();
+      if($count) {
+        return NODE_ACCESS_DENY;
+      }
+      return NODE_ACCESS_IGNORE;
+    }
+    if($op == 'view' || $op == 'create' || user_access('bypass site access control', $account) || !variable_get('s4_sites_enable_program_access', FALSE)) {
+      return NODE_ACCESS_IGNORE;
+    }
+    $programs = field_get_items('node', $node, 'field_site_restrict');
+    $account = user_load($account->uid);
+    $user_programs = field_get_items('user', $account, 'field_site_restrict');
+    $restrict = array();
+    foreach($programs as $program) {
+      foreach($user_programs as $user_program) {
+        if($user_program['tid'] == $program['tid']) {
+          return NODE_ACCESS_ALLOW;
+        }
       }
     }
+    return NODE_ACCESS_DENY;
   }
-  return NODE_ACCESS_DENY;
+  if($node->type == 'coordinator' && $op == 'delete') {
+    $count = db_select('field_data_field_coordinator', 'f')
+               ->condition('field_coordinator_nid', $node->nid)
+               ->fields('f', array('entity_id'))
+               ->countQuery()
+               ->execute()
+               ->fetchField();
+    if($count) {
+      return NODE_ACCESS_DENY;
+    }
+    return NODE_ACCESS_IGNORE;
+  }
 }
 
 /**
