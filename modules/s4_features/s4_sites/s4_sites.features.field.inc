@@ -486,8 +486,9 @@ function s4_sites_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
+          'module' => 'list',
           'settings' => array(),
-          'type' => 'hidden',
+          'type' => 'list_default',
           'weight' => '3',
         ),
         'notifications' => array(
@@ -562,8 +563,9 @@ function s4_sites_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
+          'module' => 'taxonomy',
           'settings' => array(),
-          'type' => 'hidden',
+          'type' => 'taxonomy_term_reference_link',
           'weight' => '4',
         ),
         'notifications' => array(
@@ -637,9 +639,10 @@ function s4_sites_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
+          'module' => 'file',
           'settings' => array(),
-          'type' => 'hidden',
-          'weight' => '2',
+          'type' => 'file_default',
+          'weight' => '5',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -774,7 +777,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '1',
+          'weight' => '11',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -2150,8 +2153,9 @@ function s4_sites_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
+          'module' => 'list',
           'settings' => array(),
-          'type' => 'hidden',
+          'type' => 'list_default',
           'weight' => '14',
         ),
         'full' => array(
@@ -2598,8 +2602,14 @@ function s4_sites_field_default_fields() {
         ),
         'default' => array(
           'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
+          'module' => 'number',
+          'settings' => array(
+            'decimal_separator' => '.',
+            'prefix_suffix' => TRUE,
+            'scale' => 0,
+            'thousand_separator' => ' ',
+          ),
+          'type' => 'number_integer',
           'weight' => '13',
         ),
         'full' => array(
@@ -2724,8 +2734,9 @@ function s4_sites_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
+          'module' => 'node_reference',
           'settings' => array(),
-          'type' => 'hidden',
+          'type' => 'node_reference_default',
           'weight' => '7',
         ),
         'full' => array(

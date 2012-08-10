@@ -5,10 +5,83 @@
  */
 
 /**
+ * Implements hook_ds_field_settings_info().
+ */
+function s4_sites_ds_field_settings_info() {
+  $export = array();
+
+  $ds_fieldsetting = new stdClass();
+  $ds_fieldsetting->api_version = 1;
+  $ds_fieldsetting->id = 'node|contact_record|default';
+  $ds_fieldsetting->entity_type = 'node';
+  $ds_fieldsetting->bundle = 'contact_record';
+  $ds_fieldsetting->view_mode = 'default';
+  $ds_fieldsetting->settings = array(
+    'return_to_site' => array(
+      'weight' => '1',
+      'label' => 'hidden',
+      'format' => 'default',
+    ),
+    'post_date' => array(
+      'weight' => '2',
+      'label' => 'hidden',
+      'format' => 'ds_post_date_long',
+    ),
+  );
+  $export['node|contact_record|default'] = $ds_fieldsetting;
+
+  $ds_fieldsetting = new stdClass();
+  $ds_fieldsetting->api_version = 1;
+  $ds_fieldsetting->id = 'node|file|default';
+  $ds_fieldsetting->entity_type = 'node';
+  $ds_fieldsetting->bundle = 'file';
+  $ds_fieldsetting->view_mode = 'default';
+  $ds_fieldsetting->settings = array(
+    'return_to_site' => array(
+      'weight' => '0',
+      'label' => 'hidden',
+      'format' => 'default',
+    ),
+  );
+  $export['node|file|default'] = $ds_fieldsetting;
+
+  $ds_fieldsetting = new stdClass();
+  $ds_fieldsetting->api_version = 1;
+  $ds_fieldsetting->id = 'node|site|default';
+  $ds_fieldsetting->entity_type = 'node';
+  $ds_fieldsetting->bundle = 'site';
+  $ds_fieldsetting->view_mode = 'default';
+  $ds_fieldsetting->settings = array(
+    'site_staff' => array(
+      'weight' => '4',
+      'label' => 'hidden',
+      'format' => 'default',
+    ),
+  );
+  $export['node|site|default'] = $ds_fieldsetting;
+
+  return $export;
+}
+
+/**
  * Implements hook_ds_custom_fields_info().
  */
 function s4_sites_ds_custom_fields_info() {
   $export = array();
+
+  $ds_field = new stdClass();
+  $ds_field->api_version = 1;
+  $ds_field->field = 'return_to_site';
+  $ds_field->label = 'Return to site';
+  $ds_field->field_type = 6;
+  $ds_field->entities = array(
+    'node' => 'node',
+  );
+  $ds_field->properties = array(
+    'block' => 's4_sites|s4_sites_return_tab',
+    'block_render' => '1',
+  );
+  $export['return_to_site'] = $ds_field;
 
   $ds_field = new stdClass();
   $ds_field->api_version = 1;
@@ -35,6 +108,40 @@ function s4_sites_ds_layout_settings_info() {
 
   $ds_layout = new stdClass();
   $ds_layout->api_version = 1;
+  $ds_layout->id = 'node|contact_record|default';
+  $ds_layout->entity_type = 'node';
+  $ds_layout->bundle = 'contact_record';
+  $ds_layout->view_mode = 'default';
+  $ds_layout->layout = 'ds_2col';
+  $ds_layout->settings = array(
+    'hide_empty_regions' => 0,
+    'hide_sidebars' => 0,
+    'regions' => array(
+      'left' => array(
+        0 => 'body',
+      ),
+      'right' => array(
+        0 => 'return_to_site',
+        1 => 'post_date',
+        2 => 'field_contact',
+        3 => 'field_contact_tags',
+        4 => 'field_files',
+      ),
+    ),
+    'fields' => array(
+      'body' => 'left',
+      'return_to_site' => 'right',
+      'post_date' => 'right',
+      'field_contact' => 'right',
+      'field_contact_tags' => 'right',
+      'field_files' => 'right',
+    ),
+    'classes' => array(),
+  );
+  $export['node|contact_record|default'] = $ds_layout;
+
+  $ds_layout = new stdClass();
+  $ds_layout->api_version = 1;
   $ds_layout->id = 'node|file|default';
   $ds_layout->entity_type = 'node';
   $ds_layout->bundle = 'file';
@@ -49,15 +156,17 @@ function s4_sites_ds_layout_settings_info() {
         1 => 'field_files',
       ),
       'right' => array(
-        0 => 'field_file_category',
-        1 => 'field_file_tags',
-        2 => 'field_expiration_date',
-        3 => 'field_expiration_reminder_date',
+        0 => 'return_to_site',
+        1 => 'field_file_category',
+        2 => 'field_file_tags',
+        3 => 'field_expiration_date',
+        4 => 'field_expiration_reminder_date',
       ),
     ),
     'fields' => array(
       'body' => 'left',
       'field_files' => 'left',
+      'return_to_site' => 'right',
       'field_file_category' => 'right',
       'field_file_tags' => 'right',
       'field_expiration_date' => 'right',

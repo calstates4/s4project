@@ -337,6 +337,7 @@ function s4_sites_block_info() {
   $blocks['s4_sites_search_help'] = array('info' => 'Site list help');
   $blocks['s4_sites_site_send_form'] = array('info' => 'Send site form');
   $blocks['s4_sites_form_webform'] = array('info' => 'Site form webform results');
+  $blocks['s4_sites_return_tab'] = array('info' => 'Return to site');
   return $blocks;
 }
 
@@ -356,6 +357,17 @@ function s4_sites_block_view($delta) {
     case 's4_sites_form_webform':
       return s4_webform_render_submission('field_form_sid');
       break;
+    case 's4_sites_return_tab':
+      $node = menu_get_object();
+      if($node->type == 'file' || $node->type == 'contact_record') {
+        $site = field_get_items('node', $node, 'field_site');
+        if(!$site) {
+          return;
+        }
+        $site = node_load($site[0]['nid']);
+        $path = ($node->type == 'file') ? 'forms' : 'notes';
+        return array('content' => l(t('Return to @site', array('@site' => $site->title)), 'node/'. $site->nid .'/'. $path));
+      }
   }
 
 }
