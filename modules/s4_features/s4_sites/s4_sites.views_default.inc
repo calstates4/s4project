@@ -952,12 +952,8 @@ Location',
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Site Staff';
-  $handler->display->display_options['access']['type'] = 'type_role';
-  $handler->display->display_options['access']['role'] = array(
-    4 => '4',
-    6 => '6',
-  );
-  $handler->display->display_options['access']['node_type'] = 'site';
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['perm'] = 'edit any coordinator content';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['query_comment'] = FALSE;
@@ -1268,6 +1264,54 @@ Location',
   $handler->display->display_options['menu']['type'] = 'tab';
   $handler->display->display_options['menu']['title'] = 'Site Staff';
   $handler->display->display_options['menu']['weight'] = '0';
+
+  /* Display: Block */
+  $handler = $view->new_display('block', 'Block', 'block_1');
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = 'Name';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_default_classes'] = FALSE;
+  /* Field: Field: Available programs */
+  $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
+  $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
+  $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
+  $handler->display->display_options['fields']['field_site_restrict']['label'] = 'Program';
+  $handler->display->display_options['fields']['field_site_restrict']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_site_restrict']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_site_restrict']['delta_offset'] = '0';
+  /* Field: Content: Phone number */
+  $handler->display->display_options['fields']['field_phone']['id'] = 'field_phone';
+  $handler->display->display_options['fields']['field_phone']['table'] = 'field_data_field_phone';
+  $handler->display->display_options['fields']['field_phone']['field'] = 'field_phone';
+  $handler->display->display_options['fields']['field_phone']['label'] = 'Phone';
+  $handler->display->display_options['fields']['field_phone']['click_sort_column'] = 'number';
+  $handler->display->display_options['fields']['field_phone']['type'] = 'local_phone_number';
+  /* Field: Content: Email address */
+  $handler->display->display_options['fields']['field_email']['id'] = 'field_email';
+  $handler->display->display_options['fields']['field_email']['table'] = 'field_data_field_email';
+  $handler->display->display_options['fields']['field_email']['field'] = 'field_email';
+  $handler->display->display_options['fields']['field_email']['type'] = 'email_default';
+  /* Field: Content: Edit link */
+  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['label'] = 'Edit';
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Site (field_site) */
+  $handler->display->display_options['arguments']['field_site_nid']['id'] = 'field_site_nid';
+  $handler->display->display_options['arguments']['field_site_nid']['table'] = 'field_data_field_site';
+  $handler->display->display_options['arguments']['field_site_nid']['field'] = 'field_site_nid';
+  $handler->display->display_options['arguments']['field_site_nid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['field_site_nid']['default_argument_type'] = 'node';
+  $handler->display->display_options['arguments']['field_site_nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_site_nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_site_nid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['block_description'] = 'Site staff';
   $translatables['site_coordinators'] = array(
     t('Master'),
     t('Site Staff'),
@@ -1305,6 +1349,9 @@ Location',
     t('view'),
     t('Options'),
     t('[view_node] | [edit_node]'),
+    t('Block'),
+    t('Program'),
+    t('Email address'),
   );
   $export['site_coordinators'] = $view;
 
