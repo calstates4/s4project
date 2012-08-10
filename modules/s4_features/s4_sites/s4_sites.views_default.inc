@@ -952,13 +952,16 @@ Location',
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Site Staff';
-  $handler->display->display_options['access']['type'] = 'perm';
-  $handler->display->display_options['access']['perm'] = 'edit any coordinator content';
+  $handler->display->display_options['access']['type'] = 'type_role';
+  $handler->display->display_options['access']['role'] = array(
+    4 => '4',
+    6 => '6',
+  );
+  $handler->display->display_options['access']['node_type'] = 'site';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['query_comment'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
-  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Search';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '15';
   $handler->display->display_options['pager']['options']['offset'] = '0';
@@ -1017,6 +1020,68 @@ Location',
   $handler->display->display_options['filters']['type']['value'] = array(
     'coordinator' => 'coordinator',
   );
+
+  /* Display: Page */
+  $handler = $view->new_display('page', 'Page', 'page_1');
+  $handler->display->display_options['defaults']['access'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    2 => '2',
+  );
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['empty'] = FALSE;
+  $handler->display->display_options['header']['area']['content'] = '<p class="intro">Select a coordinator who will be working with you during your service.</p>';
+  $handler->display->display_options['header']['area']['format'] = 'full_html';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Field: Field: Available programs */
+  $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
+  $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
+  $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
+  $handler->display->display_options['fields']['field_site_restrict']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_site_restrict']['delta_offset'] = '0';
+  /* Field: Content: Phone number */
+  $handler->display->display_options['fields']['field_phone']['id'] = 'field_phone';
+  $handler->display->display_options['fields']['field_phone']['table'] = 'field_data_field_phone';
+  $handler->display->display_options['fields']['field_phone']['field'] = 'field_phone';
+  $handler->display->display_options['fields']['field_phone']['label'] = 'Phone';
+  $handler->display->display_options['fields']['field_phone']['click_sort_column'] = 'number';
+  $handler->display->display_options['fields']['field_phone']['type'] = 'local_phone_number';
+  /* Field: Signup: User select coordinator */
+  $handler->display->display_options['fields']['faculty_coordinator_select']['id'] = 'faculty_coordinator_select';
+  $handler->display->display_options['fields']['faculty_coordinator_select']['table'] = 's4_signup';
+  $handler->display->display_options['fields']['faculty_coordinator_select']['field'] = 'faculty_coordinator_select';
+  $handler->display->display_options['fields']['faculty_coordinator_select']['label'] = 'Select';
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Site (field_site) */
+  $handler->display->display_options['arguments']['field_site_nid']['id'] = 'field_site_nid';
+  $handler->display->display_options['arguments']['field_site_nid']['table'] = 'field_data_field_site';
+  $handler->display->display_options['arguments']['field_site_nid']['field'] = 'field_site_nid';
+  $handler->display->display_options['arguments']['field_site_nid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['field_site_nid']['default_argument_type'] = 'node';
+  $handler->display->display_options['arguments']['field_site_nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_site_nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_site_nid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'coordinator' => 'coordinator',
+  );
+  $handler->display->display_options['path'] = 'sites/%/coordinators';
 
   /* Display: Site staff tab */
   $handler = $view->new_display('page', 'Site staff tab', 'page_2');
@@ -1203,15 +1268,11 @@ Location',
   $handler->display->display_options['menu']['type'] = 'tab';
   $handler->display->display_options['menu']['title'] = 'Site Staff';
   $handler->display->display_options['menu']['weight'] = '0';
-
-  /* Display: Block */
-  $handler = $view->new_display('block', 'Block', 'block_1');
-  $handler->display->display_options['block_description'] = 'Site staff block';
   $translatables['site_coordinators'] = array(
     t('Master'),
     t('Site Staff'),
     t('more'),
-    t('Search'),
+    t('Apply'),
     t('Reset'),
     t('Sort by'),
     t('Asc'),
@@ -1228,6 +1289,9 @@ Location',
     t('Phone'),
     t('All'),
     t('%1'),
+    t('Page'),
+    t('<p class="intro">Select a coordinator who will be working with you during your service.</p>'),
+    t('Select'),
     t('Site staff tab'),
     t('Site staff'),
     t('Last Name'),
@@ -1241,8 +1305,6 @@ Location',
     t('view'),
     t('Options'),
     t('[view_node] | [edit_node]'),
-    t('Block'),
-    t('Site staff block'),
   );
   $export['site_coordinators'] = $view;
 

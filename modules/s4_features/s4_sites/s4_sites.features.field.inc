@@ -1047,7 +1047,7 @@ function s4_sites_field_default_fields() {
   $fields['node-coordinator-field_phone'] = array(
     'field_config' => array(
       'active' => '1',
-      'cardinality' => '-1',
+      'cardinality' => '1',
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_phone',
@@ -1092,7 +1092,6 @@ function s4_sites_field_default_fields() {
           'weight' => 0,
         ),
       ),
-      'display_label' => '',
       'entity_type' => 'node',
       'field_name' => 'field_phone',
       'label' => 'Phone number',
@@ -1294,7 +1293,6 @@ function s4_sites_field_default_fields() {
             'sn' => 0,
             'so' => 0,
             'sr' => 0,
-            'ss' => 0,
             'st' => 0,
             'sv' => 0,
             'sy' => 0,
@@ -1334,11 +1332,10 @@ function s4_sites_field_default_fields() {
             'zm' => 0,
             'zw' => 0,
           ),
-          'hide_single_cc' => 0,
         ),
         'default_country' => 'us',
         'enable_country_level_validation' => 1,
-        'enable_default_country' => 1,
+        'enable_default_country' => TRUE,
         'enable_extension' => 0,
         'user_register_form' => FALSE,
       ),
@@ -2941,7 +2938,7 @@ function s4_sites_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '4',
+        'weight' => '5',
       ),
     ),
   );
@@ -3024,7 +3021,7 @@ function s4_sites_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '5',
+        'weight' => '6',
       ),
     ),
   );
@@ -3218,7 +3215,7 @@ function s4_sites_field_default_fields() {
           'module' => 'location_cck',
           'settings' => array(),
           'type' => 'location_default',
-          'weight' => '13',
+          'weight' => '12',
         ),
         'full' => array(
           'label' => 'above',
@@ -3262,7 +3259,7 @@ function s4_sites_field_default_fields() {
   $fields['node-site-field_phone'] = array(
     'field_config' => array(
       'active' => '1',
-      'cardinality' => '-1',
+      'cardinality' => '1',
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_phone',
@@ -3286,7 +3283,7 @@ function s4_sites_field_default_fields() {
           'module' => 'cck_phone',
           'settings' => array(),
           'type' => 'local_phone_number',
-          'weight' => '11',
+          'weight' => '10',
         ),
         'full' => array(
           'label' => 'above',
@@ -3608,7 +3605,7 @@ function s4_sites_field_default_fields() {
             'thousand_separator' => ' ',
           ),
           'type' => 'number_integer',
-          'weight' => '15',
+          'weight' => '14',
         ),
         'full' => array(
           'label' => 'above',
@@ -3688,15 +3685,9 @@ function s4_sites_field_default_fields() {
         ),
         'default' => array(
           'label' => 'above',
-          'module' => 'number',
-          'settings' => array(
-            'decimal_separator' => '.',
-            'prefix_suffix' => TRUE,
-            'scale' => 0,
-            'thousand_separator' => ' ',
-          ),
-          'type' => 'number_integer',
-          'weight' => '26',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '25',
         ),
         'full' => array(
           'label' => 'above',
@@ -3813,7 +3804,7 @@ function s4_sites_field_default_fields() {
           'module' => 's4_sites',
           'settings' => array(),
           'type' => 's4_sites_population_matrix',
-          'weight' => '16',
+          'weight' => '15',
         ),
         'full' => array(
           'label' => 'above',
@@ -3881,7 +3872,7 @@ function s4_sites_field_default_fields() {
           'module' => 'email',
           'settings' => array(),
           'type' => 'email_default',
-          'weight' => '12',
+          'weight' => '11',
         ),
         'full' => array(
           'label' => 'above',
@@ -3946,15 +3937,9 @@ function s4_sites_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'field_collection',
-          'settings' => array(
-            'add' => 'Add',
-            'delete' => 'Delete',
-            'description' => TRUE,
-            'edit' => 'Edit',
-          ),
-          'type' => 'field_collection_list',
-          'weight' => '35',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '36',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -4029,7 +4014,7 @@ function s4_sites_field_default_fields() {
           'module' => 'link',
           'settings' => array(),
           'type' => 'link_default',
-          'weight' => '14',
+          'weight' => '13',
         ),
         'full' => array(
           'label' => 'above',
@@ -4255,7 +4240,7 @@ function s4_sites_field_default_fields() {
           'module' => 's4_sites',
           'settings' => array(),
           'type' => 's4_sites_hours_matrix',
-          'weight' => '5',
+          'weight' => '4',
         ),
         'full' => array(
           'label' => 'above',
@@ -4345,7 +4330,7 @@ function s4_sites_field_default_fields() {
           'module' => 'list',
           'settings' => array(),
           'type' => 'list_default',
-          'weight' => '19',
+          'weight' => '18',
         ),
         'full' => array(
           'label' => 'above',
@@ -4420,10 +4405,9 @@ function s4_sites_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'text',
           'settings' => array(),
-          'type' => 'text_default',
-          'weight' => '30',
+          'type' => 'hidden',
+          'weight' => '31',
         ),
         'full' => array(
           'label' => 'above',
@@ -4505,10 +4489,9 @@ function s4_sites_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'list',
           'settings' => array(),
-          'type' => 'list_default',
-          'weight' => '33',
+          'type' => 'hidden',
+          'weight' => '34',
         ),
         'full' => array(
           'label' => 'above',
@@ -4593,7 +4576,7 @@ function s4_sites_field_default_fields() {
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_link',
-          'weight' => '17',
+          'weight' => '16',
         ),
         'full' => array(
           'label' => 'above',
@@ -4630,100 +4613,6 @@ function s4_sites_field_default_fields() {
         'settings' => array(),
         'type' => 'options_select',
         'weight' => '2',
-      ),
-    ),
-  );
-
-  // Exported field: 'node-site-field_site_other_csu'
-  $fields['node-site-field_site_other_csu'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '-1',
-      'deleted' => '0',
-      'entity_types' => array(),
-      'field_name' => 'field_site_other_csu',
-      'foreign keys' => array(),
-      'indexes' => array(
-        'value' => array(
-          0 => 'value',
-        ),
-      ),
-      'module' => 'list',
-      'settings' => array(
-        'allowed_values' => array(
-          'California State University Bakersfield' => 'California State University Bakersfield',
-          'California State University Channel Islands' => 'California State University Channel Islands',
-          'California State University Chico' => 'California State University Chico',
-          'California State University Dominguez Hills' => 'California State University Dominguez Hills',
-          'California State University East Bay' => 'California State University East Bay',
-          'California State University Fresno' => 'California State University Fresno',
-          'California State University Fullerton' => 'California State University Fullerton',
-          'Humboldt State University' => 'Humboldt State University',
-          'California State University Long Beach' => 'California State University Long Beach',
-          'California State University Los Angeles' => 'California State University Los Angeles',
-          'California Maritime Academy' => 'California Maritime Academy',
-          'California State University Monterey Bay' => 'California State University Monterey Bay',
-          'California State University Northridge' => 'California State University Northridge',
-          'California State Polytechnic University, Pomona' => 'California State Polytechnic University, Pomona',
-          'California State University Sacramento' => 'California State University Sacramento',
-          'California State University San Bernardino' => 'California State University San Bernardino',
-          'San Diego State University' => 'San Diego State University',
-          'San Francisco State University' => 'San Francisco State University',
-          'San Jose State University' => 'San Jose State University',
-          'California Polytechnic State University, San Luis Obispo' => 'California Polytechnic State University, San Luis Obispo',
-          'California State University San Marcos' => 'California State University San Marcos',
-          'Sonoma State University' => 'Sonoma State University',
-          'California State University Stanislaus' => 'California State University Stanislaus',
-        ),
-        'allowed_values_function' => '',
-        'allowed_values_php' => '',
-      ),
-      'translatable' => '0',
-      'type' => 'list_text',
-    ),
-    'field_instance' => array(
-      'bundle' => 'site',
-      'default_value' => NULL,
-      'default_value_function' => '',
-      'default_value_php' => '',
-      'deleted' => '0',
-      'description' => '',
-      'display' => array(
-        'default' => array(
-          'label' => 'above',
-          'module' => 'list',
-          'settings' => array(),
-          'type' => 'list_default',
-          'weight' => '36',
-        ),
-        'notifications' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
-        'teaser' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
-      ),
-      'display_label' => 'Other campuses',
-      'entity_type' => 'node',
-      'field_name' => 'field_site_other_csu',
-      'label' => 'Do you have a partnership with another CSU campus?',
-      'required' => 0,
-      's4_sites_field_access' => 1,
-      'settings' => array(
-        'user_register_form' => FALSE,
-      ),
-      'widget' => array(
-        'active' => 1,
-        'module' => 'options',
-        'settings' => array(),
-        'type' => 'options_select',
-        'weight' => '6',
       ),
     ),
   );
@@ -4854,7 +4743,7 @@ function s4_sites_field_default_fields() {
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_link',
-          'weight' => '18',
+          'weight' => '17',
         ),
         'full' => array(
           'label' => 'above',
@@ -5003,15 +4892,9 @@ function s4_sites_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'field_collection',
-          'settings' => array(
-            'add' => 'Add',
-            'delete' => 'Delete',
-            'description' => TRUE,
-            'edit' => 'Edit',
-          ),
-          'type' => 'field_collection_list',
-          'weight' => '34',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '35',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -5080,10 +4963,9 @@ function s4_sites_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'text',
           'settings' => array(),
-          'type' => 'text_default',
-          'weight' => '25',
+          'type' => 'hidden',
+          'weight' => '24',
         ),
         'full' => array(
           'label' => 'above',
@@ -5199,9 +5081,8 @@ function s4_sites_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'user_reference',
           'settings' => array(),
-          'type' => 'user_reference_default',
+          'type' => 'hidden',
           'weight' => '28',
         ),
         'full' => array(
@@ -5287,10 +5168,9 @@ function s4_sites_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'taxonomy',
           'settings' => array(),
-          'type' => 'taxonomy_term_reference_link',
-          'weight' => '27',
+          'type' => 'hidden',
+          'weight' => '26',
         ),
         'full' => array(
           'label' => 'above',
@@ -5621,7 +5501,6 @@ function s4_sites_field_default_fields() {
   t('Contact tags');
   t('Contact type');
   t('Days and hours will you accept students for service (check all that apply)');
-  t('Do you have a partnership with another CSU campus?');
   t('Downloadable form instructions');
   t('Email address');
   t('Enable expiration reminder');

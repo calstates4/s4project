@@ -47,8 +47,8 @@ function s4_sites_field_group_info() {
     'label' => 'Forms',
     'weight' => '26',
     'children' => array(
-      0 => 'field_site_evaluation_group',
-      1 => 'field_site_signup_group',
+      0 => 'field_site_signup_group',
+      1 => 'field_site_evaluation_group',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -230,11 +230,11 @@ function s4_sites_field_group_info() {
     'children' => array(
       0 => 'group_site_locations',
       1 => 'group_site_contact',
-      2 => 'group_site_forms',
-      3 => 'group_site_general',
-      4 => 'group_site_health_safety',
-      5 => 'group_site_instructions',
-      6 => 'group_site_population',
+      2 => 'group_site_general',
+      3 => 'group_site_health_safety',
+      4 => 'group_site_instructions',
+      5 => 'group_site_population',
+      6 => 'group_site_forms',
     ),
     'format_type' => 'htabs',
     'format_settings' => array(
