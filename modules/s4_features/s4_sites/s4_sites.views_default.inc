@@ -699,7 +699,7 @@ Location',
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Field: Field: Available programs */
+  /* Field: Field: Program */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
@@ -790,7 +790,7 @@ Location',
   $handler->display->display_options['filters']['field_csu_facility_tid']['expose']['multiple'] = TRUE;
   $handler->display->display_options['filters']['field_csu_facility_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_csu_facility_tid']['vocabulary'] = 'issues_addressed';
-  /* Filter criterion: Field: Available programs (field_site_restrict) */
+  /* Filter criterion: Field: Program (field_site_restrict) */
   $handler->display->display_options['filters']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
   $handler->display->display_options['filters']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['filters']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';
@@ -973,7 +973,7 @@ Location',
   $handler->display->display_options['fields']['title']['element_type'] = 'h3';
   $handler->display->display_options['fields']['title']['element_class'] = 'coordinator-name';
   $handler->display->display_options['fields']['title']['element_default_classes'] = FALSE;
-  /* Field: Field: Available programs */
+  /* Field: Field: Program */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
@@ -1040,7 +1040,7 @@ Location',
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Field: Field: Available programs */
+  /* Field: Field: Program */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
@@ -1276,11 +1276,10 @@ Location',
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
   $handler->display->display_options['fields']['title']['element_default_classes'] = FALSE;
-  /* Field: Field: Available programs */
+  /* Field: Field: Program */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
-  $handler->display->display_options['fields']['field_site_restrict']['label'] = 'Program';
   $handler->display->display_options['fields']['field_site_restrict']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_site_restrict']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_site_restrict']['delta_offset'] = '0';
@@ -1329,7 +1328,7 @@ Location',
     t('next ›'),
     t('last »'),
     t('Name'),
-    t('Available programs'),
+    t('Program'),
     t('Phone'),
     t('All'),
     t('%1'),
@@ -1350,7 +1349,6 @@ Location',
     t('Options'),
     t('[view_node] | [edit_node]'),
     t('Block'),
-    t('Program'),
     t('Email address'),
   );
   $export['site_coordinators'] = $view;
@@ -2018,7 +2016,7 @@ Location',
   $handler->display->display_options['fields']['title']['element_type'] = 'h4';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['element_default_classes'] = FALSE;
-  /* Field: Field: Available programs */
+  /* Field: Field: Program */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
@@ -2111,7 +2109,7 @@ Location',
   $handler->display->display_options['filters']['field_csu_org_type_tid']['reduce_duplicates'] = TRUE;
   $handler->display->display_options['filters']['field_csu_org_type_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_csu_org_type_tid']['vocabulary'] = 'organization_type';
-  /* Filter criterion: Field: Available programs (field_site_restrict) */
+  /* Filter criterion: Field: Program (field_site_restrict) */
   $handler->display->display_options['filters']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
   $handler->display->display_options['filters']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['filters']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';

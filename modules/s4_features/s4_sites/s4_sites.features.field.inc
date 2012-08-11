@@ -4942,7 +4942,7 @@ function s4_sites_field_default_fields() {
       'bundle' => 'site',
       'default_value' => NULL,
       'deleted' => '0',
-      'description' => 'Check off who is allowed to sign up with this site. ',
+      'description' => 'Select which programs can access this site.',
       'display' => array(
         'default' => array(
           'label' => 'above',
@@ -4973,7 +4973,7 @@ function s4_sites_field_default_fields() {
       'display_label' => '',
       'entity_type' => 'node',
       'field_name' => 'field_site_restrict',
-      'label' => 'Available programs',
+      'label' => 'Program(s)',
       'required' => 1,
       's4_sites_field_access' => 0,
       'settings' => array(
@@ -5622,12 +5622,10 @@ function s4_sites_field_default_fields() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Additional users');
-  t('Available programs');
   t('Available to');
   t('Body');
   t('Briefly describe any ongoing needs or special projects with which students can assist agency staff');
   t('By percentage, what is the demographic of the population you serve?');
-  t('Check off who is allowed to sign up with this site. ');
   t('Contact email');
   t('Contact tags');
   t('Contact type');
@@ -5662,6 +5660,7 @@ function s4_sites_field_default_fields() {
   t('Organization type');
   t('Phone number');
   t('Program');
+  t('Program(s)');
   t('Provide an overview description of your organization, i.e. who you are, what you do, and who you serve.');
   t('Related user');
   t('Reminder date');
@@ -5672,6 +5671,7 @@ function s4_sites_field_default_fields() {
   t('Role');
   t('Saved form record');
   t('Select the role of this staff person.');
+  t('Select which programs can access this site.');
   t('Signup forms');
   t('Site');
   t('Site Tour');
