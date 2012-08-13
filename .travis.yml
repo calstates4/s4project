@@ -16,7 +16,7 @@ before_script:
   - drush make student_signup.make ../student_signup
   - cd ../student_signup
   - sudo chmod -R 777 sites/all/modules
-  - drush si vih_dk --db-url=mysql://root:@127.0.0.1/drupal --account-name=admin --account-pass=s4Test --site-mail=admin@example.com --site-name="S4" --yes
+  - drush si student_signup --db-url=mysql://root:@127.0.0.1/drupal --account-name=admin --account-pass=s4Test --site-mail=admin@example.com --site-name="S4" --yes
   - drush cc all --yes
 
 script: 
