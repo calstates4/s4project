@@ -131,6 +131,18 @@ function s4_core_views_default_views() {
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';
   $handler->display->display_options['relationships']['uid']['table'] = 'node_revision';
   $handler->display->display_options['relationships']['uid']['field'] = 'uid';
+  /* Relationship: Content revision: Content */
+  $handler->display->display_options['relationships']['vid']['id'] = 'vid';
+  $handler->display->display_options['relationships']['vid']['table'] = 'node_revision';
+  $handler->display->display_options['relationships']['vid']['field'] = 'vid';
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['relationship'] = 'vid';
+  $handler->display->display_options['fields']['nid']['label'] = '';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
   /* Field: Field: First Name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
@@ -149,13 +161,15 @@ function s4_core_views_default_views() {
   $handler->display->display_options['fields']['type']['id'] = 'type';
   $handler->display->display_options['fields']['type']['table'] = 'node';
   $handler->display->display_options['fields']['type']['field'] = 'type';
+  $handler->display->display_options['fields']['type']['relationship'] = 'vid';
   /* Field: Content revision: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node_revision';
   $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['title']['alter']['path'] = 'node/[nid]';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['title']['link_to_node_revision'] = TRUE;
   /* Field: Content revision: Log message */
   $handler->display->display_options['fields']['log']['id'] = 'log';
   $handler->display->display_options['fields']['log']['table'] = 'node_revision';
@@ -185,6 +199,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['relationship'] = 'vid';
   $handler->display->display_options['filters']['type']['value'] = array(
     'contact_record' => 'contact_record',
     'file' => 'file',
@@ -218,11 +233,13 @@ function s4_core_views_default_views() {
     t('next ›'),
     t('last »'),
     t('revision user'),
+    t('Get the actual content from a content revision.'),
     t('First Name'),
     t('User'),
     t('[field_first_name] [field_last_name]'),
     t('Type'),
     t('Title'),
+    t('node/[nid]'),
     t('Note'),
     t('[note] [log]'),
     t('Updated date'),
@@ -658,7 +675,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['fields']['nothing_1']['alter']['text'] = 'view';
   $handler->display->display_options['fields']['nothing_1']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['nothing_1']['alter']['path'] = 'user/[uid]';
-  /* Field: Field: Available programs */
+  /* Field: Field: Program */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
@@ -761,7 +778,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['filters']['uid_raw']['operator'] = '>';
   $handler->display->display_options['filters']['uid_raw']['value']['value'] = '1';
   $handler->display->display_options['filters']['uid_raw']['group'] = 1;
-  /* Filter criterion: Field: Available programs (field_site_restrict) */
+  /* Filter criterion: Field: Program (field_site_restrict) */
   $handler->display->display_options['filters']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
   $handler->display->display_options['filters']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['filters']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';
@@ -1016,7 +1033,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['fields']['field_downloadable_file']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['field_downloadable_file']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_downloadable_file']['group_column'] = 'fid';
-  /* Field: Field: Available programs */
+  /* Field: Field: Program */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
@@ -1091,7 +1108,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['fields']['field_downloadable_file']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['field_downloadable_file']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_downloadable_file']['group_column'] = 'fid';
-  /* Field: Field: Available programs */
+  /* Field: Field: Program */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
@@ -1104,7 +1121,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['fields']['field_site_restrict']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_site_restrict']['delta_offset'] = '0';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
-  /* Contextual filter: Field: Available programs (field_site_restrict) */
+  /* Contextual filter: Field: Program (field_site_restrict) */
   $handler->display->display_options['arguments']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
   $handler->display->display_options['arguments']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['arguments']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';
@@ -1294,11 +1311,10 @@ function s4_core_views_default_views() {
   $handler->display->display_options['fields']['field_course']['id'] = 'field_course';
   $handler->display->display_options['fields']['field_course']['table'] = 'field_data_field_course';
   $handler->display->display_options['fields']['field_course']['field'] = 'field_course';
-  /* Field: Field: Available programs */
+  /* Field: Field: Program */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
-  $handler->display->display_options['fields']['field_site_restrict']['label'] = 'Program';
   $handler->display->display_options['fields']['field_site_restrict']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_site_restrict']['delta_offset'] = '0';
   /* Field: Content: Site */

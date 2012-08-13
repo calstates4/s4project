@@ -1083,6 +1083,8 @@ Location',
   $handler = $view->new_display('page', 'Site staff tab', 'page_2');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Site staff';
+  $handler->display->display_options['defaults']['css_class'] = FALSE;
+  $handler->display->display_options['css_class'] = 'quicksearch';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
@@ -1240,26 +1242,7 @@ Location',
   $handler->display->display_options['filters']['type']['value'] = array(
     'coordinator' => 'coordinator',
   );
-  /* Filter criterion: Field: First Name (field_first_name) */
-  $handler->display->display_options['filters']['field_first_name_value']['id'] = 'field_first_name_value';
-  $handler->display->display_options['filters']['field_first_name_value']['table'] = 'field_data_field_first_name';
-  $handler->display->display_options['filters']['field_first_name_value']['field'] = 'field_first_name_value';
-  $handler->display->display_options['filters']['field_first_name_value']['operator'] = 'contains';
-  $handler->display->display_options['filters']['field_first_name_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_first_name_value']['expose']['operator_id'] = 'field_first_name_value_op';
-  $handler->display->display_options['filters']['field_first_name_value']['expose']['label'] = 'First Name';
-  $handler->display->display_options['filters']['field_first_name_value']['expose']['operator'] = 'field_first_name_value_op';
-  $handler->display->display_options['filters']['field_first_name_value']['expose']['identifier'] = 'field_first_name_value';
-  /* Filter criterion: Field: Last Name (field_last_name) */
-  $handler->display->display_options['filters']['field_last_name_value']['id'] = 'field_last_name_value';
-  $handler->display->display_options['filters']['field_last_name_value']['table'] = 'field_data_field_last_name';
-  $handler->display->display_options['filters']['field_last_name_value']['field'] = 'field_last_name_value';
-  $handler->display->display_options['filters']['field_last_name_value']['operator'] = 'contains';
-  $handler->display->display_options['filters']['field_last_name_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_last_name_value']['expose']['operator_id'] = 'field_last_name_value_op';
-  $handler->display->display_options['filters']['field_last_name_value']['expose']['label'] = 'Last Name';
-  $handler->display->display_options['filters']['field_last_name_value']['expose']['operator'] = 'field_last_name_value_op';
-  $handler->display->display_options['filters']['field_last_name_value']['expose']['identifier'] = 'field_last_name_value';
+  $handler->display->display_options['filters']['type']['group'] = 1;
   $handler->display->display_options['path'] = 'node/%/site-staff';
   $handler->display->display_options['menu']['type'] = 'tab';
   $handler->display->display_options['menu']['title'] = 'Site Staff';
