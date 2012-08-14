@@ -31,9 +31,11 @@ class S4CourseFaculyProcessor extends FeedsProcessor {
   public function newReference(FeedsSource $source, $item) {
     $course = node_load($item['course']);
     $existing = field_get_items('node', $course, 'field_course_faculty');
-    foreach ($existing as $existing_faculty) {
-      if ($existing_faculty['uid'] == $item['user']) {
-        return;
+    if($existing && is_array($existing)) {
+      foreach ($existing as $existing_faculty) {
+        if ($existing_faculty['uid'] == $item['user']) {
+          return;
+        }
       }
     }
     $course->field_course_faculty[$course->language][] = array('uid' => $item['user']);

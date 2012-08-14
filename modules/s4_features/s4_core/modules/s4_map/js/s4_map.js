@@ -3,6 +3,16 @@
 		if ($('#site-map').length) {
 			s4Map.init('site-map');
 		}
+		if ($('#site-view-map').length) {
+			s4Map.init('site-view-map');
+			var bounds = new google.maps.LatLngBounds();
+			$.each(Drupal.settings.s4_map_site_coordinates, function(index, marker) {
+			 console.log(marker);
+  			s4Map.addMarker(marker.lat, marker.lon, marker.name);
+  			bounds.extend(new google.maps.LatLng(marker.lat, marker.lon));
+			});
+			s4Map.map.fitBounds(bounds);
+		}
 		if ($('#site-list-map').length) {
 			$(document).scroll(function() {
 				var columnTop = $('#content_middle .column').position();

@@ -40,6 +40,7 @@ function s4_map_s4_site_configuration() {
 function s4_map_block_info() {
 	$blocks['s4_map_site_map'] = array('info' => 'General site map');
 	$blocks['s4_map_site_list_map'] = array('info' => 'Site list map');
+	$blocks['s4_map_site_view_map'] = array('info' => 'Site view map');
 
 	return $blocks;
 }
@@ -67,5 +68,31 @@ function s4_map_block_view($delta) {
 						 'content' => '<div class="map" id="site-list-map"></div>',
 						 );
 			break;
+		case 's4_map_site_view_map':
+		  $node = menu_get_object();
+		  $locations = field_get_items('node', $node, 'field_location');
+		  if(!$locations || !count($locations)) {
+  		  return;
+		  }
+		  $coordinates = array();
+		  foreach($locations as $location) {
+		    $address = array($location['name'],
+                                                    $location['street'],
+                                                    $location['additional'],
+                                                    $location['city'] .', '. $location['province'] .' &nbsp;'. $location['postal_code']);
+        foreach($address as $k => $a) {
+          if(!$a) {
+            unset($address[$k]);
+          }
+        }
+        $address[] = l(t('Directions'), 'http://maps.google.com/?q='. implode(',', $address), array('attributes' => array('target' => '_blank')));
+  		  $coordinates[] = array('name' => implode('<br/>', $address),
+  		                         'lat' => $location['latitude'],
+  		                         'lon' => $location['longitude']);
+		  }
+		  drupal_add_js(array('s4_map_site_coordinates' => $coordinates), 'setting');
+		  return array('subject' => null,
+		         'content' => '<div class="map site-view" id="site-view-map"></div>',
+		         );
 	}
 }

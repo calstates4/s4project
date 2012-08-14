@@ -5,4 +5,4 @@
 
 #map-loading-indicator { position: absolute; top: 10px; left: 100px; border-radius: 4px; -moz-border-radius: 4px; -webkit-border-radius: 4px; font-size: 140%; padding: 6px 10px 6px 30px; background: rgba(0,0,0,0.8) url(../images/ajax-loader.gif) no-repeat 5px 8px; display: none; color: #fff; z-index: 100; }
 
-#site-map .infowindow-message {  }
+#site-view-map { height: 230px; }

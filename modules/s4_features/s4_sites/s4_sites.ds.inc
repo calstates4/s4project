@@ -71,6 +71,20 @@ function s4_sites_ds_custom_fields_info() {
 
   $ds_field = new stdClass();
   $ds_field->api_version = 1;
+  $ds_field->field = 'map';
+  $ds_field->label = 'Map';
+  $ds_field->field_type = 6;
+  $ds_field->entities = array(
+    'node' => 'node',
+  );
+  $ds_field->properties = array(
+    'block' => 's4_map|s4_map_site_view_map',
+    'block_render' => '1',
+  );
+  $export['map'] = $ds_field;
+
+  $ds_field = new stdClass();
+  $ds_field->api_version = 1;
   $ds_field->field = 'return_to_site';
   $ds_field->label = 'Return to site';
   $ds_field->field_type = 6;
@@ -204,12 +218,13 @@ function s4_sites_ds_layout_settings_info() {
         5 => 'field_phone',
         6 => 'field_site_email',
         7 => 'field_location',
-        8 => 'field_site_facebook_page',
-        9 => 'field_population_size',
-        10 => 'field_site_demographics',
-        11 => 'field_site_language',
-        12 => 'field_site_requirements',
-        13 => 'field_site_hours_minimum',
+        8 => 'map',
+        9 => 'field_site_facebook_page',
+        10 => 'field_population_size',
+        11 => 'field_site_demographics',
+        12 => 'field_site_language',
+        13 => 'field_site_requirements',
+        14 => 'field_site_hours_minimum',
       ),
     ),
     'fields' => array(
