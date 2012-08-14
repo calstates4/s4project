@@ -556,7 +556,7 @@ function s4_core_user_signup_completed($sid = 0) {
           'hours' => $_SESSION['s4_signup_hours'],
           'program' => $_SESSION['s4_signup_program'],
           'signup_sid' => $sid);
-  _s4_core_create_signup($user->uid, $signup);
+  $signup = _s4_core_create_signup($user->uid, $signup);
   unset($_SESSION['s4_signup_course']);
   unset($_SESSION['s4_signup_site']);
   unset($_SESSION['s4_signup_coordinator']);
@@ -565,6 +565,7 @@ function s4_core_user_signup_completed($sid = 0) {
   unset($_SESSION['s4_signup_program']);
   unset($_SESSION['s4_core_viewed_downloadable_forms']);
   drupal_set_message(t('Congratulations, you are signed up!'));
+  module_invoke_all('s4_student_signup_completed', $signup);
   drupal_goto('<front>', array('query' => array('finished' => 'finished')));
 }
 
