@@ -128,8 +128,8 @@ function student_signup_profiler_install_terms($term, $vocabs_by_machine_name, $
       $term->field_educational_organization[LANGUAGE_NONE][0]['value'] = 1;
     }
     taxonomy_term_save($term);
-    $context['message'] = t('Installing category @term', array('@term' => check_plain($term['name'])));
-    $context['results'][] = $term['name'];
+    $context['message'] = t('Installing category @term', array('@term' => check_plain($term->name)));
+    $context['results'][] = $term->name;
   }
 }
 
