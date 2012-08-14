@@ -18,6 +18,8 @@ function _s4_sites_s4_reporting_term_report($report_criteria) {
   $query->leftJoin('field_data_field_location', 'fl', 'fl.entity_id = r.nid AND fl.bundle = :site', array(':site' => 'site'));
   $query->leftJoin('location', 'l', 'l.lid = fl.field_location_lid');
   $query->fields('l', array('city', 'province'));
+  $query->leftJoin('field_data_field_site_restrict', 'p', 'p.entity_id = r.nid AND p.bundle = :site', array(':site' => 'site'));
+  $query->condition('p.field_site_restrict_tid', $report_criteria['program']);
   $results = $query->execute()->fetchAll();
   
   foreach ($results as $result) {
@@ -101,6 +103,8 @@ function _s4_sites_reporting_district($report_criteria, $district_type) {
     $query->leftJoin('field_revision_field_district_state_upper', 'd', 'd.entity_id = r.nid AND d.revision_id = r.vid AND d.bundle = :site', array(':site' => 'site'));
     $query->addField('d', 'field_district_state_upper_value', 'district');
   }
+  $query->leftJoin('field_data_field_site_restrict', 'pt', 'pt.entity_id = r.nid AND pt.bundle = :site', array(':site' => 'site'));
+  $query->condition('pt.field_site_restrict_tid', $report_criteria['program']);
   $query->distinct();
   $query->leftJoin('field_data_field_population_size', 'p', 'p.entity_id = d.entity_id AND p.bundle = d.bundle');
   $query->fields('p', array('field_population_size_value'));
@@ -165,6 +169,8 @@ function _s4_sites_reporting_issues($report_criteria) {
            ->condition('r.timestamp', strtotime($report_criteria['end']), '<=');
     $query->leftJoin('field_data_field_csu_facility', 'o', 'o.entity_id = r.nid AND o.bundle = :site', array(':site' => 'site'));
     $query->distinct();
+    $query->leftJoin('field_data_field_site_restrict', 'pt', 'pt.entity_id = r.nid AND pt.bundle = :site', array(':site' => 'ste'));
+    $query->condition('pt.field_site_restrict_tid', $report_criteria['program']);
     $query->condition('o.field_csu_facility_tid', $o->tid);
     $query->leftJoin('field_data_field_population_size', 'p', 'p.entity_id = o.entity_id AND p.bundle = o.bundle');
     $query->fields('p', array('field_population_size_value'));
@@ -215,6 +221,8 @@ function _s4_sites_reporting_org_type($report_criteria) {
            ->fields('r', array('nid', 'status'))
            ->condition('r.timestamp', strtotime($report_criteria['start']), '>=')
            ->condition('r.timestamp', strtotime($report_criteria['end']), '<=');
+    $query->leftJoin('field_data_field_site_restrict', 'pt', 'pt.entity_id = r.nid AND pt.bundle = :site', array(':site' => 'site'));
+    $query->condition('pt.field_site_restrict_tid', $report_criteria['program']);
     $query->leftJoin('field_data_field_csu_org_type', 'o', 'o.entity_id = r.nid AND o.bundle = :site', array(':site' => 'site'));
     $query->distinct();
     $query->condition('o.field_csu_org_type_tid', $o->tid);

@@ -17,6 +17,23 @@ function s4_reporting_term_report($form, &$form_state) {
 		$terms[$result->nid] = $result->title;
 	}
 	
+	$programs = array();
+  foreach(taxonomy_get_vocabularies() as $vocabulary) {
+    if($vocabulary->machine_name == 'site_restrictions') {
+      foreach(taxonomy_get_tree($vocabulary->vid) as $term) {
+        $programs[$term->tid] = $term->name;
+      }
+    }
+  }
+	
+	$form['program'] = array(
+	 '#type' => 'select',
+	 '#title' => t('Program'),
+	 '#options' => $programs,
+	 '#weight' => -10,
+	 '#multiple' => TRUE,
+	);
+	
 	$form['term']['report_term'] = array(
 		'#type' => 'select',
 		'#title' => 'Report on a single term',
@@ -96,6 +113,7 @@ function s4_reporting_term_report_submit($form, &$form_state) {
 							  'end' => $dates[0]['value2'],
 							  'term' => $term);
 	}
+	$report_items['program'] = $form_state['values']['program'];
 	
 	$output = array();
 	$result = module_invoke_all('s4_reporting_term_report', $report_items);
