@@ -43,7 +43,7 @@ function s4_reporting_menu() {
 	);
 	
 	$items['reports/terms'] = array(
-		'title' => 'Term Summary',
+		'title' => variable_get('s4_reporting_term_title', 'Chancellor\'s Office Report'),
 		'type' => MENU_LOCAL_TASK,
 		'page callback' => 'drupal_get_form',
 		'page arguments' => array('s4_reporting_term_report'),
@@ -88,8 +88,38 @@ function s4_reporting_menu() {
 	 'access arguments' => array('access s4 reporting'),
 		'file' => 's4_reporting.pages.inc',
 	);
-
+	
+	$items['admin/config/s4/reporting'] = array(
+	 'title' => 'Reporting',
+	 'page callback' => 'drupal_get_form',
+	 'page arguments' => array('s4_reporting_admin_form'),
+	 'access arguments' => array('administer site configuration'),
+	);
+	
 	return $items;
+}
+
+function s4_reporting_admin_form() {
+  $form = array();
+  
+  $form['s4_reporting_term_title'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Name of the term summary report page'),
+    '#default_value' => variable_get('s4_reporting_term_title', 'Chancellor\'s Office Report'),
+  );
+  
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Save configuration'),
+  );
+  
+  return $form;
+}
+
+function s4_reporting_admin_form_submit($form, $form_state) {
+  variable_set('s4_reporting_term_title', check_plain($form_state['values']['s4_reporting_term_title']));
+  drupal_set_message('Settings saved');
+  menu_rebuild();
 }
 
 function s4_reporting_form_views_exposed_form_alter(&$form, $form_state) {
@@ -613,6 +643,20 @@ function s4_reporting_cron() {
   db_delete('s4_reporting')
     ->condition('date', time() - (4 * 60 * 60), '<')
     ->execute();
+}
+
+/**
+*  Implementation of hook_s4_site_configuration
+*/
+function s4_reporting_s4_site_configuration() {
+  return array(
+    's4_reporting' => array(
+      'group' => t('General settings'),
+      'title' => t('Manage name of reports'),
+      'description' => t('Change the names of the term report to fit your campus.'),
+      'href' => 'admin/config/s4/reporting',
+    ),
+  );
 }
 
 function s4_reporting_s4_reporting_term_report($report_criteria) {
