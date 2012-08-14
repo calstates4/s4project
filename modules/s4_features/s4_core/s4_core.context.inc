@@ -331,7 +331,13 @@ function s4_core_context_default_contexts() {
           'module' => 's4_reporting',
           'delta' => 'site_summary',
           'region' => 'content_top_right',
-          'weight' => '-10',
+          'weight' => '-50',
+        ),
+        'views-sites-block_1' => array(
+          'module' => 'views',
+          'delta' => 'sites-block_1',
+          'region' => 'content_top_right',
+          'weight' => '-49',
         ),
         'views-recent_actions-block' => array(
           'module' => 'views',
