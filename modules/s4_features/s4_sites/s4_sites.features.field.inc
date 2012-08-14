@@ -5496,6 +5496,72 @@ function s4_sites_field_default_fields() {
     ),
   );
 
+  // Exported field: 'taxonomy_term-organization_type-field_educational_organization'
+  $fields['taxonomy_term-organization_type-field_educational_organization'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_educational_organization',
+      'foreign keys' => array(),
+      'indexes' => array(
+        'value' => array(
+          0 => 'value',
+        ),
+      ),
+      'module' => 'list',
+      'settings' => array(
+        'allowed_values' => array(
+          0 => '',
+          1 => '',
+        ),
+        'allowed_values_function' => '',
+        'allowed_values_php' => '',
+      ),
+      'translatable' => '0',
+      'type' => 'list_boolean',
+    ),
+    'field_instance' => array(
+      'bundle' => 'organization_type',
+      'default_value' => array(
+        0 => array(
+          'value' => 0,
+        ),
+      ),
+      'default_value_function' => '',
+      'default_value_php' => '',
+      'deleted' => '0',
+      'description' => 'When checked, this will help separate reporting on these type of organizations.',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'list',
+          'settings' => array(),
+          'type' => 'list_default',
+          'weight' => 0,
+        ),
+      ),
+      'display_label' => '',
+      'entity_type' => 'taxonomy_term',
+      'field_name' => 'field_educational_organization',
+      'label' => 'Educational organization',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(
+          'display_label' => 1,
+        ),
+        'type' => 'options_onoff',
+        'weight' => '1',
+      ),
+    ),
+  );
+
   // Exported field: 'taxonomy_term-site_restrictions-field_form_instructions'
   $fields['taxonomy_term-site_restrictions-field_form_instructions'] = array(
     'field_config' => array(
@@ -5632,6 +5698,7 @@ function s4_sites_field_default_fields() {
   t('Days and hours will you accept students for service (check all that apply)');
   t('Do you have a partnership with another CSU campus?');
   t('Downloadable form instructions');
+  t('Educational organization');
   t('Email address');
   t('Enable expiration reminder');
   t('Enter a few tags to describe this site.');
@@ -5692,6 +5759,7 @@ function s4_sites_field_default_fields() {
   t('Website');
   t('What is the minimum number of hours you would require of a student in service per term');
   t('What languages would you like students to speak other than English?');
+  t('When checked, this will help separate reporting on these type of organizations.');
   t('When checked, users who have opted to receive notifications about expiring files will get a weekly email when this file is about to expire.');
 
   return $fields;
