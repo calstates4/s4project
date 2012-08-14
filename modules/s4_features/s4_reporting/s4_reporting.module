@@ -42,7 +42,7 @@ function s4_reporting_menu() {
 		'weight' => 10
 	);
 	
-	$items['reports/terms'] = array(
+	$items['reports/summary'] = array(
 		'title' => variable_get('s4_reporting_term_title', 'Chancellor\'s Office Report'),
 		'type' => MENU_LOCAL_TASK,
 		'page callback' => 'drupal_get_form',

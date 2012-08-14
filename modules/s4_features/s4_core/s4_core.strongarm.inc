@@ -20,10 +20,6 @@ function s4_core_strongarm() {
         0 => 4,
         1 => 3,
       ),
-      'signup' => array(
-        0 => 4,
-        1 => 3,
-      ),
       'course' => array(
         0 => 2,
         1 => 5,
@@ -34,16 +30,16 @@ function s4_core_strongarm() {
         1 => 3,
         2 => 4,
       ),
+      'signup' => array(
+        0 => 6,
+        1 => 3,
+        2 => 4,
+      ),
     ),
     'view_own' => array(
       'contact_record' => array(
         0 => 2,
         1 => 3,
-      ),
-      'signup' => array(
-        0 => 2,
-        1 => 4,
-        2 => 3,
       ),
       'course' => array(
         0 => 5,
@@ -54,18 +50,24 @@ function s4_core_strongarm() {
         1 => 3,
         2 => 4,
       ),
+      'signup' => array(
+        0 => 2,
+        1 => 6,
+        2 => 3,
+        3 => 4,
+      ),
     ),
     'per_node' => array(
       'contact_record' => 0,
-      'signup' => 0,
       'course' => 0,
       'file' => 0,
+      'signup' => 0,
     ),
     'priority' => array(
       'contact_record' => '0',
-      'signup' => '0',
       'course' => '0',
       'file' => '0',
+      'signup' => '0',
     ),
   );
   $export['content_access_settings'] = $strongarm;

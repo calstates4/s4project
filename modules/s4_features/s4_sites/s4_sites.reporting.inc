@@ -3,8 +3,12 @@
 function _s4_sites_s4_reporting_term_report($report_criteria) {
   $totals = array('total_sites' => array('count' => 0,
                          'title' => t('Total number of sites')),
-            'total_active_sites' => array('count' => 0,
+                  'total_active_sites' => array('count' => 0,
                          'title' => t('Total active sites')),
+                  'total_school_sites' => array('count' => 0,
+                         'title' => t('Total education sites')),
+                  'total_active_school_sites' => array('count' => 0,
+                         'title' => t('Total active education sites')),
                          );
   $sites = array();
   $locations = array();
@@ -20,6 +24,8 @@ function _s4_sites_s4_reporting_term_report($report_criteria) {
   $query->fields('l', array('city', 'province'));
   $query->leftJoin('field_data_field_site_restrict', 'p', 'p.entity_id = r.nid AND p.bundle = :site', array(':site' => 'site'));
   $query->condition('p.field_site_restrict_tid', $report_criteria['program']);
+  $query->leftJoin('field_data_field_educational_organization', 'e', 'e.entity_id = r.nid AND p.bundle = :site', array(':site' => 'site'));
+  $query->fields('e', array('field_educational_organization_value'));
   $results = $query->execute()->fetchAll();
   
   foreach ($results as $result) {
@@ -30,6 +36,12 @@ function _s4_sites_s4_reporting_term_report($report_criteria) {
         $locations[md5($result->city . $result->province)] = (array)$result;
       }
       $locations_total[md5($result->city . $result->province)]++;
+    }
+    if($result->field_educational_organization_value) {
+      $totals['total_school_sites']['count']++;
+      if($result->status) {
+        $totals['total_active_school_sites']['count']++;
+      }
     }
   }
   $output['site_org_types'] = array(
