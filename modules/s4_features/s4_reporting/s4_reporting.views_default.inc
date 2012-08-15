@@ -966,7 +966,7 @@ Fields',
   $handler->display->display_options['fields']['field_staff_role']['table'] = 'field_data_field_staff_role';
   $handler->display->display_options['fields']['field_staff_role']['field'] = 'field_staff_role';
   $handler->display->display_options['fields']['field_staff_role']['label'] = 'Staff role';
-  /* Field: Field: Available programs */
+  /* Field: Field: Program */
   $handler->display->display_options['fields']['field_site_restrict_1']['id'] = 'field_site_restrict_1';
   $handler->display->display_options['fields']['field_site_restrict_1']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict_1']['field'] = 'field_site_restrict';
@@ -1073,7 +1073,7 @@ Fields',
   $handler->display->display_options['fields']['field_tags']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['field_tags']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_tags']['delta_offset'] = '0';
-  /* Field: Field: Available programs */
+  /* Field: Field: Program */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
@@ -1287,7 +1287,7 @@ Fields',
     'default' => FALSE,
   );
   $handler->display->display_options['filters']['distance']['origin'] = 'latlon_gmap';
-  /* Filter criterion: Field: Available programs (field_site_restrict) */
+  /* Filter criterion: Field: Program (field_site_restrict) */
   $handler->display->display_options['filters']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
   $handler->display->display_options['filters']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['filters']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';
@@ -1378,7 +1378,7 @@ Fields',
   $handler->display->display_options['filters']['field_staff_signup_available_value']['expose']['label'] = 'Staff is available for placements';
   $handler->display->display_options['filters']['field_staff_signup_available_value']['expose']['operator'] = 'field_staff_signup_available_value_op';
   $handler->display->display_options['filters']['field_staff_signup_available_value']['expose']['identifier'] = 'field_staff_signup_available_value';
-  /* Filter criterion: Field: Available programs (field_site_restrict) */
+  /* Filter criterion: Field: Program (field_site_restrict) */
   $handler->display->display_options['filters']['field_site_restrict_tid_1']['id'] = 'field_site_restrict_tid_1';
   $handler->display->display_options['filters']['field_site_restrict_tid_1']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['filters']['field_site_restrict_tid_1']['field'] = 'field_site_restrict_tid';
@@ -1404,7 +1404,7 @@ Fields',
   $handler->display->display_options['filters']['field_staff_role_tid']['expose']['multiple'] = TRUE;
   $handler->display->display_options['filters']['field_staff_role_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_staff_role_tid']['vocabulary'] = 'site_staff_role';
-  /* Filter criterion: Field: Available programs (field_site_restrict) */
+  /* Filter criterion: Field: Program (field_site_restrict) */
   $handler->display->display_options['filters']['field_site_restrict_tid_2']['id'] = 'field_site_restrict_tid_2';
   $handler->display->display_options['filters']['field_site_restrict_tid_2']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['filters']['field_site_restrict_tid_2']['field'] = 'field_site_restrict_tid';
@@ -2235,7 +2235,7 @@ Fields',
   $handler->display->display_options['fields']['field_site_language']['label'] = 'Languages';
   $handler->display->display_options['fields']['field_site_language']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['field_site_language']['delta_offset'] = '0';
-  /* Field: Field: Available programs */
+  /* Field: Field: Program */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
@@ -2463,7 +2463,7 @@ Fields',
     'default' => FALSE,
   );
   $handler->display->display_options['filters']['distance']['origin'] = 'latlon_gmap';
-  /* Filter criterion: Field: Available programs (field_site_restrict) */
+  /* Filter criterion: Field: Program (field_site_restrict) */
   $handler->display->display_options['filters']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
   $handler->display->display_options['filters']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['filters']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';
@@ -2701,15 +2701,20 @@ Fields',
   $handler->display->display_options['exposed_form']['options']['s4_reporting'] = array(
     'group-field_first_name_value' => '0',
     'group-field_last_name_value_1' => '0',
-    'group-dyfield' => '3',
+    'group-field_site_restrict_tid_1' => '0',
+    'group-dyfield' => '4',
     'group-field_term_nid' => '1',
     'group-field_course_subject_value' => '1',
     'group-field_course_catalog_number_value' => '1',
     'group-field_signup_start_date_value' => '2',
-    'group-field_term_nid_1' => '2',
+    'group-field_term_nid_1' => '1',
+    'group-field_csu_org_type_tid' => '3',
+    'group-field_csu_facility_tid' => '3',
+    'group-city' => '3',
     'groups' => 'Student
 Course
 Placement
+Site
 Fields',
   );
   $handler->display->display_options['pager']['type'] = 'full';
@@ -2732,7 +2737,8 @@ Fields',
   $handler->display->display_options['relationships']['field_site_nid']['id'] = 'field_site_nid';
   $handler->display->display_options['relationships']['field_site_nid']['table'] = 'field_data_field_site';
   $handler->display->display_options['relationships']['field_site_nid']['field'] = 'field_site_nid';
-  $handler->display->display_options['relationships']['field_site_nid']['relationship'] = 'reverse_field_course_students_node';
+  $handler->display->display_options['relationships']['field_site_nid']['relationship'] = 'reverse_field_user_node';
+  $handler->display->display_options['relationships']['field_site_nid']['delta'] = '-1';
   /* Relationship: Content: Site staff (field_coordinator) */
   $handler->display->display_options['relationships']['field_coordinator_nid']['id'] = 'field_coordinator_nid';
   $handler->display->display_options['relationships']['field_coordinator_nid']['table'] = 'field_data_field_coordinator';
@@ -2900,7 +2906,7 @@ Fields',
   $handler->display->display_options['fields']['field_first_name']['label'] = 'First name';
   $handler->display->display_options['fields']['field_first_name']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['field_first_name']['alter']['path'] = 'user/[uid]';
-  /* Field: Field: Available programs */
+  /* Field: Field: Program */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
@@ -3021,6 +3027,19 @@ Fields',
   $handler->display->display_options['filters']['field_last_name_value_1']['expose']['label'] = 'Last name';
   $handler->display->display_options['filters']['field_last_name_value_1']['expose']['operator'] = 'field_last_name_value_1_op';
   $handler->display->display_options['filters']['field_last_name_value_1']['expose']['identifier'] = 'field_last_name_value_1';
+  /* Filter criterion: Field: Program (field_site_restrict) */
+  $handler->display->display_options['filters']['field_site_restrict_tid_1']['id'] = 'field_site_restrict_tid_1';
+  $handler->display->display_options['filters']['field_site_restrict_tid_1']['table'] = 'field_data_field_site_restrict';
+  $handler->display->display_options['filters']['field_site_restrict_tid_1']['field'] = 'field_site_restrict_tid';
+  $handler->display->display_options['filters']['field_site_restrict_tid_1']['group'] = 1;
+  $handler->display->display_options['filters']['field_site_restrict_tid_1']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_site_restrict_tid_1']['expose']['operator_id'] = 'field_site_restrict_tid_1_op';
+  $handler->display->display_options['filters']['field_site_restrict_tid_1']['expose']['label'] = 'Program';
+  $handler->display->display_options['filters']['field_site_restrict_tid_1']['expose']['operator'] = 'field_site_restrict_tid_1_op';
+  $handler->display->display_options['filters']['field_site_restrict_tid_1']['expose']['identifier'] = 'field_site_restrict_tid_1';
+  $handler->display->display_options['filters']['field_site_restrict_tid_1']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_site_restrict_tid_1']['type'] = 'select';
+  $handler->display->display_options['filters']['field_site_restrict_tid_1']['vocabulary'] = 'site_restrictions';
   /* Filter criterion: Content: Dynamic Fields */
   $handler->display->display_options['filters']['dyfield']['id'] = 'dyfield';
   $handler->display->display_options['filters']['dyfield']['table'] = 'node';
@@ -3103,7 +3122,36 @@ Fields',
   $handler->display->display_options['filters']['field_course_catalog_number_value']['expose']['label'] = 'Catalog number';
   $handler->display->display_options['filters']['field_course_catalog_number_value']['expose']['operator'] = 'field_course_catalog_number_value_op';
   $handler->display->display_options['filters']['field_course_catalog_number_value']['expose']['identifier'] = 'field_course_catalog_number_value';
-  /* Filter criterion: Field: Available programs (field_site_restrict) */
+  /* Filter criterion: Content: First day of service (field_signup_start_date) */
+  $handler->display->display_options['filters']['field_signup_start_date_value']['id'] = 'field_signup_start_date_value';
+  $handler->display->display_options['filters']['field_signup_start_date_value']['table'] = 'field_data_field_signup_start_date';
+  $handler->display->display_options['filters']['field_signup_start_date_value']['field'] = 'field_signup_start_date_value';
+  $handler->display->display_options['filters']['field_signup_start_date_value']['relationship'] = 'reverse_field_course_students_node';
+  $handler->display->display_options['filters']['field_signup_start_date_value']['operator'] = 'between';
+  $handler->display->display_options['filters']['field_signup_start_date_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_signup_start_date_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_signup_start_date_value']['expose']['operator_id'] = 'field_signup_start_date_value_op';
+  $handler->display->display_options['filters']['field_signup_start_date_value']['expose']['label'] = 'First day of service';
+  $handler->display->display_options['filters']['field_signup_start_date_value']['expose']['operator'] = 'field_signup_start_date_value_op';
+  $handler->display->display_options['filters']['field_signup_start_date_value']['expose']['identifier'] = 'field_signup_start_date_value';
+  $handler->display->display_options['filters']['field_signup_start_date_value']['granularity'] = 'day';
+  $handler->display->display_options['filters']['field_signup_start_date_value']['form_type'] = 'date_select';
+  $handler->display->display_options['filters']['field_signup_start_date_value']['default_date'] = '';
+  $handler->display->display_options['filters']['field_signup_start_date_value']['default_to_date'] = '';
+  $handler->display->display_options['filters']['field_signup_start_date_value']['year_range'] = '-3:+3';
+  /* Filter criterion: Content: Term (field_term) */
+  $handler->display->display_options['filters']['field_term_nid_1']['id'] = 'field_term_nid_1';
+  $handler->display->display_options['filters']['field_term_nid_1']['table'] = 'field_data_field_term';
+  $handler->display->display_options['filters']['field_term_nid_1']['field'] = 'field_term_nid';
+  $handler->display->display_options['filters']['field_term_nid_1']['relationship'] = 'field_course_nid';
+  $handler->display->display_options['filters']['field_term_nid_1']['group'] = 1;
+  $handler->display->display_options['filters']['field_term_nid_1']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_term_nid_1']['expose']['operator_id'] = 'field_term_nid_1_op';
+  $handler->display->display_options['filters']['field_term_nid_1']['expose']['label'] = 'Semester or term';
+  $handler->display->display_options['filters']['field_term_nid_1']['expose']['operator'] = 'field_term_nid_1_op';
+  $handler->display->display_options['filters']['field_term_nid_1']['expose']['identifier'] = 'field_term_nid_1';
+  $handler->display->display_options['filters']['field_term_nid_1']['expose']['multiple'] = TRUE;
+  /* Filter criterion: Field: Program (field_site_restrict) */
   $handler->display->display_options['filters']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
   $handler->display->display_options['filters']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['filters']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';
@@ -3125,33 +3173,43 @@ Fields',
   $handler->display->display_options['filters']['nid_1']['relationship'] = 'reverse_field_user_node';
   $handler->display->display_options['filters']['nid_1']['operator'] = 'not empty';
   $handler->display->display_options['filters']['nid_1']['group'] = 2;
-  /* Filter criterion: Content: First day of service (field_signup_start_date) */
-  $handler->display->display_options['filters']['field_signup_start_date_value']['id'] = 'field_signup_start_date_value';
-  $handler->display->display_options['filters']['field_signup_start_date_value']['table'] = 'field_data_field_signup_start_date';
-  $handler->display->display_options['filters']['field_signup_start_date_value']['field'] = 'field_signup_start_date_value';
-  $handler->display->display_options['filters']['field_signup_start_date_value']['relationship'] = 'reverse_field_course_students_node';
-  $handler->display->display_options['filters']['field_signup_start_date_value']['operator'] = 'between';
-  $handler->display->display_options['filters']['field_signup_start_date_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_signup_start_date_value']['expose']['operator_id'] = 'field_signup_start_date_value_op';
-  $handler->display->display_options['filters']['field_signup_start_date_value']['expose']['label'] = 'First day of service';
-  $handler->display->display_options['filters']['field_signup_start_date_value']['expose']['operator'] = 'field_signup_start_date_value_op';
-  $handler->display->display_options['filters']['field_signup_start_date_value']['expose']['identifier'] = 'field_signup_start_date_value';
-  $handler->display->display_options['filters']['field_signup_start_date_value']['granularity'] = 'day';
-  $handler->display->display_options['filters']['field_signup_start_date_value']['form_type'] = 'date_select';
-  $handler->display->display_options['filters']['field_signup_start_date_value']['default_date'] = '';
-  $handler->display->display_options['filters']['field_signup_start_date_value']['default_to_date'] = '';
-  $handler->display->display_options['filters']['field_signup_start_date_value']['year_range'] = '-3:+3';
-  /* Filter criterion: Content: Term (field_term) */
-  $handler->display->display_options['filters']['field_term_nid_1']['id'] = 'field_term_nid_1';
-  $handler->display->display_options['filters']['field_term_nid_1']['table'] = 'field_data_field_term';
-  $handler->display->display_options['filters']['field_term_nid_1']['field'] = 'field_term_nid';
-  $handler->display->display_options['filters']['field_term_nid_1']['relationship'] = 'field_course_nid';
-  $handler->display->display_options['filters']['field_term_nid_1']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_term_nid_1']['expose']['operator_id'] = 'field_term_nid_1_op';
-  $handler->display->display_options['filters']['field_term_nid_1']['expose']['label'] = 'Semester or term';
-  $handler->display->display_options['filters']['field_term_nid_1']['expose']['operator'] = 'field_term_nid_1_op';
-  $handler->display->display_options['filters']['field_term_nid_1']['expose']['identifier'] = 'field_term_nid_1';
-  $handler->display->display_options['filters']['field_term_nid_1']['expose']['multiple'] = TRUE;
+  /* Filter criterion: Content: Organization type (field_csu_org_type) */
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['id'] = 'field_csu_org_type_tid';
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['table'] = 'field_data_field_csu_org_type';
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['field'] = 'field_csu_org_type_tid';
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['relationship'] = 'field_site_nid';
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['group'] = 1;
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['expose']['operator_id'] = 'field_csu_org_type_tid_op';
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['expose']['label'] = 'Organization type';
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['expose']['operator'] = 'field_csu_org_type_tid_op';
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['expose']['identifier'] = 'field_csu_org_type_tid';
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['vocabulary'] = 'organization_type';
+  /* Filter criterion: Content: Issues addressed (field_csu_facility) */
+  $handler->display->display_options['filters']['field_csu_facility_tid']['id'] = 'field_csu_facility_tid';
+  $handler->display->display_options['filters']['field_csu_facility_tid']['table'] = 'field_data_field_csu_facility';
+  $handler->display->display_options['filters']['field_csu_facility_tid']['field'] = 'field_csu_facility_tid';
+  $handler->display->display_options['filters']['field_csu_facility_tid']['relationship'] = 'field_site_nid';
+  $handler->display->display_options['filters']['field_csu_facility_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_csu_facility_tid']['expose']['operator_id'] = 'field_csu_facility_tid_op';
+  $handler->display->display_options['filters']['field_csu_facility_tid']['expose']['label'] = 'Issues addressed';
+  $handler->display->display_options['filters']['field_csu_facility_tid']['expose']['operator'] = 'field_csu_facility_tid_op';
+  $handler->display->display_options['filters']['field_csu_facility_tid']['expose']['identifier'] = 'field_csu_facility_tid';
+  $handler->display->display_options['filters']['field_csu_facility_tid']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_csu_facility_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_csu_facility_tid']['vocabulary'] = 'issues_addressed';
+  /* Filter criterion: Location: City */
+  $handler->display->display_options['filters']['city']['id'] = 'city';
+  $handler->display->display_options['filters']['city']['table'] = 'location';
+  $handler->display->display_options['filters']['city']['field'] = 'city';
+  $handler->display->display_options['filters']['city']['relationship'] = 'field_site_nid';
+  $handler->display->display_options['filters']['city']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['city']['expose']['operator_id'] = 'city_op';
+  $handler->display->display_options['filters']['city']['expose']['label'] = 'City';
+  $handler->display->display_options['filters']['city']['expose']['operator'] = 'city_op';
+  $handler->display->display_options['filters']['city']['expose']['identifier'] = 'city';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -3232,10 +3290,14 @@ Fields',
     t('Site'),
     t('Site staff first name'),
     t('Site staff last name'),
+    t('Program'),
     t('Fields'),
     t('Catalog number'),
     t('First day of service'),
     t('Semester or term'),
+    t('Organization type'),
+    t('Issues addressed'),
+    t('City'),
     t('Page'),
     t('Export CSV'),
     t('Export XLS'),
