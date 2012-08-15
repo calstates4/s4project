@@ -127,9 +127,14 @@ function _s4_sites_reporting_district($report_criteria, $district_type) {
   $query->distinct();
   $query->leftJoin('field_data_field_population_size', 'p', 'p.entity_id = d.entity_id AND p.bundle = d.bundle');
   $query->fields('p', array('field_population_size_value'));
+  $query->orderBy('r.timestamp', 'DESC');
   $result = $query->execute()->fetchAll();
   
   foreach ($result as $row) {
+    if($existing[$row->nid]) {
+      continue;
+    }
+    $existing[$row->nid] = $row->nid;
     $districts[$row->district][$row->nid] = array('population' => $row->field_population_size_value);
     $query = db_select('node_revision', 'r')
          ->fields('r', array('nid'))
@@ -162,7 +167,7 @@ function _s4_sites_reporting_district($report_criteria, $district_type) {
         $hours += array_sum($site['signups']);
       }
     }
-    $rows[] = array($district_name, count($district), $population, $signups, $hours);
+    $rows[] = array(array('header' => TRUE, 'data' => $district_name), count($district), $population, $signups, $hours);
   }
   return theme('table', array('header' => $header, 'rows' => $rows));
 }
@@ -177,14 +182,22 @@ function _s4_sites_reporting_issues($report_criteria) {
   
   $header = array('Issues', 'Total sites', 'Active sites', 'Population size', 'Placements', 'Hours', 'Evaluations');
   $rows[] = array();
+  $demographics_field = field_info_field( 'field_site_demographics');
+  $demographics = unserialize($demographics_field['settings']['settings']);
+  $default_demographics = array();
+  foreach($demographics['rows'] as $key => $demographic) {
+    $default_demographics[$key] = array($demographic['title'], 0);
+  }
+  $default_demographics['sites_reported'] = array('Sites with data', 0);
   foreach ($issue_type as $o) {
     $total_sites = 0;
     $active_sites = 0;
     $population = 0;
     $signups = array();
+    $demographics = $default_demographics;
     $evaluations = 0;
     $query = db_select('node_revision', 'r')
-           ->fields('r', array('nid', 'status'))
+           ->fields('r', array('nid', 'vid', 'status'))
            ->condition('r.timestamp', strtotime($report_criteria['start']), '>=')
            ->condition('r.timestamp', strtotime($report_criteria['end']), '<=');
     $query->leftJoin('field_data_field_csu_facility', 'o', 'o.entity_id = r.nid AND o.bundle = :site', array(':site' => 'site'));
@@ -194,13 +207,34 @@ function _s4_sites_reporting_issues($report_criteria) {
     $query->condition('o.field_csu_facility_tid', $o->tid);
     $query->leftJoin('field_data_field_population_size', 'p', 'p.entity_id = o.entity_id AND p.bundle = o.bundle');
     $query->fields('p', array('field_population_size_value'));
+    $query->orderBy('r.timestamp', 'DESC');
     $result = $query->execute()->fetchAll();
+    
     foreach ($result as $row) {
+      if($existing[$row->nid]) {
+        continue;
+      }
+      $existing[$row->nid] = $row->nid;
       $total_sites++;
       if($row->status) {
         $active_sites++;
+        $population += $row->field_population_size_value;
+        $demographic_query = db_select('field_revision_field_site_demographics', 'd')
+                             ->condition('entity_id', $row->nid)
+                             ->condition('revision_id', $row->vid)
+                             ->condition('entity_type', 'node')
+                             ->condition('bundle', 'site')
+                             ->fields('d', array('field_site_demographics_row', 'field_site_demographics_value'))
+                             ->execute()
+                             ->fetchAllKeyed();
+        if($demographic_query) {
+          $default_demographics['sites_reported'][1]++;
+          foreach($demographic_query as $demographic => $percentage) {
+            $demographics[$demographic][1] += ($percentage / 100) * $row->field_population_size_value;
+          }
+        }
       }
-      $population += $row->field_population_size_value;
+      
       $query = db_select('node_revision', 'r')
            ->fields('r', array('nid'))
            ->condition('r.status', 1)
@@ -220,12 +254,23 @@ function _s4_sites_reporting_issues($report_criteria) {
           $evaluations++;
         }
       }
-
     }
     $percent = ($total_sites)
                ? ' ('. round(($active_sites / $total_sites) * 100, 2) .'%)'
                : '';
-    $rows[] = array($o->name, $total_sites, $active_sites . $percent, $population, count($signups), array_sum($signups), $evaluations);
+    $name = ($o->name) ? $o->name : '<em>'. t('none') .'</em>';
+    
+    foreach($demographics as $k => &$demographic) {
+      if($k != 'sites_reported') {
+        $demographic[1] = ($population)
+                            ? round(($demographic[1] / $population) * 100, 1) .'%'
+                            : '<em>' . t('n/a') .'</em>';
+      }
+    }
+    $demographics['sites_reported'][1] = $demographics['sites_reported'][1] .' ('. round($demographics['sites_reported'][1] / $active_sites) .'%)';
+    $demographic_table = theme('table', array('header' => array('Demographic', 'Percentage'), 'rows' => $demographics));
+
+    $rows[] = array(array('header' => TRUE, 'data' => $name), $total_sites, $active_sites . $percent, $population, $demographic_table, count($signups), array_sum($signups), $evaluations);
   }
   return theme('table', array('header' => $header, 'rows' => $rows));
 }
@@ -236,16 +281,24 @@ function _s4_sites_reporting_org_type($report_criteria) {
       $org_type = taxonomy_get_tree($vid);
     }
   }
-  $header = array('Org Type', 'Sites', 'Active sites', 'Population size', 'Placements', 'Hours', 'Evaluations');
+  $header = array('Org Type', 'Sites', 'Active sites', 'Population size', 'Demographics', 'Placements', 'Hours', 'Evaluations');
   $rows[] = array();
+  $demographics_field = field_info_field( 'field_site_demographics');
+  $demographics = unserialize($demographics_field['settings']['settings']);
+  $default_demographics = array();
+  foreach($demographics['rows'] as $key => $demographic) {
+    $default_demographics[$key] = array($demographic['title'], 0);
+  }
+  $default_demographics['sites_reported'] = array('Sites with data', 0);
   foreach ($org_type as $o) {
     $total_sites = 0;
     $active_sites = 0;
     $population = 0;
     $signups = array();
     $evaluations = 0;
+    $demographics = $default_demographics;
     $query = db_select('node_revision', 'r')
-           ->fields('r', array('nid', 'status'))
+           ->fields('r', array('nid', 'vid', 'status'))
            ->condition('r.timestamp', strtotime($report_criteria['start']), '>=')
            ->condition('r.timestamp', strtotime($report_criteria['end']), '<=');
     $query->leftJoin('field_data_field_site_restrict', 'pt', 'pt.entity_id = r.nid AND pt.bundle = :site', array(':site' => 'site'));
@@ -255,13 +308,33 @@ function _s4_sites_reporting_org_type($report_criteria) {
     $query->condition('o.field_csu_org_type_tid', $o->tid);
     $query->leftJoin('field_data_field_population_size', 'p', 'p.entity_id = o.entity_id AND p.bundle = o.bundle');
     $query->fields('p', array('field_population_size_value'));
+    $query->orderBy('r.timestamp', 'DESC');
     $result = $query->execute()->fetchAll();
     foreach ($result as $row) {
+      if($existing[$row->nid]) {
+        continue;
+      }
+      $existing[$row->nid] = $row->nid;
       $total_sites++;
       if($row->status) {
         $active_sites++;
+        $demographic_query = db_select('field_revision_field_site_demographics', 'd')
+                           ->condition('entity_id', $row->nid)
+                           ->condition('revision_id', $row->vid)
+                           ->condition('entity_type', 'node')
+                           ->condition('bundle', 'site')
+                           ->fields('d', array('field_site_demographics_row', 'field_site_demographics_value'))
+                           ->execute()
+                           ->fetchAllkeyed();
+        if($demographic_query) {
+          $default_demographics['sites_reported'][1]++;
+          foreach($demographic_query as $demographic => $percentage) {
+            $demographics[$demographic][1] += ($percentage / 100) * $row->field_population_size_value;
+          }
+        }
+        $population += $row->field_population_size_value;
       }
-      $population += $row->field_population_size_value;
+      
       $query = db_select('node_revision', 'r')
            ->fields('r', array('nid'))
            ->condition('r.status', 1)
@@ -285,7 +358,18 @@ function _s4_sites_reporting_org_type($report_criteria) {
     $percent = ($total_sites)
                ? ' ('. round(($active_sites / $total_sites) * 100, 2) .'%)'
                : '';
-    $rows[] = array($o->name, $total_sites, $active_sites . $percent, $population, count($signups), array_sum($signups), $evaluations);
+    $name = ($o->name) ? $o->name : '<em>'. t('none') .'</em>';
+    foreach($demographics as $k => &$demographic) {
+      if($k != 'sites_reported') {
+        $demographic[1] = ($population)
+                            ? round(($demographic[1] / $population) * 100, 1) .'%'
+                            : '<em>' . t('n/a') .'</em>';
+      }
+    }
+    $demographics['sites_reported'][1] = $demographics['sites_reported'][1] .' ('. round($demographics['sites_reported'][1] / $active_sites) .'%)';
+    $demographic_table = theme('table', array('header' => array('Demographic', 'Percentage'), 'rows' => $demographics));
+    
+    $rows[] = array(array('header' => TRUE, 'data' => $name), $total_sites, $active_sites . $percent, $population, $demographic_table, count($signups), array_sum($signups), $evaluations);
   }
   return theme('table', array('header' => $header, 'rows' => $rows));
 }

@@ -2,7 +2,27 @@
 
 
 function s4_reporting_term_report($form, &$form_state) {
-	$form['term'] = array(
+	drupal_add_css(drupal_get_path('module', 's4_reporting') .'/css/s4_reporting.summary.css');
+	$programs = array();
+  foreach(taxonomy_get_vocabularies() as $vocabulary) {
+    if($vocabulary->machine_name == 'site_restrictions') {
+      foreach(taxonomy_get_tree($vocabulary->vid) as $term) {
+        $programs[$term->tid] = $term->name;
+      }
+    }
+  }
+  
+  $form['#attributes'] = array('class' => array('summary-report'));
+  	
+	$form['program'] = array(
+	 '#type' => 'select',
+	 '#title' => t('Program'),
+	 '#options' => $programs,
+	 '#multiple' => TRUE,
+	 '#required' => TRUE,
+	);
+	
+  $form['term'] = array(
 		'#type' => 'fieldset',
 		'#title' => 'Report by term',
 	);
@@ -16,25 +36,7 @@ function s4_reporting_term_report($form, &$form_state) {
 	foreach($results as $result) {
 		$terms[$result->nid] = $result->title;
 	}
-	
-	$programs = array();
-  foreach(taxonomy_get_vocabularies() as $vocabulary) {
-    if($vocabulary->machine_name == 'site_restrictions') {
-      foreach(taxonomy_get_tree($vocabulary->vid) as $term) {
-        $programs[$term->tid] = $term->name;
-      }
-    }
-  }
-	
-	$form['program'] = array(
-	 '#type' => 'select',
-	 '#title' => t('Program'),
-	 '#options' => $programs,
-	 '#weight' => -10,
-	 '#multiple' => TRUE,
-	 '#required' => TRUE,
-	);
-	
+
 	$form['term']['report_term'] = array(
 		'#type' => 'select',
 		'#title' => 'Report on a single term',
@@ -119,14 +121,16 @@ function s4_reporting_term_report_submit($form, &$form_state) {
 	$output = array();
 	$result = module_invoke_all('s4_reporting_term_report', $report_items);
 	foreach($result['totals'] as $t => $total) {
-		$output['totals'][$t] = t('<strong>@title</strong>: @count', array(
-			'@title' => $total['title'],
-			'@count' => $total['count']
-		));
+		$output['totals'][$t] = array(
+			array('header' => TRUE, 'data' => $total['title']),
+			$total['count']
+		);
+		
 	}
 	$output += $result['output'];
+	$header = array(t('Item'), t('Totals'));
 	$output['totals'] = array(
-		'#markup' => theme('item_list', array('items' => $output['totals']))
+		'#markup' => theme('table', array('header' => $header, 'rows' => $output['totals']))
 		);	
 	$form_state['rebuild'] = TRUE;
 	$form_state['storage']['values'] = $form_state['values'];

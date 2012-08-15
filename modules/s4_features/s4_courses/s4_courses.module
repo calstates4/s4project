@@ -941,18 +941,20 @@ function s4_courses_s4_reporting_info() {
 }
 
 function s4_courses_s4_reporting_term_report($report_criteria) {
-  $totals = array('courses' => array('count' => 0,
-                         'title' => t('Total courses')),
+  $totals = array('sections' => array('count' => 0,
+                         'title' => t('Sections')),
+            'total-courses' => array('count' => 0,
+                         'title' => t('Courses')),
             'ud-courses' => array('count' => 0,
-                         'title' => t('Total upper-division courses')),
+                         'title' => t('Upper-division sections')),
             'ld-courses' => array('count' => 0,
-                         'title' => t('Total lower-division courses')),
+                         'title' => t('Lower-division sections')),
             'students' => array('count' => 0,
-                         'title' => t('Total students')),
+                         'title' => t('Students')),
             'placements' => array('count' => 0,
-                         'title' => t('Total placements')),
+                         'title' => t('Placements')),
             'hours' => array('count' => 0,
-                      'title' => t('Total service hours')),
+                      'title' => t('Service hours')),
           );
   $courses = array();
   $query = db_select('node_revision', 'r')
@@ -974,8 +976,10 @@ function s4_courses_s4_reporting_term_report($report_criteria) {
 
   $query->leftJoin('field_data_field_course_catalog_number', 'cn', 'cn.entity_id = t.entity_id AND cn.bundle = t.bundle');
   $query->leftJoin('field_data_field_signup_hours', 'h', 'h.entity_id = c.entity_id AND h.bundle = c.bundle');
+  $query->leftJoin('field_data_field_course_subject', 'su', 'su.entity_id = t.entity_id AND su.bundle = t.bundle');
   $query->fields('h', array('field_signup_hours_value'));
   $query->fields('cn', array('field_course_catalog_number_value'));
+  $query->fields('su', array('field_course_subject_value'));
   $query->fields('c', array('entity_id'));
   $query->fields('s', array('field_course_students_uid'));
   $query->leftJoin('node', 'n', 'n.vid = r.vid');
@@ -983,7 +987,8 @@ function s4_courses_s4_reporting_term_report($report_criteria) {
   $results = $query->execute()->fetchAll();
 
   foreach($results as $result) {
-    $courses[$result->nid] = $result->nid;
+    $total_courses[$result->field_course_subject_value . $reuslt->field_course_catalog_number_value] = $result->field_course_subject_value . $reuslt->field_course_catalog_number_value;
+    $sections[$result->nid] = $result->nid;
     $students[$result->field_course_students_uid] = $result->field_course_students_uid;
     $signups[$result->entity_id] = $result->entity_id;
     if (intval(substr($result->field_course_catalog_number_value, 0, 1)) > 2) {
@@ -998,7 +1003,8 @@ function s4_courses_s4_reporting_term_report($report_criteria) {
     $totals['hours']['count'] += $hour;
   }
   $totals['students']['count'] = count($students);
-  $totals['courses']['count'] = count($courses);
+  $totals['sections']['count'] = count($sections);
+  $totals['total-courses']['count'] = count($total_courses);
   $totals['placements']['count'] = count($signups);
   $totals['ud-courses']['count'] = count($ud_courses);
   $totals['ld-courses']['count'] = count($ld_courses);
