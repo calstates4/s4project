@@ -14,7 +14,7 @@ function _s4_sites_s4_reporting_term_report($report_criteria) {
   $locations = array();
   $locations_total = array();
   $query = db_select('node_revision', 'r')
-           ->fields('r', array('nid', 'status'))
+           ->fields('r', array('nid', 'vid', 'status'))
            ->condition('r.timestamp', strtotime($report_criteria['start']), '>=')
            ->condition('r.timestamp', strtotime($report_criteria['end']), '<=');
   $query->leftJoin('node', 'n', 'n.vid = r.vid');
@@ -24,8 +24,6 @@ function _s4_sites_s4_reporting_term_report($report_criteria) {
   $query->fields('l', array('city', 'province'));
   $query->leftJoin('field_data_field_site_restrict', 'p', 'p.entity_id = r.nid AND p.bundle = :site', array(':site' => 'site'));
   $query->condition('p.field_site_restrict_tid', $report_criteria['program']);
-  $query->leftJoin('field_data_field_educational_organization', 'e', 'e.entity_id = r.nid AND p.bundle = :site', array(':site' => 'site'));
-  $query->fields('e', array('field_educational_organization_value'));
   $results = $query->execute()->fetchAll();
   
   foreach ($results as $result) {
@@ -37,7 +35,16 @@ function _s4_sites_s4_reporting_term_report($report_criteria) {
       }
       $locations_total[md5($result->city . $result->province)]++;
     }
-    if($result->field_educational_organization_value) {
+    $education = db_select('field_revision_field_csu_org_type', 'o');
+    $education->condition('o.entity_type', 'node')
+              ->condition('o.bundle', 'site')
+              ->condition('o.entity_id', $result->nid)
+              ->condition('o.revision_id', $result->vid);
+    $education->leftJoin('field_data_field_educational_organization', 'e', 'e.entity_id = o.field_csu_org_type_tid AND e.entity_type = :taxonomy_term', array(':taxonomy_term' => 'taxonomy_term'));
+    $education->condition('e.field_educational_organization_value', 1);
+    $education->fields('e', array('field_educational_organization_value'));
+    $education_result = $education->execute()->fetchField();
+    if($education_result) {
       $totals['total_school_sites']['count']++;
       if($result->status) {
         $totals['total_active_school_sites']['count']++;

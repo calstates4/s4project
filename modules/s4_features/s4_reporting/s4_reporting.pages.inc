@@ -32,6 +32,7 @@ function s4_reporting_term_report($form, &$form_state) {
 	 '#options' => $programs,
 	 '#weight' => -10,
 	 '#multiple' => TRUE,
+	 '#required' => TRUE,
 	);
 	
 	$form['term']['report_term'] = array(
