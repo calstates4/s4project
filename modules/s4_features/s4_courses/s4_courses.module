@@ -294,7 +294,7 @@ function s4_courses_s4_user_status(&$status) {
   if (isset($course)) {
     $selection = '<div class="selection">' . l($course->title, 'node/' . $course->nid) . '</div>';
   }
-  $status = array('course' => array('data'   => 'Course',
+  $status = array('course' => array('data' => ($course) ? 'Course' : 'Course or program',
             'id'     => 'status-course',
             'href'  => 'my-courses',
             'class'  => (isset($_SESSION['s4_signup_course'])) ? array('done') : array(),

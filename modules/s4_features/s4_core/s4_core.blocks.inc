@@ -50,12 +50,14 @@ function s4_core_block_user_progress() {
     if (!$site || count($site_coordinators)) {
       $status['coordinator'] = array('data' => 'Site Staff',
               'id'   => 'status-coordinator',
-                'class'   => (isset($coordinator)) ? array('done') : array(),
-              'href' => 'sites/' . $site->nid . '/coordinators',
+              'class'   => (isset($coordinator)) ? array('done') : array(),
               'selection' => (isset($coordinator_selection))
                          ? $coordinator_selection
                          : FALSE
               );
+      if($site) {
+        $status['coordinator']['href'] = 'sites/' . $site->nid . '/coordinators';
+      }
     }
   }
   if (isset($site)) {
@@ -105,8 +107,7 @@ function s4_core_block_user_progress() {
         :   '';
   $status[] = array('data' => '<div>Done!</div>',
             'class' => array('complete', $finished));
-  return array('subject' => 'Follow these steps to sign up for service:',
-         'content' => theme('item_list', array('items' => $status, 'attributes' => array('class' => 'user-signup-status'))) . '<div class="clearfix"></div>');
+  return array('content' => theme('item_list', array('items' => $status, 'attributes' => array('class' => 'user-signup-status'))) . '<div class="clearfix"></div>');
 }
 
 /**
