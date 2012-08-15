@@ -2364,6 +2364,62 @@ function s4_core_field_default_fields() {
     ),
   );
 
+  // Exported field: 'taxonomy_term-site_restrictions-field_grace_period'
+  $fields['taxonomy_term-site_restrictions-field_grace_period'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_grace_period',
+      'foreign keys' => array(),
+      'indexes' => array(),
+      'module' => 'number',
+      'settings' => array(),
+      'translatable' => '0',
+      'type' => 'number_integer',
+    ),
+    'field_instance' => array(
+      'bundle' => 'site_restrictions',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => 'Enter the length of the grace period to delete and start over a student\'s placement. Students cannot start over after their service period (i.e. the semester or term they were in a course) regardless. For no limit, enter zero.',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'number',
+          'settings' => array(
+            'decimal_separator' => '.',
+            'prefix_suffix' => TRUE,
+            'scale' => 0,
+            'thousand_separator' => ' ',
+          ),
+          'type' => 'number_integer',
+          'weight' => 15,
+        ),
+      ),
+      'display_label' => '',
+      'entity_type' => 'taxonomy_term',
+      'field_name' => 'field_grace_period',
+      'label' => 'Grace period in days',
+      'required' => 0,
+      'settings' => array(
+        'max' => '',
+        'min' => '',
+        'prefix' => '',
+        'suffix' => 'days',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 0,
+        'module' => 'number',
+        'settings' => array(),
+        'type' => 'number',
+        'weight' => '12',
+      ),
+    ),
+  );
+
   // Exported field: 'taxonomy_term-site_restrictions-field_program_error'
   $fields['taxonomy_term-site_restrictions-field_program_error'] = array(
     'field_config' => array(
@@ -2420,7 +2476,7 @@ function s4_core_field_default_fields() {
           'rows' => '5',
         ),
         'type' => 'text_textarea',
-        'weight' => '8',
+        'weight' => '9',
       ),
     ),
   );
@@ -2552,6 +2608,72 @@ function s4_core_field_default_fields() {
     ),
   );
 
+  // Exported field: 'taxonomy_term-site_restrictions-field_start_over'
+  $fields['taxonomy_term-site_restrictions-field_start_over'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_start_over',
+      'foreign keys' => array(),
+      'indexes' => array(
+        'value' => array(
+          0 => 'value',
+        ),
+      ),
+      'module' => 'list',
+      'settings' => array(
+        'allowed_values' => array(
+          0 => '',
+          1 => '',
+        ),
+        'allowed_values_function' => '',
+        'allowed_values_php' => '',
+      ),
+      'translatable' => '0',
+      'type' => 'list_boolean',
+    ),
+    'field_instance' => array(
+      'bundle' => 'site_restrictions',
+      'default_value' => array(
+        0 => array(
+          'value' => 0,
+        ),
+      ),
+      'default_value_function' => '',
+      'default_value_php' => '',
+      'deleted' => '0',
+      'description' => 'When checked, students can start over and delete their placement information.',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'list',
+          'settings' => array(),
+          'type' => 'list_default',
+          'weight' => 14,
+        ),
+      ),
+      'display_label' => '',
+      'entity_type' => 'taxonomy_term',
+      'field_name' => 'field_start_over',
+      'label' => 'Allow students to delete and start over',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(
+          'display_label' => 1,
+        ),
+        'type' => 'options_onoff',
+        'weight' => '11',
+      ),
+    ),
+  );
+
   // Exported field: 'taxonomy_term-site_restrictions-field_statistics_message'
   $fields['taxonomy_term-site_restrictions-field_statistics_message'] = array(
     'field_config' => array(
@@ -2676,10 +2798,12 @@ function s4_core_field_default_fields() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Allow students to delete and start over');
   t('Assessment results');
   t('Available to');
   t('Body');
   t('Course');
+  t('Enter the length of the grace period to delete and start over a student\'s placement. Students cannot start over after their service period (i.e. the semester or term they were in a course) regardless. For no limit, enter zero.');
   t('Estimate the total number of hours you have worked at this site.');
   t('Evaluation Form Results');
   t('Evaluation email body');
@@ -2690,6 +2814,7 @@ function s4_core_field_default_fields() {
   t('First day of service');
   t('Form instructions');
   t('Frontpage title');
+  t('Grace period in days');
   t('Images');
   t('Last expected date of service');
   t('Let us know the last date you will be working on this site. This can be an approximation, and if you are singing up as part of a course, this will be automatically the last day of the semester.');
@@ -2717,6 +2842,7 @@ function s4_core_field_default_fields() {
   t('User');
   t('Welcome message');
   t('When a student is signed up with a site, this is the confirmation email that is sent to them.');
+  t('When checked, students can start over and delete their placement information.');
   t('When checked, the form will be shown to a user when they sign up for a site.');
 
   return $fields;

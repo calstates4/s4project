@@ -393,8 +393,62 @@ function s4_core_menu() {
     'page callback' => 's4_core_logout_redirect',
     'access callback' => 'user_is_logged_in',
   );
+  
+  $items['s4/start-over/%node'] = array(
+    'title' => 'Start over',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('s4_core_start_over_form', 2),
+    'access callback' => 's4_core_start_over_access',
+    'access arguments' => array(2),
+  );
 
   return $items;
+}
+
+function s4_core_start_over_access($node) {
+  global $user;
+  $account = field_get_items('node', $node, 'field_user');
+  if($user->uid != $account[0]['uid']) {
+    return FALSE;
+  }
+  $program = field_get_items('node', $node, 'field_site_restrict');
+  $program = taxonomy_term_load($program[0]['tid']);
+  if(!$program) {
+    return FALSE;
+  }
+  $allowed = field_get_items('taxonomy_term', $program, 'field_start_over');
+  if(!$allowed[0]['value']) {
+    return FALSE;
+  }
+  $days = field_get_items('taxonomy_term', $program, 'field_grace_period');
+  if($days[0]['value'] == 0 || $days[0]['value'] > ((time() - $node->created) / (24 * 60 * 60))) {
+    return TRUE;
+  }
+  return FALSE;
+}
+
+function s4_core_start_over_form($form, $form_state, $node) {
+  $site = field_get_items('node', $node, 'field_site');
+  $site = node_load($site[0]['nid']);
+  return confirm_form(
+    array(
+    'node' => array(
+      '#type' => 'value', 
+      '#value' => $node,
+    ),
+  ), 
+    t('Are you sure you want to cancel your placement at %site', array('%site' => $site->title)), 
+    '<front>', 
+    t('This action cannot be undone.'), 
+    t('Cancel placement'), 
+    t('Nevermind, take me back!')
+  );
+}
+
+function s4_core_start_over_form_submit($form, &$form_state) {
+  node_delete($form_state['values']['node']->nid);
+  drupal_set_message(t('Your placement has been cancelled, you can now start the signup process over.'));
+  $form_state['redirect'] = '<front>';
 }
 
 function s4_core_logout_redirect() {
@@ -875,15 +929,15 @@ function s4_core_node_delete($node) {
       $site = node_load($site[0]['nid']);
 
       $site_form = field_get_items('node', $site, 'field_site_form');
-      if ($site_form[0]['nid']) {
+      if ($site_form[0]['nid'] && $signup_sid[0]['value']) {
         $site_form = node_load($site_form[0]['nid']);
-        webform_submission_delete($site_node, $signup_sid);
+        webform_submission_delete($site_node, $signup_sid[0]['value']);
       }
 
       $eval_form = field_get_items('node', $site, 'field_site_eval_form');
-      if ($eval_form[0]['nid']) {
+      if ($eval_form[0]['nid'] && $eval_sid[0]['value']) {
         $eval_form = node_load($eval_form[0]['nid']);
-        webform_submission_delete($eval_form, $eval_sid);
+        webform_submission_delete($eval_form, $eval_sid[0]['value']);
       }
     }
   }

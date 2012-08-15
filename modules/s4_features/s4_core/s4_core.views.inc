@@ -52,8 +52,6 @@ function s4_core_views_data() {
     ),
   );
 
-
-
   $data['s4_signup']['student_signup_node'] = array(
     'title' => t('Signup related to student'),
     'help' => t('For listings of students assigned to a course'),
@@ -71,6 +69,18 @@ function s4_core_views_data() {
     'help' => t('Links to all site locations'),
     'field' => array(
       'handler' => 'views_handler_s4_site_locations',
+      'click sortable' => FALSE,
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort',
+    ),
+  );
+  
+  $data['s4_signup']['cancel_signup_link'] = array(
+    'title' => t('Cancel signup link'),
+    'help' => t('Links user to delete their signup'),
+    'field' => array(
+      'handler' => 'views_handler_s4_cancel_signup_link',
       'click sortable' => FALSE,
     ),
     'sort' => array(

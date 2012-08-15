@@ -1349,6 +1349,11 @@ function s4_core_views_default_views() {
   $handler->display->display_options['fields']['evaluation_link']['table'] = 's4_sites';
   $handler->display->display_options['fields']['evaluation_link']['field'] = 'evaluation_link';
   $handler->display->display_options['fields']['evaluation_link']['label'] = 'Complete evaluation';
+  /* Field: Signup: Cancel signup link */
+  $handler->display->display_options['fields']['cancel_signup_link']['id'] = 'cancel_signup_link';
+  $handler->display->display_options['fields']['cancel_signup_link']['table'] = 's4_signup';
+  $handler->display->display_options['fields']['cancel_signup_link']['field'] = 'cancel_signup_link';
+  $handler->display->display_options['fields']['cancel_signup_link']['label'] = 'Cancel';
 
   /* Display: User profile sites */
   $handler = $view->new_display('block', 'User profile sites', 'block_1');
@@ -1395,6 +1400,7 @@ function s4_core_views_default_views() {
     t('View your current placements'),
     t('Program'),
     t('Complete evaluation'),
+    t('Cancel'),
     t('User profile sites'),
     t('Sites'),
   );
