@@ -175,10 +175,11 @@ function _s4_sites_reporting_issues($report_criteria) {
     }
   }
   
-  $header = array('Issues', 'Active sites', 'Population size', 'Placements', 'Hours', 'Evaluations');
+  $header = array('Issues', 'Total sites', 'Active sites', 'Population size', 'Placements', 'Hours', 'Evaluations');
   $rows[] = array();
   foreach ($issue_type as $o) {
-    $sites = 0;
+    $total_sites = 0;
+    $active_sites = 0;
     $population = 0;
     $signups = array();
     $evaluations = 0;
@@ -195,7 +196,10 @@ function _s4_sites_reporting_issues($report_criteria) {
     $query->fields('p', array('field_population_size_value'));
     $result = $query->execute()->fetchAll();
     foreach ($result as $row) {
-      $sites++;
+      $total_sites++;
+      if($row->status) {
+        $active_sites++;
+      }
       $population += $row->field_population_size_value;
       $query = db_select('node_revision', 'r')
            ->fields('r', array('nid'))
@@ -218,7 +222,10 @@ function _s4_sites_reporting_issues($report_criteria) {
       }
 
     }
-    $rows[] = array($o->name, $sites, $population, count($signups), array_sum($signups), $evaluations);
+    $percent = ($total_sites)
+               ? ' ('. round(($active_sites / $total_sites) * 100, 2) .'%)'
+               : '';
+    $rows[] = array($o->name, $total_sites, $active_sites . $percent, $population, count($signups), array_sum($signups), $evaluations);
   }
   return theme('table', array('header' => $header, 'rows' => $rows));
 }
@@ -229,10 +236,11 @@ function _s4_sites_reporting_org_type($report_criteria) {
       $org_type = taxonomy_get_tree($vid);
     }
   }
-  $header = array('Org Type', 'Active sites', 'Population size', 'Placements', 'Hours', 'Evaluations');
+  $header = array('Org Type', 'Sites', 'Active sites', 'Population size', 'Placements', 'Hours', 'Evaluations');
   $rows[] = array();
   foreach ($org_type as $o) {
-    $sites = 0;
+    $total_sites = 0;
+    $active_sites = 0;
     $population = 0;
     $signups = array();
     $evaluations = 0;
@@ -249,7 +257,10 @@ function _s4_sites_reporting_org_type($report_criteria) {
     $query->fields('p', array('field_population_size_value'));
     $result = $query->execute()->fetchAll();
     foreach ($result as $row) {
-      $sites++;
+      $total_sites++;
+      if($row->status) {
+        $active_sites++;
+      }
       $population += $row->field_population_size_value;
       $query = db_select('node_revision', 'r')
            ->fields('r', array('nid'))
@@ -271,7 +282,10 @@ function _s4_sites_reporting_org_type($report_criteria) {
         }
       }
     }
-    $rows[] = array($o->name, $sites, $population, count($signups), array_sum($signups), $evaluations);
+    $percent = ($total_sites)
+               ? ' ('. round(($active_sites / $total_sites) * 100, 2) .'%)'
+               : '';
+    $rows[] = array($o->name, $total_sites, $active_sites . $percent, $population, count($signups), array_sum($signups), $evaluations);
   }
   return theme('table', array('header' => $header, 'rows' => $rows));
 }
