@@ -213,6 +213,13 @@ function s4_core_views_default_views() {
   $handler->display->display_options['filters']['timestamp']['operator'] = '>=';
   $handler->display->display_options['filters']['timestamp']['value']['value'] = '-30 days';
   $handler->display->display_options['filters']['timestamp']['value']['type'] = 'offset';
+  /* Filter criterion: User: The user ID */
+  $handler->display->display_options['filters']['uid_raw']['id'] = 'uid_raw';
+  $handler->display->display_options['filters']['uid_raw']['table'] = 'users';
+  $handler->display->display_options['filters']['uid_raw']['field'] = 'uid_raw';
+  $handler->display->display_options['filters']['uid_raw']['relationship'] = 'uid';
+  $handler->display->display_options['filters']['uid_raw']['operator'] = '>';
+  $handler->display->display_options['filters']['uid_raw']['value']['value'] = '1';
 
   /* Display: Recent activity block */
   $handler = $view->new_display('block', 'Recent activity block', 'block');
