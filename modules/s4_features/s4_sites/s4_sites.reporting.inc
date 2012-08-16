@@ -180,7 +180,7 @@ function _s4_sites_reporting_issues($report_criteria) {
     }
   }
   
-  $header = array('Issues', 'Total sites', 'Active sites', 'Population size', 'Placements', 'Hours', 'Evaluations');
+  $header = array(t('Issues'), t('Total sites'), t('Active sites'), t('Population size'), array('class' => array('demographics'), 'data' => t('Demographics')), t('Placements'), t('Hours'), t('Evaluations'));
   $rows[] = array();
   $demographics_field = field_info_field( 'field_site_demographics');
   $demographics = unserialize($demographics_field['settings']['settings']);
@@ -267,12 +267,11 @@ function _s4_sites_reporting_issues($report_criteria) {
                             : '<em>' . t('n/a') .'</em>';
       }
     }
-    $demographics['sites_reported'][1] = $demographics['sites_reported'][1] .' ('. round($demographics['sites_reported'][1] / $active_sites) .'%)';
     $demographic_table = theme('table', array('header' => array('Demographic', 'Percentage'), 'rows' => $demographics));
 
-    $rows[] = array(array('header' => TRUE, 'data' => $name), $total_sites, $active_sites . $percent, $population, $demographic_table, count($signups), array_sum($signups), $evaluations);
+    $rows[] = array(array('header' => TRUE, 'data' => $name), $total_sites, $active_sites . $percent, $population, array('data' => $demographic_table, 'class' => array('demographics')), count($signups), array_sum($signups), $evaluations);
   }
-  return theme('table', array('header' => $header, 'rows' => $rows));
+  return theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('population'))));
 }
 
 function _s4_sites_reporting_org_type($report_criteria) {
@@ -281,7 +280,7 @@ function _s4_sites_reporting_org_type($report_criteria) {
       $org_type = taxonomy_get_tree($vid);
     }
   }
-  $header = array('Org Type', 'Sites', 'Active sites', 'Population size', 'Demographics', 'Placements', 'Hours', 'Evaluations');
+  $header = array(t('Org Type'), t('Sites'), t('Active sites'), t('Population size'), array('class' => array('demographics'), 'data' => t('Demographics')), t('Placements'), t('Hours'), t('Evaluations'));
   $rows[] = array();
   $demographics_field = field_info_field( 'field_site_demographics');
   $demographics = unserialize($demographics_field['settings']['settings']);
@@ -366,10 +365,10 @@ function _s4_sites_reporting_org_type($report_criteria) {
                             : '<em>' . t('n/a') .'</em>';
       }
     }
-    $demographics['sites_reported'][1] = $demographics['sites_reported'][1] .' ('. round($demographics['sites_reported'][1] / $active_sites) .'%)';
+
     $demographic_table = theme('table', array('header' => array('Demographic', 'Percentage'), 'rows' => $demographics));
     
-    $rows[] = array(array('header' => TRUE, 'data' => $name), $total_sites, $active_sites . $percent, $population, $demographic_table, count($signups), array_sum($signups), $evaluations);
+    $rows[] = array(array('header' => TRUE, 'data' => $name), $total_sites, $active_sites . $percent, $population, array('data' => $demographic_table, 'class' => array('demographics')), count($signups), array_sum($signups), $evaluations);
   }
-  return theme('table', array('header' => $header, 'rows' => $rows));
+  return theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('population'))));
 }

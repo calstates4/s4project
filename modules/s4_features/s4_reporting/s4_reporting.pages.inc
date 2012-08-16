@@ -3,6 +3,7 @@
 
 function s4_reporting_term_report($form, &$form_state) {
 	drupal_add_css(drupal_get_path('module', 's4_reporting') .'/css/s4_reporting.summary.css');
+	drupal_add_js(drupal_get_path('module', 's4_reporting') .'/js/s4_reporting.summary.js');
 	$programs = array();
   foreach(taxonomy_get_vocabularies() as $vocabulary) {
     if($vocabulary->machine_name == 'site_restrictions') {
