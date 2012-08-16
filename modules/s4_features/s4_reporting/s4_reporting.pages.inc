@@ -292,7 +292,6 @@ function s4_reporting_view_form_report_form_submit($form, $form_state) {
   $file_name = drupal_tempnam('temporary://', 'form_report_');
   $handle = @fopen($file_name, 'w'); // The @ suppresses errors.
   $exporter->bof($handle);
-  dpm($table);
   foreach($table['header'] as $k => $head) {
     if(is_array($head)) {
       $table['header'][$k] = check_plain($head['value']);
