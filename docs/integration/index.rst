@@ -3,9 +3,12 @@ Before you start
 ================
 
 Integrating your S4 website with your Student Information System will require working together with your IT department to do the actual integration, and the people on your campus who own the data you would like to access. Data access, especially data which is covered under FERPA, is the first step to integrating S4. The following data elements are required for S4:
+
 .. _integrationusers:
+
 User information (students and faculty)
 ---------------------------------------
+
 * Login ID (the user's campus login name)
 * User ID (the unique ID of the user in your SIS, like emplid)
 * Email address
@@ -15,6 +18,7 @@ User information (students and faculty)
 
 Term information (i.e. semester)
 --------------------------------
+
 * Start date of the term
 * End date of the term
 * Human-readable name of the term (i.e. "Fall 2010")
@@ -22,6 +26,7 @@ Term information (i.e. semester)
 
 Course information
 ------------------
+
 * Course term
 * Subject code
 * Catalog number
@@ -32,11 +37,13 @@ Course information
 
 Faculty assignments
 -------------------
+
 * Faculty ID
 * Course ID
 
 Student enrollment
 ------------------
+
 * User ID of the student
 * Course ID
 * Enrollment status (enrolled/dropped)
