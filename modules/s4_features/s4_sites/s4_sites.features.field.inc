@@ -3040,6 +3040,255 @@ function s4_sites_field_default_fields() {
     ),
   );
 
+  // Exported field: 'node-site-field_district_federal'
+  $fields['node-site-field_district_federal'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_district_federal',
+      'foreign keys' => array(
+        'format' => array(
+          'columns' => array(
+            'format' => 'format',
+          ),
+          'table' => 'filter_format',
+        ),
+      ),
+      'global_block_settings' => '1',
+      'indexes' => array(
+        'format' => array(
+          0 => 'format',
+        ),
+      ),
+      'module' => 'text',
+      'settings' => array(
+        'max_length' => '255',
+      ),
+      'translatable' => '1',
+      'type' => 'text',
+    ),
+    'field_instance' => array(
+      'bundle' => 'site',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => '31',
+        ),
+        'full' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '24',
+        ),
+        'notifications' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'display_label' => '',
+      'entity_type' => 'node',
+      'field_name' => 'field_district_federal',
+      'label' => 'Federal district',
+      'required' => 0,
+      's4_sites_field_access' => 1,
+      'settings' => array(
+        'text_processing' => '0',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'text',
+        'settings' => array(
+          'size' => '10',
+        ),
+        'type' => 'text_textfield',
+        'weight' => '2',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-site-field_district_state_lower'
+  $fields['node-site-field_district_state_lower'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_district_state_lower',
+      'foreign keys' => array(
+        'format' => array(
+          'columns' => array(
+            'format' => 'format',
+          ),
+          'table' => 'filter_format',
+        ),
+      ),
+      'global_block_settings' => '1',
+      'indexes' => array(
+        'format' => array(
+          0 => 'format',
+        ),
+      ),
+      'module' => 'text',
+      'settings' => array(
+        'max_length' => '10',
+      ),
+      'translatable' => '1',
+      'type' => 'text',
+    ),
+    'field_instance' => array(
+      'bundle' => 'site',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => '33',
+        ),
+        'full' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '25',
+        ),
+        'notifications' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'display_label' => '',
+      'entity_type' => 'node',
+      'field_name' => 'field_district_state_lower',
+      'label' => 'State lower district',
+      'required' => 0,
+      's4_sites_field_access' => 1,
+      'settings' => array(
+        'text_processing' => '0',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'text',
+        'settings' => array(
+          'size' => '10',
+        ),
+        'type' => 'text_textfield',
+        'weight' => '4',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-site-field_district_state_upper'
+  $fields['node-site-field_district_state_upper'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_district_state_upper',
+      'foreign keys' => array(
+        'format' => array(
+          'columns' => array(
+            'format' => 'format',
+          ),
+          'table' => 'filter_format',
+        ),
+      ),
+      'global_block_settings' => '1',
+      'indexes' => array(
+        'format' => array(
+          0 => 'format',
+        ),
+      ),
+      'module' => 'text',
+      'settings' => array(
+        'max_length' => '10',
+      ),
+      'translatable' => '1',
+      'type' => 'text',
+    ),
+    'field_instance' => array(
+      'bundle' => 'site',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => '34',
+        ),
+        'full' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '27',
+        ),
+        'notifications' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'display_label' => '',
+      'entity_type' => 'node',
+      'field_name' => 'field_district_state_upper',
+      'label' => 'State upper district',
+      'required' => 0,
+      's4_sites_field_access' => 0,
+      'settings' => array(
+        'text_processing' => '0',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'text',
+        'settings' => array(
+          'size' => '10',
+        ),
+        'type' => 'text_textfield',
+        'weight' => '3',
+      ),
+    ),
+  );
+
   // Exported field: 'node-site-field_health_risk'
   $fields['node-site-field_health_risk'] = array(
     'field_config' => array(
@@ -5707,6 +5956,7 @@ function s4_sites_field_default_fields() {
   t('Enter the number of days before a file of this type expires that an email reminder should be sent to department staff. ');
   t('Evaluation forms');
   t('Expiration date');
+  t('Federal district');
   t('File category');
   t('File description or notes');
   t('Files');
@@ -5747,6 +5997,8 @@ function s4_sites_field_default_fields() {
   t('Site special requirements');
   t('Social network page');
   t('Special site instructions');
+  t('State lower district');
+  t('State upper district');
   t('Students can register with this staff');
   t('Tags');
   t('Thank-you message');
