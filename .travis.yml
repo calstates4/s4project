@@ -13,9 +13,8 @@ before_script:
   - pear channel-discover pear.drush.org
   - pear install drush/drush
   - phpenv rehash
-  - drush make student_signup.make ../student_signup
-  - cd ../student_signup
-  - sudo chmod -R 777 sites/all/modules
+  - drush make https://raw.github.com/kevee/csu_student_signup/master/distro.make student_signup
+  - cd student_signup
   - drush si student_signup --db-url=mysql://root:@127.0.0.1/drupal --account-name=admin --account-pass=s4Test --site-mail=admin@example.com --site-name="S4" --yes
   - drush cc all --yes
 
