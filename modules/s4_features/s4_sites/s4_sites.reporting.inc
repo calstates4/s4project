@@ -332,8 +332,8 @@ function _s4_sites_reporting_org_type($report_criteria) {
           $default_demographics['sites_reported'][1]++;
           foreach($demographic_query as $demographic => $percentage) {
             $demographics[$demographic][1] += ($percentage / 100) * $row->field_population_size_value;
-            $demographic_population += $row->field_population_size_value;
           }
+          $demographic_population += $row->field_population_size_value;
         }
         $population += $row->field_population_size_value;
       }
