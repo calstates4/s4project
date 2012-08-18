@@ -193,6 +193,7 @@ function _s4_sites_reporting_issues($report_criteria) {
     $total_sites = 0;
     $active_sites = 0;
     $population = 0;
+    $demographic_population = 0;
     $signups = array();
     $demographics = $default_demographics;
     $evaluations = 0;
@@ -232,6 +233,7 @@ function _s4_sites_reporting_issues($report_criteria) {
           foreach($demographic_query as $demographic => $percentage) {
             $demographics[$demographic][1] += ($percentage / 100) * $row->field_population_size_value;
           }
+          $demographic_population += $row->field_population_size_value;
         }
       }
       
@@ -261,10 +263,10 @@ function _s4_sites_reporting_issues($report_criteria) {
     $name = ($o->name) ? $o->name : '<em>'. t('none') .'</em>';
     
     foreach($demographics as $k => &$demographic) {
-      if($k != 'sites_reported') {
+      if($k != 'sites_reported' && $demographic_population) {
         $demographic[1] = ($population)
-                            ? round(($demographic[1] / $population) * 100, 1) .'%'
-                            : '<em>' . t('n/a') .'</em>';
+                          ? round(($demographic[1] / $demographic_population) * 100, 1) .'%'
+                          : '<em>' . t('n/a') .'</em>';
       }
     }
     $demographic_table = theme('table', array('header' => array('Demographic', 'Percentage'), 'rows' => $demographics));
@@ -293,6 +295,7 @@ function _s4_sites_reporting_org_type($report_criteria) {
     $total_sites = 0;
     $active_sites = 0;
     $population = 0;
+    $demographic_population = 0;
     $signups = array();
     $evaluations = 0;
     $demographics = $default_demographics;
@@ -329,6 +332,7 @@ function _s4_sites_reporting_org_type($report_criteria) {
           $default_demographics['sites_reported'][1]++;
           foreach($demographic_query as $demographic => $percentage) {
             $demographics[$demographic][1] += ($percentage / 100) * $row->field_population_size_value;
+            $demographic_population += $row->field_population_size_value;
           }
         }
         $population += $row->field_population_size_value;
@@ -359,9 +363,9 @@ function _s4_sites_reporting_org_type($report_criteria) {
                : '';
     $name = ($o->name) ? $o->name : '<em>'. t('none') .'</em>';
     foreach($demographics as $k => &$demographic) {
-      if($k != 'sites_reported') {
+      if($k != 'sites_reported' && $demographic_population) {
         $demographic[1] = ($population)
-                            ? round(($demographic[1] / $population) * 100, 1) .'%'
+                            ? round(($demographic[1] / $demographic_population) * 100, 1) .'%'
                             : '<em>' . t('n/a') .'</em>';
       }
     }
