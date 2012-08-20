@@ -2,6 +2,7 @@
 
 
 function s4_reporting_term_report($form, &$form_state) {
+	global $user;
 	drupal_add_css(drupal_get_path('module', 's4_reporting') .'/css/s4_reporting.summary.css');
 	drupal_add_js(drupal_get_path('module', 's4_reporting') .'/js/s4_reporting.summary.js');
 	$programs = array();
@@ -12,6 +13,15 @@ function s4_reporting_term_report($form, &$form_state) {
       }
     }
   }
+  $key = (arg(2)) ? arg(2) : FALSE;
+  $cid = ($key) ? $key : $user->uid;
+  $cache = cache_get('s4_reporting_report_'. $cid);
+  if($key) {
+    $form['access_key'] = array(
+      '#type' => 'hidden',
+      '#value' => $key,
+    );
+  }
   
   $form['#attributes'] = array('class' => array('summary-report'));
   	
@@ -21,6 +31,7 @@ function s4_reporting_term_report($form, &$form_state) {
 	 '#options' => $programs,
 	 '#multiple' => TRUE,
 	 '#required' => TRUE,
+	 '#default_value' => ($cache->data) ? $cache->data['preset']['program'] : NULL,
 	);
 	
   $form['term'] = array(
@@ -44,7 +55,7 @@ function s4_reporting_term_report($form, &$form_state) {
 		'#options' => $terms,
 		'#attributes' => array('class' => array('chosen'),
 							   'style' => 'width: 25%;'),
-		'#default_value' => $form_state['storage']['values']['report_term'],
+		'#default_value' => ($cache->data && is_object($cache->data['preset']['term'])) ? $cache->data['preset']['term']->nid : NULL,
 	);
 	
 	$form['dates'] = array(
@@ -77,8 +88,8 @@ function s4_reporting_term_report($form, &$form_state) {
 		'#value' => 'Run report',
 	);
 	
-	if ($form_state['storage']['results']) {
-		$form += $form_state['storage']['results'];
+	if ($cache) {
+		$form += $cache->data['output'];
 	}
 	
 	return $form;
@@ -118,26 +129,69 @@ function s4_reporting_term_report_submit($form, &$form_state) {
 							  'term' => $term);
 	}
 	$report_items['program'] = $form_state['values']['program'];
+	$report_items['access_key'] = $form_state['values']['access_key'];
 	
 	$output = array();
-	$result = module_invoke_all('s4_reporting_term_report', $report_items);
-	foreach($result['totals'] as $t => $total) {
-		$output['totals'][$t] = array(
-			array('header' => TRUE, 'data' => $total['title']),
-			$total['count']
-		);
-		
+	$batch = array(
+    'operations' => array(),
+    'finished' => 's4_reporting_summary_report_finished',
+    'title' => t('Processing report'),
+    'init_message' => t('Report is starting.'),
+    'progress_message' => t('Processed @current out of @total.'),
+    'error_message' => t('Whoops, we have an error!.'),
+    'file' => drupal_get_path('module', 's4_reporting') . '/s4_reporting.pages.inc',
+  );
+	foreach(module_implements('s4_reporting_term_report') as $module) {
+  	$batch['operations'][] = array('s4_reporting_summary_report_operation', array($module, $report_items));
 	}
-	$output += $result['output'];
-	$header = array(t('Item'), t('Totals'));
-	$output['totals'] = array(
-		'#markup' => theme('table', array('header' => $header, 'rows' => $output['totals']))
-		);	
-	$form_state['rebuild'] = TRUE;
-	$form_state['storage']['values'] = $form_state['values'];
-	$form_state['storage']['results'] = $output;
+  batch_set($batch);
+
 }
 
+function s4_reporting_summary_report_operation($module, $report_items, &$context) {
+  if(!count($context['results'])) {
+    $context['results'] = array('totals' => array(),
+                                'output' => array(),
+                                'preset' => $report_items);
+  }
+  $function = $module . '_s4_reporting_term_report';
+  $results = $function($report_items);
+  $context['results']['totals'][] = $results['totals'];
+  $context['results']['output'][] = $results['output'];
+}
+
+/**
+ * Batch 'finished' callback
+ */
+function s4_reporting_summary_report_finished($success, $results, $operations) {
+  if ($success) {
+    global $user;
+    foreach($results['totals'] as $totals) {
+      foreach($totals as $t => $total) {
+    		$output['totals'][$t] = array(
+    			array('header' => TRUE, 'data' => $total['title']),
+    			$total['count']
+    		);
+    	}
+    }
+  	$output += $results['output'];
+  	$header = array(t('Item'), t('Totals'));
+  	$output['totals'] = array(
+  		'#markup' => theme('table', array('header' => $header, 'rows' => $output['totals']))
+  		);	
+    $key = ($results['preset']['access_key']) ? $results['preset']['access_key'] : $user->uid;
+    
+    cache_set('s4_reporting_report_'. $key, array('output' => $output, 'preset' => $results['preset']));
+    $message = t('Your report is ready.');
+  }
+  else {
+    // An error occurred.
+    // $operations contains the operations that remained unprocessed.
+    $error_operation = reset($operations);
+    $message = t('An error occurred while processing %error_operation with arguments: @arguments', array('%error_operation' => $error_operation[0], '@arguments' => print_r($error_operation[1], TRUE)));
+  }
+  drupal_set_message($message);
+}
 
 function s4_reporting_object_report($node, $type = 'signup') {
 	module_load_include('inc', 'webform', 'includes/webform.report');
