@@ -30,3 +30,8 @@ Turning off allowing anyone to propose a site
 ---------------------------------------------
 
 By default, S4 allows anyone to propose a site to any program, which can greatly speed up the registration process for new sites. These proposed sites still have to go through the approval process (see :ref:`approval`), but some departments do not want to allow anyone to register a site. To turn this off, your *Technical Administrator* can go to ``People > Permissions > Roles > Anonymous`` or ``admin/people/permissions/1`` and uncheck the option **Site: Create new content**.
+
+Granting access to summary reports
+----------------------------------
+
+If your central campus or system offices need access to run summary reports (reports without student data, just aggregate information), you can grant keys to these individuals. Under the page ``admin/config/s4/reporting`` or Admin > Config > S4 Configuration > Reporting, you can add keys by entering a description, or revoke keys by checking off the key you wish to revoke and clicking "Submit."

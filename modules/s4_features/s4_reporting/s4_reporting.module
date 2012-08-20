@@ -47,7 +47,8 @@ function s4_reporting_menu() {
 		'type' => MENU_LOCAL_TASK,
 		'page callback' => 'drupal_get_form',
 		'page arguments' => array('s4_reporting_term_report'),
-		'access arguments' => array('view all webform fields'),
+		'access callback' => 's4_reporting_summary_form_access',
+		'access arguments' => array(2),
 		'file' => 's4_reporting.pages.inc',
 		'weight' => 9,
 	);
@@ -99,6 +100,15 @@ function s4_reporting_menu() {
 	return $items;
 }
 
+
+function s4_reporting_summary_form_access($key) {
+  $keys = variable_get('s4_reporting_summary_form_keys', array());
+  if(user_access('access s4 reporting') || isset($keys[$key])) {
+    return TRUE;
+  }
+  return FALSE;
+}
+
 function s4_reporting_admin_form() {
   $form = array();
   
@@ -107,6 +117,26 @@ function s4_reporting_admin_form() {
     '#title' => t('Name of the summary (i.e. end of term or year) report page'),
     '#default_value' => variable_get('s4_reporting_term_title', 'Chancellor\'s Office Report'),
   );
+  
+  $keys = variable_get('s4_reporting_summary_form_keys', array());
+  foreach($keys as $key => $description) {
+    $keys[$key] = '<strong>'. $description .'</strong>: '. url('reports/summary/'. $key, array('absolute' => TRUE));
+  }
+  if(count($keys)) {
+    $form['keys'] = array(
+      '#type' => 'checkboxes',
+      '#title' => t('Access keys for summary report'),
+      '#description' => t('Check any access key to delete it.'),
+      '#options' => $keys,
+    );
+  }
+  
+  $form['new_key'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Add new key'),
+    '#description' => t('Add a note describing who will be using this key.'),
+  );
+  
   
   $form['submit'] = array(
     '#type' => 'submit',
@@ -118,6 +148,16 @@ function s4_reporting_admin_form() {
 
 function s4_reporting_admin_form_submit($form, $form_state) {
   variable_set('s4_reporting_term_title', check_plain($form_state['values']['s4_reporting_term_title']));
+  $keys = variable_get('s4_reporting_summary_form_keys', array());
+  foreach($form_state['values']['keys'] as $key => $value) {
+    if($value) {
+      unset($keys[$key]);
+    }
+  }
+  if(strlen(trim($form_state['values']['new_key']))) {
+    $keys[md5(time() . drupal_get_hash_salt() . variable_get('site_name', ''))] = $form_state['values']['new_key'];
+  }
+  variable_set('s4_reporting_summary_form_keys', $keys);
   drupal_set_message('Settings saved');
   menu_rebuild();
 }
