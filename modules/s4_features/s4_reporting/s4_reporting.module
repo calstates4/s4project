@@ -491,7 +491,6 @@ function s4_reporting_forms_signup($entity, $context) {
                ->condition('field_user_uid', $entity->uid)
                ->execute()
                ->fetchAll();
-  dpm($signups);
   _s4_reporting_forms_process_submissions($signups, $context);
   
   if($context['progress']['current'] >= $context['progress']['total']) {
