@@ -319,6 +319,125 @@ function s4_core_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'nodeformscols_field_placements_signup_default';
+  $strongarm->value = array(
+    'title' => array(
+      'region' => 'main',
+      'weight' => '0',
+      'has_required' => TRUE,
+      'title' => 'Title',
+    ),
+    'additional_settings' => array(
+      'region' => 'main',
+      'weight' => '6',
+      'has_required' => FALSE,
+      'title' => 'Vertical tabs',
+      'hidden' => 0,
+    ),
+    'actions' => array(
+      'region' => 'right',
+      'weight' => '0',
+      'has_required' => FALSE,
+      'title' => 'Publish',
+      'hidden' => 0,
+    ),
+    'field_coordinator' => array(
+      'region' => 'right',
+      'weight' => '3',
+      'has_required' => FALSE,
+      'title' => 'Site staff',
+      'hidden' => 0,
+    ),
+    'field_course' => array(
+      'region' => 'right',
+      'weight' => '4',
+      'has_required' => FALSE,
+      'title' => 'Course',
+      'hidden' => 0,
+    ),
+    'field_form_assessment_sid' => array(
+      'region' => 'main',
+      'weight' => '3',
+      'has_required' => FALSE,
+      'title' => 'Assessment results',
+      'hidden' => 0,
+    ),
+    'field_form_evaluation_sid' => array(
+      'region' => 'main',
+      'weight' => '2',
+      'has_required' => FALSE,
+      'title' => 'Evaluation Form Results',
+      'hidden' => 0,
+    ),
+    'field_form_signup_sid' => array(
+      'region' => 'main',
+      'weight' => '1',
+      'has_required' => FALSE,
+      'title' => 'Signup Form Results',
+      'hidden' => 0,
+    ),
+    'field_signup_hours' => array(
+      'region' => 'right',
+      'weight' => '5',
+      'has_required' => FALSE,
+      'title' => 'Service hours',
+      'hidden' => 0,
+    ),
+    'field_signup_last_date' => array(
+      'region' => 'right',
+      'weight' => '7',
+      'has_required' => TRUE,
+      'title' => 'Last expected date of service',
+    ),
+    'field_signup_location' => array(
+      'region' => 'main',
+      'weight' => '4',
+      'has_required' => FALSE,
+      'title' => 'Location',
+      'hidden' => 0,
+    ),
+    'field_signup_start_date' => array(
+      'region' => 'right',
+      'weight' => '6',
+      'has_required' => FALSE,
+      'title' => 'First day of service',
+      'hidden' => 0,
+    ),
+    'field_site' => array(
+      'region' => 'right',
+      'weight' => '2',
+      'has_required' => FALSE,
+      'title' => 'Site',
+      'hidden' => 0,
+    ),
+    'field_site_restrict' => array(
+      'region' => 'main',
+      'weight' => '5',
+      'has_required' => FALSE,
+      'title' => 'Program',
+      'hidden' => 0,
+    ),
+    'field_user' => array(
+      'region' => 'right',
+      'weight' => '1',
+      'has_required' => FALSE,
+      'title' => 'User',
+      'hidden' => 0,
+    ),
+    'notifications' => array(
+      'region' => 'main',
+      'weight' => '7',
+      'has_required' => FALSE,
+      'title' => 'Notifications',
+      'collapsed' => 0,
+      'hidden' => 0,
+    ),
+  );
+  $export['nodeformscols_field_placements_signup_default'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'notifications_content_per_type';
   $strongarm->value = '0';
   $export['notifications_content_per_type'] = $strongarm;
