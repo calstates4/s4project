@@ -507,7 +507,7 @@ function s4_courses_node_access($node, $op, $account) {
     $course = node_load($course[0]['nid']);
     $faculty = field_get_items('node', $course, 'field_course_faculty');
     foreach($faculty as $instructor) {
-      if($instructor['uid'] == $account->uid && user_access('manage course students', $account)) {
+      if($instructor['uid'] == $account->uid && ($op == 'view' || user_access('manage course students', $account))) {
         return NODE_ACCESS_ALLOW;
       }
     }
