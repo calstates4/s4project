@@ -1250,6 +1250,8 @@ Location',
 
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'block_1');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Active Site Staff';
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
@@ -1298,6 +1300,29 @@ Location',
   $handler->display->display_options['arguments']['field_site_nid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['field_site_nid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['field_site_nid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 0;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'coordinator' => 'coordinator',
+  );
+  /* Filter criterion: Content: Students can register with this staff (field_staff_signup_available) */
+  $handler->display->display_options['filters']['field_staff_signup_available_value']['id'] = 'field_staff_signup_available_value';
+  $handler->display->display_options['filters']['field_staff_signup_available_value']['table'] = 'field_data_field_staff_signup_available';
+  $handler->display->display_options['filters']['field_staff_signup_available_value']['field'] = 'field_staff_signup_available_value';
+  $handler->display->display_options['filters']['field_staff_signup_available_value']['value'] = array(
+    1 => '1',
+  );
   $handler->display->display_options['block_description'] = 'Site staff';
   $translatables['site_coordinators'] = array(
     t('Master'),
@@ -1337,6 +1362,7 @@ Location',
     t('Options'),
     t('[view_node] | [edit_node]'),
     t('Block'),
+    t('Active Site Staff'),
     t('Email address'),
   );
   $export['site_coordinators'] = $view;
