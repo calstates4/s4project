@@ -251,15 +251,6 @@ function s4_core_user_default_permissions() {
     'module' => 'imce',
   );
 
-  // Exported permission: administer languages
-  $permissions['administer languages'] = array(
-    'name' => 'administer languages',
-    'roles' => array(
-      0 => 'administrator',
-    ),
-    'module' => 'locale',
-  );
-
   // Exported permission: administer masquerade
   $permissions['administer masquerade'] = array(
     'name' => 'administer masquerade',
@@ -937,15 +928,6 @@ function s4_core_user_default_permissions() {
   $permissions['switch shortcut sets'] = array(
     'name' => 'switch shortcut sets',
     'roles' => array(),
-  );
-
-  // Exported permission: translate interface
-  $permissions['translate interface'] = array(
-    'name' => 'translate interface',
-    'roles' => array(
-      0 => 'administrator',
-    ),
-    'module' => 'locale',
   );
 
   // Exported permission: use advanced search

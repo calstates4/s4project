@@ -81,7 +81,7 @@ function s4_map_views_default_views() {
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  /* Contextual filter: Field: Available programs (field_site_restrict) */
+  /* Contextual filter: Field: Program (field_site_restrict) */
   $handler->display->display_options['arguments']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
   $handler->display->display_options['arguments']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['arguments']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';
@@ -107,24 +107,6 @@ function s4_map_views_default_views() {
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['path'] = 'json/map/sites';
-  $translatables['site_map'] = array(
-    t('Master'),
-    t('Site Map'),
-    t('more'),
-    t('Apply'),
-    t('Reset'),
-    t('Sort by'),
-    t('Asc'),
-    t('Desc'),
-    t('latitude'),
-    t('longitude'),
-    t('nid'),
-    t('path'),
-    t('hours'),
-    t('students'),
-    t('All'),
-    t('Page'),
-  );
   $export['site_map'] = $view;
 
   return $export;

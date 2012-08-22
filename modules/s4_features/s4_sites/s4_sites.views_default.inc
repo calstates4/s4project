@@ -424,41 +424,6 @@ function s4_sites_views_default_views() {
     'contact_record' => 'contact_record',
     'file' => 'file',
   );
-  $translatables['contact_records'] = array(
-    t('Master'),
-    t('Notes and Forms'),
-    t('more'),
-    t('Apply'),
-    t('Reset'),
-    t('Sort by'),
-    t('Asc'),
-    t('Desc'),
-    t('Items per page'),
-    t('- All -'),
-    t('Offset'),
-    t('« first'),
-    t('‹ previous'),
-    t('next ›'),
-    t('last »'),
-    t('Date'),
-    t('Contact tags'),
-    t('Contact type'),
-    t('Files'),
-    t('All'),
-    t('%1'),
-    t('Search'),
-    t('Files close to expiration'),
-    t('Expires'),
-    t('Site'),
-    t('Category'),
-    t('Site notes'),
-    t('Site forms'),
-    t('Name'),
-    t('[title] [timestamp]'),
-    t('Expiration date'),
-    t('Search Terms'),
-    t('Approval notes & forms'),
-  );
   $export['contact_records'] = $view;
 
   $view = new view();
@@ -590,21 +555,6 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
-  $translatables['location_gmap'] = array(
-    t('Master'),
-    t('Map'),
-    t('more'),
-    t('Apply'),
-    t('Reset'),
-    t('Sort by'),
-    t('Asc'),
-    t('Desc'),
-    t('City'),
-    t('Search'),
-    t('Page'),
-    t('Site Map'),
-    t('Site Small Map'),
-  );
   $export['location_gmap'] = $view;
 
   $view = new view();
@@ -902,40 +852,6 @@ Location',
   $handler->display->display_options['displays'] = array(
     'page' => 'page',
     'default' => 0,
-  );
-  $translatables['s4_manage_sites'] = array(
-    t('Master'),
-    t('Manage sites'),
-    t('more'),
-    t('Apply'),
-    t('Reset'),
-    t('Sort by'),
-    t('Asc'),
-    t('Desc'),
-    t('Items per page'),
-    t('- All -'),
-    t('Offset'),
-    t('« first'),
-    t('‹ previous'),
-    t('next ›'),
-    t('last »'),
-    t('<a class="button" href="site-list">View public list</a>'),
-    t('Title'),
-    t('Programs'),
-    t('Published'),
-    t('Updated date'),
-    t('Status'),
-    t('All'),
-    t('Site name'),
-    t('Organization type'),
-    t('Issues addressed'),
-    t('City'),
-    t('State'),
-    t('Approval status'),
-    t('State lower district'),
-    t('State upper district'),
-    t('Manage sites page'),
-    t('Glossary attachment'),
   );
   $export['s4_manage_sites'] = $view;
 
@@ -1324,47 +1240,6 @@ Location',
     1 => '1',
   );
   $handler->display->display_options['block_description'] = 'Site staff';
-  $translatables['site_coordinators'] = array(
-    t('Master'),
-    t('Site Staff'),
-    t('more'),
-    t('Apply'),
-    t('Reset'),
-    t('Sort by'),
-    t('Asc'),
-    t('Desc'),
-    t('Items per page'),
-    t('- All -'),
-    t('Offset'),
-    t('« first'),
-    t('‹ previous'),
-    t('next ›'),
-    t('last »'),
-    t('Name'),
-    t('Program'),
-    t('Phone'),
-    t('All'),
-    t('%1'),
-    t('Page'),
-    t('<p class="intro">Select a coordinator who will be working with you during your service.</p>'),
-    t('Select'),
-    t('Site staff tab'),
-    t('Site staff'),
-    t('Last Name'),
-    t('First Name'),
-    t('Email'),
-    t('Role'),
-    t('Max students'),
-    t('Register?'),
-    t('Published'),
-    t('Edit'),
-    t('view'),
-    t('Options'),
-    t('[view_node] | [edit_node]'),
-    t('Block'),
-    t('Active Site Staff'),
-    t('Email address'),
-  );
   $export['site_coordinators'] = $view;
 
   $view = new view();
@@ -1539,32 +1414,6 @@ Location',
   $handler->display->display_options['fields']['field_site_hours']['type'] = 's4_sites_hours_matrix';
   $handler->display->display_options['fields']['field_site_hours']['delta_offset'] = '0';
   $handler->display->display_options['block_description'] = 'Site operating hours';
-  $translatables['site_fields'] = array(
-    t('Master'),
-    t('more'),
-    t('Apply'),
-    t('Reset'),
-    t('Sort by'),
-    t('Asc'),
-    t('Desc'),
-    t('Organization type'),
-    t('Issues addressed'),
-    t('Website'),
-    t('Social network page'),
-    t('Phone number'),
-    t('Location(s)'),
-    t('Broken handler field_data_field_site_images.field_site_images'),
-    t('Suggested languages'),
-    t('Number of people served'),
-    t('Population served'),
-    t('Maximum number of students'),
-    t('Minimum hours'),
-    t('All'),
-    t('Block'),
-    t('Site fields'),
-    t('Site operating hours'),
-    t('Available hours'),
-  );
   $export['site_fields'] = $view;
 
   $view = new view();
@@ -1657,33 +1506,6 @@ Location',
 
   /* Display: Site Address */
   $handler = $view->new_display('block', 'Site Address', 'block');
-  $translatables['site_location'] = array(
-    t('Master'),
-    t('more'),
-    t('Apply'),
-    t('Reset'),
-    t('Sort by'),
-    t('Asc'),
-    t('Desc'),
-    t('Items per page'),
-    t('- All -'),
-    t('Offset'),
-    t('« first'),
-    t('‹ previous'),
-    t('next ›'),
-    t('last »'),
-    t('City'),
-    t('Postal Code'),
-    t('Province'),
-    t('street'),
-    t('Address'),
-    t('<br/>
-[street]<br/>
-[street_1]<br/>
-[city], [province]&nbsp;&nbsp;[postal_code]'),
-    t('All'),
-    t('Site Address'),
-  );
   $export['site_location'] = $view;
 
   $view = new view();
@@ -1757,19 +1579,6 @@ Location',
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['path'] = 'sites/%/locations';
-  $translatables['site_locations'] = array(
-    t('Master'),
-    t('Site locations'),
-    t('more'),
-    t('Apply'),
-    t('Reset'),
-    t('Sort by'),
-    t('Asc'),
-    t('Desc'),
-    t('<p class="intro">This site has multiple locations. Please select the location you will be working at.</p>'),
-    t('All'),
-    t('Page'),
-  );
   $export['site_locations'] = $view;
 
   $view = new view();
@@ -1959,39 +1768,6 @@ Location',
 
   /* Display: Site signups */
   $handler = $view->new_display('block', 'Site signups', 'block');
-  $translatables['site_signups'] = array(
-    t('Master'),
-    t('Students'),
-    t('more'),
-    t('Apply'),
-    t('Reset'),
-    t('Sort by'),
-    t('Asc'),
-    t('Desc'),
-    t('Items per page'),
-    t('- All -'),
-    t('Offset'),
-    t('« first'),
-    t('‹ previous'),
-    t('next ›'),
-    t('last »'),
-    t('<p class="intro">No students signed up for this term.</p>'),
-    t('field_course'),
-    t('field_site'),
-    t('field_user'),
-    t('First Name'),
-    t('Last Name'),
-    t('Course'),
-    t('Site staff'),
-    t('View'),
-    t('node/[nid]'),
-    t('Edit'),
-    t('node/[nid_1]/edit'),
-    t('All'),
-    t('Terms'),
-    t('Last name'),
-    t('Site signups'),
-  );
   $export['site_signups'] = $view;
 
   $view = new view();
@@ -2220,32 +1996,6 @@ Location',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
   $handler->display->display_options['block_description'] = 'Newest Sites';
-  $translatables['sites'] = array(
-    t('Master'),
-    t('Sites'),
-    t('more'),
-    t('Search'),
-    t('Reset'),
-    t('Sort by'),
-    t('Asc'),
-    t('Desc'),
-    t('Items per page'),
-    t('- All -'),
-    t('Offset'),
-    t('« first'),
-    t('‹ previous'),
-    t('next ›'),
-    t('last »'),
-    t('Programs'),
-    t('All'),
-    t('City'),
-    t('Issues addressed'),
-    t('Organization type'),
-    t('Available programs'),
-    t('Site listing page'),
-    t('Block'),
-    t('Newest Sites'),
-  );
   $export['sites'] = $view;
 
   return $export;
