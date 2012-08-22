@@ -1241,6 +1241,7 @@ function s4_sites_strongarm() {
     'field_site_signup_group' => FALSE,
     'field_site_evaluation_group' => FALSE,
     'field_site_other_csu' => FALSE,
+    'field_signups_max' => FALSE,
   );
   $export['s4_sites_field_access'] = $strongarm;
 

@@ -224,7 +224,8 @@ function s4_sites_ds_layout_settings_info() {
         11 => 'field_site_demographics',
         12 => 'field_site_language',
         13 => 'field_site_requirements',
-        14 => 'field_site_hours_minimum',
+        14 => 'field_signups_max',
+        15 => 'field_site_hours_minimum',
       ),
     ),
     'fields' => array(

@@ -3868,7 +3868,7 @@ function s4_sites_field_default_fields() {
             'thousand_separator' => ' ',
           ),
           'type' => 'number_integer',
-          'weight' => '16',
+          'weight' => '15',
         ),
         'full' => array(
           'label' => 'above',
@@ -3956,7 +3956,7 @@ function s4_sites_field_default_fields() {
             'thousand_separator' => ' ',
           ),
           'type' => 'number_integer',
-          'weight' => '28',
+          'weight' => '19',
         ),
         'full' => array(
           'label' => 'above',
@@ -3977,10 +3977,12 @@ function s4_sites_field_default_fields() {
           'weight' => 0,
         ),
       ),
+      'display_label' => 'Maximum number of students',
       'entity_type' => 'node',
       'field_name' => 'field_signups_max',
       'label' => 'Maximum number of students your site can accept at any given time',
       'required' => 0,
+      's4_sites_field_access' => 1,
       'settings' => array(
         'max' => '',
         'min' => '0',
@@ -4073,7 +4075,7 @@ function s4_sites_field_default_fields() {
           'module' => 's4_sites',
           'settings' => array(),
           'type' => 's4_sites_population_matrix',
-          'weight' => '17',
+          'weight' => '16',
         ),
         'full' => array(
           'label' => 'above',
@@ -4289,7 +4291,7 @@ function s4_sites_field_default_fields() {
           'module' => 'link',
           'settings' => array(),
           'type' => 'link_default',
-          'weight' => '15',
+          'weight' => '14',
         ),
         'full' => array(
           'label' => 'above',
@@ -4853,7 +4855,7 @@ function s4_sites_field_default_fields() {
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_link',
-          'weight' => '18',
+          'weight' => '17',
         ),
         'full' => array(
           'label' => 'above',
@@ -5114,7 +5116,7 @@ function s4_sites_field_default_fields() {
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_link',
-          'weight' => '19',
+          'weight' => '18',
         ),
         'full' => array(
           'label' => 'above',
@@ -5343,7 +5345,7 @@ function s4_sites_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => '27',
+          'weight' => '28',
         ),
         'full' => array(
           'label' => 'above',
