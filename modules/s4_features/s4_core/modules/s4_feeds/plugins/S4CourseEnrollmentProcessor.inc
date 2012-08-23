@@ -54,6 +54,16 @@ class S4CourseEnrollmentProcessor extends FeedsProcessor {
   }
   
   private function getTargetEntity($id, $type) {
+    if($type == 'user') {
+      $result = db_select('field_data_field_sis_id', 's')
+                ->condition('s.field_sis_id_value', $id)
+                ->fields('s', array('entity_id'))
+                ->execute()
+                ->fetchField();
+      if($result) {
+        return $result;
+      }
+    }
     return db_select('feeds_item', 'i')
              ->condition('i.entity_type', $type)
              ->condition('i.guid', $id)
