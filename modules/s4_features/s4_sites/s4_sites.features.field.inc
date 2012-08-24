@@ -1342,7 +1342,7 @@ function s4_sites_field_default_fields() {
         'default_country' => 'us',
         'enable_country_level_validation' => 1,
         'enable_default_country' => 1,
-        'enable_extension' => 0,
+        'enable_extension' => 1,
         'user_register_form' => FALSE,
       ),
       'widget' => array(
