@@ -67,7 +67,7 @@ function s4_reporting_block_course_summary() {
 		}
 
 		$items[] = '<strong>Courses: </strong>' .l($total, 'courses');
-		$items[] = '<strong>Students: </strong>' .l($students, 'students');
+		$items[] = '<strong>Students: </strong>' .l($students, 'users');
 		if ($students) {
 			//Preventing division by zero error
 			$items[] = '<strong>Total signups: </strong>' .l($signups, 'students') . ' (' . round(($signups / $students) * 100, 2) .'%)';
