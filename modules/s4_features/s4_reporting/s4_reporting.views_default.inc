@@ -419,6 +419,46 @@ Fields',
     'page' => 'page',
     'default' => 0,
   );
+  $translatables['reports_faculty'] = array(
+    t('Master'),
+    t('Student report'),
+    t('more'),
+    t('Apply'),
+    t('Reset'),
+    t('Sort by'),
+    t('Asc'),
+    t('Desc'),
+    t('Items per page'),
+    t('- All -'),
+    t('Offset'),
+    t('« first'),
+    t('‹ previous'),
+    t('next ›'),
+    t('last »'),
+    t('Displaying @start - @end of @total'),
+    t('field_course_faculty'),
+    t('field_course'),
+    t('field_site'),
+    t('Email'),
+    t('Last name'),
+    t('user/[uid]'),
+    t('First name'),
+    t('Login name'),
+    t('E-mail '),
+    t('Last login '),
+    t('Faculty ID'),
+    t('Course term'),
+    t('Course subject'),
+    t('Course number'),
+    t('Fields'),
+    t('Specific sites'),
+    t('City'),
+    t('State'),
+    t('Page'),
+    t('Export CSV'),
+    t('Export XLS'),
+    t('Export DOC'),
+  );
   $export['reports_faculty'] = $view;
 
   $view = new view();
@@ -1426,6 +1466,74 @@ Fields',
   $handler->display->display_options['displays'] = array(
     'default' => 'default',
     'page' => 'page',
+  );
+  $translatables['reports_site_staff'] = array(
+    t('Master'),
+    t('Site staff report'),
+    t('more'),
+    t('Search'),
+    t('Reset'),
+    t('Sort by'),
+    t('Asc'),
+    t('Desc'),
+    t('Items per page'),
+    t('- All -'),
+    t('Offset'),
+    t('« first'),
+    t('‹ previous'),
+    t('next ›'),
+    t('last »'),
+    t('field_coordinator'),
+    t('field_course'),
+    t('field_site'),
+    t('Email'),
+    t('Last name'),
+    t('First name'),
+    t('Site'),
+    t('Staff role'),
+    t('Staff programs'),
+    t('Staff phone'),
+    t('Open for placements'),
+    t('Staff student limit'),
+    t('Staff Email'),
+    t('City'),
+    t('Postal Code'),
+    t('Province'),
+    t('Address'),
+    t('[street]<br/>
+[city], [province]&nbsp;&nbsp; [postal_code]'),
+    t('&nbsp;'),
+    t('Legislative District: Federal'),
+    t('Legislative District: Lower state district'),
+    t('Legislative District: State upper'),
+    t('Issues addressed '),
+    t('Organization type'),
+    t('Tags '),
+    t('Site programs'),
+    t('Staff is published'),
+    t('Issues addressed'),
+    t('Org. type'),
+    t('Fields'),
+    t('Had a student in'),
+    t('Federal district'),
+    t('State lower district'),
+    t('State upper district'),
+    t('Distance / Proximity'),
+    t('[gmap ]'),
+    t('Site available programs'),
+    t('Site tags'),
+    t('Site had at least one student between the following dates'),
+    t('Who had a student in the following course subject'),
+    t('Site had a student in the following terms (only applies to students signing up as part of a course)'),
+    t('Specific sites'),
+    t('Staff is available for placements'),
+    t('Site staff programs'),
+    t('Site staff role'),
+    t('Program'),
+    t('Data report page'),
+    t('Data export: CSV'),
+    t('Data export: XLS'),
+    t('Data export: DOC'),
   );
   $export['reports_site_staff'] = $view;
 
@@ -2489,6 +2597,85 @@ Fields',
     'default' => 'default',
     'page' => 'page',
   );
+  $translatables['reports_sites'] = array(
+    t('Master'),
+    t('Site Report'),
+    t('more'),
+    t('Search'),
+    t('Reset'),
+    t('Sort by'),
+    t('Asc'),
+    t('Desc'),
+    t('Items per page'),
+    t('- All -'),
+    t('Offset'),
+    t('« first'),
+    t('‹ previous'),
+    t('next ›'),
+    t('last »'),
+    t('field_site'),
+    t('field_course'),
+    t('Bulk operations'),
+    t('Site'),
+    t('Website'),
+    t('<strong>Website:</strong> <a href="[field_website-url]">View website</a>'),
+    t('Email'),
+    t('Contact'),
+    t('<strong>Phone:</strong> [field_phone]<br/>
+<strong>Email:</strong> [field_site_email]<br/>
+[field_website]'),
+    t('City'),
+    t('Postal Code'),
+    t('Province'),
+    t('Address'),
+    t('[street]<br/>
+[city], [province]&nbsp;&nbsp; [postal_code]'),
+    t('&nbsp;'),
+    t('Legislative District: Federal'),
+    t('Legislative District: Lower state district'),
+    t('Legislative District: State upper'),
+    t('Users'),
+    t('Site description'),
+    t('Special projects'),
+    t('Demographic'),
+    t('Hours'),
+    t('Issues addressed '),
+    t('Max students'),
+    t('Organization type'),
+    t('Phone number '),
+    t('Risk Identification '),
+    t('Site has special requirements '),
+    t('Site Tour '),
+    t('Social network page '),
+    t('Special site instructions '),
+    t('Tags '),
+    t('Training & orientation '),
+    t('Website '),
+    t('Minimum hours'),
+    t('Languages'),
+    t('Related programs'),
+    t('Published'),
+    t('Issues addressed'),
+    t('Org. type'),
+    t('Fields'),
+    t('Had a student in'),
+    t('Federal district'),
+    t('State lower district'),
+    t('State upper district'),
+    t('Distance / Proximity'),
+    t('[gmap ]'),
+    t('Available programs'),
+    t('Site tags'),
+    t('Site had at least one student between the following dates'),
+    t('Who had a student in the following course subject'),
+    t('Site had a student in the following terms (only applies to students signing up as part of a course)'),
+    t('Site name'),
+    t('Maximum number of students'),
+    t('Data report page'),
+    t('Data export: CSV'),
+    t('Data export: XLS'),
+    t('Data export: DOC'),
+  );
   $export['reports_sites'] = $view;
 
   $view = new view();
@@ -2520,10 +2707,10 @@ Fields',
     'group-field_course_subject_value' => '1',
     'group-field_course_catalog_number_value' => '1',
     'group-field_signup_start_date_value' => '2',
-    'group-field_term_nid_1' => '1',
     'group-field_csu_org_type_tid' => '3',
     'group-field_csu_facility_tid' => '3',
     'group-city' => '3',
+    'group-field_site_restrict_tid_2' => '1',
     'groups' => 'Student
 Course
 Placement
@@ -2952,18 +3139,6 @@ Fields',
   $handler->display->display_options['filters']['field_signup_start_date_value']['default_date'] = '';
   $handler->display->display_options['filters']['field_signup_start_date_value']['default_to_date'] = '';
   $handler->display->display_options['filters']['field_signup_start_date_value']['year_range'] = '-3:+3';
-  /* Filter criterion: Content: Term (field_term) */
-  $handler->display->display_options['filters']['field_term_nid_1']['id'] = 'field_term_nid_1';
-  $handler->display->display_options['filters']['field_term_nid_1']['table'] = 'field_data_field_term';
-  $handler->display->display_options['filters']['field_term_nid_1']['field'] = 'field_term_nid';
-  $handler->display->display_options['filters']['field_term_nid_1']['relationship'] = 'field_course_nid';
-  $handler->display->display_options['filters']['field_term_nid_1']['group'] = 1;
-  $handler->display->display_options['filters']['field_term_nid_1']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_term_nid_1']['expose']['operator_id'] = 'field_term_nid_1_op';
-  $handler->display->display_options['filters']['field_term_nid_1']['expose']['label'] = 'Semester or term';
-  $handler->display->display_options['filters']['field_term_nid_1']['expose']['operator'] = 'field_term_nid_1_op';
-  $handler->display->display_options['filters']['field_term_nid_1']['expose']['identifier'] = 'field_term_nid_1';
-  $handler->display->display_options['filters']['field_term_nid_1']['expose']['multiple'] = TRUE;
   /* Filter criterion: Field: Program (field_site_restrict) */
   $handler->display->display_options['filters']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
   $handler->display->display_options['filters']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
@@ -3023,6 +3198,19 @@ Fields',
   $handler->display->display_options['filters']['city']['expose']['label'] = 'City';
   $handler->display->display_options['filters']['city']['expose']['operator'] = 'city_op';
   $handler->display->display_options['filters']['city']['expose']['identifier'] = 'city';
+  /* Filter criterion: Field: Program (field_site_restrict) */
+  $handler->display->display_options['filters']['field_site_restrict_tid_2']['id'] = 'field_site_restrict_tid_2';
+  $handler->display->display_options['filters']['field_site_restrict_tid_2']['table'] = 'field_data_field_site_restrict';
+  $handler->display->display_options['filters']['field_site_restrict_tid_2']['field'] = 'field_site_restrict_tid';
+  $handler->display->display_options['filters']['field_site_restrict_tid_2']['relationship'] = 'reverse_field_course_students_node';
+  $handler->display->display_options['filters']['field_site_restrict_tid_2']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_site_restrict_tid_2']['expose']['operator_id'] = 'field_site_restrict_tid_2_op';
+  $handler->display->display_options['filters']['field_site_restrict_tid_2']['expose']['label'] = 'Course program';
+  $handler->display->display_options['filters']['field_site_restrict_tid_2']['expose']['operator'] = 'field_site_restrict_tid_2_op';
+  $handler->display->display_options['filters']['field_site_restrict_tid_2']['expose']['identifier'] = 'field_site_restrict_tid_2';
+  $handler->display->display_options['filters']['field_site_restrict_tid_2']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_site_restrict_tid_2']['type'] = 'select';
+  $handler->display->display_options['filters']['field_site_restrict_tid_2']['vocabulary'] = 'site_restrictions';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -3064,6 +3252,57 @@ Fields',
   $handler->display->display_options['displays'] = array(
     'page' => 'page',
     'default' => 0,
+  );
+  $translatables['reports_students'] = array(
+    t('Master'),
+    t('Student report'),
+    t('more'),
+    t('Apply'),
+    t('Reset'),
+    t('Sort by'),
+    t('Asc'),
+    t('Desc'),
+    t('Items per page'),
+    t('- All -'),
+    t('Offset'),
+    t('« first'),
+    t('‹ previous'),
+    t('next ›'),
+    t('last »'),
+    t('Displaying @start - @end of @total'),
+    t('field_course_students'),
+    t('field_user'),
+    t('field_site'),
+    t('field_coordinator'),
+    t('field_signup_course'),
+    t('Bulk operations'),
+    t('Last name'),
+    t('user/[uid]'),
+    t('First name'),
+    t('Student programs'),
+    t('Login name'),
+    t('E-mail '),
+    t('Last login '),
+    t('Student ID'),
+    t('Course term'),
+    t('Course subject'),
+    t('Course number'),
+    t('Course section'),
+    t('Site'),
+    t('Site staff first name'),
+    t('Site staff last name'),
+    t('Program'),
+    t('Fields'),
+    t('Catalog number'),
+    t('First day of service'),
+    t('Organization type'),
+    t('Issues addressed'),
+    t('City'),
+    t('Course program'),
+    t('Page'),
+    t('Export CSV'),
+    t('Export XLS'),
+    t('Export DOC'),
   );
   $export['reports_students'] = $view;
 
