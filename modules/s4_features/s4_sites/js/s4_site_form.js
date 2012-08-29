@@ -34,6 +34,21 @@
         }
       });
       $('.field-name-field-site-demographics input[type=text]:first').trigger('keyup');
+      $('#matrix-field-field_site_hours tr').each(function(){
+        var $first = $(this).find('td:first');
+        $first.html('<a href="#" class="select-all-days">' + $first.html() +'</a>');
+      });
+      $('.select-all-days').click(function() {
+        $(this).parents('tr').find('.matrix-col-1 :checkbox, .matrix-col-2 :checkbox, .matrix-col-3 :checkbox, .matrix-col-4 :checkbox, .matrix-col-5 :checkbox').each(function() {
+          if($(this).is(':checked')) {
+            $(this).attr('checked', '');
+          }
+          else {
+            $(this).attr('checked', 'checked');
+          }
+        });
+        return false;
+      });
     }
   };
 })(jQuery);
