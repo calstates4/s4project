@@ -294,7 +294,7 @@ function s4_sites_permission() {
  *
  */
 function s4_sites_node_access($node, $op,  $account) {
-  if($node->type == 'site') {
+  if(is_object($node) && $node->type == 'site') {
     if($op == 'delete') {
       $count = db_select('field_data_field_site', 's')
                  ->condition('field_site_nid', $node->nid)
@@ -323,7 +323,7 @@ function s4_sites_node_access($node, $op,  $account) {
     }
     return NODE_ACCESS_DENY;
   }
-  if($node->type == 'coordinator' && $op == 'delete') {
+  if(is_object($node) && $node->type == 'coordinator' && $op == 'delete') {
     $count = db_select('field_data_field_coordinator', 'f')
                ->condition('field_coordinator_nid', $node->nid)
                ->fields('f', array('entity_id'))

@@ -44,8 +44,9 @@ function s4_reporting_block_course_summary() {
 
 		$query = db_select('field_data_field_term', 't');
 		$query->condition('entity_type', 'node')
-				 ->condition('field_term_nid', $term->nid)
-			     ->fields('t', array('entity_id'));
+				  ->condition('field_term_nid', $term->nid)
+			    ->fields('t', array('entity_id'))
+			    ->distinct();
 		$result = $query->execute();
 		$total = 0;
 		$signups = 0;
