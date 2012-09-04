@@ -79,6 +79,27 @@ function s4_core_views_default_views() {
 
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'block');
+  $translatables['community_member_your_sites'] = array(
+    t('Master'),
+    t('Your sites'),
+    t('more'),
+    t('Apply'),
+    t('Reset'),
+    t('Sort by'),
+    t('Asc'),
+    t('Desc'),
+    t('Items per page'),
+    t('- All -'),
+    t('Offset'),
+    t('« first'),
+    t('‹ previous'),
+    t('next ›'),
+    t('last »'),
+    t('Instructions'),
+    t('You have been given access to edit and view the students within these sites:'),
+    t('All'),
+    t('Block'),
+  );
   $export['community_member_your_sites'] = $view;
 
   $view = new view();
@@ -202,6 +223,35 @@ function s4_core_views_default_views() {
 
   /* Display: Recent activity block */
   $handler = $view->new_display('block', 'Recent activity block', 'block');
+  $translatables['recent_actions'] = array(
+    t('Master'),
+    t('Recent activity'),
+    t('more'),
+    t('Apply'),
+    t('Reset'),
+    t('Sort by'),
+    t('Asc'),
+    t('Desc'),
+    t('Items per page'),
+    t('- All -'),
+    t('Offset'),
+    t('« first'),
+    t('‹ previous'),
+    t('next ›'),
+    t('last »'),
+    t('revision user'),
+    t('Get the actual content from a content revision.'),
+    t('First Name'),
+    t('User'),
+    t('[field_first_name] [field_last_name]'),
+    t('Type'),
+    t('Title'),
+    t('node/[nid]'),
+    t('Note'),
+    t('[note] [log]'),
+    t('Updated date'),
+    t('Recent activity block'),
+  );
   $export['recent_actions'] = $view;
 
   $view = new view();
@@ -220,7 +270,8 @@ function s4_core_views_default_views() {
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
-  $handler->display->display_options['query']['options']['query_comment'] = FALSE;
+  $handler->display->display_options['query']['options']['distinct'] = TRUE;
+  $handler->display->display_options['query']['options']['pure_distinct'] = TRUE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Search';
   $handler->display->display_options['pager']['type'] = 'full';
@@ -291,16 +342,6 @@ function s4_core_views_default_views() {
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 0;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Search: Search Terms */
-  $handler->display->display_options['filters']['keys']['id'] = 'keys';
-  $handler->display->display_options['filters']['keys']['table'] = 'search_index';
-  $handler->display->display_options['filters']['keys']['field'] = 'keys';
-  $handler->display->display_options['filters']['keys']['group'] = '0';
-  $handler->display->display_options['filters']['keys']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['keys']['expose']['operator_id'] = 'keys_op';
-  $handler->display->display_options['filters']['keys']['expose']['label'] = 'Search';
-  $handler->display->display_options['filters']['keys']['expose']['operator'] = 'keys_op';
-  $handler->display->display_options['filters']['keys']['expose']['identifier'] = 'keys';
   /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
@@ -308,6 +349,16 @@ function s4_core_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'site' => 'site',
   );
+  /* Filter criterion: Content: Title */
+  $handler->display->display_options['filters']['title']['id'] = 'title';
+  $handler->display->display_options['filters']['title']['table'] = 'node';
+  $handler->display->display_options['filters']['title']['field'] = 'title';
+  $handler->display->display_options['filters']['title']['operator'] = 'allwords';
+  $handler->display->display_options['filters']['title']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['label'] = 'Search';
+  $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['identifier'] = 'keys';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -411,6 +462,33 @@ function s4_core_views_default_views() {
     'coordinator' => 'coordinator',
   );
   $handler->display->display_options['block_description'] = 'Search coordinators';
+  $translatables['s4_search'] = array(
+    t('Master'),
+    t('Site staff'),
+    t('more'),
+    t('Search'),
+    t('Reset'),
+    t('Sort by'),
+    t('Asc'),
+    t('Desc'),
+    t('Items per page'),
+    t('- All -'),
+    t('Offset'),
+    t('« first'),
+    t('‹ previous'),
+    t('next ›'),
+    t('last »'),
+    t('No results'),
+    t('No search results found'),
+    t('<h4>[title]</h4>
+<div class="meta">[field_csu_facility] - [field_csu_org_type]</div>'),
+    t('Page'),
+    t('Feed'),
+    t('[field_last_name], [field_first_name] '),
+    t('node/[nid]'),
+    t(' at [field_site]'),
+    t('Search coordinators'),
+  );
   $export['s4_search'] = $view;
 
   $view = new view();
@@ -496,6 +574,28 @@ function s4_core_views_default_views() {
   /* Display: Block */
   $handler = $view->new_display('block', 'Block', 'block');
   $handler->display->display_options['block_description'] = 'Search for students';
+  $translatables['s4_search_students'] = array(
+    t('Master'),
+    t('Students'),
+    t('more'),
+    t('Apply'),
+    t('Reset'),
+    t('Sort by'),
+    t('Asc'),
+    t('Desc'),
+    t('Items per page'),
+    t('- All -'),
+    t('Offset'),
+    t('« first'),
+    t('‹ previous'),
+    t('next ›'),
+    t('last »'),
+    t('[field_last_name], [field_first_name]'),
+    t('([name])'),
+    t('Login ID'),
+    t('Block'),
+    t('Search for students'),
+  );
   $export['s4_search_students'] = $view;
 
   $view = new view();
@@ -702,6 +802,39 @@ function s4_core_views_default_views() {
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['path'] = 'users';
+  $translatables['s4_students'] = array(
+    t('Master'),
+    t('Users'),
+    t('more'),
+    t('Apply'),
+    t('Reset'),
+    t('Sort by'),
+    t('Asc'),
+    t('Desc'),
+    t('Items per page'),
+    t('- All -'),
+    t('Offset'),
+    t('« first'),
+    t('‹ previous'),
+    t('next ›'),
+    t('last »'),
+    t('First Name'),
+    t('Last Name'),
+    t('Uid'),
+    t('Login ID'),
+    t('Last login'),
+    t('View'),
+    t('view'),
+    t('user/[uid]'),
+    t('Programs'),
+    t('Edit'),
+    t('Signups'),
+    t('Add signup'),
+    t('Sign-up student'),
+    t('signup/create/[uid]'),
+    t('Program'),
+    t('Page'),
+  );
   $export['s4_students'] = $view;
 
   $view = new view();
@@ -809,6 +942,43 @@ function s4_core_views_default_views() {
   /* Display: Downloadable forms */
   $handler = $view->new_display('block', 'Downloadable forms', 'block_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['grouping'] = array(
+    0 => array(
+      'field' => 'field_site_restrict',
+      'rendered' => 1,
+      'rendered_strip' => 0,
+    ),
+  );
+  $handler->display->display_options['style_options']['columns'] = array(
+    'title' => 'title',
+    'edit_node' => 'edit_node',
+    'field_site_restrict' => 'field_site_restrict',
+  );
+  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['info'] = array(
+    'title' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'edit_node' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_site_restrict' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['header'] = FALSE;
   /* Header: Global: Text area */
   $handler->display->display_options['header']['area']['id'] = 'area';
@@ -835,17 +1005,19 @@ function s4_core_views_default_views() {
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Field: Content: File */
-  $handler->display->display_options['fields']['field_downloadable_file']['id'] = 'field_downloadable_file';
-  $handler->display->display_options['fields']['field_downloadable_file']['table'] = 'field_data_field_downloadable_file';
-  $handler->display->display_options['fields']['field_downloadable_file']['field'] = 'field_downloadable_file';
-  $handler->display->display_options['fields']['field_downloadable_file']['hide_alter_empty'] = FALSE;
-  $handler->display->display_options['fields']['field_downloadable_file']['click_sort_column'] = 'fid';
-  $handler->display->display_options['fields']['field_downloadable_file']['group_column'] = 'fid';
   /* Field: Content: Edit link */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
+  /* Field: Field: Program */
+  $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
+  $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
+  $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
+  $handler->display->display_options['fields']['field_site_restrict']['label'] = '';
+  $handler->display->display_options['fields']['field_site_restrict']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_site_restrict']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_site_restrict']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_site_restrict']['delta_offset'] = '0';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['filter_groups']['groups'] = array(
     1 => 'AND',
@@ -1036,6 +1208,43 @@ function s4_core_views_default_views() {
   );
   $handler->display->display_options['filters']['field_downloadable_show_value']['group'] = 1;
   $handler->display->display_options['path'] = 'forms/download/%';
+  $translatables['site_forms'] = array(
+    t('Master'),
+    t('Forms'),
+    t('more'),
+    t('Apply'),
+    t('Reset'),
+    t('Sort by'),
+    t('Asc'),
+    t('Desc'),
+    t('Items per page'),
+    t('- All -'),
+    t('Offset'),
+    t('« first'),
+    t('‹ previous'),
+    t('next ›'),
+    t('last »'),
+    t('<h2>Online Forms</h2>
+<p><a class="button" href="node/add/webform"><span class="add"></span>Add online form</a> <a class="button" href="forms/public">View public form page</a></p>
+<p><strong>Online forms</strong> resemble paper or database forms and allow users to input new information while also allowing “staff” to query and display existing data in order to run reports. The collected data in the online forms can be downloaded and merged with other data for research purposes. These reports will “tie-back” to the Report tab in S4. </p>
+'),
+    t('No online forms created yet.'),
+    t('# of Submissions'),
+    t('Edit link'),
+    t('Page'),
+    t('Downloadable forms'),
+    t('<h2>Downloadable Forms</h2>
+<p><a class="button" href="node/add/downloadable-form"><span class="add"></span>Add downloadable form</a></p>
+<p><strong>Downloadable Forms</strong> are your traditional electronic/paper forms.  This section will allow you to download any electronic template forms you have created to support your program and for which you need/want a hard file copy.   Staff would be responsible for inputting the information gathered into a database or excel file and cannot be stored in S4.<p>'),
+    t('No downloadable forms created yet.'),
+    t('Public forms'),
+    t('There are no forms available to download.'),
+    t('Form name'),
+    t('Description'),
+    t('Form'),
+    t('Signup forms'),
+    t('All'),
+  );
   $export['site_forms'] = $view;
 
   $view = new view();
@@ -1208,6 +1417,39 @@ function s4_core_views_default_views() {
   $handler->display->display_options['arguments']['field_user_uid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['field_user_uid']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['block_description'] = 'User profile sites';
+  $translatables['user_signups'] = array(
+    t('Master'),
+    t('Your sites'),
+    t('more'),
+    t('Apply'),
+    t('Reset'),
+    t('Sort by'),
+    t('Asc'),
+    t('Desc'),
+    t('Items per page'),
+    t('- All -'),
+    t('Offset'),
+    t('« first'),
+    t('‹ previous'),
+    t('next ›'),
+    t('last »'),
+    t('View'),
+    t('Record # [nid]'),
+    t('node/[nid]'),
+    t('Course'),
+    t('Site'),
+    t('Site staff'),
+    t('Date'),
+    t('End date'),
+    t('All'),
+    t('Current users sites'),
+    t('View your current placements'),
+    t('Program'),
+    t('Complete evaluation'),
+    t('Cancel'),
+    t('User profile sites'),
+    t('Sites'),
+  );
   $export['user_signups'] = $view;
 
   return $export;
