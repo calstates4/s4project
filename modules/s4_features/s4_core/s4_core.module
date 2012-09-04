@@ -568,8 +568,7 @@ function s4_core_user_can_signup($user = FALSE) {
       $courses[$row->field_course_nid]['count']++;
     }
     foreach ($view as $row) {
-
-      if ($courses[$row->nid]['count'] <= $courses[$row->nid]['max'] || $courses[$row->nid]['max'] == 0) {
+      if ($courses[$row->nid]['count']['count'] <= $courses[$row->nid]['max'] || $courses[$row->nid]['max'] == 0) {
         return TRUE;
       }
     }
