@@ -1,6 +1,6 @@
 <?php
 
-function _s4_sites_s4_reporting_term_report($report_criteria) {
+function _s4_sites_reporting_general($report_criteria) {
   $totals = array('total_sites' => array('count' => 0,
                          'title' => t('Total number of sites')),
                   'total_active_sites' => array('count' => 0,
@@ -51,39 +51,6 @@ function _s4_sites_s4_reporting_term_report($report_criteria) {
       }
     }
   }
-  $output['site_org_types'] = array(
-    '#type' => 'fieldset',
-    '#title' => 'Sites by organization type',
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-  );
-  
-  $output['site_org_types']['org_table']['#markup'] = _s4_sites_reporting_org_type($report_criteria);
-  
-  $output['site_issues'] = array(
-    '#type' => 'fieldset',
-    '#title' => 'Sites by issues addressed',
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-  );
-  
-  $output['site_issues']['issues_table']['#markup'] = _s4_sites_reporting_issues($report_criteria);  
-  
-  $output['districts_lower'] = array(
-    '#type' => 'fieldset',
-    '#title' => 'Sites by state lower district',
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-  );
-  $output['districts_lower']['district_table']['#markup'] = _s4_sites_reporting_district($report_criteria, 'state_lower');  
-  
-  $output['districts_upper'] = array(
-    '#type' => 'fieldset',
-    '#title' => 'Sites by state upper district',
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-  );
-  $output['districts_upper']['district_table']['#markup'] = _s4_sites_reporting_district($report_criteria, 'state_upper');  
   
   $output['locations'] = array(
     '#type' => 'fieldset',
@@ -105,6 +72,71 @@ function _s4_sites_s4_reporting_term_report($report_criteria) {
          'output' => $output,
         );
 }
+
+function _s4_sites_reporting_report_org_type($report_criteria) {
+  $output = array();
+  $output['site_org_types'] = array(
+    '#type' => 'fieldset',
+    '#title' => 'Sites by organization type',
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  
+  $output['site_org_types']['org_table']['#markup'] = _s4_sites_reporting_org_type($report_criteria);  
+  dpm($output);
+  return array('totals' => array(),
+         'output' => $output,
+        );
+}
+
+function _s4_sites_reporting_report_issues($report_criteria) {
+
+  $output['site_issues'] = array(
+    '#type' => 'fieldset',
+    '#title' => 'Sites by issues addressed',
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  
+  $output['site_issues']['issues_table']['#markup'] = _s4_sites_reporting_issues($report_criteria);  
+
+  return array('totals' => array(),
+         'output' => $output,
+        );
+}
+
+function _s4_sites_reporting_district_lower($report_criteria) {
+  
+   $output['districts_lower'] = array(
+    '#type' => 'fieldset',
+    '#title' => 'Sites by state lower district',
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  
+  $output['districts_lower']['district_table']['#markup'] = _s4_sites_reporting_district($report_criteria, 'state_lower');  
+  
+  return array('totals' => array(),
+         'output' => $output,
+        );
+}
+
+function _s4_sites_reporting_district_upper($report_criteria) {
+  
+  $output['districts_upper'] = array(
+    '#type' => 'fieldset',
+    '#title' => 'Sites by state upper district',
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  
+  $output['districts_upper']['district_table']['#markup'] = _s4_sites_reporting_district($report_criteria, 'state_upper');  
+  
+  return array('totals' => array(),
+         'output' => $output,
+        );
+}
+
 
 function _s4_sites_reporting_district($report_criteria, $district_type) {
   $districts = array();

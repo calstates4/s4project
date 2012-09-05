@@ -141,23 +141,27 @@ function s4_reporting_term_report_submit($form, &$form_state) {
     'error_message' => t('Whoops, we have an error!.'),
     'file' => drupal_get_path('module', 's4_reporting') . '/s4_reporting.pages.inc',
   );
-	foreach(module_implements('s4_reporting_term_report') as $module) {
-  	$batch['operations'][] = array('s4_reporting_summary_report_operation', array($module, $report_items));
+	foreach(module_invoke_all('s4_reporting_summary_report') as $report) {
+  	$batch['operations'][] = array('s4_reporting_summary_report_operation', array($report, $report_items));
 	}
   batch_set($batch);
 
 }
 
-function s4_reporting_summary_report_operation($module, $report_items, &$context) {
+function s4_reporting_summary_report_operation($report, $report_items, &$context) {
   if(!count($context['results'])) {
     $context['results'] = array('totals' => array(),
                                 'output' => array(),
                                 'preset' => $report_items);
   }
-  $function = $module . '_s4_reporting_term_report';
+  if($report['file']) {
+    require_once($report['file']);
+  }
+  $function = $report['callback'];
   $results = $function($report_items);
   $context['results']['totals'][] = $results['totals'];
-  $context['results']['output'][] = $results['output'];
+  $context['results']['output'] += $results['output'];
+  $context['message'] = t('Processing %item', array('%item' => $report['title']));
 }
 
 /**
