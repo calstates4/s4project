@@ -52,6 +52,11 @@ function s4_sites_ds_field_settings_info() {
   $ds_fieldsetting->bundle = 'site';
   $ds_fieldsetting->view_mode = 'default';
   $ds_fieldsetting->settings = array(
+    'map' => array(
+      'weight' => '15',
+      'label' => 'hidden',
+      'format' => 'default',
+    ),
     'site_staff' => array(
       'weight' => '4',
       'label' => 'hidden',
@@ -208,6 +213,7 @@ function s4_sites_ds_layout_settings_info() {
         3 => 'field_site_projects',
         4 => 'site_staff',
         5 => 'field_site_hours',
+        6 => 'field_operating_hours'
       ),
       'right' => array(
         0 => 's4_core_signup_select_site',

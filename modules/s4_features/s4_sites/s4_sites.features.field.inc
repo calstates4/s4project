@@ -2926,7 +2926,7 @@ function s4_sites_field_default_fields() {
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_link',
-          'weight' => '6',
+          'weight' => '7',
         ),
         'full' => array(
           'label' => 'above',
@@ -3015,7 +3015,7 @@ function s4_sites_field_default_fields() {
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_link',
-          'weight' => '8',
+          'weight' => '9',
         ),
         'full' => array(
           'label' => 'above',
@@ -3099,7 +3099,7 @@ function s4_sites_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => '31',
+          'weight' => '32',
         ),
         'full' => array(
           'label' => 'above',
@@ -3188,7 +3188,7 @@ function s4_sites_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => '33',
+          'weight' => '34',
         ),
         'full' => array(
           'label' => 'above',
@@ -3277,7 +3277,7 @@ function s4_sites_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => '34',
+          'weight' => '35',
         ),
         'full' => array(
           'label' => 'above',
@@ -3521,7 +3521,7 @@ function s4_sites_field_default_fields() {
           'module' => 'location_cck',
           'settings' => array(),
           'type' => 'location_default',
-          'weight' => '13',
+          'weight' => '14',
         ),
         'full' => array(
           'label' => 'above',
@@ -3567,6 +3567,86 @@ function s4_sites_field_default_fields() {
     ),
   );
 
+  // Exported field: 'node-site-field_operating_hours'
+  $fields['node-site-field_operating_hours'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_operating_hours',
+      'foreign keys' => array(
+        'format' => array(
+          'columns' => array(
+            'format' => 'format',
+          ),
+          'table' => 'filter_format',
+        ),
+      ),
+      'indexes' => array(
+        'format' => array(
+          0 => 'format',
+        ),
+      ),
+      'module' => 'text',
+      'settings' => array(),
+      'translatable' => '0',
+      'type' => 'text_long',
+    ),
+    'field_instance' => array(
+      'bundle' => 'site',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => '6',
+        ),
+        'notifications' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'search_index' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'display_label' => 'Note about operating hours',
+      'entity_type' => 'node',
+      'field_name' => 'field_operating_hours',
+      'label' => 'Additional notes about hours of operation',
+      'required' => 0,
+      's4_sites_field_access' => 1,
+      'settings' => array(
+        'text_processing' => '0',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'text',
+        'settings' => array(
+          'rows' => '5',
+        ),
+        'type' => 'text_textarea',
+        'weight' => '30',
+      ),
+    ),
+  );
+
   // Exported field: 'node-site-field_phone'
   $fields['node-site-field_phone'] = array(
     'field_config' => array(
@@ -3595,7 +3675,7 @@ function s4_sites_field_default_fields() {
           'module' => 'cck_phone',
           'settings' => array(),
           'type' => 'local_phone_number',
-          'weight' => '11',
+          'weight' => '12',
         ),
         'full' => array(
           'label' => 'above',
@@ -3923,7 +4003,7 @@ function s4_sites_field_default_fields() {
             'thousand_separator' => ' ',
           ),
           'type' => 'number_integer',
-          'weight' => '15',
+          'weight' => '17',
         ),
         'full' => array(
           'label' => 'above',
@@ -4017,7 +4097,7 @@ function s4_sites_field_default_fields() {
             'thousand_separator' => ' ',
           ),
           'type' => 'number_integer',
-          'weight' => '19',
+          'weight' => '21',
         ),
         'full' => array(
           'label' => 'above',
@@ -4142,7 +4222,7 @@ function s4_sites_field_default_fields() {
           'module' => 's4_sites',
           'settings' => array(),
           'type' => 's4_sites_population_matrix',
-          'weight' => '16',
+          'weight' => '18',
         ),
         'full' => array(
           'label' => 'above',
@@ -4216,7 +4296,7 @@ function s4_sites_field_default_fields() {
           'module' => 'email',
           'settings' => array(),
           'type' => 'email_default',
-          'weight' => '12',
+          'weight' => '13',
         ),
         'full' => array(
           'label' => 'above',
@@ -4295,7 +4375,7 @@ function s4_sites_field_default_fields() {
             'edit' => 'Edit',
           ),
           'type' => 'field_collection_list',
-          'weight' => '37',
+          'weight' => '38',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -4376,7 +4456,7 @@ function s4_sites_field_default_fields() {
           'module' => 'link',
           'settings' => array(),
           'type' => 'link_default',
-          'weight' => '14',
+          'weight' => '16',
         ),
         'full' => array(
           'label' => 'above',
@@ -4642,10 +4722,12 @@ function s4_sites_field_default_fields() {
           'weight' => 0,
         ),
       ),
+      'display_label' => 'Operating hours',
       'entity_type' => 'node',
       'field_name' => 'field_site_hours',
       'label' => 'Days and hours will you accept students for service (check all that apply)',
-      'required' => 0,
+      'required' => FALSE,
+      's4_sites_field_access' => 0,
       'settings' => array(
         'user_register_form' => FALSE,
       ),
@@ -4710,7 +4792,7 @@ function s4_sites_field_default_fields() {
           'module' => 'list',
           'settings' => array(),
           'type' => 'list_default',
-          'weight' => '20',
+          'weight' => '22',
         ),
         'full' => array(
           'label' => 'above',
@@ -4794,7 +4876,7 @@ function s4_sites_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => '32',
+          'weight' => '33',
         ),
         'full' => array(
           'label' => 'above',
@@ -4885,7 +4967,7 @@ function s4_sites_field_default_fields() {
           'module' => 'list',
           'settings' => array(),
           'type' => 'list_default',
-          'weight' => '35',
+          'weight' => '36',
         ),
         'full' => array(
           'label' => 'above',
@@ -4976,7 +5058,7 @@ function s4_sites_field_default_fields() {
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_link',
-          'weight' => '17',
+          'weight' => '19',
         ),
         'full' => array(
           'label' => 'above',
@@ -5083,7 +5165,7 @@ function s4_sites_field_default_fields() {
           'module' => 'list',
           'settings' => array(),
           'type' => 'list_default',
-          'weight' => '38',
+          'weight' => '39',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -5255,7 +5337,7 @@ function s4_sites_field_default_fields() {
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_link',
-          'weight' => '18',
+          'weight' => '20',
         ),
         'full' => array(
           'label' => 'above',
@@ -5345,7 +5427,7 @@ function s4_sites_field_default_fields() {
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_plain',
-          'weight' => '7',
+          'weight' => '8',
         ),
         'full' => array(
           'label' => 'above',
@@ -5424,7 +5506,7 @@ function s4_sites_field_default_fields() {
             'edit' => 'Edit',
           ),
           'type' => 'field_collection_list',
-          'weight' => '36',
+          'weight' => '37',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -5502,7 +5584,7 @@ function s4_sites_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => '28',
+          'weight' => '29',
         ),
         'full' => array(
           'label' => 'above',
@@ -5627,7 +5709,7 @@ function s4_sites_field_default_fields() {
           'module' => 'user_reference',
           'settings' => array(),
           'type' => 'user_reference_default',
-          'weight' => '30',
+          'weight' => '31',
         ),
         'full' => array(
           'label' => 'above',
@@ -5721,7 +5803,7 @@ function s4_sites_field_default_fields() {
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_link',
-          'weight' => '29',
+          'weight' => '30',
         ),
         'full' => array(
           'label' => 'above',
@@ -5810,7 +5892,7 @@ function s4_sites_field_default_fields() {
           'module' => 'link',
           'settings' => array(),
           'type' => 'link_default',
-          'weight' => '9',
+          'weight' => '10',
         ),
         'full' => array(
           'label' => 'above',
@@ -6119,6 +6201,7 @@ function s4_sites_field_default_fields() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Additional notes about hours of operation');
   t('Additional users');
   t('Available to');
   t('Body');

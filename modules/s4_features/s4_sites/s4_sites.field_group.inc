@@ -143,6 +143,7 @@ function s4_sites_field_group_info() {
       0 => 'field_signups_max',
       1 => 'field_site_hours',
       2 => 'field_site_hours_minimum',
+      3 => 'field_operating_hours',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
