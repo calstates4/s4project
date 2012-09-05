@@ -63,6 +63,7 @@
 	
 	
 	<div class="page-header">
+		<?php if ($breadcrumb) print $breadcrumb; ?>
 		<?php if($page['content_subscriptions']): ?>
 			<div id="subscriptions">
 				<?php print render($page['content_subscriptions']); ?>
