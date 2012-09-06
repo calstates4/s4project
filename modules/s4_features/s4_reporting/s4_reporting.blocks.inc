@@ -67,11 +67,11 @@ function s4_reporting_block_course_summary() {
 			$total++;
 		}
 
-		$items[] = '<strong>Courses: </strong>' .l($total, 'courses');
-		$items[] = '<strong>Students: </strong>' .l($students, 'users');
+		$items[] = t('<strong>Courses: </strong> @total', array('@total' => $total)); 
+		$items[] = t('<strong>Students: </strong> @students', array('@students' => $students));
 		if ($students) {
 			//Preventing division by zero error
-			$items[] = '<strong>Total signups: </strong>' .l($signups, 'students') . ' (' . round(($signups / $students) * 100, 2) .'%)';
+			$items[] = t('<strong>Total placements: </strong> @placements', array('@placements' => $signups)) . ' (' . round(($signups / $students) * 100, 2) .'%)';
 		}
 		$output .= theme('item_list', array('items' => $items));
 	}
