@@ -10,15 +10,6 @@
 function s4_core_user_default_permissions() {
   $permissions = array();
 
-  // Exported permission: Use PHP for title patterns
-  $permissions['Use PHP for title patterns'] = array(
-    'name' => 'Use PHP for title patterns',
-    'roles' => array(
-      0 => 'administrator',
-    ),
-    'module' => 'auto_nodetitle',
-  );
-
   // Exported permission: Use PHP input for field settings (dangerous - grant with care)
   $permissions['Use PHP input for field settings (dangerous - grant with care)'] = array(
     'name' => 'Use PHP input for field settings (dangerous - grant with care)',
