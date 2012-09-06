@@ -743,8 +743,8 @@ function _s4_core_create_signup($uid = 0, $signup = array()) {
         $course = node_load($signup['course']);
         $faculty = field_get_items('node', $course, 'field_course_faculty');
         foreach($faculty as $instructor) {
-          $user = user_load($instructor['uid']);
-          $params['cc'][$user->uid] = $user->mail;
+          $faculty = user_load($instructor['uid']);
+          $params['cc'][$faculty->uid] = $faculty->mail;
         }
         
       }
