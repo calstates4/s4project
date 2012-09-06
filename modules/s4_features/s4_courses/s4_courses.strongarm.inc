@@ -21,7 +21,7 @@ function s4_courses_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'ant_pattern_course';
-  $strongarm->value = '[node:field-course-subject:value] [node:field-course-catalog-number:value]';
+  $strongarm->value = '[node:field_course_catalog_number] [node:field_course_subject] ([node:field_course_section])';
   $export['ant_pattern_course'] = $strongarm;
 
   $strongarm = new stdClass();

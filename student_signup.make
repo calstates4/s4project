@@ -12,7 +12,7 @@ api = 2
 
 ; Contrib Modules
 projects[auto_nodetitle][subdir] = "contrib"
-projects[auto_nodetitle][version] = "1.0-alpha1"
+projects[auto_nodetitle][version] = "1.0"
 
 projects[better_exposed_filters][subdir] = "contrib"
 projects[better_exposed_filters][version] = "3.0-beta1"
@@ -144,7 +144,7 @@ projects[textcaptcha][subdir] = "contrib"
 projects[textcaptcha][version] = "1.2"
 
 projects[token][subdir] = "contrib"
-projects[token][version] = "1.0-beta2"
+projects[token][version] = "1.2"
 
 projects[uuid][subdir] = "contrib"
 projects[uuid][version] = "1.0-alpha3"

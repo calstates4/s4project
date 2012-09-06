@@ -21,7 +21,7 @@ function s4_sites_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'ant_pattern_coordinator';
-  $strongarm->value = '[node:field-first-name:value] [node:field-last-name:value]';
+  $strongarm->value = '[node:field_first_name] [node:field_last_name]';
   $export['ant_pattern_coordinator'] = $strongarm;
 
   $strongarm = new stdClass();
