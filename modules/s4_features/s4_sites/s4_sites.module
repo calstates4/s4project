@@ -721,9 +721,9 @@ function s4_sites_field_formatter_view($entity_type, $entity, $field, $instance,
   }
   if ($display['type'] == 's4_sites_local_phone_number') {
     foreach ($items as $delta => $item) {
-
+      $extension = ($item['extension']) ? $item['extension'] : FALSE;
       $element[$delta] = array(
-        '#markup' => _s4_sites_format_phone($item['number']),
+        '#markup' => _s4_sites_format_phone($item['number'], $extension),
       );
     }
   }
@@ -758,7 +758,7 @@ function s4_sites_field_formatter_view($entity_type, $entity, $field, $instance,
 /**
 *  Field formatter for phone numbers
 */
-function _s4_sites_format_phone($number) {
+function _s4_sites_format_phone($number, $extension = FALSE) {
   $regex = '/^
     ([2-9][0-8]\d)  # area code (Allowed range of [2-9] for the first digit, [0-8] for the second, and [0-9] for the third digit)
     ([2-9]\d{2})    # 3-digit prefix (cannot start with 0 or 1)
@@ -768,7 +768,8 @@ function _s4_sites_format_phone($number) {
   $result = preg_match($regex, $number, $matches);
 
   if ($result) {
-    return $cc['code'] . ' (' . $matches[1] . ') ' . $matches[2] . '-' . $matches[3];
+    $extension = ($extension) ? t(' ext. @extension', array('@extension' => $extension)) : '';
+    return $cc['code'] . ' (' . $matches[1] . ') ' . $matches[2] . '-' . $matches[3] . $extension;
   }
   return '';
 }

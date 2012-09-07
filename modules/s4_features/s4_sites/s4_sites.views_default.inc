@@ -1059,7 +1059,8 @@ Location',
   $handler->display->display_options['fields']['field_phone']['field'] = 'field_phone';
   $handler->display->display_options['fields']['field_phone']['label'] = 'Phone';
   $handler->display->display_options['fields']['field_phone']['click_sort_column'] = 'number';
-  $handler->display->display_options['fields']['field_phone']['type'] = 'local_phone_number';
+  $handler->display->display_options['fields']['field_phone']['type'] = 's4_sites_local_phone_number';
+  $handler->display->display_options['fields']['field_phone']['delta_offset'] = '0';
   /* Field: Signup: User select coordinator */
   $handler->display->display_options['fields']['faculty_coordinator_select']['id'] = 'faculty_coordinator_select';
   $handler->display->display_options['fields']['faculty_coordinator_select']['table'] = 's4_signup';
@@ -1183,6 +1184,7 @@ Location',
   $handler->display->display_options['fields']['field_phone']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['field_phone']['click_sort_column'] = 'number';
   $handler->display->display_options['fields']['field_phone']['type'] = 's4_sites_local_phone_number';
+  $handler->display->display_options['fields']['field_phone']['delta_offset'] = '0';
   /* Field: Content: Email address */
   $handler->display->display_options['fields']['field_email']['id'] = 'field_email';
   $handler->display->display_options['fields']['field_email']['table'] = 'field_data_field_email';
@@ -1286,7 +1288,8 @@ Location',
   $handler->display->display_options['fields']['field_phone']['field'] = 'field_phone';
   $handler->display->display_options['fields']['field_phone']['label'] = 'Phone';
   $handler->display->display_options['fields']['field_phone']['click_sort_column'] = 'number';
-  $handler->display->display_options['fields']['field_phone']['type'] = 'local_phone_number';
+  $handler->display->display_options['fields']['field_phone']['type'] = 's4_sites_local_phone_number';
+  $handler->display->display_options['fields']['field_phone']['delta_offset'] = '0';
   /* Field: Content: Email address */
   $handler->display->display_options['fields']['field_email']['id'] = 'field_email';
   $handler->display->display_options['fields']['field_email']['table'] = 'field_data_field_email';
