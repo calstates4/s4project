@@ -1047,6 +1047,12 @@ Location',
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_site_restrict']['delta_offset'] = '0';
+  /* Field: Content: Email address */
+  $handler->display->display_options['fields']['field_email']['id'] = 'field_email';
+  $handler->display->display_options['fields']['field_email']['table'] = 'field_data_field_email';
+  $handler->display->display_options['fields']['field_email']['field'] = 'field_email';
+  $handler->display->display_options['fields']['field_email']['label'] = 'Email';
+  $handler->display->display_options['fields']['field_email']['type'] = 'email_default';
   /* Field: Content: Phone number */
   $handler->display->display_options['fields']['field_phone']['id'] = 'field_phone';
   $handler->display->display_options['fields']['field_phone']['table'] = 'field_data_field_phone';
@@ -1348,12 +1354,12 @@ Location',
     t('%1'),
     t('Page'),
     t('<p class="intro">Select a coordinator who will be working with you during your service.</p>'),
+    t('Email'),
     t('Select'),
     t('Site staff tab'),
     t('Site staff'),
     t('Last Name'),
     t('First Name'),
-    t('Email'),
     t('Role'),
     t('Max students'),
     t('Register?'),
