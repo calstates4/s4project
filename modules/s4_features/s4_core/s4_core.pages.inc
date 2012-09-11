@@ -338,6 +338,11 @@ function s4_core_create_signup_form($form, $form_state, $uid, $courses = true) {
       '#title' => t('Also email faculty about signup'),
     );
   }
+  
+  $form['cc_myself'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('CC myself a copy of the confirmation email sent to the student'),
+  );
 
   $form['submit'] = array(
     '#type' => 'submit',
@@ -363,6 +368,10 @@ function s4_core_create_signup_form_submit($form, $form_state) {
           );
   if ($form_state['values']['email_faculty'] && $form_state['values']['course']) {
     $signup['cc_faculty'] = TRUE;
+  }
+  if ($form_state['values']['cc_myself']) {
+    global $user;
+    $signup['cc_user'] = $user->mail;
   }
   $signup = _s4_core_create_signup($form_state['values']['user'], $signup);
   drupal_set_message(t('Created !signup record', array('!signup' => l(t('signup #@number', array('@number' => $signup->nid)), 'node/' . $signup->nid))));

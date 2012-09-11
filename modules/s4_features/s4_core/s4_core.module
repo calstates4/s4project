@@ -748,6 +748,9 @@ function _s4_core_create_signup($uid = 0, $signup = array()) {
         }
         
       }
+      if($signup['cc_user']) {
+        $params['cc'][] = $signup['cc_user'];
+      }
       drupal_mail('s4_core', 'signup_confirmation', $signup_user->mail, $node->language, $params, $sender);
     }
   }
