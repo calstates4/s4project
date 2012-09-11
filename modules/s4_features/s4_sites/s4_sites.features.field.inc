@@ -4129,12 +4129,12 @@ function s4_sites_field_default_fields() {
       'field_name' => 'field_signups_max',
       'label' => 'Maximum number of students your site can accept at any given time',
       'required' => 0,
-      's4_sites_field_access' => 1,
+      's4_sites_field_access' => 0,
       'settings' => array(
         'max' => '',
         'min' => '0',
         'prefix' => '',
-        'suffix' => 'students',
+        'suffix' => ' students',
         'user_register_form' => FALSE,
       ),
       'widget' => array(

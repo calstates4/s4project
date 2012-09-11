@@ -60,6 +60,14 @@ function s4_sites_menu() {
     'page callback' => 's4_sites_redirect',
     'access arguments' => array('access content'),
   );
+  
+  $items['node/%node/merge'] = array(
+    'title' => 'Merge with another site',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('s4_sites_merge_sites', 1),
+    'access arguments' => array('merge sites'),
+    'file' => 's4_sites.pages.inc'
+  );
 
   return $items;
 }
@@ -287,6 +295,10 @@ function s4_sites_permission() {
       'title' => t('Bypass access control on sites'),
       'description' => t('When checked, users with this role will be able to edit any site regardless of what program they are assigned to.'),
     ),
+    'merge sites' => array(
+      'title' => t('Merge sites'),
+      'description' => t('Merge two sites together. When this happens one of the sites will be deleted, and students will have their placements moved to the other.'),
+    ),
     );
 }
 
@@ -415,6 +427,7 @@ function s4_sites_block_info() {
   $blocks['s4_sites_site_send_form'] = array('info' => 'Send site form');
   $blocks['s4_sites_form_webform'] = array('info' => 'Site form webform results');
   $blocks['s4_sites_return_tab'] = array('info' => 'Return to site');
+  $blocks['s4_sites_merge_link'] = array('info' => 'Merge sites link');
   return $blocks;
 }
 
@@ -445,6 +458,15 @@ function s4_sites_block_view($delta) {
         $path = ($node->type == 'file') ? 'forms' : 'notes';
         return array('content' => l(t('Return to @site', array('@site' => $site->title)), 'node/'. $site->nid .'/'. $path));
       }
+      break;
+    case 's4_sites_merge_link':
+      if(!user_access('merge sites') || !$node = menu_get_object()) {
+        return;
+      }
+      if(!$node->type == 'site') {
+        return;
+      }
+      return array('content' => l(t('Merge with another site'), 'node/'. $node->nid .'/merge'));
   }
 
 }
