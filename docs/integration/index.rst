@@ -134,6 +134,8 @@ S4 actually treats all students and faculty as simple "users," who then get acce
 
 Use the **User processor** and under settings keep the default settings. Users also need a GUID, which in many CMS/PeopleSoft campuses is called the "emplid". Make sure to map this field to both the SIS ID field as well as the GUID field so that we can report on and find these users later. Another special field users have is called "Available programs," where you can print out the programs the user has access to. Programs allow users to register with a site without being associated with a course. If the program is setup in S4 as "Teacher education," and you want all users in teacher ed to use S4 at any time without being registered with specific coures, print "Teacher education" in a field that gets imported and mapped to "Available programs". If you have multiple programs a student belongs to, seperate them with a unique character like a pipe ( | ) and use tampering to split these values before they're processed :ref:`feeds-tamper`.
 
+**If you are using CAS for authentication** you will see another option when mapping fields for the CAS Username, this typically is the same as the login ID, but needs to be set in order for users created via feeds to login using CAS.
+
 Importing student enrollment
 """"""""""""""""""""""""""""
 Use the custom S4 **Course enrollment processor** and make sure to provide the following data:
