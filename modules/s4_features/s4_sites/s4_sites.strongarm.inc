@@ -840,6 +840,20 @@ function s4_sites_strongarm() {
       'title' => 'Students can register with this staff',
       'hidden' => 0,
     ),
+    'field_site_staff_user' => array(
+      'region' => 'main',
+      'weight' => '11',
+      'has_required' => FALSE,
+      'title' => 'Related user',
+      'hidden' => 0,
+    ),
+    'field_job_title' => array(
+      'region' => 'main',
+      'weight' => '3',
+      'has_required' => FALSE,
+      'title' => 'Job title',
+      'hidden' => 0,
+    ),
   );
   $export['nodeformscols_field_placements_coordinator_default'] = $strongarm;
 

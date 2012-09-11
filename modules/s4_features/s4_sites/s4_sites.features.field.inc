@@ -881,7 +881,7 @@ function s4_sites_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'email_textfield',
-        'weight' => '8',
+        'weight' => '9',
       ),
     ),
   );
@@ -962,6 +962,81 @@ function s4_sites_field_default_fields() {
         ),
         'type' => 'text_textfield',
         'weight' => '1',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-coordinator-field_job_title'
+  $fields['node-coordinator-field_job_title'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_job_title',
+      'foreign keys' => array(
+        'format' => array(
+          'columns' => array(
+            'format' => 'format',
+          ),
+          'table' => 'filter_format',
+        ),
+      ),
+      'indexes' => array(
+        'format' => array(
+          0 => 'format',
+        ),
+      ),
+      'module' => 'text',
+      'settings' => array(
+        'max_length' => '255',
+      ),
+      'translatable' => '0',
+      'type' => 'text',
+    ),
+    'field_instance' => array(
+      'bundle' => 'coordinator',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => 11,
+        ),
+        'notifications' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'display_label' => '',
+      'entity_type' => 'node',
+      'field_name' => 'field_job_title',
+      'label' => 'Job title',
+      'required' => 0,
+      'settings' => array(
+        'text_processing' => '0',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'text',
+        'settings' => array(
+          'size' => '60',
+        ),
+        'type' => 'text_textfield',
+        'weight' => '3',
       ),
     ),
   );
@@ -1352,7 +1427,7 @@ function s4_sites_field_default_fields() {
           'size' => 15,
         ),
         'type' => 'phone_number',
-        'weight' => '9',
+        'weight' => '10',
       ),
     ),
   );
@@ -1426,7 +1501,7 @@ function s4_sites_field_default_fields() {
         'module' => 'number',
         'settings' => array(),
         'type' => 'number',
-        'weight' => '3',
+        'weight' => '4',
       ),
     ),
   );
@@ -1553,7 +1628,7 @@ function s4_sites_field_default_fields() {
           ),
         ),
         'type' => 'nodereference_url',
-        'weight' => '4',
+        'weight' => '5',
       ),
     ),
   );
@@ -1635,7 +1710,7 @@ function s4_sites_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_buttons',
-        'weight' => '5',
+        'weight' => '6',
       ),
     ),
   );
@@ -1748,7 +1823,7 @@ function s4_sites_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'user_reference_autocomplete',
-        'weight' => '10',
+        'weight' => '11',
       ),
     ),
   );
@@ -1831,7 +1906,7 @@ function s4_sites_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '6',
+        'weight' => '7',
       ),
     ),
   );
@@ -1915,7 +1990,7 @@ function s4_sites_field_default_fields() {
           'display_label' => 1,
         ),
         'type' => 'options_onoff',
-        'weight' => '7',
+        'weight' => '8',
       ),
     ),
   );
@@ -6233,6 +6308,7 @@ function s4_sites_field_default_fields() {
   t('If you have multiple location sites that you would like students to be placed at, please provide specific location information. (You may add additional locations using the \'Add another\' button below.)');
   t('If your organization has a presence on Facebook, Twitter, or another social network, please provide the address.');
   t('Issues addressed');
+  t('Job title');
   t('Last Name');
   t('Leave blank or enter zero (0) for no limit');
   t('Location(s)');

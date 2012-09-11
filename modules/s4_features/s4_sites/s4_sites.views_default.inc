@@ -1047,6 +1047,10 @@ Location',
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_site_restrict']['delta_offset'] = '0';
+  /* Field: Content: Job title */
+  $handler->display->display_options['fields']['field_job_title']['id'] = 'field_job_title';
+  $handler->display->display_options['fields']['field_job_title']['table'] = 'field_data_field_job_title';
+  $handler->display->display_options['fields']['field_job_title']['field'] = 'field_job_title';
   /* Field: Content: Email address */
   $handler->display->display_options['fields']['field_email']['id'] = 'field_email';
   $handler->display->display_options['fields']['field_email']['table'] = 'field_data_field_email';
@@ -1198,6 +1202,10 @@ Location',
   $handler->display->display_options['fields']['field_staff_role']['field'] = 'field_staff_role';
   $handler->display->display_options['fields']['field_staff_role']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['field_staff_role']['type'] = 'taxonomy_term_reference_plain';
+  /* Field: Content: Job title */
+  $handler->display->display_options['fields']['field_job_title']['id'] = 'field_job_title';
+  $handler->display->display_options['fields']['field_job_title']['table'] = 'field_data_field_job_title';
+  $handler->display->display_options['fields']['field_job_title']['field'] = 'field_job_title';
   /* Field: Content: Maximum number of students */
   $handler->display->display_options['fields']['field_signups_max']['id'] = 'field_signups_max';
   $handler->display->display_options['fields']['field_signups_max']['table'] = 'field_data_field_signups_max';
@@ -1282,6 +1290,11 @@ Location',
   $handler->display->display_options['fields']['field_site_restrict']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_site_restrict']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_site_restrict']['delta_offset'] = '0';
+  /* Field: Content: Job title */
+  $handler->display->display_options['fields']['field_job_title']['id'] = 'field_job_title';
+  $handler->display->display_options['fields']['field_job_title']['table'] = 'field_data_field_job_title';
+  $handler->display->display_options['fields']['field_job_title']['field'] = 'field_job_title';
+  $handler->display->display_options['fields']['field_job_title']['element_label_colon'] = FALSE;
   /* Field: Content: Phone number */
   $handler->display->display_options['fields']['field_phone']['id'] = 'field_phone';
   $handler->display->display_options['fields']['field_phone']['table'] = 'field_data_field_phone';
@@ -1357,6 +1370,7 @@ Location',
     t('%1'),
     t('Page'),
     t('<p class="intro">Select a coordinator who will be working with you during your service.</p>'),
+    t('Job title'),
     t('Email'),
     t('Select'),
     t('Site staff tab'),

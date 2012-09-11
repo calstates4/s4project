@@ -269,7 +269,6 @@ function s4_sites_ds_layout_settings_info() {
       'merge_sites_link' => 'right',
       'field_signups_max' => 'right',
       'map' => 'right',
-      
     ),
     'classes' => array(),
   );
