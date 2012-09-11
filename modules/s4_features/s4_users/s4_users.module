@@ -22,3 +22,15 @@ function _s4_users_user_view_pre_render($user) {
   unset($user['summary']);
   return $user;
 }
+
+/**
+ * Feeds mapper for CAS module
+ */
+function s4_users_feeds_processor_targets_alter(&$targets, $entity_type, $bundle_name) {
+  if ($entity_type == 'user' && module_exists('cas')) {
+    $targets['cas_name'] = array(
+      'name' => t('CAS User name'),
+      'description' => t('A custom field to import user names into CAS.'),
+    );
+  }
+}
