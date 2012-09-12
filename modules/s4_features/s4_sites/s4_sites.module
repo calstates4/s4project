@@ -17,6 +17,10 @@ function s4_sites_menu_alter(&$items) {
   $items['node/%/files']['access callback'] = '_s4_sites_site_admin_view_access';
   $items['node/%/files']['access arguments'] = array(1);
   $items['node/%node/moderation']['title'] = 'Approval';
+  $items['node/%node/moderation']['weight'] = 3;
+  $items['node/%/site-staff-students']['access callback'] = '_s4_sites_site_staff_admin_view_access';
+  $items['node/%/site-staff-students']['access arguments'] = array(1);
+
 }
 
 /**
@@ -409,6 +413,15 @@ function s4_sites_node_access($node, $op,  $account) {
 function _s4_sites_site_admin_view_access($nid) {
   $node = node_load($nid);
   return (node_access('update', $node) && $node->type == 'site');
+}
+
+/**
+*  Menu access test for site contact records
+*/
+function _s4_sites_site_staff_admin_view_access($nid) {
+  $node = node_load($nid);
+  dpm($node);
+  return (node_access('update', $node) && $node->type == 'coordinator');
 }
 
 /**

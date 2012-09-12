@@ -1485,6 +1485,7 @@ function s4_sites_field_default_fields() {
           'weight' => 0,
         ),
       ),
+      'display_label' => '',
       'entity_type' => 'node',
       'field_name' => 'field_signups_max',
       'label' => 'Maximum number of students',
@@ -1493,7 +1494,7 @@ function s4_sites_field_default_fields() {
         'max' => '',
         'min' => '0',
         'prefix' => '',
-        'suffix' => 'students',
+        'suffix' => ' students',
         'user_register_form' => FALSE,
       ),
       'widget' => array(

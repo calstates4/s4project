@@ -519,6 +519,42 @@ function s4_sites_context_default_contexts() {
   $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
+  $context->name = 'view-site-staff';
+  $context->description = 'User is viewing a site staff';
+  $context->tag = 'sites';
+  $context->conditions = array(
+    'node' => array(
+      'values' => array(
+        'coordinator' => 'coordinator',
+      ),
+      'options' => array(
+        'node_form' => '1',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        'views-s4_site_staff_students-block' => array(
+          'module' => 'views',
+          'delta' => 's4_site_staff_students-block',
+          'region' => 'content_bottom',
+          'weight' => '-10',
+        ),
+      ),
+    ),
+  );
+  $context->condition_mode = 1;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('User is viewing a site staff');
+  t('sites');
+  $export['view-site-staff'] = $context;
+
+  $context = new stdClass();
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
   $context->name = 'views-contact-records';
   $context->description = 'User is on a generic view page';
   $context->tag = 'views';
