@@ -22,6 +22,18 @@ function s4_courses_views_data() {
     ),
   );
   
+  $data['s4_course']['course_student_placements'] = array(
+    'title' => t('Total course placements'),
+    'help' => t('Total number of placements made in a course.'),
+    'field' => array(
+      'handler' => 'views_handler_s4_courses_placements_count',
+      'click sortable' => FALSE,
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort',
+    ),
+  );
+  
   return $data;
 }
 

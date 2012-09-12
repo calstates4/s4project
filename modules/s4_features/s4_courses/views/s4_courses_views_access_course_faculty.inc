@@ -9,7 +9,7 @@ class s4_courses_views_access_course_faculty extends views_plugin_access {
   }
 
   function get_access_callback() {
-    return array('s4_courses_views_check_faculty_access', array($this->view);
+    return array('s4_courses_views_check_faculty_access', array($this->view));
   }
 
   function summary_title() {

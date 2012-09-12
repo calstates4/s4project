@@ -24,8 +24,7 @@ function s4_courses_views_default_views() {
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Course students';
   $handler->display->display_options['css_class'] = 'quicksearch';
-  $handler->display->display_options['access']['type'] = 'perm';
-  $handler->display->display_options['access']['perm'] = 'manage course students';
+  $handler->display->display_options['access']['type'] = 'user_faculty';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['query_comment'] = FALSE;
@@ -1291,6 +1290,11 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['fields']['course_student_enrollment']['field'] = 'course_student_enrollment';
   $handler->display->display_options['fields']['course_student_enrollment']['label'] = 'Enrollment';
   $handler->display->display_options['fields']['course_student_enrollment']['hide_alter_empty'] = FALSE;
+  /* Field: Course: Total course placements */
+  $handler->display->display_options['fields']['course_student_placements']['id'] = 'course_student_placements';
+  $handler->display->display_options['fields']['course_student_placements']['table'] = 's4_course';
+  $handler->display->display_options['fields']['course_student_placements']['field'] = 'course_student_placements';
+  $handler->display->display_options['fields']['course_student_placements']['label'] = 'Placements';
   /* Field: Content: Edit link */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
@@ -1651,6 +1655,7 @@ function s4_courses_views_default_views() {
     t('[field_last_name], [field_first_name]'),
     t('Students'),
     t('Enrollment'),
+    t('Placements'),
     t('Edit'),
     t('Catalog number'),
     t('Course programs'),
