@@ -11,9 +11,6 @@ api = 2
 ;libraries[profiler][destination] = "libraries/profiler"
 
 ; Contrib Modules
-projects[auto_nodetitle][subdir] = "contrib"
-projects[auto_nodetitle][version] = "1.0"
-
 projects[better_exposed_filters][subdir] = "contrib"
 projects[better_exposed_filters][version] = "3.0-beta1"
 

@@ -13,20 +13,6 @@ function s4_courses_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'ant_course';
-  $strongarm->value = '1';
-  $export['ant_course'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'ant_pattern_course';
-  $strongarm->value = '[node:field_course_catalog_number] [node:field_course_subject] ([node:field_course_section])';
-  $export['ant_pattern_course'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'language_content_type_course';
   $strongarm->value = '0';
   $export['language_content_type_course'] = $strongarm;

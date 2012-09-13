@@ -514,6 +514,32 @@ function s4_courses_node_access($node, $op, $account) {
   }
 }
 
+/**
+ * Implements hook_node_presave. We're customizing a course node's title.
+ */
+function s4_courses_node_presave($node) {
+  if($node->type != 'course') {
+    return;
+  }
+  $subject = field_get_items('node', $node, 'field_course_subject');
+  $number = field_get_items('node', $node, 'field_course_catalog_number');
+  $section = field_get_items('node', $node, 'field_course_section');
+  $section = ($section[0]['value']) 
+    ? t(' section @section', array('@section' => $section[0]['value'])) 
+    : '';
+  $node->title = t('@subject @number @section', array('@subject' => $subject[0]['value'],
+                                                      '@number' => $number[0]['value'],
+                                                      '@section' => $section));
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter. We're removing the title from course node forms.
+ */
+function s4_courses_form_course_node_form_alter(&$form, $form_state) {
+  $form['title']['#type'] = 'value';
+  $form['title']['#required'] = FALSE;
+}
+
 function s4_courses_edit_course_restrict_form() {
   $node = menu_get_object();
   $form = array();
