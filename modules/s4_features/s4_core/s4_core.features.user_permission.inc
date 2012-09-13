@@ -823,16 +823,6 @@ function s4_core_user_default_permissions() {
     'module' => 'node',
   );
 
-  // Exported permission: save draft
-  $permissions['save draft'] = array(
-    'name' => 'save draft',
-    'roles' => array(
-      0 => 'administrator',
-      1 => 'staff',
-    ),
-    'module' => 'save_draft',
-  );
-
   // Exported permission: search content
   $permissions['search content'] = array(
     'name' => 'search content',

@@ -104,7 +104,6 @@ dependencies[] = options_element
 dependencies[] = page_manager
 dependencies[] = pathauto
 dependencies[] = references
-dependencies[] = save_draft
 dependencies[] = select_or_other
 dependencies[] = strongarm
 dependencies[] = textcaptcha

@@ -131,9 +131,6 @@ projects[pathauto][version] = "1.0-beta1"
 projects[references][subdir] = "contrib"
 projects[references][version] = "2.x-dev"
 
-projects[save_draft][subdir] = "contrib"
-projects[save_draft][version] = "1.4"
-
 projects[select_or_other][subdir] = "contrib"
 projects[select_or_other][version] = "2.0"
 
