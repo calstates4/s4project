@@ -15,7 +15,7 @@ before_script:
   - phpenv rehash
   - drush make https://raw.github.com/kevee/csu_student_signup/master/distro.make student_signup
   - cd student_signup
-  - drush si student_signup --db-url=mysql://root:@127.0.0.1/drupal --account-name=admin --account-pass=s4Test --site-mail=s4@csumb.edu --site-name="S4" --yes
+  - drush si student_signup --db-url=mysql://root:@127.0.0.1/drupal --account-name=admin --account-pass=s4Test --account-mail=s4@csumb.edu --site-mail=s4@csumb.edu --site-name="S4" --yes
   - drush cc all --yes
 
 script: 
