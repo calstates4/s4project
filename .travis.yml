@@ -12,12 +12,14 @@ before_script:
   - "mysql -e 'create database drupal;'"
   - pear channel-discover pear.drush.org
   - pear install drush/drush
+  - pear install PHP_CodeSniffer
+  - wget http://ftp.drupal.org/files/projects/drupalcs-7.x-1.0-beta1.tar.gz -O ../drupalcs.tar.gz
+  - tar -xvzf ../drupalcs.tar.gz -C ../
   - echo "error_reporting=E_ERROR" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
-  - echo "sendmail_path=/dev/null" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
   - phpenv rehash
   - drush make https://raw.github.com/kevee/csu_student_signup/master/distro.make student_signup
   - cd student_signup
-  - drush si student_signup --db-url=mysql://root:@127.0.0.1/drupal --account-name=admin --account-pass=s4Test --account-mail=s4@csumb.edu --site-name="S4" --yes
+  - drush si student_signup --db-url=mysql://root:@127.0.0.1/drupal  --yes
   - drush cc all --yes
 
 script: 
@@ -25,3 +27,4 @@ script:
   - test -d profiles/student_signup/modules/contrib
   - test -d profiles/student_signup/modules/s4_features
   - test -d profiles/student_signup/themes
+  - phpcs . --standard=../drupalcs/Drupal/ruleset.xml --extensions=php,module,inc,install,test,profile,theme
