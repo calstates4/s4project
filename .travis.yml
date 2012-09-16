@@ -28,4 +28,3 @@ script:
   - test -d profiles/student_signup/modules/contrib
   - test -d profiles/student_signup/modules/s4_features
   - test -d profiles/student_signup/themes
-  - phpcs profiles/student_signup/modules/s4_features --standard=../drupalcs/Drupal/ruleset.xml --extensions=php,module,inc,install,test,profile,theme
