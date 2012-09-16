@@ -19,7 +19,7 @@ before_script:
   - phpenv rehash
   - drush make https://raw.github.com/kevee/csu_student_signup/master/distro.make student_signup
   - cd student_signup
-  - drush si student_signup --db-url=mysql://root:@127.0.0.1/drupal  --yes
+  - drush si student_signup --db-url=mysql://root:@127.0.0.1/drupal  --yes || true
   - drush cc all --yes
 
 script: 
