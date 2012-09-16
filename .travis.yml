@@ -16,6 +16,7 @@ before_script:
   - wget http://ftp.drupal.org/files/projects/drupalcs-7.x-1.0-beta1.tar.gz -O drupalcs.tar.gz
   - tar -xvzf drupalcs.tar.gz -C ./
   - echo "error_reporting=E_ERROR" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
+  - echo "memory_limit=200M" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
   - phpenv rehash
   - drush make https://raw.github.com/kevee/csu_student_signup/master/distro.make student_signup
   - cd student_signup
