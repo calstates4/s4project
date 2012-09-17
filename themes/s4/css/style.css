@@ -651,7 +651,7 @@ address {
 table {
   border: 1px solid #ededed;
 }
-table thead th {
+table th {
   background: #c4dbe7;
   color: #333333;
   margin-bottom: 10px;

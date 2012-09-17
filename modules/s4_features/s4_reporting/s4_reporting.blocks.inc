@@ -5,19 +5,36 @@ function s4_reporting_block_site_summary() {
 	$items = array();
 	foreach($states as $state) {
 		$query = db_select('workbench_moderation_node_history', 'h');
-		$query->leftJoin('node', 'n', 'n.nid = h.nid');
-		$query->condition('h.current', 1)
-			    ->condition('h.state', $state->name)
+		$query->leftJoin('node', 'n', 'n.nid = h.nid AND n.vid = h.vid');
+		$query->condition('h.state', $state->name)
+			    ->condition('n.status', 1)
 			    ->condition('n.type', 'site')
 		      	->addExpression('COUNT(h.nid)', 'entity_count');
 		$result = $query->execute();
 		$count = $result->fetchField();
 		$items[$state->name] = array('<strong>'. $state->label .':</strong>',
-		  l($count, 'site-list/manage/', array('query' => array('status[]' => $state->name)))
+		  l($count, 'site-list/manage/', array('query' => array('status' => $state->name, 'state' => 1)))
 		  );
 	}
 	$header = array(t('Status'), t('Count'));
-	return array('subject' => 'Site overview',
+	$count = db_select('node', 'n')
+	           ->condition('status', 0)
+	           ->condition('type', 'site')
+	           ->countQuery()
+	           ->execute()
+	           ->fetchField();
+  
+  $items[] = array(array('header' => TRUE,
+                         'data' => t('Inactive site overview')
+                         ),
+                   array('header' => TRUE,
+                         'data' => t('Count')
+                         )
+                    );
+  $items[] = array('<strong>' . t('Inactive sites:') .'</strong>',
+                   l($count, 'site-list/manage/', array('query' => array('state' => 0)))
+                   );
+	return array('subject' => t('Active site overview'),
 				 'content' => theme('table', array('header' => $header, 'rows' => $items)));
 }
 
