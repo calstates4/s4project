@@ -2700,6 +2700,133 @@ Fields',
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '40';
   $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'views_bulk_operations' => 'views_bulk_operations',
+    'uid' => 'uid',
+    'field_last_name' => 'field_last_name',
+    'field_first_name' => 'field_first_name',
+    'field_site_restrict' => 'field_site_restrict',
+    'authname' => 'authname',
+    'mail' => 'mail',
+    'login' => 'login',
+    'field_sis_id' => 'field_sis_id',
+    'field_term' => 'field_term',
+    'field_course_subject' => 'field_course_subject',
+    'field_course_catalog_number' => 'field_course_catalog_number',
+    'field_course_section' => 'field_course_section',
+    'title' => 'title',
+    'field_first_name_1' => 'field_first_name_1',
+    'field_last_name_1' => 'field_last_name_1',
+  );
+  $handler->display->display_options['style_options']['default'] = 'field_last_name';
+  $handler->display->display_options['style_options']['info'] = array(
+    'views_bulk_operations' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'uid' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_last_name' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_first_name' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_site_restrict' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'authname' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'mail' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'login' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_sis_id' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_term' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_course_subject' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_course_catalog_number' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_course_section' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'title' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_first_name_1' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_last_name_1' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
   /* Header: Global: Result summary */
   $handler->display->display_options['header']['result']['id'] = 'result';
   $handler->display->display_options['header']['result']['table'] = 'views';
@@ -2890,7 +3017,7 @@ Fields',
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
-  $handler->display->display_options['fields']['field_site_restrict']['label'] = 'Student programs';
+  $handler->display->display_options['fields']['field_site_restrict']['relationship'] = 'reverse_field_user_node';
   $handler->display->display_options['fields']['field_site_restrict']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_site_restrict']['delta_offset'] = '0';
   /* Field: User: Authentication name */
@@ -2961,6 +3088,27 @@ Fields',
   $handler->display->display_options['fields']['field_last_name_1']['field'] = 'field_last_name';
   $handler->display->display_options['fields']['field_last_name_1']['relationship'] = 'field_coordinator_nid';
   $handler->display->display_options['fields']['field_last_name_1']['label'] = 'Site staff last name';
+  /* Field: Content: Email address */
+  $handler->display->display_options['fields']['field_email']['id'] = 'field_email';
+  $handler->display->display_options['fields']['field_email']['table'] = 'field_data_field_email';
+  $handler->display->display_options['fields']['field_email']['field'] = 'field_email';
+  $handler->display->display_options['fields']['field_email']['relationship'] = 'field_coordinator_nid';
+  $handler->display->display_options['fields']['field_email']['type'] = 'email_default';
+  /* Field: Content: Job title */
+  $handler->display->display_options['fields']['field_job_title']['id'] = 'field_job_title';
+  $handler->display->display_options['fields']['field_job_title']['table'] = 'field_data_field_job_title';
+  $handler->display->display_options['fields']['field_job_title']['field'] = 'field_job_title';
+  $handler->display->display_options['fields']['field_job_title']['relationship'] = 'field_coordinator_nid';
+  $handler->display->display_options['fields']['field_job_title']['label'] = 'Site staff title';
+  /* Field: Content: Phone number */
+  $handler->display->display_options['fields']['field_phone']['id'] = 'field_phone';
+  $handler->display->display_options['fields']['field_phone']['table'] = 'field_data_field_phone';
+  $handler->display->display_options['fields']['field_phone']['field'] = 'field_phone';
+  $handler->display->display_options['fields']['field_phone']['relationship'] = 'field_coordinator_nid';
+  $handler->display->display_options['fields']['field_phone']['label'] = 'Site staff phone';
+  $handler->display->display_options['fields']['field_phone']['click_sort_column'] = 'number';
+  $handler->display->display_options['fields']['field_phone']['type'] = 's4_sites_local_phone_number';
+  $handler->display->display_options['fields']['field_phone']['delta_offset'] = '0';
   /* Sort criterion: Field: Last Name (field_last_name) */
   $handler->display->display_options['sorts']['field_last_name_value']['id'] = 'field_last_name_value';
   $handler->display->display_options['sorts']['field_last_name_value']['table'] = 'field_data_field_last_name';
@@ -3011,6 +3159,7 @@ Fields',
   $handler->display->display_options['filters']['field_site_restrict_tid_1']['id'] = 'field_site_restrict_tid_1';
   $handler->display->display_options['filters']['field_site_restrict_tid_1']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['filters']['field_site_restrict_tid_1']['field'] = 'field_site_restrict_tid';
+  $handler->display->display_options['filters']['field_site_restrict_tid_1']['relationship'] = 'reverse_field_user_node';
   $handler->display->display_options['filters']['field_site_restrict_tid_1']['group'] = 1;
   $handler->display->display_options['filters']['field_site_restrict_tid_1']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_site_restrict_tid_1']['expose']['operator_id'] = 'field_site_restrict_tid_1_op';
@@ -3048,6 +3197,9 @@ Fields',
     'title' => 'title',
     'field_first_name_1' => 'field_first_name_1',
     'field_last_name_1' => 'field_last_name_1',
+    'field_email' => 'field_email',
+    'field_job_title' => 'field_job_title',
+    'field_phone' => 'field_phone',
   );
   $handler->display->display_options['filters']['dyfield']['defaults_filterable_fields'] = array(
     'views_bulk_operations' => 'views_bulk_operations',
@@ -3065,6 +3217,9 @@ Fields',
     'title' => 0,
     'field_first_name_1' => 0,
     'field_last_name_1' => 0,
+    'field_email' => 0,
+    'field_job_title' => 0,
+    'field_phone' => 0,
   );
   $handler->display->display_options['filters']['dyfield']['sortability'] = 1;
   $handler->display->display_options['filters']['dyfield']['checkboxes'] = 0;
@@ -3106,7 +3261,7 @@ Fields',
   $handler->display->display_options['filters']['field_signup_start_date_value']['id'] = 'field_signup_start_date_value';
   $handler->display->display_options['filters']['field_signup_start_date_value']['table'] = 'field_data_field_signup_start_date';
   $handler->display->display_options['filters']['field_signup_start_date_value']['field'] = 'field_signup_start_date_value';
-  $handler->display->display_options['filters']['field_signup_start_date_value']['relationship'] = 'reverse_field_course_students_node';
+  $handler->display->display_options['filters']['field_signup_start_date_value']['relationship'] = 'reverse_field_user_node';
   $handler->display->display_options['filters']['field_signup_start_date_value']['operator'] = 'between';
   $handler->display->display_options['filters']['field_signup_start_date_value']['group'] = 1;
   $handler->display->display_options['filters']['field_signup_start_date_value']['exposed'] = TRUE;
@@ -3257,7 +3412,7 @@ Fields',
     t('Last name'),
     t('user/[uid]'),
     t('First name'),
-    t('Student programs'),
+    t('Program'),
     t('Login name'),
     t('E-mail '),
     t('Last login '),
@@ -3269,7 +3424,9 @@ Fields',
     t('Site'),
     t('Site staff first name'),
     t('Site staff last name'),
-    t('Program'),
+    t('Email address'),
+    t('Site staff title'),
+    t('Site staff phone'),
     t('Fields'),
     t('Catalog number'),
     t('First day of service'),
