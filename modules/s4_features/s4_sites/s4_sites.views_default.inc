@@ -2405,6 +2405,7 @@ Location',
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['distinct'] = TRUE;
+  $handler->display->display_options['query']['options']['pure_distinct'] = TRUE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Search';
   $handler->display->display_options['pager']['type'] = 'full';
@@ -2460,7 +2461,7 @@ Location',
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['value'] = 1;
-  $handler->display->display_options['filters']['status']['group'] = 0;
+  $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
   /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
@@ -2469,20 +2470,24 @@ Location',
   $handler->display->display_options['filters']['type']['value'] = array(
     'site' => 'site',
   );
-  /* Filter criterion: Search: Search Terms */
-  $handler->display->display_options['filters']['keys']['id'] = 'keys';
-  $handler->display->display_options['filters']['keys']['table'] = 'search_index';
-  $handler->display->display_options['filters']['keys']['field'] = 'keys';
-  $handler->display->display_options['filters']['keys']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['keys']['expose']['operator_id'] = 'keys_op';
-  $handler->display->display_options['filters']['keys']['expose']['label'] = 'Search';
-  $handler->display->display_options['filters']['keys']['expose']['operator'] = 'keys_op';
-  $handler->display->display_options['filters']['keys']['expose']['identifier'] = 'keys';
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Title */
+  $handler->display->display_options['filters']['title']['id'] = 'title';
+  $handler->display->display_options['filters']['title']['table'] = 'node';
+  $handler->display->display_options['filters']['title']['field'] = 'title';
+  $handler->display->display_options['filters']['title']['operator'] = 'allwords';
+  $handler->display->display_options['filters']['title']['group'] = 1;
+  $handler->display->display_options['filters']['title']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['label'] = 'Site name';
+  $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
   /* Filter criterion: Location: City */
   $handler->display->display_options['filters']['city']['id'] = 'city';
   $handler->display->display_options['filters']['city']['table'] = 'location';
   $handler->display->display_options['filters']['city']['field'] = 'city';
   $handler->display->display_options['filters']['city']['operator'] = 'contains';
+  $handler->display->display_options['filters']['city']['group'] = 1;
   $handler->display->display_options['filters']['city']['exposed'] = TRUE;
   $handler->display->display_options['filters']['city']['expose']['operator_id'] = 'city_op';
   $handler->display->display_options['filters']['city']['expose']['label'] = 'City';
@@ -2492,7 +2497,7 @@ Location',
   $handler->display->display_options['filters']['field_csu_facility_tid']['id'] = 'field_csu_facility_tid';
   $handler->display->display_options['filters']['field_csu_facility_tid']['table'] = 'field_data_field_csu_facility';
   $handler->display->display_options['filters']['field_csu_facility_tid']['field'] = 'field_csu_facility_tid';
-  $handler->display->display_options['filters']['field_csu_facility_tid']['group'] = '0';
+  $handler->display->display_options['filters']['field_csu_facility_tid']['group'] = 1;
   $handler->display->display_options['filters']['field_csu_facility_tid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_csu_facility_tid']['expose']['operator_id'] = 'field_csu_facility_tid_op';
   $handler->display->display_options['filters']['field_csu_facility_tid']['expose']['label'] = 'Issues addressed';
@@ -2507,7 +2512,7 @@ Location',
   $handler->display->display_options['filters']['field_csu_org_type_tid']['id'] = 'field_csu_org_type_tid';
   $handler->display->display_options['filters']['field_csu_org_type_tid']['table'] = 'field_data_field_csu_org_type';
   $handler->display->display_options['filters']['field_csu_org_type_tid']['field'] = 'field_csu_org_type_tid';
-  $handler->display->display_options['filters']['field_csu_org_type_tid']['group'] = '0';
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['group'] = 1;
   $handler->display->display_options['filters']['field_csu_org_type_tid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_csu_org_type_tid']['expose']['operator_id'] = 'field_csu_org_type_tid_op';
   $handler->display->display_options['filters']['field_csu_org_type_tid']['expose']['label'] = 'Organization type';
@@ -2522,7 +2527,7 @@ Location',
   $handler->display->display_options['filters']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
   $handler->display->display_options['filters']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['filters']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';
-  $handler->display->display_options['filters']['field_site_restrict_tid']['group'] = '0';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['group'] = 1;
   $handler->display->display_options['filters']['field_site_restrict_tid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['operator_id'] = 'field_site_restrict_tid_op';
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['label'] = 'Available programs';
@@ -2613,6 +2618,13 @@ Location',
     'site' => 'site',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Post date */
+  $handler->display->display_options['filters']['created']['id'] = 'created';
+  $handler->display->display_options['filters']['created']['table'] = 'node';
+  $handler->display->display_options['filters']['created']['field'] = 'created';
+  $handler->display->display_options['filters']['created']['operator'] = '>=';
+  $handler->display->display_options['filters']['created']['value']['value'] = '-3 months';
+  $handler->display->display_options['filters']['created']['value']['type'] = 'offset';
   $handler->display->display_options['block_description'] = 'Newest Sites';
   $translatables['sites'] = array(
     t('Master'),
@@ -2632,6 +2644,7 @@ Location',
     t('last »'),
     t('Programs'),
     t('All'),
+    t('Site name'),
     t('City'),
     t('Issues addressed'),
     t('Organization type'),
