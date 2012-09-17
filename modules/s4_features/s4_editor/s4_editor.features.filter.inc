@@ -25,6 +25,11 @@ function s4_editor_filter_default_formats() {
           'filter_url_length' => '72',
         ),
       ),
+      'office_html_strip' => array(
+        'weight' => '0',
+        'status' => '1',
+        'settings' => array(),
+      ),
       'filter_html' => array(
         'weight' => '1',
         'status' => '1',

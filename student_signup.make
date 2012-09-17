@@ -122,6 +122,9 @@ projects[notifications][version] = "1.0-alpha1"
 projects[options_element][subdir] = "contrib"
 projects[options_element][version] = "1.4"
 
+projects[office_html][subdir] = "contrib"
+projects[office_html][version] = "1.0-alpha1"
+
 projects[pathauto][subdir] = "contrib"
 projects[pathauto][version] = "1.0-beta1"
 
