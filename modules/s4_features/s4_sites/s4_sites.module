@@ -785,7 +785,7 @@ function s4_sites_field_formatter_info() {
         'multiple values' => FIELD_BEHAVIOR_DEFAULT,
       ),
       's4_sites_address' => array(
-        'label' => t('Student Signup'),
+        'label' => t('Site address'),
         'field types' => array('location'),
       ),
       's4_sites_hours_matrix' => array(

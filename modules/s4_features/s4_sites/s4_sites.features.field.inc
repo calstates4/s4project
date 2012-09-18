@@ -3594,9 +3594,9 @@ function s4_sites_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'location_cck',
+          'module' => 's4_sites',
           'settings' => array(),
-          'type' => 'location_default',
+          'type' => 's4_sites_address',
           'weight' => '14',
         ),
         'full' => array(
@@ -4074,9 +4074,9 @@ function s4_sites_field_default_fields() {
           'module' => 'number',
           'settings' => array(
             'decimal_separator' => '.',
-            'prefix_suffix' => TRUE,
+            'prefix_suffix' => 1,
             'scale' => 0,
-            'thousand_separator' => ' ',
+            'thousand_separator' => ',',
           ),
           'type' => 'number_integer',
           'weight' => '17',

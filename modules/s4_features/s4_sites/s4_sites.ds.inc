@@ -52,6 +52,16 @@ function s4_sites_ds_field_settings_info() {
   $ds_fieldsetting->bundle = 'site';
   $ds_fieldsetting->view_mode = 'default';
   $ds_fieldsetting->settings = array(
+    'map' => array(
+      'weight' => '0',
+      'label' => 'hidden',
+      'format' => 'default',
+    ),
+    'merge_sites_link' => array(
+      'weight' => '0',
+      'label' => 'hidden',
+      'format' => 'default',
+    ),
     'site_staff' => array(
       'weight' => '4',
       'label' => 'hidden',
