@@ -8,6 +8,7 @@ function s4_reporting_block_site_summary() {
 		$query->leftJoin('node', 'n', 'n.nid = h.nid AND n.vid = h.vid');
 		$query->condition('h.state', $state->name)
 			    ->condition('n.status', 1)
+			    ->condition('h.current', 1)
 			    ->condition('n.type', 'site')
 		      	->addExpression('COUNT(h.nid)', 'entity_count');
 		$result = $query->execute();
