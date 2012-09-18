@@ -15,7 +15,7 @@ class views_handler_s4_courses_placements_count extends views_handler_field {
                     ->execute()
                     ->fetchField();
     return t('@placements (@percent%)', array('@placements' => $placements,
-                                              '@percent' => round($placements / $enrollment, 1)));
+                                              '@percent' => round(($placements / $enrollment) * 100)));
   }
   
   function query() {
