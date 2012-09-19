@@ -1649,12 +1649,13 @@ function s4_core_tokens($type, $tokens, array $data = array(), array $options = 
     $fields = field_info_instances('node', $bundle);
 
     foreach ($fields as $field_name => $field_instance) {
-      if (empty($entity->{$field_name})) {
-        continue;
-      }
       $field_token_name = strtr($field_name, '_', '-');
       // Replace the [entity:field-name] token.
       $original = $tokens[$field_token_name];
+      if (empty($entity->{$field_name})) {
+        $replacements[$original] = '';
+        continue;
+      }
       if($original) {
         $field_output = field_view_field('node', $entity, $field_name);
         $output = array();
