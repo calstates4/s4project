@@ -1179,7 +1179,7 @@ function s4_core_action_info() {
 }
 
 function s4_core_cleanup_duplicate_action(&$entity, $context) {
-  $site = field_get_items('node', $entity, 'field_site');
+  /*$site = field_get_items('node', $entity, 'field_site');
   $start = field_get_items('node', $entity, 'field_signup_start_date');
   $site_staff = field_get_items('node', $entity, 'field_coordinator');
   if(module_exists('s4_courses')) {
@@ -1189,6 +1189,7 @@ function s4_core_cleanup_duplicate_action(&$entity, $context) {
                 ->fields('n', array('nid'))
                 ->condition('n.nid', $entity->nid , '!=');
   $duplicates->leftJoin('field_data_field_site', 's', 's.nid = n.nid AND s.)
+  */
 }
 
 /**
