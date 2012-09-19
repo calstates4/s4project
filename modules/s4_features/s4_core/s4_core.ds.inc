@@ -17,10 +17,10 @@ function s4_core_ds_field_settings_info() {
   $ds_fieldsetting->bundle = 'signup';
   $ds_fieldsetting->view_mode = 'default';
   $ds_fieldsetting->settings = array(
-    'post_date' => array(
-      'weight' => '3',
-      'label' => 'hidden',
-      'format' => 'ds_post_date_long',
+    'author' => array(
+      'weight' => '0',
+      'label' => 'above',
+      'format' => 'author_linked',
     ),
   );
   $export['node|signup|default'] = $ds_fieldsetting;
@@ -53,23 +53,25 @@ function s4_core_ds_layout_settings_info() {
         4 => 's4_core_assessment_submission',
       ),
       'right' => array(
-        0 => 'field_signup_hours',
-        1 => 'field_signup_start_date',
-        2 => 'field_signup_last_date',
-        3 => 's4_core_signup_submission',
-        4 => 's4_core_evaluation_submission',
+        0 => 'author',
+        1 => 'field_signup_hours',
+        2 => 'field_signup_start_date',
+        3 => 'field_signup_last_date',
+        4 => 's4_core_signup_submission',
+        5 => 's4_core_evaluation_submission',
       ),
     ),
     'fields' => array(
       'field_course' => 'left',
+      'author' => 'right',
       'field_site' => 'left',
       'field_coordinator' => 'left',
       'field_signup_location' => 'left',
-      's4_core_assessment_submission' => 'left',
       'field_signup_hours' => 'right',
       'field_signup_start_date' => 'right',
       'field_signup_last_date' => 'right',
       's4_core_signup_submission' => 'right',
+      's4_core_assessment_submission' => 'left',
       's4_core_evaluation_submission' => 'right',
     ),
     'classes' => array(),
