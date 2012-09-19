@@ -1,2 +1,0 @@
-"term", "subject", "catalog_number", "section", "user_id"
-"2104", "TEST", "101", "3", "000123429"

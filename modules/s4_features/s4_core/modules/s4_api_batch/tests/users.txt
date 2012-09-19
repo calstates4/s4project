@@ -1,3 +1,0 @@
-"login_id", "user_id", "email", "first_name", "last_name", "restrictions", "constant_registration"
-"test1234", "000123429", "test@mycampus.edu", "Joseph", "Conrad", "Service Learning, Teacher Ed", 1
-"000238293", "000238293", "test2@csumb.edu", "Me", "Me", "Service Learning", 1

@@ -1,4 +1,0 @@
-name=S4 Database Service
-description=Connects directly to a SIS database
-package=S4 SIS Integration
-core=7.x

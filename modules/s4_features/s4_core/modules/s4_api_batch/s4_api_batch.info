@@ -1,5 +1,0 @@
-name=S4 Batch File
-description=Interacts with an SIS via batch files
-package=S4 SIS Integration
-files[]=tests/s4_api_batch.test
-core=7.x

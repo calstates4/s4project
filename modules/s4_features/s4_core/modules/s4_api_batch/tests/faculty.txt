@@ -1,2 +1,0 @@
-"term", "subject", "catalog_number", "section", "login_id", "user_id", "email", "first_name", "last_name"
-"2104", "TEST", "101", "3", "test1234", "000123429", "test@mycampus.edu", "Joseph", "Faculty"

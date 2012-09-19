@@ -1,4 +1,0 @@
-name=S4 REST Service
-description=Provides a connection to a SIS system via REST
-package=S4 SIS Integration
-core=7.x

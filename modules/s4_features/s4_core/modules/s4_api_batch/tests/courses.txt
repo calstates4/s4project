@@ -1,3 +1,0 @@
-"term", "subject", "catalog_number", "section", "title", "status"
-"2104", "TEST", "101", "3", "Test course", "1"
-"2104", "TEST", "102", "1", "Test course II", "1"

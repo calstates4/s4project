@@ -1,4 +1,0 @@
-name=S4 API Developer Helper
-description=Tools to test your API implementation
-package=S4 SIS Integration
-core=7.x
