@@ -22,7 +22,7 @@ class views_handler_s4_course_student_signup extends views_handler_field {
         $coordinator = node_load($coordinator[0]['nid']);
         $output .= ' with ' . l($coordinator->title, 'node/' . $coordinator->nid);
       }
-      $output .= '<br/>' . l(t('View signup'), 'node/' . $node->nid);
+      $output .= '<br/>' . l(t('View placement'), 'node/' . $node->nid, array('query' => array('destination' => $_GET['q'])));
       $items[] = $output;
     }
     if(!count($items)) {

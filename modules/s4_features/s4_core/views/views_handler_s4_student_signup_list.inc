@@ -19,7 +19,7 @@ class views_handler_s4_student_signup_list extends views_handler_field {
       $signup = node_load($row['nid']);
       $site = field_get_items('node', $signup, 'field_site');
       $site = node_load($site[0]['nid']);
-         $list[] = l($site->title, 'node/' . $row['nid']);
+         $list[] = l($site->title, 'node/' . $row['nid'], array('query' => array('destination' => $_GET['q'])));
     }
     if (count($list) == 0) {
       return '';
