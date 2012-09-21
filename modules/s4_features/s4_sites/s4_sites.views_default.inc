@@ -956,10 +956,8 @@ Location',
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Current students';
   $handler->display->display_options['css_class'] = 'quicksearch';
-  $handler->display->display_options['access']['type'] = 'type_role';
-  $handler->display->display_options['access']['role'] = array(
-    2 => '2',
-  );
+  $handler->display->display_options['access']['type'] = 'type_permission';
+  $handler->display->display_options['access']['permission'] = 'create signups for other users';
   $handler->display->display_options['access']['node_type'] = 'coordinator';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
