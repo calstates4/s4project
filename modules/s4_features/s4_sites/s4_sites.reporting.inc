@@ -83,7 +83,6 @@ function _s4_sites_reporting_report_org_type($report_criteria) {
   );
   
   $output['site_org_types']['org_table']['#markup'] = _s4_sites_reporting_org_type($report_criteria);  
-  dpm($output);
   return array('totals' => array(),
          'output' => $output,
         );

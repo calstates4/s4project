@@ -420,7 +420,6 @@ function _s4_sites_site_admin_view_access($nid) {
 */
 function _s4_sites_site_staff_admin_view_access($nid) {
   $node = node_load($nid);
-  dpm($node);
   return (node_access('update', $node) && $node->type == 'coordinator');
 }
 
