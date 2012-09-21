@@ -53,7 +53,7 @@ function s4_core_views_data() {
   );
 
   $data['s4_signup']['student_signup_node'] = array(
-    'title' => t('Signup related to student'),
+    'title' => t('Student placements in a course'),
     'help' => t('For listings of students assigned to a course'),
     'field' => array(
       'handler' => 'views_handler_s4_course_student_signup',
