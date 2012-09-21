@@ -137,6 +137,13 @@ function s4_core_views_plugins() {
         'uses options' => TRUE,
         'help topic' => 'access-perm',
       ),
+      'type_permission' => array(
+        'title' => t('Node type and permission'),
+        'help' => t('Access will be granted to users with the specified permission where the node in the URL argument is given.'),
+        'handler' => 's4_core_views_access_node_type_permission',
+        'uses options' => TRUE,
+        'help topic' => 'access-perm',
+      ),
       'role_reverse' => array(
         'title' => t('User is not in a role'),
         'help' => t('Access will be granted to users without the selected role.'),

@@ -1919,6 +1919,13 @@ function s4_core_views_check_node_type_roles($rids, $type, $view, $account = NUL
   return (array_intersect(array_filter($rids), $roles) && $node->type == $type);
 }
 
+function s4_core_views_check_node_type_permission($permission, $type, $view, $account = NULL) {
+  $node = node_load(arg(1));
+  global $user;
+  $account = isset($account) ? $account : $user;
+  return (user_access($permission, $account) && $node->type == $type);
+}
+
 function s4_core_views_check_reverse_view_roles($rids, $view, $account = NULL) {
   global $user;
   if (user_access('administer views')) {
