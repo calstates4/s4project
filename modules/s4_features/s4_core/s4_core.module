@@ -652,6 +652,35 @@ function s4_core_student_signup_hours_submit($form, $form_state) {
 }
 
 /**
+ * Helper function to check that a signup isn't a duplicate
+ */
+function _s4_core_signup_check_duplicate($node) {
+  $user = field_get_items('node', $node, 'field_user');
+  $site = field_get_items('node', $node, 'field_site');
+  $start = field_get_items('node', $node, 'field_signup_start_date');
+  $coordinator = field_get_items('node', $node, 'field_coordinator');
+  $course = field_get_items('node', $node, 'field_course');
+  $query = db_select('node', 'n')
+           ->condition('n.type', 'signup');
+  $query->leftJoin('field_data_field_user', 'u', 'u.entity_id = n.nid AND u.bundle = n.type');
+  $query->condition('u.field_user_uid', $user[0]['uid']);
+  $query->leftJoin('field_data_field_site', 's', 's.entity_id = n.nid AND s.bundle = n.type');
+  $query->condition('s.field_site_nid', $site[0]['nid']);
+  $query->leftJoin('field_data_field_coordinator', 'c', 'c.entity_id = n.nid AND c.bundle = n.type');
+  $query->condition('c.field_coordinator_nid', $coordinator[0]['nid']);
+  if($course[0]['nid']) {
+    $query->leftJoin('field_data_field_course', 'co', 'co.entity_id = n.nid AND co.bundle = n.type');
+    $query->condition('co.field_course_nid', $course[0]['nid']);
+  }
+  else {
+    $query->leftJoin('field_data_field_signup_start_date', 'sd', 'sd.entity_id = n.nid AND sd.bundle = n.type');
+    $query->condition('sd.field_signup_start_date_value', $start[0]['value']);
+  }
+  $query->fields('n', array('nid'));
+  $result = $query->execute()->fetchField();
+  return ($result && $result > 0) ? TRUE : FALSE;
+}
+/**
 *  Helper function to create a signup node
 */
 function _s4_core_create_signup($uid = 0, $signup = array()) {
@@ -712,6 +741,11 @@ function _s4_core_create_signup($uid = 0, $signup = array()) {
   $node->field_signup_last_date[$node->language][0]['value'] = date('Y-m-d', $end_date);
 
   $node->field_signup_start_date[$node->language][0]['value'] = date('Y-m-d', $start_date);
+  if(_s4_core_signup_check_duplicate($node)) {
+    drupal_set_message(t('Sorry, that placement has already been made.'), 'error');
+    return;
+  }
+  
   node_save($node);
   $node->title = t('Signup #!nid', array('!nid' => $node->nid));
   node_save($node);
