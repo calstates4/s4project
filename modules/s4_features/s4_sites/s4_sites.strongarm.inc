@@ -1243,6 +1243,7 @@ function s4_sites_strongarm() {
     'field_site_other_csu' => FALSE,
     'field_signups_max' => FALSE,
     'field_operating_hours' => FALSE,
+    'field_site_instructions' => FALSE,
   );
   $export['s4_sites_field_access'] = $strongarm;
 

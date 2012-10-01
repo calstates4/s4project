@@ -3468,9 +3468,10 @@ function s4_sites_field_default_fields() {
           'weight' => 0,
         ),
       ),
+      'display_label' => 'Identification about risks associated with this site',
       'entity_type' => 'node',
       'field_name' => 'field_health_risk',
-      'label' => 'Risk Identification',
+      'label' => 'Risk identification',
       'required' => 0,
       's4_sites_field_access' => 0,
       'settings' => array(
@@ -4979,10 +4980,12 @@ function s4_sites_field_default_fields() {
           'weight' => 0,
         ),
       ),
+      'display_label' => 'Special information about this site',
       'entity_type' => 'node',
       'field_name' => 'field_site_instructions',
       'label' => 'Special site instructions',
       'required' => 0,
+      's4_sites_field_access' => 1,
       'settings' => array(
         'text_processing' => '1',
         'user_register_form' => FALSE,
@@ -5687,9 +5690,10 @@ function s4_sites_field_default_fields() {
           'weight' => 0,
         ),
       ),
+      'display_label' => 'Information about touring this site',
       'entity_type' => 'node',
       'field_name' => 'field_site_tour',
-      'label' => 'Site Tour',
+      'label' => 'Site tour',
       'required' => 0,
       's4_sites_field_access' => 0,
       'settings' => array(
@@ -6327,17 +6331,17 @@ function s4_sites_field_default_fields() {
   t('Reminder period (days)');
   t('Restrict this site staff to the following types of students.');
   t('Restrict to');
-  t('Risk Identification');
+  t('Risk identification');
   t('Role');
   t('Saved form record');
   t('Select the role of this staff person.');
   t('Select which programs can access this site.');
   t('Signup forms');
   t('Site');
-  t('Site Tour');
   t('Site description');
   t('Site has special requirements');
   t('Site special requirements');
+  t('Site tour');
   t('Social network page');
   t('Special site instructions');
   t('State lower district');
