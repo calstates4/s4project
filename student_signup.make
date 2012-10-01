@@ -92,11 +92,17 @@ projects[job_scheduler][version] = "2.0-alpha2"
 projects[libraries][subdir] = "contrib"
 projects[libraries][version] = "1.0"
 
+projects[location][subdir] = "contrib"
+projects[location][version] = "3.0-alpha1"
+
 projects[link][subdir] = "contrib"
 projects[link][version] = "1.0"
 
 projects[location_feeds][subdir] = "contrib"
 projects[location_feeds][version] = "1.5"
+
+projects[matrix][subdir] = "contrib"
+projects[matrix][version] = "2.x-dev"
 
 projects[masquerade][subdir] = "contrib"
 projects[masquerade][version] = "1.0-rc4"
@@ -158,8 +164,14 @@ projects[views_bulk_operations][version] = "3.0"
 projects[views_data_export][subdir] = "contrib"
 projects[views_data_export][version] = "3.0-beta4"
 
+projects[views_datasource][subdir] = "contrib"
+projects[views_datasource][version] = "7.x-dev"
+
 projects[views_dynamic_fields][subdir] = "contrib"
 projects[views_dynamic_fields][version] = "1.x-dev"
+
+projects[views_savedsearches][subdir] = "contrib"
+projects[views_savedsearches][version] = "1.0-beta1"
 
 projects[workbench][subdir] = "contrib"
 projects[workbench][version] = "1.1"
@@ -178,32 +190,6 @@ projects[wysiwyg][version] = "2.1"
 
 projects[wysiwyg_spellcheck] = "contrib"
 projects[wysiwyg_spellcheck] = "1.1"
-
-;Modules still in development
-projects[location][type] = module
-projects[location][subdir] = "contrib"
-projects[location][version] = "3.x-dev"
-projects[location][download][type] = "git"
-projects[location][download][url] = "http://git.drupal.org/project/location.git"
-projects[location][download][branch] = "7.x-3.x"
-
-projects[matrix][type] = module
-projects[matrix][subdir] = "contrib"
-projects[matrix][version] = "1.x-dev"
-projects[matrix][download][type] = "file"
-projects[matrix][download][url] = "http://s4.csumb.edu/hosted_modules/matrix.tar.gz"
-
-projects[views_datasource][type] = module
-projects[views_datasource][subdir] = "contrib"
-projects[views_datasource][version] = "7.x-dev"
-projects[views_datasource][download][type] = "file"
-projects[views_datasource][download][url] = "http://s4.csumb.edu/hosted_modules/views_datasource.tar.gz"
-
-projects[views_savedsearches][type] = module
-projects[views_savedsearches][subdir] = "contrib"
-projects[views_savedsearches][version] = "7.x-dev"
-projects[views_savedsearches][download][type] = "file"
-projects[views_savedsearches][download][url] = "http://s4.csumb.edu/hosted_modules/views_savedsearches.tar.gz"
 
 ; Themes
 
