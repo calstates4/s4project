@@ -1590,11 +1590,6 @@ Location',
   $handler->display->display_options['fields']['field_staff_signup_available']['field'] = 'field_staff_signup_available';
   $handler->display->display_options['fields']['field_staff_signup_available']['label'] = 'Register?';
   $handler->display->display_options['fields']['field_staff_signup_available']['hide_alter_empty'] = FALSE;
-  /* Field: Content: Published */
-  $handler->display->display_options['fields']['status']['id'] = 'status';
-  $handler->display->display_options['fields']['status']['table'] = 'node';
-  $handler->display->display_options['fields']['status']['field'] = 'status';
-  $handler->display->display_options['fields']['status']['not'] = 0;
   /* Field: Content: Edit link */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
@@ -1748,7 +1743,6 @@ Location',
     t('Role'),
     t('Max students'),
     t('Register?'),
-    t('Published'),
     t('Edit'),
     t('view'),
     t('Options'),
