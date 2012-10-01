@@ -180,14 +180,15 @@ function s4_core_block_s4_user_login_message() {
 *  Generic user login paragraph
 */
 function s4_core_block_s4_user_login() {
+  global $user;
   $output = array();
   $auth_types = array('students'        => variable_get('s4_core_auth_students', 'user'),
                 'staff'             => variable_get('s4_core_auth_staff', 'user'),
                 'faculty'           => variable_get('s4_core_auth_faculty', 'user'),
                 'community members' => variable_get('s4_core_auth_sites', 'none'));
   $login_destinations = array('user' => 'user',
-                'ldap' => 'user',
-                'cas'  => 'cas/login');
+                              'ldap' => 'user',
+                              'cas'  => 'cas/login');
 
   $login_options = array();
   foreach ($auth_types as $audience => $method) {
@@ -202,8 +203,9 @@ function s4_core_block_s4_user_login() {
       $join_list = ',';
     }
     $audience = ucfirst(implode(((isset($join_list)) ? $join_list : ' &amp;') . ' ', $audience));
+    $login_url = ($user->uid) ? '<front>' : $login_destinations[$option];
     $output[] = t('<strong>!audience:</strong>', array('!audience' => $audience)) . ' ' .
-          l(t('Login'), $login_destinations[$option],
+          l(t('Login'), $login_url,
               array('query' => array('destination' => '<front>')));
   }
   return array('subject' => NULL,
