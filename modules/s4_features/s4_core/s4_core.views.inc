@@ -120,6 +120,18 @@ function s4_core_views_data() {
       'handler' => 'views_handler_sort',
     ),
   );
+  
+  $data['s4_user_signup']['make_placement_link'] = array(
+    'title' => t('Make placement link'),
+    'help' => t('Provides link to make a placement on a user\'s behalf.'),
+    'field' => array(
+      'handler' => 'views_handler_make_placement_link',
+      'click sortable' => FALSE,
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort',
+    ),
+  );
 
   return $data;
 }

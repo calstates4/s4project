@@ -208,8 +208,12 @@ function s4_core_s4_site_configuration() {
 /**
 *  Form to quickly sign up student with a site
 */
-function s4_core_create_signup_form($form, $form_state, $uid, $courses = true) {
-
+function s4_core_create_signup_form($form, &$form_state, $uid, $courses = true) {
+  
+  if($_GET['destination']) {
+    $form_state['destination'] = check_plain($_GET['destination']);
+  }
+  
   $user = user_load($uid);
   drupal_set_title(t('Sign up @name', array('@name' => s4_core_get_user_full_name($user))));
   $form = array();

@@ -704,14 +704,11 @@ function s4_core_views_default_views() {
   $handler->display->display_options['fields']['student_signup_list']['label'] = 'Signups';
   $handler->display->display_options['fields']['student_signup_list']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['student_signup_list']['hide_alter_empty'] = FALSE;
-  /* Field: Global: Custom text */
-  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
-  $handler->display->display_options['fields']['nothing']['table'] = 'views';
-  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
-  $handler->display->display_options['fields']['nothing']['label'] = 'Add signup';
-  $handler->display->display_options['fields']['nothing']['alter']['text'] = 'Sign-up student';
-  $handler->display->display_options['fields']['nothing']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['nothing']['alter']['path'] = 'signup/create/[uid]';
+  /* Field: User Signup: Make placement link */
+  $handler->display->display_options['fields']['make_placement_link']['id'] = 'make_placement_link';
+  $handler->display->display_options['fields']['make_placement_link']['table'] = 's4_user_signup';
+  $handler->display->display_options['fields']['make_placement_link']['field'] = 'make_placement_link';
+  $handler->display->display_options['fields']['make_placement_link']['label'] = 'Make placement';
   /* Sort criterion: Field: Last Name (field_last_name) */
   $handler->display->display_options['sorts']['field_last_name_value']['id'] = 'field_last_name_value';
   $handler->display->display_options['sorts']['field_last_name_value']['table'] = 'field_data_field_last_name';
@@ -830,9 +827,7 @@ function s4_core_views_default_views() {
     t('Programs'),
     t('Edit'),
     t('Signups'),
-    t('Add signup'),
-    t('Sign-up student'),
-    t('signup/create/[uid]'),
+    t('Make placement'),
     t('Program'),
     t('Page'),
   );
