@@ -29,21 +29,58 @@ function s4_reporting_views_default_views() {
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['disable_sql_rewrite'] = TRUE;
   $handler->display->display_options['query']['options']['distinct'] = TRUE;
-  $handler->display->display_options['exposed_form']['type'] = 's4_reporting';
-  $handler->display->display_options['exposed_form']['options']['s4_reporting'] = array(
-    'group-field_first_name_value_1' => '0',
-    'group-field_last_name_value' => '0',
-    'group-field_term_nid' => '1',
-    'group-field_course_subject_value' => '1',
-    'group-field_course_catalog_number_value' => '1',
-    'group-dyfield' => '3',
-    'group-field_site_nid' => '2',
-    'group-city' => '2',
-    'group-province' => '2',
+  $handler->display->display_options['exposed_form']['type'] = 'views_exposed_groups';
+  $handler->display->display_options['exposed_form']['options']['views_exposed_groups'] = array(
+    'format_groups' => 'vertical_tabs',
     'groups' => 'Faculty
 Course
 Placements
 Fields',
+    'group-field_first_name_value_1' => array(
+      'group' => '0',
+      'filter_name' => 'field_first_name_value_1',
+      'weight' => '-10',
+    ),
+    'group-field_last_name_value' => array(
+      'group' => '0',
+      'filter_name' => 'field_last_name_value',
+      'weight' => '-9',
+    ),
+    'group-field_term_nid' => array(
+      'group' => '1',
+      'filter_name' => 'field_term_nid',
+      'weight' => '-8',
+    ),
+    'group-field_course_subject_value' => array(
+      'group' => '1',
+      'filter_name' => 'field_course_subject_value',
+      'weight' => '-7',
+    ),
+    'group-field_course_catalog_number_value' => array(
+      'group' => '1',
+      'filter_name' => 'field_course_catalog_number_value',
+      'weight' => '-6',
+    ),
+    'group-dyfield' => array(
+      'group' => '3',
+      'filter_name' => 'dyfield',
+      'weight' => '-2',
+    ),
+    'group-field_site_nid' => array(
+      'group' => '2',
+      'filter_name' => 'field_site_nid',
+      'weight' => '-5',
+    ),
+    'group-city' => array(
+      'group' => '2',
+      'filter_name' => 'city',
+      'weight' => '-4',
+    ),
+    'group-province' => array(
+      'group' => '2',
+      'filter_name' => 'province',
+      'weight' => '-3',
+    ),
   );
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '40';
@@ -479,35 +516,114 @@ Fields',
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['disable_sql_rewrite'] = TRUE;
   $handler->display->display_options['query']['options']['distinct'] = TRUE;
-  $handler->display->display_options['exposed_form']['type'] = 's4_reporting';
-  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Search';
-  $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
-  $handler->display->display_options['exposed_form']['options']['s4_reporting'] = array(
-    'group-status' => '0',
-    'group-city' => '2',
-    'group-field_csu_facility_tid' => '1',
-    'group-field_csu_org_type_tid' => '1',
-    'group-dyfield' => '4',
-    'group-field_term_nid' => '1',
-    'group-field_district_federal_value' => '2',
-    'group-field_district_state_lower_value' => '2',
-    'group-field_district_state_upper_value' => '2',
-    'group-distance' => '2',
-    'group-field_site_restrict_tid' => '1',
-    'group-field_tags_tid' => '1',
-    'group-field_signup_start_date_value' => '3',
-    'group-field_course_subject_value' => '3',
-    'group-field_term_nid_1' => '3',
-    'group-field_site_nid' => '0',
-    'group-field_staff_signup_available_value' => '0',
-    'group-field_site_restrict_tid_1' => '0',
-    'group-field_staff_role_tid' => '0',
-    'group-field_site_restrict_tid_2' => '3',
+  $handler->display->display_options['exposed_form']['type'] = 'views_exposed_groups';
+  $handler->display->display_options['exposed_form']['options']['views_exposed_groups'] = array(
+    'format_groups' => 'vertical_tabs',
     'groups' => 'Site staff
 Site categories
 Site location
 Placements
 Fields',
+    'group-status' => array(
+      'group' => '0',
+      'filter_name' => 'status',
+      'weight' => '-21',
+    ),
+    'group-city' => array(
+      'group' => '2',
+      'filter_name' => 'city',
+      'weight' => '-21',
+    ),
+    'group-field_csu_facility_tid' => array(
+      'group' => '1',
+      'filter_name' => 'field_csu_facility_tid',
+      'weight' => '-21',
+    ),
+    'group-field_csu_org_type_tid' => array(
+      'group' => '1',
+      'filter_name' => 'field_csu_org_type_tid',
+      'weight' => '-21',
+    ),
+    'group-dyfield' => array(
+      'group' => '4',
+      'filter_name' => 'dyfield',
+      'weight' => '-21',
+    ),
+    'group-field_term_nid' => array(
+      'group' => '3',
+      'filter_name' => 'field_term_nid',
+      'weight' => '-21',
+    ),
+    'group-field_district_federal_value' => array(
+      'group' => '2',
+      'filter_name' => 'field_district_federal_value',
+      'weight' => '-20',
+    ),
+    'group-field_district_state_lower_value' => array(
+      'group' => '2',
+      'filter_name' => 'field_district_state_lower_value',
+      'weight' => '-19',
+    ),
+    'group-field_district_state_upper_value' => array(
+      'group' => '2',
+      'filter_name' => 'field_district_state_upper_value',
+      'weight' => '-18',
+    ),
+    'group-distance' => array(
+      'group' => '2',
+      'filter_name' => 'distance',
+      'weight' => '-17',
+    ),
+    'group-field_site_restrict_tid' => array(
+      'group' => '1',
+      'filter_name' => 'field_site_restrict_tid',
+      'weight' => '-21',
+    ),
+    'group-field_tags_tid' => array(
+      'group' => '1',
+      'filter_name' => 'field_tags_tid',
+      'weight' => '-21',
+    ),
+    'group-field_signup_start_date_value' => array(
+      'group' => '3',
+      'filter_name' => 'field_signup_start_date_value',
+      'weight' => '-21',
+    ),
+    'group-field_course_subject_value' => array(
+      'group' => '3',
+      'filter_name' => 'field_course_subject_value',
+      'weight' => '-21',
+    ),
+    'group-field_term_nid_1' => array(
+      'group' => '3',
+      'filter_name' => 'field_term_nid_1',
+      'weight' => '-21',
+    ),
+    'group-field_site_nid' => array(
+      'group' => '0',
+      'filter_name' => 'field_site_nid',
+      'weight' => '-21',
+    ),
+    'group-field_staff_signup_available_value' => array(
+      'group' => '0',
+      'filter_name' => 'field_staff_signup_available_value',
+      'weight' => '-21',
+    ),
+    'group-field_site_restrict_tid_1' => array(
+      'group' => '0',
+      'filter_name' => 'field_site_restrict_tid_1',
+      'weight' => '-21',
+    ),
+    'group-field_staff_role_tid' => array(
+      'group' => '0',
+      'filter_name' => 'field_staff_role_tid',
+      'weight' => '-21',
+    ),
+    'group-field_site_restrict_tid_2' => array(
+      'group' => '3',
+      'filter_name' => 'field_site_restrict_tid_2',
+      'weight' => '-21',
+    ),
   );
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '30';
@@ -1091,17 +1207,6 @@ Fields',
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  /* Filter criterion: Content: Published */
-  $handler->display->display_options['filters']['status']['id'] = 'status';
-  $handler->display->display_options['filters']['status']['table'] = 'node';
-  $handler->display->display_options['filters']['status']['field'] = 'status';
-  $handler->display->display_options['filters']['status']['value'] = '1';
-  $handler->display->display_options['filters']['status']['group'] = 1;
-  $handler->display->display_options['filters']['status']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['status']['expose']['operator_id'] = '';
-  $handler->display->display_options['filters']['status']['expose']['label'] = 'Staff is published';
-  $handler->display->display_options['filters']['status']['expose']['operator'] = 'status_op';
-  $handler->display->display_options['filters']['status']['expose']['identifier'] = 'status';
   /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
@@ -1461,7 +1566,7 @@ Fields',
     t('Master'),
     t('Site staff report'),
     t('more'),
-    t('Search'),
+    t('Apply'),
     t('Reset'),
     t('Sort by'),
     t('Asc'),
@@ -1500,7 +1605,6 @@ Fields',
     t('Organization type'),
     t('Tags '),
     t('Site programs'),
-    t('Staff is published'),
     t('Issues addressed'),
     t('Org. type'),
     t('Fields'),
@@ -1547,32 +1651,99 @@ Fields',
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['disable_sql_rewrite'] = TRUE;
   $handler->display->display_options['query']['options']['distinct'] = TRUE;
-  $handler->display->display_options['exposed_form']['type'] = 's4_reporting';
-  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Search';
-  $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
-  $handler->display->display_options['exposed_form']['options']['s4_reporting'] = array(
-    'group-status' => '0',
-    'group-city' => '2',
-    'group-field_csu_facility_tid' => '1',
-    'group-field_csu_org_type_tid' => '1',
-    'group-dyfield' => '4',
-    'group-field_term_nid' => '1',
-    'group-field_district_federal_value' => '2',
-    'group-field_district_state_lower_value' => '2',
-    'group-field_district_state_upper_value' => '2',
-    'group-distance' => '2',
-    'group-field_site_restrict_tid' => '0',
-    'group-field_tags_tid' => '1',
-    'group-field_signup_start_date_value' => '3',
-    'group-field_course_subject_value' => '3',
-    'group-field_term_nid_1' => '3',
-    'group-title' => '0',
-    'group-field_signups_max_value' => '0',
+  $handler->display->display_options['exposed_form']['type'] = 'views_exposed_groups';
+  $handler->display->display_options['exposed_form']['options']['views_exposed_groups'] = array(
+    'format_groups' => 'vertical_tabs',
     'groups' => 'General
 Categories
 Location
 Placements
 Fields',
+    'group-status' => array(
+      'group' => '0',
+      'filter_name' => 'status',
+      'weight' => '-18',
+    ),
+    'group-city' => array(
+      'group' => '2',
+      'filter_name' => 'city',
+      'weight' => '-18',
+    ),
+    'group-field_csu_facility_tid' => array(
+      'group' => '1',
+      'filter_name' => 'field_csu_facility_tid',
+      'weight' => '-18',
+    ),
+    'group-field_csu_org_type_tid' => array(
+      'group' => '1',
+      'filter_name' => 'field_csu_org_type_tid',
+      'weight' => '-18',
+    ),
+    'group-dyfield' => array(
+      'group' => '4',
+      'filter_name' => 'dyfield',
+      'weight' => '-18',
+    ),
+    'group-field_term_nid' => array(
+      'group' => '3',
+      'filter_name' => 'field_term_nid',
+      'weight' => '-18',
+    ),
+    'group-field_district_federal_value' => array(
+      'group' => '2',
+      'filter_name' => 'field_district_federal_value',
+      'weight' => '-18',
+    ),
+    'group-field_district_state_lower_value' => array(
+      'group' => '2',
+      'filter_name' => 'field_district_state_lower_value',
+      'weight' => '-18',
+    ),
+    'group-field_district_state_upper_value' => array(
+      'group' => '2',
+      'filter_name' => 'field_district_state_upper_value',
+      'weight' => '-18',
+    ),
+    'group-distance' => array(
+      'group' => '0',
+      'filter_name' => 'distance',
+      'weight' => '-18',
+    ),
+    'group-field_site_restrict_tid' => array(
+      'group' => '0',
+      'filter_name' => 'field_site_restrict_tid',
+      'weight' => '-18',
+    ),
+    'group-field_tags_tid' => array(
+      'group' => '0',
+      'filter_name' => 'field_tags_tid',
+      'weight' => '-18',
+    ),
+    'group-field_signup_start_date_value' => array(
+      'group' => '3',
+      'filter_name' => 'field_signup_start_date_value',
+      'weight' => '-18',
+    ),
+    'group-field_course_subject_value' => array(
+      'group' => '3',
+      'filter_name' => 'field_course_subject_value',
+      'weight' => '-18',
+    ),
+    'group-field_term_nid_1' => array(
+      'group' => '3',
+      'filter_name' => 'field_term_nid_1',
+      'weight' => '-18',
+    ),
+    'group-title' => array(
+      'group' => '0',
+      'filter_name' => 'title',
+      'weight' => '-18',
+    ),
+    'group-field_signups_max_value' => array(
+      'group' => '3',
+      'filter_name' => 'field_signups_max_value',
+      'weight' => '-18',
+    ),
   );
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '30';
@@ -2147,6 +2318,7 @@ Fields',
   $handler->display->display_options['fields']['field_csu_org_type']['id'] = 'field_csu_org_type';
   $handler->display->display_options['fields']['field_csu_org_type']['table'] = 'field_data_field_csu_org_type';
   $handler->display->display_options['fields']['field_csu_org_type']['field'] = 'field_csu_org_type';
+  $handler->display->display_options['fields']['field_csu_org_type']['label'] = 'Organization type ';
   $handler->display->display_options['fields']['field_csu_org_type']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['field_csu_org_type']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_csu_org_type']['delta_offset'] = '0';
@@ -2157,7 +2329,7 @@ Fields',
   $handler->display->display_options['fields']['field_phone_1']['label'] = 'Phone number ';
   $handler->display->display_options['fields']['field_phone_1']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['field_phone_1']['click_sort_column'] = 'number';
-  /* Field: Content: Risk Identification */
+  /* Field: Content: Risk identification */
   $handler->display->display_options['fields']['field_health_risk']['id'] = 'field_health_risk';
   $handler->display->display_options['fields']['field_health_risk']['table'] = 'field_data_field_health_risk';
   $handler->display->display_options['fields']['field_health_risk']['field'] = 'field_health_risk';
@@ -2169,7 +2341,7 @@ Fields',
   $handler->display->display_options['fields']['field_site_instructions_required']['field'] = 'field_site_instructions_required';
   $handler->display->display_options['fields']['field_site_instructions_required']['label'] = 'Site has special requirements ';
   $handler->display->display_options['fields']['field_site_instructions_required']['hide_alter_empty'] = FALSE;
-  /* Field: Content: Site Tour */
+  /* Field: Content: Site tour */
   $handler->display->display_options['fields']['field_site_tour']['id'] = 'field_site_tour';
   $handler->display->display_options['fields']['field_site_tour']['table'] = 'field_data_field_site_tour';
   $handler->display->display_options['fields']['field_site_tour']['field'] = 'field_site_tour';
@@ -2582,7 +2754,7 @@ Fields',
     t('Master'),
     t('Site Report'),
     t('more'),
-    t('Search'),
+    t('Apply'),
     t('Reset'),
     t('Sort by'),
     t('Asc'),
@@ -2622,7 +2794,7 @@ Fields',
     t('Hours'),
     t('Issues addressed '),
     t('Max students'),
-    t('Organization type'),
+    t('Organization type '),
     t('Phone number '),
     t('Risk Identification '),
     t('Site has special requirements '),
@@ -2677,25 +2849,74 @@ Fields',
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['disable_sql_rewrite'] = TRUE;
   $handler->display->display_options['query']['options']['distinct'] = TRUE;
-  $handler->display->display_options['exposed_form']['type'] = 's4_reporting';
-  $handler->display->display_options['exposed_form']['options']['s4_reporting'] = array(
-    'group-field_first_name_value' => '0',
-    'group-field_last_name_value_1' => '0',
-    'group-field_site_restrict_tid_1' => '0',
-    'group-dyfield' => '4',
-    'group-field_term_nid' => '1',
-    'group-field_course_subject_value' => '1',
-    'group-field_course_catalog_number_value' => '1',
-    'group-field_signup_start_date_value' => '2',
-    'group-field_csu_org_type_tid' => '3',
-    'group-field_csu_facility_tid' => '3',
-    'group-city' => '3',
-    'group-field_site_restrict_tid_2' => '1',
+  $handler->display->display_options['exposed_form']['type'] = 'views_exposed_groups';
+  $handler->display->display_options['exposed_form']['options']['views_exposed_groups'] = array(
+    'format_groups' => 'vertical_tabs',
     'groups' => 'Student
 Course
 Placement
 Site
 Fields',
+    'group-field_first_name_value' => array(
+      'group' => '0',
+      'filter_name' => 'field_first_name_value',
+      'weight' => '-16',
+    ),
+    'group-field_last_name_value_1' => array(
+      'group' => '0',
+      'filter_name' => 'field_last_name_value_1',
+      'weight' => '-16',
+    ),
+    'group-field_site_restrict_tid_1' => array(
+      'group' => '0',
+      'filter_name' => 'field_site_restrict_tid_1',
+      'weight' => '-16',
+    ),
+    'group-dyfield' => array(
+      'group' => '4',
+      'filter_name' => 'dyfield',
+      'weight' => '-16',
+    ),
+    'group-field_term_nid' => array(
+      'group' => '1',
+      'filter_name' => 'field_term_nid',
+      'weight' => '-16',
+    ),
+    'group-field_course_subject_value' => array(
+      'group' => '1',
+      'filter_name' => 'field_course_subject_value',
+      'weight' => '-16',
+    ),
+    'group-field_course_catalog_number_value' => array(
+      'group' => '1',
+      'filter_name' => 'field_course_catalog_number_value',
+      'weight' => '-16',
+    ),
+    'group-field_signup_start_date_value' => array(
+      'group' => '2',
+      'filter_name' => 'field_signup_start_date_value',
+      'weight' => '-16',
+    ),
+    'group-field_csu_org_type_tid' => array(
+      'group' => '3',
+      'filter_name' => 'field_csu_org_type_tid',
+      'weight' => '-16',
+    ),
+    'group-field_csu_facility_tid' => array(
+      'group' => '3',
+      'filter_name' => 'field_csu_facility_tid',
+      'weight' => '-16',
+    ),
+    'group-city' => array(
+      'group' => '3',
+      'filter_name' => 'city',
+      'weight' => '-16',
+    ),
+    'group-field_site_restrict_tid_2' => array(
+      'group' => '1',
+      'filter_name' => 'field_site_restrict_tid_2',
+      'weight' => '-16',
+    ),
   );
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '40';
