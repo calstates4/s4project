@@ -17,10 +17,10 @@
 			$(document).scroll(function() {
 				var columnTop = $('#content_middle .column').position();
 				if ($(document).scrollTop() > columnTop.top) {
-					$('#site-list-map').css('position', 'fixed').css('top', 0);
+					$('.region-content-right').css('position', 'fixed').css('top', 0);
 				}
 				else {
-					$('#site-list-map').css('position', 'relative');
+					$('.region-content-right').css('position', 'relative');
 				}
 			});
 			s4Map.init('site-list-map');

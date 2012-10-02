@@ -2398,8 +2398,37 @@ Location',
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['distinct'] = TRUE;
   $handler->display->display_options['query']['options']['pure_distinct'] = TRUE;
-  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['type'] = 'views_exposed_groups';
   $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Search';
+  $handler->display->display_options['exposed_form']['options']['views_exposed_groups'] = array(
+    'format_groups' => 'fieldsets_collapsed',
+    'groups' => 'Advanced search',
+    'group-title' => array(
+      'group' => 'no-group',
+      'filter_name' => 'title',
+      'weight' => '-4',
+    ),
+    'group-city' => array(
+      'group' => 'no-group',
+      'filter_name' => 'city',
+      'weight' => '-3',
+    ),
+    'group-issues' => array(
+      'group' => '0',
+      'filter_name' => 'field_csu_facility_tid',
+      'weight' => '-7',
+    ),
+    'group-organization' => array(
+      'group' => '0',
+      'filter_name' => 'field_csu_org_type_tid',
+      'weight' => '-6',
+    ),
+    'group-program' => array(
+      'group' => '0',
+      'filter_name' => 'field_site_restrict_tid',
+      'weight' => '-5',
+    ),
+  );
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '20';
   $handler->display->display_options['pager']['options']['offset'] = '0';
@@ -2534,6 +2563,7 @@ Location',
 
   /* Display: Site listing page */
   $handler = $view->new_display('page', 'Site listing page', 'page');
+  $handler->display->display_options['exposed_block'] = TRUE;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Content: Nid */
