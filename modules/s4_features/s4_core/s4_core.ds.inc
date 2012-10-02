@@ -17,6 +17,11 @@ function s4_core_ds_field_settings_info() {
   $ds_fieldsetting->bundle = 'signup';
   $ds_fieldsetting->view_mode = 'default';
   $ds_fieldsetting->settings = array(
+    'edit_signup_link' => array(
+      'weight' => '0',
+      'label' => 'hidden',
+      'format' => 'default',
+    ),
     'author' => array(
       'weight' => '0',
       'label' => 'above',
@@ -24,6 +29,29 @@ function s4_core_ds_field_settings_info() {
     ),
   );
   $export['node|signup|default'] = $ds_fieldsetting;
+
+  return $export;
+}
+
+/**
+ * Implements hook_ds_custom_fields_info().
+ */
+function s4_core_ds_custom_fields_info() {
+  $export = array();
+
+  $ds_field = new stdClass();
+  $ds_field->api_version = 1;
+  $ds_field->field = 'edit_signup_link';
+  $ds_field->label = 'Edit signup link';
+  $ds_field->field_type = 6;
+  $ds_field->entities = array(
+    'node' => 'node',
+  );
+  $ds_field->properties = array(
+    'block' => 's4_core|s4_signup_edit',
+    'block_render' => '1',
+  );
+  $export['edit_signup_link'] = $ds_field;
 
   return $export;
 }
@@ -45,6 +73,15 @@ function s4_core_ds_layout_settings_info() {
     'hide_empty_regions' => 0,
     'hide_sidebars' => 0,
     'regions' => array(
+      'right' => array(
+        0 => 'edit_signup_link',
+        1 => 'author',
+        2 => 'field_signup_hours',
+        3 => 'field_signup_start_date',
+        4 => 'field_signup_last_date',
+        5 => 's4_core_signup_submission',
+        6 => 's4_core_evaluation_submission',
+      ),
       'left' => array(
         0 => 'field_course',
         1 => 'field_site',
@@ -52,18 +89,11 @@ function s4_core_ds_layout_settings_info() {
         3 => 'field_signup_location',
         4 => 's4_core_assessment_submission',
       ),
-      'right' => array(
-        0 => 'author',
-        1 => 'field_signup_hours',
-        2 => 'field_signup_start_date',
-        3 => 'field_signup_last_date',
-        4 => 's4_core_signup_submission',
-        5 => 's4_core_evaluation_submission',
-      ),
     ),
     'fields' => array(
-      'field_course' => 'left',
+      'edit_signup_link' => 'right',
       'author' => 'right',
+      'field_course' => 'left',
       'field_site' => 'left',
       'field_coordinator' => 'left',
       'field_signup_location' => 'left',

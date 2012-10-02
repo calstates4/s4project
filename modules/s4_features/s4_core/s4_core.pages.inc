@@ -208,15 +208,22 @@ function s4_core_s4_site_configuration() {
 /**
 *  Form to quickly sign up student with a site
 */
-function s4_core_create_signup_form($form, &$form_state, $uid, $courses = true) {
-  
-  if($_GET['destination']) {
-    $form_state['destination'] = check_plain($_GET['destination']);
-  }
+function s4_core_create_signup_form($form, &$form_state, $uid, $option = 'new', $existing_node = FALSE, $courses = TRUE) {
   
   $user = user_load($uid);
   drupal_set_title(t('Sign up @name', array('@name' => s4_core_get_user_full_name($user))));
   $form = array();
+
+  if($existing_node) {
+    drupal_set_title(t('Edit placement for @name', array('@name' => s4_core_get_user_full_name($user))));
+    $form['existing_node'] = array(
+      '#type' => 'hidden',
+      '#value' => $existing_node->nid,
+    );
+  }
+  if($_GET['destination']) {
+    $form_state['destination'] = check_plain($_GET['destination']);
+  }
 
   $form['user'] = array(
     '#type' => 'hidden',
@@ -247,6 +254,10 @@ function s4_core_create_signup_form($form, &$form_state, $uid, $courses = true) 
       '#options' => $courses,
       '#attributes' => array('class' => array('chosen')),
     );
+    if($existing_node) {
+      $course = field_get_items('node', $existing_node, 'field_course');
+      $form['course']['#default_value'] = $course[0]['nid'];
+    }
     
   }
 
@@ -275,6 +286,11 @@ function s4_core_create_signup_form($form, &$form_state, $uid, $courses = true) 
       ),
     ),
   );
+  if($existing_node && !$form_state['values']['site']) {
+    $site = field_get_items('node', $existing_node, 'field_site');
+    $form['site']['#default_value'] = $site[0]['nid'];
+    $form_state['values']['site'] = $site[0]['nid'];
+  }
 
   $site_staff_options = array();
   $program_options = array();
@@ -329,6 +345,19 @@ function s4_core_create_signup_form($form, &$form_state, $uid, $courses = true) 
     '#title' => 'Number of expected hours of services',
     '#size' => 6,
   );
+    
+  if($existing_node) {
+    $site = field_get_items('node', $existing_node, 'field_site');
+    if($site[0]['nid'] == $form_state['values']['site']['#default_value']) {
+      $site_staff = field_get_items('node', $existing_node, 'field_coordinator');
+      $form['site_options']['site-staff']['#default_value'] = $site_staff[0]['nid'];
+      $program = field_get_items('node', $existing_node, 'field_site_restrict');
+      $form['site_options']['program']['#default_value'] = $program[0]['tid'];
+    }
+    $hours = field_get_items('node', $existing_node, 'field_signup_hours');
+    $form['hours']['#default_value'] = $hours[0]['value'];
+
+  }
 
   $form['email_student'] = array(
     '#type' => 'checkbox',
@@ -350,7 +379,7 @@ function s4_core_create_signup_form($form, &$form_state, $uid, $courses = true) 
 
   $form['submit'] = array(
     '#type' => 'submit',
-    '#value' => 'Create signup',
+    '#value' => ($existing_node) ? t('Update placement') : t('Create placement'),
   );
 
   return $form;
@@ -363,6 +392,22 @@ function s4_core_create_signup_form_validate($form, $form_state) {
 }
 
 function s4_core_create_signup_form_submit($form, $form_state) {
+  dpm($form_state);
+  if($form_state['values']['existing_node']) {
+    $node = node_load($form_state['values']['existing_node']);
+    $node->field_site[$node->language][0]['nid'] = $form_state['values']['site'];
+    $node->field_coordinator[$node->language][0]['nid'] = ($form_state['values']['site-staff']) 
+      ? $form_state['values']['site-staff'] 
+      : 0;
+    $node->field_site_restrict[$node->language][0]['tid'] = $form_state['values']['program'];
+    $node->field_signup_hours[$node->language][0]['value'] = $form_state['values']['hours'];
+    if($form_state['values']['course']) {
+      $node->field_course[$node->course][0]['nid'] = $form_state['values']['course'];
+    }
+    node_save($node);
+    drupal_goto(($form_state['values']['destination']) ? $form_state['values']['destination'] : 'node/'. $node->nid);
+    return;
+  }
   $signup = array('user' => $form_state['values']['user'],
            'site' => $form_state['values']['site'],
            'course' => $form_state['values']['course'],
@@ -381,9 +426,7 @@ function s4_core_create_signup_form_submit($form, $form_state) {
   drupal_set_message(t('Created !signup record', array('!signup' => l(t('signup #@number', array('@number' => $signup->nid)), 'node/' . $signup->nid))));
   $site = node_load($form_state['values']['site']);
   $form = field_get_items('node', $site, 'field_site_form');
-  if ($form[0]['nid'] && $form_state['values']['email_student']) {
 
-  }
   drupal_goto($form_state['values']['destination']);
 }
 
