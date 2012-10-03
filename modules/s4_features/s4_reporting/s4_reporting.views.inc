@@ -30,23 +30,3 @@ function s4_reporting_views_data() {
   
   return $data;
 }
-
-/**
- * Implements hook_views_plugins().
- */
-function s4_reporting_views_plugins() {
-  return array(
-    'exposed_form' => array(
-      's4_reporting' => array(
-        'title' => t('S4 grouped reporting'),
-        'help' => t('Groups fields into vertical tabs'),
-        'handler' => 's4_reporting_exposed_form_plugin',
-        'uses row plugin' => FALSE,
-        'uses fields' => TRUE,
-        'uses options' => TRUE,
-        'type' => 'normal',
-        'parent' => 'basic',
-      ),
-    ),
-  );
-}
