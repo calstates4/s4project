@@ -524,11 +524,6 @@ Site categories
 Site location
 Placements
 Fields',
-    'group-status' => array(
-      'group' => '0',
-      'filter_name' => 'status',
-      'weight' => '-21',
-    ),
     'group-city' => array(
       'group' => '2',
       'filter_name' => 'city',
@@ -622,6 +617,11 @@ Fields',
     'group-field_site_restrict_tid_2' => array(
       'group' => '3',
       'filter_name' => 'field_site_restrict_tid_2',
+      'weight' => '-21',
+    ),
+    'group-created' => array(
+      'group' => '0',
+      'filter_name' => 'created',
       'weight' => '-21',
     ),
   );
@@ -1519,6 +1519,16 @@ Fields',
   $handler->display->display_options['filters']['field_site_restrict_tid_2']['type'] = 'select';
   $handler->display->display_options['filters']['field_site_restrict_tid_2']['vocabulary'] = 'site_restrictions';
   $handler->display->display_options['filters']['field_site_restrict_tid_2']['error_message'] = FALSE;
+  /* Filter criterion: Content: Post date */
+  $handler->display->display_options['filters']['created']['id'] = 'created';
+  $handler->display->display_options['filters']['created']['table'] = 'node';
+  $handler->display->display_options['filters']['created']['field'] = 'created';
+  $handler->display->display_options['filters']['created']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['created']['expose']['operator_id'] = 'created_op';
+  $handler->display->display_options['filters']['created']['expose']['label'] = 'Created date';
+  $handler->display->display_options['filters']['created']['expose']['use_operator'] = TRUE;
+  $handler->display->display_options['filters']['created']['expose']['operator'] = 'created_op';
+  $handler->display->display_options['filters']['created']['expose']['identifier'] = 'created';
 
   /* Display: Data report page */
   $handler = $view->new_display('page', 'Data report page', 'page');
@@ -1624,6 +1634,7 @@ Fields',
     t('Site staff programs'),
     t('Site staff role'),
     t('Program'),
+    t('Created date'),
     t('Data report page'),
     t('Data export: CSV'),
     t('Data export: XLS'),
