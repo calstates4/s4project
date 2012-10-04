@@ -7,7 +7,7 @@ function s4_sites_install() {
   db_update('block')
     ->condition('module', 'views')
     ->condition('delta', '-exp-sites-page')
-    ->fields('title' => t('Search for a site'))
+    ->fields(array('title' => t('Search for a site')))
     ->execute();
   
   db_insert('captcha_points')
