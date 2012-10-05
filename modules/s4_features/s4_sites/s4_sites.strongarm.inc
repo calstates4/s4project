@@ -753,7 +753,7 @@ function s4_sites_strongarm() {
       'region' => 'right',
       'weight' => '0',
       'has_required' => FALSE,
-      'title' => 'Publish',
+      'title' => 'Save',
       'hidden' => 0,
     ),
     'field_site' => array(
@@ -821,7 +821,7 @@ function s4_sites_strongarm() {
     ),
     'field_staff_signup_available' => array(
       'region' => 'right',
-      'weight' => '3',
+      'weight' => '2',
       'has_required' => FALSE,
       'title' => 'Students can register with this staff',
       'hidden' => 0,
@@ -838,6 +838,13 @@ function s4_sites_strongarm() {
       'weight' => '3',
       'has_required' => FALSE,
       'title' => 'Job title',
+      'hidden' => 0,
+    ),
+    'field_site_staff_active' => array(
+      'region' => 'right',
+      'weight' => '3',
+      'has_required' => FALSE,
+      'title' => NULL,
       'hidden' => 0,
     ),
   );

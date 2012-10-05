@@ -881,7 +881,7 @@ function s4_sites_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'email_textfield',
-        'weight' => '9',
+        'weight' => '10',
       ),
     ),
   );
@@ -1427,7 +1427,7 @@ function s4_sites_field_default_fields() {
           'size' => 15,
         ),
         'type' => 'phone_number',
-        'weight' => '10',
+        'weight' => '11',
       ),
     ),
   );
@@ -1716,6 +1716,84 @@ function s4_sites_field_default_fields() {
     ),
   );
 
+  // Exported field: 'node-coordinator-field_site_staff_active'
+  $fields['node-coordinator-field_site_staff_active'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_site_staff_active',
+      'foreign keys' => array(),
+      'indexes' => array(
+        'value' => array(
+          0 => 'value',
+        ),
+      ),
+      'module' => 'list',
+      'settings' => array(
+        'allowed_values' => array(
+          0 => 'Inactive',
+          1 => 'Active',
+        ),
+        'allowed_values_function' => '',
+        'allowed_values_php' => '',
+      ),
+      'translatable' => '0',
+      'type' => 'list_boolean',
+    ),
+    'field_instance' => array(
+      'bundle' => 'coordinator',
+      'default_value' => array(
+        0 => array(
+          'value' => 1,
+        ),
+      ),
+      'default_value_function' => '',
+      'default_value_php' => '',
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'list',
+          'settings' => array(),
+          'type' => 'list_default',
+          'weight' => 12,
+        ),
+        'notifications' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'display_label' => '',
+      'entity_type' => 'node',
+      'field_name' => 'field_site_staff_active',
+      'label' => 'Active',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(
+          'display_label' => 1,
+        ),
+        'type' => 'options_onoff',
+        'weight' => '9',
+      ),
+    ),
+  );
+
   // Exported field: 'node-coordinator-field_site_staff_user'
   $fields['node-coordinator-field_site_staff_user'] = array(
     'field_config' => array(
@@ -1824,7 +1902,7 @@ function s4_sites_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'user_reference_autocomplete',
-        'weight' => '11',
+        'weight' => '12',
       ),
     ),
   );
@@ -6281,6 +6359,7 @@ function s4_sites_field_default_fields() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Active');
   t('Additional notes about hours of operation');
   t('Additional users');
   t('Available to');

@@ -624,21 +624,64 @@ function s4_sites_views_default_views() {
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['distinct'] = TRUE;
-  $handler->display->display_options['exposed_form']['type'] = 's4_reporting';
-  $handler->display->display_options['exposed_form']['options']['s4_reporting'] = array(
-    'group-title' => '0',
-    'group-field_csu_org_type_tid' => '0',
-    'group-field_csu_facility_tid' => '0',
-    'group-field_site_restrict_tid' => '0',
-    'group-city' => '2',
-    'group-province' => '2',
-    'group-state' => '1',
-    'group-status' => '1',
-    'group-field_district_state_lower_value' => '2',
-    'group-field_district_state_upper_value' => '2',
+  $handler->display->display_options['exposed_form']['type'] = 'views_exposed_groups';
+  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Search';
+  $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
+  $handler->display->display_options['exposed_form']['options']['views_exposed_groups'] = array(
+    'format_groups' => 'vertical_tabs',
     'groups' => 'Site
 Status
 Location',
+    'group-title' => array(
+      'group' => '0',
+      'filter_name' => 'title',
+      'weight' => '-12',
+    ),
+    'group-field_csu_org_type_tid' => array(
+      'group' => '0',
+      'filter_name' => 'field_csu_org_type_tid',
+      'weight' => '-12',
+    ),
+    'group-field_csu_facility_tid' => array(
+      'group' => '0',
+      'filter_name' => 'field_csu_facility_tid',
+      'weight' => '-12',
+    ),
+    'group-field_site_restrict_tid' => array(
+      'group' => '0',
+      'filter_name' => 'field_site_restrict_tid',
+      'weight' => '-12',
+    ),
+    'group-city' => array(
+      'group' => '2',
+      'filter_name' => 'city',
+      'weight' => '-12',
+    ),
+    'group-province' => array(
+      'group' => '2',
+      'filter_name' => 'province',
+      'weight' => '-12',
+    ),
+    'group-status' => array(
+      'group' => '1',
+      'filter_name' => 'state',
+      'weight' => '-12',
+    ),
+    'group-state' => array(
+      'group' => '1',
+      'filter_name' => 'status',
+      'weight' => '-12',
+    ),
+    'group-field_district_state_lower_value' => array(
+      'group' => '2',
+      'filter_name' => 'field_district_state_lower_value',
+      'weight' => '-12',
+    ),
+    'group-field_district_state_upper_value' => array(
+      'group' => '2',
+      'filter_name' => 'field_district_state_upper_value',
+      'weight' => '-12',
+    ),
   );
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '40';
@@ -910,7 +953,7 @@ Location',
     t('Master'),
     t('Manage sites'),
     t('more'),
-    t('Apply'),
+    t('Search'),
     t('Reset'),
     t('Sort by'),
     t('Asc'),
@@ -939,6 +982,7 @@ Location',
     t('State upper district'),
     t('Manage sites page'),
     t('Glossary attachment'),
+    t('Apply'),
   );
   $export['s4_manage_sites'] = $view;
 
@@ -1457,6 +1501,20 @@ Location',
   $handler->display->display_options['filters']['type']['value'] = array(
     'coordinator' => 'coordinator',
   );
+  /* Filter criterion: Content: Active (field_site_staff_active) */
+  $handler->display->display_options['filters']['field_site_staff_active_value']['id'] = 'field_site_staff_active_value';
+  $handler->display->display_options['filters']['field_site_staff_active_value']['table'] = 'field_data_field_site_staff_active';
+  $handler->display->display_options['filters']['field_site_staff_active_value']['field'] = 'field_site_staff_active_value';
+  $handler->display->display_options['filters']['field_site_staff_active_value']['value'] = array(
+    1 => '1',
+  );
+  /* Filter criterion: Content: Students can register with this staff (field_staff_signup_available) */
+  $handler->display->display_options['filters']['field_staff_signup_available_value']['id'] = 'field_staff_signup_available_value';
+  $handler->display->display_options['filters']['field_staff_signup_available_value']['table'] = 'field_data_field_staff_signup_available';
+  $handler->display->display_options['filters']['field_staff_signup_available_value']['field'] = 'field_staff_signup_available_value';
+  $handler->display->display_options['filters']['field_staff_signup_available_value']['value'] = array(
+    1 => '1',
+  );
   $handler->display->display_options['path'] = 'sites/%/coordinators';
 
   /* Display: Site staff tab */
@@ -1464,7 +1522,6 @@ Location',
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Site staff';
   $handler->display->display_options['defaults']['css_class'] = FALSE;
-  $handler->display->display_options['css_class'] = 'quicksearch';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
@@ -1590,6 +1647,10 @@ Location',
   $handler->display->display_options['fields']['field_staff_signup_available']['field'] = 'field_staff_signup_available';
   $handler->display->display_options['fields']['field_staff_signup_available']['label'] = 'Register?';
   $handler->display->display_options['fields']['field_staff_signup_available']['hide_alter_empty'] = FALSE;
+  /* Field: Content: Active */
+  $handler->display->display_options['fields']['field_site_staff_active']['id'] = 'field_site_staff_active';
+  $handler->display->display_options['fields']['field_site_staff_active']['table'] = 'field_data_field_site_staff_active';
+  $handler->display->display_options['fields']['field_site_staff_active']['field'] = 'field_site_staff_active';
   /* Field: Content: Edit link */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
@@ -1623,6 +1684,38 @@ Location',
     'coordinator' => 'coordinator',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Active (field_site_staff_active) */
+  $handler->display->display_options['filters']['field_site_staff_active_value']['id'] = 'field_site_staff_active_value';
+  $handler->display->display_options['filters']['field_site_staff_active_value']['table'] = 'field_data_field_site_staff_active';
+  $handler->display->display_options['filters']['field_site_staff_active_value']['field'] = 'field_site_staff_active_value';
+  $handler->display->display_options['filters']['field_site_staff_active_value']['value'] = array(
+    1 => '1',
+  );
+  $handler->display->display_options['filters']['field_site_staff_active_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_site_staff_active_value']['expose']['operator_id'] = 'field_site_staff_active_value_op';
+  $handler->display->display_options['filters']['field_site_staff_active_value']['expose']['label'] = 'Active';
+  $handler->display->display_options['filters']['field_site_staff_active_value']['expose']['operator'] = 'field_site_staff_active_value_op';
+  $handler->display->display_options['filters']['field_site_staff_active_value']['expose']['identifier'] = 'field_site_staff_active_value';
+  /* Filter criterion: Field: First Name (field_first_name) */
+  $handler->display->display_options['filters']['field_first_name_value']['id'] = 'field_first_name_value';
+  $handler->display->display_options['filters']['field_first_name_value']['table'] = 'field_data_field_first_name';
+  $handler->display->display_options['filters']['field_first_name_value']['field'] = 'field_first_name_value';
+  $handler->display->display_options['filters']['field_first_name_value']['operator'] = 'starts';
+  $handler->display->display_options['filters']['field_first_name_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_first_name_value']['expose']['operator_id'] = 'field_first_name_value_op';
+  $handler->display->display_options['filters']['field_first_name_value']['expose']['label'] = 'First name';
+  $handler->display->display_options['filters']['field_first_name_value']['expose']['operator'] = 'field_first_name_value_op';
+  $handler->display->display_options['filters']['field_first_name_value']['expose']['identifier'] = 'field_first_name_value';
+  /* Filter criterion: Field: Last Name (field_last_name) */
+  $handler->display->display_options['filters']['field_last_name_value']['id'] = 'field_last_name_value';
+  $handler->display->display_options['filters']['field_last_name_value']['table'] = 'field_data_field_last_name';
+  $handler->display->display_options['filters']['field_last_name_value']['field'] = 'field_last_name_value';
+  $handler->display->display_options['filters']['field_last_name_value']['operator'] = 'starts';
+  $handler->display->display_options['filters']['field_last_name_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_last_name_value']['expose']['operator_id'] = 'field_last_name_value_op';
+  $handler->display->display_options['filters']['field_last_name_value']['expose']['label'] = 'Last name';
+  $handler->display->display_options['filters']['field_last_name_value']['expose']['operator'] = 'field_last_name_value_op';
+  $handler->display->display_options['filters']['field_last_name_value']['expose']['identifier'] = 'field_last_name_value';
   $handler->display->display_options['path'] = 'node/%/site-staff';
   $handler->display->display_options['menu']['type'] = 'tab';
   $handler->display->display_options['menu']['title'] = 'Site Staff';
@@ -1709,6 +1802,13 @@ Location',
   $handler->display->display_options['filters']['field_staff_signup_available_value']['value'] = array(
     1 => '1',
   );
+  /* Filter criterion: Content: Active (field_site_staff_active) */
+  $handler->display->display_options['filters']['field_site_staff_active_value']['id'] = 'field_site_staff_active_value';
+  $handler->display->display_options['filters']['field_site_staff_active_value']['table'] = 'field_data_field_site_staff_active';
+  $handler->display->display_options['filters']['field_site_staff_active_value']['field'] = 'field_site_staff_active_value';
+  $handler->display->display_options['filters']['field_site_staff_active_value']['value'] = array(
+    1 => '1',
+  );
   $handler->display->display_options['block_description'] = 'Site staff';
   $translatables['site_coordinators'] = array(
     t('Master'),
@@ -1743,10 +1843,13 @@ Location',
     t('Role'),
     t('Max students'),
     t('Register?'),
+    t('Active'),
     t('Edit'),
     t('view'),
     t('Options'),
     t('[view_node] | [edit_node]'),
+    t('First name'),
+    t('Last name'),
     t('Block'),
     t('Active Site Staff'),
     t('Email address'),
