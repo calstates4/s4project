@@ -10,6 +10,7 @@ Installing S4 is relatively straightforward. You will need:
 4. Make sure the web server has at least PHP version 5.3
 5. Make sure PHP has at least 85M of memory
 6. You might want to read our scalability reccomendations as well to make the site more speedy.
+7. **During installation** you should also increase your max_execution_time to 120 seconds. Afterwards, you can turn it back to the normal 30 seconds.
 
 Place the downloaded project into your web server and go to the path where you downloaded it. For example, if you placed it in the "signup" directory of your web server, visit "http://myhost.edu/signup." You could also setup a virtual host to give the project it's own domain name.
 
