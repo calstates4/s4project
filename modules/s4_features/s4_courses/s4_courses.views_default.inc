@@ -1368,18 +1368,6 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['filters']['field_course_section_value']['expose']['label'] = 'Section';
   $handler->display->display_options['filters']['field_course_section_value']['expose']['operator'] = 'field_course_section_value_op';
   $handler->display->display_options['filters']['field_course_section_value']['expose']['identifier'] = 'field_course_section_value';
-  /* Filter criterion: Content: Term (field_term) */
-  $handler->display->display_options['filters']['field_term_nid']['id'] = 'field_term_nid';
-  $handler->display->display_options['filters']['field_term_nid']['table'] = 'field_data_field_term';
-  $handler->display->display_options['filters']['field_term_nid']['field'] = 'field_term_nid';
-  $handler->display->display_options['filters']['field_term_nid']['group'] = 1;
-  $handler->display->display_options['filters']['field_term_nid']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_term_nid']['expose']['operator_id'] = 'field_term_nid_op';
-  $handler->display->display_options['filters']['field_term_nid']['expose']['label'] = 'Term';
-  $handler->display->display_options['filters']['field_term_nid']['expose']['operator'] = 'field_term_nid_op';
-  $handler->display->display_options['filters']['field_term_nid']['expose']['identifier'] = 'field_term_nid';
-  $handler->display->display_options['filters']['field_term_nid']['expose']['remember'] = TRUE;
-  $handler->display->display_options['filters']['field_term_nid']['expose']['multiple'] = TRUE;
   /* Filter criterion: Field: Program (field_site_restrict) */
   $handler->display->display_options['filters']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
   $handler->display->display_options['filters']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
@@ -1419,6 +1407,18 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['filters']['field_last_name_value']['expose']['label'] = 'Faculty last name';
   $handler->display->display_options['filters']['field_last_name_value']['expose']['operator'] = 'field_last_name_value_op';
   $handler->display->display_options['filters']['field_last_name_value']['expose']['identifier'] = 'field_last_name_value';
+  /* Filter criterion: Content: Term (field_term) */
+  $handler->display->display_options['filters']['field_term_nid']['id'] = 'field_term_nid';
+  $handler->display->display_options['filters']['field_term_nid']['table'] = 'field_data_field_term';
+  $handler->display->display_options['filters']['field_term_nid']['field'] = 'field_term_nid';
+  $handler->display->display_options['filters']['field_term_nid']['group'] = 1;
+  $handler->display->display_options['filters']['field_term_nid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_term_nid']['expose']['operator_id'] = 'field_term_nid_op';
+  $handler->display->display_options['filters']['field_term_nid']['expose']['label'] = 'Term';
+  $handler->display->display_options['filters']['field_term_nid']['expose']['operator'] = 'field_term_nid_op';
+  $handler->display->display_options['filters']['field_term_nid']['expose']['identifier'] = 'field_term_nid';
+  $handler->display->display_options['filters']['field_term_nid']['expose']['remember'] = TRUE;
+  $handler->display->display_options['filters']['field_term_nid']['expose']['multiple'] = TRUE;
   $handler->display->display_options['path'] = 'courses';
 
   /* Display: Student course list */
