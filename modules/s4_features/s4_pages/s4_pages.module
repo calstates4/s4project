@@ -13,14 +13,16 @@ function s4_pages_menu() {
     'access arguments' => array('access content'),
   );
   $vocabulary = taxonomy_vocabulary_machine_name_load('site_restrictions');
-  $terms = taxonomy_get_tree($vocabulary->vid);
-  foreach($terms as $term) {  
-    $items[pathauto_cleanstring($term->name)] = array(
-      'title' => 'Home page',
-      'page callback' => '_s4_pages_program_homepage',
-      'page arguments' => array((string)$term->tid),
-      'access arguments' => array('access content'),
-    );
+  if($vocabulary) {
+    $terms = taxonomy_get_tree($vocabulary->vid);
+    foreach($terms as $term) {  
+      $items[pathauto_cleanstring($term->name)] = array(
+        'title' => 'Home page',
+        'page callback' => '_s4_pages_program_homepage',
+        'page arguments' => array((string)$term->tid),
+        'access arguments' => array('access content'),
+      );
+    }
   }
   
   $items['dashboard'] = array(
