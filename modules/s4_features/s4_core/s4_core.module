@@ -1385,6 +1385,10 @@ function s4_core_mail($key, &$message, $params) {
         $message['headers']['Cc'] = implode(', ', $params['cc']);
       }
       break;
+    case 's4_email_reminder':
+      $message['subject'] = $params['subject'];
+      $message['body'][] = check_markup($params['message']['value'], $params['message']['format']);
+      break;
   }
 }
 
@@ -1660,8 +1664,82 @@ function s4_core_cron() {
     _trigger_node($node, 'document_expiration');
   }
   variable_set('s4_core_file_expiration_last_notice', time());
+  
+  $reminder_query = db_select('field_data_field_enable_email_reminders', 'r')
+                    ->fields('r', array('entity_id'))
+                    ->condition('r.field_enable_email_reminders_value', 1)
+                    ->condition('r.bundle', 'site_restrictions')
+                    ->condition('r.entity_type', 'taxonomy_term');
+  $reminder_query->leftJoin('field_data_field_reminder_schedule_dates', 'd', 'd.entity_id = r.entity_id AND d.bundle = r.bundle AND r.entity_type = d.entity_type');
+  $reminder_query->condition('field_reminder_schedule_dates_value', date('Y-m-d') . 'T00:00:00'); 
+  $reminders = $reminder_query->execute()
+                              ->fetchAllKeyed(0,0);
+  $already_sent = variable_get('s4_core_sent_reminders', array());
+  $queue = DrupalQueue::get('s4_core_send_reminder_email');
+  foreach($reminders as $program) {
+    if(!isset($already_sent[$program][date('Y-m-d')])) {
+      $terms = _s4_courses_get_current_terms();
+      foreach($terms as $term) {
+    		$items = array();
+    		$term_nid = db_select('field_data_field_term_code', 'c')
+    				 ->condition('field_term_code_value', $term)
+    				 ->fields('c', array('entity_id'))
+    				 ->execute()
+    				 ->fetchField();
+    		$students = db_query('SELECT field_course_students_uid
+          FROM   {field_data_field_course_students} s
+                 LEFT JOIN {field_data_field_term} t
+                        ON t.entity_id = s.entity_id
+                           AND t.bundle = s.bundle
+                           AND t.entity_type = s.entity_type
+          WHERE  t.field_term_nid = :term_nid
+                 AND field_course_students_uid NOT IN (SELECT field_user_uid
+                                                       FROM   {field_data_field_user} u
+                         LEFT JOIN {field_data_field_course_students} s
+                                ON s.field_course_students_uid = u.field_user_uid
+                         LEFT JOIN {field_data_field_term} t
+                                ON t.entity_id = s.entity_id
+                                   AND t.bundle = s.bundle
+                                   AND t.entity_type = s.entity_type
+                                                       WHERE  t.field_term_nid = :term_nid
+                                                              AND u.entity_type = :node
+                                                              AND u.bundle = :signup) ',
+                                                              array(':term_nid' => $term_nid,
+                                                                    ':node' => 'node',
+                                                                    ':signup' => 'signup'))
+          ->fetchAllKeyed(0,0);
+        foreach($students as $student) {
+          if($student) {
+            $queue->createItem(array('uid' => $student, 'program' => $program));
+          }
+        }
+        
+      }
+      $queue->createItem(array('uid' => $uid, 'program' => $program));
+      $already_sent[$program][date('Y-m-d')] = date('Y-m-d');
+      variable_set('s4_core_sent_reminders', $already_sent);
+    }
+  }
 }
 
+function s4_core_send_email_reminders($data) {
+  $user = user_load($data['uid']);
+  $program = taxonomy_term_load($data['program']);
+  $subject = field_get_items('taxonomy_term', $program, 'field_reminder_email_subject');
+  $body = field_get_items('taxonomy_term', $program, 'field_reminder_email_body');
+  $context = array('subject' => $subject[0]['value'],
+                   'message' => $body[0]);
+  drupal_mail('s4_core', 's4_email_reminder', $user->mail, language_default(), $context);
+
+}
+
+function s4_core_cron_queue_info() {
+  $queues['s4_core_send_reminder_email'] = array(
+    'worker callback' => 's4_core_send_email_reminders',
+    'time' => 5,
+  );
+  return $queues;
+}
 
 /**
  * Helper function to retrieve the correct form for a student.

@@ -43,6 +43,36 @@ function s4_core_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_email_reminders|taxonomy_term|site_restrictions|form';
+  $field_group->group_name = 'group_email_reminders';
+  $field_group->entity_type = 'taxonomy_term';
+  $field_group->bundle = 'site_restrictions';
+  $field_group->mode = 'form';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Email reminders',
+    'weight' => '11',
+    'children' => array(
+      0 => 'field_enable_email_reminders',
+      1 => 'field_reminder_email_subject',
+      2 => 'field_reminder_email_body',
+      3 => 'field_reminder_schedule_dates',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'formatter' => 'collapsible',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => '',
+        'required_fields' => 1,
+      ),
+    ),
+  );
+  $export['group_email_reminders|taxonomy_term|site_restrictions|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_evaluation_email|taxonomy_term|site_restrictions|form';
   $field_group->group_name = 'group_evaluation_email';
   $field_group->entity_type = 'taxonomy_term';

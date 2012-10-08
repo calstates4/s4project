@@ -2176,6 +2176,72 @@ function s4_core_field_default_fields() {
     ),
   );
 
+  // Exported field: 'taxonomy_term-site_restrictions-field_enable_email_reminders'
+  $fields['taxonomy_term-site_restrictions-field_enable_email_reminders'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_enable_email_reminders',
+      'foreign keys' => array(),
+      'indexes' => array(
+        'value' => array(
+          0 => 'value',
+        ),
+      ),
+      'module' => 'list',
+      'settings' => array(
+        'allowed_values' => array(
+          0 => '',
+          1 => '',
+        ),
+        'allowed_values_function' => '',
+        'allowed_values_php' => '',
+      ),
+      'translatable' => '0',
+      'type' => 'list_boolean',
+    ),
+    'field_instance' => array(
+      'bundle' => 'site_restrictions',
+      'default_value' => array(
+        0 => array(
+          'value' => 0,
+        ),
+      ),
+      'default_value_function' => '',
+      'default_value_php' => '',
+      'deleted' => '0',
+      'description' => 'When turned on, students enrolled in courses associated with this program will get automatic reminders until they select a site.',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'list',
+          'settings' => array(),
+          'type' => 'list_default',
+          'weight' => 16,
+        ),
+      ),
+      'display_label' => '',
+      'entity_type' => 'taxonomy_term',
+      'field_name' => 'field_enable_email_reminders',
+      'label' => 'Enable email reminders',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(
+          'display_label' => 1,
+        ),
+        'type' => 'options_onoff',
+        'weight' => '12',
+      ),
+    ),
+  );
+
   // Exported field: 'taxonomy_term-site_restrictions-field_evaluation_email_body'
   $fields['taxonomy_term-site_restrictions-field_evaluation_email_body'] = array(
     'field_config' => array(
@@ -2607,6 +2673,206 @@ function s4_core_field_default_fields() {
     ),
   );
 
+  // Exported field: 'taxonomy_term-site_restrictions-field_reminder_email_body'
+  $fields['taxonomy_term-site_restrictions-field_reminder_email_body'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_reminder_email_body',
+      'foreign keys' => array(
+        'format' => array(
+          'columns' => array(
+            'format' => 'format',
+          ),
+          'table' => 'filter_format',
+        ),
+      ),
+      'indexes' => array(
+        'format' => array(
+          0 => 'format',
+        ),
+      ),
+      'module' => 'text',
+      'settings' => array(),
+      'translatable' => '0',
+      'type' => 'text_long',
+    ),
+    'field_instance' => array(
+      'bundle' => 'site_restrictions',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => 18,
+        ),
+      ),
+      'display_label' => '',
+      'entity_type' => 'taxonomy_term',
+      'field_name' => 'field_reminder_email_body',
+      'label' => 'Reminder email body',
+      'required' => 0,
+      'settings' => array(
+        'text_processing' => '1',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'text',
+        'settings' => array(
+          'rows' => '5',
+        ),
+        'type' => 'text_textarea',
+        'weight' => '14',
+      ),
+    ),
+  );
+
+  // Exported field: 'taxonomy_term-site_restrictions-field_reminder_email_subject'
+  $fields['taxonomy_term-site_restrictions-field_reminder_email_subject'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_reminder_email_subject',
+      'foreign keys' => array(
+        'format' => array(
+          'columns' => array(
+            'format' => 'format',
+          ),
+          'table' => 'filter_format',
+        ),
+      ),
+      'indexes' => array(
+        'format' => array(
+          0 => 'format',
+        ),
+      ),
+      'module' => 'text',
+      'settings' => array(
+        'max_length' => '255',
+      ),
+      'translatable' => '0',
+      'type' => 'text',
+    ),
+    'field_instance' => array(
+      'bundle' => 'site_restrictions',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => 17,
+        ),
+      ),
+      'display_label' => '',
+      'entity_type' => 'taxonomy_term',
+      'field_name' => 'field_reminder_email_subject',
+      'label' => 'Reminder email subject',
+      'required' => 0,
+      'settings' => array(
+        'text_processing' => '0',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'text',
+        'settings' => array(
+          'size' => '60',
+        ),
+        'type' => 'text_textfield',
+        'weight' => '13',
+      ),
+    ),
+  );
+
+  // Exported field: 'taxonomy_term-site_restrictions-field_reminder_schedule_dates'
+  $fields['taxonomy_term-site_restrictions-field_reminder_schedule_dates'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '-1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_reminder_schedule_dates',
+      'foreign keys' => array(),
+      'indexes' => array(),
+      'module' => 'date',
+      'settings' => array(
+        'granularity' => array(
+          'day' => 'day',
+          'month' => 'month',
+          'year' => 'year',
+        ),
+        'repeat' => 0,
+        'timezone_db' => '',
+        'todate' => '',
+        'tz_handling' => 'none',
+      ),
+      'translatable' => '0',
+      'type' => 'date',
+    ),
+    'field_instance' => array(
+      'bundle' => 'site_restrictions',
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'date',
+          'settings' => array(
+            'format_type' => 'long',
+            'fromto' => 'both',
+            'multiple_from' => '',
+            'multiple_number' => '',
+            'multiple_to' => '',
+            'show_repeat_rule' => 'show',
+          ),
+          'type' => 'date_default',
+          'weight' => 19,
+        ),
+      ),
+      'display_label' => '',
+      'entity_type' => 'taxonomy_term',
+      'field_name' => 'field_reminder_schedule_dates',
+      'label' => 'Reminder schedule',
+      'required' => 0,
+      'settings' => array(
+        'default_format' => 'medium',
+        'default_value' => 'blank',
+        'default_value2' => 'blank',
+        'default_value_code' => '',
+        'default_value_code2' => '',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'date',
+        'settings' => array(
+          'increment' => '1',
+          'input_format' => 'm/d/Y - H:i:s',
+          'input_format_custom' => '',
+          'label_position' => 'above',
+          'repeat_collapsed' => 0,
+          'text_parts' => array(),
+          'year_range' => '-0:+5',
+        ),
+        'type' => 'date_select',
+        'weight' => '15',
+      ),
+    ),
+  );
+
   // Exported field: 'taxonomy_term-site_restrictions-field_start_over'
   $fields['taxonomy_term-site_restrictions-field_start_over'] = array(
     'field_config' => array(
@@ -2802,6 +3068,7 @@ function s4_core_field_default_fields() {
   t('Available to');
   t('Body');
   t('Course');
+  t('Enable email reminders');
   t('Enter the length of the grace period to delete and start over a student\'s placement. Students cannot start over after their service period (i.e. the semester or term they were in a course) regardless. For no limit, enter zero.');
   t('Estimate the total number of hours you have worked at this site.');
   t('Evaluation Form Results');
@@ -2821,6 +3088,9 @@ function s4_core_field_default_fields() {
   t('Message when not allowing people to submit a site');
   t('People can propose sites for this program');
   t('Program');
+  t('Reminder email body');
+  t('Reminder email subject');
+  t('Reminder schedule');
   t('Reply-to address');
   t('Send confirmation email when someone is signed up');
   t('Service hours');
@@ -2843,6 +3113,7 @@ function s4_core_field_default_fields() {
   t('When a student is signed up with a site, this is the confirmation email that is sent to them.');
   t('When checked, students can start over and delete their placement information.');
   t('When checked, the form will be shown to a user when they sign up for a site.');
+  t('When turned on, students enrolled in courses associated with this program will get automatic reminders until they select a site.');
 
   return $fields;
 }
