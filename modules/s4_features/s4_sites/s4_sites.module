@@ -1213,3 +1213,111 @@ function s4_sites_ds_layout_info() {
 
   return $layouts;
 }
+
+/**
+ * Implements hook_theme_registry_alter();
+ */
+function s4_sites_theme_registry_alter(&$items) {
+  $items['field_collection_table_multiple_value_fields']['function'] = 's4_sites_theme_field_collection_table';
+}
+
+/**
+ * Theme alter to make field collection labels not be in the first column
+ */
+function s4_sites_theme_field_collection_table($variables) {
+  $element = $variables['element'];
+  $output = '';
+
+  if (isset($element['#cardinality']) && ($element['#cardinality'] > 1 || $element['#cardinality'] == FIELD_CARDINALITY_UNLIMITED)) {
+    $table_id = drupal_html_id($element['#field_name'] . '_values');
+    $order_class = $element['#field_name'] . '-delta-order';
+    $required = !empty($element['#required']) ? '<span class="form-required" title="' . t('This field is required. ') . '">*</span>' : '';
+
+    $rows = array();
+
+    // Sort items according to '_weight' (needed when the form comes back after
+    // preview or failed validation)
+    $items = array();
+    foreach (element_children($element) as $key) {
+      if ($key === 'add_more') {
+        $add_more_button = &$element[$key];
+      }
+      else {
+        $items[] = &$element[$key];
+      }
+    }
+    usort($items, '_field_sort_items_value_helper');
+
+    $header = array('');
+    // Add the items as table rows.
+    foreach ($items as $key => $item) {
+      uasort($item, 'element_sort');
+      $item['_weight']['#attributes']['class'] = array($order_class);
+      $cells = array(
+        array('data' => '', 'class' => array('field-multiple-drag')),
+      );
+      foreach (element_children($item) as $field_name) {
+        // Only add the header once.
+        if ($key == 0 && $field_name != '_weight') {
+          $header[] = array(
+            'data' => '<label>' . t('!title', array('!title' => _field_collection_table_get_title($item[$field_name]))) . '</label>',
+            'class' => array('field-label'),
+          );
+        }
+        elseif ($key == 0 && $field_name == '_weight') {
+          $header[] = array(
+            'data' => '<label>' . t('!title', array('!title' => _field_collection_table_get_title($item[$field_name]))) . '</label>',
+            'class' => array('element-invisible'),
+          );
+        }
+        $class = array();
+        if($field_name == '_weight') {
+           $class[] = 'element-invisible';
+        }
+        $cells[] = array('data' => $item[$field_name],
+                         'class' => $class);
+      }
+      $rows[] = $cells;
+    }
+
+    $output = array(
+      '#prefix' => '<div class="form-item">',
+      '#suffix' => '</div>',
+    );
+    $output['field_collection_table'] = array(
+      '#theme' => 'table',
+      '#header' => $header,
+      '#rows' => $rows,
+      '#attributes' => array(
+        'id' => $table_id,
+        'class' => array(
+          'field-multiple-table',
+        ),
+      ),
+    );
+    if (!empty($element['#description'])) {
+      $output[] = array(
+        '#prefix' => '<div class="description">',
+        '#suffix' => '</div>',
+        '#markup' => $element['#description'],
+      );
+    }
+    if (isset($add_more_button)) {
+      $output[] = $add_more_button + array(
+        '#prefix' => '<div class="clearfix">',
+        '#suffix' => '</div>',
+      );
+    }
+
+    $output = '<label>' . t('!title: !required', array('!title' => $element['#title'], '!required' => $required)) .'</label>'
+               . drupal_render($output);
+
+  }
+  else {
+    foreach (element_children($element) as $key) {
+      $output .= drupal_render($element[$key]);
+    }
+  }
+
+  return $output;
+}
