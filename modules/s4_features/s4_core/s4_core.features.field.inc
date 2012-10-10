@@ -2244,13 +2244,13 @@ function s4_core_field_default_fields() {
       ),
       'widget' => array(
         'active' => 1,
-        'module' => 'node_reference',
+        'module' => 'options',
         'settings' => array(
           'autocomplete_match' => 'contains',
           'autocomplete_path' => 'node_reference/autocomplete',
           'size' => '60',
         ),
-        'type' => 'node_reference_autocomplete',
+        'type' => 'options_select',
         'weight' => '15',
       ),
     ),
