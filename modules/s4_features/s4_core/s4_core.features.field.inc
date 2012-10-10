@@ -2176,6 +2176,162 @@ function s4_core_field_default_fields() {
     ),
   );
 
+  // Exported field: 'taxonomy_term-site_restrictions-field_default_evaluation_form'
+  $fields['taxonomy_term-site_restrictions-field_default_evaluation_form'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_default_evaluation_form',
+      'foreign keys' => array(
+        'nid' => array(
+          'columns' => array(
+            'nid' => 'nid',
+          ),
+          'table' => 'node',
+        ),
+      ),
+      'indexes' => array(
+        'nid' => array(
+          0 => 'nid',
+        ),
+      ),
+      'module' => 'node_reference',
+      'settings' => array(
+        'referenceable_types' => array(
+          'contact_record' => 0,
+          'coordinator' => 0,
+          'course' => 0,
+          'course_term' => 0,
+          'downloadable_form' => 0,
+          'file' => 0,
+          'page' => 0,
+          'signup' => 0,
+          'site' => 0,
+          'webform' => 'webform',
+        ),
+        'view' => array(
+          'args' => array(),
+          'display_name' => '',
+          'view_name' => '',
+        ),
+      ),
+      'translatable' => '0',
+      'type' => 'node_reference',
+    ),
+    'field_instance' => array(
+      'bundle' => 'site_restrictions',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => 'Select the default evaluation form this program will use. New sites will automatically have these forms attached.',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'node_reference',
+          'settings' => array(),
+          'type' => 'node_reference_default',
+          'weight' => 21,
+        ),
+      ),
+      'display_label' => '',
+      'entity_type' => 'taxonomy_term',
+      'field_name' => 'field_default_evaluation_form',
+      'label' => 'Default evaluation form',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'node_reference',
+        'settings' => array(
+          'autocomplete_match' => 'contains',
+          'autocomplete_path' => 'node_reference/autocomplete',
+          'size' => '60',
+        ),
+        'type' => 'node_reference_autocomplete',
+        'weight' => '15',
+      ),
+    ),
+  );
+
+  // Exported field: 'taxonomy_term-site_restrictions-field_default_signup_form'
+  $fields['taxonomy_term-site_restrictions-field_default_signup_form'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_default_signup_form',
+      'foreign keys' => array(
+        'nid' => array(
+          'columns' => array(
+            'nid' => 'nid',
+          ),
+          'table' => 'node',
+        ),
+      ),
+      'indexes' => array(
+        'nid' => array(
+          0 => 'nid',
+        ),
+      ),
+      'module' => 'node_reference',
+      'settings' => array(
+        'referenceable_types' => array(
+          'contact_record' => 0,
+          'coordinator' => 0,
+          'course' => 0,
+          'course_term' => 0,
+          'downloadable_form' => 0,
+          'file' => 0,
+          'page' => 0,
+          'signup' => 0,
+          'site' => 0,
+          'webform' => 'webform',
+        ),
+        'view' => array(
+          'args' => array(),
+          'display_name' => '',
+          'view_name' => '',
+        ),
+      ),
+      'translatable' => '0',
+      'type' => 'node_reference',
+    ),
+    'field_instance' => array(
+      'bundle' => 'site_restrictions',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => 'Select the default form students will use when signing up as part of this program. New sites will automatically have this form attached.',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'node_reference',
+          'settings' => array(),
+          'type' => 'node_reference_default',
+          'weight' => 20,
+        ),
+      ),
+      'display_label' => '',
+      'entity_type' => 'taxonomy_term',
+      'field_name' => 'field_default_signup_form',
+      'label' => 'Default signup form',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(),
+        'type' => 'options_select',
+        'weight' => '14',
+      ),
+    ),
+  );
+
   // Exported field: 'taxonomy_term-site_restrictions-field_enable_email_reminders'
   $fields['taxonomy_term-site_restrictions-field_enable_email_reminders'] = array(
     'field_config' => array(
@@ -3068,6 +3224,8 @@ function s4_core_field_default_fields() {
   t('Available to');
   t('Body');
   t('Course');
+  t('Default evaluation form');
+  t('Default signup form');
   t('Enable email reminders');
   t('Enter the length of the grace period to delete and start over a student\'s placement. Students cannot start over after their service period (i.e. the semester or term they were in a course) regardless. For no limit, enter zero.');
   t('Estimate the total number of hours you have worked at this site.');
@@ -3092,6 +3250,8 @@ function s4_core_field_default_fields() {
   t('Reminder email subject');
   t('Reminder schedule');
   t('Reply-to address');
+  t('Select the default evaluation form this program will use. New sites will automatically have these forms attached.');
+  t('Select the default form students will use when signing up as part of this program. New sites will automatically have this form attached.');
   t('Send confirmation email when someone is signed up');
   t('Service hours');
   t('Show on signup');
