@@ -140,6 +140,9 @@ projects[references][version] = "2.x-dev"
 projects[select_or_other][subdir] = "contrib"
 projects[select_or_other][version] = "2.0"
 
+projects[signaturefield][subdir] = "contrib"
+projects[signaturefield][version] = "1.x-dev"
+
 projects[strongarm][subdir] = "contrib"
 projects[strongarm][version] = "2.0"
 
@@ -227,6 +230,12 @@ libraries[tinymce][destination] = "libraries"
 libraries[markerclusterer][download][type] = "get"
 libraries[markerclusterer][download][url] = "http://gmaps-utility-library-dev.googlecode.com/svn/tags/markerclusterer/1.0/src/markerclusterer_packed.js"
 libraries[markerclusterer][destination] = "modules/contrib/gmap/thirdparty"
+
+; Download Signature Pad as a library
+libraries[tinymce][download][type] = "git"
+libraries[tinymce][download][url] = "https://github.com/thomasjbradley/signature-pad.git"
+libraries[tinymce][directory_name] = "signature-pad"
+libraries[tinymce][destination] = "libraries"
 
 ; Patches
 projects[wysiwyg][patch][] = "http://drupal.org/files/issues/wysiwyg-entity-exportables-624018-176_1.patch"

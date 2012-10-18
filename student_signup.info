@@ -104,6 +104,7 @@ dependencies[] = page_manager
 dependencies[] = pathauto
 dependencies[] = references
 dependencies[] = select_or_other
+dependencies[] = signaturefield
 dependencies[] = strongarm
 dependencies[] = textcaptcha
 dependencies[] = token
