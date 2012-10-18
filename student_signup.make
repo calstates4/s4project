@@ -232,10 +232,10 @@ libraries[markerclusterer][download][url] = "http://gmaps-utility-library-dev.go
 libraries[markerclusterer][destination] = "modules/contrib/gmap/thirdparty"
 
 ; Download Signature Pad as a library
-libraries[tinymce][download][type] = "git"
-libraries[tinymce][download][url] = "https://github.com/thomasjbradley/signature-pad.git"
-libraries[tinymce][directory_name] = "signature-pad"
-libraries[tinymce][destination] = "libraries"
+libraries[signature-pad][download][type] = "git"
+libraries[signature-pad][download][url] = "https://github.com/thomasjbradley/signature-pad.git"
+libraries[signature-pad][directory_name] = "signature-pad"
+libraries[signature-pad][destination] = "libraries"
 
 ; Patches
 projects[wysiwyg][patch][] = "http://drupal.org/files/issues/wysiwyg-entity-exportables-624018-176_1.patch"
