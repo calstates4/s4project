@@ -19,8 +19,8 @@ before_script:
   - echo "memory_limit=200M" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
   - phpenv rehash
   - drush make https://raw.github.com/kevee/csu_student_signup/master/distro.make student_signup
-  - cd student_signup
   - cp student_signup student_signup_postgresql -R
+  - cd student_signup
   - drush si student_signup --db-url=mysql://root:@127.0.0.1/drupal  --yes || true
   - drush cc all --yes
   - drush cd ../student_signup_postgresql
