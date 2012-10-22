@@ -20,8 +20,11 @@ before_script:
   - phpenv rehash
   - drush make https://raw.github.com/kevee/csu_student_signup/master/distro.make student_signup
   - cd student_signup
+  - cp student_signup student_signup_postgresql -R
   - drush si student_signup --db-url=mysql://root:@127.0.0.1/drupal  --yes || true
   - drush cc all --yes
+  - drush cd ../student_signup_postgresql
+  - drush si student_signup --db-url=postgresql://root:@127.0.0.1/drupal  --yes || true
 
 script: 
   - test -d profiles/student_signup
