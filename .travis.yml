@@ -23,7 +23,7 @@ before_script:
   - cd student_signup
   - drush si student_signup --db-url=mysql://root:@127.0.0.1/drupal  --yes || true
   - drush cc all --yes
-  - drush cd ../student_signup_postgresql
+  - cd ../student_signup_postgresql
   - drush si student_signup --db-url=postgresql://root:@127.0.0.1/drupal  --yes || true
 
 script: 
