@@ -10,7 +10,7 @@
 function s4_users_context_default_contexts() {
   $export = array();
 
-  $context = new stdClass;
+  $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
   $context->name = 'user-page';
@@ -35,11 +35,17 @@ function s4_users_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
+        'views-user_courses-block_3' => array(
+          'module' => 'views',
+          'delta' => 'user_courses-block_3',
+          'region' => 'content',
+          'weight' => '-10',
+        ),
         'views-s4_user_signups-block' => array(
           'module' => 'views',
           'delta' => 's4_user_signups-block',
           'region' => 'content',
-          'weight' => '-10',
+          'weight' => '-9',
         ),
       ),
     ),

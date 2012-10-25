@@ -1019,7 +1019,7 @@ function s4_courses_views_default_views() {
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Sign up for service';
   $handler->display->display_options['access']['type'] = 'perm';
-  $handler->display->display_options['access']['perm'] = 'signup for service';
+  $handler->display->display_options['access']['perm'] = 'create signups for other users';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['distinct'] = TRUE;
@@ -1641,6 +1641,62 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['arguments']['field_course_students_uid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['field_course_students_uid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['field_course_students_uid']['summary_options']['items_per_page'] = '25';
+
+  /* Display: User profile block */
+  $handler = $view->new_display('block', 'User profile block', 'block_3');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Current courses';
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  $handler->display->display_options['defaults']['empty'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = '';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
+  /* Field: Content: Catalog number */
+  $handler->display->display_options['fields']['field_course_catalog_number']['id'] = 'field_course_catalog_number';
+  $handler->display->display_options['fields']['field_course_catalog_number']['table'] = 'field_data_field_course_catalog_number';
+  $handler->display->display_options['fields']['field_course_catalog_number']['field'] = 'field_course_catalog_number';
+  $handler->display->display_options['fields']['field_course_catalog_number']['label'] = '';
+  $handler->display->display_options['fields']['field_course_catalog_number']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_course_catalog_number']['element_label_colon'] = FALSE;
+  /* Field: Content: Subject */
+  $handler->display->display_options['fields']['field_course_subject']['id'] = 'field_course_subject';
+  $handler->display->display_options['fields']['field_course_subject']['table'] = 'field_data_field_course_subject';
+  $handler->display->display_options['fields']['field_course_subject']['field'] = 'field_course_subject';
+  $handler->display->display_options['fields']['field_course_subject']['label'] = 'Course';
+  $handler->display->display_options['fields']['field_course_subject']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_course_subject']['alter']['text'] = '[field_course_subject] [field_course_catalog_number]';
+  $handler->display->display_options['fields']['field_course_subject']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['field_course_subject']['alter']['path'] = 'node/[nid]';
+  /* Field: Content: Section number */
+  $handler->display->display_options['fields']['field_course_section']['id'] = 'field_course_section';
+  $handler->display->display_options['fields']['field_course_section']['table'] = 'field_data_field_course_section';
+  $handler->display->display_options['fields']['field_course_section']['field'] = 'field_course_section';
+  $handler->display->display_options['fields']['field_course_section']['label'] = 'Section';
+  $handler->display->display_options['fields']['field_course_section']['settings'] = array(
+    'thousand_separator' => ' ',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Content: Course title */
+  $handler->display->display_options['fields']['field_course_title']['id'] = 'field_course_title';
+  $handler->display->display_options['fields']['field_course_title']['table'] = 'field_data_field_course_title';
+  $handler->display->display_options['fields']['field_course_title']['field'] = 'field_course_title';
+  $handler->display->display_options['fields']['field_course_title']['label'] = 'Title';
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Students (field_course_students) */
+  $handler->display->display_options['arguments']['field_course_students_uid']['id'] = 'field_course_students_uid';
+  $handler->display->display_options['arguments']['field_course_students_uid']['table'] = 'field_data_field_course_students';
+  $handler->display->display_options['arguments']['field_course_students_uid']['field'] = 'field_course_students_uid';
+  $handler->display->display_options['arguments']['field_course_students_uid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['field_course_students_uid']['default_argument_type'] = 'user';
+  $handler->display->display_options['arguments']['field_course_students_uid']['default_argument_options']['user'] = FALSE;
+  $handler->display->display_options['arguments']['field_course_students_uid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_course_students_uid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_course_students_uid']['summary_options']['items_per_page'] = '25';
   $translatables['user_courses'] = array(
     t('Master'),
     t('Sign up for service'),
@@ -1697,6 +1753,8 @@ function s4_courses_views_default_views() {
     t('Sign up as part of a course'),
     t('Directions'),
     t('<p class="intro">To begin looking for a site, click the <strong>Select this Course</strong> link near the course you are taking for this service.</p>'),
+    t('User profile block'),
+    t('Current courses'),
   );
   $export['user_courses'] = $view;
 
