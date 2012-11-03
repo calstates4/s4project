@@ -1673,7 +1673,7 @@ Fields',
     'group-status' => array(
       'group' => '0',
       'filter_name' => 'status',
-      'weight' => '-18',
+      'weight' => '-19',
     ),
     'group-city' => array(
       'group' => '2',
@@ -1688,7 +1688,7 @@ Fields',
     'group-field_csu_org_type_tid' => array(
       'group' => '1',
       'filter_name' => 'field_csu_org_type_tid',
-      'weight' => '-18',
+      'weight' => '-17',
     ),
     'group-dyfield' => array(
       'group' => '4',
@@ -1723,12 +1723,12 @@ Fields',
     'group-field_site_restrict_tid' => array(
       'group' => '0',
       'filter_name' => 'field_site_restrict_tid',
-      'weight' => '-18',
+      'weight' => '-17',
     ),
     'group-field_tags_tid' => array(
       'group' => '0',
       'filter_name' => 'field_tags_tid',
-      'weight' => '-18',
+      'weight' => '-16',
     ),
     'group-field_signup_start_date_value' => array(
       'group' => '3',
@@ -1748,12 +1748,17 @@ Fields',
     'group-title' => array(
       'group' => '0',
       'filter_name' => 'title',
-      'weight' => '-18',
+      'weight' => '-15',
     ),
     'group-field_signups_max_value' => array(
       'group' => '3',
       'filter_name' => 'field_signups_max_value',
       'weight' => '-18',
+    ),
+    'group-created' => array(
+      'group' => '0',
+      'filter_name' => 'created',
+      'weight' => '-14',
     ),
   );
   $handler->display->display_options['pager']['type'] = 'full';
@@ -2413,6 +2418,12 @@ Fields',
   $handler->display->display_options['fields']['field_site_restrict']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['field_site_restrict']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_site_restrict']['delta_offset'] = '0';
+  /* Field: Content: Post date */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'node';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = 'Date created';
+  $handler->display->display_options['fields']['created']['date_format'] = 'short';
   /* Sort criterion: Content: Title */
   $handler->display->display_options['sorts']['title']['id'] = 'title';
   $handler->display->display_options['sorts']['title']['table'] = 'node';
@@ -2719,6 +2730,16 @@ Fields',
   $handler->display->display_options['filters']['field_signups_max_value']['expose']['use_operator'] = TRUE;
   $handler->display->display_options['filters']['field_signups_max_value']['expose']['operator'] = 'field_signups_max_value_op';
   $handler->display->display_options['filters']['field_signups_max_value']['expose']['identifier'] = 'field_signups_max_value';
+  /* Filter criterion: Content: Post date */
+  $handler->display->display_options['filters']['created']['id'] = 'created';
+  $handler->display->display_options['filters']['created']['table'] = 'node';
+  $handler->display->display_options['filters']['created']['field'] = 'created';
+  $handler->display->display_options['filters']['created']['operator'] = 'between';
+  $handler->display->display_options['filters']['created']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['created']['expose']['operator_id'] = 'created_op';
+  $handler->display->display_options['filters']['created']['expose']['label'] = 'Date created';
+  $handler->display->display_options['filters']['created']['expose']['operator'] = 'created_op';
+  $handler->display->display_options['filters']['created']['expose']['identifier'] = 'created';
 
   /* Display: Data report page */
   $handler = $view->new_display('page', 'Data report page', 'page');
@@ -2818,6 +2839,7 @@ Fields',
     t('Minimum hours'),
     t('Languages'),
     t('Related programs'),
+    t('Date created'),
     t('Published'),
     t('Issues addressed'),
     t('Org. type'),
