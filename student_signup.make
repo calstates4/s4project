@@ -243,3 +243,4 @@ projects[nodeformcols][patch][] = "http://drupal.org/files/nodeformcolum_captcha
 projects[cck_phone][] = "http://drupal.org/files/cck_phone_feeds_1160186_7.patch"
 projects[fancybox][patch][] = "http://drupal.org/files/fancybox_library_sub_folder-1378104-1.patch"
 projects[workbench_moderation][patch][] = "http://drupal.org/files/workbench_moderation_feeds-1470528-1.patch"
+projects[drupal][patch][] = "http://drupal.org/files/postgresql_index_length-1410102.patch"
