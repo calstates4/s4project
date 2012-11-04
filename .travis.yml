@@ -3,13 +3,20 @@ language: php
 php:
   - 5.3
 
+
 mysql:
   database: drupal
   username: root
   encoding: utf8
+psql:
+  database: drupal
+  username: postgres
+  encoding: utf8
+
   
 before_script:
   - "mysql -e 'create database drupal;'"
+  - psql -c 'create database drupal;' -U postgres
   - pear channel-discover pear.drush.org
   - pear install drush/drush
   - pear install PHP_CodeSniffer
@@ -24,7 +31,7 @@ before_script:
   - drush si student_signup --db-url=mysql://root:@127.0.0.1/drupal  --yes || true
   - drush cc all --yes
   - cd ../student_signup_postgresql
-  - drush si student_signup --db-url=pgsql://root:@127.0.0.1/drupal  --yes || true
+  - drush si student_signup --db-url=pgsql://postgres:@127.0.0.1/drupal  --yes || true
 
 script: 
   - test -d profiles/student_signup
