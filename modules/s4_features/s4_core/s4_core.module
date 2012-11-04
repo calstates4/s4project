@@ -410,8 +410,25 @@ function s4_core_menu() {
     'access callback' => 's4_core_start_over_access',
     'access arguments' => array(2),
   );
+  
+    
+  $items['node/%node/signup-delete'] = array(
+    'title' => 'Delete',
+    'type' => MENU_LOCAL_TASK,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('node_delete_confirm', 1),
+    'access callback' => 's4_core_signup_delete_access',
+    'access arguments' => array(1),
+    'file' => 'node.pages.inc',
+    'file path' => drupal_get_path('module', 'node'),
+    
+  );
 
   return $items;
+}
+
+function s4_core_signup_delete_access($node) {
+  return ($node->type == 'signup' && node_access('delete', $node));
 }
 
 function s4_core_start_over_access($node) {
