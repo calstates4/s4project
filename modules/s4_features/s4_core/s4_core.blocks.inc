@@ -428,15 +428,3 @@ function s4_core_block_s4_signup_forms() {
                             l(t('Continue signing up'), 's4/signup/site/' . $_SESSION['s4_signup_site'])
                             . '</div>');
 }
-
-/**
- * Form to edit existing placement.
- */
-function s4_core_block_s4_signup_edit() {
-  $node = menu_get_object();
-  if(!node_access('update', $node)) {
-    return;
-  }
-  $user = field_get_items('node', $node, 'field_user');
-  return array('content' => l(t('Edit this placement'), 'signup/create/'. $user[0]['uid'] .'/edit/'. $node->nid));
-}
