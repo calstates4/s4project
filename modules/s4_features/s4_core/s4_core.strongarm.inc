@@ -95,8 +95,8 @@ function s4_core_strongarm() {
   $strongarm->name = 'fancybox_settings';
   $strongarm->value = array(
     'options' => array(
-      'width' => '425',
-      'height' => '355',
+      'width' => 425,
+      'height' => 355,
       'padding' => 0,
       'margin' => 0,
       'titleShow' => 1,
@@ -135,7 +135,6 @@ function s4_core_strongarm() {
     ),
     'imagefield' => array(
       'grouping' => '1',
-      'imagecache_preset' => '0',
       'use_node_title' => 0,
     ),
   );

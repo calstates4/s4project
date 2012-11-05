@@ -3,6 +3,7 @@
 		
 		attach : function(context) {
 			this.addChosen(context);
+			this.openModal(context);
 			$('.view.quicksearch:has(table)').each(function(index, element) {
 		      $(this).prepend('<div class="search-filter"><label for="filter-' + index + 
 		               '">Filter: </label><input type="text" id="filter-' + index +

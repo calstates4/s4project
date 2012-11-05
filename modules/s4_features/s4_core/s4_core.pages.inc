@@ -348,7 +348,7 @@ function s4_core_create_signup_form($form, &$form_state, $uid, $option = 'new', 
     
   if($existing_node) {
     $site = field_get_items('node', $existing_node, 'field_site');
-    if($site[0]['nid'] == $form_state['values']['site']['#default_value']) {
+    if($site[0]['nid'] == $form['site']['#default_value']) {
       $site_staff = field_get_items('node', $existing_node, 'field_coordinator');
       $form['site_options']['site-staff']['#default_value'] = $site_staff[0]['nid'];
       $program = field_get_items('node', $existing_node, 'field_site_restrict');
@@ -376,10 +376,19 @@ function s4_core_create_signup_form($form, &$form_state, $uid, $option = 'new', 
     '#type' => 'checkbox',
     '#title' => t('CC myself a copy of the confirmation email sent to the student'),
   );
+  
+  $form['actions'] = array(
+    '#type' => 'actions',
+  );
 
-  $form['submit'] = array(
+  $form['actions']['submit'] = array(
     '#type' => 'submit',
     '#value' => ($existing_node) ? t('Update placement') : t('Create placement'),
+  );
+  
+  $form['actions']['cancel'] = array(
+    '#type' => 'markup',
+    '#markup' => l(t('Cancel'), $_GET['destination']),
   );
 
   return $form;
@@ -392,7 +401,6 @@ function s4_core_create_signup_form_validate($form, $form_state) {
 }
 
 function s4_core_create_signup_form_submit($form, $form_state) {
-  dpm($form_state);
   if($form_state['values']['existing_node']) {
     $node = node_load($form_state['values']['existing_node']);
     $node->field_site[$node->language][0]['nid'] = $form_state['values']['site'];
@@ -426,8 +434,12 @@ function s4_core_create_signup_form_submit($form, $form_state) {
   drupal_set_message(t('Created !signup record', array('!signup' => l(t('signup #@number', array('@number' => $signup->nid)), 'node/' . $signup->nid))));
   $site = node_load($form_state['values']['site']);
   $form = field_get_items('node', $site, 'field_site_form');
-
-  drupal_goto($form_state['values']['destination']);
+  if(module_exists('overlay')) {
+    overlay_close_dialog();
+  }
+  else {
+    drupal_goto($form_state['values']['destination']);
+  }
 }
 
 function s4_core_student_signup_complete($signup) {

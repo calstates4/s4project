@@ -977,6 +977,11 @@ function s4_core_node_insert($node) {
   }
 }
 
+
+function s4_core_form_signup_node_form_alter(&$form, $form_state) {
+  drupal_goto('signup/create/'. $form['#node']->uid .'/edit/' . $form['#node']->nid, array('query' => array('destination' => 'node/'. $form['#node']->nid)));
+}
+
 /**
 * Implements hook_node_delete
 */
@@ -2075,11 +2080,19 @@ function s4_core_views_check_reverse_view_roles($rids, $view, $account = NULL) {
   return (!array_intersect(array_filter($rids), $roles));
 }
 
+function s4_core_admin_paths() {
+  $paths = array(
+    'signup/create/*' => TRUE,
+  );
+  return $paths;
+}
+
 function s4_core_s4_help($path) {
   module_load_include('inc', 's4_core', 's4_core.help');
   return _s4_core_help($path);
 }
 
 function s4_core_site_options_choice(&$form, $form_state) {
+  module_load_include('inc', 's4_core', 's4_core.pages');
   return $form['site_options'];
 }
