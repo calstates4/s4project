@@ -279,7 +279,7 @@ a:visited {
   font-weight: bold;
   text-shadow: 0 transparent;
 }
-#navigation .breadcrumba:hover {
+#navigation .breadcrumb a:hover {
   color: #ffffff;
 }
 #navigation .breadcrumb a:hover {
@@ -485,8 +485,6 @@ address {
 }
 .comment .comment-arrow {
   background: url(../images/comment-arrow.gif) no-repeat 0 center transparent;
-  /* LTR */
-
   border-left: 1px solid #fff;
   border-right: 1px solid #fff;
   height: 40px;
@@ -1081,4 +1079,11 @@ table#webform-components {
 }
 #page .ui-accordion-content-active {
   border-color: #00ae3e;
+}
+/** Hiding things in overlay mode **/
+.overlay #navigation,
+.overlay .breadcrumb,
+.overlay h1.title,
+.overlay #branding {
+  display: none;
 }
