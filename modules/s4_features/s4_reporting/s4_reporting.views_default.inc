@@ -1194,6 +1194,16 @@ Fields',
   $handler->display->display_options['fields']['field_site_restrict']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['field_site_restrict']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_site_restrict']['delta_offset'] = '0';
+  /* Field: Site Data: Current site staff students */
+  $handler->display->display_options['fields']['current_site_staff_students']['id'] = 'current_site_staff_students';
+  $handler->display->display_options['fields']['current_site_staff_students']['table'] = 's4_sites';
+  $handler->display->display_options['fields']['current_site_staff_students']['field'] = 'current_site_staff_students';
+  $handler->display->display_options['fields']['current_site_staff_students']['label'] = 'Current students';
+  /* Field: Site Data: Total site staff students */
+  $handler->display->display_options['fields']['total_site_staff_students']['id'] = 'total_site_staff_students';
+  $handler->display->display_options['fields']['total_site_staff_students']['table'] = 's4_sites';
+  $handler->display->display_options['fields']['total_site_staff_students']['field'] = 'total_site_staff_students';
+  $handler->display->display_options['fields']['total_site_staff_students']['label'] = 'Total students';
   /* Sort criterion: Field: Last Name (field_last_name) */
   $handler->display->display_options['sorts']['field_last_name_value']['id'] = 'field_last_name_value';
   $handler->display->display_options['sorts']['field_last_name_value']['table'] = 'field_data_field_last_name';
@@ -1285,6 +1295,8 @@ Fields',
     'field_csu_org_type' => 'field_csu_org_type',
     'field_tags' => 'field_tags',
     'field_site_restrict' => 'field_site_restrict',
+    'current_site_staff_students' => 'current_site_staff_students',
+    'total_site_staff_students' => 'total_site_staff_students',
   );
   $handler->display->display_options['filters']['dyfield']['defaults_filterable_fields'] = array(
     'views_bulk_operations' => 'views_bulk_operations',
@@ -1305,6 +1317,8 @@ Fields',
     'field_csu_org_type' => 0,
     'field_tags' => 0,
     'field_site_restrict' => 0,
+    'current_site_staff_students' => 0,
+    'total_site_staff_students' => 0,
   );
   $handler->display->display_options['filters']['dyfield']['sortability'] = 1;
   $handler->display->display_options['filters']['dyfield']['checkboxes'] = 0;
@@ -1615,6 +1629,8 @@ Fields',
     t('Organization type'),
     t('Tags '),
     t('Site programs'),
+    t('Current students'),
+    t('Total students'),
     t('Issues addressed'),
     t('Org. type'),
     t('Fields'),
