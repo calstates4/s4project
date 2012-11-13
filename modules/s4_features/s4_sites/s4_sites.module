@@ -673,14 +673,15 @@ function s4_sites_form_site_node_form_alter(&$form, $form_state) {
   array_unshift($form['#validate'], 's4_sites_form_site_node_form_alter_validate');
   
   $form['actions']['submit']['#value'] = t('Save draft');
-  
-  $form['actions']['publish_now'] = array(
-    '#type' => 'submit',
-    '#class' => 'form-submit',
-    '#value' => t('Save and publish'),
-    '#weight' => '9',
-    '#submit' => array('s4_sites_form_site_node_form_alter_submit')
-  );
+  if(user_access('moderate site information')) {
+    $form['actions']['publish_now'] = array(
+      '#type' => 'submit',
+      '#class' => 'form-submit',
+      '#value' => t('Save and publish'),
+      '#weight' => '9',
+      '#submit' => array('s4_sites_form_site_node_form_alter_submit')
+    );
+  }
   
   if (isset($form['nid']['#value']) && $form['#node']->status == 1) {
     $form['actions']['unpublish'] = array(
