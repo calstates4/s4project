@@ -3862,7 +3862,7 @@ function s4_sites_field_default_fields() {
       'field_name' => 'field_phone',
       'label' => 'Main phone number',
       'required' => 0,
-      's4_sites_field_access' => 0,
+      's4_sites_field_access' => 1,
       'settings' => array(
         'all_country_codes' => 0,
         'country_code_position' => 'after',
@@ -4104,7 +4104,7 @@ function s4_sites_field_default_fields() {
         ),
         'default_country' => 'us',
         'enable_country_level_validation' => 0,
-        'enable_default_country' => TRUE,
+        'enable_default_country' => 1,
         'enable_extension' => 1,
         'user_register_form' => FALSE,
       ),
@@ -4284,7 +4284,7 @@ function s4_sites_field_default_fields() {
       'field_name' => 'field_signups_max',
       'label' => 'Maximum number of students your site can accept at any given time',
       'required' => 0,
-      's4_sites_field_access' => 0,
+      's4_sites_field_access' => 1,
       'settings' => array(
         'max' => '',
         'min' => '0',

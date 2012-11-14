@@ -15,7 +15,7 @@ function s4_core_views_default_views() {
   $view->description = '';
   $view->tag = 'default';
   $view->base_table = 'node';
-  $view->human_name = 'Community member: your sites';
+  $view->human_name = 'S4: Community member: your sites';
   $view->core = 7;
   $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
@@ -107,7 +107,7 @@ function s4_core_views_default_views() {
   $view->description = '';
   $view->tag = 'default';
   $view->base_table = 'node_revision';
-  $view->human_name = 'Recent actions';
+  $view->human_name = 'S4: Recent actions';
   $view->core = 7;
   $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
@@ -497,7 +497,7 @@ function s4_core_views_default_views() {
   $view->description = '';
   $view->tag = 'default';
   $view->base_table = 'users';
-  $view->human_name = 's4: Search students';
+  $view->human_name = 'S4: Search students';
   $view->core = 7;
   $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */

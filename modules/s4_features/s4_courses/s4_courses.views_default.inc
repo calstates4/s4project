@@ -15,7 +15,7 @@ function s4_courses_views_default_views() {
   $view->description = '';
   $view->tag = 'default';
   $view->base_table = 'node';
-  $view->human_name = 'Course students';
+  $view->human_name = 'S4: Course students';
   $view->core = 7;
   $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
@@ -769,7 +769,7 @@ function s4_courses_views_default_views() {
   $view->description = 'A listing of terms for courses';
   $view->tag = 'course';
   $view->base_table = 'node';
-  $view->human_name = 'Course Terms';
+  $view->human_name = 'S4: Course Terms';
   $view->core = 7;
   $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
@@ -1010,7 +1010,7 @@ function s4_courses_views_default_views() {
   $view->description = '';
   $view->tag = 'default';
   $view->base_table = 'node';
-  $view->human_name = 'Courses';
+  $view->human_name = 'S4: Courses';
   $view->core = 7;
   $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */

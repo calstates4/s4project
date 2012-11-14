@@ -15,7 +15,7 @@ function s4_map_views_default_views() {
   $view->description = '';
   $view->tag = 'default';
   $view->base_table = 'node';
-  $view->human_name = 'Site Map';
+  $view->human_name = 'S4: Site Map';
   $view->core = 7;
   $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
@@ -107,6 +107,24 @@ function s4_map_views_default_views() {
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['path'] = 'json/map/sites';
+  $translatables['site_map'] = array(
+    t('Master'),
+    t('Site Map'),
+    t('more'),
+    t('Apply'),
+    t('Reset'),
+    t('Sort by'),
+    t('Asc'),
+    t('Desc'),
+    t('latitude'),
+    t('longitude'),
+    t('nid'),
+    t('path'),
+    t('hours'),
+    t('students'),
+    t('All'),
+    t('Page'),
+  );
   $export['site_map'] = $view;
 
   return $export;

@@ -466,7 +466,7 @@ function s4_sites_views_default_views() {
   $view->description = '';
   $view->tag = 'default';
   $view->base_table = 'node';
-  $view->human_name = 'Site Locations Map';
+  $view->human_name = 'S4: Site Locations Map';
   $view->core = 7;
   $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
@@ -1360,7 +1360,7 @@ Location',
   $view->description = 'Listings of site coordinators';
   $view->tag = 'default';
   $view->base_table = 'node';
-  $view->human_name = 'Site staff';
+  $view->human_name = 'S4: Site staff';
   $view->core = 7;
   $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
@@ -1436,8 +1436,8 @@ Location',
     'coordinator' => 'coordinator',
   );
 
-  /* Display: Page */
-  $handler = $view->new_display('page', 'Page', 'page_1');
+  /* Display: Page: Student list of site staff */
+  $handler = $view->new_display('page', 'Page: Student list of site staff', 'page_1');
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
@@ -1523,8 +1523,8 @@ Location',
   );
   $handler->display->display_options['path'] = 'sites/%/coordinators';
 
-  /* Display: Site staff tab */
-  $handler = $view->new_display('page', 'Site staff tab', 'page_2');
+  /* Display: Page: Site staff tab */
+  $handler = $view->new_display('page', 'Page: Site staff tab', 'page_2');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Site staff';
   $handler->display->display_options['defaults']['css_class'] = FALSE;
@@ -1727,8 +1727,8 @@ Location',
   $handler->display->display_options['menu']['title'] = 'Site Staff';
   $handler->display->display_options['menu']['weight'] = '0';
 
-  /* Display: Block */
-  $handler = $view->new_display('block', 'Block', 'block_1');
+  /* Display: Block: Active site staff */
+  $handler = $view->new_display('block', 'Block: Active site staff', 'block_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Active Site Staff';
   $handler->display->display_options['defaults']['access'] = FALSE;
@@ -1737,14 +1737,16 @@ Location',
     2 => '2',
   );
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Content: Title */
-  $handler->display->display_options['fields']['title']['id'] = 'title';
-  $handler->display->display_options['fields']['title']['table'] = 'node';
-  $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = 'Name';
-  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['title']['element_default_classes'] = FALSE;
+  /* Field: Field: Last Name */
+  $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
+  $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
+  $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
+  $handler->display->display_options['fields']['field_last_name']['label'] = 'Last name';
+  /* Field: Field: First Name */
+  $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
+  $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
+  $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
+  $handler->display->display_options['fields']['field_first_name']['label'] = 'First name';
   /* Field: Field: Program */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
@@ -1775,6 +1777,15 @@ Location',
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['label'] = 'Edit';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Field: First Name (field_first_name) */
+  $handler->display->display_options['sorts']['field_first_name_value']['id'] = 'field_first_name_value';
+  $handler->display->display_options['sorts']['field_first_name_value']['table'] = 'field_data_field_first_name';
+  $handler->display->display_options['sorts']['field_first_name_value']['field'] = 'field_first_name_value';
+  /* Sort criterion: Field: Last Name (field_last_name) */
+  $handler->display->display_options['sorts']['field_last_name_value']['id'] = 'field_last_name_value';
+  $handler->display->display_options['sorts']['field_last_name_value']['table'] = 'field_data_field_last_name';
+  $handler->display->display_options['sorts']['field_last_name_value']['field'] = 'field_last_name_value';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Content: Site (field_site) */
   $handler->display->display_options['arguments']['field_site_nid']['id'] = 'field_site_nid';
@@ -1837,12 +1848,12 @@ Location',
     t('Phone'),
     t('All'),
     t('%1'),
-    t('Page'),
+    t('Page: Student list of site staff'),
     t('<p class="intro">Select a coordinator who will be working with you during your service.</p>'),
     t('Job title'),
     t('Email'),
     t('Select'),
-    t('Site staff tab'),
+    t('Page: Site staff tab'),
     t('Site staff'),
     t('Last Name'),
     t('First Name'),
@@ -1856,7 +1867,7 @@ Location',
     t('[view_node] | [edit_node]'),
     t('First name'),
     t('Last name'),
-    t('Block'),
+    t('Block: Active site staff'),
     t('Active Site Staff'),
     t('Email address'),
   );
@@ -1867,7 +1878,7 @@ Location',
   $view->description = '';
   $view->tag = 'default';
   $view->base_table = 'node';
-  $view->human_name = 'Site fields';
+  $view->human_name = 'S4: Site fields';
   $view->core = 7;
   $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
@@ -1935,13 +1946,6 @@ Location',
   $handler->display->display_options['fields']['field_location']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['field_location']['type'] = 's4_sites_address';
   $handler->display->display_options['fields']['field_location']['delta_offset'] = '0';
-  /* Field: Broken/missing handler */
-  $handler->display->display_options['fields']['field_site_images']['id'] = 'field_site_images';
-  $handler->display->display_options['fields']['field_site_images']['table'] = 'field_data_field_site_images';
-  $handler->display->display_options['fields']['field_site_images']['field'] = 'field_site_images';
-  $handler->display->display_options['fields']['field_site_images']['element_label_type'] = 'strong';
-  $handler->display->display_options['fields']['field_site_images']['hide_empty'] = TRUE;
-  $handler->display->display_options['fields']['field_site_images']['hide_alter_empty'] = FALSE;
   /* Field: Content: What languages would you like students to speak other than English? */
   $handler->display->display_options['fields']['field_site_language']['id'] = 'field_site_language';
   $handler->display->display_options['fields']['field_site_language']['table'] = 'field_data_field_site_language';
@@ -2048,7 +2052,6 @@ Location',
     t('Social network page'),
     t('Phone number'),
     t('Location(s)'),
-    t('Broken handler field_data_field_site_images.field_site_images'),
     t('Suggested languages'),
     t('Number of people served'),
     t('Population served'),
@@ -2067,7 +2070,7 @@ Location',
   $view->description = '';
   $view->tag = 'default';
   $view->base_table = 'node';
-  $view->human_name = 'site location';
+  $view->human_name = 'S4: Site Location';
   $view->core = 7;
   $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
@@ -2186,7 +2189,7 @@ Location',
   $view->description = '';
   $view->tag = 'default';
   $view->base_table = 'node';
-  $view->human_name = 'Site locations';
+  $view->human_name = 'S4: Site locations';
   $view->core = 7;
   $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
@@ -2494,7 +2497,7 @@ Location',
   $view->description = '';
   $view->tag = 'default';
   $view->base_table = 'node';
-  $view->human_name = 'sites';
+  $view->human_name = 'S4: Sites';
   $view->core = 7;
   $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
