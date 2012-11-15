@@ -2079,11 +2079,8 @@ function s4_core_views_check_reverse_view_roles($rids, $view, $account = NULL) {
   return (!array_intersect(array_filter($rids), $roles));
 }
 
-function s4_core_admin_paths() {
-  $paths = array(
-    'signup/create/*' => TRUE,
-  );
-  return $paths;
+function s4_core_admin_paths_alter(&$paths) {
+  $paths = array('signup/create/*' => TRUE);
 }
 
 function s4_core_s4_help($path) {
