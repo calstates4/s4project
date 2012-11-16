@@ -440,6 +440,7 @@ function s4_sites_block_info() {
   $blocks['s4_sites_form_webform'] = array('info' => 'Site form webform results');
   $blocks['s4_sites_return_tab'] = array('info' => 'Return to site');
   $blocks['s4_sites_merge_link'] = array('info' => 'Merge sites link');
+  $blocks['s4_sites_site_full'] = array('info' => 'Site is full indicator');
   return $blocks;
 }
 
@@ -479,6 +480,20 @@ function s4_sites_block_view($delta) {
         return;
       }
       return array('content' => l(t('Merge with another site'), 'node/'. $node->nid .'/merge'));
+    case 's4_sites_site_full':
+      $node = menu_get_object();
+      if(!$node || $node->type != 'site') {
+        return;
+      }
+      
+        return array('content' => t('This site is full'));
+      $max = field_get_items('node', $node, 'field_signups_max');
+      if(!$max || $max[0]['value'] == 0) {
+        return;
+      }
+      if(_s4_core_object_is_full($node)) {
+        return array('content' => t('This site is full'));
+      }
   }
 
 }

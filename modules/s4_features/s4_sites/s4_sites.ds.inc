@@ -123,6 +123,20 @@ function s4_sites_ds_custom_fields_info() {
 
   $ds_field = new stdClass();
   $ds_field->api_version = 1;
+  $ds_field->field = 'site_is_full';
+  $ds_field->label = 'Site is full';
+  $ds_field->field_type = 6;
+  $ds_field->entities = array(
+    'node' => 'node',
+  );
+  $ds_field->properties = array(
+    'block' => 's4_sites|s4_sites_site_full',
+    'block_render' => '1',
+  );
+  $export['site_is_full'] = $ds_field;
+
+  $ds_field = new stdClass();
+  $ds_field->api_version = 1;
   $ds_field->field = 'site_staff';
   $ds_field->label = 'Site staff';
   $ds_field->field_type = 6;
@@ -239,22 +253,23 @@ function s4_sites_ds_layout_settings_info() {
       ),
       'right' => array(
         0 => 'merge_sites_link',
-        1 => 's4_core_signup_select_site',
-        2 => 'field_csu_facility',
-        3 => 'field_site_restrict',
-        4 => 'field_csu_org_type',
-        5 => 'field_website',
-        6 => 'field_phone',
-        7 => 'field_site_email',
-        8 => 'field_location',
-        9 => 'map',
-        10 => 'field_site_facebook_page',
-        11 => 'field_population_size',
-        12 => 'field_site_demographics',
-        13 => 'field_site_language',
-        14 => 'field_site_requirements',
-        15 => 'field_signups_max',
-        16 => 'field_site_hours_minimum',
+        1 => 's4_sites_site_full',
+        2 => 's4_core_signup_select_site',
+        3 => 'field_csu_facility',
+        4 => 'field_site_restrict',
+        5 => 'field_csu_org_type',
+        6 => 'field_website',
+        7 => 'field_phone',
+        8 => 'field_site_email',
+        9 => 'field_location',
+        10 => 'map',
+        11 => 'field_site_facebook_page',
+        12 => 'field_population_size',
+        13 => 'field_site_demographics',
+        14 => 'field_site_language',
+        15 => 'field_site_requirements',
+        16 => 'field_signups_max',
+        17 => 'field_site_hours_minimum',
       ),
     ),
     'fields' => array(
