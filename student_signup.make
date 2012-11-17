@@ -95,6 +95,9 @@ projects[libraries][version] = "1.0"
 projects[location][subdir] = "contrib"
 projects[location][version] = "3.0-alpha1"
 
+projects[login_destination][subdir] = "contrib"
+projects[login_destination][version] = "1.0"
+
 projects[link][subdir] = "contrib"
 projects[link][version] = "1.0"
 

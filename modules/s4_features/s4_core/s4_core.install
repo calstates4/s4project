@@ -12,6 +12,17 @@ function s4_core_install() {
     ))
     ->execute();
   
+  db_insert('login_destination')
+    ->fields(array(
+      'triggers' => serialize(array('login' => 'login')),
+      'roles' => serialize(array()),
+      'page_type' => 0,
+      'pages' => '',
+      'destination_type' => 0,
+      'destination' => '<front>',
+      'weight' => 0
+    ))
+    ->execute();
 }
 
 /**

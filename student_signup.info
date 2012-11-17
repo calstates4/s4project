@@ -84,6 +84,7 @@ dependencies[] = location_feeds
 dependencies[] = location_node
 dependencies[] = location_phone
 dependencies[] = location_search
+dependencies[] = login_destination
 dependencies[] = masquerade
 dependencies[] = matrix
 dependencies[] = messaging
