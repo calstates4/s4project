@@ -1222,37 +1222,5 @@ function s4_sites_strongarm() {
   $strongarm->value = 'form/[node:nid]';
   $export['pathauto_node_webform_pattern'] = $strongarm;
 
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 's4_sites_field_access';
-  $strongarm->value = array(
-    'field_site_form' => FALSE,
-    'field_site_restrict' => FALSE,
-    'field_site_users' => FALSE,
-    'field_site_eval_form' => FALSE,
-    'field_workflow_status' => FALSE,
-    'field_health_risk' => FALSE,
-    'field_site_tour' => FALSE,
-    'field_population_size' => FALSE,
-    'field_district_federal' => FALSE,
-    'field_district_state_lower' => FALSE,
-    'field_district_state_upper' => FALSE,
-    'field_phone' => FALSE,
-    'field_site_demographics' => FALSE,
-    'field_site_language' => FALSE,
-    'field_site_hours' => FALSE,
-    'field_site_projects' => FALSE,
-    'field_site_hours_minimum' => FALSE,
-    'field_location' => FALSE,
-    'field_site_signup_group' => FALSE,
-    'field_site_evaluation_group' => FALSE,
-    'field_site_other_csu' => FALSE,
-    'field_signups_max' => FALSE,
-    'field_operating_hours' => FALSE,
-    'field_site_instructions' => FALSE,
-  );
-  $export['s4_sites_field_access'] = $strongarm;
-
   return $export;
 }

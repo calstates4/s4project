@@ -645,22 +645,13 @@ function s4_sites_form_field_ui_field_edit_form_alter(&$form, $form_state) {
   if ($form['#instance']['entity_type'] != 'node' || $form['#instance']['bundle'] != 'site') {
     return null;
   }
-
-  $access = variable_get('s4_sites_field_access', array());
-
+  
   $form['instance']['s4_sites_field_access'] = array(
     '#type' => 'checkbox',
     '#title' => 'Non department staff can edit this field',
-    '#default_value' => ($access[$form['#field']['field_name']] !== false),
+    '#default_value' => ($form['#instance']['s4_sites_field_access']) ? $form['#instance']['s4_sites_field_access'] : FALSE,
   );
 
-  $form['#submit'][] = 's4_sites_form_field_ui_field_edit_form_alter_submit';
-}
-
-function s4_sites_form_field_ui_field_edit_form_alter_submit($form, $form_state) {
-  $access = variable_get('s4_sites_field_access', array());
-  $access[$form['#field']['field_name']] = ($form_state['values']['s4_sites_field_access']) ? true : false;
-  variable_set('s4_sites_field_access', $access);
 }
 
 /**
@@ -732,10 +723,11 @@ function s4_sites_form_site_node_form_alter(&$form, $form_state) {
     foreach($form['#groups'] as $k => $group) {
       $form['#groups'][$k]->format_type = 'accordion-item';
     }
+    $form['actions']['submit']['#value'] = t('Propose site');
     $form['#groups']['group_site_tabs']->format_type = 'accordion';
-    $access = variable_get('s4_sites_field_access', array());
-    foreach($access as $name => $access) {
-      if ($access === false) {
+    $fields = field_info_instances('node', 'site');
+    foreach($fields as $name => $field) {
+      if (!$field['s4_sites_field_access']) {
         $form[$name]['#access'] = $form[$name]['#required'] = false;
       }
     }

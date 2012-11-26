@@ -3012,10 +3012,12 @@ function s4_sites_field_default_fields() {
           'weight' => 0,
         ),
       ),
+      'display_label' => '',
       'entity_type' => 'node',
       'field_name' => 'body',
       'label' => 'Site description',
       'required' => 0,
+      's4_sites_field_access' => 1,
       'settings' => array(
         'display_summary' => 1,
         'text_processing' => '1',
@@ -3061,8 +3063,8 @@ function s4_sites_field_default_fields() {
       'settings' => array(
         'allowed_values' => array(
           0 => array(
-            'parent' => '0',
             'vocabulary' => 'issues_addressed',
+            'parent' => '0',
           ),
         ),
       ),
@@ -3080,7 +3082,7 @@ function s4_sites_field_default_fields() {
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_link',
-          'weight' => '7',
+          'weight' => '13',
         ),
         'full' => array(
           'label' => 'above',
@@ -3107,10 +3109,12 @@ function s4_sites_field_default_fields() {
           'weight' => 0,
         ),
       ),
+      'display_label' => '',
       'entity_type' => 'node',
       'field_name' => 'field_csu_facility',
       'label' => 'Issues addressed',
       'required' => 0,
+      's4_sites_field_access' => 1,
       'settings' => array(
         'user_register_form' => FALSE,
       ),
@@ -3150,8 +3154,8 @@ function s4_sites_field_default_fields() {
       'settings' => array(
         'allowed_values' => array(
           0 => array(
-            'parent' => '0',
             'vocabulary' => 'organization_type',
+            'parent' => '0',
           ),
         ),
       ),
@@ -3169,7 +3173,7 @@ function s4_sites_field_default_fields() {
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_link',
-          'weight' => '9',
+          'weight' => '14',
         ),
         'full' => array(
           'label' => 'above',
@@ -3196,10 +3200,12 @@ function s4_sites_field_default_fields() {
           'weight' => 0,
         ),
       ),
+      'display_label' => '',
       'entity_type' => 'node',
       'field_name' => 'field_csu_org_type',
       'label' => 'Organization type',
       'required' => 0,
+      's4_sites_field_access' => 1,
       'settings' => array(
         'user_register_form' => FALSE,
       ),
@@ -3253,7 +3259,7 @@ function s4_sites_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => '32',
+          'weight' => '36',
         ),
         'full' => array(
           'label' => 'above',
@@ -3285,7 +3291,7 @@ function s4_sites_field_default_fields() {
       'field_name' => 'field_district_federal',
       'label' => 'Federal district',
       'required' => 0,
-      's4_sites_field_access' => 1,
+      's4_sites_field_access' => 0,
       'settings' => array(
         'text_processing' => '0',
         'user_register_form' => FALSE,
@@ -3342,7 +3348,7 @@ function s4_sites_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => '34',
+          'weight' => '37',
         ),
         'full' => array(
           'label' => 'above',
@@ -3374,7 +3380,7 @@ function s4_sites_field_default_fields() {
       'field_name' => 'field_district_state_lower',
       'label' => 'State lower district',
       'required' => 0,
-      's4_sites_field_access' => 1,
+      's4_sites_field_access' => 0,
       'settings' => array(
         'text_processing' => '0',
         'user_register_form' => FALSE,
@@ -3431,7 +3437,7 @@ function s4_sites_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => '35',
+          'weight' => '38',
         ),
         'full' => array(
           'label' => 'above',
@@ -3551,7 +3557,7 @@ function s4_sites_field_default_fields() {
       'field_name' => 'field_health_risk',
       'label' => 'Risk identification',
       'required' => 0,
-      's4_sites_field_access' => 0,
+      's4_sites_field_access' => 1,
       'settings' => array(
         'text_processing' => '1',
         'user_register_form' => FALSE,
@@ -3676,7 +3682,7 @@ function s4_sites_field_default_fields() {
           'module' => 's4_sites',
           'settings' => array(),
           'type' => 's4_sites_address',
-          'weight' => '14',
+          'weight' => '19',
         ),
         'full' => array(
           'label' => 'above',
@@ -3830,7 +3836,7 @@ function s4_sites_field_default_fields() {
           'module' => 'cck_phone',
           'settings' => array(),
           'type' => 'local_phone_number',
-          'weight' => '12',
+          'weight' => '16',
         ),
         'full' => array(
           'label' => 'above',
@@ -4158,7 +4164,7 @@ function s4_sites_field_default_fields() {
             'thousand_separator' => ',',
           ),
           'type' => 'number_integer',
-          'weight' => '17',
+          'weight' => '21',
         ),
         'full' => array(
           'label' => 'above',
@@ -4252,7 +4258,7 @@ function s4_sites_field_default_fields() {
             'thousand_separator' => ' ',
           ),
           'type' => 'number_integer',
-          'weight' => '21',
+          'weight' => '25',
         ),
         'full' => array(
           'label' => 'above',
@@ -4377,7 +4383,7 @@ function s4_sites_field_default_fields() {
           'module' => 's4_sites',
           'settings' => array(),
           'type' => 's4_sites_population_matrix',
-          'weight' => '18',
+          'weight' => '22',
         ),
         'full' => array(
           'label' => 'above',
@@ -4451,7 +4457,7 @@ function s4_sites_field_default_fields() {
           'module' => 'email',
           'settings' => array(),
           'type' => 'email_default',
-          'weight' => '13',
+          'weight' => '18',
         ),
         'full' => array(
           'label' => 'above',
@@ -4478,10 +4484,12 @@ function s4_sites_field_default_fields() {
           'weight' => 0,
         ),
       ),
+      'display_label' => '',
       'entity_type' => 'node',
       'field_name' => 'field_site_email',
       'label' => 'Contact email',
       'required' => 0,
+      's4_sites_field_access' => 1,
       'settings' => array(
         'user_register_form' => FALSE,
       ),
@@ -4492,7 +4500,7 @@ function s4_sites_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'email_textfield',
-        'weight' => '0',
+        'weight' => 0,
       ),
     ),
   );
@@ -4530,7 +4538,7 @@ function s4_sites_field_default_fields() {
             'edit' => 'Edit',
           ),
           'type' => 'field_collection_list',
-          'weight' => '38',
+          'weight' => '41',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -4556,7 +4564,7 @@ function s4_sites_field_default_fields() {
       'field_name' => 'field_site_evaluation_group',
       'label' => 'Evaluation forms',
       'required' => 0,
-      's4_sites_field_access' => 1,
+      's4_sites_field_access' => 0,
       'settings' => array(
         'user_register_form' => FALSE,
       ),
@@ -4611,7 +4619,7 @@ function s4_sites_field_default_fields() {
           'module' => 'link',
           'settings' => array(),
           'type' => 'link_default',
-          'weight' => '16',
+          'weight' => '20',
         ),
         'full' => array(
           'label' => 'above',
@@ -4639,22 +4647,26 @@ function s4_sites_field_default_fields() {
           'weight' => 0,
         ),
       ),
+      'display_label' => '',
       'entity_type' => 'node',
       'field_name' => 'field_site_facebook_page',
       'label' => 'Social network page',
       'required' => 0,
+      's4_sites_field_access' => 1,
       'settings' => array(
         'attributes' => array(
           'class' => 'social-link',
+          'configurable_title' => 0,
           'rel' => '',
           'target' => '_blank',
+          'title' => '',
         ),
         'display' => array(
           'url_cutoff' => '80',
         ),
         'enable_tokens' => 0,
         'title' => 'none',
-        'title_maxlength' => 128,
+        'title_maxlength' => '128',
         'title_value' => '',
         'url' => 0,
         'user_register_form' => FALSE,
@@ -4736,10 +4748,12 @@ function s4_sites_field_default_fields() {
           'weight' => 0,
         ),
       ),
+      'display_label' => '',
       'entity_type' => 'node',
       'field_name' => 'field_site_health_training',
       'label' => 'Training and orientation information',
       'required' => 0,
+      's4_sites_field_access' => 1,
       'settings' => array(
         'text_processing' => '1',
         'user_register_form' => FALSE,
@@ -4834,7 +4848,7 @@ function s4_sites_field_default_fields() {
           ),
         ),
         'rows_count' => '8',
-        'settings' => 'a:6:{i:0;b:0;s:10:"old_define";s:4:"cols";s:14:"old_rows_count";s:1:"8";s:14:"old_cols_count";s:1:"7";s:4:"cols";a:7:{i:1;a:8:{s:10:"field_type";s:10:"checkboxes";s:5:"title";s:6:"Monday";s:9:"textfield";a:3:{s:4:"size";s:0:"";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";}s:6:"select";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:6:"radios";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:10:"checkboxes";a:2:{s:14:"allowed_values";s:7:"Monday|";s:23:"allowed_values_function";s:1:"0";}s:11:"calculation";a:4:{s:11:"calculation";s:3:"sum";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";s:8:"rounding";s:0:"";}s:6:"custom";a:1:{s:6:"custom";s:32:"matrix_custom_processing_example";}}i:2;a:8:{s:10:"field_type";s:10:"checkboxes";s:5:"title";s:7:"Tuesday";s:9:"textfield";a:3:{s:4:"size";s:0:"";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";}s:6:"select";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:6:"radios";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:10:"checkboxes";a:2:{s:14:"allowed_values";s:8:"Tuesday|";s:23:"allowed_values_function";s:1:"0";}s:11:"calculation";a:4:{s:11:"calculation";s:3:"sum";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";s:8:"rounding";s:0:"";}s:6:"custom";a:1:{s:6:"custom";s:32:"matrix_custom_processing_example";}}i:3;a:8:{s:10:"field_type";s:10:"checkboxes";s:5:"title";s:9:"Wednesday";s:9:"textfield";a:3:{s:4:"size";s:0:"";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";}s:6:"select";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:6:"radios";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:10:"checkboxes";a:2:{s:14:"allowed_values";s:10:"Wednesday|";s:23:"allowed_values_function";s:1:"0";}s:11:"calculation";a:4:{s:11:"calculation";s:3:"sum";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";s:8:"rounding";s:0:"";}s:6:"custom";a:1:{s:6:"custom";s:32:"matrix_custom_processing_example";}}i:4;a:8:{s:10:"field_type";s:10:"checkboxes";s:5:"title";s:8:"Thursday";s:9:"textfield";a:3:{s:4:"size";s:0:"";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";}s:6:"select";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:6:"radios";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:10:"checkboxes";a:2:{s:14:"allowed_values";s:9:"Thursday|";s:23:"allowed_values_function";s:1:"0";}s:11:"calculation";a:4:{s:11:"calculation";s:3:"sum";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";s:8:"rounding";s:0:"";}s:6:"custom";a:1:{s:6:"custom";s:32:"matrix_custom_processing_example";}}i:5;a:8:{s:10:"field_type";s:10:"checkboxes";s:5:"title";s:6:"Friday";s:9:"textfield";a:3:{s:4:"size";s:0:"";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";}s:6:"select";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:6:"radios";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:10:"checkboxes";a:2:{s:14:"allowed_values";s:7:"Friday|";s:23:"allowed_values_function";s:1:"0";}s:11:"calculation";a:4:{s:11:"calculation";s:3:"sum";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";s:8:"rounding";s:0:"";}s:6:"custom";a:1:{s:6:"custom";s:32:"matrix_custom_processing_example";}}i:6;a:8:{s:10:"field_type";s:10:"checkboxes";s:5:"title";s:8:"Saturday";s:9:"textfield";a:3:{s:4:"size";s:0:"";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";}s:6:"select";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:6:"radios";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:10:"checkboxes";a:2:{s:14:"allowed_values";s:9:"Saturday|";s:23:"allowed_values_function";s:1:"0";}s:11:"calculation";a:4:{s:11:"calculation";s:3:"sum";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";s:8:"rounding";s:0:"";}s:6:"custom";a:1:{s:6:"custom";s:32:"matrix_custom_processing_example";}}i:7;a:8:{s:10:"field_type";s:10:"checkboxes";s:5:"title";s:6:"Sunday";s:9:"textfield";a:3:{s:4:"size";s:0:"";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";}s:6:"select";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:6:"radios";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:10:"checkboxes";a:2:{s:14:"allowed_values";s:7:"Sunday|";s:23:"allowed_values_function";s:1:"0";}s:11:"calculation";a:4:{s:11:"calculation";s:3:"sum";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";s:8:"rounding";s:0:"";}s:6:"custom";a:1:{s:6:"custom";s:32:"matrix_custom_processing_example";}}}s:4:"rows";a:8:{i:1;a:8:{s:10:"field_type";s:4:"none";s:5:"title";s:10:"6 - 8 a.m.";s:9:"textfield";a:3:{s:4:"size";s:0:"";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";}s:6:"select";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:6:"radios";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:10:"checkboxes";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:11:"calculation";a:4:{s:11:"calculation";s:3:"sum";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";s:8:"rounding";s:0:"";}s:6:"custom";a:1:{s:6:"custom";s:32:"matrix_custom_processing_example";}}i:2;a:8:{s:10:"field_type";s:4:"none";s:5:"title";s:11:"8 - 10 a.m.";s:9:"textfield";a:3:{s:4:"size";s:0:"";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";}s:6:"select";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:6:"radios";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:10:"checkboxes";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:11:"calculation";a:4:{s:11:"calculation";s:3:"sum";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";s:8:"rounding";s:0:"";}s:6:"custom";a:1:{s:6:"custom";s:32:"matrix_custom_processing_example";}}i:3;a:8:{s:10:"field_type";s:4:"none";s:5:"title";s:9:"10 - Noon";s:9:"textfield";a:3:{s:4:"size";s:0:"";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";}s:6:"select";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:6:"radios";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:10:"checkboxes";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:11:"calculation";a:4:{s:11:"calculation";s:3:"sum";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";s:8:"rounding";s:0:"";}s:6:"custom";a:1:{s:6:"custom";s:32:"matrix_custom_processing_example";}}i:4;a:8:{s:10:"field_type";s:4:"none";s:5:"title";s:13:"Noon - 2 p.m.";s:9:"textfield";a:3:{s:4:"size";s:0:"";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";}s:6:"select";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:6:"radios";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:10:"checkboxes";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:11:"calculation";a:4:{s:11:"calculation";s:3:"sum";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";s:8:"rounding";s:0:"";}s:6:"custom";a:1:{s:6:"custom";s:32:"matrix_custom_processing_example";}}i:5;a:8:{s:10:"field_type";s:4:"none";s:5:"title";s:10:"2 - 4 p.m.";s:9:"textfield";a:3:{s:4:"size";s:0:"";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";}s:6:"select";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:6:"radios";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:10:"checkboxes";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:11:"calculation";a:4:{s:11:"calculation";s:3:"sum";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";s:8:"rounding";s:0:"";}s:6:"custom";a:1:{s:6:"custom";s:32:"matrix_custom_processing_example";}}i:6;a:8:{s:10:"field_type";s:4:"none";s:5:"title";s:10:"4 - 6 p.m.";s:9:"textfield";a:3:{s:4:"size";s:0:"";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";}s:6:"select";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:6:"radios";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:10:"checkboxes";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:11:"calculation";a:4:{s:11:"calculation";s:3:"sum";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";s:8:"rounding";s:0:"";}s:6:"custom";a:1:{s:6:"custom";s:32:"matrix_custom_processing_example";}}i:7;a:8:{s:10:"field_type";s:4:"none";s:5:"title";s:10:"6 - 8 p.m.";s:9:"textfield";a:3:{s:4:"size";s:0:"";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";}s:6:"select";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:6:"radios";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:10:"checkboxes";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:11:"calculation";a:4:{s:11:"calculation";s:3:"sum";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";s:8:"rounding";s:0:"";}s:6:"custom";a:1:{s:6:"custom";s:32:"matrix_custom_processing_example";}}i:8;a:8:{s:10:"field_type";s:4:"none";s:5:"title";s:11:"8 - 10 p.m.";s:9:"textfield";a:3:{s:4:"size";s:0:"";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";}s:6:"select";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:6:"radios";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:10:"checkboxes";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:11:"calculation";a:4:{s:11:"calculation";s:3:"sum";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";s:8:"rounding";s:0:"";}s:6:"custom";a:1:{s:6:"custom";s:32:"matrix_custom_processing_example";}}}}',
+        'settings' => 'a:6:{i:0;b:0;s:10:"old_define";s:4:"cols";s:14:"old_rows_count";s:1:"8";s:14:"old_cols_count";s:1:"1";s:4:"cols";a:1:{i:1;a:8:{s:10:"field_type";s:9:"textfield";s:5:"title";s:7:"Percent";s:9:"textfield";a:3:{s:4:"size";s:1:"3";s:6:"prefix";s:0:"";s:6:"suffix";s:1:"%";}s:6:"select";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:6:"radios";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:10:"checkboxes";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:11:"calculation";a:4:{s:11:"calculation";s:3:"sum";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";s:8:"rounding";s:0:"";}s:6:"custom";a:1:{s:6:"custom";s:32:"matrix_custom_processing_example";}}}s:4:"rows";a:8:{i:1;a:8:{s:10:"field_type";s:4:"none";s:5:"title";s:16:"African American";s:9:"textfield";a:3:{s:4:"size";s:0:"";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";}s:6:"select";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:6:"radios";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:10:"checkboxes";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:11:"calculation";a:4:{s:11:"calculation";s:3:"sum";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";s:8:"rounding";s:0:"";}s:6:"custom";a:1:{s:6:"custom";s:32:"matrix_custom_processing_example";}}i:2;a:8:{s:10:"field_type";s:4:"none";s:5:"title";s:14:"Asian American";s:9:"textfield";a:3:{s:4:"size";s:0:"";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";}s:6:"select";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:6:"radios";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:10:"checkboxes";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:11:"calculation";a:4:{s:11:"calculation";s:3:"sum";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";s:8:"rounding";s:0:"";}s:6:"custom";a:1:{s:6:"custom";s:32:"matrix_custom_processing_example";}}i:3;a:8:{s:10:"field_type";s:4:"none";s:5:"title";s:22:"Biracial/Multicultural";s:9:"textfield";a:3:{s:4:"size";s:0:"";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";}s:6:"select";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:6:"radios";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:10:"checkboxes";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:11:"calculation";a:4:{s:11:"calculation";s:3:"sum";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";s:8:"rounding";s:0:"";}s:6:"custom";a:1:{s:6:"custom";s:32:"matrix_custom_processing_example";}}i:4;a:8:{s:10:"field_type";s:4:"none";s:5:"title";s:9:"Caucasian";s:9:"textfield";a:3:{s:4:"size";s:0:"";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";}s:6:"select";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:6:"radios";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:10:"checkboxes";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:11:"calculation";a:4:{s:11:"calculation";s:3:"sum";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";s:8:"rounding";s:0:"";}s:6:"custom";a:1:{s:6:"custom";s:32:"matrix_custom_processing_example";}}i:5;a:8:{s:10:"field_type";s:4:"none";s:5:"title";s:8:"Latino/a";s:9:"textfield";a:3:{s:4:"size";s:0:"";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";}s:6:"select";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:6:"radios";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:10:"checkboxes";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:11:"calculation";a:4:{s:11:"calculation";s:3:"sum";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";s:8:"rounding";s:0:"";}s:6:"custom";a:1:{s:6:"custom";s:32:"matrix_custom_processing_example";}}i:6;a:8:{s:10:"field_type";s:4:"none";s:5:"title";s:15:"Native American";s:9:"textfield";a:3:{s:4:"size";s:0:"";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";}s:6:"select";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:6:"radios";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:10:"checkboxes";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:11:"calculation";a:4:{s:11:"calculation";s:3:"sum";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";s:8:"rounding";s:0:"";}s:6:"custom";a:1:{s:6:"custom";s:32:"matrix_custom_processing_example";}}i:7;a:8:{s:10:"field_type";s:4:"none";s:5:"title";s:16:"Pacific Islander";s:9:"textfield";a:3:{s:4:"size";s:0:"";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";}s:6:"select";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:6:"radios";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:10:"checkboxes";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:11:"calculation";a:4:{s:11:"calculation";s:3:"sum";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";s:8:"rounding";s:0:"";}s:6:"custom";a:1:{s:6:"custom";s:32:"matrix_custom_processing_example";}}i:8;a:8:{s:10:"field_type";s:4:"none";s:5:"title";s:5:"Other";s:9:"textfield";a:3:{s:4:"size";s:0:"";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";}s:6:"select";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:6:"radios";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:10:"checkboxes";a:2:{s:14:"allowed_values";s:0:"";s:23:"allowed_values_function";s:1:"0";}s:11:"calculation";a:4:{s:11:"calculation";s:3:"sum";s:6:"prefix";s:0:"";s:6:"suffix";s:0:"";s:8:"rounding";s:0:"";}s:6:"custom";a:1:{s:6:"custom";s:32:"matrix_custom_processing_example";}}}}',
       ),
       'translatable' => '1',
       'type' => 'matrix_custom',
@@ -4881,8 +4895,8 @@ function s4_sites_field_default_fields() {
       'entity_type' => 'node',
       'field_name' => 'field_site_hours',
       'label' => 'Days and hours will you accept students for service (check all that apply)',
-      'required' => FALSE,
-      's4_sites_field_access' => 0,
+      'required' => 0,
+      's4_sites_field_access' => 1,
       'settings' => array(
         'user_register_form' => FALSE,
       ),
@@ -4947,7 +4961,7 @@ function s4_sites_field_default_fields() {
           'module' => 'list',
           'settings' => array(),
           'type' => 'list_default',
-          'weight' => '22',
+          'weight' => '26',
         ),
         'full' => array(
           'label' => 'above',
@@ -5031,7 +5045,7 @@ function s4_sites_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => '33',
+          'weight' => '8',
         ),
         'full' => array(
           'label' => 'above',
@@ -5124,7 +5138,7 @@ function s4_sites_field_default_fields() {
           'module' => 'list',
           'settings' => array(),
           'type' => 'list_default',
-          'weight' => '36',
+          'weight' => '39',
         ),
         'full' => array(
           'label' => 'above',
@@ -5151,10 +5165,12 @@ function s4_sites_field_default_fields() {
           'weight' => 0,
         ),
       ),
+      'display_label' => '',
       'entity_type' => 'node',
       'field_name' => 'field_site_instructions_required',
       'label' => 'Site has special requirements',
       'required' => 0,
+      's4_sites_field_access' => 0,
       'settings' => array(
         'user_register_form' => FALSE,
       ),
@@ -5215,7 +5231,7 @@ function s4_sites_field_default_fields() {
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_link',
-          'weight' => '19',
+          'weight' => '23',
         ),
         'full' => array(
           'label' => 'above',
@@ -5248,7 +5264,7 @@ function s4_sites_field_default_fields() {
       'field_name' => 'field_site_language',
       'label' => 'What languages would you like students to speak other than English?',
       'required' => 0,
-      's4_sites_field_access' => 0,
+      's4_sites_field_access' => 1,
       'settings' => array(
         'user_register_form' => FALSE,
       ),
@@ -5322,7 +5338,7 @@ function s4_sites_field_default_fields() {
           'module' => 'list',
           'settings' => array(),
           'type' => 'list_default',
-          'weight' => '39',
+          'weight' => '42',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -5475,8 +5491,8 @@ function s4_sites_field_default_fields() {
       'settings' => array(
         'allowed_values' => array(
           0 => array(
-            'parent' => '0',
             'vocabulary' => 'special_requirements',
+            'parent' => '0',
           ),
         ),
       ),
@@ -5494,7 +5510,7 @@ function s4_sites_field_default_fields() {
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_link',
-          'weight' => '20',
+          'weight' => '24',
         ),
         'full' => array(
           'label' => 'above',
@@ -5522,10 +5538,12 @@ function s4_sites_field_default_fields() {
           'weight' => 0,
         ),
       ),
+      'display_label' => '',
       'entity_type' => 'node',
       'field_name' => 'field_site_requirements',
       'label' => 'Site special requirements',
       'required' => 0,
+      's4_sites_field_access' => 1,
       'settings' => array(
         'user_register_form' => FALSE,
       ),
@@ -5584,7 +5602,7 @@ function s4_sites_field_default_fields() {
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_plain',
-          'weight' => '8',
+          'weight' => '12',
         ),
         'full' => array(
           'label' => 'above',
@@ -5663,7 +5681,7 @@ function s4_sites_field_default_fields() {
             'edit' => 'Edit',
           ),
           'type' => 'field_collection_list',
-          'weight' => '37',
+          'weight' => '40',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -5689,7 +5707,7 @@ function s4_sites_field_default_fields() {
       'field_name' => 'field_site_signup_group',
       'label' => 'Signup forms',
       'required' => 0,
-      's4_sites_field_access' => 1,
+      's4_sites_field_access' => 0,
       'settings' => array(
         'user_register_form' => FALSE,
       ),
@@ -5741,7 +5759,7 @@ function s4_sites_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => '29',
+          'weight' => '7',
         ),
         'full' => array(
           'label' => 'above',
@@ -5773,7 +5791,7 @@ function s4_sites_field_default_fields() {
       'field_name' => 'field_site_tour',
       'label' => 'Site tour',
       'required' => 0,
-      's4_sites_field_access' => 0,
+      's4_sites_field_access' => 1,
       'settings' => array(
         'text_processing' => '1',
         'user_register_form' => FALSE,
@@ -5867,7 +5885,7 @@ function s4_sites_field_default_fields() {
           'module' => 'user_reference',
           'settings' => array(),
           'type' => 'user_reference_default',
-          'weight' => '31',
+          'weight' => '35',
         ),
         'full' => array(
           'label' => 'above',
@@ -5942,8 +5960,8 @@ function s4_sites_field_default_fields() {
       'settings' => array(
         'allowed_values' => array(
           0 => array(
-            'parent' => 0,
             'vocabulary' => 'tags',
+            'parent' => 0,
           ),
         ),
       ),
@@ -5961,7 +5979,7 @@ function s4_sites_field_default_fields() {
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_link',
-          'weight' => '30',
+          'weight' => '34',
         ),
         'full' => array(
           'label' => 'above',
@@ -5989,10 +6007,12 @@ function s4_sites_field_default_fields() {
           'weight' => 0,
         ),
       ),
+      'display_label' => '',
       'entity_type' => 'node',
       'field_name' => 'field_tags',
       'label' => 'Tags',
       'required' => 0,
+      's4_sites_field_access' => 0,
       'settings' => array(
         'user_register_form' => FALSE,
       ),
@@ -6050,7 +6070,7 @@ function s4_sites_field_default_fields() {
           'module' => 'link',
           'settings' => array(),
           'type' => 'link_default',
-          'weight' => '10',
+          'weight' => '15',
         ),
         'full' => array(
           'label' => 'above',
@@ -6077,22 +6097,26 @@ function s4_sites_field_default_fields() {
           'weight' => 0,
         ),
       ),
+      'display_label' => '',
       'entity_type' => 'node',
       'field_name' => 'field_website',
       'label' => 'Website',
       'required' => 0,
+      's4_sites_field_access' => 1,
       'settings' => array(
         'attributes' => array(
           'class' => 'site-website',
+          'configurable_title' => 0,
           'rel' => '',
           'target' => '_blank',
+          'title' => '',
         ),
         'display' => array(
           'url_cutoff' => '80',
         ),
         'enable_tokens' => 1,
         'title' => 'none',
-        'title_maxlength' => 128,
+        'title_maxlength' => '128',
         'title_value' => 'Visit Website',
         'url' => 0,
         'user_register_form' => FALSE,

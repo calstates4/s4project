@@ -53,12 +53,17 @@ function s4_sites_ds_field_settings_info() {
   $ds_fieldsetting->view_mode = 'default';
   $ds_fieldsetting->settings = array(
     'map' => array(
-      'weight' => '0',
+      'weight' => '17',
       'label' => 'hidden',
       'format' => 'default',
     ),
     'merge_sites_link' => array(
-      'weight' => '0',
+      'weight' => '10',
+      'label' => 'hidden',
+      'format' => 'default',
+    ),
+    'site_is_full' => array(
+      'weight' => '9',
       'label' => 'hidden',
       'format' => 'default',
     ),
