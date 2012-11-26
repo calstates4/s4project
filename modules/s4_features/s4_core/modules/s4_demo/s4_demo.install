@@ -1,6 +1,13 @@
 <?php
 
 function s4_demo_install() {
+  $vocabularies = taxonomy_vocabulary_get_names();
+  $terms = taxonomy_get_tree($vocabularies['site_restrictions']->vid);
+  foreach($terms as $term) {
+    $term = taxonomy_term_load($term->tid);
+    $term->field_program_site_proposal[LANGUAGE_NONE][0]['value'] = 1;
+    taxonomy_term_save($term);
+  }
   $feeds = array('demo_user_importer'         => 'users.csv',
                  'demo_term_importer'         => 'terms.csv',
                  'demo_course_importer'       => 'courses.csv',
