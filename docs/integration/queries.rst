@@ -44,15 +44,15 @@ This query is pulling all courses with a specific "SL" attribute, and also adds 
            WHEN subject = 'CHHS' THEN 'Collaborative Health and Human Services' 
            ELSE 'Service Learning' 
          END                         AS programs 
-  FROM   mb_ps_class_tbl c 
-         left join mb_ps_class_attribute a 
+  FROM   ps_class_tbl c 
+         left join ps_class_attribute a 
                 ON a.crse_id = c.crse_id 
                    AND a.crse_offer_nbr = c.crse_offer_nbr 
                    AND a.strm = c.strm 
                    AND a.crse_attr = 'CSLI' 
   WHERE  a.crse_attr_value = 'Y' 
          AND c.strm = (SELECT Min(strm) 
-                       FROM   mb_ps_term_tbl 
+                       FROM   ps_term_tbl 
                        WHERE  term_begin_dt <= SYSDATE 
                               AND session_code = '1') 
 
@@ -71,34 +71,34 @@ A union of multiple queries to pick up students in specific programs, students e
                             'Master of Social Work' 
                             ELSE NULL 
                           END AS program 
-          FROM   mb_ps_acad_plan_mv p 
+          FROM   ps_acad_plan p 
           WHERE  p.emplid = x.emplid 
                  AND p.effseq = 1 
                  AND p.effdt = (SELECT Max(p2.effdt) 
-                                FROM   mb_ps_acad_plan_mv p2 
+                                FROM   ps_acad_plan p2 
                                 WHERE  p2.emplid = p.emplid 
                                        AND p.effseq = 1)) AS program 
-  FROM   mb_ps_external_system x 
-         left join mb_ps_email_addresses em 
+  FROM   ps_external_system x 
+         left join ps_email_addresses em 
                 ON em.emplid = x.emplid 
-         left join mb_ps_names n 
+         left join ps_names n 
                 ON n.emplid = x.emplid 
                    AND n.name_type = 'PRI' 
   WHERE  x.external_system = 'LS3' 
          AND em.e_addr_type = 'OCMP' 
          AND n.effdt = (SELECT Max(n2.effdt) 
-                        FROM   mb_ps_names n2 
+                        FROM   ps_names n2 
                         WHERE  n2.emplid = n.emplid 
                                AND n2.name_type = 'PRI') 
          AND x.emplid IN (SELECT i.emplid 
-                          FROM   mb_ps_class_instr i 
+                          FROM   ps_class_instr i 
                           WHERE  i.strm = (SELECT Min(strm) 
-                                           FROM   mb_ps_term_tbl 
+                                           FROM   ps_term_tbl 
                                            WHERE  term_begin_dt <= SYSDATE 
                                                   AND session_code = '1') 
                                  AND i.crse_id IN (SELECT c.crse_id 
-                                                   FROM   mb_ps_class_tbl c 
-                                     left join mb_ps_class_attribute 
+                                                   FROM   ps_class_tbl c 
+                                     left join ps_class_attribute 
                                                a 
                                             ON a.crse_id = c.crse_id 
                                                AND a.crse_offer_nbr 
@@ -111,14 +111,14 @@ A union of multiple queries to pick up students in specific programs, students e
                                                           AND c.strm = i.strm) 
                           UNION 
                           SELECT e.emplid 
-                          FROM   mb_ps_stdnt_enrl e 
+                          FROM   ps_stdnt_enrl e 
                           WHERE  e.strm = (SELECT Min(strm) 
-                                           FROM   mb_ps_term_tbl 
+                                           FROM   ps_term_tbl 
                                            WHERE  term_begin_dt <= SYSDATE 
                                                   AND session_code = '1') 
                                  AND e.class_nbr IN (SELECT c.class_nbr 
-                                                     FROM   mb_ps_class_tbl c 
-                                     left join mb_ps_class_attribute a 
+                                                     FROM   ps_class_tbl c 
+                                     left join ps_class_attribute a 
                                             ON a.crse_id = c.crse_id 
                                                AND a.crse_offer_nbr = 
                                                    c.crse_offer_nbr 
@@ -130,11 +130,11 @@ A union of multiple queries to pick up students in specific programs, students e
                                      AND c.strm = e.strm) 
                           UNION 
                           SELECT DISTINCT s.emplid 
-                          FROM   mb_ps_acad_plan_mv s 
+                          FROM   ps_acad_plan s 
                           WHERE  s.acad_plan = 'MSW____MPB' 
                                  AND s.effseq = 1 
                                  AND s.effdt = (SELECT Max(effdt) 
-                                                FROM   mb_ps_acad_plan_mv s2 
+                                                FROM   ps_acad_plan s2 
                                                 WHERE  s2.emplid = s.emplid 
                                                        AND s2.effseq = 1)) 
 
@@ -150,14 +150,14 @@ CMS PeopleSoft has a really terrible lack of consistency when it comes to course
            ELSE 0 
          END                                           AS status, 
          Concat(e.emplid, Concat(e.strm, e.class_nbr)) AS enrollment_id 
-  FROM   mb_ps_stdnt_enrl e 
+  FROM   ps_stdnt_enrl e 
   WHERE  e.strm = (SELECT Min(strm) 
-                   FROM   mb_ps_term_tbl 
+                   FROM   ps_term_tbl 
                    WHERE  term_begin_dt <= SYSDATE 
                           AND session_code = '1') 
          AND e.class_nbr IN (SELECT c.class_nbr 
-                             FROM   mb_ps_class_tbl c 
-                                    left join mb_ps_class_attribute a 
+                             FROM   ps_class_tbl c 
+                                    left join ps_class_attribute a 
                                            ON a.crse_id = c.crse_id 
                                               AND a.crse_offer_nbr = 
                                                   c.crse_offer_nbr 
@@ -172,7 +172,7 @@ Faculty assignments
 Again we reconstruct the unique course ID consisting of the term code and the course number::
 
   SELECT Concat(i.strm, (SELECT class_nbr 
-                         FROM   mb_ps_class_tbl 
+                         FROM   ps_class_tbl 
                          WHERE  strm = i.strm 
                                 AND crse_id = i.crse_id 
                                 AND class_section = i.class_section))         AS 
@@ -183,14 +183,14 @@ Again we reconstruct the unique course ID consisting of the term code and the co
          status, 
          Concat(Concat(i.emplid, Concat(i.strm, i.crse_id)), i.class_section) AS 
          assignment_id 
-  FROM   mb_ps_class_instr i 
+  FROM   ps_class_instr i 
   WHERE  i.strm = (SELECT Min(strm) 
-                   FROM   mb_ps_term_tbl 
+                   FROM   ps_term_tbl 
                    WHERE  term_begin_dt <= SYSDATE 
                           AND session_code = '1') 
          AND i.crse_id IN (SELECT c.crse_id 
-                           FROM   mb_ps_class_tbl c 
-                                  left join mb_ps_class_attribute a 
+                           FROM   ps_class_tbl c 
+                                  left join ps_class_attribute a 
                                          ON a.crse_id = c.crse_id 
                                             AND a.crse_offer_nbr = 
                                                 c.crse_offer_nbr 
