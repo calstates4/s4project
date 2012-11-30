@@ -3180,7 +3180,7 @@ Fields',
   $view->description = '';
   $view->tag = 'default';
   $view->base_table = 'users';
-  $view->human_name = 'S4 Reports: students';
+  $view->human_name = 'Reports: students';
   $view->core = 7;
   $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
@@ -3250,17 +3250,22 @@ Fields',
     'group-field_csu_facility_tid' => array(
       'group' => '3',
       'filter_name' => 'field_csu_facility_tid',
-      'weight' => '-16',
+      'weight' => '-15',
     ),
     'group-city' => array(
       'group' => '3',
       'filter_name' => 'city',
-      'weight' => '-16',
+      'weight' => '-14',
     ),
     'group-field_site_restrict_tid_2' => array(
       'group' => '1',
       'filter_name' => 'field_site_restrict_tid_2',
       'weight' => '-16',
+    ),
+    'group-field_site_nid' => array(
+      'group' => '3',
+      'filter_name' => 'field_site_nid',
+      'weight' => '-17',
     ),
   );
   $handler->display->display_options['pager']['type'] = 'full';
@@ -3659,7 +3664,6 @@ Fields',
   $handler->display->display_options['fields']['field_email']['table'] = 'field_data_field_email';
   $handler->display->display_options['fields']['field_email']['field'] = 'field_email';
   $handler->display->display_options['fields']['field_email']['relationship'] = 'field_coordinator_nid';
-  $handler->display->display_options['fields']['field_email']['type'] = 'email_default';
   /* Field: Content: Job title */
   $handler->display->display_options['fields']['field_job_title']['id'] = 'field_job_title';
   $handler->display->display_options['fields']['field_job_title']['table'] = 'field_data_field_job_title';
@@ -3881,6 +3885,7 @@ Fields',
   $handler->display->display_options['filters']['field_csu_facility_tid']['table'] = 'field_data_field_csu_facility';
   $handler->display->display_options['filters']['field_csu_facility_tid']['field'] = 'field_csu_facility_tid';
   $handler->display->display_options['filters']['field_csu_facility_tid']['relationship'] = 'field_site_nid';
+  $handler->display->display_options['filters']['field_csu_facility_tid']['group'] = 1;
   $handler->display->display_options['filters']['field_csu_facility_tid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_csu_facility_tid']['expose']['operator_id'] = 'field_csu_facility_tid_op';
   $handler->display->display_options['filters']['field_csu_facility_tid']['expose']['label'] = 'Issues addressed';
@@ -3894,6 +3899,7 @@ Fields',
   $handler->display->display_options['filters']['city']['table'] = 'location';
   $handler->display->display_options['filters']['city']['field'] = 'city';
   $handler->display->display_options['filters']['city']['relationship'] = 'field_site_nid';
+  $handler->display->display_options['filters']['city']['group'] = 1;
   $handler->display->display_options['filters']['city']['exposed'] = TRUE;
   $handler->display->display_options['filters']['city']['expose']['operator_id'] = 'city_op';
   $handler->display->display_options['filters']['city']['expose']['label'] = 'City';
@@ -3904,6 +3910,7 @@ Fields',
   $handler->display->display_options['filters']['field_site_restrict_tid_2']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['filters']['field_site_restrict_tid_2']['field'] = 'field_site_restrict_tid';
   $handler->display->display_options['filters']['field_site_restrict_tid_2']['relationship'] = 'reverse_field_course_students_node';
+  $handler->display->display_options['filters']['field_site_restrict_tid_2']['group'] = 1;
   $handler->display->display_options['filters']['field_site_restrict_tid_2']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_site_restrict_tid_2']['expose']['operator_id'] = 'field_site_restrict_tid_2_op';
   $handler->display->display_options['filters']['field_site_restrict_tid_2']['expose']['label'] = 'Course program';
@@ -3912,6 +3919,17 @@ Fields',
   $handler->display->display_options['filters']['field_site_restrict_tid_2']['expose']['multiple'] = TRUE;
   $handler->display->display_options['filters']['field_site_restrict_tid_2']['type'] = 'select';
   $handler->display->display_options['filters']['field_site_restrict_tid_2']['vocabulary'] = 'site_restrictions';
+  /* Filter criterion: Content: Site (field_site) */
+  $handler->display->display_options['filters']['field_site_nid']['id'] = 'field_site_nid';
+  $handler->display->display_options['filters']['field_site_nid']['table'] = 'field_data_field_site';
+  $handler->display->display_options['filters']['field_site_nid']['field'] = 'field_site_nid';
+  $handler->display->display_options['filters']['field_site_nid']['relationship'] = 'reverse_field_user_node';
+  $handler->display->display_options['filters']['field_site_nid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_site_nid']['expose']['operator_id'] = 'field_site_nid_op';
+  $handler->display->display_options['filters']['field_site_nid']['expose']['label'] = 'Site';
+  $handler->display->display_options['filters']['field_site_nid']['expose']['operator'] = 'field_site_nid_op';
+  $handler->display->display_options['filters']['field_site_nid']['expose']['identifier'] = 'field_site_nid';
+  $handler->display->display_options['filters']['field_site_nid']['expose']['multiple'] = TRUE;
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');

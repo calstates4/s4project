@@ -958,6 +958,10 @@ ul.pager .pager-last a {
   clip: rect(1px, 1px, 1px, 1px);
   background: #558095;
 }
+#content_middle .features-components div.column {
+  float: left;
+  width: 50%;
+}
 /** SUBSCRIPTION BUTTONS **/
 .subscription-button {
   padding: 4px 4px 4px 24px;
