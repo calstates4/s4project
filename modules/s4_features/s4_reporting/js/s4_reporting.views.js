@@ -16,6 +16,17 @@
 					'autoDimensions' : false
 				});
 			});
+			$('select.default-filter').each(function() {
+  			 if(Drupal.settings.s4_default_program) {
+    			 $(this).find('option').each(function() {
+    			   console.log(Drupal.settings.s4_default_program[$(this).attr('value')]);
+    			   if(typeof Drupal.settings.s4_default_program[$(this).attr('value')] !== 'undefined') {
+        			 $(this).attr('selected', 'selected');
+      			 }
+    			 });
+    			 $('select.default-filter').trigger("liszt:updated");
+  			 }
+			});
 			Drupal.behaviors.viewsSavedSearches = { }
 		}
 	};

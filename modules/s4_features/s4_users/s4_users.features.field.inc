@@ -68,7 +68,7 @@ function s4_users_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '5',
+        'weight' => '4',
       ),
     ),
   );
@@ -132,6 +132,71 @@ function s4_users_field_default_fields() {
         ),
         'type' => 'text_textfield',
         'weight' => '6',
+      ),
+    ),
+  );
+
+  // Exported field: 'user-user-field_program_default'
+  $fields['user-user-field_program_default'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '-1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_program_default',
+      'foreign keys' => array(
+        'tid' => array(
+          'columns' => array(
+            'tid' => 'tid',
+          ),
+          'table' => 'taxonomy_term_data',
+        ),
+      ),
+      'indexes' => array(
+        'tid' => array(
+          0 => 'tid',
+        ),
+      ),
+      'module' => 'taxonomy',
+      'settings' => array(
+        'allowed_values' => array(
+          0 => array(
+            'vocabulary' => 'site_restrictions',
+            'parent' => '0',
+          ),
+        ),
+      ),
+      'translatable' => '0',
+      'type' => 'taxonomy_term_reference',
+    ),
+    'field_instance' => array(
+      'bundle' => 'user',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'taxonomy',
+          'settings' => array(),
+          'type' => 'taxonomy_term_reference_link',
+          'weight' => 5,
+        ),
+      ),
+      'display_label' => '',
+      'entity_type' => 'user',
+      'field_name' => 'field_program_default',
+      'label' => 'Default programs for reports',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => 0,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(),
+        'type' => 'options_buttons',
+        'weight' => '8',
       ),
     ),
   );
@@ -266,6 +331,7 @@ function s4_users_field_default_fields() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Available programs');
+  t('Default programs for reports');
   t('First Name');
   t('Last Name');
   t('SIS ID');
