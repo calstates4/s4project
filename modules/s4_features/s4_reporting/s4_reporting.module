@@ -90,6 +90,14 @@ function s4_reporting_menu() {
 		'file' => 's4_reporting.pages.inc',
 	);
 	
+	$items['reports/%/summary'] = array(
+	 'title' => 'Summary',
+	 'page callback' => 'drupal_get_form',
+	 'page arguments' => array('s4_reporting_view_summary_report', 1),
+	 'access arguments' => array('access s4 reporting'),
+		'file' => 's4_reporting.pages.inc',
+	);
+	
 	$items['admin/config/s4/reporting'] = array(
 	 'title' => 'Reporting',
 	 'page callback' => 'drupal_get_form',
@@ -425,63 +433,6 @@ function theme_s4_reporting_chart_pie($data) {
 	return '<div class="chart-pie" id="'. $data['id'] .'"></div>';
 }
 
-function s4_reporting_views_pre_render($view) {
-	if ($view->name == 'report_students' && arg(0) == 'reports') {
-		module_load_include('inc', 'webform', 'includes/webform.submissions');
-		if (isset($view->result[0]->field_field_form_signup_sid)) { 
-			//s4_reporting_append_form_to_view($view, 'field_field_form_signup_sid', 'field_field_site_form');
-		}
-	}
-}
-
-function s4_reporting_append_form_to_view($view, $signup_field, $site_field) {
-	static $webform_fields;
-	foreach($view->result as $result_key => $result) {
-		$form = $result->{$site_field}[0]['raw']['nid'];
-		$sid = $result->{$signup_field}[0]['raw']['value'];
-		$submission = webform_get_submission($form, $sid);
-		$form = node_load($form);
-		/**
-		*	Please don't look so hard at this, you might go blind.
-		*/
-		if ($form->webform['components']) {
-			foreach($form->webform['components'] as $key => $component) {
-				$view->result[$result_key]->{$component['form_key']} = array(
-					'rendered' => array(
-						'#markup' => webform_component_invoke($component['type'], 'table', $component, $submission->data[$key]['value'])
-					),
-					'raw' => array(
-						'value' => $submission->data[$key]['value'],
-					),
-				);
-				if (!isset($view->field[$component['form_key']])) {
-					foreach($view->field as $field_key => $field) {
-						if (get_class($field) == 'views_handler_field_field') {
-							$view->field[$component['form_key']] = clone $view->field[$field_key];
-						}
-					}
-					$view->field[$component['form_key']] = new views_handler_field_field();
-					$view->field[$component['form_key']]->view = $view->field['nid']->view;
-					$view->field[$component['form_key']]->query = $view->field['nid']->query;
-					$view->field[$component['form_key']]->handler_type = 'field';
-					$view->field[$component['form_key']]->is_handler = TRUE;
-					$view->field[$component['form_key']]->additional_fields[$component['form_key']] = array(
-						'table' => 'node',
-						'field' => 'nid',
-					);
-					$view->field[$component['form_key']]->options['label'] = $component['name'];
-					$view->field[$component['form_key']]->options['exclude'] = 0;
-					$view->field[$component['form_key']]->options['id'] = $component['form_key'];
-					$view->field[$component['form_key']]->aliases = array($component['form_key'] =>  $component['form_key']);
-					$view->field[$component['form_key']]->field = $component['form_key'];
-					$view->field[$component['form_key']]->field_alias = $component['form_key'];
-					
-				}
-			}
-		}
-	}
-}
-
 function s4_reporting_permission() {
   return array('access s4 reporting' => array('title' => t('Access S4 reports'),
                 'description' => t('User can run reports on students, sites, and site staff.')),
@@ -502,7 +453,137 @@ function s4_reporting_action_info() {
       'configurable' => TRUE,
       'triggers' => array('any'),
     ),
+    's4_reporting_summary' => array(
+      'type' => 'system',
+      'label' => t('Build summary report'),
+      'configurable' => TRUE,
+      'triggers' => array('any'),
+    ),
   );
+}
+
+function s4_reporting_summary_form($context) {
+  
+  $form = array();
+  
+  $fields = array();
+  foreach($context['view']->field as $field_name => $field) {
+    if($field_name != 'views_bulk_operations' && !$field->options['exclude']) {
+      $fields[$field_name] = $field->options['label'];
+    };
+  }
+  
+  $form['fields'] = array(
+    '#type' => 'checkboxes',
+    '#title' => t('Which fields do you want a summary for?'),
+    '#options' => $fields,
+    '#default_value' => $fields,
+  );
+  
+  $form['view'] = array(
+    '#type' => 'value',
+    '#value' => array('name' => $context['view']->name,
+                      'display' => $context['view']->current_display,
+                      'input' => $context['view']->exposed_input,
+                      'fields' => $fields),
+  );
+  
+  $form['report_key'] = array(
+    '#type' => 'hidden',
+    '#value' => md5($context['view']->name . serialize($context['view']->exposed_raw_input)),
+  );
+    
+  return $form;
+}
+
+function s4_reporting_summary_submit($form, $form_state) {
+  db_delete('s4_reporting')
+    ->condition('report_key', $form_state['values']['report_key'])
+    ->execute();
+  $form_state['values']['report_key'] = md5($form_state['values']['report_key'] . serialize($form_state['values']));
+  $summary = array();
+  foreach($form_state['values']['fields'] as $field_name => $field) {
+    if(!$field) {
+      unset($form_state['values']['fields'][$field_name]);
+    }
+    else {
+        $summary[$field_name] = array('label' => $form_state['values']['view']['fields'][$field],
+          'sum' => 0,
+          'count' => 0,
+          'types' => array());
+    }
+  }
+  
+  db_insert('s4_reporting')
+    ->fields(array('report_key' => $form_state['values']['report_key'],
+                   'date' => time(),
+                   'data' => serialize(array('options' => $form_state['values'],
+                                             'summary' => $summary)),
+                  )
+                )
+    ->execute();
+  return $form_state['values'];
+}
+
+function s4_reporting_summary($entity, $context) {
+  $result = db_select('s4_reporting', 'r')
+              ->fields('r', array('data'))
+              ->condition('report_key', $context['report_key'])
+              ->execute()
+              ->fetchAssoc();
+  $result['data'] = unserialize($result['data']);
+  
+  $view = views_get_view($context['view']['name']);
+  $view->set_display($context['view']['display']);
+  $view->set_exposed_input($context['view']['exposed_input']);
+  $view->set_items_per_page(1);
+  $view->set_offset($context['progress']['current'] - 1);
+  $view->pre_execute();
+  $view->execute();
+  $row = array_pop($view->result);
+  foreach($context['fields'] as $field_name => $field) {
+    $this_field = 'field_'. $field_name;
+    if(isset($row->{$this_field}) && is_array($row->{$this_field})) {
+      if(isset($row->{$this_field}[0]['raw']['value'])) {
+        $value = $row->{$this_field}[0]['raw']['value'];
+        if($value !== FALSE) {
+          $result['data']['summary'][$field_name]['count']++;
+        }
+        if(is_int($value)) {
+          $result['data']['summary'][$field_name]['sum'] += $value;
+        }
+        else {
+          foreach($row->{$this_field} as $value) {
+            if(!isset($result['data']['summary'][$field_name]['types'][$value['raw']['value']])) {
+              $result['data']['summary'][$field_name]['types'][$value['raw']['tid']] = array('count' => 0,
+                'label' => $value['rendered']['#markup']);
+            }
+            $result['data']['summary'][$field_name]['types'][$value['raw']['value']]['count']++;
+          }
+        }
+      }
+      if(isset($row->{$this_field}[0]['raw']['tid'])) {
+        $result['data']['summary'][$field_name]['count'] += count($result['data']['summary'][$field_name]);
+        foreach($row->{$this_field} as $value) {
+          if(!isset($result['data']['summary'][$field_name]['types'][$value['raw']['tid']])) {
+            $result['data']['summary'][$field_name]['types'][$value['raw']['tid']] = array('count' => 0,
+              'label' => $value['rendered']['#markup']);
+          }
+          $result['data']['summary'][$field_name]['types'][$value['raw']['tid']]['count']++;
+        }
+      }
+    }
+  }
+  
+  if($context['progress']['current'] >= $context['progress']['total']) {
+    drupal_set_message(t('Your report is ready. !link',
+      array('!link' => l('View form summary', 'reports/'. $context['report_key'] .'/summary'))));
+    $result['data']['total'] = $context['progress']['total'];
+  }
+  db_update('s4_reporting')
+    ->condition('report_key', $context['report_key'])
+    ->fields(array('data' => serialize($result['data'])))
+    ->execute();
 }
 
 function s4_reporting_forms_signup($entity, $context) {

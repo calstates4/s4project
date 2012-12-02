@@ -469,3 +469,55 @@ function _s4_reporting_get_form_report_results($report_key) {
   }
   return array('header' => $header, 'rows' => $rows);
 }
+
+function s4_reporting_view_summary_report($form, $form_state, $report_key) {
+  $result = db_select('s4_reporting', 'r')
+            ->fields('r', array('data'))
+            ->condition('report_key', $report_key)
+            ->execute()
+            ->fetchAssoc();
+  $result = unserialize($result['data']);
+  $form = array();
+  
+  $form['total'] = array(
+    '#markup' => '<h2>'. t('Total records: @total', array('@total' => $result['total'])) .'</h2>',
+  );
+  
+  $header = array(t('Field'), t('Count'), t('Sum'));
+  $rows = array();
+  
+  foreach($result['summary'] as $field_name => $field) {
+    $rows[] = array(array('data' => $field['label'],
+                          'header' => TRUE),
+                    $field['count'],
+                    $field['sum']);
+  }
+  
+  $form['summary_table'] = array(
+    '#markup' => theme('table', array('header' => $header, 'rows' => $rows)),
+  );
+  
+  $header = array(t('Value'), t('Count'), t('Percent'));
+  foreach($result['summary'] as $field_name => $field) {
+    if(count($field['types'])) {
+      $rows = array();
+      $total = 0;
+      $form['group_'. $field_name] = array(
+        '#type' => 'fieldset',
+        '#title' => $field['label'],
+        '#collapsible' => TRUE,
+        '#collapsed' => TRUE,
+      );
+      foreach($field['types'] as $k => $type) {
+        $rows[$k] = array(array('data' => $type['label'], 'header' => TRUE),
+                          $type['count'],
+                          t('@percent%', array('@percent' => round(($type['count'] / $result['total']) * 100, 2))));
+      }
+      $form['group_'. $field_name]['result'] = array(
+        '#markup' => theme('table', array('header' => $header, 'rows' => $rows)),
+      );
+    }
+  }
+    
+  return $form;
+}
