@@ -6,6 +6,7 @@ core=7.x
 
 stylesheets[all][] = css/style.css
 stylesheets[all][] = css/colors.css
+stylesheets[print][] = css/print.css
 scripts[] = js/s4.js
 scripts[] = js/placeholder.js
 
