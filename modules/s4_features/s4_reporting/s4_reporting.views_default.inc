@@ -2206,15 +2206,10 @@ Categories
 Location
 Placements
 Fields',
-    'group-status' => array(
-      'group' => '0',
-      'filter_name' => 'status',
-      'weight' => '-17',
-    ),
     'group-city' => array(
       'group' => '2',
       'filter_name' => 'city',
-      'weight' => '-17',
+      'weight' => '-16',
     ),
     'group-field_csu_facility_tid' => array(
       'group' => '1',
@@ -2224,66 +2219,66 @@ Fields',
     'group-field_csu_org_type_tid' => array(
       'group' => '1',
       'filter_name' => 'field_csu_org_type_tid',
-      'weight' => '-17',
+      'weight' => '-16',
     ),
     'group-dyfield' => array(
       'group' => '4',
       'filter_name' => 'dyfield',
-      'weight' => '-17',
+      'weight' => '-16',
     ),
     'group-field_district_federal_value' => array(
       'group' => '2',
       'filter_name' => 'field_district_federal_value',
-      'weight' => '-17',
+      'weight' => '-16',
     ),
     'group-field_district_state_lower_value' => array(
       'group' => '2',
       'filter_name' => 'field_district_state_lower_value',
-      'weight' => '-17',
+      'weight' => '-16',
     ),
     'group-field_district_state_upper_value' => array(
       'group' => '2',
       'filter_name' => 'field_district_state_upper_value',
-      'weight' => '-17',
+      'weight' => '-16',
     ),
     'group-field_site_restrict_tid' => array(
       'group' => '0',
       'filter_name' => 'field_site_restrict_tid',
-      'weight' => '-17',
+      'weight' => '-16',
     ),
     'group-field_tags_tid' => array(
-      'group' => '0',
+      'group' => '1',
       'filter_name' => 'field_tags_tid',
-      'weight' => '-16',
+      'weight' => '-15',
     ),
     'group-field_signup_start_date_value' => array(
       'group' => '3',
       'filter_name' => 'field_signup_start_date_value',
-      'weight' => '-17',
+      'weight' => '-16',
     ),
     'group-field_course_subject_value' => array(
       'group' => '3',
       'filter_name' => 'field_course_subject_value',
-      'weight' => '-17',
+      'weight' => '-16',
     ),
     'group-field_term_nid_1' => array(
       'group' => '3',
       'filter_name' => 'field_term_nid_1',
-      'weight' => '-17',
+      'weight' => '-16',
     ),
     'group-title' => array(
       'group' => '0',
       'filter_name' => 'title',
       'weight' => '-15',
     ),
-    'group-field_signups_max_value' => array(
-      'group' => '3',
-      'filter_name' => 'field_signups_max_value',
-      'weight' => '-17',
-    ),
     'group-created' => array(
       'group' => '0',
       'filter_name' => 'created',
+      'weight' => '-14',
+    ),
+    'group-field_site_requirements_tid' => array(
+      'group' => '1',
+      'filter_name' => 'field_site_requirements_tid',
       'weight' => '-14',
     ),
   );
@@ -2771,30 +2766,12 @@ Fields',
 <strong>Email:</strong> [field_site_email]<br/>
 [field_website]';
   $handler->display->display_options['fields']['field_phone']['click_sort_column'] = 'number';
-  /* Field: Location: City */
-  $handler->display->display_options['fields']['city']['id'] = 'city';
-  $handler->display->display_options['fields']['city']['table'] = 'location';
-  $handler->display->display_options['fields']['city']['field'] = 'city';
-  $handler->display->display_options['fields']['city']['exclude'] = TRUE;
-  /* Field: Location: Postal Code */
-  $handler->display->display_options['fields']['postal_code']['id'] = 'postal_code';
-  $handler->display->display_options['fields']['postal_code']['table'] = 'location';
-  $handler->display->display_options['fields']['postal_code']['field'] = 'postal_code';
-  $handler->display->display_options['fields']['postal_code']['exclude'] = TRUE;
-  /* Field: Location: Province */
-  $handler->display->display_options['fields']['province']['id'] = 'province';
-  $handler->display->display_options['fields']['province']['table'] = 'location';
-  $handler->display->display_options['fields']['province']['field'] = 'province';
-  $handler->display->display_options['fields']['province']['exclude'] = TRUE;
-  /* Field: Location: Street */
-  $handler->display->display_options['fields']['street']['id'] = 'street';
-  $handler->display->display_options['fields']['street']['table'] = 'location';
-  $handler->display->display_options['fields']['street']['field'] = 'street';
-  $handler->display->display_options['fields']['street']['label'] = 'Address';
-  $handler->display->display_options['fields']['street']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['street']['alter']['text'] = '[street]<br/>
-[city], [province]&nbsp;&nbsp; [postal_code]';
-  $handler->display->display_options['fields']['street']['empty'] = '&nbsp;';
+  /* Field: Content: Location(s) */
+  $handler->display->display_options['fields']['field_location']['id'] = 'field_location';
+  $handler->display->display_options['fields']['field_location']['table'] = 'field_data_field_location';
+  $handler->display->display_options['fields']['field_location']['field'] = 'field_location';
+  $handler->display->display_options['fields']['field_location']['type'] = 's4_sites_address';
+  $handler->display->display_options['fields']['field_location']['delta_offset'] = '0';
   /* Field: Content: Federal district */
   $handler->display->display_options['fields']['field_district_federal']['id'] = 'field_district_federal';
   $handler->display->display_options['fields']['field_district_federal']['table'] = 'field_data_field_district_federal';
@@ -2979,7 +2956,6 @@ Fields',
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['filters']['status']['group'] = 1;
-  $handler->display->display_options['filters']['status']['exposed'] = TRUE;
   $handler->display->display_options['filters']['status']['expose']['operator_id'] = '';
   $handler->display->display_options['filters']['status']['expose']['label'] = 'Published';
   $handler->display->display_options['filters']['status']['expose']['operator'] = 'status_op';
@@ -3043,7 +3019,7 @@ Fields',
   $handler->display->display_options['filters']['dyfield']['filterable_fields'] = array(
     'title' => 'title',
     'field_phone' => 'field_phone',
-    'street' => 'street',
+    'field_location' => 'field_location',
     'field_district_federal' => 'field_district_federal',
     'field_district_state_lower' => 'field_district_state_lower',
     'field_district_state_upper' => 'field_district_state_upper',
@@ -3053,15 +3029,12 @@ Fields',
     'field_site_demographics' => 'field_site_demographics',
     'field_site_email_1' => 'field_site_email_1',
     'field_site_hours' => 'field_site_hours',
-    'field_site_eval_form' => 'field_site_eval_form',
     'field_csu_facility' => 'field_csu_facility',
     'field_signups_max' => 'field_signups_max',
     'field_csu_org_type' => 'field_csu_org_type',
     'field_phone_1' => 'field_phone_1',
     'field_health_risk' => 'field_health_risk',
-    'field_site_form' => 'field_site_form',
     'field_site_instructions_required' => 'field_site_instructions_required',
-    'field_site_requirements' => 'field_site_requirements',
     'field_site_tour' => 'field_site_tour',
     'field_site_facebook_page' => 'field_site_facebook_page',
     'field_site_instructions' => 'field_site_instructions',
@@ -3071,13 +3044,15 @@ Fields',
     'field_site_hours_minimum' => 'field_site_hours_minimum',
     'field_site_language' => 'field_site_language',
     'field_site_restrict' => 'field_site_restrict',
-    'field_workflow_status' => 'field_workflow_status',
+    'views_bulk_operations' => 0,
+    'created' => 0,
   );
   $handler->display->display_options['filters']['dyfield']['defaults_filterable_fields'] = array(
     'title' => 'title',
-    'street' => 'street',
+    'field_location' => 'field_location',
     'field_csu_facility' => 'field_csu_facility',
     'field_csu_org_type' => 'field_csu_org_type',
+    'views_bulk_operations' => 0,
     'field_phone' => 0,
     'field_district_federal' => 0,
     'field_district_state_lower' => 0,
@@ -3088,13 +3063,10 @@ Fields',
     'field_site_demographics' => 0,
     'field_site_email_1' => 0,
     'field_site_hours' => 0,
-    'field_site_eval_form' => 0,
     'field_signups_max' => 0,
     'field_phone_1' => 0,
     'field_health_risk' => 0,
-    'field_site_form' => 0,
     'field_site_instructions_required' => 0,
-    'field_site_requirements' => 0,
     'field_site_tour' => 0,
     'field_site_facebook_page' => 0,
     'field_site_instructions' => 0,
@@ -3104,7 +3076,7 @@ Fields',
     'field_site_hours_minimum' => 0,
     'field_site_language' => 0,
     'field_site_restrict' => 0,
-    'field_workflow_status' => 0,
+    'created' => 0,
   );
   $handler->display->display_options['filters']['dyfield']['sortability'] = 1;
   $handler->display->display_options['filters']['dyfield']['checkboxes'] = 0;
@@ -3163,7 +3135,6 @@ Fields',
   $handler->display->display_options['filters']['field_tags_tid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_tags_tid']['expose']['operator_id'] = 'field_tags_tid_op';
   $handler->display->display_options['filters']['field_tags_tid']['expose']['label'] = 'Site tags';
-  $handler->display->display_options['filters']['field_tags_tid']['expose']['use_operator'] = TRUE;
   $handler->display->display_options['filters']['field_tags_tid']['expose']['operator'] = 'field_tags_tid_op';
   $handler->display->display_options['filters']['field_tags_tid']['expose']['identifier'] = 'field_tags_tid';
   $handler->display->display_options['filters']['field_tags_tid']['expose']['multiple'] = TRUE;
@@ -3221,18 +3192,6 @@ Fields',
   $handler->display->display_options['filters']['title']['expose']['use_operator'] = TRUE;
   $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
-  /* Filter criterion: Content: Maximum number of students (field_signups_max) */
-  $handler->display->display_options['filters']['field_signups_max_value']['id'] = 'field_signups_max_value';
-  $handler->display->display_options['filters']['field_signups_max_value']['table'] = 'field_data_field_signups_max';
-  $handler->display->display_options['filters']['field_signups_max_value']['field'] = 'field_signups_max_value';
-  $handler->display->display_options['filters']['field_signups_max_value']['operator'] = '>=';
-  $handler->display->display_options['filters']['field_signups_max_value']['group'] = 1;
-  $handler->display->display_options['filters']['field_signups_max_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_signups_max_value']['expose']['operator_id'] = 'field_signups_max_value_op';
-  $handler->display->display_options['filters']['field_signups_max_value']['expose']['label'] = 'Maximum number of students';
-  $handler->display->display_options['filters']['field_signups_max_value']['expose']['use_operator'] = TRUE;
-  $handler->display->display_options['filters']['field_signups_max_value']['expose']['operator'] = 'field_signups_max_value_op';
-  $handler->display->display_options['filters']['field_signups_max_value']['expose']['identifier'] = 'field_signups_max_value';
   /* Filter criterion: Content: Post date */
   $handler->display->display_options['filters']['created']['id'] = 'created';
   $handler->display->display_options['filters']['created']['table'] = 'node';
@@ -3244,6 +3203,18 @@ Fields',
   $handler->display->display_options['filters']['created']['expose']['label'] = 'Date created';
   $handler->display->display_options['filters']['created']['expose']['operator'] = 'created_op';
   $handler->display->display_options['filters']['created']['expose']['identifier'] = 'created';
+  /* Filter criterion: Content: Site special requirements (field_site_requirements) */
+  $handler->display->display_options['filters']['field_site_requirements_tid']['id'] = 'field_site_requirements_tid';
+  $handler->display->display_options['filters']['field_site_requirements_tid']['table'] = 'field_data_field_site_requirements';
+  $handler->display->display_options['filters']['field_site_requirements_tid']['field'] = 'field_site_requirements_tid';
+  $handler->display->display_options['filters']['field_site_requirements_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_site_requirements_tid']['expose']['operator_id'] = 'field_site_requirements_tid_op';
+  $handler->display->display_options['filters']['field_site_requirements_tid']['expose']['label'] = 'Site special requirements';
+  $handler->display->display_options['filters']['field_site_requirements_tid']['expose']['operator'] = 'field_site_requirements_tid_op';
+  $handler->display->display_options['filters']['field_site_requirements_tid']['expose']['identifier'] = 'field_site_requirements_tid';
+  $handler->display->display_options['filters']['field_site_requirements_tid']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_site_requirements_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_site_requirements_tid']['vocabulary'] = 'special_requirements';
 
   /* Display: Data report page */
   $handler = $view->new_display('page', 'Data report page', 'page');
@@ -3313,13 +3284,7 @@ Fields',
     t('<strong>Phone:</strong> [field_phone]<br/>
 <strong>Email:</strong> [field_site_email]<br/>
 [field_website]'),
-    t('City'),
-    t('Postal Code'),
-    t('Province'),
-    t('Address'),
-    t('[street]<br/>
-[city], [province]&nbsp;&nbsp; [postal_code]'),
-    t('&nbsp;'),
+    t('Location(s)'),
     t('Legislative District: Federal'),
     t('Legislative District: Lower state district'),
     t('Legislative District: State upper'),
@@ -3345,6 +3310,7 @@ Fields',
     t('Related programs'),
     t('Date created is between'),
     t('Published'),
+    t('City'),
     t('Issues addressed'),
     t('Org. type'),
     t('Fields'),
@@ -3357,8 +3323,8 @@ Fields',
     t('Who had a student in the following course subject'),
     t('Site had a student in the following terms (only applies to students signing up as part of a course)'),
     t('Site name'),
-    t('Maximum number of students'),
     t('Date created'),
+    t('Site special requirements'),
     t('Data report page'),
     t('Data export: CSV'),
     t('Data export: XLS'),
@@ -3457,9 +3423,17 @@ Fields',
       'filter_name' => 'field_site_nid',
       'weight' => '-17',
     ),
+    'group-field_site_restrict_tid_3' => array(
+      'group' => '2',
+      'filter_name' => 'field_site_restrict_tid_3',
+      'weight' => '-18',
+    ),
   );
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '40';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
     'views_bulk_operations' => 'views_bulk_operations',
@@ -4169,10 +4143,23 @@ Fields',
   $handler->display->display_options['filters']['field_site_nid']['relationship'] = 'reverse_field_user_node';
   $handler->display->display_options['filters']['field_site_nid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_site_nid']['expose']['operator_id'] = 'field_site_nid_op';
-  $handler->display->display_options['filters']['field_site_nid']['expose']['label'] = 'Site';
+  $handler->display->display_options['filters']['field_site_nid']['expose']['label'] = 'Specific site(s)';
   $handler->display->display_options['filters']['field_site_nid']['expose']['operator'] = 'field_site_nid_op';
   $handler->display->display_options['filters']['field_site_nid']['expose']['identifier'] = 'field_site_nid';
   $handler->display->display_options['filters']['field_site_nid']['expose']['multiple'] = TRUE;
+  /* Filter criterion: Field: Program (field_site_restrict) */
+  $handler->display->display_options['filters']['field_site_restrict_tid_3']['id'] = 'field_site_restrict_tid_3';
+  $handler->display->display_options['filters']['field_site_restrict_tid_3']['table'] = 'field_data_field_site_restrict';
+  $handler->display->display_options['filters']['field_site_restrict_tid_3']['field'] = 'field_site_restrict_tid';
+  $handler->display->display_options['filters']['field_site_restrict_tid_3']['relationship'] = 'reverse_field_user_node';
+  $handler->display->display_options['filters']['field_site_restrict_tid_3']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_site_restrict_tid_3']['expose']['operator_id'] = 'field_site_restrict_tid_3_op';
+  $handler->display->display_options['filters']['field_site_restrict_tid_3']['expose']['label'] = 'Placement program';
+  $handler->display->display_options['filters']['field_site_restrict_tid_3']['expose']['operator'] = 'field_site_restrict_tid_3_op';
+  $handler->display->display_options['filters']['field_site_restrict_tid_3']['expose']['identifier'] = 'field_site_restrict_tid_3';
+  $handler->display->display_options['filters']['field_site_restrict_tid_3']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_site_restrict_tid_3']['type'] = 'select';
+  $handler->display->display_options['filters']['field_site_restrict_tid_3']['vocabulary'] = 'site_restrictions';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -4263,6 +4250,8 @@ Fields',
     t('Issues addressed'),
     t('City'),
     t('Course program'),
+    t('Specific site(s)'),
+    t('Placement program'),
     t('Page'),
     t('Export CSV'),
     t('Export XLS'),

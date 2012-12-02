@@ -952,6 +952,9 @@ ul.pager .pager-last a {
 .coordinators .name {
   font-weight: bold;
 }
+.views-table address {
+  min-width: 200px;
+}
 /** TWEAKS FOR BOX CONTROLS **/
 .boxes-box-controls {
   position: absolute !important;
