@@ -28,5 +28,29 @@ function s4_reporting_views_data() {
     ),
   );
   
+  $data['s4_reporting']['total_hours'] = array(
+    'title' => t('Total hours'),
+    'help' => t('Renders the total hours worked at a site.'),
+    'field' => array(
+      'handler' => 'views_handler_s4_reporting_site_hours',
+      'click sortable' => FALSE,
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort',
+    ),
+  );
+  
+  $data['s4_reporting']['total_placements'] = array(
+    'title' => t('Total placements'),
+    'help' => t('Renders the total placements at a site.'),
+    'field' => array(
+      'handler' => 'views_handler_s4_reporting_site_placements',
+      'click sortable' => FALSE,
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort',
+    ),
+  );
+  
   return $data;
 }

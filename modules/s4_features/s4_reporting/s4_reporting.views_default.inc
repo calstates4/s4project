@@ -545,7 +545,7 @@ Fieds',
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Student report';
+  $handler->display->display_options['title'] = 'Faculty report';
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['access']['perm'] = 'access s4 reporting';
   $handler->display->display_options['cache']['type'] = 'none';
@@ -572,17 +572,17 @@ Fields',
     'group-field_term_nid' => array(
       'group' => '1',
       'filter_name' => 'field_term_nid',
-      'weight' => '-8',
+      'weight' => '-10',
     ),
     'group-field_course_subject_value' => array(
       'group' => '1',
       'filter_name' => 'field_course_subject_value',
-      'weight' => '-7',
+      'weight' => '-9',
     ),
     'group-field_course_catalog_number_value' => array(
       'group' => '1',
       'filter_name' => 'field_course_catalog_number_value',
-      'weight' => '-6',
+      'weight' => '-8',
     ),
     'group-dyfield' => array(
       'group' => '3',
@@ -603,6 +603,11 @@ Fields',
       'group' => '2',
       'filter_name' => 'province',
       'weight' => '-3',
+    ),
+    'group-field_site_restrict_tid' => array(
+      'group' => '1',
+      'filter_name' => 'field_site_restrict_tid',
+      'weight' => '-11',
     ),
   );
   $handler->display->display_options['pager']['type'] = 'full';
@@ -913,7 +918,7 @@ Fields',
   $handler->display->display_options['filters']['field_site_nid']['relationship'] = 'reverse_field_course_node';
   $handler->display->display_options['filters']['field_site_nid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_site_nid']['expose']['operator_id'] = 'field_site_nid_op';
-  $handler->display->display_options['filters']['field_site_nid']['expose']['label'] = 'Specific sites';
+  $handler->display->display_options['filters']['field_site_nid']['expose']['label'] = 'Specific site(s)';
   $handler->display->display_options['filters']['field_site_nid']['expose']['operator'] = 'field_site_nid_op';
   $handler->display->display_options['filters']['field_site_nid']['expose']['identifier'] = 'field_site_nid';
   $handler->display->display_options['filters']['field_site_nid']['expose']['multiple'] = TRUE;
@@ -937,6 +942,19 @@ Fields',
   $handler->display->display_options['filters']['province']['expose']['label'] = 'State';
   $handler->display->display_options['filters']['province']['expose']['operator'] = 'province_op';
   $handler->display->display_options['filters']['province']['expose']['identifier'] = 'province';
+  /* Filter criterion: Field: Program (field_site_restrict) */
+  $handler->display->display_options['filters']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['relationship'] = 'reverse_field_course_faculty_node';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['operator_id'] = 'field_site_restrict_tid_op';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['label'] = 'Program';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['operator'] = 'field_site_restrict_tid_op';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['identifier'] = 'field_site_restrict_tid';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_site_restrict_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['vocabulary'] = 'site_restrictions';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -979,7 +997,7 @@ Fields',
   $handler->display->display_options['use_batch'] = '0';
   $translatables['reports_faculty'] = array(
     t('Master'),
-    t('Student report'),
+    t('Faculty report'),
     t('more'),
     t('Apply'),
     t('Reset'),
@@ -1009,9 +1027,10 @@ Fields',
     t('Course subject'),
     t('Course number'),
     t('Fields'),
-    t('Specific sites'),
+    t('Specific site(s)'),
     t('City'),
     t('State'),
+    t('Program'),
     t('Page'),
     t('Export CSV'),
     t('Export XLS'),
@@ -2939,8 +2958,17 @@ Fields',
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'node';
   $handler->display->display_options['fields']['created']['field'] = 'created';
-  $handler->display->display_options['fields']['created']['label'] = 'Date created is between';
+  $handler->display->display_options['fields']['created']['label'] = 'Date created';
   $handler->display->display_options['fields']['created']['date_format'] = 'short';
+  /* Field: Form Evaluation: Total placements */
+  $handler->display->display_options['fields']['total_placements']['id'] = 'total_placements';
+  $handler->display->display_options['fields']['total_placements']['table'] = 's4_reporting';
+  $handler->display->display_options['fields']['total_placements']['field'] = 'total_placements';
+  $handler->display->display_options['fields']['total_placements']['element_label_colon'] = FALSE;
+  /* Field: Form Evaluation: Total hours */
+  $handler->display->display_options['fields']['total_hours']['id'] = 'total_hours';
+  $handler->display->display_options['fields']['total_hours']['table'] = 's4_reporting';
+  $handler->display->display_options['fields']['total_hours']['field'] = 'total_hours';
   /* Sort criterion: Content: Title */
   $handler->display->display_options['sorts']['title']['id'] = 'title';
   $handler->display->display_options['sorts']['title']['table'] = 'node';
@@ -3017,6 +3045,7 @@ Fields',
   $handler->display->display_options['filters']['dyfield']['expose']['operator'] = 'dyfield_op';
   $handler->display->display_options['filters']['dyfield']['expose']['identifier'] = 'dyfield';
   $handler->display->display_options['filters']['dyfield']['filterable_fields'] = array(
+    'views_bulk_operations' => 'views_bulk_operations',
     'title' => 'title',
     'field_phone' => 'field_phone',
     'field_location' => 'field_location',
@@ -3044,15 +3073,16 @@ Fields',
     'field_site_hours_minimum' => 'field_site_hours_minimum',
     'field_site_language' => 'field_site_language',
     'field_site_restrict' => 'field_site_restrict',
-    'views_bulk_operations' => 0,
-    'created' => 0,
+    'created' => 'created',
+    'total_placements' => 'total_placements',
+    'total_hours' => 'total_hours',
   );
   $handler->display->display_options['filters']['dyfield']['defaults_filterable_fields'] = array(
+    'views_bulk_operations' => 'views_bulk_operations',
     'title' => 'title',
     'field_location' => 'field_location',
     'field_csu_facility' => 'field_csu_facility',
     'field_csu_org_type' => 'field_csu_org_type',
-    'views_bulk_operations' => 0,
     'field_phone' => 0,
     'field_district_federal' => 0,
     'field_district_state_lower' => 0,
@@ -3077,6 +3107,8 @@ Fields',
     'field_site_language' => 0,
     'field_site_restrict' => 0,
     'created' => 0,
+    'total_placements' => 0,
+    'total_hours' => 0,
   );
   $handler->display->display_options['filters']['dyfield']['sortability'] = 1;
   $handler->display->display_options['filters']['dyfield']['checkboxes'] = 0;
@@ -3200,7 +3232,7 @@ Fields',
   $handler->display->display_options['filters']['created']['group'] = 1;
   $handler->display->display_options['filters']['created']['exposed'] = TRUE;
   $handler->display->display_options['filters']['created']['expose']['operator_id'] = 'created_op';
-  $handler->display->display_options['filters']['created']['expose']['label'] = 'Date created';
+  $handler->display->display_options['filters']['created']['expose']['label'] = 'Date created is between';
   $handler->display->display_options['filters']['created']['expose']['operator'] = 'created_op';
   $handler->display->display_options['filters']['created']['expose']['identifier'] = 'created';
   /* Filter criterion: Content: Site special requirements (field_site_requirements) */
@@ -3308,7 +3340,11 @@ Fields',
     t('Minimum hours'),
     t('Languages'),
     t('Related programs'),
-    t('Date created is between'),
+    t('Date created'),
+    t('Total placements'),
+    t('.'),
+    t(','),
+    t('Total hours'),
     t('Published'),
     t('City'),
     t('Issues addressed'),
@@ -3323,7 +3359,7 @@ Fields',
     t('Who had a student in the following course subject'),
     t('Site had a student in the following terms (only applies to students signing up as part of a course)'),
     t('Site name'),
-    t('Date created'),
+    t('Date created is between'),
     t('Site special requirements'),
     t('Data report page'),
     t('Data export: CSV'),
