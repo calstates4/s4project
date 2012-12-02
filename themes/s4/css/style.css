@@ -352,10 +352,10 @@ body .node-form .form-region-right {
   margin: 10px 0 0 0;
 }
 /** USER LINK **/
-#search .block a {
+#search .block a,
+#search .block span {
   margin: 2px 10px 0 0;
   font-size: 15px;
-  cursor: pointer;
   padding: 3px 5px;
   color: #000;
   text-decoration: none;

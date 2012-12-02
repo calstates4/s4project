@@ -359,7 +359,7 @@ function s4_core_block_s4_current_user_link() {
   }
   $user = user_load($user->uid);
   $first_name = field_get_items('user', $user, 'field_first_name');
-  return array('content' => l(t('Hello <strong>@username</strong>', array('@username' => $first_name[0]['value'])), 'user/' . $user->uid, array('html' => TRUE)) . $masquerade_switch);
+  return array('content' => '<span>' .t('Hello <strong>@username</strong>', array('@username' => $first_name[0]['value'])) . $masquerade_switch .'</span>');
 
 }
 
