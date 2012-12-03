@@ -538,9 +538,10 @@ function s4_reporting_summary($entity, $context) {
   $view->set_exposed_input($context['view']['exposed_input']);
   $view->set_items_per_page(1);
   $view->set_offset($context['progress']['current'] - 1);
-  $view->pre_execute();
   $view->execute();
+  $view->preview();
   $row = array_pop($view->result);
+  $rendered_row = array_pop($view->style_plugin->rendered_fields);
   foreach($context['fields'] as $field_name => $field) {
     $this_field = 'field_'. $field_name;
     if(isset($row->{$this_field}) && is_array($row->{$this_field})) {
@@ -571,6 +572,13 @@ function s4_reporting_summary($entity, $context) {
           }
           $result['data']['summary'][$field_name]['types'][$value['raw']['tid']]['count']++;
         }
+      }
+    }
+    elseif(isset($rendered_row[$this_field]) || isset($rendered_row[$field_name])) {
+      $value = ($rendered_row[$this_field]) ? $rendered_row[$this_field] : $rendered_row[$field_name];
+      $result['data']['summary'][$field_name]['count']++;
+      if(is_numeric($value)) {
+        $result['data']['summary'][$field_name]['sum'] += floatval($value);
       }
     }
   }

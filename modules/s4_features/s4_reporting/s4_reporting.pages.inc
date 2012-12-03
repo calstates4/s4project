@@ -483,14 +483,15 @@ function s4_reporting_view_summary_report($form, $form_state, $report_key) {
     '#markup' => '<h2>'. t('Total records: @total', array('@total' => $result['total'])) .'</h2>',
   );
   
-  $header = array(t('Field'), t('Count'), t('Sum'));
+  $header = array(t('Field'), t('Count'), t('Sum'), t('Average'));
   $rows = array();
   
   foreach($result['summary'] as $field_name => $field) {
     $rows[] = array(array('data' => $field['label'],
                           'header' => TRUE),
                     $field['count'],
-                    $field['sum']);
+                    $field['sum'],
+                    round($field['sum']/$field['count'], 2));
   }
   
   $form['summary_table'] = array(
