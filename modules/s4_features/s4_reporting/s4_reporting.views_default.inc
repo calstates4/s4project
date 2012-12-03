@@ -105,7 +105,7 @@ Fieds',
   $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['label'] = '';
   $handler->display->display_options['fields']['views_bulk_operations']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['entity_load_capacity'] = '10';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['entity_load_capacity'] = '1';
   $handler->display->display_options['fields']['views_bulk_operations']['vbo']['operations'] = array(
     'action::s4_reporting_summary' => array(
       'selected' => 1,
@@ -2570,7 +2570,7 @@ Fields',
   $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'node';
   $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['label'] = 'Bulk operations';
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['entity_load_capacity'] = '3';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['entity_load_capacity'] = '1';
   $handler->display->display_options['fields']['views_bulk_operations']['vbo']['operations'] = array(
     'action::s4_reporting_summary' => array(
       'selected' => 1,
@@ -3417,12 +3417,12 @@ Fields',
     'group-field_term_nid' => array(
       'group' => '1',
       'filter_name' => 'field_term_nid',
-      'weight' => '-16',
+      'weight' => '-19',
     ),
     'group-field_course_subject_value' => array(
       'group' => '1',
       'filter_name' => 'field_course_subject_value',
-      'weight' => '-16',
+      'weight' => '-17',
     ),
     'group-field_course_catalog_number_value' => array(
       'group' => '1',
@@ -3452,7 +3452,7 @@ Fields',
     'group-field_site_restrict_tid_2' => array(
       'group' => '1',
       'filter_name' => 'field_site_restrict_tid_2',
-      'weight' => '-16',
+      'weight' => '-18',
     ),
     'group-field_site_nid' => array(
       'group' => '3',
@@ -3463,6 +3463,11 @@ Fields',
       'group' => '2',
       'filter_name' => 'field_site_restrict_tid_3',
       'weight' => '-18',
+    ),
+    'group-field_course_section_value' => array(
+      'group' => '1',
+      'filter_name' => 'field_course_section_value',
+      'weight' => '-15',
     ),
   );
   $handler->display->display_options['pager']['type'] = 'full';
@@ -3665,7 +3670,7 @@ Fields',
   $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'users';
   $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['label'] = 'Bulk operations';
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['entity_load_capacity'] = '10';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['entity_load_capacity'] = '3';
   $handler->display->display_options['fields']['views_bulk_operations']['vbo']['operations'] = array(
     'action::system_block_ip_action' => array(
       'selected' => 0,
@@ -4196,6 +4201,16 @@ Fields',
   $handler->display->display_options['filters']['field_site_restrict_tid_3']['expose']['multiple'] = TRUE;
   $handler->display->display_options['filters']['field_site_restrict_tid_3']['type'] = 'select';
   $handler->display->display_options['filters']['field_site_restrict_tid_3']['vocabulary'] = 'site_restrictions';
+  /* Filter criterion: Content: Section number (field_course_section) */
+  $handler->display->display_options['filters']['field_course_section_value']['id'] = 'field_course_section_value';
+  $handler->display->display_options['filters']['field_course_section_value']['table'] = 'field_data_field_course_section';
+  $handler->display->display_options['filters']['field_course_section_value']['field'] = 'field_course_section_value';
+  $handler->display->display_options['filters']['field_course_section_value']['relationship'] = 'reverse_field_course_students_node';
+  $handler->display->display_options['filters']['field_course_section_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_course_section_value']['expose']['operator_id'] = 'field_course_section_value_op';
+  $handler->display->display_options['filters']['field_course_section_value']['expose']['label'] = 'Section number';
+  $handler->display->display_options['filters']['field_course_section_value']['expose']['operator'] = 'field_course_section_value_op';
+  $handler->display->display_options['filters']['field_course_section_value']['expose']['identifier'] = 'field_course_section_value';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -4288,6 +4303,7 @@ Fields',
     t('Course program'),
     t('Specific site(s)'),
     t('Placement program'),
+    t('Section number'),
     t('Page'),
     t('Export CSV'),
     t('Export XLS'),
