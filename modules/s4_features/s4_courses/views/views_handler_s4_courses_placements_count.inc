@@ -17,11 +17,35 @@ class views_handler_s4_courses_placements_count extends views_handler_field {
                     ->countQuery()
                     ->execute()
                     ->fetchField();
-    return t('@placements (@percent%)', array('@placements' => $placements,
+    if($this->options['display_percentage']) {
+      return t('@placements (@percent%)', array('@placements' => $placements,
                                               '@percent' => round(($placements / $enrollment) * 100)));
+    }
+    return $placements;
+  }
+  
+  function option_definition() {
+    $options = parent::option_definition();
+
+    $options['display_percentage'] = array('default' => FALSE, 'bool' => TRUE);
+
+    return $options;
+  }
+  
+  function options_form(&$form, &$form_state) {
+
+    $form['display_percentage'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Display percentage'),
+      '#description' => t('If checked, the percent of students placed will be displayed.'),
+      '#default_value' => $this->options['display_percentage'],
+    );
+
+    parent::options_form($form, $form_state);
   }
   
   function query() {
     
   }
+
 }

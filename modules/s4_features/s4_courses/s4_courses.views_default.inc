@@ -1295,6 +1295,7 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['fields']['course_student_placements']['table'] = 's4_course';
   $handler->display->display_options['fields']['course_student_placements']['field'] = 'course_student_placements';
   $handler->display->display_options['fields']['course_student_placements']['label'] = 'Placements';
+  $handler->display->display_options['fields']['course_student_placements']['display_percentage'] = TRUE;
   /* Field: Content: Edit link */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
