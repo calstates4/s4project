@@ -675,7 +675,64 @@ function s4_courses_action_info() {
       'configurable' => TRUE,
       'triggers' => array('any'),
     ),
+    's4_courses_email_course_faculty' => array(
+      'type' => 'system',
+      'label' => t('Email faculty in a course'),
+      'configurable' => TRUE,
+      'triggers' => array('any'),
+    ),
   );
+}
+
+/**
+ * Action to send an email to the faculty in a course.
+ */
+function s4_courses_email_course_faculty($entity, $context) {
+  $faculty = field_get_items('node', $entity, 'field_course_faculty');
+  if(!count($faculty)) {
+    return;
+  }
+  $reply_to = (valid_email_address($context['reply_to']))
+              ? $context['reply_to']
+              : variable_get('site_mail', '');
+  $students = db_query('SELECT DISTINCT s.field_course_students_uid as uid FROM {field_data_field_course_students} s LEFT JOIN {node} n ON n.nid = s.entity_id AND n.vid = s.revision_id WHERE s.entity_id = :course AND s.deleted = 0 AND s.field_course_students_uid NOT IN (
+	SELECT u.field_user_uid FROM {field_data_field_user} u LEFT JOIN {field_data_field_course} c ON c.entity_id = u.entity_id AND c.revision_id = u.entity_id LEFT JOIN {node} n ON n.nid = u.entity_id AND n.vid = u.revision_id WHERE field_course_nid = :course
+);', array(':course' => $entity->nid));
+  $student_list = array();
+  if($students) {
+    while($student = $students->fetchField()) {
+      $student = user_load($student);
+      $first_name = field_get_items('user', $student, 'field_first_name');
+      $last_name  = field_get_items('user', $student, 'field_last_name');
+      $student_list[] = $first_name[0]['value'] .' '. $last_name[0]['value'];
+    }
+  }
+  if(count($student_list)) {
+    $context['message']['value'] = str_replace('[missing_students]', theme('item_list', array('items' => $student_list)), $context['message']['value']);
+    foreach($faculty as $instructor) {
+      $instructor = user_load($instructor['uid']);
+      drupal_mail('s4_core', 'action_send_email', $instructor->mail, language_default(), $context, $reply_to);
+    }
+  }
+}
+
+/**
+ * Form callback for s4_courses_email_course_faculty
+ */
+function s4_courses_email_course_faculty_form($context) {
+  $form = s4_core_email_site_coordinator_action_form($context);
+  $form['token_message'] = array(
+    '#markup' => t('Enter the token [missing_students] in your message for a list of all students who have no placements in the course.'),
+    '#weight' => -1,
+  );
+  return $form;
+}
+
+/**
+*  Form submit callback for s4_courses_email_course_faculty
+*/
+function s4_courses_email_course_faculty_submit($form, $form_state) {
+  return s4_core_email_site_coordinator_action_submit($form, $form_state);
 }
 
 /**

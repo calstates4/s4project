@@ -135,6 +135,13 @@ Fieds',
       'override_label' => 0,
       'label' => '',
     ),
+    'action::s4_courses_email_course_faculty' => array(
+      'selected' => 1,
+      'use_queue' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 1,
+      'label' => 'Email faculty',
+    ),
     'action::views_bulk_operations_script_action' => array(
       'selected' => 0,
       'use_queue' => 0,
