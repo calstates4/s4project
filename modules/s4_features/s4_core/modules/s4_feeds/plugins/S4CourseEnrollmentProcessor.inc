@@ -43,11 +43,9 @@ class S4CourseEnrollmentProcessor extends FeedsProcessor {
         }
       }
     }
-    elseif($enrolled) {
-      $course->field_course_students[$course->language][] = array('uid' => $item['user']);
-      node_save($course); 
-      return $course;
-    }
+    $course->field_course_students[$course->language][] = array('uid' => $item['user']);
+    node_save($course); 
+    return $course;
   }
   
   protected function newEntity(FeedsSource $source) {
