@@ -212,27 +212,6 @@ function s4_reporting_form_views_exposed_form_alter(&$form, $form_state) {
     	}
   	}
 	}
-	$programs = field_get_items('user', $user, 'field_program_default');
-	$get = $_GET;
-	unset($get['q']);
-	if(count($programs) && !count($get) && $form['filters']) {
-  	$default = array();
-  	foreach($programs as $program) {
-  	  $default[$program['tid']] = $program['tid'];
-  	}
-  	drupal_add_js(array('s4_default_program' => $default), 'setting');
-  	drupal_add_js(drupal_get_path('module', 's4_reporting') .'/js/s4_reporting.views.js');
-  	foreach($form['filters'] as &$group) {
-    	if(is_array($group)) {
-      	foreach($group as $filter_name => &$filter) {
-        	if(strpos($filter_name, 'field_site_restrict_tid') !== FALSE && $filter['#type'] == 'select') {
-          	$filter['#attributes']['class'][] = 'default-filter';
-        	}
-      	}
-    	}
-  	}
-	}
-	
 }
 
 function s4_reporting_form_views_savedsearches_delete_search_form_alter(&$form, $form_state) {
