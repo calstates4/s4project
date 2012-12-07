@@ -45,6 +45,27 @@ function s4_map_block_info() {
 	return $blocks;
 }
 
+function s4_map_node_presave($node) {
+  $location = field_get_items('node', $node, 'field_location');
+  $location = $location[0];
+  $county = field_get_items('node', $node, 'field_county');
+  if(!$location['city'] || $county[0]['value']) {
+    return;
+  }
+  $address = urlencode(check_plain($location['street'] .',+'. $location['city'] .',+'. $location['province'] .'+'. $location['postal_code']));
+  $geocode = drupal_http_request('http://maps.googleapis.com/maps/api/geocode/json?sensor=false&address='. $address, array('timeout' => 7));
+  if($geocode->code == 200) {
+    $geo = json_decode($geocode->data);
+    foreach($geo->results as $result) {
+      foreach($result->address_components as $component) {
+        if(in_array('administrative_area_level_2', $component->types)) {
+          $node->field_county[$node->language][0]['value'] = $component->long_name;
+        }
+      }
+    }
+  }
+}
+
 function s4_map_block_view($delta) {
 	$default = variable_get('gmap_default', array());
 	$lat_lon = explode(',', $default['latlong']);

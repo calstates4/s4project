@@ -3039,6 +3039,88 @@ function s4_sites_field_default_fields() {
     ),
   );
 
+  // Exported field: 'node-site-field_county'
+  $fields['node-site-field_county'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_county',
+      'foreign keys' => array(
+        'format' => array(
+          'columns' => array(
+            'format' => 'format',
+          ),
+          'table' => 'filter_format',
+        ),
+      ),
+      'indexes' => array(
+        'format' => array(
+          0 => 'format',
+        ),
+      ),
+      'module' => 'text',
+      'settings' => array(
+        'max_length' => '255',
+      ),
+      'translatable' => '0',
+      'type' => 'text',
+    ),
+    'field_instance' => array(
+      'bundle' => 'site',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => 'This field is updated automatically based on the first location in the site.',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => 43,
+        ),
+        'notifications' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'search_index' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'display_label' => '',
+      'entity_type' => 'node',
+      'field_name' => 'field_county',
+      'label' => 'County',
+      'required' => 0,
+      's4_sites_field_access' => 0,
+      'settings' => array(
+        'text_processing' => '0',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'text',
+        'settings' => array(
+          'size' => '60',
+        ),
+        'type' => 'text_textfield',
+        'weight' => '5',
+      ),
+    ),
+  );
+
   // Exported field: 'node-site-field_csu_facility'
   $fields['node-site-field_csu_facility'] = array(
     'field_config' => array(
@@ -3254,7 +3336,7 @@ function s4_sites_field_default_fields() {
       'bundle' => 'site',
       'default_value' => NULL,
       'deleted' => '0',
-      'description' => '',
+      'description' => 'This field is updated automatically based on the first location in the site.',
       'display' => array(
         'default' => array(
           'label' => 'above',
@@ -3343,7 +3425,7 @@ function s4_sites_field_default_fields() {
       'bundle' => 'site',
       'default_value' => NULL,
       'deleted' => '0',
-      'description' => '',
+      'description' => 'This field is updated automatically based on the first location in the site.',
       'display' => array(
         'default' => array(
           'label' => 'above',
@@ -3432,7 +3514,7 @@ function s4_sites_field_default_fields() {
       'bundle' => 'site',
       'default_value' => NULL,
       'deleted' => '0',
-      'description' => '',
+      'description' => 'This field is updated automatically based on the first location in the site.',
       'display' => array(
         'default' => array(
           'label' => 'above',
@@ -4502,7 +4584,7 @@ function s4_sites_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'email_textfield',
-        'weight' => 0,
+        'weight' => '0',
       ),
     ),
   );
@@ -6395,6 +6477,7 @@ function s4_sites_field_default_fields() {
   t('Contact email');
   t('Contact tags');
   t('Contact type');
+  t('County');
   t('Days and hours will you accept students for service (check all that apply)');
   t('Do you have a partnership with another CSU campus?');
   t('Downloadable form instructions');
@@ -6456,6 +6539,7 @@ function s4_sites_field_default_fields() {
   t('Thank-you message');
   t('The date when a reminder to check on this file will be sent out.');
   t('These are other users (besides department staff) who can edit this site\'s information, along with information about associated coordinators.');
+  t('This field is updated automatically based on the first location in the site.');
   t('This information will be displayed to students before they sign up. This could contain additional information the student needs to know when they sign up for issues like TB testing, background checks, or specialized training');
   t('This message appears when users are viewing your paper forms and are in the process of signing up.');
   t('This will be shown to the public, so only include a generic email contact for the site.');

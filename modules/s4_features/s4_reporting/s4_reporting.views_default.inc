@@ -2217,7 +2217,7 @@ Fields',
     'group-city' => array(
       'group' => '2',
       'filter_name' => 'city',
-      'weight' => '-16',
+      'weight' => '-18',
     ),
     'group-field_csu_facility_tid' => array(
       'group' => '1',
@@ -2242,12 +2242,12 @@ Fields',
     'group-field_district_state_lower_value' => array(
       'group' => '2',
       'filter_name' => 'field_district_state_lower_value',
-      'weight' => '-16',
+      'weight' => '-15',
     ),
     'group-field_district_state_upper_value' => array(
       'group' => '2',
       'filter_name' => 'field_district_state_upper_value',
-      'weight' => '-16',
+      'weight' => '-14',
     ),
     'group-field_site_restrict_tid' => array(
       'group' => '0',
@@ -2288,6 +2288,11 @@ Fields',
       'group' => '1',
       'filter_name' => 'field_site_requirements_tid',
       'weight' => '-14',
+    ),
+    'group-field_county_value' => array(
+      'group' => '2',
+      'filter_name' => 'field_county_value',
+      'weight' => '-17',
     ),
   );
   $handler->display->display_options['pager']['type'] = 'full';
@@ -2780,6 +2785,13 @@ Fields',
   $handler->display->display_options['fields']['field_location']['field'] = 'field_location';
   $handler->display->display_options['fields']['field_location']['type'] = 's4_sites_address';
   $handler->display->display_options['fields']['field_location']['delta_offset'] = '0';
+  /* Field: Content: Location(s) */
+  $handler->display->display_options['fields']['field_location_1']['id'] = 'field_location_1';
+  $handler->display->display_options['fields']['field_location_1']['table'] = 'field_data_field_location';
+  $handler->display->display_options['fields']['field_location_1']['field'] = 'field_location';
+  $handler->display->display_options['fields']['field_location_1']['label'] = 'City';
+  $handler->display->display_options['fields']['field_location_1']['type'] = 's4_sites_address_city';
+  $handler->display->display_options['fields']['field_location_1']['delta_offset'] = '0';
   /* Field: Content: Federal district */
   $handler->display->display_options['fields']['field_district_federal']['id'] = 'field_district_federal';
   $handler->display->display_options['fields']['field_district_federal']['table'] = 'field_data_field_district_federal';
@@ -2958,6 +2970,11 @@ Fields',
   $handler->display->display_options['fields']['total_hours']['id'] = 'total_hours';
   $handler->display->display_options['fields']['total_hours']['table'] = 's4_reporting';
   $handler->display->display_options['fields']['total_hours']['field'] = 'total_hours';
+  /* Field: Content: County */
+  $handler->display->display_options['fields']['field_county']['id'] = 'field_county';
+  $handler->display->display_options['fields']['field_county']['table'] = 'field_data_field_county';
+  $handler->display->display_options['fields']['field_county']['field'] = 'field_county';
+  $handler->display->display_options['fields']['field_county']['label'] = 'County ';
   /* Sort criterion: Content: Title */
   $handler->display->display_options['sorts']['title']['id'] = 'title';
   $handler->display->display_options['sorts']['title']['table'] = 'node';
@@ -2989,7 +3006,7 @@ Fields',
   $handler->display->display_options['filters']['city']['id'] = 'city';
   $handler->display->display_options['filters']['city']['table'] = 'location';
   $handler->display->display_options['filters']['city']['field'] = 'city';
-  $handler->display->display_options['filters']['city']['operator'] = 'contains';
+  $handler->display->display_options['filters']['city']['operator'] = 'word';
   $handler->display->display_options['filters']['city']['group'] = 1;
   $handler->display->display_options['filters']['city']['exposed'] = TRUE;
   $handler->display->display_options['filters']['city']['expose']['operator_id'] = 'city_op';
@@ -3038,6 +3055,7 @@ Fields',
     'title' => 'title',
     'field_phone' => 'field_phone',
     'field_location' => 'field_location',
+    'field_location_1' => 'field_location_1',
     'field_district_federal' => 'field_district_federal',
     'field_district_state_lower' => 'field_district_state_lower',
     'field_district_state_upper' => 'field_district_state_upper',
@@ -3073,6 +3091,7 @@ Fields',
     'field_csu_facility' => 'field_csu_facility',
     'field_csu_org_type' => 'field_csu_org_type',
     'field_phone' => 0,
+    'field_location_1' => 0,
     'field_district_federal' => 0,
     'field_district_state_lower' => 0,
     'field_district_state_upper' => 0,
@@ -3236,6 +3255,16 @@ Fields',
   $handler->display->display_options['filters']['field_site_requirements_tid']['expose']['multiple'] = TRUE;
   $handler->display->display_options['filters']['field_site_requirements_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_site_requirements_tid']['vocabulary'] = 'special_requirements';
+  /* Filter criterion: Content: County (field_county) */
+  $handler->display->display_options['filters']['field_county_value']['id'] = 'field_county_value';
+  $handler->display->display_options['filters']['field_county_value']['table'] = 'field_data_field_county';
+  $handler->display->display_options['filters']['field_county_value']['field'] = 'field_county_value';
+  $handler->display->display_options['filters']['field_county_value']['operator'] = 'word';
+  $handler->display->display_options['filters']['field_county_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_county_value']['expose']['operator_id'] = 'field_county_value_op';
+  $handler->display->display_options['filters']['field_county_value']['expose']['label'] = 'County';
+  $handler->display->display_options['filters']['field_county_value']['expose']['operator'] = 'field_county_value_op';
+  $handler->display->display_options['filters']['field_county_value']['expose']['identifier'] = 'field_county_value';
 
   /* Display: Data report page */
   $handler = $view->new_display('page', 'Data report page', 'page');
@@ -3305,6 +3334,7 @@ Fields',
 <strong>Email:</strong> [field_site_email]<br/>
 [field_website]'),
     t('Location(s)'),
+    t('City'),
     t('Legislative District: Federal'),
     t('Legislative District: Lower state district'),
     t('Legislative District: State upper'),
@@ -3333,8 +3363,8 @@ Fields',
     t('.'),
     t(','),
     t('Total hours'),
+    t('County '),
     t('Published'),
-    t('City'),
     t('Issues addressed'),
     t('Org. type'),
     t('Fields'),
@@ -3349,6 +3379,7 @@ Fields',
     t('Site name'),
     t('Date created is between'),
     t('Site special requirements'),
+    t('County'),
     t('Data report page'),
     t('Data export: CSV'),
     t('Data export: XLS'),

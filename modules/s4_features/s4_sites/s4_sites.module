@@ -809,6 +809,10 @@ function s4_sites_field_formatter_info() {
         'label' => t('Site address'),
         'field types' => array('location'),
       ),
+      's4_sites_address_city' => array(
+        'label' => t('Just the city'),
+        'field types' => array('location'),
+      ),
       's4_sites_hours_matrix' => array(
         'label' => t('Site hours'),
         'field types' => array('matrix_text', 'matrix_custom'),
@@ -839,6 +843,14 @@ function s4_sites_field_formatter_view($entity_type, $entity, $field, $instance,
       $extension = ($item['extension']) ? $item['extension'] : FALSE;
       $element[$delta] = array(
         '#markup' => _s4_sites_format_phone($item['number'], $extension),
+      );
+    }
+  }
+  if ($display['type'] == 's4_sites_address_city') {
+    
+     foreach ($items as $delta => $item) {
+       $element[$delta] = array(
+        '#markup' => $item['city'],
       );
     }
   }

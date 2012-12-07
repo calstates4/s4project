@@ -175,6 +175,7 @@ function s4_sites_field_group_info() {
       1 => 'field_district_state_lower',
       2 => 'field_district_state_upper',
       3 => 'field_location',
+      4 => 'field_county',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
