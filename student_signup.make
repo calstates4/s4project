@@ -168,7 +168,7 @@ projects[views_bulk_operations][subdir] = "contrib"
 projects[views_bulk_operations][version] = "3.0"
 
 projects[views_data_export][subdir] = "contrib"
-projects[views_data_export][version] = "3.0-beta4"
+projects[views_data_export][version] = "3.0-beta6"
 
 projects[views_datasource][subdir] = "contrib"
 projects[views_datasource][version] = "1.x-dev"

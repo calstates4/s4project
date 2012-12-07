@@ -29,6 +29,7 @@ function s4_reporting_views_default_views() {
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'views_exposed_groups';
   $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Search';
+  $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['exposed_form']['options']['views_exposed_groups'] = array(
     'format_groups' => 'vertical_tabs',
     'groups' => 'Course
@@ -420,6 +421,7 @@ Fieds',
     'course_student_enrollment' => 'course_student_enrollment',
     'course_student_placements' => 'course_student_placements',
     'field_course_faculty' => 'field_course_faculty',
+    'views_bulk_operations' => 0,
   );
   $handler->display->display_options['filters']['dyfield']['defaults_filterable_fields'] = array(
     'field_term' => 'field_term',
@@ -428,11 +430,12 @@ Fieds',
     'field_course_section' => 'field_course_section',
     'course_student_enrollment' => 'course_student_enrollment',
     'course_student_placements' => 'course_student_placements',
+    'views_bulk_operations' => 0,
     'field_site_restrict' => 0,
     'field_course_title' => 0,
     'field_course_faculty' => 0,
   );
-  $handler->display->display_options['filters']['dyfield']['sortability'] = 0;
+  $handler->display->display_options['filters']['dyfield']['sortability'] = 1;
   $handler->display->display_options['filters']['dyfield']['checkboxes'] = 1;
   /* Filter criterion: Content: Issues addressed (field_csu_facility) */
   $handler->display->display_options['filters']['field_csu_facility_tid']['id'] = 'field_csu_facility_tid';
@@ -489,6 +492,7 @@ Fieds',
     'page' => 'page',
     'default' => 0,
   );
+  $handler->display->display_options['use_batch'] = 'batch';
 
   /* Display: Data export: XLS */
   $handler = $view->new_display('views_data_export', 'Data export: XLS', 'views_data_export_2');
@@ -501,6 +505,7 @@ Fieds',
     'page' => 'page',
     'default' => 0,
   );
+  $handler->display->display_options['use_batch'] = 'batch';
   $translatables['reports_courses'] = array(
     t('Master'),
     t('S4 Reports: Courses'),
@@ -560,6 +565,8 @@ Fieds',
   $handler->display->display_options['query']['options']['disable_sql_rewrite'] = TRUE;
   $handler->display->display_options['query']['options']['distinct'] = TRUE;
   $handler->display->display_options['exposed_form']['type'] = 'views_exposed_groups';
+  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Search';
+  $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['exposed_form']['options']['views_exposed_groups'] = array(
     'format_groups' => 'vertical_tabs',
     'groups' => 'Faculty
@@ -986,7 +993,7 @@ Fields',
     'page' => 'page',
     'default' => 0,
   );
-  $handler->display->display_options['use_batch'] = '0';
+  $handler->display->display_options['use_batch'] = 'batch';
 
   /* Display: Export XLS */
   $handler = $view->new_display('views_data_export', 'Export XLS', 'views_data_export_2');
@@ -1001,12 +1008,12 @@ Fields',
     'page' => 'page',
     'default' => 0,
   );
-  $handler->display->display_options['use_batch'] = '0';
+  $handler->display->display_options['use_batch'] = 'batch';
   $translatables['reports_faculty'] = array(
     t('Master'),
     t('Faculty report'),
     t('more'),
-    t('Apply'),
+    t('Search'),
     t('Reset'),
     t('Sort by'),
     t('Asc'),
@@ -1066,6 +1073,8 @@ Fields',
   $handler->display->display_options['query']['options']['disable_sql_rewrite'] = TRUE;
   $handler->display->display_options['query']['options']['distinct'] = TRUE;
   $handler->display->display_options['exposed_form']['type'] = 'views_exposed_groups';
+  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Search';
+  $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['exposed_form']['options']['views_exposed_groups'] = array(
     'format_groups' => 'vertical_tabs',
     'groups' => 'Site staff
@@ -1076,102 +1085,92 @@ Fields',
     'group-city' => array(
       'group' => '2',
       'filter_name' => 'city',
-      'weight' => '-21',
+      'weight' => '-18',
     ),
     'group-field_csu_facility_tid' => array(
       'group' => '1',
       'filter_name' => 'field_csu_facility_tid',
-      'weight' => '-21',
+      'weight' => '-18',
     ),
     'group-field_csu_org_type_tid' => array(
       'group' => '1',
       'filter_name' => 'field_csu_org_type_tid',
-      'weight' => '-21',
+      'weight' => '-18',
     ),
     'group-dyfield' => array(
       'group' => '4',
       'filter_name' => 'dyfield',
-      'weight' => '-21',
-    ),
-    'group-field_term_nid' => array(
-      'group' => '3',
-      'filter_name' => 'field_term_nid',
-      'weight' => '-21',
+      'weight' => '-18',
     ),
     'group-field_district_federal_value' => array(
       'group' => '2',
       'filter_name' => 'field_district_federal_value',
-      'weight' => '-20',
+      'weight' => '-18',
     ),
     'group-field_district_state_lower_value' => array(
       'group' => '2',
       'filter_name' => 'field_district_state_lower_value',
-      'weight' => '-19',
+      'weight' => '-18',
     ),
     'group-field_district_state_upper_value' => array(
       'group' => '2',
       'filter_name' => 'field_district_state_upper_value',
       'weight' => '-18',
     ),
-    'group-distance' => array(
-      'group' => '2',
-      'filter_name' => 'distance',
-      'weight' => '-17',
-    ),
     'group-field_site_restrict_tid' => array(
       'group' => '1',
       'filter_name' => 'field_site_restrict_tid',
-      'weight' => '-21',
+      'weight' => '-18',
     ),
     'group-field_tags_tid' => array(
       'group' => '1',
       'filter_name' => 'field_tags_tid',
-      'weight' => '-21',
+      'weight' => '-18',
     ),
     'group-field_signup_start_date_value' => array(
       'group' => '3',
       'filter_name' => 'field_signup_start_date_value',
-      'weight' => '-21',
+      'weight' => '-18',
     ),
     'group-field_course_subject_value' => array(
       'group' => '3',
       'filter_name' => 'field_course_subject_value',
-      'weight' => '-21',
+      'weight' => '-18',
     ),
     'group-field_term_nid_1' => array(
       'group' => '3',
       'filter_name' => 'field_term_nid_1',
-      'weight' => '-21',
+      'weight' => '-18',
     ),
     'group-field_site_nid' => array(
       'group' => '0',
       'filter_name' => 'field_site_nid',
-      'weight' => '-21',
+      'weight' => '-19',
     ),
     'group-field_staff_signup_available_value' => array(
       'group' => '0',
       'filter_name' => 'field_staff_signup_available_value',
-      'weight' => '-21',
-    ),
-    'group-field_site_restrict_tid_1' => array(
-      'group' => '0',
-      'filter_name' => 'field_site_restrict_tid_1',
-      'weight' => '-21',
+      'weight' => '-17',
     ),
     'group-field_staff_role_tid' => array(
       'group' => '0',
       'filter_name' => 'field_staff_role_tid',
-      'weight' => '-21',
+      'weight' => '-16',
     ),
     'group-field_site_restrict_tid_2' => array(
       'group' => '3',
       'filter_name' => 'field_site_restrict_tid_2',
-      'weight' => '-21',
+      'weight' => '-18',
     ),
     'group-created' => array(
       'group' => '0',
       'filter_name' => 'created',
-      'weight' => '-21',
+      'weight' => '-15',
+    ),
+    'group-field_site_restrict_tid_1' => array(
+      'group' => '0',
+      'filter_name' => 'field_site_restrict_tid_1',
+      'weight' => '-18',
     ),
   );
   $handler->display->display_options['pager']['type'] = 'full';
@@ -1900,19 +1899,6 @@ Fields',
   );
   $handler->display->display_options['filters']['dyfield']['sortability'] = 1;
   $handler->display->display_options['filters']['dyfield']['checkboxes'] = 0;
-  /* Filter criterion: Content: Term (field_term) */
-  $handler->display->display_options['filters']['field_term_nid']['id'] = 'field_term_nid';
-  $handler->display->display_options['filters']['field_term_nid']['table'] = 'field_data_field_term';
-  $handler->display->display_options['filters']['field_term_nid']['field'] = 'field_term_nid';
-  $handler->display->display_options['filters']['field_term_nid']['relationship'] = 'field_course_nid';
-  $handler->display->display_options['filters']['field_term_nid']['group'] = 1;
-  $handler->display->display_options['filters']['field_term_nid']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_term_nid']['expose']['operator_id'] = 'field_term_nid_op';
-  $handler->display->display_options['filters']['field_term_nid']['expose']['label'] = 'Had a student in';
-  $handler->display->display_options['filters']['field_term_nid']['expose']['operator'] = 'field_term_nid_op';
-  $handler->display->display_options['filters']['field_term_nid']['expose']['identifier'] = 'field_term_nid';
-  $handler->display->display_options['filters']['field_term_nid']['expose']['remember'] = TRUE;
-  $handler->display->display_options['filters']['field_term_nid']['expose']['multiple'] = TRUE;
   /* Filter criterion: Content: Federal district (field_district_federal) */
   $handler->display->display_options['filters']['field_district_federal_value']['id'] = 'field_district_federal_value';
   $handler->display->display_options['filters']['field_district_federal_value']['table'] = 'field_data_field_district_federal';
@@ -1957,7 +1943,7 @@ Fields',
   $handler->display->display_options['filters']['field_site_restrict_tid']['group'] = 1;
   $handler->display->display_options['filters']['field_site_restrict_tid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['operator_id'] = 'field_site_restrict_tid_op';
-  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['label'] = 'Site available programs';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['label'] = 'Program(s)';
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['operator'] = 'field_site_restrict_tid_op';
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['identifier'] = 'field_site_restrict_tid';
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['multiple'] = TRUE;
@@ -2040,21 +2026,6 @@ Fields',
   $handler->display->display_options['filters']['field_staff_signup_available_value']['expose']['label'] = 'Staff is available for placements';
   $handler->display->display_options['filters']['field_staff_signup_available_value']['expose']['operator'] = 'field_staff_signup_available_value_op';
   $handler->display->display_options['filters']['field_staff_signup_available_value']['expose']['identifier'] = 'field_staff_signup_available_value';
-  /* Filter criterion: Field: Program (field_site_restrict) */
-  $handler->display->display_options['filters']['field_site_restrict_tid_1']['id'] = 'field_site_restrict_tid_1';
-  $handler->display->display_options['filters']['field_site_restrict_tid_1']['table'] = 'field_data_field_site_restrict';
-  $handler->display->display_options['filters']['field_site_restrict_tid_1']['field'] = 'field_site_restrict_tid';
-  $handler->display->display_options['filters']['field_site_restrict_tid_1']['value'] = '';
-  $handler->display->display_options['filters']['field_site_restrict_tid_1']['group'] = 1;
-  $handler->display->display_options['filters']['field_site_restrict_tid_1']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_site_restrict_tid_1']['expose']['operator_id'] = 'field_site_restrict_tid_1_op';
-  $handler->display->display_options['filters']['field_site_restrict_tid_1']['expose']['label'] = 'Site staff programs';
-  $handler->display->display_options['filters']['field_site_restrict_tid_1']['expose']['operator'] = 'field_site_restrict_tid_1_op';
-  $handler->display->display_options['filters']['field_site_restrict_tid_1']['expose']['identifier'] = 'field_site_restrict_tid_1';
-  $handler->display->display_options['filters']['field_site_restrict_tid_1']['expose']['multiple'] = TRUE;
-  $handler->display->display_options['filters']['field_site_restrict_tid_1']['type'] = 'select';
-  $handler->display->display_options['filters']['field_site_restrict_tid_1']['vocabulary'] = 'site_restrictions';
-  $handler->display->display_options['filters']['field_site_restrict_tid_1']['error_message'] = FALSE;
   /* Filter criterion: Content: Role (field_staff_role) */
   $handler->display->display_options['filters']['field_staff_role_tid']['id'] = 'field_staff_role_tid';
   $handler->display->display_options['filters']['field_staff_role_tid']['table'] = 'field_data_field_staff_role';
@@ -2091,6 +2062,18 @@ Fields',
   $handler->display->display_options['filters']['created']['expose']['use_operator'] = TRUE;
   $handler->display->display_options['filters']['created']['expose']['operator'] = 'created_op';
   $handler->display->display_options['filters']['created']['expose']['identifier'] = 'created';
+  /* Filter criterion: Field: Program (field_site_restrict) */
+  $handler->display->display_options['filters']['field_site_restrict_tid_1']['id'] = 'field_site_restrict_tid_1';
+  $handler->display->display_options['filters']['field_site_restrict_tid_1']['table'] = 'field_data_field_site_restrict';
+  $handler->display->display_options['filters']['field_site_restrict_tid_1']['field'] = 'field_site_restrict_tid';
+  $handler->display->display_options['filters']['field_site_restrict_tid_1']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_site_restrict_tid_1']['expose']['operator_id'] = 'field_site_restrict_tid_1_op';
+  $handler->display->display_options['filters']['field_site_restrict_tid_1']['expose']['label'] = 'Program(s)';
+  $handler->display->display_options['filters']['field_site_restrict_tid_1']['expose']['operator'] = 'field_site_restrict_tid_1_op';
+  $handler->display->display_options['filters']['field_site_restrict_tid_1']['expose']['identifier'] = 'field_site_restrict_tid_1';
+  $handler->display->display_options['filters']['field_site_restrict_tid_1']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_site_restrict_tid_1']['type'] = 'select';
+  $handler->display->display_options['filters']['field_site_restrict_tid_1']['vocabulary'] = 'site_restrictions';
 
   /* Display: Data report page */
   $handler = $view->new_display('page', 'Data report page', 'page');
@@ -2118,7 +2101,7 @@ Fields',
     'default' => 'default',
     'page' => 'page',
   );
-  $handler->display->display_options['use_batch'] = '0';
+  $handler->display->display_options['use_batch'] = 'batch';
 
   /* Display: Data export: XLS */
   $handler = $view->new_display('views_data_export', 'Data export: XLS', 'views_data_export_2');
@@ -2133,12 +2116,12 @@ Fields',
     'default' => 'default',
     'page' => 'page',
   );
-  $handler->display->display_options['use_batch'] = '0';
+  $handler->display->display_options['use_batch'] = 'batch';
   $translatables['reports_site_staff'] = array(
     t('Master'),
     t('Site staff report'),
     t('more'),
-    t('Apply'),
+    t('Search'),
     t('Reset'),
     t('Sort by'),
     t('Asc'),
@@ -2181,18 +2164,16 @@ Fields',
     t('Issues addressed'),
     t('Org. type'),
     t('Fields'),
-    t('Had a student in'),
     t('Federal district'),
     t('State lower district'),
     t('State upper district'),
-    t('Site available programs'),
+    t('Program(s)'),
     t('Site tags'),
     t('Site had at least one student between the following dates'),
     t('Who had a student in the following course subject'),
     t('Site had a student in the following terms (only applies to students signing up as part of a course)'),
     t('Specific sites'),
     t('Staff is available for placements'),
-    t('Site staff programs'),
     t('Site staff role'),
     t('Program'),
     t('Created date'),
@@ -2225,6 +2206,7 @@ Fields',
   $handler->display->display_options['query']['options']['distinct'] = TRUE;
   $handler->display->display_options['exposed_form']['type'] = 'views_exposed_groups';
   $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Search';
+  $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['exposed_form']['options']['views_exposed_groups'] = array(
     'format_groups' => 'vertical_tabs',
     'groups' => 'General
@@ -3280,22 +3262,21 @@ Fields',
     'default' => 'default',
     'page' => 'page',
   );
-  $handler->display->display_options['use_batch'] = '0';
+  $handler->display->display_options['use_batch'] = 'batch';
 
   /* Display: Data export: XLS */
-  $handler = $view->new_display('views_data_export', 'Data export: XLS', 'views_data_export_2');
+  $handler = $view->new_display('views_data_export', 'Data export: XLS', 'views_data_export_3');
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'views_data_export_xls';
-  $handler->display->display_options['style_options']['provide_file'] = 1;
-  $handler->display->display_options['style_options']['filename'] = 'sites_report_%timestamp-full.xls';
+  $handler->display->display_options['style_options']['provide_file'] = 0;
   $handler->display->display_options['style_options']['parent_sort'] = 0;
   $handler->display->display_options['path'] = 'reports/sites/export/xls';
   $handler->display->display_options['displays'] = array(
-    'default' => 'default',
     'page' => 'page',
+    'default' => 0,
   );
-  $handler->display->display_options['use_batch'] = '0';
+  $handler->display->display_options['use_batch'] = 'batch';
   $translatables['reports_sites'] = array(
     t('Master'),
     t('Site Report'),
@@ -3394,6 +3375,8 @@ Fields',
   $handler->display->display_options['query']['options']['disable_sql_rewrite'] = TRUE;
   $handler->display->display_options['query']['options']['distinct'] = TRUE;
   $handler->display->display_options['exposed_form']['type'] = 'views_exposed_groups';
+  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Search';
+  $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
   $handler->display->display_options['exposed_form']['options']['views_exposed_groups'] = array(
     'format_groups' => 'vertical_tabs',
     'groups' => 'Student
@@ -4242,7 +4225,7 @@ Fields',
     'page' => 'page',
     'default' => 0,
   );
-  $handler->display->display_options['use_batch'] = '0';
+  $handler->display->display_options['use_batch'] = 'batch';
 
   /* Display: Export XLS */
   $handler = $view->new_display('views_data_export', 'Export XLS', 'views_data_export_2');
@@ -4257,12 +4240,12 @@ Fields',
     'page' => 'page',
     'default' => 0,
   );
-  $handler->display->display_options['use_batch'] = '0';
+  $handler->display->display_options['use_batch'] = 'batch';
   $translatables['reports_students'] = array(
     t('Master'),
     t('Student report'),
     t('more'),
-    t('Apply'),
+    t('Search'),
     t('Reset'),
     t('Sort by'),
     t('Asc'),
