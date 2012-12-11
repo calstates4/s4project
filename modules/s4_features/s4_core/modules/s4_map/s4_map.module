@@ -23,6 +23,21 @@ function s4_map_views_query_alter(&$view, &$query) {
   }
 }
 
+function s4_map_menu() {
+  $items = array();
+  
+  $items['admin/config/s4/counties'] = array(
+    'title' => 'Update county information',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('s4_map_admin_rebuild_counties'),
+    'access arguments' => array('administer site configuration'),
+    'file' => 's4_map.admin.inc',
+    'type' => MENU_LOCAL_TASK,
+  );
+  
+  return $items;
+}
+
 /**
 * Implements hook_s4_site_configuration
 */
@@ -46,10 +61,14 @@ function s4_map_block_info() {
 }
 
 function s4_map_node_presave($node) {
+  s4_map_assign_county($node);
+}
+
+function s4_map_assign_county($node, $rebuild = FALSE) {
   $location = field_get_items('node', $node, 'field_location');
   $location = $location[0];
   $county = field_get_items('node', $node, 'field_county');
-  if(!$location['city'] || $county[0]['value']) {
+  if((!$location['city'] || $county[0]['value']) && !$rebuild) {
     return;
   }
   $address = urlencode(check_plain($location['street'] .',+'. $location['city'] .',+'. $location['province'] .'+'. $location['postal_code']));
