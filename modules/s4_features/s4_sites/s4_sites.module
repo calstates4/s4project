@@ -1355,3 +1355,27 @@ function s4_sites_theme_field_collection_table($variables) {
 
   return $output;
 }
+
+/**
+ * Alter the public site search form to expand if there are values in the advanced search fieldset.
+ * Implements hook_form_FORM_ID_alter().
+ */
+function s4_sites_form_views_exposed_form_alter(&$form, $form_state) {
+  if($form_state['view']->name == 'sites') {
+    $set_filters = array();
+    foreach($form_state['view']->exposed_input as $field => $value) {
+      if(is_array($value) || strlen($value) > 0) {
+        $set_filters[$field] = $field;
+      }
+    }
+    foreach($form['filters'] as &$filter) {
+      if(is_array($filter) && $filter['#collapsed']) {
+        foreach($filter as $field_name => $field) {
+          if($set_filters[$field_name]) {
+            $filter['#collapsed'] = FALSE;
+          }
+        }
+      }
+    }
+  }
+}
