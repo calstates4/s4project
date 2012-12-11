@@ -2975,6 +2975,12 @@ Fields',
   $handler->display->display_options['fields']['field_county']['table'] = 'field_data_field_county';
   $handler->display->display_options['fields']['field_county']['field'] = 'field_county';
   $handler->display->display_options['fields']['field_county']['label'] = 'County ';
+  /* Field: Site Data: Subject code totals */
+  $handler->display->display_options['fields']['site_course_subject_codes']['id'] = 'site_course_subject_codes';
+  $handler->display->display_options['fields']['site_course_subject_codes']['table'] = 's4_sites';
+  $handler->display->display_options['fields']['site_course_subject_codes']['field'] = 'site_course_subject_codes';
+  $handler->display->display_options['fields']['site_course_subject_codes']['label'] = 'Subject code subject';
+  $handler->display->display_options['fields']['site_course_subject_codes']['element_label_colon'] = FALSE;
   /* Sort criterion: Content: Title */
   $handler->display->display_options['sorts']['title']['id'] = 'title';
   $handler->display->display_options['sorts']['title']['table'] = 'node';
@@ -3083,6 +3089,8 @@ Fields',
     'created' => 'created',
     'total_placements' => 'total_placements',
     'total_hours' => 'total_hours',
+    'field_county' => 'field_county',
+    'site_course_subject_codes' => 'site_course_subject_codes',
   );
   $handler->display->display_options['filters']['dyfield']['defaults_filterable_fields'] = array(
     'views_bulk_operations' => 'views_bulk_operations',
@@ -3117,6 +3125,8 @@ Fields',
     'created' => 0,
     'total_placements' => 0,
     'total_hours' => 0,
+    'field_county' => 0,
+    'site_course_subject_codes' => 0,
   );
   $handler->display->display_options['filters']['dyfield']['sortability'] = 1;
   $handler->display->display_options['filters']['dyfield']['checkboxes'] = 0;
@@ -3364,6 +3374,7 @@ Fields',
     t(','),
     t('Total hours'),
     t('County '),
+    t('Subject code subject'),
     t('Published'),
     t('Issues addressed'),
     t('Org. type'),

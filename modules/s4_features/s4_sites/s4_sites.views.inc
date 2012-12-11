@@ -51,6 +51,19 @@ function s4_sites_views_data() {
       'handler' => 'views_handler_sort',
     ),
   );
+
+  
+  $data['s4_sites']['site_course_subject_codes'] = array(
+    'title' => t('Subject code totals'),
+    'help' => t('List of subject codes'),
+    'field' => array(
+      'handler' => 'views_handler_s4_site_course_subject_codes',
+      'click sortable' => FALSE,
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort',
+    ),
+  );
   
   $data['s4_sites']['current_site_staff_students'] = array(
     'title' => t('Current site staff students'),
