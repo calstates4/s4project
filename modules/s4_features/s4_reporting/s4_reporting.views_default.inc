@@ -483,29 +483,21 @@ Fieds',
   $handler->display->display_options['menu']['weight'] = '0';
   $handler->display->display_options['menu']['context'] = 0;
 
-  /* Display: Data export: CSV */
-  $handler = $view->new_display('views_data_export', 'Data export: CSV', 'views_data_export_1');
-  $handler->display->display_options['pager']['type'] = 'some';
-  $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
-  $handler->display->display_options['path'] = 'reports/courses/export/csv';
-  $handler->display->display_options['displays'] = array(
-    'page' => 'page',
-    'default' => 0,
-  );
-  $handler->display->display_options['use_batch'] = 'batch';
-
-  /* Display: Data export: XLS */
-  $handler = $view->new_display('views_data_export', 'Data export: XLS', 'views_data_export_2');
-  $handler->display->display_options['pager']['type'] = 'some';
+  /* Display: Data export */
+  $handler = $view->new_display('views_data_export', 'Data export', 'views_data_export_1');
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'views_data_export_xls';
-  $handler->display->display_options['style_options']['provide_file'] = 0;
+  $handler->display->display_options['style_options']['provide_file'] = 1;
+  $handler->display->display_options['style_options']['filename'] = '%view-%timestamp-full.xls';
   $handler->display->display_options['style_options']['parent_sort'] = 0;
-  $handler->display->display_options['path'] = 'reports/courses/export/xls';
+  $handler->display->display_options['path'] = 'reports/courses/xls';
   $handler->display->display_options['displays'] = array(
+    'default' => 'default',
     'page' => 'page',
-    'default' => 0,
   );
   $handler->display->display_options['use_batch'] = 'batch';
+  $handler->display->display_options['segment_size'] = '50';
   $translatables['reports_courses'] = array(
     t('Master'),
     t('S4 Reports: Courses'),
@@ -540,8 +532,7 @@ Fieds',
     t('Organization type'),
     t('City'),
     t('Page'),
-    t('Data export: CSV'),
-    t('Data export: XLS'),
+    t('Data export'),
   );
   $export['reports_courses'] = $view;
 
@@ -978,37 +969,21 @@ Fields',
   $handler->display->display_options['menu']['weight'] = '2';
   $handler->display->display_options['menu']['context'] = 0;
 
-  /* Display: Export CSV */
-  $handler = $view->new_display('views_data_export', 'Export CSV', 'views_data_export_1');
-  $handler->display->display_options['pager']['type'] = 'none';
-  $handler->display->display_options['pager']['options']['offset'] = '0';
-  $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
-  $handler->display->display_options['style_options']['provide_file'] = 1;
-  $handler->display->display_options['style_options']['filename'] = 'faculty_report_%timestamp-full.csv';
-  $handler->display->display_options['style_options']['parent_sort'] = 0;
-  $handler->display->display_options['style_options']['quote'] = 1;
-  $handler->display->display_options['style_options']['header'] = 1;
-  $handler->display->display_options['path'] = 'reports/faculty/export/csv';
-  $handler->display->display_options['displays'] = array(
-    'page' => 'page',
-    'default' => 0,
-  );
-  $handler->display->display_options['use_batch'] = 'batch';
-
-  /* Display: Export XLS */
-  $handler = $view->new_display('views_data_export', 'Export XLS', 'views_data_export_2');
+  /* Display: Data export */
+  $handler = $view->new_display('views_data_export', 'Data export', 'views_data_export_1');
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'views_data_export_xls';
   $handler->display->display_options['style_options']['provide_file'] = 1;
-  $handler->display->display_options['style_options']['filename'] = 'faculty_report_%timestamp-full.xls';
+  $handler->display->display_options['style_options']['filename'] = '%view-%timestamp-full.xls';
   $handler->display->display_options['style_options']['parent_sort'] = 0;
-  $handler->display->display_options['path'] = 'reports/faculty/export/xls';
+  $handler->display->display_options['path'] = 'reports/faculty/xls';
   $handler->display->display_options['displays'] = array(
+    'default' => 'default',
     'page' => 'page',
-    'default' => 0,
   );
   $handler->display->display_options['use_batch'] = 'batch';
+  $handler->display->display_options['segment_size'] = '50';
   $translatables['reports_faculty'] = array(
     t('Master'),
     t('Faculty report'),
@@ -1046,8 +1021,7 @@ Fields',
     t('State'),
     t('Program'),
     t('Page'),
-    t('Export CSV'),
-    t('Export XLS'),
+    t('Data export'),
   );
   $export['reports_faculty'] = $view;
 
@@ -2086,37 +2060,21 @@ Fields',
   $handler->display->display_options['tab_options']['title'] = 'Reports';
   $handler->display->display_options['tab_options']['weight'] = '0';
 
-  /* Display: Data export: CSV */
-  $handler = $view->new_display('views_data_export', 'Data export: CSV', 'views_data_export_1');
-  $handler->display->display_options['pager']['type'] = 'none';
-  $handler->display->display_options['pager']['options']['offset'] = '0';
-  $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
-  $handler->display->display_options['style_options']['provide_file'] = 1;
-  $handler->display->display_options['style_options']['filename'] = 'site_staff_report_%timestamp-full.csv';
-  $handler->display->display_options['style_options']['parent_sort'] = 0;
-  $handler->display->display_options['style_options']['quote'] = 1;
-  $handler->display->display_options['style_options']['header'] = 1;
-  $handler->display->display_options['path'] = 'reports/sites/export/csv';
-  $handler->display->display_options['displays'] = array(
-    'default' => 'default',
-    'page' => 'page',
-  );
-  $handler->display->display_options['use_batch'] = 'batch';
-
-  /* Display: Data export: XLS */
-  $handler = $view->new_display('views_data_export', 'Data export: XLS', 'views_data_export_2');
+  /* Display: Data export */
+  $handler = $view->new_display('views_data_export', 'Data export', 'views_data_export_1');
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'views_data_export_xls';
   $handler->display->display_options['style_options']['provide_file'] = 1;
-  $handler->display->display_options['style_options']['filename'] = 'site_staff_report_%timestamp-full.xls';
-  $handler->display->display_options['style_options']['parent_sort'] = 0;
-  $handler->display->display_options['path'] = 'reports/sites/export/xls';
+  $handler->display->display_options['style_options']['filename'] = '%view-%timestamp-full.xls';
+  $handler->display->display_options['style_options']['parent_sort'] = 1;
+  $handler->display->display_options['path'] = 'reports/site-staff/xls';
   $handler->display->display_options['displays'] = array(
     'default' => 'default',
     'page' => 'page',
   );
   $handler->display->display_options['use_batch'] = 'batch';
+  $handler->display->display_options['segment_size'] = '50';
   $translatables['reports_site_staff'] = array(
     t('Master'),
     t('Site staff report'),
@@ -2178,8 +2136,7 @@ Fields',
     t('Program'),
     t('Created date'),
     t('Data report page'),
-    t('Data export: CSV'),
-    t('Data export: XLS'),
+    t('Data export'),
   );
   $export['reports_site_staff'] = $view;
 
@@ -3286,36 +3243,21 @@ Fields',
   $handler->display->display_options['tab_options']['title'] = 'Reports';
   $handler->display->display_options['tab_options']['weight'] = '0';
 
-  /* Display: Data export: CSV */
-  $handler = $view->new_display('views_data_export', 'Data export: CSV', 'views_data_export_1');
+  /* Display: Data export */
+  $handler = $view->new_display('views_data_export', 'Data export', 'views_data_export_1');
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
-  $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
+  $handler->display->display_options['style_plugin'] = 'views_data_export_xls';
   $handler->display->display_options['style_options']['provide_file'] = 1;
-  $handler->display->display_options['style_options']['filename'] = 'sites_report_%timestamp-full.csv';
+  $handler->display->display_options['style_options']['filename'] = '%view-%timestamp-full.xls';
   $handler->display->display_options['style_options']['parent_sort'] = 0;
-  $handler->display->display_options['style_options']['quote'] = 1;
-  $handler->display->display_options['style_options']['header'] = 1;
-  $handler->display->display_options['path'] = 'reports/sites/export/csv';
+  $handler->display->display_options['path'] = 'reports/sites/xls';
   $handler->display->display_options['displays'] = array(
     'default' => 'default',
     'page' => 'page',
   );
   $handler->display->display_options['use_batch'] = 'batch';
-
-  /* Display: Data export: XLS */
-  $handler = $view->new_display('views_data_export', 'Data export: XLS', 'views_data_export_3');
-  $handler->display->display_options['pager']['type'] = 'none';
-  $handler->display->display_options['pager']['options']['offset'] = '0';
-  $handler->display->display_options['style_plugin'] = 'views_data_export_xls';
-  $handler->display->display_options['style_options']['provide_file'] = 0;
-  $handler->display->display_options['style_options']['parent_sort'] = 0;
-  $handler->display->display_options['path'] = 'reports/sites/export/xls';
-  $handler->display->display_options['displays'] = array(
-    'page' => 'page',
-    'default' => 0,
-  );
-  $handler->display->display_options['use_batch'] = 'batch';
+  $handler->display->display_options['segment_size'] = '50';
   $translatables['reports_sites'] = array(
     t('Master'),
     t('Site Report'),
@@ -3392,8 +3334,7 @@ Fields',
     t('Site special requirements'),
     t('County'),
     t('Data report page'),
-    t('Data export: CSV'),
-    t('Data export: XLS'),
+    t('Data export'),
   );
   $export['reports_sites'] = $view;
 
@@ -3402,7 +3343,7 @@ Fields',
   $view->description = '';
   $view->tag = 'default';
   $view->base_table = 'users';
-  $view->human_name = 'Reports: students';
+  $view->human_name = 'S4 Reports: students';
   $view->core = 7;
   $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
@@ -4252,37 +4193,21 @@ Fields',
   $handler->display->display_options['menu']['weight'] = '0';
   $handler->display->display_options['menu']['context'] = 0;
 
-  /* Display: Export CSV */
-  $handler = $view->new_display('views_data_export', 'Export CSV', 'views_data_export_1');
-  $handler->display->display_options['pager']['type'] = 'none';
-  $handler->display->display_options['pager']['options']['offset'] = '0';
-  $handler->display->display_options['style_plugin'] = 'views_data_export_csv';
-  $handler->display->display_options['style_options']['provide_file'] = 1;
-  $handler->display->display_options['style_options']['filename'] = 'student_report_%timestamp-full.csv';
-  $handler->display->display_options['style_options']['parent_sort'] = 0;
-  $handler->display->display_options['style_options']['quote'] = 1;
-  $handler->display->display_options['style_options']['header'] = 1;
-  $handler->display->display_options['path'] = 'reports/students/export/csv';
-  $handler->display->display_options['displays'] = array(
-    'page' => 'page',
-    'default' => 0,
-  );
-  $handler->display->display_options['use_batch'] = 'batch';
-
-  /* Display: Export XLS */
-  $handler = $view->new_display('views_data_export', 'Export XLS', 'views_data_export_2');
+  /* Display: Data export */
+  $handler = $view->new_display('views_data_export', 'Data export', 'views_data_export_1');
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['style_plugin'] = 'views_data_export_xls';
   $handler->display->display_options['style_options']['provide_file'] = 1;
-  $handler->display->display_options['style_options']['filename'] = 'student_report_%timestamp-full.xls';
+  $handler->display->display_options['style_options']['filename'] = '%view-%timestamp-full.xls';
   $handler->display->display_options['style_options']['parent_sort'] = 0;
-  $handler->display->display_options['path'] = 'reports/students/export/xls';
+  $handler->display->display_options['path'] = 'reports/students/xls';
   $handler->display->display_options['displays'] = array(
+    'default' => 'default',
     'page' => 'page',
-    'default' => 0,
   );
   $handler->display->display_options['use_batch'] = 'batch';
+  $handler->display->display_options['segment_size'] = '50';
   $translatables['reports_students'] = array(
     t('Master'),
     t('Student report'),
@@ -4337,8 +4262,7 @@ Fields',
     t('Placement program'),
     t('Section number'),
     t('Page'),
-    t('Export CSV'),
-    t('Export XLS'),
+    t('Data export'),
   );
   $export['reports_students'] = $view;
 
