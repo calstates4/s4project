@@ -4,11 +4,11 @@
    contain the root `toctree` directive.
 
 
-=========================================
-S4: Students Signup for Service and Stuff
-=========================================
+=======================================
+S4: Supporting Students & Service Sites
+=======================================
 
-Students need to sign up for lots of things besides courses. Things like service learning, teacher education, or social work programs all need to track students outside the scope of a course or even a semester. The Signup Project will provide a way for a campus to track the relationships between community partners, site coordinators, students, faculty, courses, and programs; while being simple to maintain and easy (even fun!) to use.
+S4 is a free software solution that allows your campus to track service-learning, internships, and undergraduate research experiences, as well as as teacher education and social work placements. S4 is uniquely designed to easily manage the CSU?s risk management processes and provides students, faculty and community members with a user-friendly interface to manage CSU students? outside learning experiences.
 
 This project is a collaboration between the CSUMB Web Services department and the Center for Community Engagement
 
