@@ -21,7 +21,7 @@ function student_signup_install_tasks() {
  */
 function student_signup_profiler_install_tasks() {
 	$batch = array(
-	  'title' => t('Completing student signup setup.'),
+	  'title' => st('Completing student signup setup.'),
 	  'operations' => array(
         array('student_signup_setup_homepage', array()),
 	  ),
@@ -59,7 +59,7 @@ function student_signup_profiler_install_tasks() {
 function student_signup_install_rebuild_permissions(&$context) {
   node_access_rebuild();
   node_access_needs_rebuild(FALSE);
-  $context['messages'] = t('Rebuilding node permissions');
+  $context['messages'] = st('Rebuilding node permissions');
   $context['results'][] = 'node_rebuild';
 }
 
@@ -70,7 +70,7 @@ function student_signup_install_rebuild_features(&$context) {
   features_revert(array('s4_sites' => array('user_permission')));
   features_revert(array('s4_core' => array('user_permission')));
   features_revert(array('s4_reporting' => array('user_permission')));
-  $context['messages'] = t('Rebuilding access permissions');
+  $context['messages'] = st('Rebuilding access permissions');
   $context['results'][] = 'features_rebuild';
 }
 
@@ -79,7 +79,7 @@ function student_signup_install_rebuild_features(&$context) {
  */
 function student_signup_install_cache_clear(&$context) {
   drupal_flush_all_caches();
-  $context['messages'] = t('Clearing caches');
+  $context['messages'] = st('Clearing caches');
   $context['results'][] = 'cache_clear';
 }
 
@@ -98,7 +98,7 @@ function student_signup_setup_homepage(&$context) {
       user_save($admin);
     }
   }
-  $context['messages'] = t('Setting up homepage');
+  $context['messages'] = st('Setting up homepage');
   $context['results'][] = 'homepage';
 }
 
@@ -110,7 +110,7 @@ function student_signup_profiler_install_step($callback, $data, $config, &$conte
     $context['sandbox']['identifiers'] = array();
   }
   $callback($data, $config, $context['sandbox']['identifiers']);
-	$context['message'] = t('Completing installation callback @callback', array('@callback' => $callback));
+	$context['message'] = st('Completing installation callback @callback', array('@callback' => $callback));
 	$context['results'][] = $callback;
 }
 
@@ -131,7 +131,7 @@ function student_signup_profiler_install_terms($term, $vocabs_by_machine_name, $
       $term->field_educational_organization[LANGUAGE_NONE][0]['value'] = 1;
     }
     taxonomy_term_save($term);
-    $context['message'] = t('Installing category @term', array('@term' => check_plain($term->name)));
+    $context['message'] = st('Installing category @term', array('@term' => check_plain($term->name)));
     $context['results'][] = $term->name;
   }
 }
@@ -143,12 +143,12 @@ function student_signup_profiler_finished($success, $results, $operations) {
     $message = format_plural(count($results), 'One install process finished.', '@count install process finished.');
   }
   else {
-    $message = t('Finished with an error.');
+    $message = st('Finished with an error.');
   }
   drupal_set_message($message);
   // Providing data for the redirected page is done through $_SESSION.
   foreach ($results as $result) {
-    $items[] = t('Loaded node %title.', array('%title' => $result));
+    $items[] = st('Loaded node %title.', array('%title' => $result));
   }
   $_SESSION['my_batch_results'] = $items;
 }
