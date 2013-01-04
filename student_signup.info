@@ -29,7 +29,6 @@ dependencies[] = overlay
 dependencies[] = path
 dependencies[] = rdf
 dependencies[] = search
-dependencies[] = shortcut
 dependencies[] = system
 dependencies[] = taxonomy
 dependencies[] = text
