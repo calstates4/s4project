@@ -1853,7 +1853,7 @@ function s4_core_token_info() {
         foreach ($field['bundles'] as $entity_key => $entity) {
           if($entity_key == 'node') {
             foreach($entity as $entity_type) {
-              if($bundle_tokens[$entity_type]) {
+              if(isset($bundle_tokens[$entity_type]) && $bundle_tokens[$entity_type]) {
                 $field_token_type = strtr($field['type'], '_', '-') . '-field';
                 $field_token_name = strtr($field_name, '_', '-');
                 $tokens[$bundle_tokens[$entity_type]][$field_token_name] = array(
