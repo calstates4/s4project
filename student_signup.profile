@@ -58,6 +58,7 @@ function student_signup_profiler_install_tasks() {
  */
 function student_signup_install_rebuild_permissions(&$context) {
   node_access_rebuild();
+  node_access_needs_rebuild(FALSE);
   $context['messages'] = t('Rebuilding node permissions');
   $context['results'][] = 'node_rebuild';
 }
