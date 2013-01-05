@@ -12,7 +12,7 @@ api = 2
 
 ; Contrib Modules
 projects[better_exposed_filters][subdir] = "contrib"
-projects[better_exposed_filters][version] = "3.0-beta1"
+projects[better_exposed_filters][version] = "3.0-beta3"
 
 projects[captcha][subdir] = "contrib"
 projects[captcha][version] = "1.0-beta2"
@@ -27,7 +27,7 @@ projects[content_access][subdir] = "contrib"
 projects[content_access][version] = "1.2-beta1"
 
 projects[context][subdir] = "contrib"
-projects[context][version] = "3.0-beta1"
+projects[context][version] = "3.0-beta6"
 
 projects[ctools][subdir] = "contrib"
 projects[ctools][version] = "1.x-dev"
@@ -42,7 +42,7 @@ projects[edit_limit][subdir] = "contrib"
 projects[edit_limit][version] = "1.0-beta4"
 
 projects[email][subdir] = "contrib"
-projects[email][version] = "1.1"
+projects[email][version] = "1.2"
 
 projects[entity][subdir] = "contrib"
 projects[entity][version] = "1.0-rc2"
