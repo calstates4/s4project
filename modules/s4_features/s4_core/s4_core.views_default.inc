@@ -845,6 +845,95 @@ function s4_core_views_default_views() {
   $export['s4_students'] = $view;
 
   $view = new view();
+  $view->name = 's4_user_programs';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'users';
+  $view->human_name = 'S4: User programs';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'Sign up as part of a program';
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['perm'] = 'signup for service';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['style_plugin'] = 'table';
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = FALSE;
+  $handler->display->display_options['empty']['area']['content'] = 'None
+';
+  $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
+  /* Relationship: Field: Program (field_site_restrict) */
+  $handler->display->display_options['relationships']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
+  $handler->display->display_options['relationships']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
+  $handler->display->display_options['relationships']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';
+  $handler->display->display_options['relationships']['field_site_restrict_tid']['required'] = TRUE;
+  /* Field: Taxonomy term: Name */
+  $handler->display->display_options['fields']['name']['id'] = 'name';
+  $handler->display->display_options['fields']['name']['table'] = 'taxonomy_term_data';
+  $handler->display->display_options['fields']['name']['field'] = 'name';
+  $handler->display->display_options['fields']['name']['relationship'] = 'field_site_restrict_tid';
+  $handler->display->display_options['fields']['name']['label'] = 'Program';
+  /* Field: User Signup: User select program */
+  $handler->display->display_options['fields']['user_program_select']['id'] = 'user_program_select';
+  $handler->display->display_options['fields']['user_program_select']['table'] = 's4_user_signup';
+  $handler->display->display_options['fields']['user_program_select']['field'] = 'user_program_select';
+  $handler->display->display_options['fields']['user_program_select']['label'] = 'Select program';
+  /* Sort criterion: User: Created date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'users';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Contextual filter: User: Uid */
+  $handler->display->display_options['arguments']['uid']['id'] = 'uid';
+  $handler->display->display_options['arguments']['uid']['table'] = 'users';
+  $handler->display->display_options['arguments']['uid']['field'] = 'uid';
+  $handler->display->display_options['arguments']['uid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['uid']['default_argument_type'] = 'current_user';
+  $handler->display->display_options['arguments']['uid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['uid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['uid']['summary_options']['items_per_page'] = '25';
+  /* Filter criterion: User: Active */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'users';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+
+  /* Display: Block */
+  $handler = $view->new_display('block', 'Block', 'block');
+  $handler->display->display_options['block_description'] = 'User programs';
+  $translatables['s4_user_programs'] = array(
+    t('Master'),
+    t('Sign up as part of a program'),
+    t('more'),
+    t('Apply'),
+    t('Reset'),
+    t('Sort by'),
+    t('Asc'),
+    t('Desc'),
+    t('None
+'),
+    t('term from field_site_restrict'),
+    t('Program'),
+    t('Select program'),
+    t('All'),
+    t('Block'),
+    t('User programs'),
+  );
+  $export['s4_user_programs'] = $view;
+
+  $view = new view();
   $view->name = 'site_forms';
   $view->description = '';
   $view->tag = 'default';

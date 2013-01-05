@@ -183,31 +183,31 @@ function s4_core_context_default_contexts() {
           'module' => 'views',
           'delta' => 'course_students-block_1',
           'region' => 'content',
-          'weight' => '-49',
+          'weight' => '-10',
         ),
         'views-user_signups-block' => array(
           'module' => 'views',
           'delta' => 'user_signups-block',
           'region' => 'content',
-          'weight' => '-48',
+          'weight' => '-10',
         ),
         'views-user_courses-block_2' => array(
           'module' => 'views',
           'delta' => 'user_courses-block_2',
           'region' => 'content',
-          'weight' => '-47',
+          'weight' => '-8',
         ),
-        'views-user_programs-block' => array(
+        'views-s4_user_programs-block' => array(
           'module' => 'views',
-          'delta' => 'user_programs-block',
+          'delta' => 's4_user_programs-block',
           'region' => 'content',
-          'weight' => '-46',
+          'weight' => '-7',
         ),
         's4_core-s4_signup_error' => array(
           'module' => 's4_core',
           'delta' => 's4_signup_error',
           'region' => 'content',
-          'weight' => '-10',
+          'weight' => '-6',
         ),
         'views-65656e1f5a12cde25f0722f735fe7969' => array(
           'module' => 'views',

@@ -22,6 +22,9 @@ class views_handler_s4_sites_evaluation_link extends views_handler_field {
     }
     $signup_program = field_get_items('node', $signup, 'field_site_restrict');
     $forms = field_get_items('node', $site, 'field_site_evaluation_group');
+    if(!$forms || !count($forms)) {
+      return t('No evaluation required.');
+    }
     foreach($forms as $form) {
       $form = field_collection_item_load($form['value']);
       $programs = field_get_items('field_collection_item', $form, 'field_site_restrict');
