@@ -105,6 +105,7 @@ function s4_sites_field_default_fields() {
       'label' => 'Form',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -181,6 +182,7 @@ function s4_sites_field_default_fields() {
       'label' => 'Program',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -288,6 +290,7 @@ function s4_sites_field_default_fields() {
       'label' => 'Form',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -354,6 +357,7 @@ function s4_sites_field_default_fields() {
       'label' => 'Available to',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -429,6 +433,7 @@ function s4_sites_field_default_fields() {
       'label' => 'Body',
       'required' => FALSE,
       'settings' => array(
+        'custom_add_another' => '',
         'display_summary' => TRUE,
         'text_processing' => 1,
         'user_register_form' => FALSE,
@@ -509,6 +514,7 @@ function s4_sites_field_default_fields() {
       'label' => 'Contact type',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -586,6 +592,7 @@ function s4_sites_field_default_fields() {
       'label' => 'Contact tags',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -663,6 +670,7 @@ function s4_sites_field_default_fields() {
       'label' => 'Files',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'description_field' => 0,
         'file_directory' => 'contact/files',
         'file_extensions' => 'txt doc xml xls pdf',
@@ -797,6 +805,7 @@ function s4_sites_field_default_fields() {
       'label' => 'Site',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -872,6 +881,7 @@ function s4_sites_field_default_fields() {
       'label' => 'Email address',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -951,6 +961,7 @@ function s4_sites_field_default_fields() {
       'label' => 'First Name',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'text_processing' => '0',
         'user_register_form' => FALSE,
       ),
@@ -1026,6 +1037,7 @@ function s4_sites_field_default_fields() {
       'label' => 'Job title',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'text_processing' => '0',
         'user_register_form' => FALSE,
       ),
@@ -1106,6 +1118,7 @@ function s4_sites_field_default_fields() {
       'label' => 'Last Name',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'text_processing' => '0',
         'user_register_form' => FALSE,
       ),
@@ -1414,6 +1427,7 @@ function s4_sites_field_default_fields() {
           ),
           'hide_single_cc' => 0,
         ),
+        'custom_add_another' => '',
         'default_country' => 'us',
         'enable_country_level_validation' => 1,
         'enable_default_country' => 1,
@@ -1491,6 +1505,7 @@ function s4_sites_field_default_fields() {
       'label' => 'Maximum number of students',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'max' => '',
         'min' => '0',
         'prefix' => '',
@@ -1612,6 +1627,7 @@ function s4_sites_field_default_fields() {
       'label' => 'Site',
       'required' => 1,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -1704,6 +1720,7 @@ function s4_sites_field_default_fields() {
       'label' => 'Restrict to',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -1780,6 +1797,7 @@ function s4_sites_field_default_fields() {
       'label' => 'Active',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -1891,6 +1909,7 @@ function s4_sites_field_default_fields() {
       'label' => 'Related user',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -1978,6 +1997,7 @@ function s4_sites_field_default_fields() {
       'label' => 'Role',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -2060,6 +2080,7 @@ function s4_sites_field_default_fields() {
       'label' => 'Students can register with this staff',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -2141,6 +2162,7 @@ function s4_sites_field_default_fields() {
       'label' => 'File description or notes',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'display_summary' => 0,
         'text_processing' => '1',
         'user_register_form' => FALSE,
@@ -2242,6 +2264,7 @@ function s4_sites_field_default_fields() {
       'label' => 'Expiration date',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'default_format' => 'medium',
         'default_value' => 'strtotime',
         'default_value2' => 'blank',
@@ -2337,6 +2360,7 @@ function s4_sites_field_default_fields() {
       'label' => 'Enable expiration reminder',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -2435,6 +2459,7 @@ function s4_sites_field_default_fields() {
       'label' => 'Reminder date',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'default_format' => 'medium',
         'default_value' => 'strtotime',
         'default_value2' => 'blank',
@@ -2531,6 +2556,7 @@ function s4_sites_field_default_fields() {
       'label' => 'File category',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -2614,6 +2640,7 @@ function s4_sites_field_default_fields() {
       'label' => 'Tags',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -2698,6 +2725,7 @@ function s4_sites_field_default_fields() {
       'label' => 'Files',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'description_field' => 0,
         'file_directory' => 'sites/files',
         'file_extensions' => 'txt doc docx xls xlsx pdf',
@@ -2792,6 +2820,7 @@ function s4_sites_field_default_fields() {
       'label' => 'Saved form record',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'max' => '',
         'min' => '',
         'prefix' => '',
@@ -2920,6 +2949,7 @@ function s4_sites_field_default_fields() {
       'label' => 'Site',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -3021,6 +3051,7 @@ function s4_sites_field_default_fields() {
       'required' => 0,
       's4_sites_field_access' => 1,
       'settings' => array(
+        'custom_add_another' => '',
         'display_summary' => 1,
         'text_processing' => '1',
         'user_register_form' => FALSE,
@@ -3106,6 +3137,7 @@ function s4_sites_field_default_fields() {
       'required' => 0,
       's4_sites_field_access' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'text_processing' => '0',
         'user_register_form' => FALSE,
       ),
@@ -3200,6 +3232,7 @@ function s4_sites_field_default_fields() {
       'required' => 0,
       's4_sites_field_access' => 1,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -3291,6 +3324,7 @@ function s4_sites_field_default_fields() {
       'required' => 0,
       's4_sites_field_access' => 1,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -3377,6 +3411,7 @@ function s4_sites_field_default_fields() {
       'required' => 0,
       's4_sites_field_access' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'text_processing' => '0',
         'user_register_form' => FALSE,
       ),
@@ -3466,6 +3501,7 @@ function s4_sites_field_default_fields() {
       'required' => 0,
       's4_sites_field_access' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'text_processing' => '0',
         'user_register_form' => FALSE,
       ),
@@ -3555,6 +3591,7 @@ function s4_sites_field_default_fields() {
       'required' => 0,
       's4_sites_field_access' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'text_processing' => '0',
         'user_register_form' => FALSE,
       ),
@@ -3643,6 +3680,7 @@ function s4_sites_field_default_fields() {
       'required' => 0,
       's4_sites_field_access' => 1,
       'settings' => array(
+        'custom_add_another' => '',
         'text_processing' => '1',
         'user_register_form' => FALSE,
       ),
@@ -3800,6 +3838,7 @@ function s4_sites_field_default_fields() {
       'required' => 0,
       's4_sites_field_access' => 1,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -3877,6 +3916,7 @@ function s4_sites_field_default_fields() {
       'required' => 0,
       's4_sites_field_access' => 1,
       'settings' => array(
+        'custom_add_another' => '',
         'text_processing' => '0',
         'user_register_form' => FALSE,
       ),
@@ -4192,6 +4232,7 @@ function s4_sites_field_default_fields() {
           ),
           'hide_single_cc' => 0,
         ),
+        'custom_add_another' => '',
         'default_country' => 'us',
         'enable_country_level_validation' => 0,
         'enable_default_country' => 1,
@@ -4282,6 +4323,7 @@ function s4_sites_field_default_fields() {
       'required' => 0,
       's4_sites_field_access' => 1,
       'settings' => array(
+        'custom_add_another' => '',
         'max' => '',
         'min' => '0',
         'prefix' => '',
@@ -4376,6 +4418,7 @@ function s4_sites_field_default_fields() {
       'required' => 0,
       's4_sites_field_access' => 1,
       'settings' => array(
+        'custom_add_another' => '',
         'max' => '',
         'min' => '0',
         'prefix' => '',
@@ -4502,6 +4545,7 @@ function s4_sites_field_default_fields() {
       'required' => 0,
       's4_sites_field_access' => 1,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -4575,6 +4619,7 @@ function s4_sites_field_default_fields() {
       'required' => 0,
       's4_sites_field_access' => 1,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -4650,6 +4695,7 @@ function s4_sites_field_default_fields() {
       'required' => 0,
       's4_sites_field_access' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -4745,6 +4791,7 @@ function s4_sites_field_default_fields() {
           'target' => '_blank',
           'title' => '',
         ),
+        'custom_add_another' => '',
         'display' => array(
           'url_cutoff' => '80',
         ),
@@ -4839,6 +4886,7 @@ function s4_sites_field_default_fields() {
       'required' => 0,
       's4_sites_field_access' => 1,
       'settings' => array(
+        'custom_add_another' => '',
         'text_processing' => '1',
         'user_register_form' => FALSE,
       ),
@@ -4982,6 +5030,7 @@ function s4_sites_field_default_fields() {
       'required' => 0,
       's4_sites_field_access' => 1,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -5079,6 +5128,7 @@ function s4_sites_field_default_fields() {
       'required' => 0,
       's4_sites_field_access' => 1,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -5163,6 +5213,7 @@ function s4_sites_field_default_fields() {
       'required' => 0,
       's4_sites_field_access' => 1,
       'settings' => array(
+        'custom_add_another' => '',
         'text_processing' => '1',
         'user_register_form' => FALSE,
       ),
@@ -5256,6 +5307,7 @@ function s4_sites_field_default_fields() {
       'required' => 0,
       's4_sites_field_access' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -5350,6 +5402,7 @@ function s4_sites_field_default_fields() {
       'required' => 0,
       's4_sites_field_access' => 1,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -5450,6 +5503,7 @@ function s4_sites_field_default_fields() {
       'required' => 0,
       's4_sites_field_access' => 1,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -5534,6 +5588,7 @@ function s4_sites_field_default_fields() {
       'required' => 0,
       's4_sites_field_access' => 1,
       'settings' => array(
+        'custom_add_another' => '',
         'text_processing' => '1',
         'user_register_form' => FALSE,
       ),
@@ -5629,6 +5684,7 @@ function s4_sites_field_default_fields() {
       'required' => 0,
       's4_sites_field_access' => 1,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -5720,6 +5776,7 @@ function s4_sites_field_default_fields() {
       'required' => 1,
       's4_sites_field_access' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -5793,6 +5850,7 @@ function s4_sites_field_default_fields() {
       'required' => 0,
       's4_sites_field_access' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -5877,6 +5935,7 @@ function s4_sites_field_default_fields() {
       'required' => 0,
       's4_sites_field_access' => 1,
       'settings' => array(
+        'custom_add_another' => '',
         'text_processing' => '1',
         'user_register_form' => FALSE,
       ),
@@ -6002,6 +6061,7 @@ function s4_sites_field_default_fields() {
       'required' => 0,
       's4_sites_field_access' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -6098,6 +6158,7 @@ function s4_sites_field_default_fields() {
       'required' => 0,
       's4_sites_field_access' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -6195,6 +6256,7 @@ function s4_sites_field_default_fields() {
           'target' => '_blank',
           'title' => '',
         ),
+        'custom_add_another' => '',
         'display' => array(
           'url_cutoff' => '80',
         ),
@@ -6260,6 +6322,7 @@ function s4_sites_field_default_fields() {
       'label' => 'Reminder period (days)',
       'required' => 1,
       'settings' => array(
+        'custom_add_another' => '',
         'max' => '',
         'min' => '1',
         'prefix' => '',
@@ -6328,6 +6391,7 @@ function s4_sites_field_default_fields() {
       'label' => 'Educational organization',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -6388,6 +6452,7 @@ function s4_sites_field_default_fields() {
       'label' => 'Downloadable form instructions',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'text_processing' => '1',
         'user_register_form' => FALSE,
       ),
@@ -6450,6 +6515,7 @@ function s4_sites_field_default_fields() {
       'label' => 'Thank-you message',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'text_processing' => '1',
         'user_register_form' => FALSE,
       ),

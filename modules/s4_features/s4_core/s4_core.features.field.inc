@@ -74,6 +74,7 @@ function s4_core_field_default_fields() {
       'label' => 'File description',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'display_summary' => 1,
         'text_processing' => '1',
         'user_register_form' => FALSE,
@@ -153,6 +154,7 @@ function s4_core_field_default_fields() {
       'label' => 'File',
       'required' => 1,
       'settings' => array(
+        'custom_add_another' => '',
         'description_field' => 0,
         'file_directory' => '',
         'file_extensions' => 'doc docx pdf odf',
@@ -248,6 +250,7 @@ function s4_core_field_default_fields() {
       'label' => 'Show on signup',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -328,6 +331,7 @@ function s4_core_field_default_fields() {
       'label' => 'Available to',
       'required' => 1,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -403,6 +407,7 @@ function s4_core_field_default_fields() {
       'label' => 'Body',
       'required' => FALSE,
       'settings' => array(
+        'custom_add_another' => '',
         'display_summary' => TRUE,
         'text_processing' => 1,
         'user_register_form' => FALSE,
@@ -480,6 +485,7 @@ function s4_core_field_default_fields() {
       'label' => 'Files',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'description_field' => 0,
         'file_directory' => 'attachments/pages/files',
         'file_extensions' => 'doc rdf txt xls docx xlsx odf pdf',
@@ -570,6 +576,7 @@ function s4_core_field_default_fields() {
       'required' => 0,
       'settings' => array(
         'alt_field' => 1,
+        'custom_add_another' => '',
         'default_image' => 0,
         'file_directory' => 'attachments/page/images',
         'file_extensions' => 'png gif jpg jpeg',
@@ -718,6 +725,7 @@ function s4_core_field_default_fields() {
       'label' => 'Site staff',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -852,6 +860,7 @@ function s4_core_field_default_fields() {
       'label' => 'Course',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -927,6 +936,7 @@ function s4_core_field_default_fields() {
       'label' => 'Assessment results',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'max' => '',
         'min' => '',
         'prefix' => '',
@@ -996,6 +1006,7 @@ function s4_core_field_default_fields() {
       'label' => 'Evaluation Form Results',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'max' => '',
         'min' => '',
         'prefix' => '',
@@ -1064,6 +1075,7 @@ function s4_core_field_default_fields() {
       'label' => 'Signup Form Results',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'max' => '',
         'min' => '',
         'prefix' => '',
@@ -1146,6 +1158,7 @@ function s4_core_field_default_fields() {
       'label' => 'Service hours',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'max' => '',
         'min' => '0',
         'prefix' => '',
@@ -1239,6 +1252,7 @@ function s4_core_field_default_fields() {
       'label' => 'Last expected date of service',
       'required' => 1,
       'settings' => array(
+        'custom_add_another' => '',
         'default_format' => 'medium',
         'default_value' => 'blank',
         'default_value2' => 'blank',
@@ -1398,6 +1412,7 @@ function s4_core_field_default_fields() {
       'label' => 'Location',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -1496,6 +1511,7 @@ function s4_core_field_default_fields() {
       'label' => 'First day of service',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'default_format' => 'medium',
         'default_value' => 'now',
         'default_value2' => 'blank',
@@ -1633,6 +1649,7 @@ function s4_core_field_default_fields() {
       'label' => 'Site',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -1726,6 +1743,7 @@ function s4_core_field_default_fields() {
       'label' => 'Program',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -1840,6 +1858,7 @@ function s4_core_field_default_fields() {
       'label' => 'User',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -1919,6 +1938,7 @@ function s4_core_field_default_fields() {
       'label' => 'Form instructions',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'display_summary' => 1,
         'text_processing' => '1',
         'user_register_form' => FALSE,
@@ -1983,6 +2003,7 @@ function s4_core_field_default_fields() {
       'label' => 'Student confirmation email',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'text_processing' => '0',
         'user_register_form' => FALSE,
       ),
@@ -2033,6 +2054,7 @@ function s4_core_field_default_fields() {
       'label' => 'Reply-to address',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -2099,6 +2121,7 @@ function s4_core_field_default_fields() {
       'label' => 'Send confirmation email when someone is signed up',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -2161,6 +2184,7 @@ function s4_core_field_default_fields() {
       'label' => 'Student confirmation subject',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'text_processing' => '0',
         'user_register_form' => FALSE,
       ),
@@ -2228,6 +2252,7 @@ function s4_core_field_default_fields() {
       'label' => 'Enable email reminders',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -2288,6 +2313,7 @@ function s4_core_field_default_fields() {
       'label' => 'Evaluation email body',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'text_processing' => '0',
         'user_register_form' => FALSE,
       ),
@@ -2351,6 +2377,7 @@ function s4_core_field_default_fields() {
       'label' => 'Evaluation email subject',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'text_processing' => '0',
         'user_register_form' => FALSE,
       ),
@@ -2414,6 +2441,7 @@ function s4_core_field_default_fields() {
       'label' => 'Frontpage title',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'text_processing' => '0',
         'user_register_form' => FALSE,
       ),
@@ -2469,6 +2497,7 @@ function s4_core_field_default_fields() {
       'label' => 'Grace period in days',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'max' => '',
         'min' => '',
         'prefix' => '',
@@ -2531,6 +2560,7 @@ function s4_core_field_default_fields() {
       'label' => 'Student error message',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'text_processing' => '0',
         'user_register_form' => FALSE,
       ),
@@ -2592,6 +2622,7 @@ function s4_core_field_default_fields() {
       'label' => 'Message when not allowing people to submit a site',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'text_processing' => '1',
         'user_register_form' => FALSE,
       ),
@@ -2659,6 +2690,7 @@ function s4_core_field_default_fields() {
       'label' => 'People can propose sites for this program',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -2719,6 +2751,7 @@ function s4_core_field_default_fields() {
       'label' => 'Reminder email body',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'text_processing' => '1',
         'user_register_form' => FALSE,
       ),
@@ -2782,6 +2815,7 @@ function s4_core_field_default_fields() {
       'label' => 'Reminder email subject',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'text_processing' => '0',
         'user_register_form' => FALSE,
       ),
@@ -2848,6 +2882,7 @@ function s4_core_field_default_fields() {
       'label' => 'Reminder schedule',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'default_format' => 'medium',
         'default_value' => 'blank',
         'default_value2' => 'blank',
@@ -2925,6 +2960,7 @@ function s4_core_field_default_fields() {
       'label' => 'Allow students to delete and start over',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -2985,6 +3021,7 @@ function s4_core_field_default_fields() {
       'label' => 'Statistics message',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'text_processing' => '0',
         'user_register_form' => FALSE,
       ),
@@ -3046,6 +3083,7 @@ function s4_core_field_default_fields() {
       'label' => 'Welcome message',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'text_processing' => '1',
         'user_register_form' => FALSE,
       ),
