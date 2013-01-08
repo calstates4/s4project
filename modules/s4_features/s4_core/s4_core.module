@@ -1630,7 +1630,7 @@ function s4_core_get_user_full_name($user) {
   $last_name = field_get_items('user', $user, 'field_last_name');
   return  ($first_name[0]['value'] && $last_name[0]['value'])
         ? $first_name[0]['value'] . ' ' . $last_name[0]['value']
-        : $variables['name'];
+        : $user->name;
 }
 
 /**
@@ -1833,9 +1833,6 @@ function s4_core_token_info() {
 
     $tokens['s4_site']['site_name'] = array('name' => t('Site name'),
                        'description' => t('The name of the site'),
-                       'module' => 's4_core');
-    $tokens['s4_signup']['evaluation_link'] = array('name' => t('Evaluation link'),
-                       'description' => t('A link to the user\'s site evaluation'),
                        'module' => 's4_core');
     $tokens['s4_signup']['program_forms'] = array('name' => t('Program forms'),
                        'description' => t('A list of downloadable forms related to the program'),
