@@ -15,8 +15,8 @@ Terms
 
 This is the simplest query, it only selects term data for "major" terms (session code 1) and uses the STRM as the global unique identifier. Note that we convert the dates to a S4-friendly (MySQL) format, but that format will be chagned to whatever type your own database uses on the fly::
 
-  SELECT DISTINCT strm, 
-                  descr, 
+  SELECT DISTINCT strm as term_code, 
+                  descr as name, 
                   To_char(term_begin_dt, 'YYYY-MM-DD') AS start_date, 
                   To_char(term_end_dt, 'YYYY-MM-DD')   AS end_date 
   FROM   ps_term_tbl 
@@ -31,11 +31,11 @@ Courses
 This query is pulling all courses with a specific "SL" attribute, and also adds the "CHHS" program designation based on the courses' subject code. If you want more programs based on subject code, just expand the WHERE statement and fiddle with the conditionals::
   
   SELECT Concat(c.strm, c.class_nbr) AS course_id, 
-         c.strm, 
+         c.strm as term_code, 
          c.subject, 
-         c.catalog_nbr, 
-         c.class_section, 
-         c.descr, 
+         c.catalog_nbr as course_number, 
+         c.class_section as section, 
+         c.descr as title, 
          CASE 
            WHEN c.class_stat = 'X' THEN 0 
            ELSE 1 
