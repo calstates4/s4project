@@ -1008,7 +1008,7 @@ function _s4_sites_format_hours_matrix($entity_type, $entity, $field, $instance,
   }
 
   //transpose the $items array into a [$row][$col] = value arangement
-  foreach ($items as $delta => $item) {
+  foreach ($raw_items as $delta => $item) {
     $items[$item['row']][$item['col']][] = matrix_cell_value($item, $field);
   }
 
@@ -1040,19 +1040,20 @@ function _s4_sites_format_hours_matrix($entity_type, $entity, $field, $instance,
     }
     $cols_count = max($max_cols);
   }
-
   //populate the data part of the table rows
   $rows = array();
   for ($row = 1; $row <= $rows_count; $row++) {
     for ($col = 1; $col <= $cols_count; $col++) {
       $value = array('');
-      if (isset($items[$row][$col])) {
-        $value = $items[$row][$col];
+      foreach($items as $item) {
+        if($item['row'] == $row && $item['col'] == $col) {
+          $value = $item['value'];
+        }
       }
       $rows[$row][$col] = $value;
     }
   }
-
+  
   //collapse any multi-valued results into a list
   foreach ($rows as $row_id => $row) {
     foreach ($row as $col_id => $values) {
@@ -1085,7 +1086,7 @@ function _s4_sites_format_hours_matrix($entity_type, $entity, $field, $instance,
     $headers = array();
     $headers = array_fill(1, $cols_count, '&nbsp;'); //initialize the headers with spaces (in case headers have not title set)
     $settings = unserialize($field['settings']['settings']);
-
+    
     if (isset($settings['cols'])) {
       foreach ($settings['cols'] as $col_id => $col) {
         $headers[$col_id] = $col['title'];
