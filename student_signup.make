@@ -245,5 +245,6 @@ projects[wysiwyg][patch][] = "http://drupal.org/files/issues/wysiwyg-entity-expo
 projects[nodeformcols][patch][] = "http://drupal.org/files/nodeformcolum_captcha_error.patch"
 projects[cck_phone][] = "http://drupal.org/files/cck_phone_feeds_1160186_7.patch"
 projects[fancybox][patch][] = "http://drupal.org/files/fancybox_library_sub_folder-1378104-1.patch"
+projects[feeds][patch][] = "http://drupal.org/files/1147734-Configurable-upload-directory-for-FeedsFileFetcher-25.patch"
 projects[workbench_moderation][patch][] = "http://drupal.org/files/workbench_moderation_feeds-1470528-1.patch"
 projects[views_data_export][patch][] = "http://drupal.org/files/views_data_export_exposed_input_0.patch"
