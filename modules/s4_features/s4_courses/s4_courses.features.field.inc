@@ -76,6 +76,7 @@ function s4_courses_field_default_fields() {
       'label' => 'Catalog number',
       'required' => 1,
       'settings' => array(
+        'custom_add_another' => '',
         'text_processing' => '0',
         'user_register_form' => FALSE,
       ),
@@ -196,6 +197,7 @@ function s4_courses_field_default_fields() {
       'label' => 'Faculty',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -289,6 +291,7 @@ function s4_courses_field_default_fields() {
       'label' => 'Allow system to send emails on behalf of faculty members',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -365,6 +368,7 @@ function s4_courses_field_default_fields() {
       'label' => 'Section number',
       'required' => 1,
       'settings' => array(
+        'custom_add_another' => '',
         'max' => '',
         'min' => '',
         'prefix' => '',
@@ -438,6 +442,7 @@ function s4_courses_field_default_fields() {
         'counted_reference_fields' => array(
           'field_course' => 'field_course',
         ),
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -552,6 +557,7 @@ function s4_courses_field_default_fields() {
       'label' => 'Students',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -634,6 +640,7 @@ function s4_courses_field_default_fields() {
       'label' => 'Subject',
       'required' => 1,
       'settings' => array(
+        'custom_add_another' => '',
         'text_processing' => '0',
         'user_register_form' => FALSE,
       ),
@@ -722,6 +729,7 @@ function s4_courses_field_default_fields() {
       'label' => 'Syllabus',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'description_field' => 0,
         'file_directory' => 'syllabi',
         'file_extensions' => 'doc pdf docx odf txt',
@@ -818,6 +826,7 @@ function s4_courses_field_default_fields() {
       'label' => 'Course title',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'text_processing' => '0',
         'user_register_form' => FALSE,
       ),
@@ -889,6 +898,7 @@ function s4_courses_field_default_fields() {
       'label' => 'Maximum number of placements per student',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'max' => '',
         'min' => '0',
         'prefix' => '',
@@ -974,6 +984,7 @@ function s4_courses_field_default_fields() {
       'label' => 'Date to send evaluations',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'default_format' => 'medium',
         'default_value' => 'now',
         'default_value2' => 'blank',
@@ -1071,6 +1082,7 @@ function s4_courses_field_default_fields() {
       'label' => 'Available programs',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -1154,6 +1166,7 @@ function s4_courses_field_default_fields() {
       'label' => 'Restrict students to only these sites',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -1280,6 +1293,7 @@ function s4_courses_field_default_fields() {
       'label' => 'Sites',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -1408,6 +1422,7 @@ function s4_courses_field_default_fields() {
       'label' => 'Term',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -1490,6 +1505,7 @@ function s4_courses_field_default_fields() {
       'label' => 'Term Code',
       'required' => 1,
       'settings' => array(
+        'custom_add_another' => '',
         'text_processing' => '0',
         'user_register_form' => FALSE,
       ),
@@ -1574,6 +1590,7 @@ function s4_courses_field_default_fields() {
       'label' => 'Term dates',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'default_format' => 'medium',
         'default_value' => 'now',
         'default_value2' => 'strtotime',
@@ -1663,6 +1680,7 @@ function s4_courses_field_default_fields() {
       'label' => 'Course filter',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'text_processing' => '0',
         'user_register_form' => FALSE,
       ),
