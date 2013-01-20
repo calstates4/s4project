@@ -304,11 +304,20 @@ function s4_core_create_signup_form($form, &$form_state, $uid, $option = 'new', 
     foreach ($site_staff as $staff) {
       $staff = node_load($staff);
       $available = field_get_items('node', $staff, 'field_staff_signup_available');
-      if ($available[0]['value']) {
-        $role = field_get_items('node', $staff, 'field_staff_role');
-        $role = taxonomy_term_load($role[0]['tid']);
-        $site_staff_options[$staff->nid] = t('@title (@role)', array('@title' => $staff->title,
-                                       '@role' => $role->name));
+      $active = field_get_items('node', $staff, 'field_site_staff_active');
+      if ($available[0]['value'] && $active[0]['value']) {
+        $programs = field_get_items('node', $staff, 'field_site_restrict');
+        foreach($programs as &$program) {
+          $program = taxonomy_term_load($program['tid']);
+          $program = $program->name;
+        }
+        if(!count($programs)) {
+          $site_staff_options[$staff->nid] = check_plain($staff->title);
+        }
+        else {
+          $site_staff_options[$staff->nid] = t('@title - @program', array('@title' => $staff->title,
+                                       '@program' => (count($programs) > 1) ? implode(', ', $programs) : $programs[0]));
+        }
       }
     }
     $site = node_load($form_state['values']['site']);
@@ -420,9 +429,10 @@ function s4_core_create_signup_form_submit($form, $form_state) {
     if($form_state['values']['course']) {
       $node->field_course[$node->course][0]['nid'] = $form_state['values']['course'];
     }
-    if($form_state['values']['log']) {
-      $node->log = check_plain($form_state['values']['log']);
+    if($form_state['values']['revision_log']) {
+      $node->log = check_plain($form_state['values']['revision_log']);
     }
+    $node->revision = TRUE;
     node_save($node);
     drupal_goto(($form_state['values']['destination']) ? $form_state['values']['destination'] : 'node/'. $node->nid);
     return;

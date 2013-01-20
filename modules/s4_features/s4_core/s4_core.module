@@ -772,7 +772,7 @@ function _s4_core_create_signup($uid = 0, $signup = array()) {
   }
   
   node_save($node);
-  $node->title = t('Signup #!nid', array('!nid' => $node->nid));
+  $node->title = t('Placement #!nid', array('!nid' => $node->nid));
   node_save($node);
   if($node->field_site_restrict[$node->language][0]['tid']) {
     $program = taxonomy_term_load($node->field_site_restrict[$node->language][0]['tid']);

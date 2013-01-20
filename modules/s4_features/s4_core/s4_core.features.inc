@@ -58,7 +58,7 @@ function s4_core_node_info() {
       'help' => t('Basic pages are for generic content like "About Us" or documentation.'),
     ),
     'signup' => array(
-      'name' => t('Signup'),
+      'name' => t('Placement'),
       'base' => 'node_content',
       'description' => t('A signup is a record of a student signing up for a site.'),
       'has_title' => '1',
