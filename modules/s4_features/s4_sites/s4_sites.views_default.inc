@@ -655,12 +655,12 @@ Location',
     'group-city' => array(
       'group' => '2',
       'filter_name' => 'city',
-      'weight' => '-12',
+      'weight' => '-13',
     ),
     'group-province' => array(
       'group' => '2',
       'filter_name' => 'province',
-      'weight' => '-12',
+      'weight' => '-11',
     ),
     'group-status' => array(
       'group' => '1',
@@ -675,11 +675,16 @@ Location',
     'group-field_district_state_lower_value' => array(
       'group' => '2',
       'filter_name' => 'field_district_state_lower_value',
-      'weight' => '-12',
+      'weight' => '-10',
     ),
     'group-field_district_state_upper_value' => array(
       'group' => '2',
       'filter_name' => 'field_district_state_upper_value',
+      'weight' => '-9',
+    ),
+    'group-field_county_value' => array(
+      'group' => '2',
+      'filter_name' => 'field_county_value',
       'weight' => '-12',
     ),
   );
@@ -916,6 +921,16 @@ Location',
   $handler->display->display_options['filters']['field_district_state_upper_value']['expose']['label'] = 'State upper district';
   $handler->display->display_options['filters']['field_district_state_upper_value']['expose']['operator'] = 'field_district_state_upper_value_op';
   $handler->display->display_options['filters']['field_district_state_upper_value']['expose']['identifier'] = 'field_district_state_upper_value';
+  /* Filter criterion: Content: County (field_county) */
+  $handler->display->display_options['filters']['field_county_value']['id'] = 'field_county_value';
+  $handler->display->display_options['filters']['field_county_value']['table'] = 'field_data_field_county';
+  $handler->display->display_options['filters']['field_county_value']['field'] = 'field_county_value';
+  $handler->display->display_options['filters']['field_county_value']['operator'] = 'contains';
+  $handler->display->display_options['filters']['field_county_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_county_value']['expose']['operator_id'] = 'field_county_value_op';
+  $handler->display->display_options['filters']['field_county_value']['expose']['label'] = 'County';
+  $handler->display->display_options['filters']['field_county_value']['expose']['operator'] = 'field_county_value_op';
+  $handler->display->display_options['filters']['field_county_value']['expose']['identifier'] = 'field_county_value';
 
   /* Display: Manage sites page */
   $handler = $view->new_display('page', 'Manage sites page', 'page');
@@ -986,6 +1001,7 @@ Location',
     t('Approval status'),
     t('State lower district'),
     t('State upper district'),
+    t('County'),
     t('Manage sites page'),
     t('Glossary attachment'),
     t('Apply'),
