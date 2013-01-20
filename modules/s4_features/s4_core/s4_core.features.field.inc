@@ -328,7 +328,7 @@ function s4_core_field_default_fields() {
       'display_label' => '',
       'entity_type' => 'node',
       'field_name' => 'field_site_restrict',
-      'label' => 'Available to',
+      'label' => 'Programs',
       'required' => 1,
       'settings' => array(
         'custom_add_another' => '',
@@ -338,7 +338,7 @@ function s4_core_field_default_fields() {
         'active' => 1,
         'module' => 'options',
         'settings' => array(),
-        'type' => 'options_select',
+        'type' => 'options_buttons',
         'weight' => '3',
       ),
     ),
@@ -3103,7 +3103,6 @@ function s4_core_field_default_fields() {
   // Included for use with string extractors like potx.
   t('Allow students to delete and start over');
   t('Assessment results');
-  t('Available to');
   t('Body');
   t('Course');
   t('Enable email reminders');
@@ -3126,6 +3125,7 @@ function s4_core_field_default_fields() {
   t('Message when not allowing people to submit a site');
   t('People can propose sites for this program');
   t('Program');
+  t('Programs');
   t('Reminder email body');
   t('Reminder email subject');
   t('Reminder schedule');
