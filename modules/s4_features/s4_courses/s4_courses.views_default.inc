@@ -1206,6 +1206,15 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['access']['perm'] = 'create course content';
+  $handler->display->display_options['defaults']['empty'] = FALSE;
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['label'] = 'No courses';
+  $handler->display->display_options['empty']['area']['empty'] = FALSE;
+  $handler->display->display_options['empty']['area']['content'] = '<p class="intro">No courses were found.</p>';
+  $handler->display->display_options['empty']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Content: Faculty (field_course_faculty) */
   $handler->display->display_options['relationships']['field_course_faculty_uid']['id'] = 'field_course_faculty_uid';
@@ -1723,6 +1732,7 @@ function s4_courses_views_default_views() {
     t('Manage your courses'),
     t('Staff course listing'),
     t('Courses'),
+    t('<p class="intro">No courses were found.</p>'),
     t('field_course_faculty'),
     t('View'),
     t('node/[nid]'),
