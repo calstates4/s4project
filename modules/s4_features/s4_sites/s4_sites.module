@@ -718,6 +718,12 @@ function s4_sites_form_site_node_form_alter(&$form, $form_state) {
     }
   }
   if (!user_access('moderate site information')) {
+    $form['#theme'] = array();
+    $form['#group_children']['field_csu_org_type'] = 'group_site_general';
+    $form['#group_children']['field_csu_facility'] = 'group_site_general';
+    $form['#group_children']['field_site_other_csu'] = 'group_site_general';
+    $form['#group_children']['field_site_language'] = 'group_site_general';
+    
     $form['revision_information']['#attributes']['class'][] = 'element-invisible';
     $form['revision_information']['#group'] = false;
     foreach($form['#groups'] as $k => $group) {

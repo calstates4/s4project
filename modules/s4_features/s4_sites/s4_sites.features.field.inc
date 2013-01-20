@@ -3064,7 +3064,7 @@ function s4_sites_field_default_fields() {
           'summary_rows' => 5,
         ),
         'type' => 'text_textarea_with_summary',
-        'weight' => '-4',
+        'weight' => '-3',
       ),
       'widget_type' => 'text_textarea_with_summary',
     ),
@@ -3240,7 +3240,7 @@ function s4_sites_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '4',
+        'weight' => '5',
       ),
     ),
   );
@@ -3332,7 +3332,7 @@ function s4_sites_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '5',
+        'weight' => '4',
       ),
     ),
   );
@@ -4246,7 +4246,7 @@ function s4_sites_field_default_fields() {
           'size' => 15,
         ),
         'type' => 'phone_number',
-        'weight' => '-2',
+        'weight' => '-1',
       ),
     ),
   );
@@ -4988,7 +4988,7 @@ function s4_sites_field_default_fields() {
     'field_instance' => array(
       'bundle' => 'site',
       'deleted' => '0',
-      'description' => '',
+      'description' => 'Hint: You can click the hours on the left of the table to select that time Monday through Friday.',
       'display' => array(
         'default' => array(
           'label' => 'above',
@@ -5599,7 +5599,7 @@ function s4_sites_field_default_fields() {
           'rows' => '5',
         ),
         'type' => 'text_textarea',
-        'weight' => '-3',
+        'weight' => '-2',
       ),
     ),
   );
@@ -6562,6 +6562,7 @@ function s4_sites_field_default_fields() {
   t('Files');
   t('First Name');
   t('Form');
+  t('Hint: You can click the hours on the left of the table to select that time Monday through Friday.');
   t('How many people does your organization serve?');
   t('If this site staff needs to login and view their students, ask them to create a user account and then enter that account name here.');
   t('If you have multiple location sites that you would like students to be placed at, please provide specific location information. (You may add additional locations using the \'Add another\' button below.)');
