@@ -377,6 +377,14 @@ function s4_core_create_signup_form($form, &$form_state, $uid, $option = 'new', 
     '#title' => t('CC myself a copy of the confirmation email sent to the student'),
   );
   
+  if($existing_node) {
+    $form['revision_log'] = array(
+      '#type' => 'textarea',
+      '#title' => t('Leave a note about why this placement was changed.'),
+      '#rows' => 3,
+    );
+  }
+  
   $form['actions'] = array(
     '#type' => 'actions',
   );
@@ -411,6 +419,9 @@ function s4_core_create_signup_form_submit($form, $form_state) {
     $node->field_signup_hours[$node->language][0]['value'] = $form_state['values']['hours'];
     if($form_state['values']['course']) {
       $node->field_course[$node->course][0]['nid'] = $form_state['values']['course'];
+    }
+    if($form_state['values']['log']) {
+      $node->log = check_plain($form_state['values']['log']);
     }
     node_save($node);
     drupal_goto(($form_state['values']['destination']) ? $form_state['values']['destination'] : 'node/'. $node->nid);
