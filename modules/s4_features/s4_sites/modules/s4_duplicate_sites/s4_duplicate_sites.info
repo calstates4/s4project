@@ -1,0 +1,4 @@
+name=S4 Duplicate sites
+package=S4
+description=Shows users possible duplicate sites when creating a new site.
+core=7.x

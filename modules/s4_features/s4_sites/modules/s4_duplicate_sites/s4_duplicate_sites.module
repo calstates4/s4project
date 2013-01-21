@@ -1,0 +1,50 @@
+<?php
+
+function s4_duplicate_sites_form_site_node_form_alter(&$form, $form_state) {
+  if($form['#nid']['#value'] || !user_access('moderate site information')) {
+    return;
+  }
+  $form['title']['#ajax'] = array(
+    'callback' => 's4_duplicate_sites_check_title',
+    'wrapper' => 'duplicate-sites',
+    'method' => 'replace',
+    'progress' => array(
+      'type' => 'throbber',
+      'message' => t('Checking for duplicate sites'),
+    ),
+  );
+  $form['s4_duplicate_sites'] = array(
+    '#markup' => '',
+    '#prefix' => '<div id="duplicate-sites">',
+    '#suffix' => '</div>',
+    '#weight' => $form['title']['#weight'] + 1,
+  );
+  
+  $form['#group_children']['s4_duplicate_sites'] = $form['#group_children']['title'];
+  
+}
+
+function s4_duplicate_sites_check_title($form, $form_state) {
+  $words = explode(' ', strtolower($form_state['values']['title']));
+  $query = db_select('node', 'n')
+           ->condition('n.type', 'site')
+           ->fields('n', array('nid', 'title'))
+           ->orderBy('n.title')
+           ->range(0, 8);
+           
+  foreach($words as $word) {
+    $query->condition('n.title', '%'. $word .'%', 'LIKE');
+  }
+  $results = $query->execute()->fetchAllKeyed();
+  
+  if(!count($results)) {
+    $form['s4_duplicate_sites']['#markup'] = t('No duplicates were found');
+  }
+  else {
+    foreach($results as $nid => $title) {
+      $results[$nid] = l($title, 'node/'. $nid);
+    }
+    $form['s4_duplicate_sites']['#markup'] = t('The following potential duplicate sites were found:') . theme('item_list', array('items' => $results));
+  }
+  return $form['s4_duplicate_sites'];
+}
