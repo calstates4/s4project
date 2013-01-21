@@ -44,7 +44,7 @@ function s4_sites_field_group_info() {
   $field_group->mode = 'form';
   $field_group->parent_name = 'group_site_tabs';
   $field_group->data = array(
-    'label' => 'Forms',
+    'label' => 'Online Forms',
     'weight' => '26',
     'children' => array(
       0 => 'field_site_evaluation_group',
@@ -52,12 +52,13 @@ function s4_sites_field_group_info() {
     ),
     'format_type' => 'htab',
     'format_settings' => array(
-      'formatter' => 'closed',
+      'label' => 'Online Forms',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => '',
         'required_fields' => 1,
+        'classes' => '',
+        'description' => '',
       ),
+      'formatter' => 'closed',
     ),
   );
   $export['group_site_forms|node|site|form'] = $field_group;

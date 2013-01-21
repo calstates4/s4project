@@ -3109,7 +3109,7 @@ function s4_sites_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => 43,
+          'weight' => '44',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -3198,7 +3198,7 @@ function s4_sites_field_default_fields() {
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_link',
-          'weight' => '13',
+          'weight' => '12',
         ),
         'full' => array(
           'label' => 'above',
@@ -3290,7 +3290,7 @@ function s4_sites_field_default_fields() {
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_link',
-          'weight' => '14',
+          'weight' => '13',
         ),
         'full' => array(
           'label' => 'above',
@@ -3377,7 +3377,7 @@ function s4_sites_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => '36',
+          'weight' => '37',
         ),
         'full' => array(
           'label' => 'above',
@@ -3467,7 +3467,7 @@ function s4_sites_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => '37',
+          'weight' => '38',
         ),
         'full' => array(
           'label' => 'above',
@@ -3557,7 +3557,7 @@ function s4_sites_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => '38',
+          'weight' => '39',
         ),
         'full' => array(
           'label' => 'above',
@@ -3804,7 +3804,7 @@ function s4_sites_field_default_fields() {
           'module' => 's4_sites',
           'settings' => array(),
           'type' => 's4_sites_address',
-          'weight' => '19',
+          'weight' => '18',
         ),
         'full' => array(
           'label' => 'above',
@@ -3960,7 +3960,7 @@ function s4_sites_field_default_fields() {
           'module' => 'cck_phone',
           'settings' => array(),
           'type' => 'local_phone_number',
-          'weight' => '16',
+          'weight' => '15',
         ),
         'full' => array(
           'label' => 'above',
@@ -4289,7 +4289,7 @@ function s4_sites_field_default_fields() {
             'thousand_separator' => ',',
           ),
           'type' => 'number_integer',
-          'weight' => '21',
+          'weight' => '20',
         ),
         'full' => array(
           'label' => 'above',
@@ -4510,7 +4510,7 @@ function s4_sites_field_default_fields() {
           'module' => 's4_sites',
           'settings' => array(),
           'type' => 's4_sites_population_matrix',
-          'weight' => '22',
+          'weight' => '21',
         ),
         'full' => array(
           'label' => 'above',
@@ -4585,7 +4585,7 @@ function s4_sites_field_default_fields() {
           'module' => 'email',
           'settings' => array(),
           'type' => 'email_default',
-          'weight' => '18',
+          'weight' => '17',
         ),
         'full' => array(
           'label' => 'above',
@@ -4667,7 +4667,7 @@ function s4_sites_field_default_fields() {
             'edit' => 'Edit',
           ),
           'type' => 'field_collection_list',
-          'weight' => '41',
+          'weight' => '42',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -4749,7 +4749,7 @@ function s4_sites_field_default_fields() {
           'module' => 'link',
           'settings' => array(),
           'type' => 'link_default',
-          'weight' => '20',
+          'weight' => '19',
         ),
         'full' => array(
           'label' => 'above',
@@ -5273,7 +5273,7 @@ function s4_sites_field_default_fields() {
           'module' => 'list',
           'settings' => array(),
           'type' => 'list_default',
-          'weight' => '39',
+          'weight' => '40',
         ),
         'full' => array(
           'label' => 'above',
@@ -5367,7 +5367,7 @@ function s4_sites_field_default_fields() {
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_link',
-          'weight' => '23',
+          'weight' => '22',
         ),
         'full' => array(
           'label' => 'above',
@@ -5454,11 +5454,11 @@ function s4_sites_field_default_fields() {
       'description' => '',
       'display' => array(
         'default' => array(
-          'label' => 'above',
+          'label' => 'hidden',
           'module' => 'list',
           'settings' => array(),
           'type' => 'list_default',
-          'weight' => 44,
+          'weight' => '23',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -5561,7 +5561,7 @@ function s4_sites_field_default_fields() {
           'module' => 'list',
           'settings' => array(),
           'type' => 'list_default',
-          'weight' => '42',
+          'weight' => '43',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -5828,7 +5828,7 @@ function s4_sites_field_default_fields() {
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_plain',
-          'weight' => '12',
+          'weight' => '11',
         ),
         'full' => array(
           'label' => 'above',
@@ -5908,7 +5908,7 @@ function s4_sites_field_default_fields() {
             'edit' => 'Edit',
           ),
           'type' => 'field_collection_list',
-          'weight' => '40',
+          'weight' => '41',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -6114,7 +6114,7 @@ function s4_sites_field_default_fields() {
           'module' => 'user_reference',
           'settings' => array(),
           'type' => 'user_reference_default',
-          'weight' => '35',
+          'weight' => '36',
         ),
         'full' => array(
           'label' => 'above',
@@ -6209,7 +6209,7 @@ function s4_sites_field_default_fields() {
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_link',
-          'weight' => '34',
+          'weight' => '35',
         ),
         'full' => array(
           'label' => 'above',
@@ -6301,7 +6301,7 @@ function s4_sites_field_default_fields() {
           'module' => 'link',
           'settings' => array(),
           'type' => 'link_default',
-          'weight' => '15',
+          'weight' => '14',
         ),
         'full' => array(
           'label' => 'above',
