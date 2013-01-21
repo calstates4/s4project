@@ -3240,7 +3240,7 @@ function s4_sites_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '5',
+        'weight' => '6',
       ),
     ),
   );
@@ -3332,7 +3332,7 @@ function s4_sites_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '4',
+        'weight' => '5',
       ),
     ),
   );
@@ -5410,6 +5410,92 @@ function s4_sites_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
+        'weight' => '3',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-site-field_site_language_bilingual'
+  $fields['node-site-field_site_language_bilingual'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_site_language_bilingual',
+      'foreign keys' => array(),
+      'indexes' => array(
+        'value' => array(
+          0 => 'value',
+        ),
+      ),
+      'module' => 'list',
+      'settings' => array(
+        'allowed_values' => array(
+          0 => '',
+          1 => 'Bilingual language is required',
+        ),
+        'allowed_values_function' => '',
+        'allowed_values_php' => '',
+      ),
+      'translatable' => '0',
+      'type' => 'list_boolean',
+    ),
+    'field_instance' => array(
+      'bundle' => 'site',
+      'default_value' => array(
+        0 => array(
+          'value' => 0,
+        ),
+      ),
+      'default_value_function' => '',
+      'default_value_php' => '',
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'list',
+          'settings' => array(),
+          'type' => 'list_default',
+          'weight' => 44,
+        ),
+        'notifications' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'search_index' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'display_label' => '',
+      'entity_type' => 'node',
+      'field_name' => 'field_site_language_bilingual',
+      'label' => 'Bilingual required',
+      'required' => 0,
+      's4_sites_field_access' => 1,
+      'settings' => array(
+        'custom_add_another' => '',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(
+          'display_label' => 1,
+        ),
+        'type' => 'options_onoff',
         'weight' => '2',
       ),
     ),
@@ -5511,7 +5597,7 @@ function s4_sites_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '6',
+        'weight' => '7',
       ),
     ),
   );
@@ -5784,7 +5870,7 @@ function s4_sites_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_buttons',
-        'weight' => '3',
+        'weight' => '4',
       ),
     ),
   );
@@ -6073,7 +6159,7 @@ function s4_sites_field_default_fields() {
           'size' => '40',
         ),
         'type' => 'user_reference_autocomplete',
-        'weight' => '7',
+        'weight' => '8',
       ),
     ),
   );
@@ -6537,6 +6623,7 @@ function s4_sites_field_default_fields() {
   t('Additional notes about hours of operation');
   t('Additional users');
   t('Available to');
+  t('Bilingual required');
   t('Body');
   t('Briefly describe any ongoing needs or special projects with which students can assist agency staff');
   t('By percentage, what is the demographic of the population you serve?');

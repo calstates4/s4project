@@ -963,7 +963,7 @@ function s4_sites_strongarm() {
       'region' => 'right',
       'weight' => '0',
       'has_required' => FALSE,
-      'title' => 'Publish',
+      'title' => 'Save draft',
       'hidden' => 0,
     ),
     'body' => array(
@@ -975,7 +975,7 @@ function s4_sites_strongarm() {
     ),
     'field_tags' => array(
       'region' => 'right',
-      'weight' => '6',
+      'weight' => '7',
       'has_required' => FALSE,
       'title' => 'Tags',
       'hidden' => 0,
@@ -984,7 +984,7 @@ function s4_sites_strongarm() {
       'region' => 'right',
       'weight' => '1',
       'has_required' => TRUE,
-      'title' => 'Available programs',
+      'title' => 'Program(s)',
     ),
     'field_location' => array(
       'region' => 'main',
@@ -1016,7 +1016,7 @@ function s4_sites_strongarm() {
     ),
     'field_site_users' => array(
       'region' => 'right',
-      'weight' => '7',
+      'weight' => '8',
       'has_required' => FALSE,
       'title' => 'Additional users',
       'hidden' => 0,
@@ -1117,14 +1117,14 @@ function s4_sites_strongarm() {
       'region' => 'main',
       'weight' => '21',
       'has_required' => FALSE,
-      'title' => 'Site Tour',
+      'title' => 'Site tour',
       'hidden' => 0,
     ),
     'field_health_risk' => array(
       'region' => 'main',
       'weight' => '22',
       'has_required' => FALSE,
-      'title' => 'Risk Identification',
+      'title' => 'Risk identification',
       'hidden' => 0,
     ),
     'field_site_requirements' => array(
@@ -1178,9 +1178,30 @@ function s4_sites_strongarm() {
     ),
     'field_site_other_csu' => array(
       'region' => 'right',
-      'weight' => '5',
+      'weight' => '6',
       'has_required' => FALSE,
       'title' => 'Do you have a partnership with another CSU campus?',
+      'hidden' => 0,
+    ),
+    'field_operating_hours' => array(
+      'region' => 'main',
+      'weight' => '30',
+      'has_required' => FALSE,
+      'title' => 'Additional notes about hours of operation',
+      'hidden' => 0,
+    ),
+    'field_county' => array(
+      'region' => 'main',
+      'weight' => '5',
+      'has_required' => FALSE,
+      'title' => 'County',
+      'hidden' => 0,
+    ),
+    'field_site_language_bilingual' => array(
+      'region' => 'right',
+      'weight' => '5',
+      'has_required' => FALSE,
+      'title' => 'Bilingual required',
       'hidden' => 0,
     ),
   );
