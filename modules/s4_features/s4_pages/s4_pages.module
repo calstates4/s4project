@@ -43,6 +43,12 @@ function s4_pages_menu() {
   return $items;
 }
 
+function s4_pages_taxonomy_term_insert($term) {
+  if($term->vocabulary_machine_name == 'site_restrictions') {
+    menu_rebuild();
+  }
+}
+
 function _s4_pages_program_homepage($term) {
   global $conf;
   $conf['s4_original_site_title'] = variable_get('site_name', 'S4');
