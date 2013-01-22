@@ -26,6 +26,20 @@ function s4_process_html(&$variables) {
   }
 }
 
+function s4_links__system_main_menu($variables) {
+  global $conf;
+  if($conf['s4_pages_program_homepage']) {
+    
+    foreach($variables['links'] as &$link) {
+      if($link['href'] == 'site') {
+        $link['href'] = 'site-list';
+        $link['query'] = array('program' => array($conf['s4_pages_program_homepage']));
+      }
+    }
+  }
+  return theme_links($variables);
+}
+
 /**
 *  Override & remove the filter guidelines
 */
