@@ -22,15 +22,13 @@ function s4_courses_ds_layout_settings_info() {
     'hide_sidebars' => 0,
     'regions' => array(
       'left' => array(
-        0 => 'field_site_restrict_to_list',
-        1 => 'field_sites',
+        0 => 'field_sites',
       ),
       'right' => array(
         0 => 'field_course_faculty',
       ),
     ),
     'fields' => array(
-      'field_site_restrict_to_list' => 'left',
       'field_sites' => 'left',
       'field_course_faculty' => 'right',
     ),
