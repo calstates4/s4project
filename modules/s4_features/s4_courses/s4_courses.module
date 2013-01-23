@@ -1048,15 +1048,14 @@ function s4_courses_s4_reporting_summary_report() {
 /**
  * Views access callback
  */
-function s4_courses_views_check_faculty_access() {
+function s4_courses_views_check_faculty_access($view, $account) {
   $node = node_load(arg(1));
   if ($node->type != 'course' || user_access('create signups for other users')) {
     return TRUE;
   }
   $faculty = field_get_items('node', $node, 'field_course_faculty');
-  global $user;
   foreach($faculty as $instructor) {
-    if ($instructor[0]['uid'] == $user->uid) {
+    if ($instructor['uid'] == $account->uid) {
       return TRUE;
     }
   }
