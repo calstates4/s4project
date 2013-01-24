@@ -88,39 +88,6 @@ function s4_courses_get_allowed_term_codes() {
 }
 
 /**
-*  Returns the NID of a term based on term code
-*/
-function _s4_courses_get_term_nid($code) {
-  static $terms;
-  if (!isset($terms[$code])) {
-    $term = db_select('field_data_field_term_code', 't')
-          ->condition('t.field_term_code_value', $code)
-          ->fields('t', array('entity_id'));
-      $result = $term->execute();
-      $terms[$code] = $result->fetchField();
-    }
-    return $terms[$code];
-}
-
-/**
-*  Retrieves all field mappings from Drupal fields to
-*  the array keys returned by S4 hooks.
-*  @todo - This should probably be a bit smarter than a
-*  single array.
-*/
-function _s4_courses_get_field_mapping($type = 'course') {
-  if ($type == 'course') {
-    return array(
-      'field_course_subject' => 'subject',
-      'field_course_catalog_number' => 'catalog_number',
-      'field_course_section' => 'section',
-      'field_course_title' => 'title',
-      'field_course_status' => 'status'
-    );
-  }
-}
-
-/**
 *  Returns all terms that cover the current time.
 *  This is primarily used when making API calls to see what
 *  courses are available generally or for a user.
