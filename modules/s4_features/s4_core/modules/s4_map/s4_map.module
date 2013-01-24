@@ -75,9 +75,11 @@ function s4_map_assign_county($node, $rebuild = FALSE) {
   $geocode = drupal_http_request('http://maps.googleapis.com/maps/api/geocode/json?sensor=false&address='. $address, array('timeout' => 7));
   if($geocode->code == 200) {
     $geo = json_decode($geocode->data);
+
     foreach($geo->results as $result) {
       foreach($result->address_components as $component) {
         if(in_array('administrative_area_level_2', $component->types)) {
+          $node->field_county[LANGUAGE_NONE][0]['value'] = $component->long_name;
           $node->field_county[$node->language][0]['value'] = $component->long_name;
         }
       }
