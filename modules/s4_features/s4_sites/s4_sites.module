@@ -148,7 +148,7 @@ function s4_sites_propose_site_form() {
       $form['terms_'. $t->tid] = array(
         '#type' => 'checkbox',
         '#title' => check_plain($t->name),
-        '#description' => check_plain($t->description),
+        '#description' => check_markup($t->description, $t->format),
       );
     }
     elseif($message[0]['value']) {
