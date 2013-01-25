@@ -25,6 +25,9 @@ function s4_duplicate_sites_form_site_node_form_alter(&$form, $form_state) {
 }
 
 function s4_duplicate_sites_check_title($form, $form_state) {
+  if(strlen(trim($form_state['values']['title'])) < 3) {
+    return $form['s4_duplicate_sites'];
+  }
   $words = explode(' ', strtolower($form_state['values']['title']));
   $query = db_select('node', 'n')
            ->condition('n.type', 'site')
