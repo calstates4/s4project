@@ -59,7 +59,7 @@ This query is pulling all courses with a specific "SL" attribute, and also adds 
 Users
 =====
 
-A union of multiple queries to pick up students in specific programs, students enrolled currently in specific types of courses, and fauclty assigned to specific types of courses::
+A union of multiple queries to pick up students in specific programs, students enrolled currently in specific types of courses, and fauclty assigned to specific types of courses. Please note that on different campuses the external system is stored in different values. The Login ID shoudld contain the username that students or faculty use to login to campus systems like LDAP, you might need to tweak the external_system value to something other than 'LS3'::
 
   SELECT x.external_system_id                             AS login_id, 
          x.emplid                                         AS user_id, 
