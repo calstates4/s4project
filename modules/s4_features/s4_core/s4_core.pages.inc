@@ -196,11 +196,11 @@ function s4_core_s4_site_configuration() {
       'description' => t('Change the site name and footer message.'),
       'href' => 'admin/config/system/site-information',
     ),
-    's4_general_user' => array(
+    's4_general_workbench' => array(
       'group' => t('General settings'),
-      'title' => t('Map user fields to SIS field'),
-      'description' => t('Add additional user attributes coming from your SIS.'),
-      'href' => 'admin/config/s4/user-attributes',
+      'title' => t('Change approval process'),
+      'description' => t('Alter the way that new sites are approved and the possible transitions from Proposed to Published.'),
+      'href' => 'admin/config/workbench/moderation',
     ),
   );
 }
@@ -209,7 +209,7 @@ function s4_core_s4_site_configuration() {
 *  Form to quickly sign up student with a site
 */
 function s4_core_create_signup_form($form, &$form_state, $uid, $option = 'new', $existing_node = FALSE, $courses = TRUE) {
-  
+	drupal_add_js(drupal_get_path('module', 's4_core') .'/js/s4.form-modal.js');
   $user = user_load($uid);
   drupal_set_title(t('Sign up @name', array('@name' => s4_core_get_user_full_name($user))));
   $form = array();
