@@ -42,6 +42,12 @@ function s4_editor_install() {
       'spellchecker' => array(
         'spellchecker' => 1,
       ),
+      'fullscreen' => array(
+        'fullscreen' => 1,
+      ),
+      'paste' => array(
+        'pastetext' => 1,
+      ),
     ),
     'toolbar_loc' => 'top',
     'toolbar_align' => 'left',
