@@ -764,7 +764,7 @@ Location',
   $handler->display->display_options['fields']['state']['id'] = 'state';
   $handler->display->display_options['fields']['state']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['fields']['state']['field'] = 'state';
-  $handler->display->display_options['fields']['state']['label'] = 'Status';
+  $handler->display->display_options['fields']['state']['label'] = 'Approval Status';
   $handler->display->display_options['fields']['state']['machine_name'] = 0;
   /* Field: Content: Updated date */
   $handler->display->display_options['fields']['changed']['id'] = 'changed';
@@ -989,7 +989,7 @@ Location',
     t('Title'),
     t('Programs'),
     t('Active'),
-    t('Status'),
+    t('Approval Status'),
     t('Updated date'),
     t('Edit'),
     t('All'),

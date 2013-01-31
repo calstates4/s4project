@@ -34,7 +34,7 @@ function s4_reporting_views_default_views() {
     'format_groups' => 'vertical_tabs',
     'groups' => 'Course
 Sites
-Fieds',
+Fields',
     'group-field_course_catalog_number_value' => array(
       'group' => '0',
       'filter_name' => 'field_course_catalog_number_value',
