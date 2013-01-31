@@ -68,7 +68,7 @@ function student_signup_install_rebuild_permissions(&$context) {
  */
 function student_signup_install_rebuild_features(&$context) {
   features_revert(array('s4_sites' => array('user_permission')));
-  features_revert(array('s4_core' => array('user_permission')));
+  features_revert(array('s4_core' => array('user_permission', 'menu_links')));
   features_revert(array('s4_reporting' => array('user_permission')));
   $context['messages'] = st('Rebuilding access permissions');
   $context['results'][] = 'features_rebuild';
