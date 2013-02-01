@@ -4266,5 +4266,446 @@ Fields',
   );
   $export['reports_students'] = $view;
 
+  $view = new view();
+  $view->name = 's4_reports_site_forms';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'node';
+  $view->human_name = 'S4 Reports: Site forms';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'S4 Reports: Site forms';
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['perm'] = 'access s4 reporting';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'views_exposed_groups';
+  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Search';
+  $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
+  $handler->display->display_options['exposed_form']['options']['views_exposed_groups'] = array(
+    'format_groups' => 'vertical_tabs',
+    'groups' => 'Form
+Site
+Fields',
+    'group-field_county_value' => array(
+      'group' => '1',
+      'filter_name' => 'field_county_value',
+      'weight' => '-7',
+    ),
+    'group-field_expiration_date_value' => array(
+      'group' => '0',
+      'filter_name' => 'field_expiration_date_value',
+      'weight' => '-11',
+    ),
+    'group-field_file_category_tid' => array(
+      'group' => '0',
+      'filter_name' => 'field_file_category_tid',
+      'weight' => '-10',
+    ),
+    'group-field_csu_facility_tid' => array(
+      'group' => '1',
+      'filter_name' => 'field_csu_facility_tid',
+      'weight' => '-12',
+    ),
+    'group-field_csu_org_type_tid' => array(
+      'group' => '1',
+      'filter_name' => 'field_csu_org_type_tid',
+      'weight' => '-11',
+    ),
+    'group-field_site_nid' => array(
+      'group' => '1',
+      'filter_name' => 'field_site_nid',
+      'weight' => '-10',
+    ),
+    'group-field_file_tags_tid' => array(
+      'group' => '0',
+      'filter_name' => 'field_file_tags_tid',
+      'weight' => '-9',
+    ),
+    'group-field_site_restrict_tid' => array(
+      'group' => '1',
+      'filter_name' => 'field_site_restrict_tid',
+      'weight' => '-9',
+    ),
+    'group-city' => array(
+      'group' => '1',
+      'filter_name' => 'city',
+      'weight' => '-8',
+    ),
+    'group-dyfield' => array(
+      'group' => '2',
+      'filter_name' => 'dyfield',
+      'weight' => '-8',
+    ),
+  );
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '40';
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'field_expiration_date' => 'field_expiration_date',
+    'field_file_category' => 'field_file_category',
+    'field_files' => 'field_files',
+    'field_expiration_reminder_date' => 'field_expiration_reminder_date',
+    'field_site' => 'field_site',
+    'field_file_tags' => 'field_file_tags',
+    'field_site_restrict' => 'field_site_restrict',
+  );
+  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['info'] = array(
+    'field_expiration_date' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_file_category' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_files' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_expiration_reminder_date' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_site' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_file_tags' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_site_restrict' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  /* Header: Global: Result summary */
+  $handler->display->display_options['header']['result']['id'] = 'result';
+  $handler->display->display_options['header']['result']['table'] = 'views';
+  $handler->display->display_options['header']['result']['field'] = 'result';
+  $handler->display->display_options['header']['result']['empty'] = FALSE;
+  /* Relationship: Content: Site (field_site) */
+  $handler->display->display_options['relationships']['field_site_nid']['id'] = 'field_site_nid';
+  $handler->display->display_options['relationships']['field_site_nid']['table'] = 'field_data_field_site';
+  $handler->display->display_options['relationships']['field_site_nid']['field'] = 'field_site_nid';
+  $handler->display->display_options['relationships']['field_site_nid']['delta'] = '-1';
+  /* Relationship: Content: Author */
+  $handler->display->display_options['relationships']['uid']['id'] = 'uid';
+  $handler->display->display_options['relationships']['uid']['table'] = 'node';
+  $handler->display->display_options['relationships']['uid']['field'] = 'uid';
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = 'Form name';
+  /* Field: Content: Expiration date */
+  $handler->display->display_options['fields']['field_expiration_date']['id'] = 'field_expiration_date';
+  $handler->display->display_options['fields']['field_expiration_date']['table'] = 'field_data_field_expiration_date';
+  $handler->display->display_options['fields']['field_expiration_date']['field'] = 'field_expiration_date';
+  $handler->display->display_options['fields']['field_expiration_date']['label'] = 'Expires';
+  $handler->display->display_options['fields']['field_expiration_date']['type'] = 'date_medium';
+  $handler->display->display_options['fields']['field_expiration_date']['settings'] = array(
+    'format_type' => 'long',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_repeat_rule' => 'show',
+  );
+  /* Field: Content: File category */
+  $handler->display->display_options['fields']['field_file_category']['id'] = 'field_file_category';
+  $handler->display->display_options['fields']['field_file_category']['table'] = 'field_data_field_file_category';
+  $handler->display->display_options['fields']['field_file_category']['field'] = 'field_file_category';
+  $handler->display->display_options['fields']['field_file_category']['label'] = 'Category';
+  /* Field: Content: Files */
+  $handler->display->display_options['fields']['field_files']['id'] = 'field_files';
+  $handler->display->display_options['fields']['field_files']['table'] = 'field_data_field_files';
+  $handler->display->display_options['fields']['field_files']['field'] = 'field_files';
+  $handler->display->display_options['fields']['field_files']['label'] = 'File';
+  $handler->display->display_options['fields']['field_files']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_files']['delta_offset'] = '0';
+  /* Field: Content: Site */
+  $handler->display->display_options['fields']['field_site']['id'] = 'field_site';
+  $handler->display->display_options['fields']['field_site']['table'] = 'field_data_field_site';
+  $handler->display->display_options['fields']['field_site']['field'] = 'field_site';
+  $handler->display->display_options['fields']['field_site']['label'] = 'Site ';
+  /* Field: Content: Tags */
+  $handler->display->display_options['fields']['field_file_tags']['id'] = 'field_file_tags';
+  $handler->display->display_options['fields']['field_file_tags']['table'] = 'field_data_field_file_tags';
+  $handler->display->display_options['fields']['field_file_tags']['field'] = 'field_file_tags';
+  $handler->display->display_options['fields']['field_file_tags']['label'] = 'Tag(s)';
+  $handler->display->display_options['fields']['field_file_tags']['delta_offset'] = '0';
+  /* Field: Field: Program */
+  $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
+  $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
+  $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
+  $handler->display->display_options['fields']['field_site_restrict']['relationship'] = 'field_site_nid';
+  $handler->display->display_options['fields']['field_site_restrict']['label'] = 'Program(s)';
+  $handler->display->display_options['fields']['field_site_restrict']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_site_restrict']['delta_offset'] = '0';
+  /* Field: Content: Post date */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'node';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = 'Created';
+  $handler->display->display_options['fields']['created']['date_format'] = 'short';
+  /* Field: Field: First Name */
+  $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
+  $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
+  $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
+  $handler->display->display_options['fields']['field_first_name']['relationship'] = 'uid';
+  $handler->display->display_options['fields']['field_first_name']['label'] = 'Author first name';
+  /* Field: Field: Last Name */
+  $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
+  $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
+  $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
+  $handler->display->display_options['fields']['field_last_name']['relationship'] = 'uid';
+  $handler->display->display_options['fields']['field_last_name']['label'] = 'Author Last Name';
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Filter criterion: Content: Published or admin */
+  $handler->display->display_options['filters']['status_extra']['id'] = 'status_extra';
+  $handler->display->display_options['filters']['status_extra']['table'] = 'node';
+  $handler->display->display_options['filters']['status_extra']['field'] = 'status_extra';
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'file' => 'file',
+  );
+  /* Filter criterion: Content: County (field_county) */
+  $handler->display->display_options['filters']['field_county_value']['id'] = 'field_county_value';
+  $handler->display->display_options['filters']['field_county_value']['table'] = 'field_data_field_county';
+  $handler->display->display_options['filters']['field_county_value']['field'] = 'field_county_value';
+  $handler->display->display_options['filters']['field_county_value']['relationship'] = 'field_site_nid';
+  $handler->display->display_options['filters']['field_county_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_county_value']['expose']['operator_id'] = 'field_county_value_op';
+  $handler->display->display_options['filters']['field_county_value']['expose']['label'] = 'County';
+  $handler->display->display_options['filters']['field_county_value']['expose']['operator'] = 'field_county_value_op';
+  $handler->display->display_options['filters']['field_county_value']['expose']['identifier'] = 'field_county_value';
+  /* Filter criterion: Content: Expiration date (field_expiration_date) */
+  $handler->display->display_options['filters']['field_expiration_date_value']['id'] = 'field_expiration_date_value';
+  $handler->display->display_options['filters']['field_expiration_date_value']['table'] = 'field_data_field_expiration_date';
+  $handler->display->display_options['filters']['field_expiration_date_value']['field'] = 'field_expiration_date_value';
+  $handler->display->display_options['filters']['field_expiration_date_value']['operator'] = 'between';
+  $handler->display->display_options['filters']['field_expiration_date_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_expiration_date_value']['expose']['operator_id'] = 'field_expiration_date_value_op';
+  $handler->display->display_options['filters']['field_expiration_date_value']['expose']['label'] = 'Expiration date';
+  $handler->display->display_options['filters']['field_expiration_date_value']['expose']['operator'] = 'field_expiration_date_value_op';
+  $handler->display->display_options['filters']['field_expiration_date_value']['expose']['identifier'] = 'field_expiration_date_value';
+  $handler->display->display_options['filters']['field_expiration_date_value']['granularity'] = 'day';
+  $handler->display->display_options['filters']['field_expiration_date_value']['form_type'] = 'date_popup';
+  $handler->display->display_options['filters']['field_expiration_date_value']['default_date'] = '';
+  $handler->display->display_options['filters']['field_expiration_date_value']['default_to_date'] = '';
+  $handler->display->display_options['filters']['field_expiration_date_value']['year_range'] = '-10:+10';
+  /* Filter criterion: Content: File category (field_file_category) */
+  $handler->display->display_options['filters']['field_file_category_tid']['id'] = 'field_file_category_tid';
+  $handler->display->display_options['filters']['field_file_category_tid']['table'] = 'field_data_field_file_category';
+  $handler->display->display_options['filters']['field_file_category_tid']['field'] = 'field_file_category_tid';
+  $handler->display->display_options['filters']['field_file_category_tid']['value'] = '';
+  $handler->display->display_options['filters']['field_file_category_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_file_category_tid']['expose']['operator_id'] = 'field_file_category_tid_op';
+  $handler->display->display_options['filters']['field_file_category_tid']['expose']['label'] = 'File category';
+  $handler->display->display_options['filters']['field_file_category_tid']['expose']['operator'] = 'field_file_category_tid_op';
+  $handler->display->display_options['filters']['field_file_category_tid']['expose']['identifier'] = 'field_file_category_tid';
+  $handler->display->display_options['filters']['field_file_category_tid']['vocabulary'] = 'file_category';
+  /* Filter criterion: Content: Issues addressed (field_csu_facility) */
+  $handler->display->display_options['filters']['field_csu_facility_tid']['id'] = 'field_csu_facility_tid';
+  $handler->display->display_options['filters']['field_csu_facility_tid']['table'] = 'field_data_field_csu_facility';
+  $handler->display->display_options['filters']['field_csu_facility_tid']['field'] = 'field_csu_facility_tid';
+  $handler->display->display_options['filters']['field_csu_facility_tid']['relationship'] = 'field_site_nid';
+  $handler->display->display_options['filters']['field_csu_facility_tid']['value'] = '';
+  $handler->display->display_options['filters']['field_csu_facility_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_csu_facility_tid']['expose']['operator_id'] = 'field_csu_facility_tid_op';
+  $handler->display->display_options['filters']['field_csu_facility_tid']['expose']['label'] = 'Issues addressed';
+  $handler->display->display_options['filters']['field_csu_facility_tid']['expose']['operator'] = 'field_csu_facility_tid_op';
+  $handler->display->display_options['filters']['field_csu_facility_tid']['expose']['identifier'] = 'field_csu_facility_tid';
+  $handler->display->display_options['filters']['field_csu_facility_tid']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_csu_facility_tid']['vocabulary'] = 'issues_addressed';
+  /* Filter criterion: Content: Organization type (field_csu_org_type) */
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['id'] = 'field_csu_org_type_tid';
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['table'] = 'field_data_field_csu_org_type';
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['field'] = 'field_csu_org_type_tid';
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['relationship'] = 'field_site_nid';
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['value'] = '';
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['expose']['operator_id'] = 'field_csu_org_type_tid_op';
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['expose']['label'] = 'Organization type';
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['expose']['operator'] = 'field_csu_org_type_tid_op';
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['expose']['identifier'] = 'field_csu_org_type_tid';
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['vocabulary'] = 'organization_type';
+  /* Filter criterion: Content: Site (field_site) */
+  $handler->display->display_options['filters']['field_site_nid']['id'] = 'field_site_nid';
+  $handler->display->display_options['filters']['field_site_nid']['table'] = 'field_data_field_site';
+  $handler->display->display_options['filters']['field_site_nid']['field'] = 'field_site_nid';
+  $handler->display->display_options['filters']['field_site_nid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_site_nid']['expose']['operator_id'] = 'field_site_nid_op';
+  $handler->display->display_options['filters']['field_site_nid']['expose']['label'] = 'Specific sites';
+  $handler->display->display_options['filters']['field_site_nid']['expose']['operator'] = 'field_site_nid_op';
+  $handler->display->display_options['filters']['field_site_nid']['expose']['identifier'] = 'field_site_nid';
+  $handler->display->display_options['filters']['field_site_nid']['expose']['multiple'] = TRUE;
+  /* Filter criterion: Content: Tags (field_file_tags) */
+  $handler->display->display_options['filters']['field_file_tags_tid']['id'] = 'field_file_tags_tid';
+  $handler->display->display_options['filters']['field_file_tags_tid']['table'] = 'field_data_field_file_tags';
+  $handler->display->display_options['filters']['field_file_tags_tid']['field'] = 'field_file_tags_tid';
+  $handler->display->display_options['filters']['field_file_tags_tid']['value'] = '';
+  $handler->display->display_options['filters']['field_file_tags_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_file_tags_tid']['expose']['operator_id'] = 'field_file_tags_tid_op';
+  $handler->display->display_options['filters']['field_file_tags_tid']['expose']['label'] = 'File tags';
+  $handler->display->display_options['filters']['field_file_tags_tid']['expose']['operator'] = 'field_file_tags_tid_op';
+  $handler->display->display_options['filters']['field_file_tags_tid']['expose']['identifier'] = 'field_file_tags_tid';
+  $handler->display->display_options['filters']['field_file_tags_tid']['vocabulary'] = 'file_tags';
+  /* Filter criterion: Field: Program (field_site_restrict) */
+  $handler->display->display_options['filters']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['relationship'] = 'field_site_nid';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['value'] = '';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['operator_id'] = 'field_site_restrict_tid_op';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['label'] = 'Program';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['operator'] = 'field_site_restrict_tid_op';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['identifier'] = 'field_site_restrict_tid';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_site_restrict_tid']['vocabulary'] = 'site_restrictions';
+  /* Filter criterion: Location: City */
+  $handler->display->display_options['filters']['city']['id'] = 'city';
+  $handler->display->display_options['filters']['city']['table'] = 'location';
+  $handler->display->display_options['filters']['city']['field'] = 'city';
+  $handler->display->display_options['filters']['city']['relationship'] = 'field_site_nid';
+  $handler->display->display_options['filters']['city']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['city']['expose']['operator_id'] = 'city_op';
+  $handler->display->display_options['filters']['city']['expose']['label'] = 'City';
+  $handler->display->display_options['filters']['city']['expose']['operator'] = 'city_op';
+  $handler->display->display_options['filters']['city']['expose']['identifier'] = 'city';
+  /* Filter criterion: Content: Dynamic Fields */
+  $handler->display->display_options['filters']['dyfield']['id'] = 'dyfield';
+  $handler->display->display_options['filters']['dyfield']['table'] = 'node';
+  $handler->display->display_options['filters']['dyfield']['field'] = 'dyfield';
+  $handler->display->display_options['filters']['dyfield']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['dyfield']['expose']['operator_id'] = '';
+  $handler->display->display_options['filters']['dyfield']['expose']['label'] = 'Fields';
+  $handler->display->display_options['filters']['dyfield']['expose']['operator'] = 'dyfield_op';
+  $handler->display->display_options['filters']['dyfield']['expose']['identifier'] = 'dyfield';
+  $handler->display->display_options['filters']['dyfield']['filterable_fields'] = array(
+    'title' => 'title',
+    'field_expiration_date' => 'field_expiration_date',
+    'field_file_category' => 'field_file_category',
+    'field_files' => 'field_files',
+    'field_site' => 'field_site',
+    'field_file_tags' => 'field_file_tags',
+    'field_site_restrict' => 'field_site_restrict',
+    'created' => 'created',
+    'field_first_name' => 'field_first_name',
+    'field_last_name' => 'field_last_name',
+  );
+  $handler->display->display_options['filters']['dyfield']['defaults_filterable_fields'] = array(
+    'title' => 'title',
+    'field_expiration_date' => 'field_expiration_date',
+    'field_file_category' => 'field_file_category',
+    'field_files' => 'field_files',
+    'field_site' => 'field_site',
+    'field_site_restrict' => 'field_site_restrict',
+    'field_file_tags' => 0,
+    'created' => 0,
+    'field_first_name' => 0,
+    'field_last_name' => 0,
+  );
+  $handler->display->display_options['filters']['dyfield']['sortability'] = 1;
+  $handler->display->display_options['filters']['dyfield']['checkboxes'] = 1;
+
+  /* Display: Page */
+  $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['path'] = 'reports/site-forms';
+  $handler->display->display_options['menu']['type'] = 'tab';
+  $handler->display->display_options['menu']['title'] = 'Site forms';
+  $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['context'] = 0;
+
+  /* Display: Data export */
+  $handler = $view->new_display('views_data_export', 'Data export', 'views_data_export_1');
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['style_plugin'] = 'views_data_export_xls';
+  $handler->display->display_options['style_options']['provide_file'] = 1;
+  $handler->display->display_options['style_options']['filename'] = '%view-%timestamp-full.xls';
+  $handler->display->display_options['style_options']['parent_sort'] = 0;
+  $handler->display->display_options['path'] = 'reports/site-forms/xls';
+  $handler->display->display_options['displays'] = array(
+    'default' => 'default',
+    'page' => 'page',
+  );
+  $handler->display->display_options['use_batch'] = 'batch';
+  $handler->display->display_options['segment_size'] = '50';
+  $translatables['s4_reports_site_forms'] = array(
+    t('Master'),
+    t('S4 Reports: Site forms'),
+    t('more'),
+    t('Search'),
+    t('Reset'),
+    t('Sort by'),
+    t('Asc'),
+    t('Desc'),
+    t('Items per page'),
+    t('- All -'),
+    t('Offset'),
+    t('« first'),
+    t('‹ previous'),
+    t('next ›'),
+    t('last »'),
+    t('Displaying @start - @end of @total'),
+    t('field_site'),
+    t('author'),
+    t('Form name'),
+    t('Expires'),
+    t('Category'),
+    t('File'),
+    t('Site '),
+    t('Tag(s)'),
+    t('Program(s)'),
+    t('Created'),
+    t('Author first name'),
+    t('Author Last Name'),
+    t('County'),
+    t('Expiration date'),
+    t('File category'),
+    t('Issues addressed'),
+    t('Organization type'),
+    t('Specific sites'),
+    t('File tags'),
+    t('Program'),
+    t('City'),
+    t('Fields'),
+    t('Page'),
+    t('Data export'),
+  );
+  $export['s4_reports_site_forms'] = $view;
+
   return $export;
 }
