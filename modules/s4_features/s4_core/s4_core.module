@@ -271,63 +271,6 @@ function s4_core_menu() {
     'weight' => -10,
   );
 
-  $items['admin/config/s4/user-attributes'] = array(
-    'title' => 'User attributes',
-    'description' => 'Map additional user attributes like major to a profile field.',
-    'page callback' => 's4_core_admin_user_attributes_list',
-    'file' => 's4_core.admin.inc',
-    'access arguments' => array('administer site configuration'),
-    'weight' => -9,
-  );
-
-  $items['admin/config/s4/user-attributes/list'] = array(
-    'title' => 'User attributes',
-    'description' => 'Map additional user attributes like major to a profile field.',
-    'page callback' => 's4_core_admin_user_attributes_list',
-    'file' => 's4_core.admin.inc',
-    'access arguments' => array('administer site configuration'),
-    'type' => MENU_DEFAULT_LOCAL_TASK,
-    'weight' => -3,
-  );
-
-  $items['admin/config/s4/user-attributes/add'] = array(
-    'title' => 'Add attribute',
-    'description' => 'Add a new user attribute',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('s4_core_admin_user_attributes_edit'),
-    'file' => 's4_core.admin.inc',
-    'access arguments' => array('administer site configuration'),
-    'type' => MENU_LOCAL_TASK,
-  );
-
-  $items['admin/config/s4/user-attributes/test'] = array(
-    'title' => 'Test attributes',
-    'description' => 'Test user attributes',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('s4_core_admin_user_attributes_test'),
-    'file' => 's4_core.admin.inc',
-    'access arguments' => array('administer site configuration'),
-    'type' => MENU_LOCAL_TASK,
-  );
-
-  $items['admin/config/s4/user-attributes/edit/%'] = array(
-    'title' => 'Edit attribute',
-    'description' => 'Edit user attribute',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('s4_core_admin_user_attributes_edit', 5),
-    'file' => 's4_core.admin.inc',
-    'access arguments' => array('administer site configuration')
-  );
-
-  $items['admin/config/s4/user-attributes/delete/%'] = array(
-    'title' => 'Delete attribute',
-    'description' => 'Delete user attribute',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('s4_core_admin_user_attributes_delete', 5),
-    'file' => 's4_core.admin.inc',
-    'access arguments' => array('administer site configuration')
-  );
-
   $items['s4/signup/%/%'] = array(
     'title' => 'Signup',
     'description' => 'User signup callback',
@@ -856,71 +799,12 @@ function s4_core_webform_submission_insert($node, $submission) {
 }
 
 /**
-* Implements hook_user_login
-*/
-function s4_core_user_login(&$edit, $account) {
-  $sis_user = module_invoke_all('s4_get_user', $account->name);
-  s4_core_create_user($sis_user, $account);
+ * Implements hook_admin_paths_alter()
+ */
+function s4_core_admin_paths_alter(&$paths) {
+  $paths = array('signup/create/*' => TRUE);
 }
 
-/**
-*  Callback to create a user account
-*/
-function s4_core_create_user($sis_user, $user = FALSE) {
-  if (!$sis_user) {
-    return FALSE;
-  }
-  $query = db_select('users', 'u')
-         ->condition('u.name', $sis_user['login_id'])
-         ->fields('u', array('uid'));
-  $uid = $query->execute()->fetchField();
-  if ($uid) {
-    $user = user_load($uid);
-  }
-  if (!$user) {
-    $user = new stdClass();
-    $user->name = $sis_user['login_id'];
-    $user->status = 1;
-  }
-  $values = _s4_core_map_user_attributes();
-  $save = FALSE;
-  foreach ($values as $sis_field => $field) {
-    $current = field_get_items('user', $user, $field);
-    if (isset($sis_user[$sis_field]) && $current[0]['value'] != $sis_user[$sis_field]) {
-      $save[$field]['und'][0]['value'] = $sis_user[$sis_field];
-    }
-  }
-  if ($user->mail != $sis_user['email']) {
-    $save['mail'] = $sis_user['email'];
-  }
-  if ($save) {
-    watchdog('s4', 'User @user updated with new information', array('@user' => $user->name));
-    $user = user_save($user, $save);
-  }
-  return $user;
-}
-
-/**
-*  Helper function to find an entity using it's unique hash
-*  This is helpful when processing SIS integration data
-*/
-function s4_core_get_entity($data, $type, $id_only = FALSE) {
-  $hash = s4_core_make_hash($data, $type);
-  $entity = db_query('SELECT entity_id, entity_type from {s4_core_entity_data}
-            WHERE unique_id = :hash',
-            array(':hash' => $hash));
-  $entity_id = $entity->fetchField();
-  if (!$entity_id) {
-    return FALSE;
-  }
-  if ($id_only) {
-    return $entity_id;
-  }
-  if ($type == 'user') {
-    return user_load($entity_id);
-  }
-  return node_load($entity_id);
-}
 
 /**
  * Implements hook_form_FORM_ID_alter().
@@ -1007,30 +891,6 @@ function s4_core_node_delete($node) {
       }
     }
   }
-}
-
-/**
-*  Returns a unique hash code for a given object
-*/
-function s4_core_make_hash($object, $type) {
-  switch ($type) {
-    case 'term':
-      return md5($object['term_code']);
-    case 'course':
-      return md5($object['term'] . $object['subject'] . $object['catalog_number'] . $object['section']);
-    case 'user':
-      return md5($object['user_id']);
-  }
-}
-
-function _s4_core_map_user_attributes() {
-  $mapping = array(
-        'first_name' => 'field_first_name',
-        'last_name' => 'field_last_name',
-        'user_id' => 'field_sis_user_id',
-        'constant_registration' => 'field_course_ignore',
-  );
-  return array_merge($mapping, variable_get('s4_core_user_attribute_mappings', array()));
 }
 
 /**
@@ -2074,10 +1934,6 @@ function s4_core_views_check_reverse_view_roles($rids, $view, $account = NULL) {
   $roles = array_keys($account->roles);
   $roles[] = $account->uid ? DRUPAL_AUTHENTICATED_RID : DRUPAL_ANONYMOUS_RID;
   return (!array_intersect(array_filter($rids), $roles));
-}
-
-function s4_core_admin_paths_alter(&$paths) {
-  $paths = array('signup/create/*' => TRUE);
 }
 
 function s4_core_s4_help($path) {
