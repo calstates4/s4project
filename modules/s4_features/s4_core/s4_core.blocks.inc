@@ -135,6 +135,7 @@ function s4_core_block_site_list_course_restriction() {
   }
   $course = node_load($_SESSION['s4_signup_course']);
   $restrict = field_get_items('node', $course, 'field_site_restrict_to_list');
+  $program = field_get_items('node', $course, 'field_site_restrict');
   $suggested_sites = field_get_items('node', $course, 'field_sites');
   if (!$suggested_sites) {
     return NULL;
@@ -154,7 +155,7 @@ function s4_core_block_site_list_course_restriction() {
   else {
     $output = t('Your faculty for @course suggest the following sites; however, you are allowed to select a !link.',
           array('@course' => $course->title,
-              '!link' => l(t('site not included on this list'), 'site-list')));
+              '!link' => l(t('site not included on this list'), 'site-list', array('query' => array('program[]' => $program[0]['tid'])))));
   }
   return array('subject' => '',
          'content' => '<p class="intro">' . $output . '</p>');
