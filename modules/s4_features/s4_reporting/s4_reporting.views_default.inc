@@ -2730,12 +2730,12 @@ Fields',
   $handler->display->display_options['fields']['field_phone']['id'] = 'field_phone';
   $handler->display->display_options['fields']['field_phone']['table'] = 'field_data_field_phone';
   $handler->display->display_options['fields']['field_phone']['field'] = 'field_phone';
-  $handler->display->display_options['fields']['field_phone']['label'] = 'Contact';
   $handler->display->display_options['fields']['field_phone']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_phone']['alter']['text'] = '<strong>Phone:</strong> [field_phone]<br/>
 <strong>Email:</strong> [field_site_email]<br/>
 [field_website]';
   $handler->display->display_options['fields']['field_phone']['click_sort_column'] = 'number';
+  $handler->display->display_options['fields']['field_phone']['delta_offset'] = '0';
   /* Field: Content: Location(s) */
   $handler->display->display_options['fields']['field_location']['id'] = 'field_location';
   $handler->display->display_options['fields']['field_location']['table'] = 'field_data_field_location';
@@ -3281,7 +3281,7 @@ Fields',
     t('Website'),
     t('<strong>Website:</strong> <a href="[field_website-url]">View website</a>'),
     t('Email'),
-    t('Contact'),
+    t('Phone number'),
     t('<strong>Phone:</strong> [field_phone]<br/>
 <strong>Email:</strong> [field_site_email]<br/>
 [field_website]'),
