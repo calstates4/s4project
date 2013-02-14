@@ -38,22 +38,22 @@ Fields',
     'group-field_course_catalog_number_value' => array(
       'group' => '0',
       'filter_name' => 'field_course_catalog_number_value',
-      'weight' => '-7',
+      'weight' => '-11',
     ),
     'group-field_course_section_value' => array(
       'group' => '0',
       'filter_name' => 'field_course_section_value',
-      'weight' => '-6',
+      'weight' => '-10',
     ),
     'group-field_course_subject_value' => array(
       'group' => '0',
       'filter_name' => 'field_course_subject_value',
-      'weight' => '-5',
+      'weight' => '-9',
     ),
     'group-field_term_nid' => array(
       'group' => '0',
       'filter_name' => 'field_term_nid',
-      'weight' => '-4',
+      'weight' => '-8',
     ),
     'group-field_site_nid' => array(
       'group' => '1',
@@ -79,6 +79,11 @@ Fields',
       'group' => '1',
       'filter_name' => 'city',
       'weight' => '-11',
+    ),
+    'group-field_course_department_tid' => array(
+      'group' => '0',
+      'filter_name' => 'field_course_department_tid',
+      'weight' => '-12',
     ),
   );
   $handler->display->display_options['pager']['type'] = 'full';
@@ -335,6 +340,12 @@ Fields',
   $handler->display->display_options['fields']['field_course_faculty']['table'] = 'field_data_field_course_faculty';
   $handler->display->display_options['fields']['field_course_faculty']['field'] = 'field_course_faculty';
   $handler->display->display_options['fields']['field_course_faculty']['delta_offset'] = '0';
+  /* Field: Content: Course department */
+  $handler->display->display_options['fields']['field_course_department']['id'] = 'field_course_department';
+  $handler->display->display_options['fields']['field_course_department']['table'] = 'field_data_field_course_department';
+  $handler->display->display_options['fields']['field_course_department']['field'] = 'field_course_department';
+  $handler->display->display_options['fields']['field_course_department']['label'] = 'Department/college';
+  $handler->display->display_options['fields']['field_course_department']['type'] = 'taxonomy_term_reference_plain';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -421,6 +432,7 @@ Fields',
     'course_student_enrollment' => 'course_student_enrollment',
     'course_student_placements' => 'course_student_placements',
     'field_course_faculty' => 'field_course_faculty',
+    'field_course_department' => 'field_course_department',
     'views_bulk_operations' => 0,
   );
   $handler->display->display_options['filters']['dyfield']['defaults_filterable_fields'] = array(
@@ -434,6 +446,7 @@ Fields',
     'field_site_restrict' => 0,
     'field_course_title' => 0,
     'field_course_faculty' => 0,
+    'field_course_department' => 0,
   );
   $handler->display->display_options['filters']['dyfield']['sortability'] = 1;
   $handler->display->display_options['filters']['dyfield']['checkboxes'] = 1;
@@ -474,6 +487,19 @@ Fields',
   $handler->display->display_options['filters']['city']['expose']['label'] = 'City';
   $handler->display->display_options['filters']['city']['expose']['operator'] = 'city_op';
   $handler->display->display_options['filters']['city']['expose']['identifier'] = 'city';
+  /* Filter criterion: Content: Course department (field_course_department) */
+  $handler->display->display_options['filters']['field_course_department_tid']['id'] = 'field_course_department_tid';
+  $handler->display->display_options['filters']['field_course_department_tid']['table'] = 'field_data_field_course_department';
+  $handler->display->display_options['filters']['field_course_department_tid']['field'] = 'field_course_department_tid';
+  $handler->display->display_options['filters']['field_course_department_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_course_department_tid']['expose']['operator_id'] = 'field_course_department_tid_op';
+  $handler->display->display_options['filters']['field_course_department_tid']['expose']['label'] = 'Department/college';
+  $handler->display->display_options['filters']['field_course_department_tid']['expose']['operator'] = 'field_course_department_tid_op';
+  $handler->display->display_options['filters']['field_course_department_tid']['expose']['identifier'] = 'field_course_department_tid';
+  $handler->display->display_options['filters']['field_course_department_tid']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_course_department_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_course_department_tid']['vocabulary'] = 'course_department';
+  $handler->display->display_options['filters']['field_course_department_tid']['error_message'] = FALSE;
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -526,6 +552,7 @@ Fields',
     t('Total enrollment'),
     t('Total placements'),
     t('Faculty'),
+    t('Department/college'),
     t('Specific sites'),
     t('Fields'),
     t('Issues addressed'),
