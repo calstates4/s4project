@@ -67,12 +67,12 @@ function s4_courses_strongarm() {
       'region' => 'right',
       'weight' => '0',
       'has_required' => FALSE,
-      'title' => 'Publish',
+      'title' => 'Save',
       'hidden' => 0,
     ),
     'field_course_faculty' => array(
       'region' => 'right',
-      'weight' => '5',
+      'weight' => '6',
       'has_required' => FALSE,
       'title' => 'Faculty',
       'hidden' => 0,
@@ -86,7 +86,7 @@ function s4_courses_strongarm() {
     ),
     'field_site_restrict' => array(
       'region' => 'right',
-      'weight' => '4',
+      'weight' => '5',
       'has_required' => FALSE,
       'title' => 'Available programs',
       'hidden' => 0,
@@ -100,7 +100,7 @@ function s4_courses_strongarm() {
     ),
     'field_term' => array(
       'region' => 'right',
-      'weight' => '3',
+      'weight' => '4',
       'has_required' => FALSE,
       'title' => 'Term',
       'hidden' => 0,
@@ -114,7 +114,7 @@ function s4_courses_strongarm() {
     ),
     'field_service_end' => array(
       'region' => 'right',
-      'weight' => '1',
+      'weight' => '2',
       'has_required' => FALSE,
       'title' => 'Date to send evaluations',
       'hidden' => 0,
@@ -175,9 +175,16 @@ function s4_courses_strongarm() {
     ),
     'field_max_placements' => array(
       'region' => 'right',
-      'weight' => '2',
+      'weight' => '3',
       'has_required' => FALSE,
       'title' => 'Maximum number of placements per student',
+      'hidden' => 0,
+    ),
+    'field_course_department' => array(
+      'region' => 'right',
+      'weight' => '1',
+      'has_required' => FALSE,
+      'title' => 'Course department',
       'hidden' => 0,
     ),
   );

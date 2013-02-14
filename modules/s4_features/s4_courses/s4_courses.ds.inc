@@ -25,12 +25,13 @@ function s4_courses_ds_layout_settings_info() {
         0 => 'field_sites',
       ),
       'right' => array(
-        0 => 'field_course_faculty',
+        0 => 'field_course_department',
       ),
     ),
     'fields' => array(
       'field_sites' => 'left',
       'field_course_faculty' => 'right',
+      'field_course_department' => 'right',
     ),
     'classes' => array(),
   );

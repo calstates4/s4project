@@ -1429,6 +1429,18 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['filters']['field_term_nid']['expose']['identifier'] = 'field_term_nid';
   $handler->display->display_options['filters']['field_term_nid']['expose']['remember'] = TRUE;
   $handler->display->display_options['filters']['field_term_nid']['expose']['multiple'] = TRUE;
+  /* Filter criterion: Content: Course department (field_course_department) */
+  $handler->display->display_options['filters']['field_course_department_tid']['id'] = 'field_course_department_tid';
+  $handler->display->display_options['filters']['field_course_department_tid']['table'] = 'field_data_field_course_department';
+  $handler->display->display_options['filters']['field_course_department_tid']['field'] = 'field_course_department_tid';
+  $handler->display->display_options['filters']['field_course_department_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_course_department_tid']['expose']['operator_id'] = 'field_course_department_tid_op';
+  $handler->display->display_options['filters']['field_course_department_tid']['expose']['label'] = 'Department or college';
+  $handler->display->display_options['filters']['field_course_department_tid']['expose']['operator'] = 'field_course_department_tid_op';
+  $handler->display->display_options['filters']['field_course_department_tid']['expose']['identifier'] = 'field_course_department_tid';
+  $handler->display->display_options['filters']['field_course_department_tid']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_course_department_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_course_department_tid']['vocabulary'] = 'course_department';
   $handler->display->display_options['path'] = 'courses';
 
   /* Display: Student course list */
@@ -1753,6 +1765,7 @@ function s4_courses_views_default_views() {
     t('Course programs'),
     t('Faculty first name'),
     t('Faculty last name'),
+    t('Department or college'),
     t('Student course list'),
     t('Course'),
     t('[field_course_subject] [field_course_catalog_number]'),

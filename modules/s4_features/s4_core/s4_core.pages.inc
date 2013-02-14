@@ -209,7 +209,6 @@ function s4_core_s4_site_configuration() {
 *  Form to quickly sign up student with a site
 */
 function s4_core_create_signup_form($form, &$form_state, $uid, $option = 'new', $existing_node = FALSE, $courses = TRUE) {
-	drupal_add_js(drupal_get_path('module', 's4_core') .'/js/s4.form-modal.js');
   $user = user_load($uid);
   drupal_set_title(t('Sign up @name', array('@name' => s4_core_get_user_full_name($user))));
   $form = array();
