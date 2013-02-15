@@ -11,7 +11,7 @@
             total += parseFloat($(this).val());
           }
           else {
-            if ($(this).val().trim() != '') {
+            if ($(this).val() && $(this).val().trim() != '') {
               $(this).addClass('error');
             }
             else {
