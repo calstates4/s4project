@@ -240,12 +240,6 @@ function s4_core_create_signup_form($form, &$form_state, $uid, $option = 'new', 
          ->execute()
          ->fetchCol();
 
-    foreach ($course_list as $course) {
-      $course = node_load($course);
-      $term = field_get_items('node', $course, 'field_term');
-      $term = node_load($term[0]['nid']);
-      $courses[$term->title][$course->nid] = $course->title;
-    }
 
     $form['course'] = array(
       '#type' => 'select',
@@ -253,6 +247,18 @@ function s4_core_create_signup_form($form, &$form_state, $uid, $option = 'new', 
       '#options' => $courses,
       '#attributes' => array('class' => array('chosen')),
     );
+
+    foreach ($course_list as $course) {
+      $course = node_load($course);
+      $term = field_get_items('node', $course, 'field_term');
+      $term = node_load($term[0]['nid']);
+      $dates = field_get_items('node', $term, 'field_term_date_start');
+      if(strtotime($dates[0]['value']) < time() && strtotime($dates[0]['value2']) > time()) {
+        $form['course']['#default_value'] = $course->nid;
+      }
+      $form['course']['#options'][$term->title][$course->nid] = $course->title;
+    }
+
     
     if(in_array(arg(3), $course_list)) {
       $form['course']['#default_value'] = intval(arg(3));
