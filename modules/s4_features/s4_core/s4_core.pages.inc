@@ -253,11 +253,14 @@ function s4_core_create_signup_form($form, &$form_state, $uid, $option = 'new', 
       '#options' => $courses,
       '#attributes' => array('class' => array('chosen')),
     );
+    
+    if(in_array(arg(3), $course_list)) {
+      $form['course']['#default_value'] = intval(arg(3));
+    }
     if($existing_node) {
       $course = field_get_items('node', $existing_node, 'field_course');
       $form['course']['#default_value'] = $course[0]['nid'];
     }
-    
   }
 
   $sites = array();

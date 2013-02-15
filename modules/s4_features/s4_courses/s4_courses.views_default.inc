@@ -714,11 +714,11 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['fields']['uid']['table'] = 'users';
   $handler->display->display_options['fields']['uid']['field'] = 'uid';
   $handler->display->display_options['fields']['uid']['relationship'] = 'field_course_students_uid';
-  $handler->display->display_options['fields']['uid']['label'] = 'Signup student';
+  $handler->display->display_options['fields']['uid']['label'] = 'Make placement';
   $handler->display->display_options['fields']['uid']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['uid']['alter']['text'] = 'Signup student';
+  $handler->display->display_options['fields']['uid']['alter']['text'] = 'Make placement';
   $handler->display->display_options['fields']['uid']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['uid']['alter']['path'] = 'signup/create/[uid]';
+  $handler->display->display_options['fields']['uid']['alter']['path'] = 'signup/create/[uid]/!1';
   $handler->display->display_options['fields']['uid']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['uid']['link_to_user'] = FALSE;
   $translatables['course_students'] = array(
@@ -759,8 +759,8 @@ function s4_courses_views_default_views() {
     t('[field_first_name] [field_last_name]'),
     t('user/[uid]'),
     t('Course students (Staff view)'),
-    t('Signup student'),
-    t('signup/create/[uid]'),
+    t('Make placement'),
+    t('signup/create/[uid]/!1'),
   );
   $export['course_students'] = $view;
 
