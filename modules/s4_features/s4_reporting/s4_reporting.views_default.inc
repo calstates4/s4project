@@ -88,6 +88,12 @@ Fields',
   );
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '40';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page'] = TRUE;
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Courses per page';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all'] = TRUE;
   $handler->display->display_options['style_plugin'] = 'table';
   /* Header: Global: Result summary */
   $handler->display->display_options['header']['result']['id'] = 'result';
@@ -533,7 +539,7 @@ Fields',
     t('Sort by'),
     t('Asc'),
     t('Desc'),
-    t('Items per page'),
+    t('Courses per page'),
     t('- All -'),
     t('Offset'),
     t('« first'),
@@ -644,6 +650,12 @@ Fields',
   );
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '40';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page'] = TRUE;
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Faculty per page';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all'] = TRUE;
   $handler->display->display_options['style_plugin'] = 'table';
   /* Header: Global: Result summary */
   $handler->display->display_options['header']['result']['id'] = 'result';
@@ -1020,7 +1032,7 @@ Fields',
     t('Sort by'),
     t('Asc'),
     t('Desc'),
-    t('Items per page'),
+    t('Faculty per page'),
     t('- All -'),
     t('Offset'),
     t('« first'),
@@ -1175,7 +1187,13 @@ Fields',
     ),
   );
   $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '30';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '40';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page'] = TRUE;
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Site staff per page';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all'] = TRUE;
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
     'title' => 'title',
@@ -2111,7 +2129,7 @@ Fields',
     t('Sort by'),
     t('Asc'),
     t('Desc'),
-    t('Items per page'),
+    t('Site staff per page'),
     t('- All -'),
     t('Offset'),
     t('« first'),
@@ -2280,7 +2298,13 @@ Fields',
     ),
   );
   $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '30';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '40';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page'] = TRUE;
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Sites per page';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all'] = TRUE;
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
     'title' => 'title',
@@ -3294,7 +3318,7 @@ Fields',
     t('Sort by'),
     t('Asc'),
     t('Desc'),
-    t('Items per page'),
+    t('Sites per page'),
     t('- All -'),
     t('Offset'),
     t('« first'),
@@ -3475,6 +3499,9 @@ Fields',
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['pager']['options']['id'] = '0';
   $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page'] = TRUE;
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Students per page';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all'] = TRUE;
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
     'views_bulk_operations' => 'views_bulk_operations',
@@ -4244,7 +4271,7 @@ Fields',
     t('Sort by'),
     t('Asc'),
     t('Desc'),
-    t('Items per page'),
+    t('Students per page'),
     t('- All -'),
     t('Offset'),
     t('« first'),
@@ -4371,6 +4398,12 @@ Fields',
   );
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '40';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page'] = TRUE;
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Forms per page';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all'] = TRUE;
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
     'field_expiration_date' => 'field_expiration_date',
@@ -4560,20 +4593,24 @@ Fields',
   $handler->display->display_options['filters']['field_file_category_tid']['expose']['label'] = 'File category';
   $handler->display->display_options['filters']['field_file_category_tid']['expose']['operator'] = 'field_file_category_tid_op';
   $handler->display->display_options['filters']['field_file_category_tid']['expose']['identifier'] = 'field_file_category_tid';
+  $handler->display->display_options['filters']['field_file_category_tid']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_file_category_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_file_category_tid']['vocabulary'] = 'file_category';
+  $handler->display->display_options['filters']['field_file_category_tid']['error_message'] = FALSE;
   /* Filter criterion: Content: Issues addressed (field_csu_facility) */
   $handler->display->display_options['filters']['field_csu_facility_tid']['id'] = 'field_csu_facility_tid';
   $handler->display->display_options['filters']['field_csu_facility_tid']['table'] = 'field_data_field_csu_facility';
   $handler->display->display_options['filters']['field_csu_facility_tid']['field'] = 'field_csu_facility_tid';
   $handler->display->display_options['filters']['field_csu_facility_tid']['relationship'] = 'field_site_nid';
-  $handler->display->display_options['filters']['field_csu_facility_tid']['value'] = '';
   $handler->display->display_options['filters']['field_csu_facility_tid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_csu_facility_tid']['expose']['operator_id'] = 'field_csu_facility_tid_op';
   $handler->display->display_options['filters']['field_csu_facility_tid']['expose']['label'] = 'Issues addressed';
   $handler->display->display_options['filters']['field_csu_facility_tid']['expose']['operator'] = 'field_csu_facility_tid_op';
   $handler->display->display_options['filters']['field_csu_facility_tid']['expose']['identifier'] = 'field_csu_facility_tid';
   $handler->display->display_options['filters']['field_csu_facility_tid']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_csu_facility_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_csu_facility_tid']['vocabulary'] = 'issues_addressed';
+  $handler->display->display_options['filters']['field_csu_facility_tid']['error_message'] = FALSE;
   /* Filter criterion: Content: Organization type (field_csu_org_type) */
   $handler->display->display_options['filters']['field_csu_org_type_tid']['id'] = 'field_csu_org_type_tid';
   $handler->display->display_options['filters']['field_csu_org_type_tid']['table'] = 'field_data_field_csu_org_type';
@@ -4586,7 +4623,9 @@ Fields',
   $handler->display->display_options['filters']['field_csu_org_type_tid']['expose']['operator'] = 'field_csu_org_type_tid_op';
   $handler->display->display_options['filters']['field_csu_org_type_tid']['expose']['identifier'] = 'field_csu_org_type_tid';
   $handler->display->display_options['filters']['field_csu_org_type_tid']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_csu_org_type_tid']['vocabulary'] = 'organization_type';
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['error_message'] = FALSE;
   /* Filter criterion: Content: Site (field_site) */
   $handler->display->display_options['filters']['field_site_nid']['id'] = 'field_site_nid';
   $handler->display->display_options['filters']['field_site_nid']['table'] = 'field_data_field_site';
@@ -4608,6 +4647,7 @@ Fields',
   $handler->display->display_options['filters']['field_file_tags_tid']['expose']['operator'] = 'field_file_tags_tid_op';
   $handler->display->display_options['filters']['field_file_tags_tid']['expose']['identifier'] = 'field_file_tags_tid';
   $handler->display->display_options['filters']['field_file_tags_tid']['vocabulary'] = 'file_tags';
+  $handler->display->display_options['filters']['field_file_tags_tid']['error_message'] = FALSE;
   /* Filter criterion: Field: Program (field_site_restrict) */
   $handler->display->display_options['filters']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
   $handler->display->display_options['filters']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
@@ -4620,7 +4660,9 @@ Fields',
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['operator'] = 'field_site_restrict_tid_op';
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['identifier'] = 'field_site_restrict_tid';
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_site_restrict_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_site_restrict_tid']['vocabulary'] = 'site_restrictions';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['error_message'] = FALSE;
   /* Filter criterion: Location: City */
   $handler->display->display_options['filters']['city']['id'] = 'city';
   $handler->display->display_options['filters']['city']['table'] = 'location';
@@ -4699,7 +4741,7 @@ Fields',
     t('Sort by'),
     t('Asc'),
     t('Desc'),
-    t('Items per page'),
+    t('Forms per page'),
     t('- All -'),
     t('Offset'),
     t('« first'),
