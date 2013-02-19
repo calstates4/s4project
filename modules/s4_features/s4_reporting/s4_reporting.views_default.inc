@@ -2793,6 +2793,7 @@ Fields',
   $handler->display->display_options['fields']['field_location']['field'] = 'field_location';
   $handler->display->display_options['fields']['field_location']['type'] = 's4_sites_address';
   $handler->display->display_options['fields']['field_location']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_location']['separator'] = '';
   /* Field: Content: Location(s) */
   $handler->display->display_options['fields']['field_location_1']['id'] = 'field_location_1';
   $handler->display->display_options['fields']['field_location_1']['table'] = 'field_data_field_location';

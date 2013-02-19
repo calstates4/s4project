@@ -880,6 +880,11 @@ function s4_sites_field_formatter_view($entity_type, $entity, $field, $instance,
         $output[] = $item['additional'];
       }
       $output[] = $item['city'] .', '. $item['province'] . '&nbsp;&nbsp;' . $item['postal_code'];
+      foreach($output as $l => $line) {
+        if(strlen(trim($line)) == 0) {
+          unset($output[$l]);
+        }
+      }
       $element[$delta] = array(
         '#markup' => '<address>'. implode('<br />', $output) .'</address>',
       );
