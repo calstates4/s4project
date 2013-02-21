@@ -802,7 +802,8 @@ function s4_core_webform_submission_insert($node, $submission) {
  * Implements hook_admin_paths_alter()
  */
 function s4_core_admin_paths_alter(&$paths) {
-  $paths = array('signup/create/*' => TRUE);
+  $paths = array('signup/create/*' => TRUE,
+                 'node/*/signup-delete' => TRUE);
 }
 
 

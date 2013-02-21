@@ -618,35 +618,92 @@ function s4_core_views_default_views() {
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['distinct'] = TRUE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Search';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '40';
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(
-    'name' => 'name',
     'field_first_name' => 'field_first_name',
     'field_last_name' => 'field_last_name',
+    'uid' => 'uid',
+    'name' => 'name',
+    'login' => 'login',
+    'edit_node' => 'edit_node',
+    'nothing_1' => 'nothing_1',
+    'nothing' => 'nothing',
+    'field_site_restrict' => 'field_site_restrict',
+    'student_signup_list' => 'student_signup_list',
+    'make_placement_link' => 'make_placement_link',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
-    'name' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-    ),
     'field_first_name' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
+      'empty_column' => 0,
     ),
     'field_last_name' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
+      'empty_column' => 0,
+    ),
+    'uid' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'name' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'login' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'edit_node' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'nothing_1' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'nothing' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_site_restrict' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'student_signup_list' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'make_placement_link' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
     ),
   );
+  $handler->display->display_options['style_options']['sticky'] = TRUE;
   /* Field: Field: First Name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
@@ -708,13 +765,15 @@ function s4_core_views_default_views() {
   $handler->display->display_options['fields']['field_site_restrict']['label'] = 'Programs';
   $handler->display->display_options['fields']['field_site_restrict']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_site_restrict']['delta_offset'] = '0';
-  /* Field: User Signup: List all signups for a user */
+  /* Field: User Signup: List all placements for a user */
   $handler->display->display_options['fields']['student_signup_list']['id'] = 'student_signup_list';
   $handler->display->display_options['fields']['student_signup_list']['table'] = 's4_user_signup';
   $handler->display->display_options['fields']['student_signup_list']['field'] = 'student_signup_list';
-  $handler->display->display_options['fields']['student_signup_list']['label'] = 'Signups';
+  $handler->display->display_options['fields']['student_signup_list']['label'] = 'Current placements';
   $handler->display->display_options['fields']['student_signup_list']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['student_signup_list']['hide_alter_empty'] = FALSE;
+  $handler->display->display_options['fields']['student_signup_list']['course'] = 0;
+  $handler->display->display_options['fields']['student_signup_list']['only_current'] = 1;
   /* Field: User Signup: Make placement link */
   $handler->display->display_options['fields']['make_placement_link']['id'] = 'make_placement_link';
   $handler->display->display_options['fields']['make_placement_link']['table'] = 's4_user_signup';
@@ -815,7 +874,7 @@ function s4_core_views_default_views() {
     t('Master'),
     t('Users'),
     t('more'),
-    t('Apply'),
+    t('Search'),
     t('Reset'),
     t('Sort by'),
     t('Asc'),
@@ -837,7 +896,7 @@ function s4_core_views_default_views() {
     t('Manage user'),
     t('[nothing_1] | [edit_node]'),
     t('Programs'),
-    t('Signups'),
+    t('Current placements'),
     t('Make placement'),
     t('Program'),
     t('Page'),

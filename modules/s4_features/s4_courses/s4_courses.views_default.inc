@@ -295,11 +295,14 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['fields']['login']['field'] = 'login';
   $handler->display->display_options['fields']['login']['relationship'] = 'field_course_students_uid';
   $handler->display->display_options['fields']['login']['date_format'] = 'long';
-  /* Field: Signup: Student placements in a course */
-  $handler->display->display_options['fields']['student_signup_node']['id'] = 'student_signup_node';
-  $handler->display->display_options['fields']['student_signup_node']['table'] = 's4_signup';
-  $handler->display->display_options['fields']['student_signup_node']['field'] = 'student_signup_node';
-  $handler->display->display_options['fields']['student_signup_node']['label'] = 'Site';
+  /* Field: User Signup: List all placements for a user */
+  $handler->display->display_options['fields']['student_signup_list']['id'] = 'student_signup_list';
+  $handler->display->display_options['fields']['student_signup_list']['table'] = 's4_user_signup';
+  $handler->display->display_options['fields']['student_signup_list']['field'] = 'student_signup_list';
+  $handler->display->display_options['fields']['student_signup_list']['relationship'] = 'field_course_students_uid';
+  $handler->display->display_options['fields']['student_signup_list']['label'] = 'Placements';
+  $handler->display->display_options['fields']['student_signup_list']['course'] = 1;
+  $handler->display->display_options['fields']['student_signup_list']['only_current'] = 0;
   /* Field: Assessment: Assessment link */
   $handler->display->display_options['fields']['assessment_link']['id'] = 'assessment_link';
   $handler->display->display_options['fields']['assessment_link']['table'] = 's4_assessment';
@@ -704,11 +707,14 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['fields']['login']['field'] = 'login';
   $handler->display->display_options['fields']['login']['relationship'] = 'field_course_students_uid';
   $handler->display->display_options['fields']['login']['date_format'] = 'long';
-  /* Field: Signup: Student placements in a course */
-  $handler->display->display_options['fields']['student_signup_node']['id'] = 'student_signup_node';
-  $handler->display->display_options['fields']['student_signup_node']['table'] = 's4_signup';
-  $handler->display->display_options['fields']['student_signup_node']['field'] = 'student_signup_node';
-  $handler->display->display_options['fields']['student_signup_node']['label'] = 'Site';
+  /* Field: User Signup: List all placements for a user */
+  $handler->display->display_options['fields']['student_signup_list']['id'] = 'student_signup_list';
+  $handler->display->display_options['fields']['student_signup_list']['table'] = 's4_user_signup';
+  $handler->display->display_options['fields']['student_signup_list']['field'] = 'student_signup_list';
+  $handler->display->display_options['fields']['student_signup_list']['relationship'] = 'field_course_students_uid';
+  $handler->display->display_options['fields']['student_signup_list']['label'] = 'Placements';
+  $handler->display->display_options['fields']['student_signup_list']['course'] = 1;
+  $handler->display->display_options['fields']['student_signup_list']['only_current'] = 0;
   /* Field: User: Uid */
   $handler->display->display_options['fields']['uid']['id'] = 'uid';
   $handler->display->display_options['fields']['uid']['table'] = 'users';
@@ -739,6 +745,7 @@ function s4_courses_views_default_views() {
     t('Assessment'),
     t('All'),
     t('User'),
+    t('Placements'),
     t('All faculty students'),
     t('Search your students'),
     t('Items per page'),

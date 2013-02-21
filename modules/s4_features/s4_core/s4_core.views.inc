@@ -97,7 +97,7 @@ function s4_core_views_data() {
   );
 
   $data['s4_user_signup']['student_signup_list'] = array(
-    'title' => t('List all signups for a user'),
+    'title' => t('List all placements for a user'),
     'help' => t('Renders an unordered list of a user\'s signup records.'),
     'field' => array(
       'handler' => 'views_handler_s4_student_signup_list',
