@@ -38,7 +38,7 @@ class views_handler_s4_student_signup_list extends views_handler_field {
           'signup/create/'. $uid .'/edit/'.$row['nid'], 
           array('attributes' => array('class' => 'modal-edit')));
         $list[$row['nid']] .= ' - '. l(t('delete'), 
-          'node/'. $uid .'/signup-delete', 
+          'node/'. $row['nid'] .'/signup-delete', 
           array('attributes' => array('class' => 'modal-edit'),
                 'query' => array(drupal_get_destination())));
       }

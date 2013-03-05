@@ -20,7 +20,6 @@ function s4_sites_menu_alter(&$items) {
   $items['node/%node/moderation']['weight'] = 1;
   $items['node/%/site-staff-students']['access callback'] = '_s4_sites_site_staff_admin_view_access';
   $items['node/%/site-staff-students']['access arguments'] = array(1);
-
 }
 
 /**
