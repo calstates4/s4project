@@ -34,7 +34,6 @@ dependencies[] = taxonomy
 dependencies[] = text
 dependencies[] = toolbar
 dependencies[] = trigger
-dependencies[] = update
 dependencies[] = user
 
 ;libraries
