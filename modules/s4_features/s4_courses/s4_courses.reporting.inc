@@ -17,58 +17,66 @@ function _s4_courses_reporting_general($report_criteria) {
                       'title' => t('Service hours')),
           );
   $courses = array();
-  $query = db_select('node_revision', 'r')
-           ->fields('r', array('nid', 'status'));
-  $query->leftJoin('field_data_field_term', 't', 't.entity_id = r.nid AND t.bundle = :course', array(':course' => 'course'));
-  $query->fields('t', array('field_term_nid'));
-  $query->leftJoin('field_data_field_site_restrict', 'p', 'p.entity_id = r.nid AND p.bundle = :course', array(':course' => 'course'));
-  $query->condition('p.field_site_restrict_tid', $report_criteria['program']);
-  if ($report_criteria['term']) {
-    $query->condition('t.field_term_nid', $report_criteria['term']->nid);
+  $course_query = db_select('node', 'n')
+                    ->condition('n.type', 'course')
+                    ->fields('n', array('nid'));
+  $course_query->leftJoin('field_data_field_term', 't', 't.entity_type = :node AND t.entity_id = n.nid', array(':node' => 'node'));
+  if($report_criteria['term']) {
+    $course_query->condition('t.field_term_nid', $report_criteria['term']->nid);
   }
   else {
-    $query->condition('r.timestamp', strtotime($report_criteria['start']), '>=')
-        ->condition('r.timestamp', strtotime($report_criteria['end']), '<=');
+    // @todo also add case for time
   }
-  $query->leftJoin('field_data_field_course_students', 's', 's.entity_id = r.nid AND s.bundle = :course', array(':course' => 'course'));
-  $query->leftJoin('field_data_field_user', 'u', 's.field_course_students_uid = u.field_user_uid AND u.bundle = :signup', array(':signup' => 'signup'));
-  $query->leftJoin('field_data_field_course', 'c', 'c.field_course_nid = r.nid AND c.bundle = :signup', array(':signup' => 'signup'));
-
-  $query->leftJoin('field_data_field_course_catalog_number', 'cn', 'cn.entity_id = t.entity_id AND cn.bundle = t.bundle');
-  $query->leftJoin('field_data_field_signup_hours', 'h', 'h.entity_id = c.entity_id AND h.bundle = c.bundle');
-  $query->leftJoin('field_data_field_course_subject', 'su', 'su.entity_id = t.entity_id AND su.bundle = t.bundle');
-  $query->fields('h', array('field_signup_hours_value'));
-  $query->fields('cn', array('field_course_catalog_number_value'));
-  $query->fields('su', array('field_course_subject_value'));
-  $query->fields('c', array('entity_id'));
-  $query->fields('s', array('field_course_students_uid'));
-  $query->leftJoin('node', 'n', 'n.vid = r.vid');
-  $query->condition('n.type', 'course');
-  $results = $query->execute()->fetchAll();
-
-  foreach($results as $result) {
-    $total_courses[$result->field_course_subject_value . $reuslt->field_course_catalog_number_value] = $result->field_course_subject_value . $reuslt->field_course_catalog_number_value;
-    $sections[$result->nid] = $result->nid;
-    $students[$result->field_course_students_uid] = $result->field_course_students_uid;
-    $signups[$result->entity_id] = $result->entity_id;
-    if (intval(substr($result->field_course_catalog_number_value, 0, 1)) > 2) {
-      $ud_courses[$result->nid] = $result->nid;
+  $course_query->leftJoin('field_data_field_course_catalog_number', 'num', 'num.entity_type = :node AND num.entity_id = n.nid', array(':node' => 'node'));
+  $course_query->fields('num', array('field_course_catalog_number_value'));
+  $course_query->leftJoin('field_data_field_course_subject', 's', 's.entity_type = :node AND s.entity_id = n.nid', array(':node' => 'node'));
+  $course_query->fields('s', array('field_course_subject_value'));
+  $course_query->leftJoin('field_data_field_course_section', 'sect', 'sect.entity_type = s.entity_type AND sect.entity_id = n.nid');
+  $course_query->fields('sect', array('field_course_section_value'));
+  $course_query->distinct();
+  $course_query->orderBy('s.field_course_subject_value')
+               ->orderBy('num.field_course_catalog_number_value')
+               ->orderBy('sect.field_course_section_value');
+  $course_query->distinct();
+  $course_result = $course_query->execute()->fetchAll();
+  $courses = array();
+  foreach($course_result as $course) {
+		$totals['sections']['count']++;
+		$courses[$course->field_course_subject_value .'-'. $course->field_course_catalog_number_value] = 1;
+		if(intval(substr(trim($course->field_course_catalog_number_value), 0, 1)) > 2) {
+			$totals['ud-courses']['count']++;
+		}
+		else {
+			$totals['ld-courses']['count']++;
+		}
+		$query = db_select('field_data_field_course', 'c')
+                    ->condition('c.entity_type', 'node')
+                    ->condition('c.bundle', 'signup')
+                    ->condition('c.deleted', 0)
+                    ->condition('c.field_course_nid',  $course->nid)
+                    ->fields('c', array('entity_id'));
+    $query->leftJoin('field_data_field_signup_hours', 'h', 'h.entity_type = c.entity_type AND h.entity_id = c.entity_id');
+    $query->fields('h', array('field_signup_hours_value'));
+    $placements = $query->execute()->fetchAll();
+    foreach($placements as $placement) {
+    	$totals['placements']['count']++;
+    	$totals['hours']['count'] += $placement->field_signup_hours_value;
     }
-    else {
-      $ld_courses[$result->nid] = $result->nid;
-    }
-    $hours[$result->entity_id] = $result->field_signup_hours_value;
-  };
-  foreach($hours as $hour) {
-    $totals['hours']['count'] += $hour;
+	  $students = db_select('field_data_field_course_students', 'c')
+                    ->condition('entity_type', 'node')
+                    ->condition('bundle', 'course')
+                    ->condition('deleted', 0)
+                    ->condition('entity_id',  $course->nid)
+                    ->fields('c', array('field_course_students_uid'))
+                    ->countQuery()
+                    ->execute()
+                    ->fetchField();
+     if($students) {
+     	  $totals['students']['count'] += $students;
+     }
   }
-  $totals['students']['count'] = count($students);
-  $totals['sections']['count'] = count($sections);
-  $totals['total-courses']['count'] = count($total_courses);
-  $totals['placements']['count'] = count($signups);
-  $totals['ud-courses']['count'] = count($ud_courses);
-  $totals['ld-courses']['count'] = count($ld_courses);
-  
+  $totals['total-courses']['count'] = count($courses);
+    
   return array('totals' => $totals,
        'output' => array(),
       );
