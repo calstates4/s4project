@@ -25,7 +25,7 @@ function _s4_sites_reporting_general($report_criteria) {
   $query->leftJoin('field_data_field_site_restrict', 'p', 'p.entity_id = r.nid AND p.bundle = :site', array(':site' => 'site'));
   $query->condition('p.field_site_restrict_tid', $report_criteria['program']);
   $results = $query->execute()->fetchAll();
-  
+  $total_placements = 0;
   foreach ($results as $result) {
     $totals['total_sites']['count']++;
     if ($result->status) {
@@ -33,7 +33,24 @@ function _s4_sites_reporting_general($report_criteria) {
       if (!isset($locations[md5($result->city . $result->province)])) {
         $locations[md5($result->city . $result->province)] = (array)$result;
       }
-      $locations_total[md5($result->city . $result->province)]++;
+      $locations_total[md5($result->city . $result->province)]['total']++;
+      
+      $query = db_select('field_data_field_site', 's')
+      				   ->condition('s.entity_type', 'node')
+      				   ->condition('s.bundle', 'signup')
+      				   ->condition('s.field_site_nid', $result->nid);
+      if($report_criteria['term']) {
+		    $query->leftJoin('field_data_field_course', 'c', 'c.entity_type = s.entity_type AND c.entity_id = s.entity_id');
+		    $query->leftJoin('field_data_field_term', 't', 't.entity_type = s.entity_type AND t.entity_id = c.field_course_nid');
+		    $query->condition('t.field_term_nid', $report_criteria['term']->nid);
+		  }
+		  else {
+		    // @todo also add case for time
+		  }
+		  $query->fields('c', array('entity_id'));
+
+		  $locations_total[md5($result->city . $result->province)]['students'] = $query->countQuery()->execute()->fetchField();
+		  $total_placements += $locations_total[md5($result->city . $result->province)]['students'];
     }
     $education = db_select('field_revision_field_csu_org_type', 'o');
     $education->condition('o.entity_type', 'node')
@@ -59,12 +76,14 @@ function _s4_sites_reporting_general($report_criteria) {
     '#collapsed' => TRUE,
   );
   arsort($locations_total);
-  $header = array('City', 'Total', 'Percent');
+  $header = array('City', '# of sites', '% of sites', '# of placements', '% of placements');
   $rows = array();
   foreach ($locations_total as $k => $total) {
-    $rows[] = array($locations[$k]['city'] . ', ' . $locations[$k]['province'],
-            $total,
-            round(($total / $totals['total_active_sites']['count']) * 100, 2) . '%');
+    $rows[] = array(rtrim(trim($locations[$k]['city'] . ', ' . $locations[$k]['province']), ','),
+            $total['total'],
+            round(($total['total'] / $totals['total_active_sites']['count']) * 100, 2) . '%',
+            $total['students'],
+            round(($total['students'] / $total_placements) * 100, 2) .'%');
   }
   $output['locations']['location_table']['#markup'] = theme('table', array('header' => $header, 'rows' => $rows));
   
