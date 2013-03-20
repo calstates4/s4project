@@ -1,2 +1,18 @@
 .summary-report table { width: 100%; }
 .summary-report table th { font-weight: bold; }
+
+.summary-report table thead tr th, .summary-report table tfoot tr th {
+	padding: 4px;
+}
+.summary-report table thead tr .header {
+	background-image: url(bg.gif);
+	background-repeat: no-repeat;
+	background-position: center right;
+	cursor: pointer;
+}
+.summary-report table thead tr .headerSortUp {
+	background-image: url(asc.gif);
+}
+.summary-report table thead tr .headerSortDown {
+	background-image: url(desc.gif);
+}

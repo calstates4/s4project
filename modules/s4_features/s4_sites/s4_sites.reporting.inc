@@ -76,7 +76,8 @@ function _s4_sites_reporting_general($report_criteria) {
     '#collapsed' => TRUE,
   );
   arsort($locations_total);
-  $header = array('City', '# of sites', '% of sites', '# of placements', '% of placements');
+  $header = array(array('data' => 'City', 'data-sort' => 'string'),
+  								'# of sites', '% of sites', '# of placements', '% of placements');
   $rows = array();
   foreach ($locations_total as $k => $total) {
     $rows[] = array(rtrim(trim($locations[$k]['city'] . ', ' . $locations[$k]['province']), ','),

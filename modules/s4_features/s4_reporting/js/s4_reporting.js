@@ -8,7 +8,6 @@
 				$('input.s4-reporting-fields').attr('checked', false);
 			}
 		});
-		
 		$('.field-name-field-filter-field select').chosen();
 		$('.field-name-field-report-field select').chosen();
 		$('.field-name-field-filter-field select').change(function() {
