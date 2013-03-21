@@ -1915,7 +1915,7 @@ function s4_core_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => 0,
+          'weight' => '0',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -1999,10 +1999,9 @@ function s4_core_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'taxonomy',
           'settings' => array(),
-          'type' => 'taxonomy_term_reference_link',
-          'weight' => 1,
+          'type' => 'hidden',
+          'weight' => '3',
         ),
         'notifications' => array(
           'label' => 'above',

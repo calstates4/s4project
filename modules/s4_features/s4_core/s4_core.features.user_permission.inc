@@ -216,6 +216,24 @@ function s4_core_user_default_permissions() {
     'module' => 'features',
   );
 
+  // Exported permission: administer feeds
+  $permissions['administer feeds'] = array(
+    'name' => 'administer feeds',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'feeds',
+  );
+
+  // Exported permission: administer feeds_tamper
+  $permissions['administer feeds_tamper'] = array(
+    'name' => 'administer feeds_tamper',
+    'roles' => array(
+      0 => 'administrator',
+    ),
+    'module' => 'feeds_tamper',
+  );
+
   // Exported permission: administer fieldgroups
   $permissions['administer fieldgroups'] = array(
     'name' => 'administer fieldgroups',
