@@ -26,7 +26,7 @@ function s4_reporting_block_site_summary() {
 	           ->fetchField();
   
   $items[] = array(array('header' => TRUE,
-                         'data' => t('Inactive site overview')
+                         'data' => t('Inactive sites')
                          ),
                    array('header' => TRUE,
                          'data' => t('Count')
@@ -35,7 +35,7 @@ function s4_reporting_block_site_summary() {
   $items[] = array('<strong>' . t('Inactive sites:') .'</strong>',
                    l($count, 'site-list/manage/', array('query' => array('state' => 0)))
                    );
-	return array('subject' => t('Active site overview'),
+	return array('subject' => t('Site overview'),
 				 'content' => theme('table', array('header' => $header, 'rows' => $items)));
 }
 
