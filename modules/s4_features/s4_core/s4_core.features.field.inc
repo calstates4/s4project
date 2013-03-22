@@ -157,7 +157,7 @@ function s4_core_field_default_fields() {
         'custom_add_another' => '',
         'description_field' => 0,
         'file_directory' => '',
-        'file_extensions' => 'doc docx pdf odf',
+        'file_extensions' => 'doc docx pdf odf xls xlsx',
         'max_filesize' => '',
         'user_register_form' => FALSE,
       ),
