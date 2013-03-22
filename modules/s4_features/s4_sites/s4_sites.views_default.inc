@@ -2310,7 +2310,7 @@ Location',
   $view->description = '';
   $view->tag = 'default';
   $view->base_table = 'node';
-  $view->human_name = 'Site signups';
+  $view->human_name = 'S4: Site placements';
   $view->core = 7;
   $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
@@ -2327,12 +2327,21 @@ Location',
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '30';
   $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['grouping'] = array(
+    0 => array(
+      'field' => 'field_term',
+      'rendered' => 1,
+      'rendered_strip' => 0,
+    ),
+  );
   $handler->display->display_options['style_options']['columns'] = array(
     'field_first_name' => 'field_first_name',
     'field_last_name' => 'field_last_name',
     'field_course' => 'field_course',
     'field_coordinator' => 'field_coordinator',
     'nid' => 'nid',
+    'nid_1' => 'nid_1',
+    'field_term' => 'field_term',
   );
   $handler->display->display_options['style_options']['default'] = 'field_last_name';
   $handler->display->display_options['style_options']['info'] = array(
@@ -2341,30 +2350,49 @@ Location',
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
+      'empty_column' => 0,
     ),
     'field_last_name' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
+      'empty_column' => 0,
     ),
     'field_course' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
+      'empty_column' => 0,
     ),
     'field_coordinator' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
+      'empty_column' => 0,
     ),
     'nid' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
+      'empty_column' => 0,
+    ),
+    'nid_1' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_term' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
     ),
   );
   $handler->display->display_options['exposed_block'] = TRUE;
@@ -2426,6 +2454,14 @@ Location',
   $handler->display->display_options['fields']['nid_1']['alter']['text'] = 'Edit';
   $handler->display->display_options['fields']['nid_1']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['nid_1']['alter']['path'] = 'node/[nid_1]/edit';
+  /* Field: Content: Term */
+  $handler->display->display_options['fields']['field_term']['id'] = 'field_term';
+  $handler->display->display_options['fields']['field_term']['table'] = 'field_data_field_term';
+  $handler->display->display_options['fields']['field_term']['field'] = 'field_term';
+  $handler->display->display_options['fields']['field_term']['relationship'] = 'field_course_nid';
+  $handler->display->display_options['fields']['field_term']['label'] = '';
+  $handler->display->display_options['fields']['field_term']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_term']['type'] = 'node_reference_plain';
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
