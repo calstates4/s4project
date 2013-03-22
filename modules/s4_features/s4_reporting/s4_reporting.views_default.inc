@@ -2777,20 +2777,11 @@ Fields',
   $handler->display->display_options['fields']['field_site_email']['field'] = 'field_site_email';
   $handler->display->display_options['fields']['field_site_email']['label'] = 'Email';
   $handler->display->display_options['fields']['field_site_email']['exclude'] = TRUE;
-  /* Field: Content: Phone number */
-  $handler->display->display_options['fields']['field_phone']['id'] = 'field_phone';
-  $handler->display->display_options['fields']['field_phone']['table'] = 'field_data_field_phone';
-  $handler->display->display_options['fields']['field_phone']['field'] = 'field_phone';
-  $handler->display->display_options['fields']['field_phone']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['field_phone']['alter']['text'] = '<strong>Phone:</strong> [field_phone]<br/>
-<strong>Email:</strong> [field_site_email]<br/>
-[field_website]';
-  $handler->display->display_options['fields']['field_phone']['click_sort_column'] = 'number';
-  $handler->display->display_options['fields']['field_phone']['delta_offset'] = '0';
   /* Field: Content: Location(s) */
   $handler->display->display_options['fields']['field_location']['id'] = 'field_location';
   $handler->display->display_options['fields']['field_location']['table'] = 'field_data_field_location';
   $handler->display->display_options['fields']['field_location']['field'] = 'field_location';
+  $handler->display->display_options['fields']['field_location']['label'] = 'Location';
   $handler->display->display_options['fields']['field_location']['type'] = 's4_sites_address';
   $handler->display->display_options['fields']['field_location']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_location']['separator'] = '';
@@ -2801,6 +2792,14 @@ Fields',
   $handler->display->display_options['fields']['field_location_1']['label'] = 'City';
   $handler->display->display_options['fields']['field_location_1']['type'] = 's4_sites_address_city';
   $handler->display->display_options['fields']['field_location_1']['delta_offset'] = '0';
+  /* Field: Content: Phone number */
+  $handler->display->display_options['fields']['field_phone']['id'] = 'field_phone';
+  $handler->display->display_options['fields']['field_phone']['table'] = 'field_data_field_phone';
+  $handler->display->display_options['fields']['field_phone']['field'] = 'field_phone';
+  $handler->display->display_options['fields']['field_phone']['label'] = 'Phone ';
+  $handler->display->display_options['fields']['field_phone']['click_sort_column'] = 'number';
+  $handler->display->display_options['fields']['field_phone']['type'] = 's4_sites_local_phone_number';
+  $handler->display->display_options['fields']['field_phone']['delta_offset'] = '0';
   /* Field: Content: Federal district */
   $handler->display->display_options['fields']['field_district_federal']['id'] = 'field_district_federal';
   $handler->display->display_options['fields']['field_district_federal']['table'] = 'field_data_field_district_federal';
@@ -3068,9 +3067,9 @@ Fields',
   $handler->display->display_options['filters']['dyfield']['filterable_fields'] = array(
     'views_bulk_operations' => 'views_bulk_operations',
     'title' => 'title',
-    'field_phone' => 'field_phone',
     'field_location' => 'field_location',
     'field_location_1' => 'field_location_1',
+    'field_phone' => 'field_phone',
     'field_district_federal' => 'field_district_federal',
     'field_district_state_lower' => 'field_district_state_lower',
     'field_district_state_upper' => 'field_district_state_upper',
@@ -3107,8 +3106,8 @@ Fields',
     'field_location' => 'field_location',
     'field_csu_facility' => 'field_csu_facility',
     'field_csu_org_type' => 'field_csu_org_type',
-    'field_phone' => 0,
     'field_location_1' => 0,
+    'field_phone' => 0,
     'field_district_federal' => 0,
     'field_district_state_lower' => 0,
     'field_district_state_upper' => 0,
@@ -3287,6 +3286,13 @@ Fields',
 
   /* Display: Data report page */
   $handler = $view->new_display('page', 'Data report page', 'page');
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Result summary */
+  $handler->display->display_options['header']['result']['id'] = 'result';
+  $handler->display->display_options['header']['result']['table'] = 'views';
+  $handler->display->display_options['header']['result']['field'] = 'result';
+  $handler->display->display_options['header']['result']['empty'] = FALSE;
+  $handler->display->display_options['header']['result']['content'] = 'Showing @start - @end of @total';
   $handler->display->display_options['path'] = 'reports/sites';
   $handler->display->display_options['menu']['type'] = 'default tab';
   $handler->display->display_options['menu']['title'] = 'Sites';
@@ -3333,12 +3339,9 @@ Fields',
     t('Website'),
     t('<strong>Website:</strong> <a href="[field_website-url]">View website</a>'),
     t('Email'),
-    t('Phone number'),
-    t('<strong>Phone:</strong> [field_phone]<br/>
-<strong>Email:</strong> [field_site_email]<br/>
-[field_website]'),
-    t('Location(s)'),
+    t('Location'),
     t('City'),
+    t('Phone '),
     t('Legislative District: Federal'),
     t('Legislative District: Lower state district'),
     t('Legislative District: State upper'),
@@ -3386,6 +3389,7 @@ Fields',
     t('Site special requirements'),
     t('County'),
     t('Data report page'),
+    t('Showing @start - @end of @total'),
     t('Data export'),
   );
   $export['reports_sites'] = $view;
