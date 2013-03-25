@@ -359,8 +359,7 @@ function s4_sites_node_view($node, $view_mode, $language) {
             l(t('Forms'), 'forms'),
             l($node->title, 'node/'. $node->nid))
     );
-  }
-  
+  }  
 }
 
 /**

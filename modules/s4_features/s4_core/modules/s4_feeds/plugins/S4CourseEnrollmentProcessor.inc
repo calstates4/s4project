@@ -33,7 +33,7 @@ class S4CourseEnrollmentProcessor extends FeedsProcessor {
     $existing = field_get_items('node', $course, 'field_course_students');
     if ($existing) {
       foreach ($existing as $k => $existing_student) {
-        if ($existing_student['uid'] == $item['user']) {
+        if (intval($existing_student['uid']) == intval($item['user'])) {
           if (!$enrolled) {
             unset($course->field_course_students[$course->language][$k]);
             node_save($course);
