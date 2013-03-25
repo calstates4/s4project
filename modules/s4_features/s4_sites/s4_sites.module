@@ -315,6 +315,10 @@ function s4_sites_node_view($node, $view_mode, $language) {
             l(t('Sites'), 'site-list'),
             l($node->title, 'node/'. $node->nid))
     );
+    if(node_access('update', $node) && !$node->status) {
+      drupal_set_message(t('This site is inactive'), 'error');
+    }
+    
   }
   if($node->type == 'coordinator') {
     $site = field_get_items('node', $node, 'field_site');
