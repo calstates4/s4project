@@ -36,7 +36,7 @@ projects[date][subdir] = "contrib"
 projects[date][version] = "2.0-alpha3"
 
 projects[ds][subdir] = "contrib"
-projects[ds][version] = "1.4"
+projects[ds][version] = "1.7"
 
 projects[edit_limit][subdir] = "contrib"
 projects[edit_limit][version] = "1.0-beta4"
@@ -153,7 +153,7 @@ projects[textcaptcha][subdir] = "contrib"
 projects[textcaptcha][version] = "1.2"
 
 projects[token][subdir] = "contrib"
-projects[token][version] = "1.2"
+projects[token][version] = "1.5"
 
 projects[uuid][subdir] = "contrib"
 projects[uuid][version] = "1.0-alpha3"
