@@ -10,6 +10,20 @@ Documentation
 =============
 You can read **[full documentation on the S4 project](http://s4.readthedocs.org/en/latest/)**, hosted by readthedocs.org.
 
+Downloads
+=========
+
+#### Install through Drush
+If you are using Drush, issue the following command:
+
+`drush make https://raw.github.com/kevee/csu_student_signup/master/distro.make my_directory`
+
+There's also a helpful `distro_http.make` file for those of you who are behind a firewall.
+
+#### Direct download
+
+You can also download a nightly build of S4 from: http://s4.csumb.edu/downloads/s4_head.tar.gz
+
 Installation
 ============
 
