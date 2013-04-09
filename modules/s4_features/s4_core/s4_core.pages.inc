@@ -209,12 +209,16 @@ function s4_core_s4_site_configuration() {
 *  Form to quickly sign up student with a site
 */
 function s4_core_create_signup_form($form, &$form_state, $uid, $option = 'new', $existing_node = FALSE, $courses = TRUE) {
-  $user = user_load($uid);
-  drupal_set_title(t('Sign up @name', array('@name' => s4_core_get_user_full_name($user))));
-  $form = array();
+  global $user;
+  $user = user_load($user->uid);
+  $default_program = field_get_items('user', $user, 'field_program_default');
 
+  $account = user_load($uid);
+  drupal_set_title(t('Sign up @name', array('@name' => s4_core_get_user_full_name($account))));
+  $form = array();
+  
   if($existing_node) {
-    drupal_set_title(t('Edit placement for @name', array('@name' => s4_core_get_user_full_name($user))));
+    drupal_set_title(t('Edit placement for @name', array('@name' => s4_core_get_user_full_name($account))));
     $form['existing_node'] = array(
       '#type' => 'hidden',
       '#value' => $existing_node->nid,
@@ -226,7 +230,7 @@ function s4_core_create_signup_form($form, &$form_state, $uid, $option = 'new', 
 
   $form['user'] = array(
     '#type' => 'hidden',
-    '#value' => $user->uid,
+    '#value' => $account->uid,
   );
 
   if (module_exists('s4_courses') && $courses) {
@@ -235,7 +239,7 @@ function s4_core_create_signup_form($form, &$form_state, $uid, $option = 'new', 
     $course_list = db_select('field_data_field_course_students', 's')
          ->fields('s', array('entity_id'))
          ->condition('s.bundle', 'course')
-         ->condition('s.field_course_students_uid', $user->uid)
+         ->condition('s.field_course_students_uid', $account->uid)
          ->distinct()
          ->execute()
          ->fetchCol();
@@ -268,12 +272,21 @@ function s4_core_create_signup_form($form, &$form_state, $uid, $option = 'new', 
       $form['course']['#default_value'] = $course[0]['nid'];
     }
   }
-
+  
   $sites = array();
   $query = db_select('node', 'n')
        ->fields('n', array('nid', 'title'))
        ->condition('type', 'site')
        ->orderBy('title', 'ASC');
+  if(count($default_program)) {
+  	$programs = array();
+  	foreach($default_program as $program) {
+  		$programs[] = $program['tid'];
+  	}
+		$query->leftJoin('field_data_field_site_restrict', 'r', 'r.entity_id = n.nid AND r.entity_type = :node', array(':node' => 'node'));
+		$query->condition('r.field_site_restrict_tid', $programs, 'IN');  
+  }
+  
   $results = $query->execute();
   foreach ($results as $result) {
     $sites[$result->nid] = $result->title;
