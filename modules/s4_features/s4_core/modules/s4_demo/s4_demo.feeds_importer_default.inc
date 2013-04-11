@@ -22,6 +22,11 @@ function s4_demo_feeds_importer_default() {
       'config' => array(
         'allowed_extensions' => 'txt csv tsv xml opml',
         'direct' => FALSE,
+        'directory' => 'private://feeds',
+        'allowed_schemes' => array(
+          0 => 'public',
+          1 => 'private',
+        ),
       ),
     ),
     'parser' => array(
@@ -34,7 +39,6 @@ function s4_demo_feeds_importer_default() {
     'processor' => array(
       'plugin_key' => 'FeedsNodeProcessor',
       'config' => array(
-        'content_type' => 'course',
         'expire' => '-1',
         'author' => 0,
         'mappings' => array(
@@ -81,6 +85,9 @@ function s4_demo_feeds_importer_default() {
         ),
         'update_existing' => '2',
         'input_format' => 'plain_text',
+        'authorize' => 1,
+        'skip_hash_check' => 0,
+        'bundle' => 'course',
       ),
     ),
     'content_type' => '',
@@ -221,6 +228,11 @@ function s4_demo_feeds_importer_default() {
       'config' => array(
         'allowed_extensions' => 'txt csv tsv xml opml',
         'direct' => FALSE,
+        'directory' => 'private://feeds',
+        'allowed_schemes' => array(
+          0 => 'public',
+          1 => 'private',
+        ),
       ),
     ),
     'parser' => array(
@@ -233,7 +245,6 @@ function s4_demo_feeds_importer_default() {
     'processor' => array(
       'plugin_key' => 'FeedsNodeProcessor',
       'config' => array(
-        'content_type' => 'site',
         'expire' => '-1',
         'author' => 0,
         'mappings' => array(
@@ -320,6 +331,9 @@ function s4_demo_feeds_importer_default() {
         ),
         'update_existing' => '0',
         'input_format' => 'plain_text',
+        'authorize' => 1,
+        'skip_hash_check' => 0,
+        'bundle' => 'site',
       ),
     ),
     'content_type' => '',
@@ -343,6 +357,11 @@ function s4_demo_feeds_importer_default() {
       'config' => array(
         'allowed_extensions' => 'txt csv tsv xml opml',
         'direct' => FALSE,
+        'directory' => 'private://feeds',
+        'allowed_schemes' => array(
+          0 => 'public',
+          1 => 'private',
+        ),
       ),
     ),
     'parser' => array(
@@ -355,7 +374,6 @@ function s4_demo_feeds_importer_default() {
     'processor' => array(
       'plugin_key' => 'FeedsNodeProcessor',
       'config' => array(
-        'content_type' => 'coordinator',
         'expire' => '-1',
         'author' => 0,
         'mappings' => array(
@@ -402,6 +420,9 @@ function s4_demo_feeds_importer_default() {
         ),
         'update_existing' => '0',
         'input_format' => 'plain_text',
+        'authorize' => 1,
+        'skip_hash_check' => 0,
+        'bundle' => 'coordinator',
       ),
     ),
     'content_type' => '',
@@ -425,6 +446,11 @@ function s4_demo_feeds_importer_default() {
       'config' => array(
         'allowed_extensions' => 'txt csv tsv xml opml',
         'direct' => FALSE,
+        'directory' => 'private://feeds',
+        'allowed_schemes' => array(
+          0 => 'public',
+          1 => 'private',
+        ),
       ),
     ),
     'parser' => array(
@@ -437,7 +463,6 @@ function s4_demo_feeds_importer_default() {
     'processor' => array(
       'plugin_key' => 'FeedsNodeProcessor',
       'config' => array(
-        'content_type' => 'course_term',
         'expire' => '-1',
         'author' => 0,
         'mappings' => array(
@@ -469,6 +494,9 @@ function s4_demo_feeds_importer_default() {
         ),
         'update_existing' => '2',
         'input_format' => 'plain_text',
+        'authorize' => 1,
+        'skip_hash_check' => 0,
+        'bundle' => 'course_term',
       ),
     ),
     'content_type' => '',
