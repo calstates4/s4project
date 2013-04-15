@@ -38,6 +38,7 @@ class S4CourseEnrollmentProcessor extends FeedsProcessor {
           	unset($course->field_course_students[$course->language][$k]);
           	$course->field_course_students[$course->language] = array_values($course->field_course_students[$course->language]);
             node_save($course);
+            node_load($course->nid, NULL, TRUE);
             return $course;
           }
           return;
