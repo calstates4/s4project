@@ -35,7 +35,8 @@ class S4CourseEnrollmentProcessor extends FeedsProcessor {
       foreach ($existing as $k => $existing_student) {
         if (intval($existing_student['uid']) == intval($item['user'])) {
           if (!$enrolled) {
-            unset($course->field_course_students[$course->language][$k]);
+          	unset($course->field_course_students[$course->language][$k]);
+          	$course->field_course_students[$course->language] = array_values($course->field_course_students[$course->language]);
             node_save($course);
             return $course;
           }
