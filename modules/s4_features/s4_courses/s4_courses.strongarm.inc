@@ -30,7 +30,6 @@ function s4_courses_strongarm() {
   $strongarm->name = 'node_options_course';
   $strongarm->value = array(
     0 => 'status',
-    1 => 'revision',
   );
   $export['node_options_course'] = $strongarm;
 
