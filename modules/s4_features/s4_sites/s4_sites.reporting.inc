@@ -96,7 +96,7 @@ function _s4_sites_reporting_general($report_criteria) {
             round(($total['total'] / $totals['total_active_sites']['count']) * 100, 2) . '%'
             );
   }
-  $output['locations']['location_table']['#markup'] = theme('table', array('header' => $header, 'rows' => $rows));
+  $output['locations']['location_table']['#markup'] = theme('table', array('header' => $header, 'rows' => $rows, 'sticky' => TRUE));
   
   return array('totals' => $totals,
          'output' => $output,
@@ -230,7 +230,7 @@ function _s4_sites_reporting_district($report_criteria, $district_type) {
     }
     $rows[] = array(array('header' => TRUE, 'data' => $district_name), count($district), $population, $signups, $hours);
   }
-  return theme('table', array('header' => $header, 'rows' => $rows));
+  return theme('table', array('header' => $header, 'rows' => $rows, 'sticky' => TRUE));
 }
 
 function _s4_sites_reporting_issues($report_criteria) {
@@ -330,11 +330,11 @@ function _s4_sites_reporting_issues($report_criteria) {
                           : '<em>' . t('n/a') .'</em>';
       }
     }
-    $demographic_table = theme('table', array('header' => array('Demographic', 'Percentage'), 'rows' => $demographics));
+    $demographic_table = theme('table', array('header' => array('Demographic', 'Percentage'), 'rows' => $demographics, 'sticky' => TRUE));
 
     $rows[] = array(array('header' => TRUE, 'data' => $name), $total_sites, $active_sites . $percent, $population, array('data' => $demographic_table, 'class' => array('demographics')), count($signups), array_sum($signups), $evaluations);
   }
-  return theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('population'))));
+  return theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('population')), 'sticky' => TRUE));
 }
 
 function _s4_sites_reporting_org_type($report_criteria) {
@@ -431,9 +431,9 @@ function _s4_sites_reporting_org_type($report_criteria) {
       }
     }
 
-    $demographic_table = theme('table', array('header' => array('Demographic', 'Percentage'), 'rows' => $demographics));
+    $demographic_table = theme('table', array('header' => array('Demographic', 'Percentage'), 'rows' => $demographics, 'sticky' => TRUE));
     
     $rows[] = array(array('header' => TRUE, 'data' => $name), $total_sites, $active_sites . $percent, $population, array('data' => $demographic_table, 'class' => array('demographics')), count($signups), array_sum($signups), $evaluations);
   }
-  return theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('population'))));
+  return theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('population')), 'sticky' => TRUE));
 }

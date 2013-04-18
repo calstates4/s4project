@@ -7,6 +7,10 @@ function s4_reporting_term_report($form, &$form_state) {
 	drupal_add_css(drupal_get_path('module', 's4_reporting') .'/css/tablesorter/style.css');
 	drupal_add_js(drupal_get_path('module', 's4_reporting') .'/js/jquery.tablesorter.min.js');
 	drupal_add_js(drupal_get_path('module', 's4_reporting') .'/js/s4_reporting.summary.js');
+	
+	//Manually load tableheader because these are pre-rendered tables.
+	drupal_add_js('misc/tableheader.js');
+	
 	$programs = array();
   foreach(taxonomy_get_vocabularies() as $vocabulary) {
     if($vocabulary->machine_name == 'site_restrictions') {
@@ -183,7 +187,7 @@ function s4_reporting_summary_report_finished($success, $results, $operations) {
   	$output += $results['output'];
   	$header = array(t('Item'), t('Totals'));
   	$output['totals'] = array(
-  		'#markup' => theme('table', array('header' => $header, 'rows' => $output['totals']))
+  		'#markup' => theme('table', array('header' => $header, 'rows' => $output['totals'], 'sticky' => TRUE))
   		);	
     $key = ($results['preset']['access_key']) ? $results['preset']['access_key'] : $user->uid;
     
@@ -497,7 +501,7 @@ function s4_reporting_view_summary_report($form, $form_state, $report_key) {
   }
   
   $form['summary_table'] = array(
-    '#markup' => theme('table', array('header' => $header, 'rows' => $rows)),
+    '#markup' => theme('table', array('header' => $header, 'rows' => $rows, 'sticky' => TRUE)),
   );
   
   $header = array(t('Value'), t('Count'), t('Percent'));
@@ -517,7 +521,7 @@ function s4_reporting_view_summary_report($form, $form_state, $report_key) {
                           t('@percent%', array('@percent' => round(($type['count'] / $result['total']) * 100, 2))));
       }
       $form['group_'. $field_name]['result'] = array(
-        '#markup' => theme('table', array('header' => $header, 'rows' => $rows)),
+        '#markup' => theme('table', array('header' => $header, 'rows' => $rows, 'sticky' => TRUE)),
       );
     }
   }

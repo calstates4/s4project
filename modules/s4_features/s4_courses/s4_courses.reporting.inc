@@ -218,7 +218,7 @@ function _s4_courses_reporting_course_summary($report_criteria) {
   );
   
   $output['discipline']['table'] = array(
-    '#markup' => theme('table', array('header' => $discipline_header, 'rows' => $discipline_rows)),
+    '#markup' => theme('table', array('header' => $discipline_header, 'rows' => $discipline_rows, 'sticky' => TRUE)),
   );
   
   $output['courses'] = array(
@@ -229,7 +229,7 @@ function _s4_courses_reporting_course_summary($report_criteria) {
   );
   
   $output['courses']['table'] = array(
-    '#markup' => theme('table', array('header' => $course_header, 'rows' => $course_rows)),
+    '#markup' => theme('table', array('header' => $course_header, 'rows' => $course_rows, 'sticky' => TRUE)),
   );
   
   $output['sites_discipline'] = array(
@@ -240,7 +240,7 @@ function _s4_courses_reporting_course_summary($report_criteria) {
   );
   
   $output['sites_discipline']['table'] = array(
-    '#markup' => theme('table', array('header' => $site_discipline_header, 'rows' => $site_discipline_rows)),
+    '#markup' => theme('table', array('header' => $site_discipline_header, 'rows' => $site_discipline_rows, 'sticky' => TRUE)),
   );
   
   return array('totals' => $totals,
