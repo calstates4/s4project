@@ -376,6 +376,30 @@ function s4_sites_context_default_contexts() {
   $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
+  $context->name = 'site-manage';
+  $context->description = 'User is on the manage sites page';
+  $context->tag = '';
+  $context->conditions = array(
+    'path' => array(
+      'values' => array(
+        'site-list/manage' => 'site-list/manage',
+        'site-list/manage*' => 'site-list/manage*',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'menu' => 'site',
+  );
+  $context->condition_mode = 0;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('User is on the manage sites page');
+  $export['site-manage'] = $context;
+
+  $context = new stdClass();
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
   $context->name = 'site-moderation';
   $context->description = 'User is viewing the site moderation tab';
   $context->tag = 'sites';
