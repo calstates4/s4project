@@ -268,17 +268,18 @@ function s4_sites_webform_submission_insert($node, $submission) {
   if (!$_SESSION['s4_sites_user_form_site']) {
     return null;
   }
+  $site = node_load($_SESSION['s4_sites_user_form_site']);
   $form = new stdClass();
   $form->type = 'file';
   node_object_prepare($form);
     $form->language = LANGUAGE_NONE;
   $form->title = $node->title;
   $form->uid = 0;
-  $form->field_site[$form->language][0]['nid'] = $_SESSION['s4_sites_user_form_site'];
+  $form->field_site[$form->language][0]['nid'] = $site->nid;
   $form->field_form_sid[$form->language][0]['value'] = $submission->sid;
   node_save($form);
   unset($_SESSION['s4_sites_user_form_site']);
-  if (user_access('administer nodes')) {
+  if (node_access('update', $site)) {
     drupal_goto('node/'. $form->field_site[$form->language][0]['nid'] .'/forms');
   }
   drupal_set_message(t('Thanks for submitting your form!'));
