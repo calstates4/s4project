@@ -1446,6 +1446,11 @@ Fields',
       'empty_column' => 0,
     ),
   );
+  /* Header: Global: Result summary */
+  $handler->display->display_options['header']['result']['id'] = 'result';
+  $handler->display->display_options['header']['result']['table'] = 'views';
+  $handler->display->display_options['header']['result']['field'] = 'result';
+  $handler->display->display_options['header']['result']['empty'] = FALSE;
   /* Relationship: Content: Site staff (field_coordinator) - reverse */
   $handler->display->display_options['relationships']['reverse_field_coordinator_node']['id'] = 'reverse_field_coordinator_node';
   $handler->display->display_options['relationships']['reverse_field_coordinator_node']['table'] = 'node';
@@ -2136,6 +2141,7 @@ Fields',
     t('‹ previous'),
     t('next ›'),
     t('last »'),
+    t('Displaying @start - @end of @total'),
     t('field_coordinator'),
     t('field_course'),
     t('field_site'),
@@ -4592,13 +4598,13 @@ Fields',
   $handler->display->display_options['filters']['field_file_category_tid']['id'] = 'field_file_category_tid';
   $handler->display->display_options['filters']['field_file_category_tid']['table'] = 'field_data_field_file_category';
   $handler->display->display_options['filters']['field_file_category_tid']['field'] = 'field_file_category_tid';
-  $handler->display->display_options['filters']['field_file_category_tid']['value'] = '';
   $handler->display->display_options['filters']['field_file_category_tid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_file_category_tid']['expose']['operator_id'] = 'field_file_category_tid_op';
   $handler->display->display_options['filters']['field_file_category_tid']['expose']['label'] = 'File category';
   $handler->display->display_options['filters']['field_file_category_tid']['expose']['operator'] = 'field_file_category_tid_op';
   $handler->display->display_options['filters']['field_file_category_tid']['expose']['identifier'] = 'field_file_category_tid';
   $handler->display->display_options['filters']['field_file_category_tid']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_file_category_tid']['reduce_duplicates'] = TRUE;
   $handler->display->display_options['filters']['field_file_category_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_file_category_tid']['vocabulary'] = 'file_category';
   $handler->display->display_options['filters']['field_file_category_tid']['error_message'] = FALSE;
@@ -4613,6 +4619,7 @@ Fields',
   $handler->display->display_options['filters']['field_csu_facility_tid']['expose']['operator'] = 'field_csu_facility_tid_op';
   $handler->display->display_options['filters']['field_csu_facility_tid']['expose']['identifier'] = 'field_csu_facility_tid';
   $handler->display->display_options['filters']['field_csu_facility_tid']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_csu_facility_tid']['reduce_duplicates'] = TRUE;
   $handler->display->display_options['filters']['field_csu_facility_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_csu_facility_tid']['vocabulary'] = 'issues_addressed';
   $handler->display->display_options['filters']['field_csu_facility_tid']['error_message'] = FALSE;
@@ -4621,13 +4628,13 @@ Fields',
   $handler->display->display_options['filters']['field_csu_org_type_tid']['table'] = 'field_data_field_csu_org_type';
   $handler->display->display_options['filters']['field_csu_org_type_tid']['field'] = 'field_csu_org_type_tid';
   $handler->display->display_options['filters']['field_csu_org_type_tid']['relationship'] = 'field_site_nid';
-  $handler->display->display_options['filters']['field_csu_org_type_tid']['value'] = '';
   $handler->display->display_options['filters']['field_csu_org_type_tid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_csu_org_type_tid']['expose']['operator_id'] = 'field_csu_org_type_tid_op';
   $handler->display->display_options['filters']['field_csu_org_type_tid']['expose']['label'] = 'Organization type';
   $handler->display->display_options['filters']['field_csu_org_type_tid']['expose']['operator'] = 'field_csu_org_type_tid_op';
   $handler->display->display_options['filters']['field_csu_org_type_tid']['expose']['identifier'] = 'field_csu_org_type_tid';
   $handler->display->display_options['filters']['field_csu_org_type_tid']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_csu_org_type_tid']['reduce_duplicates'] = TRUE;
   $handler->display->display_options['filters']['field_csu_org_type_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_csu_org_type_tid']['vocabulary'] = 'organization_type';
   $handler->display->display_options['filters']['field_csu_org_type_tid']['error_message'] = FALSE;
@@ -4658,13 +4665,13 @@ Fields',
   $handler->display->display_options['filters']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['filters']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';
   $handler->display->display_options['filters']['field_site_restrict_tid']['relationship'] = 'field_site_nid';
-  $handler->display->display_options['filters']['field_site_restrict_tid']['value'] = '';
   $handler->display->display_options['filters']['field_site_restrict_tid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['operator_id'] = 'field_site_restrict_tid_op';
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['label'] = 'Program';
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['operator'] = 'field_site_restrict_tid_op';
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['identifier'] = 'field_site_restrict_tid';
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_site_restrict_tid']['reduce_duplicates'] = TRUE;
   $handler->display->display_options['filters']['field_site_restrict_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_site_restrict_tid']['vocabulary'] = 'site_restrictions';
   $handler->display->display_options['filters']['field_site_restrict_tid']['error_message'] = FALSE;
