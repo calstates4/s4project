@@ -1,0 +1,489 @@
+<?php
+
+/**
+ * @file
+ * Module for the s4_opportunity Entity - a starting point to create your own Entity
+ * and associated administration interface
+ */  
+
+
+/**
+ * Implement hook_entity_info().
+ *
+ * We define two entities here - the actual entity that will hold our domain
+ * specific information and an entity that holds information about the different
+ * types of entities. See here: http://drupal.org/node/977380 for a discussion on this
+ * choice.
+ */
+function s4_opportunity_entity_info() {
+  $return['s4_opportunity'] = array(
+    'label' => t('Opportunity'),
+    // The entity class and controller class extend the classes provided by the
+    // Entity API
+    'entity class' => 's4_opportunity',
+    'controller class' => 's4OpportunityController',
+    'base table' => 's4_opportunity',
+    'fieldable' => TRUE,
+    'entity keys' => array(
+        'id' => 's4_opportunity_id',
+        'bundle' => 'type',
+    ),
+    // Bundles are defined by the s4_opportunity types below
+    'bundles' => array(),
+    // Bundle keys tell the FieldAPI how to extract information from the bundle objects
+    'bundle keys' => array(
+      'bundle' => 'type',
+    ),
+    'label callback' => 'entity_class_label',
+    'uri callback' => 'entity_class_uri',
+    'creation callback' => 's4_opportunity_create',
+    'access callback' => 's4_opportunity_access',
+    'module' => 's4_opportunity',
+    // The information below is used by the s4OpportunityUIController (which extends the EntityDefaultUIController)
+    'admin ui' => array(
+      'path' => 'admin/content/s4_opportunitys',
+      'file' => 's4_opportunity.admin.inc',
+      'controller class' => 's4OpportunityUIController',
+      'menu wildcard' => '%s4_opportunity',
+    ),
+  );
+  // The entity that holds information about the entity types	  
+  $return['s4_opportunity_type'] = array(
+    'label' => t('Opportunity Type'),
+    'entity class' => 's4_opportunityType',
+    'controller class' => 's4OpportunityTypeController',
+    'base table' => 's4_opportunity_type',
+    'fieldable' => FALSE,
+    'bundle of' => 's4_opportunity',
+    'exportable' => TRUE,
+    'entity keys' => array(
+      'id' => 'id',
+      'name' => 'type',
+      'label' => 'label',
+    ),
+    'access callback' => 's4_opportunity_type_access',
+    'module' => 's4_opportunity',
+    // Enable the entity API's admin UI.
+    'admin ui' => array(
+      'path' => 'admin/structure/s4_opportunity_types',
+      'file' => 's4_opportunity_type.admin.inc',
+      'controller class' => 's4OpportunityTypeUIController',
+    ),
+  );
+
+  return $return;
+}
+
+
+/**
+ * Implements hook_entity_info_alter().
+ *
+ * We are adding the info about the s4_opportunity types via a hook to avoid a recursion
+ * issue as loading the s4_opportunity types requires the entity info as well.
+ *
+ * @todo This needs to be improved
+ */
+function s4_opportunity_entity_info_alter(&$entity_info) {
+  foreach (s4_opportunity_get_types() as $type => $info) {
+    $entity_info['s4_opportunity']['bundles'][$type] = array(
+      'label' => $info->label,
+      'admin' => array(
+        'path' => 'admin/structure/s4_opportunity_types/manage/%s4_opportunity_type',
+        'real path' => 'admin/structure/s4_opportunity_types/manage/' . $type,
+        'bundle argument' => 4,
+        'access arguments' => array('administer s4_opportunity types'),
+      ),
+    );
+  }
+}
+  
+
+/**
+ * Implements hook_permission().
+ */
+function s4_opportunity_permission() {
+  // We set up permisssions to manage entity types, manage all entities and the
+  // permissions for each individual entity
+  $permissions = array(
+    'administer s4_opportunity types' => array(
+      'title' => t('Administer s4_opportunity types'),
+      'description' => t('Create and delete fields for s4_opportunity types, and set their permissions.'),
+    ),
+    'administer s4_opportunitys' => array(
+      'title' => t('Administer s4_opportunitys'),
+      'description' => t('Edit and delete all s4_opportunitys'),
+    ),  
+  );
+  
+  //Generate permissions per s4_opportunity 
+  foreach (s4_opportunity_get_types() as $type) {
+    $type_name = check_plain($type->type);
+    $permissions += array(
+      "edit any $type_name s4_opportunity" => array(
+        'title' => t('%type_name: Edit any s4_opportunity', array('%type_name' => $type->label)),
+      ),
+      "view any $type_name s4_opportunity" => array(
+        'title' => t('%type_name: View any s4_opportunity', array('%type_name' => $type->label)),
+      ),
+    );
+  }
+  return $permissions;  
+}
+
+
+/**
+ * Determines whether the given user has access to a s4_opportunity.
+ *
+ * @param $op
+ *   The operation being performed. One of 'view', 'update', 'create', 'delete'
+ *   or just 'edit' (being the same as 'create' or 'update').
+ * @param $s4_opportunity
+ *   Optionally a s4_opportunity or a s4_opportunity type to check access for. If nothing is
+ *   given, access for all s4_opportunitys is determined.
+ * @param $account
+ *   The user to check for. Leave it to NULL to check for the global user.
+ * @return boolean
+ *   Whether access is allowed or not.
+ */
+function s4_opportunity_access($op, $s4_opportunity = NULL, $account = NULL) {
+  if (user_access('administer s4_opportunitys', $account)) {
+    return TRUE;
+  }
+  if (isset($s4_opportunity) && $type_name = $s4_opportunity->type) {
+    $op = ($op == 'view') ? 'view' : 'edit';
+    if (user_access("$op any $type_name s4_opportunity", $account)) {
+      return TRUE;
+    }
+  }
+  return FALSE;
+}
+
+
+/**
+ * Access callback for the entity API.
+ */
+function s4_opportunity_type_access($op, $type = NULL, $account = NULL) {
+  return user_access('administer s4_opportunity types', $account);
+}
+
+
+/**
+ * Gets an array of all s4_opportunity types, keyed by the type name.
+ *
+ * @param $type_name
+ *   If set, the type with the given name is returned.
+ * @return s4_opportunityType[]
+ *   Depending whether $type isset, an array of s4_opportunity types or a single one.
+ */
+function s4_opportunity_get_types($type_name = NULL) {
+  // entity_load will get the Entity controller for our s4_opportunity entity and call the load
+  // function of that object - we are loading entities by name here.
+  $types = entity_load_multiple_by_name('s4_opportunity_type', isset($type_name) ? array($type_name) : FALSE);
+  return isset($type_name) ? reset($types) : $types;
+}
+
+
+/**
+ * Menu argument loader; Load a s4_opportunity type by string.
+ *
+ * @param $type
+ *   The machine-readable name of a s4_opportunity type to load.
+ * @return
+ *   A s4_opportunity type array or FALSE if $type does not exist.
+ */
+function s4_opportunity_type_load($type) {
+  return s4_opportunity_get_types($type);
+}
+
+
+/**
+ * Fetch a s4_opportunity object. Make sure that the wildcard you choose 
+ * in the s4_opportunity entity definition fits the function name here.
+ *
+ * @param $s4_opportunity_id
+ *   Integer specifying the s4_opportunity id.
+ * @param $reset
+ *   A boolean indicating that the internal cache should be reset.
+ * @return
+ *   A fully-loaded $s4_opportunity object or FALSE if it cannot be loaded.
+ *
+ * @see s4_opportunity_load_multiple()
+ */
+function s4_opportunity_load($s4_opportunity_id, $reset = FALSE) {
+  $s4_opportunitys = s4_opportunity_load_multiple(array($s4_opportunity_id), array(), $reset);
+  return reset($s4_opportunitys);
+}
+
+
+/**
+ * Load multiple s4_opportunitys based on certain conditions.
+ *
+ * @param $s4_opportunity_ids
+ *   An array of s4_opportunity IDs.
+ * @param $conditions
+ *   An array of conditions to match against the {s4_opportunity} table.
+ * @param $reset
+ *   A boolean indicating that the internal cache should be reset.
+ * @return
+ *   An array of s4_opportunity objects, indexed by s4_opportunity_id.
+ *
+ * @see entity_load()
+ * @see s4_opportunity_load()
+ */
+function s4_opportunity_load_multiple($s4_opportunity_ids = array(), $conditions = array(), $reset = FALSE) {
+  return entity_load('s4_opportunity', $s4_opportunity_ids, $conditions, $reset);
+}
+
+
+/**
+ * Deletes a s4_opportunity.
+ */
+function s4_opportunity_delete(s4_opportunity $s4_opportunity) {
+  $s4_opportunity->delete();
+}
+
+
+/**
+ * Delete multiple s4_opportunitys.
+ *
+ * @param $s4_opportunity_ids
+ *   An array of s4_opportunity IDs.
+ */
+function s4_opportunity_delete_multiple(array $s4_opportunity_ids) {
+  entity_get_controller('s4_opportunity')->delete($s4_opportunity_ids);
+}
+
+
+/**
+ * Create a s4_opportunity object.
+ */
+function s4_opportunity_create($values = array()) {
+  return entity_get_controller('s4_opportunity')->create($values);
+}
+
+
+/**
+ * Saves a s4_opportunity to the database.
+ *
+ * @param $s4_opportunity
+ *   The s4_opportunity object.
+ */
+function s4_opportunity_save(s4_opportunity $s4_opportunity) {
+  return $s4_opportunity->save();
+}
+
+
+/**
+ * Saves a s4_opportunity type to the db.
+ */
+function s4_opportunity_type_save(s4_opportunityType $type) {
+  $type->save();
+}
+
+
+/**
+ * Deletes a s4_opportunity type from the db.
+ */
+function s4_opportunity_type_delete(s4_opportunityType $type) {
+  $type->delete();
+}
+
+
+/**
+ * URI callback for s4_opportunitys
+ */
+function s4_opportunity_uri(s4_opportunity $s4_opportunity){
+  return array(
+    'path' => 's4_opportunity/' . $s4_opportunity->s4_opportunity_id,
+  );
+}
+
+
+/**
+ * Menu title callback for showing individual entities
+ */
+function s4_opportunity_page_title(s4_opportunity $s4_opportunity){
+  return $s4_opportunity->name;
+}
+
+
+/**
+ * Sets up content to show an individual s4_opportunity
+ * @todo - get rid of drupal_set_title();
+ */
+function s4_opportunity_page_view($s4_opportunity, $view_mode = 'full') {    
+  $controller = entity_get_controller('s4_opportunity');  
+  $content = $controller->view(array($s4_opportunity->s4_opportunity_id => $s4_opportunity));
+  drupal_set_title($s4_opportunity->name);
+  return $content;
+}
+
+
+/**
+ * Implements hook_views_api().
+ */
+function s4_opportunity_views_api() {
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 's4_opportunity') . '/views',
+  );
+}
+
+
+/**
+ * Implement hook_theme().
+ */
+function s4_opportunity_theme() {
+  return array(
+    's4_opportunity_add_list' => array(
+      'variables' => array('content' => array()),
+      'file' => 's4_opportunity.admin.inc',
+    ),
+    's4_opportunity' => array(
+      'render element' => 'elements',
+      'template' => 's4_opportunity',
+    ),
+   's4_opportunity_sample_data' => array(
+      'variables' => array('s4_opportunity_sample_data', 's4_opportunity' => NULL),
+      'template' => 's4_opportunity-sample-data',
+    ),
+
+
+  );
+}  
+
+
+/**
+ * Implements hook_menu_local_tasks_alter().
+ */
+function s4_opportunity_menu_local_tasks_alter(&$data, $router_item, $root_path) {
+  // Add action link 'admin/structure/s4_opportunitys/add' on 'admin/structure/s4_opportunitys'.
+  if ($root_path == 'admin/content/s4_opportunitys') {
+    $item = menu_get_item('admin/content/s4_opportunitys/add');
+    if ($item['access']) {
+      $data['actions']['output'][] = array(
+        '#theme' => 'menu_local_action',
+        '#link' => $item,
+      );
+    }
+  }
+}
+
+
+/**
+ * The class used for s4_opportunity entities
+ */
+class s4_opportunity extends Entity {
+  
+  public function __construct($values = array()) {
+    parent::__construct($values, 's4_opportunity');
+  }
+
+  protected function defaultLabel() {
+    return $this->name;
+  }
+
+  protected function defaultUri() {
+    return array('path' => 's4_opportunity/' . $this->s4_opportunity_id);
+  }
+  
+  
+}
+
+
+/**
+ * The class used for s4_opportunity type entities
+ */
+class s4_opportunityType extends Entity {
+  
+  public $type;
+  public $label;
+  
+  public function __construct($values = array()) {
+    parent::__construct($values, 's4_opportunity_type');
+  }
+  
+}
+
+
+/**
+ * The Controller for s4_opportunity entities
+ */
+class s4OpportunityController extends EntityAPIController {
+  public function __construct($entityType) {
+    parent::__construct($entityType);
+  }
+
+
+  /**
+   * Create a s4_opportunity - we first set up the values that are specific
+   * to our s4_opportunity schema but then also go through the EntityAPIController
+   * function.
+   * 
+   * @param $type
+   *   The machine-readable type of the s4_opportunity.
+   *
+   * @return
+   *   A s4_opportunity object with all default fields initialized.
+   */
+  public function create(array $values = array()) {
+    // Add values that are specific to our s4_opportunity
+    $values += array( 
+      's4_opportunity_id' => '',
+      'is_new' => TRUE,
+      'title' => '',
+      'created' => '',
+      'changed' => '',
+      'data' => '',
+    );
+    
+    $s4_opportunity = parent::create($values);
+    return $s4_opportunity;
+  }
+  
+  /**
+   * Overriding the buldContent function to add entity specific fields
+   */
+  public function buildContent($entity, $view_mode = 'full', $langcode = NULL, $content = array()) {
+    $content = parent::buildContent($entity, $view_mode, $langcode, $content);
+    $content['s4_opportunity_sample_data'] =  array(
+      '#markup' => theme('s4_opportunity_sample_data', array('s4_opportunity_sample_data' => check_plain($entity->data['sample_data']), 's4_opportunity' => $entity)),
+    );
+
+    return $content;
+  }
+  
+}
+
+
+/**
+ * The Controller for s4_opportunity entities
+ */
+class s4OpportunityTypeController extends EntityAPIControllerExportable {
+  public function __construct($entityType) {
+    parent::__construct($entityType);
+  }
+  
+   /**
+   * Create a s4_opportunity type - we first set up the values that are specific
+   * to our s4_opportunity type schema but then also go through the EntityAPIController
+   * function.
+   * 
+   * @param $type
+   *   The machine-readable type of the s4_opportunity.
+   *
+   * @return
+   *   A s4_opportunity type object with all default fields initialized.
+   */
+  public function create(array $values = array()) {
+    // Add values that are specific to our s4_opportunity
+    $values += array( 
+      'id' => '',
+      'is_new' => TRUE,
+      'data' => '',
+    );
+    $s4_opportunity_type = parent::create($values);
+    return $s4_opportunity_type;
+  }
+
+}
