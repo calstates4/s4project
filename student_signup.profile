@@ -127,7 +127,7 @@ function student_signup_profiler_install_terms($term, $vocabs_by_machine_name, $
     $term['weight'] = !isset($term['weight']) ? $weight++ : $term['weight'];
     //Cast the term as an object, to allow it to be saved properly.
     $term = (object)$term;
-    if($term->education) {
+    if(property_exists($term, 'education') && $term->education) {
       $term->field_educational_organization[LANGUAGE_NONE][0]['value'] = 1;
     }
     taxonomy_term_save($term);
