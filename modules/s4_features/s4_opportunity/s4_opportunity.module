@@ -369,6 +369,147 @@ function s4_opportunity_menu_local_tasks_alter(&$data, $router_item, $root_path)
   }
 }
 
+/**
+ * Add default fields to new opportunity types
+ */
+function s4_opportunity_add_default_fields($type) {
+  $field = field_info_field('field_sites');
+  $instance = field_info_instance('s4_opportunity', 'field_sites', $type->type);
+  if (empty($field)) {
+    $field = array(
+      'entity_types' => array(),
+      'field_name' => 'field_sites',
+      'foreign keys' => array(
+        'nid' => array(
+          'columns' => array(
+            'nid' => 'nid',
+          ),
+          'table' => 'node',
+        ),
+      ),
+      'global_block_settings' => '2',
+      'indexes' => array(
+        'nid' => array(
+          0 => 'nid',
+        ),
+      ),
+      'module' => 'node_reference',
+      'settings' => array(
+        'nodeaccess_nodereference' => array(
+          'all' => array(
+            'view' => 0,
+          ),
+          'author' => array(
+            'delete' => 'delete',
+            'update' => 'update',
+            'view' => 'view',
+          ),
+          'priority' => '0',
+          'referenced' => array(
+            'delete' => array(
+              'delete' => 0,
+              'update' => 0,
+              'view' => 0,
+            ),
+            'update' => array(
+              'delete' => 0,
+              'update' => 0,
+              'view' => 0,
+            ),
+            'view' => array(
+              'delete' => 0,
+              'update' => 0,
+              'view' => 'view',
+            ),
+          ),
+        ),
+        'referenceable_types' => array(
+          'contact_record' => 0,
+          'coordinator' => 0,
+          'course' => 0,
+          'course_term' => 0,
+          'downloadable_form' => 0,
+          'fieldtrip' => 0,
+          'file' => 0,
+          'page' => 0,
+          'signup' => 0,
+          'site' => 'site',
+          'webform' => 0,
+        ),
+        'view' => array(
+          'args' => array(),
+          'display_name' => '',
+          'view_name' => '',
+        ),
+      ),
+      'translatable' => '1',
+      'type' => 'node_reference',
+    );
+    $field = field_create_field($field);
+  }
+  if (empty($instance)) {
+    $instance = array(
+      'bundle' => $type,
+      'default_value' => NULL,
+      'description' => 'The sites related to this opportunity.',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'node_reference',
+          'settings' => array(),
+          'type' => 'node_reference_default',
+          'weight' => '1',
+        ),
+        'full' => array(
+          'label' => 'above',
+          'module' => 'node_reference',
+          'settings' => array(),
+          'type' => 'node_reference_default',
+          'weight' => '1',
+        ),
+        'notifications' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 's4_opportunity',
+      'field_name' => 'field_sites',
+      'label' => 'Sites',
+      'required' => 0,
+      'settings' => array(
+        'custom_add_another' => '',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+		    'weight' => '4',
+		    'type' => 'nodereference_url',
+		    'module' => 'nodereference_url',
+		    'active' => 1,
+		    'settings' => array(
+		      'fallback' => 'page_not_found',
+		      'edit_fallback' => 1,
+		      'node_link' => array(
+		        'teaser' => 0,
+		        'full' => 0,
+		        'title' => '',
+		        'hover_title' => '',
+		        'destination' => 'default',
+		      ),
+		    ),
+		  ),
+    );
+    $instance = field_create_instance($instance);
+  }
+  return $instance;
+}
 
 /**
  * The class used for s4_opportunity entities

@@ -53,10 +53,11 @@ function s4_opportunity_type_form($form, &$form_state, $s4_opportunity_type, $op
   );
 
   $form['data']['#tree'] = TRUE;
-  $form['data']['sample_data'] = array(
+  
+  $form['data']['students_can_place'] = array(
     '#type' => 'checkbox',
-    '#title' => t('An interesting s4_opportunity switch'),
-    '#default_value' => !empty($s4_opportunity_type->data['sample_data']),
+    '#title' => t('Students can be placed with this type of opportunity'),
+    '#default_value' => !empty($s4_opportunity_type->data['students_can_place']),
   );
 
   $form['actions'] = array('#type' => 'actions');
@@ -76,6 +77,7 @@ function s4_opportunity_type_form($form, &$form_state, $s4_opportunity_type, $op
 function s4_opportunity_type_form_submit(&$form, &$form_state) {
   $s4_opportunity_type = entity_ui_form_submit_build_entity($form, $form_state);
   $s4_opportunity_type->save();
+  s4_opportunity_add_default_fields($s4_opportunity_type->type);
   $form_state['redirect'] = 'admin/structure/s4_opportunity_types';
 }
 
