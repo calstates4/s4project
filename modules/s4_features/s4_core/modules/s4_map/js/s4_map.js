@@ -16,7 +16,7 @@
 		if ($('#site-list-map').length) {
 			$(document).scroll(function() {
 				var columnTop = $('#content_middle .column').position();
-				if ($(document).scrollTop() > columnTop.top) {
+				if ($(document).scrollTop() > columnTop.top && $('#content').height() > $(window).height()) {
 					$('.region-content-right').css('position', 'fixed').css('top', 0);
 				}
 				else {
