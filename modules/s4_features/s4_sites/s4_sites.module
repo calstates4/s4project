@@ -1227,6 +1227,12 @@ function s4_sites_s4_site_configuration() {
       'description' => t('Manage the list of site organization types.'),
       'href' => 'admin/structure/taxonomy/organization_type',
     ),
+    'category_site_org' => array(
+      'group' => t('Categories'),
+      'title' => t('Languages'),
+      'description' => t('Manage the list of site languages.'),
+      'href' => 'admin/structure/taxonomy/language',
+    ),
     'category_requirements' => array(
       'group' => t('Categories'),
       'title' => t('Site special requirements'),

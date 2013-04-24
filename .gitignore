@@ -6,3 +6,4 @@ themes/contrib/*
 themes/student_signup/*
 themes/s4_bootstrap/*
 *.sublime*
+*.DS_Store
