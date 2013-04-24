@@ -1,9 +1,10 @@
 .s4-2col .group-left {
   float: left;
-  width: 75%;
+  width: 70%;
 }
 
 .s4-2col .group-right {
   float: left;
   width: 25%;
+  margin-left: 15px;
 }
