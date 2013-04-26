@@ -5,6 +5,10 @@ core = 7.x
 
 dependencies[] = entity
 dependencies[] = views
+dependencies[] = "entityreference"
+dependencies[] = "features"
+
+features[field][] = "node-signup-field_opportunity"
 
 files[] = s4_opportunity.admin.inc
 files[] = s4_opportunity_type.admin.inc

@@ -47,6 +47,9 @@ projects[email][version] = "1.2"
 projects[entity][subdir] = "contrib"
 projects[entity][version] = "1.0"
 
+projects[entityreference][subdir] = "contrib"
+projects[entityreference][version] = "1.0"
+
 projects[fancybox][subdir] = "contrib"
 projects[fancybox][version] = "1.x-dev"
 
