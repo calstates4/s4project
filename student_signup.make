@@ -156,7 +156,7 @@ projects[token][subdir] = "contrib"
 projects[token][version] = "1.5"
 
 projects[uuid][subdir] = "contrib"
-projects[uuid][version] = "1.0-alpha3"
+projects[uuid][version] = "1.0-alpha4"
 
 projects[view_unpublished][subdir] = "contrib"
 projects[view_unpublished][version] = "1.0"
