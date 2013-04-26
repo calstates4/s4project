@@ -319,8 +319,7 @@ function s4_core_menu() {
     'title' => 'Edit signup',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('s4_core_create_signup_form', 2, 3, 4),
-    'access callback' => 's4_core_signup_edit_access',
-    'access arguments' => array(4),
+    'access arguments' => array('create signups for other users'),
     'file' => 's4_core.pages.inc',
   );
 
@@ -368,13 +367,6 @@ function s4_core_menu() {
   );
 
   return $items;
-}
-
-function s4_core_signup_edit_access($node) {
-	if(user_access('create signups for other users')) {
-		return true;
-	}
-	return node_access('update', $node);
 }
 
 function s4_core_signup_delete_access($node) {

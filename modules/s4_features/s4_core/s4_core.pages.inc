@@ -278,8 +278,7 @@ function s4_core_create_signup_form($form, &$form_state, $uid, $option = 'new', 
        ->fields('n', array('nid', 'title'))
        ->condition('type', 'site')
        ->orderBy('title', 'ASC');
-       
-  if($default_program && count($default_program)) {
+  if(count($default_program)) {
   	$programs = array();
   	foreach($default_program as $program) {
   		$programs[] = $program['tid'];
