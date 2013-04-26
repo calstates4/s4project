@@ -1,4 +1,15 @@
 <?php
+/**
+ * @file
+ * s4_map.features.inc
+ */
 
-// This file is deprecated and can be removed.
-// Please remove include_once('s4_map.features.inc') in s4_map.module as well.
+/**
+ * Implements hook_views_api().
+ */
+function s4_map_views_api() {
+  list($module, $api) = func_get_args();
+  if ($module == "views") {
+    return array("version" => "3.0");
+  }
+}

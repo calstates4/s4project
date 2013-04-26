@@ -1,4 +1,15 @@
 <?php
+/**
+ * @file
+ * s4_editor.features.inc
+ */
 
-// This file is deprecated and can be removed.
-// Please remove include_once('s4_editor.features.inc') in s4_editor.module as well.
+/**
+ * Implements hook_ctools_plugin_api().
+ */
+function s4_editor_ctools_plugin_api() {
+  list($module, $api) = func_get_args();
+  if ($module == "strongarm") {
+    return array("version" => "1");
+  }
+}

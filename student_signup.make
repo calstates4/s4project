@@ -51,7 +51,7 @@ projects[fancybox][subdir] = "contrib"
 projects[fancybox][version] = "1.x-dev"
 
 projects[features][subdir] = "contrib"
-projects[features][version] = "2.0-beta2"
+projects[features][version] = "1.0-beta4"
 
 projects[feeds][subdir] = "contrib"
 projects[feeds][version] = "2.x-dev"
