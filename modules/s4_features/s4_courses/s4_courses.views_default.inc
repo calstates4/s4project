@@ -878,7 +878,7 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
   $handler->display->display_options['header']['area']['empty'] = TRUE;
-  $handler->display->display_options['header']['area']['content'] = '<a class="button" href="node/add/course-term">Add new term</a>';
+  $handler->display->display_options['header']['area']['content'] = '<a class="btn" href="node/add/course-term">Add new term</a>';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
   $handler->display->display_options['path'] = 'terms';
 
@@ -899,8 +899,8 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['footer']['area']['table'] = 'views';
   $handler->display->display_options['footer']['area']['field'] = 'area';
   $handler->display->display_options['footer']['area']['empty'] = TRUE;
-  $handler->display->display_options['footer']['area']['content'] = '<a class="button" href="terms">View all terms</a><br/>
-<a class="button" href="node/add/course-term">Add new term</a>';
+  $handler->display->display_options['footer']['area']['content'] = '<a class="btn" href="terms">View all terms</a><br/>
+<a class="btn" href="node/add/course-term">Add new term</a>';
   $handler->display->display_options['footer']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Title */
@@ -1008,10 +1008,10 @@ function s4_courses_views_default_views() {
     t('End date'),
     t('Page'),
     t('Course terms'),
-    t('<a class="button" href="node/add/course-term">Add new term</a>'),
+    t('<a class="btn" href="node/add/course-term">Add new term</a>'),
     t('Term list'),
-    t('<a class="button" href="terms">View all terms</a><br/>
-<a class="button" href="node/add/course-term">Add new term</a>'),
+    t('<a class="btn" href="terms">View all terms</a><br/>
+<a class="btn" href="node/add/course-term">Add new term</a>'),
     t('Student Term list'),
   );
   $export['terms'] = $view;

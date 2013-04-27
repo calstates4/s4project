@@ -454,7 +454,7 @@ function s4_sites_block_view($delta) {
   switch ($delta) {
     case 's4_sites_search_help':
       return array('subject' => '',
-             'content' => t('<p>Use this search form to find a site that meets your specific needs. Clicking on the <strong>Map link</strong> will show the location of that site on the map to the right.</p>'));
+             'content' => t('<p class="lead">Use this search form to find a site that meets your specific needs. Clicking on the <strong>Map link</strong> will show the location of that site on the map to the right.</p>'));
       break;
     case 's4_sites_site_send_form':
       return array('subject' => 'Attach a form',

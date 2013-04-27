@@ -739,7 +739,7 @@ Location',
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
   $handler->display->display_options['header']['area']['empty'] = TRUE;
-  $handler->display->display_options['header']['area']['content'] = '<a class="button" href="../node/add/site"><span class="add"></span> Add new site</a> <a class="button" href="../site-list">View public list</a>';
+  $handler->display->display_options['header']['area']['content'] = '<a class="btn btn-success" href="../node/add/site"><i class="icon-plus icon-white"></i> Add new site</a> <a class="btn" href="../site-list">View public list</a>';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
@@ -985,7 +985,7 @@ Location',
     t('‹ previous'),
     t('next ›'),
     t('last »'),
-    t('<a class="button" href="../node/add/site"><span class="add"></span> Add new site</a> <a class="button" href="../site-list">View public list</a>'),
+    t('<a class="btn" href="../node/add/site"><i class="icon-plus icon-white"></i>  Add new site</a> <a class="btn" href="../site-list">View public list</a>'),
     t('Title'),
     t('Programs'),
     t('Active'),

@@ -258,11 +258,11 @@ function s4_courses_block_view($delta) {
                    'content' => check_markup($message['value'], $message['format']));
     case 's4_courses_add_course':
       if (user_access('create course content')) {
-        return array('content' => l(t('<span class="add"></span>Add new course'),
+        return array('content' => l(t('<i class="icon-plus icon-white"></i> Add new course'),
                   'node/add/course',
                   array('html' => TRUE,
                        'attributes' =>
-                      array('class' => 'button add')
+                      array('class' => 'btn btn-success')
                   )
                   )
           );

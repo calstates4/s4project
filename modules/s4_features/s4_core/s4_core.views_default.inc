@@ -1039,7 +1039,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['header']['area']['field'] = 'area';
   $handler->display->display_options['header']['area']['empty'] = TRUE;
   $handler->display->display_options['header']['area']['content'] = '<h2>Online Forms</h2>
-<p><a class="button" href="node/add/webform"><span class="add"></span>Add online form</a> <a class="button" href="forms/public">View public form page</a></p>
+<p><a class="btn" href="node/add/webform"><i class="icon-plus icon-white"></i> Add online form</a> <a class="btn" href="forms/public">View public form page</a></p>
 <p><strong>Online forms</strong> resemble paper or database forms and allow users to input new information while also allowing “staff” to query and display existing data in order to run reports. The collected data in the online forms can be downloaded and merged with other data for research purposes. These reports will “tie-back” to the Report tab in S4. </p>
 ';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
@@ -1128,7 +1128,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['header']['area']['field'] = 'area';
   $handler->display->display_options['header']['area']['empty'] = TRUE;
   $handler->display->display_options['header']['area']['content'] = '<h2>Downloadable Forms</h2>
-<p><a class="button" href="node/add/downloadable-form"><span class="add"></span>Add downloadable form</a></p>
+<p><a class="btn" href="node/add/downloadable-form"><i class="icon-plus icon-white"></i> Add downloadable form</a></p>
 <p><strong>Downloadable Forms</strong> are your traditional electronic/paper forms.  This section will allow you to download any electronic template forms you have created to support your program and for which you need/want a hard file copy.   Staff would be responsible for inputting the information gathered into a database or excel file and cannot be stored in S4.<p>';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['empty'] = FALSE;
@@ -1367,7 +1367,7 @@ function s4_core_views_default_views() {
     t('next ›'),
     t('last »'),
     t('<h2>Online Forms</h2>
-<p><a class="button" href="node/add/webform"><span class="add"></span>Add online form</a> <a class="button" href="forms/public">View public form page</a></p>
+<p><a class="btn" href="node/add/webform"><i class="icon-plus icon-white"></i> Add online form</a> <a class="btn" href="forms/public">View public form page</a></p>
 <p><strong>Online forms</strong> resemble paper or database forms and allow users to input new information while also allowing “staff” to query and display existing data in order to run reports. The collected data in the online forms can be downloaded and merged with other data for research purposes. These reports will “tie-back” to the Report tab in S4. </p>
 '),
     t('No online forms created yet.'),
@@ -1376,7 +1376,7 @@ function s4_core_views_default_views() {
     t('Page'),
     t('Downloadable forms'),
     t('<h2>Downloadable Forms</h2>
-<p><a class="button" href="node/add/downloadable-form"><span class="add"></span>Add downloadable form</a></p>
+<p><a class="btn" href="node/add/downloadable-form"><i class="icon-plus icon-white"></i> Add downloadable form</a></p>
 <p><strong>Downloadable Forms</strong> are your traditional electronic/paper forms.  This section will allow you to download any electronic template forms you have created to support your program and for which you need/want a hard file copy.   Staff would be responsible for inputting the information gathered into a database or excel file and cannot be stored in S4.<p>'),
     t('No downloadable forms created yet.'),
     t('Public forms'),

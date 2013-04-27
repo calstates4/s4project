@@ -122,10 +122,10 @@ function s4_pages_add_contact_record() {
   $node = node_load(arg(1));
   return array('subject' => NULL,
          'content' => '<div class="spacer-30">' .
-                 l('<span class="add"></span>Add new note', 
+                 l('<i class="icon-plus icon-white"></i> Add new note', 
                  'node/add/contact-record/' . $node->nid,
                  array('html' => TRUE,
-                     'attributes' => array('class' => 'button add'),
+                     'attributes' => array('class' => 'btn btn-success'),
                      'query' => array('destination' => 
                        'node/' . $node->nid . '/notes')))
                   . '</div>');
@@ -138,10 +138,10 @@ function s4_pages_add_site_file() {
   $node = node_load(arg(1));
   return array('subject' => NULL,
          'content' => '<div class="spacer-30">' .
-                 l('<span class="add"></span>Add new form', 
+                 l('<i class="icon-plus icon-white"></i> Add new form', 
                  'node/add/file/' . $node->nid,
                  array('html' => TRUE,
-                     'attributes' => array('class' => 'button add'),
+                     'attributes' => array('class' => 'btn btn-success'),
                      'query' => array('destination' => 
                        'node/' . $node->nid . '/forms')))
                   . '</div>');

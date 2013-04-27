@@ -263,18 +263,18 @@ function s4_core_block_s4_page_notifications() {
 function s4_core_block_s4_add_new_site() {
   global $user;
   if (user_access('moderate site information') && !s4_core_user_can_signup($user)) {
-    $add_link = l(t('<span class="add"></span>Add new site'),
+    $add_link = l(t('<i class="icon-plus icon-white"></i> Add new site'),
                 'node/add/site',
                 array('html' => TRUE,
                      'attributes' =>
-                    array('class' => 'button add')
+                    array('class' => 'btn btn-success')
                 )
                 );
     $manage_link = l(t('Manage sites'),
                 'site-list/manage',
                 array('html' => TRUE,
                      'attributes' =>
-                    array('class' => 'button add')
+                    array('class' => 'btn btn-success')
                 )
                 );
     return array('content' => $add_link . ' ' . $manage_link);
@@ -288,12 +288,12 @@ function s4_core_block_s4_add_new_site() {
 function s4_core_block_s4_add_new_coordinator() {
   if (user_access('create site content')) {
     $node = node_load(check_plain(arg(1)));
-    return array('content' => l(t('<span class="add"></span>Add new site staff'),
+    return array('content' => l(t('<i class="icon-plus icon-white"></i> Add new site staff'),
                   'node/add/coordinator/' . $node->nid,
                   array('html' => TRUE,
                       'query' => array('destination' => 'node/' . $node->nid . '/site-staff'),
                        'attributes' =>
-                      array('class' => 'button add')
+                      array('class' => 'btn btn-success')
                   )
                   )
           );

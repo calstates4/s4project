@@ -7,13 +7,16 @@ class views_handler_s4_user_program_select extends views_handler_field {
       return;
     }
     if (isset($_SESSION['s4_signup_program']) && $_SESSION['s4_signup_program'] == $values->taxonomy_term_data_field_data_field_site_restrict_tid) {
-      return '<div class="signup signed-up"><div class="icon"></div>Program selected</div>';
+      return '<a class="btn btn-info disabled"><i class="icon-check icon-white"></i> Program selected</a>';
     }
     global $user;
-    return '<div class="signup"><div class="icon"></div>' .
-      l(t('Select this program'), 's4/signup/program/' . $values->taxonomy_term_data_field_data_field_site_restrict_tid,
-        array('attributes' => array('data-target' => 'signup-program')))
-      . '</div>';
+    return 
+      l('<i class="icon-check icon-white"></i> ' . t('Select this program'), 
+      	's4/signup/program/' . $values->taxonomy_term_data_field_data_field_site_restrict_tid,
+        array('html' => TRUE,
+        			'attributes' => array(
+        				'class' => array('btn', 'btn-success'),
+	        			'data-target' => 'signup-program')));
   }
 
   function query() {
