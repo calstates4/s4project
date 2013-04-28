@@ -79,7 +79,7 @@ function s4_pager($variables) {
       if ($i > 1) {
         $items[] = array(
           'class' => array('pager-ellipsis'), 
-          'data' => '…',
+          'data' => '<a>&hellip;</a>',
         );
       }
       // Now generate the actual pager piece.
@@ -106,7 +106,7 @@ function s4_pager($variables) {
       if ($i < $pager_max) {
         $items[] = array(
           'class' => array('pager-ellipsis'), 
-          'data' => '…',
+          'data' => '<a>&hellip;</a>',
         );
       }
     }

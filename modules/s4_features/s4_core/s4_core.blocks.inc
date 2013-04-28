@@ -413,9 +413,9 @@ function s4_core_block_s4_signup_error() {
 function s4_core_block_s4_welcome_message() {
   $message = variable_get('s4_core_welcome_message', array('value' => FALSE));
   if (!$message['value']) {
-    $message['value'] = '<p class="intro">This where you can give users more information about your program. Let us know in a few sentences what you do, and what the community gets from your program.</p><p>Select <strong>Site Settings</strong> then <strong> General settings</strong> to change this message.</p>';
+    $message['value'] = '<p class="lead">This where you can give users more information about your program. Let us know in a few sentences what you do, and what the community gets from your program.</p><p>Select <strong>Site Settings</strong> then <strong> General settings</strong> to change this message.</p>';
   }
-  return array('content' => $message['value']);
+  return array('content' => '<div class="hero-unit">' . $message['value'] . '</div>');
 }
 
 /**

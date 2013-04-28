@@ -48,6 +48,33 @@
 @navigation-bottom  : #ca433c;
 
 
+/** FORMS **/
+
+fieldset {
+	
+	legend {
+		font-size: 14px;
+		line-height: normal;
+	}
+}
+
+html.js fieldset.collapsed {
+	margin-bottom: 15px;
+}
+
+.form-actions .btn {
+	margin: 15px 15px 0 0
+}
+
+.radio, .checkbox {
+	padding-left: 0;
+}
+
+.radio input[type="radio"], .checkbox input[type="checkbox"] {
+	margin: 0 8px 0 0;
+}
+
+/** SECTIONS **/
 #branding, #navigation {
 	border-bottom: 1px solid black;
 }
@@ -69,11 +96,17 @@
 	}
 }
 
+
+
 #search {
 	
 	.block {
 		float: right;
-		margin: 0;
+		margin: 12px 0 0 0;
+	}
+	
+	.block.block-views {
+		margin-top: 0;
 	}
 	
 	a {
@@ -308,4 +341,14 @@ body .vertical-tabs .form-type-textfield input {
 	address {
 		margin:0;
 	}
+}
+
+.hero-unit {
+	padding: 20px;
+	color: #fff;
+}
+
+#page .breadcrumb {
+	background: none;
+	padding-left: 0;
 }

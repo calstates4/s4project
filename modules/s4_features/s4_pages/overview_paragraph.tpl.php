@@ -1,4 +1,4 @@
-<p class="overview">
+<p class="lead overview">
 <?php print $paragraph; ?>
 </p>
 <?php if($registration): ?>

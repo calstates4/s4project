@@ -82,7 +82,7 @@
 		<?php if($page['content_top_left'] || $page['content_top_right']): ?>
 			<div id="content_top" class="row">
 				<?php if($page['content_top_left']): ?>
-					<div class="span6">
+					<div <?php if($page['content_top_right']): ?>class="span6"<?php else: ?>class="span12"<?php endif; ?>>
 						<?php print render($page['content_top_left']); ?>
 					</div>
 				<?php endif; ?>

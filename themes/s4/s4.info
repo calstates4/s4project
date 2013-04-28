@@ -5,7 +5,7 @@ core=7.x
 
 
 stylesheets[all][] = bootstrap/css/bootstrap.css
-stylesheets[all][] = bootstrap/css/bootstrap.responsive.css
+stylesheets[all][] = bootstrap/css/bootstrap-responsive.css
 stylesheets[all][] = css/style.css
 stylesheets[all][] = css/colors.css
 stylesheets[print][] = css/print.css
@@ -16,20 +16,16 @@ scripts[] = js/placeholder.js
 ;stylesheets[all][] = system.menus.css
 
 
-regions[search] 			= Search
-regions[site_navigation]	= Site Navigation
+regions[search] 							 = Search
+regions[site_navigation]			 = Site Navigation
 
-regions[help]				= Help
+regions[help]									 = Help
 regions[content_subscriptions] = Content subscriptions
-regions[content_top_wide]	= Content Top Wide
-regions[content_top_left] 	= Content Top Left
-regions[content_top_right]  = Content Top Right
-regions[content] 			= Content
-regions[content_right] 		= Content Right
-regions[content_bottom] 	= Content Bottom
-
-regions[footer_map]			= Footer Map
-regions[footer_left]		= Footer Left
-regions[footer_middle]		= Footer Middle
-regions[footer_right]		= Footer Right
-regions[footer_bottom]		= Footer Bottom
+regions[content_top_wide]			 = Content Top Wide
+regions[content_top_left] 		 = Content Top Left
+regions[content_top_right]  	 = Content Top Right
+regions[content] 							 = Content
+regions[content_right] 				 = Content Right
+regions[content_bottom] 			 = Content Bottom
+															 
+regions[footer]       				 = Footer

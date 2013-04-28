@@ -14,4 +14,8 @@
   background-image: linear-gradient(top, #e26140, #ca433c);
 }
 
+.hero-unit {
+	background: #6aa4c2;
+}
+
 #footer a, #tools a, #tools h2 { color: #fff; }
