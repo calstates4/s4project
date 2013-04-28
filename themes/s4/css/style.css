@@ -8,6 +8,11 @@
     padding: 0 15px;
   }
 }
+@media (min-width: 1200px) {
+  .container {
+    padding: 0 15px;
+  }
+}
 /** FORMS **/
 fieldset legend {
   font-size: 14px;
@@ -227,6 +232,13 @@ body .vertical-tabs .form-type-textfield input {
   display: block;
 }
 .site-listing address {
+  margin: 0;
+}
+#user-progress {
+  background: #ffffff;
+  padding: 5px 0 2px 0;
+}
+#user-progress .block {
   margin: 0;
 }
 .hero-unit {
