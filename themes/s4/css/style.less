@@ -48,6 +48,17 @@
 @navigation-bottom  : #ca433c;
 
 
+/** LAYOUT CHANGES **/
+@media (max-width: 767px) {
+	body {
+		padding: 0;
+	}
+	
+	#page {
+		padding: 0 15px;
+	}
+}
+
 /** FORMS **/
 
 fieldset {
@@ -130,7 +141,7 @@ html.js fieldset.collapsed {
 	
 	h1 {
 		padding-bottom: 9px;
-		margin: 20px 0 30px;
+		margin: 15px 0 20px;
 		border-bottom: 1px solid #eeeeee;
 	}
 }
@@ -351,4 +362,5 @@ body .vertical-tabs .form-type-textfield input {
 #page .breadcrumb {
 	background: none;
 	padding-left: 0;
+	margin-bottom: 10px;
 }
