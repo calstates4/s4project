@@ -36,7 +36,8 @@ function s4_reporting_block_site_summary() {
                    l($count, 'site-list/manage/', array('query' => array('state' => 0)))
                    );
 	return array('subject' => t('Site overview'),
-				 'content' => theme('table', array('header' => $header, 'rows' => $items)));
+				 'content' => theme('table', array('header' => $header, 'rows' => $items,
+				 									  'attributes' => array('class' => array('table-bordered')))));
 }
 
 function s4_reporting_block_course_summary() {

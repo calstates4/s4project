@@ -1129,6 +1129,7 @@ function _s4_sites_format_hours_matrix($entity_type, $entity, $field, $instance,
     '#theme' => 'table',
     '#header' => $headers,
     '#rows' => $rows,
+    '#attributes' => array('class' => array('hidden-phone')),
     '#caption' => 'Available times are <span class="hours-sample">marked in dark blue</span>.',
   );
   if (!$hour_count) {
