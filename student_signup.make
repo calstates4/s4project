@@ -162,7 +162,7 @@ projects[view_unpublished][subdir] = "contrib"
 projects[view_unpublished][version] = "1.0"
 
 projects[views][subdir] = "contrib"
-projects[views][version] = "3.x-dev"
+projects[views][version] = "3.7"
 
 projects[views_bulk_operations][subdir] = "contrib"
 projects[views_bulk_operations][version] = "3.1"
@@ -247,3 +247,4 @@ projects[cck_phone][] = "http://drupal.org/files/cck_phone_feeds_1160186_7.patch
 projects[fancybox][patch][] = "http://drupal.org/files/fancybox_library_sub_folder-1378104-1.patch"
 projects[workbench_moderation][patch][] = "http://drupal.org/files/workbench_moderation_feeds-1470528-1.patch"
 projects[views_data_export][patch][] = "http://drupal.org/files/views_data_export_exposed_input_0.patch"
+projects[views][] = "http://drupal.org/files/views-taxonomy_multiple_term_names-1248300-36.patch"
