@@ -119,30 +119,10 @@
 </div>
 <?php endif; ?>
 
-<?php if($page['footer_left'] || $page['footer_middle'] || $page['footer_right'] || $page['footer_bottom']): ?>
-	<div id="footer">
-		<div class="container">
-			<?php if($page['footer_left']): ?>
-				<div class="triptych">
-					<?php print render($page['footer_left']); ?>
-				</div>
-			<?php endif; ?>
-			<?php if($page['footer_middle']): ?>
-				<div class="triptych margin">
-					<?php print render($page['footer_middle']); ?>
-				</div>
-			<?php endif; ?>
-			<?php if($page['footer_right']): ?>
-				<div class="triptych margin">
-					<?php print render($page['footer_right']); ?>
-				</div>
-			<?php endif; ?>
-			<div class="clear"></div>
-			<?php if($page['footer_bottom']): ?>
-				<?php print render($page['footer_bottom']); ?>
-			<?php endif; ?>
-			<div class="clear">
-			</div>
+<?php if($page['footer']): ?>
+	<div id="footer" class="row">
+		<div class="span12">
+			<?php print render($page['footer']); ?>
 		</div>
 	</div>
 <?php endif; ?>
