@@ -24,6 +24,7 @@ function s4_courses_views_default_views() {
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Course students';
   $handler->display->display_options['css_class'] = 'quicksearch';
+  $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'user_faculty';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -170,56 +171,59 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'users';
   $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['relationship'] = 'field_course_students_uid';
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['entity_load_capacity'] = '10';
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['operations'] = array(
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['display_type'] = '1';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['enable_select_all_pages'] = 1;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['force_single'] = 0;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['entity_load_capacity'] = '10';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_operations'] = array(
     'action::system_block_ip_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::user_block_user_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::views_bulk_operations_delete_item' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::system_message_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::views_bulk_operations_script_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::flag_user_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::views_bulk_operations_user_roles_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::views_bulk_operations_argument_selector_action' => array(
       'selected' => 0,
@@ -232,44 +236,40 @@ function s4_courses_views_default_views() {
     ),
     'action::system_goto_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::system_send_email_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::s4_core_email_site_coordinator_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::s4_core_email_user_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::s4_courses_bulk_signup_students_action' => array(
       'selected' => 1,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 1,
       'label' => 'Signup student',
+      'postpone_processing' => 0,
     ),
   );
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['enable_select_all_pages'] = 1;
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['display_type'] = '1';
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['display_result'] = 1;
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['force_single'] = 0;
   /* Field: User: Uid */
   $handler->display->display_options['fields']['uid']['id'] = 'uid';
   $handler->display->display_options['fields']['uid']['table'] = 'users';
@@ -297,20 +297,17 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['fields']['login']['field'] = 'login';
   $handler->display->display_options['fields']['login']['relationship'] = 'field_course_students_uid';
   $handler->display->display_options['fields']['login']['date_format'] = 'long';
-  /* Field: User Signup: List all placements for a user */
-  $handler->display->display_options['fields']['student_signup_list']['id'] = 'student_signup_list';
-  $handler->display->display_options['fields']['student_signup_list']['table'] = 's4_user_signup';
-  $handler->display->display_options['fields']['student_signup_list']['field'] = 'student_signup_list';
-  $handler->display->display_options['fields']['student_signup_list']['relationship'] = 'field_course_students_uid';
-  $handler->display->display_options['fields']['student_signup_list']['label'] = 'Placements';
-  $handler->display->display_options['fields']['student_signup_list']['course'] = 1;
-  $handler->display->display_options['fields']['student_signup_list']['only_current'] = 0;
   /* Field: Assessment: Assessment link */
   $handler->display->display_options['fields']['assessment_link']['id'] = 'assessment_link';
   $handler->display->display_options['fields']['assessment_link']['table'] = 's4_assessment';
   $handler->display->display_options['fields']['assessment_link']['field'] = 'assessment_link';
   $handler->display->display_options['fields']['assessment_link']['label'] = 'Assessment';
   $handler->display->display_options['fields']['assessment_link']['hide_alter_empty'] = FALSE;
+  /* Field: Signup: Student placements in a course */
+  $handler->display->display_options['fields']['student_signup_node']['id'] = 'student_signup_node';
+  $handler->display->display_options['fields']['student_signup_node']['table'] = 's4_signup';
+  $handler->display->display_options['fields']['student_signup_node']['field'] = 'student_signup_node';
+  $handler->display->display_options['fields']['student_signup_node']['label'] = 'Placements';
 
   /* Display: All faculty students */
   $handler = $view->new_display('block', 'All faculty students', 'block_1');
@@ -592,56 +589,59 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['fields']['views_bulk_operations']['relationship'] = 'field_course_students_uid';
   $handler->display->display_options['fields']['views_bulk_operations']['label'] = '';
   $handler->display->display_options['fields']['views_bulk_operations']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['entity_load_capacity'] = '10';
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['operations'] = array(
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['display_type'] = '1';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['enable_select_all_pages'] = 1;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['force_single'] = 0;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['entity_load_capacity'] = '10';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_operations'] = array(
     'action::system_block_ip_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::user_block_user_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::views_bulk_operations_delete_item' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::system_message_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::views_bulk_operations_script_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::flag_user_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::views_bulk_operations_user_roles_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::views_bulk_operations_argument_selector_action' => array(
       'selected' => 0,
@@ -654,44 +654,40 @@ function s4_courses_views_default_views() {
     ),
     'action::system_goto_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::system_send_email_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::s4_core_email_site_coordinator_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::s4_core_email_user_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::s4_courses_bulk_signup_students_action' => array(
       'selected' => 1,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 1,
       'label' => 'Signup students',
+      'postpone_processing' => 0,
     ),
   );
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['enable_select_all_pages'] = 1;
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['display_type'] = '1';
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['display_result'] = 1;
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['force_single'] = 0;
   /* Field: Field: First Name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
@@ -761,17 +757,14 @@ function s4_courses_views_default_views() {
     t('last »'),
     t('Course'),
     t('[field_course_subject-value] [field_course_catalog_number] ([field_course_section])'),
-    t('node/[nid]'),
     t('Evaluation status'),
     t('Complete assessment'),
     t('Course faculty'),
     t('Faculty'),
     t('field_course_faculty'),
     t('[field_first_name] [field_last_name]'),
-    t('user/[uid]'),
     t('Course students (Staff view)'),
     t('Make placement'),
-    t('signup/create/[uid]/!1'),
   );
   $export['course_students'] = $view;
 
@@ -788,6 +781,7 @@ function s4_courses_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Current Terms';
+  $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['access']['perm'] = 'signup for service';
   $handler->display->display_options['cache']['type'] = 'none';
@@ -848,7 +842,7 @@ function s4_courses_views_default_views() {
     'multiple_to' => '',
     'show_repeat_rule' => 'show',
   );
-  /* Sort criterion: Content: Term dates (field_term_date_start) */
+  /* Sort criterion: Content: Term dates -  start date (field_term_date_start) */
   $handler->display->display_options['sorts']['field_term_date_start_value']['id'] = 'field_term_date_start_value';
   $handler->display->display_options['sorts']['field_term_date_start_value']['table'] = 'field_data_field_term_date_start';
   $handler->display->display_options['sorts']['field_term_date_start_value']['field'] = 'field_term_date_start_value';
@@ -878,7 +872,7 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
   $handler->display->display_options['header']['area']['empty'] = TRUE;
-  $handler->display->display_options['header']['area']['content'] = '<a class="btn" href="node/add/course-term">Add new term</a>';
+  $handler->display->display_options['header']['area']['content'] = '<a class="button" href="node/add/course-term">Add new term</a>';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
   $handler->display->display_options['path'] = 'terms';
 
@@ -899,8 +893,7 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['footer']['area']['table'] = 'views';
   $handler->display->display_options['footer']['area']['field'] = 'area';
   $handler->display->display_options['footer']['area']['empty'] = TRUE;
-  $handler->display->display_options['footer']['area']['content'] = '<a class="btn" href="terms">View all terms</a><br/>
-<a class="btn" href="node/add/course-term">Add new term</a>';
+  $handler->display->display_options['footer']['area']['content'] = '<a class="btn" href="terms"><i class="icon-list"></i>View all terms</a>';
   $handler->display->display_options['footer']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Title */
@@ -927,26 +920,18 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'course_term' => 'course_term',
   );
-  /* Filter criterion: Content: Term dates (field_term_date_start) */
+  /* Filter criterion: Content: Term dates -  start date (field_term_date_start) */
   $handler->display->display_options['filters']['field_term_date_start_value']['id'] = 'field_term_date_start_value';
   $handler->display->display_options['filters']['field_term_date_start_value']['table'] = 'field_data_field_term_date_start';
   $handler->display->display_options['filters']['field_term_date_start_value']['field'] = 'field_term_date_start_value';
   $handler->display->display_options['filters']['field_term_date_start_value']['operator'] = '<=';
-  $handler->display->display_options['filters']['field_term_date_start_value']['granularity'] = 'day';
-  $handler->display->display_options['filters']['field_term_date_start_value']['form_type'] = 'date_select';
   $handler->display->display_options['filters']['field_term_date_start_value']['default_date'] = 'now';
-  $handler->display->display_options['filters']['field_term_date_start_value']['default_to_date'] = '';
-  $handler->display->display_options['filters']['field_term_date_start_value']['year_range'] = '-3:+3';
-  /* Filter criterion: Content: Term dates (field_term_date_start:value2) */
+  /* Filter criterion: Content: Term dates - end date (field_term_date_start:value2) */
   $handler->display->display_options['filters']['field_term_date_start_value2']['id'] = 'field_term_date_start_value2';
   $handler->display->display_options['filters']['field_term_date_start_value2']['table'] = 'field_data_field_term_date_start';
   $handler->display->display_options['filters']['field_term_date_start_value2']['field'] = 'field_term_date_start_value2';
   $handler->display->display_options['filters']['field_term_date_start_value2']['operator'] = '>=';
-  $handler->display->display_options['filters']['field_term_date_start_value2']['granularity'] = 'day';
-  $handler->display->display_options['filters']['field_term_date_start_value2']['form_type'] = 'date_select';
   $handler->display->display_options['filters']['field_term_date_start_value2']['default_date'] = 'now + 1 day';
-  $handler->display->display_options['filters']['field_term_date_start_value2']['default_to_date'] = '';
-  $handler->display->display_options['filters']['field_term_date_start_value2']['year_range'] = '-3:+3';
 
   /* Display: Student Term list */
   $handler = $view->new_display('block', 'Student Term list', 'block_1');
@@ -1008,10 +993,9 @@ function s4_courses_views_default_views() {
     t('End date'),
     t('Page'),
     t('Course terms'),
-    t('<a class="btn" href="node/add/course-term">Add new term</a>'),
+    t('<a class="button" href="node/add/course-term">Add new term</a>'),
     t('Term list'),
-    t('<a class="btn" href="terms">View all terms</a><br/>
-<a class="btn" href="node/add/course-term">Add new term</a>'),
+    t('<a class="btn" href="terms"><i class="icon-list"></i>View all terms</a>'),
     t('Student Term list'),
   );
   $export['terms'] = $view;
@@ -1029,6 +1013,7 @@ function s4_courses_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Sign up for service';
+  $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['access']['perm'] = 'signup for service';
   $handler->display->display_options['cache']['type'] = 'none';
@@ -1057,7 +1042,6 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['empty']['area']['table'] = 'views';
   $handler->display->display_options['empty']['area']['field'] = 'area';
   $handler->display->display_options['empty']['area']['label'] = 'No courses';
-  $handler->display->display_options['empty']['area']['empty'] = FALSE;
   $handler->display->display_options['empty']['area']['content'] = '<p class="intro">It looks like you don\'t have any courses this semester.</p><p><strong>Don\'t panic:</strong> if you just registered for a course, it might be taking a while for your registration to get to our system. Also, in some situations we don\'t bring over courses unless they have a service learning, internship, or other training component. Check with your faculty if you think your course should show up here.</p>';
   $handler->display->display_options['empty']['area']['format'] = 'full_html';
   /* Relationship: Content: Term (field_term) */
@@ -1108,28 +1092,20 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'course' => 'course',
   );
-  /* Filter criterion: Content: Term dates (field_term_date_start) */
+  /* Filter criterion: Content: Term dates -  start date (field_term_date_start) */
   $handler->display->display_options['filters']['field_term_date_start_value']['id'] = 'field_term_date_start_value';
   $handler->display->display_options['filters']['field_term_date_start_value']['table'] = 'field_data_field_term_date_start';
   $handler->display->display_options['filters']['field_term_date_start_value']['field'] = 'field_term_date_start_value';
   $handler->display->display_options['filters']['field_term_date_start_value']['relationship'] = 'field_term_nid';
   $handler->display->display_options['filters']['field_term_date_start_value']['operator'] = '<=';
-  $handler->display->display_options['filters']['field_term_date_start_value']['granularity'] = 'day';
-  $handler->display->display_options['filters']['field_term_date_start_value']['form_type'] = 'date_select';
   $handler->display->display_options['filters']['field_term_date_start_value']['default_date'] = 'now';
-  $handler->display->display_options['filters']['field_term_date_start_value']['default_to_date'] = '';
-  $handler->display->display_options['filters']['field_term_date_start_value']['year_range'] = '-3:+3';
-  /* Filter criterion: Content: Term dates (field_term_date_start:value2) */
+  /* Filter criterion: Content: Term dates - end date (field_term_date_start:value2) */
   $handler->display->display_options['filters']['field_term_date_start_value2']['id'] = 'field_term_date_start_value2';
   $handler->display->display_options['filters']['field_term_date_start_value2']['table'] = 'field_data_field_term_date_start';
   $handler->display->display_options['filters']['field_term_date_start_value2']['field'] = 'field_term_date_start_value2';
   $handler->display->display_options['filters']['field_term_date_start_value2']['relationship'] = 'field_term_nid';
   $handler->display->display_options['filters']['field_term_date_start_value2']['operator'] = '>=';
-  $handler->display->display_options['filters']['field_term_date_start_value2']['granularity'] = 'day';
-  $handler->display->display_options['filters']['field_term_date_start_value2']['form_type'] = 'date_select';
   $handler->display->display_options['filters']['field_term_date_start_value2']['default_date'] = 'now';
-  $handler->display->display_options['filters']['field_term_date_start_value2']['default_to_date'] = '';
-  $handler->display->display_options['filters']['field_term_date_start_value2']['year_range'] = '-3:+3';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
@@ -1187,28 +1163,20 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'course' => 'course',
   );
-  /* Filter criterion: Content: Term dates (field_term_date_start) */
+  /* Filter criterion: Content: Term dates -  start date (field_term_date_start) */
   $handler->display->display_options['filters']['field_term_date_start_value']['id'] = 'field_term_date_start_value';
   $handler->display->display_options['filters']['field_term_date_start_value']['table'] = 'field_data_field_term_date_start';
   $handler->display->display_options['filters']['field_term_date_start_value']['field'] = 'field_term_date_start_value';
   $handler->display->display_options['filters']['field_term_date_start_value']['relationship'] = 'field_term_nid';
   $handler->display->display_options['filters']['field_term_date_start_value']['operator'] = '<=';
-  $handler->display->display_options['filters']['field_term_date_start_value']['granularity'] = 'day';
-  $handler->display->display_options['filters']['field_term_date_start_value']['form_type'] = 'date_select';
   $handler->display->display_options['filters']['field_term_date_start_value']['default_date'] = 'now';
-  $handler->display->display_options['filters']['field_term_date_start_value']['default_to_date'] = '';
-  $handler->display->display_options['filters']['field_term_date_start_value']['year_range'] = '-3:+3';
-  /* Filter criterion: Content: Term dates (field_term_date_start:value2) */
+  /* Filter criterion: Content: Term dates - end date (field_term_date_start:value2) */
   $handler->display->display_options['filters']['field_term_date_start_value2']['id'] = 'field_term_date_start_value2';
   $handler->display->display_options['filters']['field_term_date_start_value2']['table'] = 'field_data_field_term_date_start';
   $handler->display->display_options['filters']['field_term_date_start_value2']['field'] = 'field_term_date_start_value2';
   $handler->display->display_options['filters']['field_term_date_start_value2']['relationship'] = 'field_term_nid';
   $handler->display->display_options['filters']['field_term_date_start_value2']['operator'] = '>=';
-  $handler->display->display_options['filters']['field_term_date_start_value2']['granularity'] = 'day';
-  $handler->display->display_options['filters']['field_term_date_start_value2']['form_type'] = 'date_select';
   $handler->display->display_options['filters']['field_term_date_start_value2']['default_date'] = 'now';
-  $handler->display->display_options['filters']['field_term_date_start_value2']['default_to_date'] = '';
-  $handler->display->display_options['filters']['field_term_date_start_value2']['year_range'] = '-3:+3';
 
   /* Display: Staff course listing */
   $handler = $view->new_display('page', 'Staff course listing', 'page_1');
@@ -1223,7 +1191,6 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['empty']['area']['table'] = 'views';
   $handler->display->display_options['empty']['area']['field'] = 'area';
   $handler->display->display_options['empty']['area']['label'] = 'No courses';
-  $handler->display->display_options['empty']['area']['empty'] = FALSE;
   $handler->display->display_options['empty']['area']['content'] = '<p class="intro">No courses were found.</p>';
   $handler->display->display_options['empty']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
@@ -1563,7 +1530,7 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['fields']['faculty_site_select']['field'] = 'faculty_site_select';
   $handler->display->display_options['fields']['faculty_site_select']['label'] = '';
   $handler->display->display_options['fields']['faculty_site_select']['element_label_colon'] = FALSE;
-  /* Field: Content: Sites */
+  /* Field: Field: Sites */
   $handler->display->display_options['fields']['field_sites']['id'] = 'field_sites';
   $handler->display->display_options['fields']['field_sites']['table'] = 'field_data_field_sites';
   $handler->display->display_options['fields']['field_sites']['field'] = 'field_sites';
@@ -1585,28 +1552,20 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'course' => 'course',
   );
-  /* Filter criterion: Content: Term dates (field_term_date_start) */
+  /* Filter criterion: Content: Term dates -  start date (field_term_date_start) */
   $handler->display->display_options['filters']['field_term_date_start_value']['id'] = 'field_term_date_start_value';
   $handler->display->display_options['filters']['field_term_date_start_value']['table'] = 'field_data_field_term_date_start';
   $handler->display->display_options['filters']['field_term_date_start_value']['field'] = 'field_term_date_start_value';
   $handler->display->display_options['filters']['field_term_date_start_value']['relationship'] = 'field_term_nid';
   $handler->display->display_options['filters']['field_term_date_start_value']['operator'] = '<=';
-  $handler->display->display_options['filters']['field_term_date_start_value']['granularity'] = 'day';
-  $handler->display->display_options['filters']['field_term_date_start_value']['form_type'] = 'date_select';
   $handler->display->display_options['filters']['field_term_date_start_value']['default_date'] = 'now';
-  $handler->display->display_options['filters']['field_term_date_start_value']['default_to_date'] = '';
-  $handler->display->display_options['filters']['field_term_date_start_value']['year_range'] = '-3:+3';
-  /* Filter criterion: Content: Term dates (field_term_date_start:value2) */
+  /* Filter criterion: Content: Term dates - end date (field_term_date_start:value2) */
   $handler->display->display_options['filters']['field_term_date_start_value2']['id'] = 'field_term_date_start_value2';
   $handler->display->display_options['filters']['field_term_date_start_value2']['table'] = 'field_data_field_term_date_start';
   $handler->display->display_options['filters']['field_term_date_start_value2']['field'] = 'field_term_date_start_value2';
   $handler->display->display_options['filters']['field_term_date_start_value2']['relationship'] = 'field_term_nid';
   $handler->display->display_options['filters']['field_term_date_start_value2']['operator'] = '>=';
-  $handler->display->display_options['filters']['field_term_date_start_value2']['granularity'] = 'day';
-  $handler->display->display_options['filters']['field_term_date_start_value2']['form_type'] = 'date_select';
   $handler->display->display_options['filters']['field_term_date_start_value2']['default_date'] = 'now';
-  $handler->display->display_options['filters']['field_term_date_start_value2']['default_to_date'] = '';
-  $handler->display->display_options['filters']['field_term_date_start_value2']['year_range'] = '-3:+3';
 
   /* Display: Student course block */
   $handler = $view->new_display('block', 'Student course block', 'block_2');
@@ -1618,7 +1577,6 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
   $handler->display->display_options['header']['area']['label'] = 'Directions';
-  $handler->display->display_options['header']['area']['empty'] = FALSE;
   $handler->display->display_options['header']['area']['content'] = '<p class="intro">To begin looking for a site, click the <strong>Select this Course</strong> link near the course you are taking for this service.</p>';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['empty'] = FALSE;
@@ -1758,7 +1716,6 @@ function s4_courses_views_default_views() {
     t('<p class="intro">No courses were found.</p>'),
     t('field_course_faculty'),
     t('View'),
-    t('node/[nid]'),
     t('Subject'),
     t('Number'),
     t('Section'),
