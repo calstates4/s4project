@@ -51,7 +51,7 @@ html.js fieldset.collapsed {
 }
 #search .block {
   float: right;
-  margin: 12px 0 0 0;
+  margin: 12px 0 0 15px;
 }
 #search .block.block-views {
   margin-top: 0;
@@ -240,6 +240,9 @@ body .vertical-tabs .form-type-textfield input {
 }
 #user-progress .block {
   margin: 0;
+}
+#user-progress ul {
+  list-style-type: none;
 }
 .hero-unit {
   padding: 20px;
