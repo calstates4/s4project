@@ -64,7 +64,7 @@ function s4_menu_local_task($variables) {
 }
 
 function s4_menu_tree(&$variables) {
-  return '<ul class="menu nav">' . $variables['tree'] . '</ul>';
+  return '<ul class="menu nav nav-tabs nav-stacked">' . $variables['tree'] . '</ul>';
 }
 
 function s4_menu_link(array $variables) {

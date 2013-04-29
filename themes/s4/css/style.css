@@ -234,6 +234,17 @@ body .vertical-tabs .form-type-textfield input {
 .site-listing address {
   margin: 0;
 }
+/** MENU **/
+.nav-tabs.nav-stacked li,
+.nav-tabs.nav-stacked li.leaf {
+  padding-top: 0;
+  list-style-type: none;
+  list-style-image: none;
+  margin-bottom: -1px;
+}
+.nav-tabs.nav-stacked li.last.leaf > a {
+  border-top: none;
+}
 #user-progress {
   background: #ffffff;
   padding: 5px 0 2px 0;
