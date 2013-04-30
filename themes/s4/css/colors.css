@@ -20,11 +20,7 @@
 }
 
 #navigation .btn.btn-navbar:hover {
-  background-color: #e26140;
-  background-image: -moz-linear-gradient(top, #e26140, #ca433c);
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #e26140), color-stop(1, #ca433c));
-  background-image: -webkit-linear-gradient(#e26140, #ca433c);
-  background-image: linear-gradient(top, #e26140, #ca433c);
+  background-position: 0;
 }
 
 .hero-unit {
