@@ -86,6 +86,9 @@ html.js fieldset.collapsed {
   width: 880px;
   margin-left: -440px;
 }
+.node-type-site .group-right .field {
+  margin-bottom: 15px;
+}
 /** SECTIONS **/
 #branding {
   margin: 0;

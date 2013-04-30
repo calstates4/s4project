@@ -58,7 +58,6 @@ dependencies[] = ds
 dependencies[] = ds_extras
 dependencies[] = email
 dependencies[] = entity
-dependencies[] = fancybox
 dependencies[] = features
 dependencies[] = feeds
 dependencies[] = feeds_ui
