@@ -30,6 +30,11 @@
 </div>
 <div class="navbar">
   <div class="navbar-inner" id="navigation" >
+		<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
 		<div class="nav-collapse collapse">
 		<?php print theme('links__system_main_menu', array(
           'links' => $main_menu,

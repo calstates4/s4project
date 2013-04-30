@@ -427,14 +427,6 @@ function _s4_sites_site_staff_admin_view_access($nid) {
 }
 
 /**
-* Implements hook_init
-*/
-function s4_sites_init() {
-  drupal_add_js(drupal_get_path('module', 's4_sites') . '/js/s4_fancybox.js');
-
-}
-
-/**
 * Implements hook_block_info()
 */
 function s4_sites_block_info() {

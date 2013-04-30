@@ -73,6 +73,7 @@ dependencies[] = guiders_js
 dependencies[] = imce
 dependencies[] = imce_wysiwyg
 dependencies[] = insert
+dependencies[] = jquery_update
 dependencies[] = job_scheduler
 dependencies[] = link
 dependencies[] = location

@@ -86,11 +86,6 @@ function s4_assessment_form_alter(&$form, $form_sate, $form_id) {
 }
 
 function theme_s4_assessment_rubric_hints(&$variables) {
-	drupal_add_js(drupal_get_path('module', 's4_assessment') .'/js/s4_assessment.js');
-	$fancybox_settings = variable_get('fancybox_settings', array());
-	if (!empty($fancybox_settings)) {
-		fancybox_activate($fancybox_settings);
-	}
 	$element = $variables['element'];
 	$rubric = (isset($element['#webform_component']['extra']['rubric']))
 			  ? $element['#webform_component']['extra']['rubric']
@@ -116,13 +111,17 @@ function theme_s4_assessment_rubric_hints(&$variables) {
 			$rows[$question_key][] = drupal_render($element[$question_key][$option_key]);
 		}
 		if($rubric) {
-			$rows[$question_key][] = '<a href="#rubric-'. $element['#id'] .'-'. $question_key .'" class="rubric-show">View rubric</a>';
+			$rows[$question_key][] = '<a href="#rubric-'. $element['#id'] .'-'. $question_key .'" class="rubric-show" data-toggle="modal" role="button">View rubric</a>';
 		}
 		if($rubric) {
-			$output .= theme('table', array('header' => $rubric_header, 'rows' => $rubric_rows, 
-							 'caption' => $question, 
-							 'attributes' => array('class' => array('element-invisible'), 
-							 					   'id' => 'rubric-'. $element['#id'] .'-'. $question_key)));
+			$output .= '<div id="rubric-'. $element['#id'] .'-'. $question_key . '" class="modal modal-wide hide fade" tabindex="-1" role="dialog" aria-labelledby="rubric-'. $element['#id'] .'-'. $question_key . '" aria-hidden="true"><div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<h3>' . $question .'</h3>
+			</div><div class="modal-body">' 
+			.theme('table', array('header' => $rubric_header, 'rows' => $rubric_rows )) .'</div><div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  </div>
+</div>';
 		}
 	}
 	

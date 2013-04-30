@@ -49,6 +49,39 @@
 
 
 /** LAYOUT CHANGES **/
+
+
+@media (max-width: 979px) {
+	.navbar .btn-navbar {
+		display: none;
+	}
+	
+	body .nav-collapse, .nav-collapse.collapse {
+		overflow: visible;
+		height: auto;
+	}
+	
+	.nav-collapse .nav > li {
+		float: left;
+	}
+	
+	.navbar .nav-collapse .nav.pull-right {
+		float: right;
+		margin-right: 0;
+		margin: 0;
+	}
+	
+	.nav-collapse .nav > li > a {
+		-webkit-border-radius: 0;
+		-moz-border-radius: 0;
+		border-radius: 0;
+		margin-bottom: 0;
+	}
+	.nav-collapse .nav > li > a:hover {
+		background: inherit;
+	}	
+}
+
 @media (max-width: 767px) {
 	body {
 		padding: 0;
@@ -61,7 +94,29 @@
 	.nav-collapse #main-menu.nav > li {
 		float: none;
 	}
+	.navbar .btn-navbar {
+		display: block !important;
+	}
+	
+	body .nav-collapse, .nav-collapse.collapse {
+		overflow: hidden;
+		height: 0;
+	}
 
+	.nav-collapse .nav > li {
+		float: none;
+	}
+	
+	.navbar .nav-collapse .nav.pull-right {
+		float: none;
+		margin-left: 0;
+	}
+	
+	.nav-collapse .nav > li > a {
+		-webkit-border-radius: 3px;
+		-moz-border-radius: 3px;
+		border-radius: 3px;
+	}
 }
 
 @media (min-width: 1200px) {
@@ -98,6 +153,11 @@ html.js fieldset.collapsed {
 	margin: 0 8px 0 0;
 }
 
+.modal.modal-wide {
+	width: 880px;
+	margin-left: -440px;
+}
+
 /** SECTIONS **/
 
 #branding {
@@ -124,8 +184,6 @@ html.js fieldset.collapsed {
 		text-shadow: none;
 	}
 }
-
-
 
 #search {
 	
