@@ -17,10 +17,8 @@ class views_handler_s4_user_coordinator_select extends views_handler_field {
     if (isset($_SESSION['s4_signup_coordinator']) && $_SESSION['s4_signup_coordinator'] == $values->nid) {
       return '<div class="signup signed-up"><div class="icon"></div>Site staff selected</div>';
     }
-    return '<div class="signup"><div class="icon"></div>' .
-      l(t('Select this site staff'), 's4/signup/coordinator/' . $values->nid,
-        array('attributes' => array('data-target' => 'signup-course')))
-      . '</div>';
+    return l('<i class="icon-ok-circle icon-white"></i> ' . ('Select this site staff'), 's4/signup/coordinator/' . $values->nid,
+        array('html' => TRUE, 'attributes' => array('class' => array('btn', 'btn-primary'), 'data-target' => 'signup-course')));
   }
 
   function query() {

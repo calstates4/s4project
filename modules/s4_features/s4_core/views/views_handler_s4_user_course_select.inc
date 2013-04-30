@@ -32,12 +32,12 @@ return l('<i class="icon-check icon-white"></i> ' .
         }
       }
     }
-    return l('<i class="icon-check icon-white"></i> ' . 
+    return l('<i class="icon-ok-circle icon-white"></i> ' . 
     					t('Select this course'),
     					's4/signup/course/' . $values->nid,
 			         array('html' => TRUE,
 			         	     'attributes' => array(
-			         	     'class' => array('btn', 'btn-success'),
+			         	     'class' => array('btn', 'btn-primary'),
 			         	     'data-target' => 'signup-course')));
   }
 

@@ -428,7 +428,9 @@ function s4_core_block_s4_signup_forms() {
   if (!$_SESSION['s4_signup_site']) {
     return;
   }
-  return array('content' => '<div class="signup"><div class="icon"></div>' .
-                            l(t('Continue signing up'), 's4/signup/site/' . $_SESSION['s4_signup_site'])
-                            . '</div>');
+  return array('content' => 
+                            l('<i class="icon-arrow-right icon-white"></i> ' . t('Continue'), 's4/signup/site/' . $_SESSION['s4_signup_site'],
+             array('html' => TRUE,
+             'attributes' => array('class' => array('btn', 'btn-primary', 'btn-large', 'btn-block')))));
+
 }
