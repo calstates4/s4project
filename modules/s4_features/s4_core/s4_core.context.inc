@@ -143,6 +143,7 @@ function s4_core_context_default_contexts() {
         ),
       ),
     ),
+    'menu' => 'form',
   );
   $context->condition_mode = 1;
 

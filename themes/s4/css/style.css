@@ -7,6 +7,9 @@
   #page {
     padding: 0 15px;
   }
+  .nav-collapse #main-menu.nav > li {
+    float: none;
+  }
 }
 @media (min-width: 1200px) {
   .container {
@@ -33,9 +36,8 @@ html.js fieldset.collapsed {
   margin: 0 8px 0 0;
 }
 /** SECTIONS **/
-#branding,
-#navigation {
-  border-bottom: 1px solid black;
+#branding {
+  margin: 0;
 }
 #branding h1 {
   font-size: 1.4em;
@@ -48,16 +50,24 @@ html.js fieldset.collapsed {
   text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6);
   -webkit-text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6);
   -moz-text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6);
+  font-weight: bold;
+  padding: 0 20px;
+}
+#branding a {
+  color: #000000;
+  text-shadow: none;
+}
+#search form {
+  margin: 0;
+}
+#search .views-exposed-form .views-exposed-widget {
+  padding: 5px 7px 0 0;
 }
 #search .block {
   float: right;
-  margin: 12px 0 0 15px;
 }
 #search .block.block-views {
   margin-top: 0;
-}
-#search a {
-  color: #000000;
 }
 #search label {
   display: none;
@@ -65,6 +75,9 @@ html.js fieldset.collapsed {
 #search .control-group,
 #search input {
   margin: 0;
+}
+h2.block-title {
+  font-size: 20px;
 }
 .page-header {
   padding: none;
@@ -76,40 +89,23 @@ html.js fieldset.collapsed {
   margin: 15px 0 20px;
   border-bottom: 1px solid #eeeeee;
 }
-#main-menu {
-  border-bottom: 0;
+body .navbar,
+body .navbar > .navbar-inner {
   margin: 0;
-  margin-top: 5px;
-}
-#main-menu li {
-  float: right;
-  margin-bottom: -3px;
-}
-#main-menu li a {
-  padding: 6px 10px;
   border: none;
-  margin-right: 4px;
-  margin-bottom: 0;
+  border-radius: 0;
 }
-#main-menu li a:hover {
-  background: transparent;
-  background: rgba(255, 255, 255, 0.6);
-  line-height: 20px;
-  margin-bottom: 0;
-}
-#main-menu li.active a {
-  border: none;
-}
-#main-menu li.active a:hover {
-  text-decoration: none;
-  cursor: pointer;
-  background: #fff;
-  border: none;
-}
-#main-menu a {
-  color: #000000;
+#main-menu li > a {
   font-weight: bold;
+  color: #000000;
+  text-shadow: none;
   text-transform: uppercase;
+}
+#main-menu li > a:hover {
+  text-decoration: underline;
+}
+#main-menu li.active > a {
+  background: rgba(255, 255, 255, 0.8);
 }
 #footer-map {
   height: 550px;

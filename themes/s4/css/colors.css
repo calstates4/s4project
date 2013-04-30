@@ -1,9 +1,14 @@
-#branding, #footer {
+#branding {
   background-color: #6aa4c2;
   background-image: -moz-linear-gradient(top, #6aa4c2, #558095);
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #6aa4c2), color-stop(1, #558095));
   background-image: -webkit-linear-gradient(#6aa4c2, #558095);
   background-image: linear-gradient(top, #6aa4c2, #558095);
+}
+
+#branding .divider-vertical {
+	border-left-color: #558095;
+	border-right-color: #6aa4c2;
 }
 
 #navigation {

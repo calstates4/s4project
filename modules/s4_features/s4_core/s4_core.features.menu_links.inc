@@ -22,7 +22,7 @@ function s4_core_menu_default_menu_links() {
     'external' => '1',
     'has_children' => '0',
     'expanded' => '0',
-    'weight' => '-43',
+    'weight' => '-50',
   );
   // Exported menu link: main-menu:form
   $menu_links['main-menu:form'] = array(
@@ -40,7 +40,7 @@ function s4_core_menu_default_menu_links() {
     'external' => '0',
     'has_children' => '0',
     'expanded' => '0',
-    'weight' => '-48',
+    'weight' => '-46',
   );
   // Exported menu link: main-menu:reports
   $menu_links['main-menu:reports'] = array(
@@ -58,7 +58,7 @@ function s4_core_menu_default_menu_links() {
     'external' => '0',
     'has_children' => '0',
     'expanded' => '0',
-    'weight' => '-49',
+    'weight' => '-45',
   );
   // Exported menu link: main-menu:s4/logout
   $menu_links['main-menu:s4/logout'] = array(
@@ -76,7 +76,7 @@ function s4_core_menu_default_menu_links() {
     'external' => '0',
     'has_children' => '0',
     'expanded' => '0',
-    'weight' => '-50',
+    'weight' => '-44',
   );
   // Exported menu link: main-menu:users
   $menu_links['main-menu:users'] = array(
@@ -94,7 +94,7 @@ function s4_core_menu_default_menu_links() {
     'external' => '0',
     'has_children' => '0',
     'expanded' => '0',
-    'weight' => '-45',
+    'weight' => '-48',
   );
   // Exported menu link: menu-add-content:node/add/site
   $menu_links['menu-add-content:node/add/site'] = array(

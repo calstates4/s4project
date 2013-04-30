@@ -1,15 +1,13 @@
-<div id="branding">
-	<div class="container">
-		<div class="row">
-			<div class="span4">
+<div class="navbar">
+  <div class="navbar-inner" id="branding" >
 				<?php if ($site_name): ?>
 					<h1>
 						<?php if ($logo): ?>
-						<a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home">
+						<a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="brand">
 							<img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
 						</a>
 						<?php endif; ?>
-						<a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home">
+						<a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="brand">
 							<?php print $site_name; ?>
 						</a>
 						<?php if($original_title = variable_get('s4_original_site_title', FALSE)): ?>
@@ -20,9 +18,8 @@
 					</h1>
 					
 				<?php endif; ?>
-			</div>
 			
-			<div class="span6 offset2">
+			<div class="pull-right">
 				<?php if($page['search']): ?>
 					<div id="search">
 						<?php print render($page['search']); ?>
@@ -30,17 +27,18 @@
 				<?php endif; ?>
 			</div>
 		</div>
-	</div>
 </div>
-<div id="navigation">
-	<div class="container">
+<div class="navbar">
+  <div class="navbar-inner" id="navigation" >
+		<div class="nav-collapse collapse">
 		<?php print theme('links__system_main_menu', array(
           'links' => $main_menu,
           'attributes' => array(
             'id' => 'main-menu',
-            'class' => array('links', 'nav nav-tabs'),
+            'class' => array('links', 'nav', 'pull-right'),
           ),
         )); ?>
+		</div>
 	</div>
 </div>
 <div class="container">

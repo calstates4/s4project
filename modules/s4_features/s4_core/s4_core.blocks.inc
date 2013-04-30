@@ -360,7 +360,13 @@ function s4_core_block_s4_current_user_link() {
   }
   $user = user_load($user->uid);
   $first_name = field_get_items('user', $user, 'field_first_name');
-  return array('content' => '<span>' .t('Hello <strong>@username</strong>', array('@username' => $first_name[0]['value'])) . $masquerade_switch .'</span>');
+  $links = array();
+  $links[] = l(t('Hello <strong>@username</strong>', array('@username' => $first_name[0]['value'])),'user/' . $user->uid, array('html' => TRUE)) . $masquerade_switch;
+  if (user_access('access s4 site settings')) {
+  	$links[] = l('<i class="icon-cog"></i> '. t('Site settings'), 's4/settings', array('html' => TRUE));
+  }
+  $links[] = array('data' => '', 'class' => array('divider-vertical'));
+  return array('content' => theme('item_list', array('items' => $links, 'attributes' => array('class' => array('nav')))));
 
 }
 
@@ -368,10 +374,7 @@ function s4_core_block_s4_current_user_link() {
 *  Link to the site settings page
 */
 function s4_core_block_s4_site_settings() {
-  if (!user_access('access s4 site settings')) {
-    return NULL;
-  }
-  return array('content' => l(t('Site settings'), 's4/settings', array('attributes' => array('class' => array('s4-site-settings')))));
+  return null;
 }
 
 function s4_core_block_s4_signup_error() {

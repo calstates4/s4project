@@ -96,8 +96,8 @@ function s4_courses_context_default_contexts() {
         'views-terms-block' => array(
           'module' => 'views',
           'delta' => 'terms-block',
-          'region' => 'content_right',
-          'weight' => '-10',
+          'region' => 'content_top_left',
+          'weight' => '-9',
         ),
       ),
     ),
