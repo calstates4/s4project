@@ -125,6 +125,10 @@ body .navbar > .navbar-inner {
   position: absolute;
   z-index: 1;
 }
+.lead.overview {
+  font-size: 30px;
+  line-height: 38px;
+}
 #block-workbench-block {
   margin-bottom: 15px;
 }
