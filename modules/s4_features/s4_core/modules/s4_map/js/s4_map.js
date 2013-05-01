@@ -14,13 +14,13 @@
 			s4Map.map.fitBounds(bounds);
 		}
 		if ($('#site-list-map').length) {
-			$(document).scroll(function() {
+			$(document).on('scroll resize', function() {
 				var columnTop = $('#content_middle .column').position();
-				if ($(document).scrollTop() > columnTop.top && $('#content').height() > $(window).height()) {
-					$('.region-content-right').css('position', 'fixed').css('top', 0);
+				if ($(document).width() > 767 && $(document).scrollTop() > columnTop.top && $('#content').height() > $(window).height()) {
+					$('.region-content-right').addClass('span4').css('position', 'fixed').css('top', 0);
 				}
 				else {
-					$('.region-content-right').css('position', 'relative');
+					$('.region-content-right').removeClass('span4').css('position', 'relative');
 				}
 			});
 			s4Map.init('site-list-map');
