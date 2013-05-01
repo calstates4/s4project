@@ -4,6 +4,7 @@
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #6aa4c2), color-stop(1, #558095));
   background-image: -webkit-linear-gradient(#6aa4c2, #558095);
   background-image: linear-gradient(top, #6aa4c2, #558095);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#6aa4c2', EndColorStr='#558095');
 }
 
 #branding .divider-vertical {
@@ -17,6 +18,7 @@
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #e26140), color-stop(1, #ca433c));
   background-image: -webkit-linear-gradient(#e26140, #ca433c);
   background-image: linear-gradient(top, #e26140, #ca433c);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#e26140', EndColorStr='#ca433c');
 }
 
 #navigation .btn.btn-navbar:hover {
