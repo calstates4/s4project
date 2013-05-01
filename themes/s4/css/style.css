@@ -89,6 +89,16 @@ html.js fieldset.collapsed {
 .node-type-site .group-right .field {
   margin-bottom: 15px;
 }
+div.error,
+div.status,
+div.warning {
+  background-image: none;
+}
+form div.error,
+form div.status,
+form div.warning {
+  background: transparent;
+}
 /** SECTIONS **/
 #branding {
   margin: 0;
