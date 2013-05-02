@@ -63,7 +63,7 @@
 		    </div>
 		<?php endif; ?>
 		<?php if($page['content_subscriptions']): ?>
-			<div id="subscriptions">
+			<div id="subscriptions" class="pull-right">
 				<?php print render($page['content_subscriptions']); ?>
 			</div>
 		<?php endif; ?>

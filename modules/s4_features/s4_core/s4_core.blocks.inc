@@ -239,19 +239,17 @@ function s4_core_block_s4_page_notifications() {
     $link = $notification->element_link();
     if ($notification->is_stored()) {
       $link['#title'] = t('<span class="hover">Unsubscribe</span><span class="nohover">Subscribed</span>');
-      $link['#options']['attributes']['class'] = 'subscribed';
+      $link['#options']['attributes']['class'] = 'subscribed btn-success';
     }
     else {
       $link['#title'] = t('Subscribe to changes');
-      $link['#options']['attributes']['class'] = 'not-subscribed';
+      $link['#options']['attributes']['class'] = 'not-subscribed btn-info';
     }
-    $link['#options']['attributes']['class'] .= ' subscription-button';
+    $link['#options']['attributes']['class'] .= ' subscription-button btn';
     $links[] = drupal_render($link);
   }
   if (count($links)) {
-    drupal_add_css(drupal_get_path('module', 's4_core') . '/css/subscriptions.css');
-    return array('subject' => 'Subscriptions',
-          'content' => theme('item_list', array('items' => $links))
+    return array('content' => theme('item_list', array('items' => $links, 'class' => array('nav')))
          );
   }
   return NULL;

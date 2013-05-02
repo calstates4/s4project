@@ -63,6 +63,10 @@
     padding: 0 15px;
   }
 }
+/** Subscriptions region **/
+#subscriptions ul {
+  list-style-type: none;
+}
 /** FORMS **/
 fieldset legend {
   font-size: 14px;
@@ -104,6 +108,16 @@ form input.form-autocomplete {
 }
 form input.throbbing {
   background-position: 100% -13px !important;
+}
+/** Subscription buttons **/
+a .hover {
+  display: none;
+}
+a:hover .hover {
+  display: inline;
+}
+a:hover .nohover {
+  display: none;
 }
 /** Form accordions **/
 #page .field-group-accordion-wrapper {
