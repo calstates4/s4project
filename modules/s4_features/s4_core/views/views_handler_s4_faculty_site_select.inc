@@ -17,14 +17,11 @@ class views_handler_s4_faculty_site_select extends views_handler_field {
       }
     }
     if ($exists) {
-      return '<div class="signup remove course"><div class="icon"></div>' .
-        l(t('Remove from @site', array('@site' => $values->node_title)), 's4/course-list/remove/' . $values->nid . '/' . $node->nid)
-        . '</div>';
+      return l('<i class="icon-remove icon-white"></i> '. t('Remove from @site', array('@site' => $values->node_title)), 's4/course-list/remove/' . $values->nid . '/' . $node->nid, array('html' => TRUE, 'attributes' => array('class' => array('btn btn-danger'))));
     }
     else {
-      return '<div class="signup add course"><div class="icon"></div>' .
-        l(t('Add to @site', array('@site' => $values->node_title)), 's4/course-list/add/' . $values->nid . '/' . $node->nid)
-        . '</div>';
+      return l('<i class="icon-plus icon-white"></i> '. t('Add to @site', array('@site' => $values->node_title)), 's4/course-list/add/' . $values->nid . '/' . $node->nid, array('html' => TRUE, 'attributes' => array('class' => array('btn btn-success'))));
+
     }
 
   }
