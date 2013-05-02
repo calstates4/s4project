@@ -99,6 +99,12 @@ form div.status,
 form div.warning {
   background: transparent;
 }
+form input.form-autocomplete {
+  background-position: 100% 9px !important;
+}
+form input.throbbing {
+  background-position: 100% -13px !important;
+}
 /** Form accordions **/
 #page .field-group-accordion-wrapper {
   font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
