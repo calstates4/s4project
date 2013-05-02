@@ -107,7 +107,7 @@ function s4_map_block_view($delta) {
 			break;
 		case 's4_map_site_list_map':
 			return array('subject' => null,
-						 'content' => '<div class="map" id="site-list-map"></div>',
+						 'content' => '<div class="map hidden-phone" id="site-list-map"></div>',
 						 );
 			break;
 		case 's4_map_site_view_map':

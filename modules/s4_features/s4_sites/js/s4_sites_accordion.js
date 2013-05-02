@@ -2,7 +2,7 @@
   $(document).ready(function() {
     $('#edit-preview').addClass('element-invisible');
     $('.ui-accordion-content:not(.ui-accordion-content:last)').each(function() {
-      $(this).append('<input type="button" value="Continue" class="continue" />');
+      $(this).append('<input type="button" value="Continue" class="btn btn-success continue" />');
     });
     $('.ui-accordion-content .continue').click(function() {
       $(this).parent('.ui-accordion-content').next('h3').trigger('click');

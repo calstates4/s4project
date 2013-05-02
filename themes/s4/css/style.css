@@ -142,12 +142,6 @@ a:hover .nohover {
 #page .ui-accordion-content {
   border-color: #558095;
 }
-#page input[type=button].continue {
-  border: 1px solid #00ae3e;
-  background: #00ae3e;
-  color: #fff;
-  margin: 10px;
-}
 #page .ui-accordion-header.ui-state-active {
   background: #00ae3e;
   border-color: #00ae3e;

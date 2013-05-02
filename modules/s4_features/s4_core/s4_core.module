@@ -1857,7 +1857,7 @@ function s4_core_field_formatter_view($entity_type, $entity, $field, $instance, 
      foreach ($items as $delta => $item) {
       $output = array();
       // @todo - the map link wrapper should move out to a theme
-    $output[] = '<div class="map-link-wrapper item-list">';
+    $output[] = '<div class="map-link-wrapper item-list hidden-phone">';
     $output[] = '<span>';
     $output[] = '<div class="map-pointer"></div>';
     $output[] = '<a href="#" class="map-link" lat="' . $item['latitude'] . '" lon="' . $item['longitude'] . '"></a>';
