@@ -252,15 +252,6 @@ function s4_core_user_default_permissions() {
     'module' => 'image',
   );
 
-  // Exported permission: administer imce
-  $permissions['administer imce'] = array(
-    'name' => 'administer imce',
-    'roles' => array(
-      0 => 'administrator',
-    ),
-    'module' => 'imce',
-  );
-
   // Exported permission: administer masquerade
   $permissions['administer masquerade'] = array(
     'name' => 'administer masquerade',

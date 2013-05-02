@@ -74,12 +74,6 @@ projects[gmap][version] = "1.x-dev"
 ;projects[Guiders-JS][subdir] = "contrib"
 ;projects[Guiders-JS][version] = "1.x-dev"
 
-projects[imce][subdir] = "contrib"
-projects[imce][version] = "1.5"
-
-projects[imce_wysiwyg][subdir] = "contrib"
-projects[imce_wysiwyg][version] = "1.0"
-
 projects[insert][subdir] = "contrib"
 projects[insert][version] = "1.1"
 
@@ -199,6 +193,9 @@ projects[wysiwyg][version] = "2.1"
 
 projects[wysiwyg_spellcheck][subdir] = "contrib"
 projects[wysiwyg_spellcheck][version] = "1.1"
+
+projects[wysiwyg_ckeditor][subdir] = "contrib"
+projects[wysiwyg_ckeditor][version] = "1.x-dev"
 
 ; Themes
 

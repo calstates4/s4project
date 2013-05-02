@@ -149,6 +149,9 @@ a:hover .nohover {
 #page .ui-accordion-content-active {
   border-color: #00ae3e;
 }
+.horizontal-tabs-list .form-required {
+  display: none;
+}
 /** SECTIONS **/
 #branding {
   margin: 0;
