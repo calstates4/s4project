@@ -40,7 +40,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'S4: Supporting Students & Service Sites'
+project = u'S4: Student Signup for Service and Stuff'
 copyright = u'2012, Cal State Monterey Bay'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -190,7 +190,7 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'S4StudentSignupforServiceandStuff.tex', u'S4: Supporting Students and Service Sites Documentation',
+  ('index', 'S4StudentSignupforServiceandStuff.tex', u'S4: Student Signup for Service and Stuff Documentation',
    u'Cal State Monterey Bay', 'manual'),
 ]
 
