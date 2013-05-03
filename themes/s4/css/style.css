@@ -273,6 +273,7 @@ body .navbar > .navbar-inner {
 body .vertical-tabs .form-type-textfield input {
   box-sizing: content-box;
   -webkit-box-sizing: content-box;
+  width: 80%;
 }
 /** SITE STAFF HOMEPAGE **/
 .staff-frontpage #page .block {
