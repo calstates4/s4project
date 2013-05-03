@@ -198,6 +198,9 @@ a:hover .nohover {
 #search input {
   margin: 0;
 }
+.span4 .region.span4 {
+  margin: 0;
+}
 h2.block-title {
   font-size: 20px;
 }
