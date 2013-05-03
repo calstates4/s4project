@@ -180,6 +180,11 @@ a:hover .nohover {
 #search .views-exposed-form .views-exposed-widget {
   padding: 5px 7px 0 0;
 }
+#search .views-exposed-form .views-exposed-widget button {
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
 #search .block {
   float: right;
 }
