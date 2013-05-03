@@ -121,7 +121,7 @@ dependencies[] = webform
 dependencies[] = workbench
 dependencies[] = workbench_moderation
 dependencies[] = wysiwyg
-dependencies[] = wysiwyg_ckeditor
+dependencies[] = ckeditor
 
 ; Custom
 dependencies[] = s4_core
