@@ -36,6 +36,12 @@ function s4_process_html(&$variables) {
   }
 }
 
+function s4_preprocess_page(&$variables) {
+	if($variables['page']['#views_contextual_links_info']['views_ui']['view_name'] == 'sites') {
+		$variables['flip_columns'] = true;
+	}
+}
+
 function s4_links__system_main_menu($variables) {
   global $conf;
   if($conf['s4_pages_program_homepage']) {
