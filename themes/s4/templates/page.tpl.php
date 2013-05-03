@@ -1,5 +1,6 @@
 <div class="navbar">
   <div class="navbar-inner" id="branding" >
+		<div class="container">
 				<?php if ($site_name): ?>
 					<h1>
 						<?php if ($logo): ?>
@@ -27,22 +28,25 @@
 				<?php endif; ?>
 			</div>
 		</div>
+  </div>
 </div>
 <div class="navbar">
   <div class="navbar-inner" id="navigation" >
-		<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-		<div class="nav-collapse collapse">
-		<?php print theme('links__system_main_menu', array(
-          'links' => $main_menu,
-          'attributes' => array(
-            'id' => 'main-menu',
-            'class' => array('links', 'nav', 'pull-right'),
-          ),
-        )); ?>
+		<div class="container">
+			<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </button>
+			<div class="nav-collapse collapse">
+			<?php print theme('links__system_main_menu', array(
+	          'links' => $main_menu,
+	          'attributes' => array(
+	            'id' => 'main-menu',
+	            'class' => array('links', 'nav', 'pull-right'),
+	          ),
+	        )); ?>
+			</div>
 		</div>
 	</div>
 </div>
