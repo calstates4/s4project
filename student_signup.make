@@ -191,9 +191,6 @@ projects[webform][version] = "3.18"
 projects[wysiwyg][subdir] = "contrib"
 projects[wysiwyg][version] = "2.1"
 
-projects[wysiwyg_spellcheck][subdir] = "contrib"
-projects[wysiwyg_spellcheck][version] = "1.1"
-
 projects[wysiwyg_ckeditor][subdir] = "contrib"
 projects[wysiwyg_ckeditor][version] = "1.x-dev"
 
