@@ -76,6 +76,9 @@ body .navbar .container {
     width: 724px;
   }
 }
+h1.title {
+  font-family: 'Roboto Slab', 'Helvetica Neue', Aria, Helvetica, sans-serif;
+}
 /** Subscriptions region **/
 #subscriptions ul {
   list-style-type: none;
