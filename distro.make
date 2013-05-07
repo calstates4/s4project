@@ -8,7 +8,6 @@ core = 7.x
 
 projects[drupal][type] = core
 projects[drupal][version] = "7"
-projects[drupal][patch][] = "http://drupal.org/files/postgresql_index_length-1410102.patch"
 
 ; Add Student Signup to the full distribution build.
 projects[student_signup][type] = profile
