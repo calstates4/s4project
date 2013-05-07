@@ -55,6 +55,15 @@ function s4_links__system_main_menu($variables) {
   }
   return theme_links($variables);
 }
+ 
+function s4_progress_bar($variables) {
+  $output = '<div id="progress" class="progress progress-striped active">';
+  $output .= '<div class="bar" style="width: ' . $variables['percent'] . '%"></div>';
+  $output .= '</div>';
+  $output .= '<div class="message">' . $variables['message'] . '</div>';
+
+  return $output;
+}
 
 /**
 *  Override & remove the filter guidelines
