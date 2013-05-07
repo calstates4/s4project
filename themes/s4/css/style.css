@@ -57,6 +57,10 @@
     -moz-border-radius: 3px;
     border-radius: 3px;
   }
+  .navbar .navbar-widget {
+    float: left !important;
+    clear: both;
+  }
 }
 @media (min-width: 1200px) {
   .container {

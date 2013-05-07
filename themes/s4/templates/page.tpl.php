@@ -2,7 +2,7 @@
   <div class="navbar-inner" id="branding" >
 		<div class="container">
 				<?php if ($site_name): ?>
-					<h1>
+					<h1 class="navbar-widget">
 						<?php if ($logo): ?>
 						<a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="brand">
 							<img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
@@ -20,7 +20,7 @@
 					
 				<?php endif; ?>
 			
-			<div class="pull-right">
+			<div class="pull-right navbar-widget">
 				<?php if($page['search']): ?>
 					<div id="search">
 						<?php print render($page['search']); ?>
