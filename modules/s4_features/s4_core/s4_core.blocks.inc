@@ -100,6 +100,7 @@ function s4_core_block_user_progress() {
       unset($status[$key]['selection']);
     }
     $status[$key]['class'][] = 'items-' . count($status);
+    $status[$key]['data'] .= '<span class="arrow"></span>';
     $number++;
   }
   $finished = ($_GET['finished'] == 'finished')

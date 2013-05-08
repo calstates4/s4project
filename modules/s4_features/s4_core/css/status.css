@@ -1,12 +1,23 @@
 #user-progress #block-s4-core-user-progress { margin-bottom: 30px; }
 	#block-s4-core-user-progress h2 { font-size: 1.2em; }
 .user-signup-status { clear: both; }
-	.user-signup-status li, div.signup, .user-signup-status .selection { border-radius: 4px; -moz-border-radius: 4px; -webkit-border-radius: 4px; height: 32px; font-size: 1.2em; padding-right: 10px; }
-	.user-signup-status li { margin: 0px 10px 0px 0px; float: left; color: #fff; background: #a6a6a6 url(../images/arrow_mask.png) no-repeat top right; list-style-type: none;  padding: 0 20px 0 0;  }
+	.user-signup-status li, div.signup, .user-signup-status .selection { border-radius: 4px 0 0 4px; -moz-border-radius: 4px 0 0 4px; -webkit-border-radius: 4px 0 0 4px; height: 32px; font-size: 1.2em; padding-right: 10px; }
+	.user-signup-status li { margin: 0px 20px 0px 0px; float: left; color: #fff; background: #a6a6a6; list-style-type: none;  padding: 0 20px 0 0;  }
 		li.items-4 { width: 18%; }
 		li.items-3 { width: 25%; }
 		li.items-2 { width: 40%; }
-		
+			.user-signup-status li { position: relative; }
+			.user-signup-status li .arrow {
+				width: 0; 
+				height: 0; 
+				border-top: 16px solid transparent;
+				border-bottom: 16px solid transparent;
+				
+				border-left: 16px solid #a6a6a6;
+				position: absolute;
+				right: -16px;
+				top: 0;
+			}
 		.user-signup-status li div { margin: 5px 0 5px 15px; }
 		.user-signup-status li a, .signup a { color: #fff !important; text-decoration: none; }
 	.user-signup-status li.done, .signup.signed-up { background-color: #75b902; }
@@ -23,3 +34,7 @@
 .hours-field { font-size: 150%; margin: 15px 0; }
 
 .private-label { color: #222; font-weight: normal; }
+
+@media (max-width: 767px) {
+	#user-progress li { width: 90%; float: none; margin-bottom: 5px;}
+}
