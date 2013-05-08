@@ -11,7 +11,10 @@
 						<a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="brand">
 							<?php print $site_name; ?>
 						</a>
-						<?php if($original_title = variable_get('s4_original_site_title', FALSE)): ?>
+						<?php 
+							$original_title = variable_get('s4_original_site_title', FALSE);
+							if($original_title && $original_title != $site_name): 
+						?>
 		  			 <div class="original-title">
 		  			   <?php print t('Part of !link', array('!link' => l($original_title, '<front>'))); ?>
 		  			 </div>
