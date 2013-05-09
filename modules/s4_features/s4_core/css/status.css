@@ -8,21 +8,15 @@
 		li.items-2 { width: 40%; }
 			.user-signup-status li { position: relative; }
 			.user-signup-status li .arrow {
-				width: 0; 
-				height: 0; 
-				border-top: 16px solid transparent;
-				border-bottom: 16px solid transparent;
-				
-				border-left: 16px solid #a6a6a6;
-				position: absolute;
-				right: -16px;
-				top: 0;
+				width: 0; height: 0; border-top: 16px solid transparent; border-bottom: 16px solid transparent; border-left: 16px solid #a6a6a6; position: absolute; right: -16px; top: 0;
 			}
 		.user-signup-status li div { margin: 5px 0 5px 15px; }
 		.user-signup-status li a, .signup a { color: #fff !important; text-decoration: none; }
 	.user-signup-status li.done, .signup.signed-up { background-color: #75b902; }
+	.user-signup-status li.done .arrow {  border-left-color: #75b902; } 
 		.user-signup-status li.complete.finished { background-color: #e15440 !important; box-shadow: 0 0 10px #e15440; }
 		.user-signup-status li .signup:hover { background-color: #868686; }
+		.user-signup-status li:hover .arrow { border-left-color: #868686;}
 	.user-signup-status li.clickable:hover, .signup:hover, .signup.remove { background-color: #e15440; }
 	.user-signup-status .number { display: block; float: left; margin: -1px 10px 0 0; background: rgba(0,0,0,0.4); color: #fff; width: 24px; height: 24px; font-size: 18px;  border-radius: 12px; -moz-border-radius: 12px; -webkit-border-radius: 12px; text-align: center; }
 	
