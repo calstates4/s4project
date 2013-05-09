@@ -23,6 +23,7 @@ function s4_sites_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Notes and Forms';
+  $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'type_role';
   $handler->display->display_options['access']['role'] = array(
     4 => '4',
@@ -474,6 +475,7 @@ function s4_sites_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Map';
+  $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -620,6 +622,7 @@ function s4_sites_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Manage sites';
+  $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -985,7 +988,7 @@ Location',
     t('‹ previous'),
     t('next ›'),
     t('last »'),
-    t('<a class="btn" href="../node/add/site"><i class="icon-plus icon-white"></i>  Add new site</a> <a class="btn" href="../site-list">View public list</a>'),
+    t('<a class="btn btn-success" href="../node/add/site"><i class="icon-plus icon-white"></i> Add new site</a> <a class="btn" href="../site-list">View public list</a>'),
     t('Title'),
     t('Programs'),
     t('Active'),
@@ -1022,6 +1025,7 @@ Location',
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Current students';
   $handler->display->display_options['css_class'] = 'quicksearch';
+  $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'type_permission';
   $handler->display->display_options['access']['permission'] = 'create signups for other users';
   $handler->display->display_options['access']['node_type'] = 'coordinator';
@@ -1110,7 +1114,6 @@ Location',
   $handler->display->display_options['empty']['area']['id'] = 'area';
   $handler->display->display_options['empty']['area']['table'] = 'views';
   $handler->display->display_options['empty']['area']['field'] = 'area';
-  $handler->display->display_options['empty']['area']['empty'] = FALSE;
   $handler->display->display_options['empty']['area']['content'] = 'There are currently no students placed with this site staff.';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   /* Relationship: Content: User (field_user) */
@@ -1163,7 +1166,7 @@ Location',
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  /* Contextual filter: Content: Site staff (field_coordinator) */
+  /* Contextual filter: Field: Site staff (field_coordinator) */
   $handler->display->display_options['arguments']['field_coordinator_nid']['id'] = 'field_coordinator_nid';
   $handler->display->display_options['arguments']['field_coordinator_nid']['table'] = 'field_data_field_coordinator';
   $handler->display->display_options['arguments']['field_coordinator_nid']['field'] = 'field_coordinator_nid';
@@ -1191,21 +1194,13 @@ Location',
   $handler->display->display_options['filters']['field_signup_start_date_value']['table'] = 'field_data_field_signup_start_date';
   $handler->display->display_options['filters']['field_signup_start_date_value']['field'] = 'field_signup_start_date_value';
   $handler->display->display_options['filters']['field_signup_start_date_value']['operator'] = '<=';
-  $handler->display->display_options['filters']['field_signup_start_date_value']['granularity'] = 'day';
-  $handler->display->display_options['filters']['field_signup_start_date_value']['form_type'] = 'date_select';
   $handler->display->display_options['filters']['field_signup_start_date_value']['default_date'] = 'now';
-  $handler->display->display_options['filters']['field_signup_start_date_value']['default_to_date'] = '';
-  $handler->display->display_options['filters']['field_signup_start_date_value']['year_range'] = '-3:+3';
   /* Filter criterion: Content: Last expected date of service (field_signup_last_date) */
   $handler->display->display_options['filters']['field_signup_last_date_value']['id'] = 'field_signup_last_date_value';
   $handler->display->display_options['filters']['field_signup_last_date_value']['table'] = 'field_data_field_signup_last_date';
   $handler->display->display_options['filters']['field_signup_last_date_value']['field'] = 'field_signup_last_date_value';
   $handler->display->display_options['filters']['field_signup_last_date_value']['operator'] = '>=';
-  $handler->display->display_options['filters']['field_signup_last_date_value']['granularity'] = 'day';
-  $handler->display->display_options['filters']['field_signup_last_date_value']['form_type'] = 'date_select';
   $handler->display->display_options['filters']['field_signup_last_date_value']['default_date'] = 'now - 7 days';
-  $handler->display->display_options['filters']['field_signup_last_date_value']['default_to_date'] = '';
-  $handler->display->display_options['filters']['field_signup_last_date_value']['year_range'] = '-3:+3';
 
   /* Display: Block: Current students */
   $handler = $view->new_display('block', 'Block: Current students', 'block');
@@ -1281,7 +1276,7 @@ Location',
   $handler->display->display_options['fields']['nothing']['label'] = 'Options';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '[edit_node] | [delete_node]';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
-  /* Contextual filter: Content: Site staff (field_coordinator) */
+  /* Contextual filter: Field: Site staff (field_coordinator) */
   $handler->display->display_options['arguments']['field_coordinator_nid']['id'] = 'field_coordinator_nid';
   $handler->display->display_options['arguments']['field_coordinator_nid']['table'] = 'field_data_field_coordinator';
   $handler->display->display_options['arguments']['field_coordinator_nid']['field'] = 'field_coordinator_nid';
@@ -1384,6 +1379,7 @@ Location',
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Site Staff';
+  $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'type_role';
   $handler->display->display_options['access']['role'] = array(
     6 => '6',
@@ -1464,7 +1460,6 @@ Location',
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['empty'] = FALSE;
   $handler->display->display_options['header']['area']['content'] = '<p class="intro">Select a coordinator who will be working with you during your service.</p>';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['fields'] = FALSE;
@@ -1490,7 +1485,6 @@ Location',
   $handler->display->display_options['fields']['field_email']['table'] = 'field_data_field_email';
   $handler->display->display_options['fields']['field_email']['field'] = 'field_email';
   $handler->display->display_options['fields']['field_email']['label'] = 'Email';
-  $handler->display->display_options['fields']['field_email']['type'] = 'email_default';
   /* Field: Content: Phone number */
   $handler->display->display_options['fields']['field_phone']['id'] = 'field_phone';
   $handler->display->display_options['fields']['field_phone']['table'] = 'field_data_field_phone';
@@ -1648,7 +1642,6 @@ Location',
   $handler->display->display_options['fields']['field_email']['field'] = 'field_email';
   $handler->display->display_options['fields']['field_email']['label'] = 'Email';
   $handler->display->display_options['fields']['field_email']['hide_alter_empty'] = FALSE;
-  $handler->display->display_options['fields']['field_email']['type'] = 'email_default';
   /* Field: Content: Role */
   $handler->display->display_options['fields']['field_staff_role']['id'] = 'field_staff_role';
   $handler->display->display_options['fields']['field_staff_role']['table'] = 'field_data_field_staff_role';
@@ -1806,7 +1799,6 @@ Location',
   $handler->display->display_options['fields']['field_email']['id'] = 'field_email';
   $handler->display->display_options['fields']['field_email']['table'] = 'field_data_field_email';
   $handler->display->display_options['fields']['field_email']['field'] = 'field_email';
-  $handler->display->display_options['fields']['field_email']['type'] = 'email_default';
   /* Field: Content: Edit link */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
@@ -1920,6 +1912,7 @@ Location',
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -2112,6 +2105,7 @@ Location',
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -2233,6 +2227,7 @@ Location',
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Site locations';
   $handler->display->display_options['css_class'] = 'site-listing';
+  $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -2245,7 +2240,6 @@ Location',
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['empty'] = FALSE;
   $handler->display->display_options['header']['area']['content'] = '<p class="intro">This site has multiple locations. Please select the location you will be working at.</p>';
   $handler->display->display_options['header']['area']['format'] = 'filtered_html';
   /* Field: Content: Location(s) */
@@ -2319,6 +2313,7 @@ Location',
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Students';
   $handler->display->display_options['css_class'] = 'quicksearch';
+  $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -2400,7 +2395,6 @@ Location',
   $handler->display->display_options['empty']['area']['id'] = 'area';
   $handler->display->display_options['empty']['area']['table'] = 'views';
   $handler->display->display_options['empty']['area']['field'] = 'area';
-  $handler->display->display_options['empty']['area']['empty'] = FALSE;
   $handler->display->display_options['empty']['area']['content'] = '<p class="intro">No students signed up for this term.</p>';
   $handler->display->display_options['empty']['area']['format'] = 'full_html';
   /* Relationship: Content: Course (field_course) */
@@ -2432,7 +2426,7 @@ Location',
   $handler->display->display_options['fields']['field_course']['id'] = 'field_course';
   $handler->display->display_options['fields']['field_course']['table'] = 'field_data_field_course';
   $handler->display->display_options['fields']['field_course']['field'] = 'field_course';
-  /* Field: Content: Site staff */
+  /* Field: Field: Site staff */
   $handler->display->display_options['fields']['field_coordinator']['id'] = 'field_coordinator';
   $handler->display->display_options['fields']['field_coordinator']['table'] = 'field_data_field_coordinator';
   $handler->display->display_options['fields']['field_coordinator']['field'] = 'field_coordinator';
@@ -2553,9 +2547,7 @@ Location',
     t('Course'),
     t('Site staff'),
     t('View'),
-    t('node/[nid]'),
     t('Edit'),
-    t('node/[nid_1]/edit'),
     t('All'),
     t('Terms'),
     t('Last name'),
@@ -2576,6 +2568,7 @@ Location',
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Sites';
+  $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'none';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -2620,6 +2613,14 @@ Location',
   $handler->display->display_options['style_options']['wrapper_class'] = 'site-listing';
   $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['exposed_block'] = TRUE;
+  /* Field: Signup: Site location links */
+  $handler->display->display_options['fields']['site_location_links']['id'] = 'site_location_links';
+  $handler->display->display_options['fields']['site_location_links']['table'] = 's4_signup';
+  $handler->display->display_options['fields']['site_location_links']['field'] = 'site_location_links';
+  $handler->display->display_options['fields']['site_location_links']['label'] = '';
+  $handler->display->display_options['fields']['site_location_links']['element_class'] = 'pull-right';
+  $handler->display->display_options['fields']['site_location_links']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['site_location_links']['hide_alter_empty'] = FALSE;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -2640,13 +2641,6 @@ Location',
   $handler->display->display_options['fields']['field_site_restrict']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['field_site_restrict']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_site_restrict']['delta_offset'] = '0';
-  /* Field: Signup: Site location links */
-  $handler->display->display_options['fields']['site_location_links']['id'] = 'site_location_links';
-  $handler->display->display_options['fields']['site_location_links']['table'] = 's4_signup';
-  $handler->display->display_options['fields']['site_location_links']['field'] = 'site_location_links';
-  $handler->display->display_options['fields']['site_location_links']['label'] = '';
-  $handler->display->display_options['fields']['site_location_links']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['site_location_links']['hide_alter_empty'] = FALSE;
   /* Sort criterion: Content: Title */
   $handler->display->display_options['sorts']['title']['id'] = 'title';
   $handler->display->display_options['sorts']['title']['table'] = 'node';
@@ -2788,7 +2782,6 @@ Location',
   $handler->display->display_options['pager']['options']['items_per_page'] = '10';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['pager']['options']['id'] = '0';
-  $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'list';
   $handler->display->display_options['defaults']['style_options'] = FALSE;
