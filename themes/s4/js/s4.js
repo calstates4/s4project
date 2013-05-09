@@ -25,9 +25,8 @@
 	  // The WAI-ARIA setting aria-live="polite" will announce changes after users
 	  // have completed their current activity and not interrupt the screen reader.
 	  this.element = $('<div class="progress progress-striped active" aria-live="polite"></div>').attr('id', id);
-	  this.element.html('<div class="bar filled"></div>' +
-	                    '</div>' +
-	                    '<div class="message">&nbsp;</div>');
+	  this.element.html('<div class="bar filled"></div>')
+	              .after('<div class="message">&nbsp;</div>');
 	};
 	
 	Drupal.progressBar.prototype.setProgress = function (percentage, message) {
@@ -35,7 +34,7 @@
 	    $('div.filled', this.element).css('width', percentage + '%');
 	    $('div.percentage', this.element).html(percentage + '%');
 	  }
-	  $('div.message', this.element).html(message);
+	  this.element.next('div.message').html(message);
 	  if (this.updateCallback) {
 	    this.updateCallback(percentage, message, this);
 	  }
