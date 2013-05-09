@@ -12,7 +12,7 @@ class views_handler_s4_site_locations extends views_handler_field {
       return NULL;
     }
     foreach ($locations as $location) {
-      if ($location['latitude'] && $location['longitude']) {
+      if (floatval($location['latitude']) != 0 && floatval($location['longitude']) != 0) {
         $output[] = '<div class="map-link-wrapper hidden-phone">
             <a href="#" class="map-link" lat="' .
             $location['latitude'] . '" lon="' . $location['longitude'] . '"></a><span class="arrow"></span></div>';

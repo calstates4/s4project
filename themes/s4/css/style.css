@@ -382,13 +382,6 @@ body .vertical-tabs .form-type-textfield input {
   padding: 10px 0 0 0;
   text-align: center;
 }
-.site-listing .map-link.disabled {
-  background: #d0d0d0;
-}
-.site-listing .map-link.disabled:hover {
-  border-color: inherit;
-  color: inherit;
-}
 .site-listing .map-link:hover {
   border-color: #e15440;
   color: #e15440;
