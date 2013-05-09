@@ -4,9 +4,10 @@ td.hours-no { color: rgba(0,0,0,0); }
 .matrix-col-header { font-size: 80%; }
 .hours-sample { color: #fff; padding: 3px; }
 #demographic-total { font-weight: bold; }
-  .field-name-field-site-demographics .error { background: #d6473e; color: #fff;  }
-  .field-name-field-site-demographics .success { background: #00ae3e; color: #fff;  }
-
+  .field-name-field-site-demographics .error { background-color: #d6473e !important; color: #fff;  }
+  .field-name-field-site-demographics .success { background-color: #00ae3e !important; color: #fff;  }
+  .field-name-field-site-demographics table { width: auto; }
+  .field-name-field-site-demographics input { width: 50px; }
 #s4-sites-propose-site-form .form-type-checkbox { margin-bottom: 1.5em; }
   #s4-sites-propose-site-form .form-type-checkbox input { margin-right: -8px; margin-top: -5px;  width: 30px; height: 30px;}
   #s4-sites-propose-site-form .form-type-checkbox label { font-size: 150%; cursor: pointer; }
