@@ -14,9 +14,8 @@ class views_handler_s4_site_locations extends views_handler_field {
     foreach ($locations as $location) {
       if ($location['latitude'] && $location['longitude']) {
         $output[] = '<div class="map-link-wrapper hidden-phone">
-            <span><div class="map-pointer"></div>
             <a href="#" class="map-link" lat="' .
-            $location['latitude'] . '" lon="' . $location['longitude'] . '"></a></span></div>';
+            $location['latitude'] . '" lon="' . $location['longitude'] . '"></a><span class="arrow"></span></div>';
       }
     }
     if (count($output)) {

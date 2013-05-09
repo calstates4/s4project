@@ -29,7 +29,7 @@
 			var bounds = new google.maps.LatLngBounds();
 			$('.map-link').each(function(index, element) {
 				if ($(this).attr('lat') == 0 && !$(this).attr('lon') == 0 ) {
-					$(this).html('&times;').addClass('disabled').show();
+					$(this).html('&times;').addClass('disabled').show().next('.arrow').hide();
 					return null;
 				}
 				var letter = String.fromCharCode("A".charCodeAt(0) + index);
