@@ -88,6 +88,9 @@ h1.title {
   list-style-type: none;
 }
 /** FORMS **/
+form label {
+  font-weight: bold;
+}
 fieldset legend {
   font-size: 14px;
   line-height: normal;
