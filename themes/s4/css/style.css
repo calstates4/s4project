@@ -274,6 +274,9 @@ body .navbar > .navbar-inner {
   font-size: 30px;
   line-height: 38px;
 }
+.page-site-search .region-content-right form {
+  display: none;
+}
 #block-workbench-block {
   margin-bottom: 15px;
 }
