@@ -171,7 +171,7 @@ projects[views_dynamic_fields][subdir] = "contrib"
 projects[views_dynamic_fields][version] = "1.x-dev"
 
 projects[views_exposed_groups][subdir] = "contrib"
-projects[views_exposed_groups][version] = "1.x-dev"
+projects[views_exposed_groups][version] = "1.0"
 
 projects[views_savedsearches][subdir] = "contrib"
 projects[views_savedsearches][version] = "1.0-beta1"
