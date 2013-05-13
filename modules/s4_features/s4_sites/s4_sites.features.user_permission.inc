@@ -25,7 +25,10 @@ function s4_sites_user_default_permissions() {
   // Exported permission: bypass workbench moderation
   $permissions['bypass workbench moderation'] = array(
     'name' => 'bypass workbench moderation',
-    'roles' => array(),
+    'roles' => array(
+      0 => 'staff',
+    ),
+    'module' => 'workbench_moderation',
   );
 
   // Exported permission: create contact_record content
