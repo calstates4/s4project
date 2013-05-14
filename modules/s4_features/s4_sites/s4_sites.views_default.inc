@@ -1460,7 +1460,7 @@ Location',
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['content'] = '<p class="intro">Select a coordinator who will be working with you during your service.</p>';
+  $handler->display->display_options['header']['area']['content'] = '<p class="lead">Select a coordinator who will be working with you during your service.</p>';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Title */
@@ -1876,7 +1876,7 @@ Location',
     t('All'),
     t('%1'),
     t('Page: Student list of site staff'),
-    t('<p class="intro">Select a coordinator who will be working with you during your service.</p>'),
+    t('<p class="lead">Select a coordinator who will be working with you during your service.</p>'),
     t('Job title'),
     t('Email'),
     t('Select'),
@@ -2240,7 +2240,7 @@ Location',
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['content'] = '<p class="intro">This site has multiple locations. Please select the location you will be working at.</p>';
+  $handler->display->display_options['header']['area']['content'] = '<p class="lead">This site has multiple locations. Please select the location you will be working at.</p>';
   $handler->display->display_options['header']['area']['format'] = 'filtered_html';
   /* Field: Content: Location(s) */
   $handler->display->display_options['fields']['field_location']['id'] = 'field_location';
@@ -2293,7 +2293,7 @@ Location',
     t('Sort by'),
     t('Asc'),
     t('Desc'),
-    t('<p class="intro">This site has multiple locations. Please select the location you will be working at.</p>'),
+    t('<p class="lead">This site has multiple locations. Please select the location you will be working at.</p>'),
     t('All'),
     t('Page'),
   );
@@ -2395,7 +2395,7 @@ Location',
   $handler->display->display_options['empty']['area']['id'] = 'area';
   $handler->display->display_options['empty']['area']['table'] = 'views';
   $handler->display->display_options['empty']['area']['field'] = 'area';
-  $handler->display->display_options['empty']['area']['content'] = '<p class="intro">No students signed up for this term.</p>';
+  $handler->display->display_options['empty']['area']['content'] = '<p class="lead">No students signed up for this term.</p>';
   $handler->display->display_options['empty']['area']['format'] = 'full_html';
   /* Relationship: Content: Course (field_course) */
   $handler->display->display_options['relationships']['field_course_nid']['id'] = 'field_course_nid';
@@ -2538,7 +2538,7 @@ Location',
     t('‹ previous'),
     t('next ›'),
     t('last »'),
-    t('<p class="intro">No students signed up for this term.</p>'),
+    t('<p class="lead">No students signed up for this term.</p>'),
     t('field_course'),
     t('field_site'),
     t('field_user'),

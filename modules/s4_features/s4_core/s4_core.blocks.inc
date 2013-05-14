@@ -159,7 +159,7 @@ function s4_core_block_site_list_course_restriction() {
               '!link' => l(t('site not included on this list'), 'site-list', array('query' => array('program[]' => $program[0]['tid'])))));
   }
   return array('subject' => '',
-         'content' => '<p class="intro">' . $output . '</p>');
+         'content' => '<p class="lead">' . $output . '</p>');
 }
 
 /**
@@ -400,7 +400,7 @@ function s4_core_block_s4_signup_error() {
          ->execute()
          ->fetchField();
   $output = t('<h2>Cannnot register</h2>');
-  $output = '<p class="intro">'. t('You cannot register for a placement. The following information may help you if you are part of a course or program and think you should be able to register.') .'</p>';
+  $output = '<p class="lead">'. t('<strong>Sorry!</strong> You cannot register for a placement. The following information may help you if you are part of a course or program and think you should be able to register.') .'</p>';
   foreach(taxonomy_get_tree($vid) as $term) {
     $term = taxonomy_term_load($term->tid);
     $message = field_get_items('taxonomy_term', $term, 'field_program_error');
