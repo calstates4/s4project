@@ -15,7 +15,7 @@ projects[better_exposed_filters][subdir] = "contrib"
 projects[better_exposed_filters][version] = "3.0-beta3"
 
 projects[captcha][subdir] = "contrib"
-projects[captcha][version] = "1.0-beta2"
+projects[captcha][version] = "1.0-beta2+16-dev"
 
 projects[cck][subdir] = "contrib"
 projects[cck][version] = "2.x-dev"
