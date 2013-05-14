@@ -8,7 +8,7 @@
 			
 			if($('.horizontal-tabs-panes').length) {
 				$(window).resize(function() {
-					$('.horizontal-tabs-panes').find('fieldset:not(table fieldset)').css('width', ($('.horizontal-tabs-panes').width() - 28) + 'px');
+					$('.horizontal-tabs-panes').find('fieldset:not(table fieldset), table').css('width', ($('.horizontal-tabs-panes').width() - 28) + 'px');
 				});
 				$(window).trigger('resize');
 			}

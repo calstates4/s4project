@@ -66,8 +66,6 @@ function s4_form_alter(&$form, &$form_state, $form_id) {
  */
 function s4_form_element(&$variables) {
   $element = &$variables['element'];
-  // This is also used in the installer, pre-database setup.
-  $t = get_t();
 
   // This function is invoked as theme wrapper, but the rendered form element
   // may not necessarily have been processed by form_builder().
@@ -79,15 +77,8 @@ function s4_form_element(&$variables) {
   if (isset($element['#markup']) && !empty($element['#id'])) {
     $attributes['id'] = $element['#id'];
   }
-
-  // Add bootstrap class
-  $attributes['class'] = array('control-group');
-
-  // Check for errors and set correct error class
-  if (isset($element['#parents']) && form_get_error($element)) {
-    $attributes['class'][] = 'error';
-  }
-
+  // Add element's #type and #name as class to aid with JS/CSS selectors.
+  $attributes['class'] = array('form-item', 'control-group');
   if (!empty($element['#type'])) {
     $attributes['class'][] = 'form-type-' . strtr($element['#type'], '_', '-');
   }
@@ -111,29 +102,26 @@ function s4_form_element(&$variables) {
     case 'before':
     case 'invisible':
       $output .= ' ' . theme('form_element_label', $variables);
-      $output .= '<div class="controls">';
       $output .= ' ' . $prefix . $element['#children'] . $suffix . "\n";
       break;
 
     case 'after':
-      $output .= '<div class="controls">';
-      $variables['#children'] = ' ' . $prefix . $element['#children'] . $suffix;
+      $output .= ' ' . $prefix . $element['#children'] . $suffix;
       $output .= ' ' . theme('form_element_label', $variables) . "\n";
       break;
 
     case 'none':
     case 'attribute':
       // Output no label and no required marker, only the children.
-      $output .= '<div class="controls">';
       $output .= ' ' . $prefix . $element['#children'] . $suffix . "\n";
       break;
   }
 
-  if ( !empty($element['#description']) ) {
-    $output .= '<p class="help-block">' . $element['#description'] . "</p>\n";
+  if (!empty($element['#description'])) {
+    $output .= '<div class="help-block">' . $element['#description'] . "</div>\n";
   }
 
-  $output .= "</div></div>\n";
+  $output .= "</div>\n";
 
   return $output;
 }
