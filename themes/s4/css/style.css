@@ -425,3 +425,10 @@ body .vertical-tabs .form-type-textfield input {
   padding-left: 0;
   margin-bottom: 10px;
 }
+/** OVERLAY MODE **/
+.overlay #navigation,
+.overlay .breadcrumb,
+.overlay h1.title,
+.overlay #branding {
+  display: none;
+}
