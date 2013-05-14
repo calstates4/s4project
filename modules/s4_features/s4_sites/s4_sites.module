@@ -744,6 +744,10 @@ function s4_sites_form_site_node_form_alter(&$form, $form_state) {
     drupal_set_title(t('Request a new site'));
     drupal_add_js(drupal_get_path('module', 's4_sites') .'/js/s4_sites_accordion.js');
   }
+  else {
+  	$form['actions_bottom'] = $form['actions'];
+		$form['actions_bottom']['#weight'] = 40;
+  }
 }
 
 function s4_sites_form_site_node_form_add_default_forms($form, $form_state) {
