@@ -432,3 +432,9 @@ body .vertical-tabs .form-type-textfield input {
 .overlay #branding {
   display: none;
 }
+.views-exposed-form .row {
+  margin-top: 15px;
+}
+.views-exposed-form .row .views-widget {
+  width: 90%;
+}
