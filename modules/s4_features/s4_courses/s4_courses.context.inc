@@ -25,11 +25,6 @@ function s4_courses_context_default_contexts() {
         'node_form' => '0',
       ),
     ),
-    'user_edit_course' => array(
-      'values' => array(
-        1 => 1,
-      ),
-    ),
   );
   $context->reactions = array(
     'block' => array(

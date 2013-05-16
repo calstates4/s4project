@@ -684,7 +684,7 @@ function s4_courses_views_default_views() {
       'selected' => 1,
       'skip_confirmation' => 0,
       'override_label' => 1,
-      'label' => 'Place students',
+      'label' => 'Signup students',
       'postpone_processing' => 0,
     ),
   );
@@ -882,7 +882,8 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '5';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
-  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['style_plugin'] = 'list';
+  $handler->display->display_options['style_options']['class'] = 'nav nav-pills';
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'fields';
@@ -903,7 +904,11 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['title']['element_type'] = 'h4';
+  $handler->display->display_options['fields']['title']['element_type'] = '0';
+  $handler->display->display_options['fields']['title']['element_label_type'] = '0';
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_wrapper_type'] = '0';
+  $handler->display->display_options['fields']['title']['element_default_classes'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Published */
@@ -1042,7 +1047,7 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['empty']['area']['table'] = 'views';
   $handler->display->display_options['empty']['area']['field'] = 'area';
   $handler->display->display_options['empty']['area']['label'] = 'No courses';
-  $handler->display->display_options['empty']['area']['content'] = '<p class="lead">It looks like you don\'t have any courses this semester.</p><p><strong>Don\'t panic:</strong> if you just registered for a course, it might be taking a while for your registration to get to our system. Also, in some situations we don\'t bring over courses unless they have a service learning, internship, or other training component. Check with your faculty if you think your course should show up here.</p>';
+  $handler->display->display_options['empty']['area']['content'] = '<p class="intro">It looks like you don\'t have any courses this semester.</p><p><strong>Don\'t panic:</strong> if you just registered for a course, it might be taking a while for your registration to get to our system. Also, in some situations we don\'t bring over courses unless they have a service learning, internship, or other training component. Check with your faculty if you think your course should show up here.</p>';
   $handler->display->display_options['empty']['area']['format'] = 'full_html';
   /* Relationship: Content: Term (field_term) */
   $handler->display->display_options['relationships']['field_term_nid']['id'] = 'field_term_nid';
@@ -1191,7 +1196,7 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['empty']['area']['table'] = 'views';
   $handler->display->display_options['empty']['area']['field'] = 'area';
   $handler->display->display_options['empty']['area']['label'] = 'No courses';
-  $handler->display->display_options['empty']['area']['content'] = '<p class="lead">No courses were found.</p>';
+  $handler->display->display_options['empty']['area']['content'] = '<p class="intro">No courses were found.</p>';
   $handler->display->display_options['empty']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   /* Relationship: Content: Faculty (field_course_faculty) */
@@ -1577,7 +1582,7 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
   $handler->display->display_options['header']['area']['label'] = 'Directions';
-  $handler->display->display_options['header']['area']['content'] = '<p class="lead">To begin looking for a site, click the <strong>Select this Course</strong> link near the course you are taking for this service.</p>';
+  $handler->display->display_options['header']['area']['content'] = '<p class="intro">To begin looking for a site, click the <strong>Select this Course</strong> link near the course you are taking for this service.</p>';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['empty'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
@@ -1705,7 +1710,7 @@ function s4_courses_views_default_views() {
     t('next ›'),
     t('last »'),
     t('No courses'),
-    t('<p class="lead">It looks like you don\'t have any courses this semester.</p><p><strong>Don\'t panic:</strong> if you just registered for a course, it might be taking a while for your registration to get to our system. Also, in some situations we don\'t bring over courses unless they have a service learning, internship, or other training component. Check with your faculty if you think your course should show up here.</p>'),
+    t('<p class="intro">It looks like you don\'t have any courses this semester.</p><p><strong>Don\'t panic:</strong> if you just registered for a course, it might be taking a while for your registration to get to our system. Also, in some situations we don\'t bring over courses unless they have a service learning, internship, or other training component. Check with your faculty if you think your course should show up here.</p>'),
     t('field_term'),
     t('All'),
     t('Page'),
@@ -1713,7 +1718,7 @@ function s4_courses_views_default_views() {
     t('Manage your courses'),
     t('Staff course listing'),
     t('Courses'),
-    t('<p class="lead">No courses were found.</p>'),
+    t('<p class="intro">No courses were found.</p>'),
     t('field_course_faculty'),
     t('View'),
     t('Subject'),
@@ -1744,7 +1749,7 @@ function s4_courses_views_default_views() {
     t('Student course block'),
     t('Sign up as part of a course'),
     t('Directions'),
-    t('<p class="lead">To begin looking for a site, click the <strong>Select this Course</strong> link near the course you are taking for this service.</p>'),
+    t('<p class="intro">To begin looking for a site, click the <strong>Select this Course</strong> link near the course you are taking for this service.</p>'),
     t('User profile block'),
     t('Current courses'),
   );

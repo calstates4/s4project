@@ -333,6 +333,9 @@ function s4_courses_node_access($node, $op, $account) {
     return;
   }
   $course = field_get_items('node', $node, 'field_course');
+  if(!$course) {
+  	return;
+  }
   if($course[0]['nid']) {
     $course = node_load($course[0]['nid']);
     $faculty = field_get_items('node', $course, 'field_course_faculty');
