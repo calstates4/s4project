@@ -255,12 +255,14 @@ function s4_core_create_signup_form($form, &$form_state, $uid, $option = 'new', 
     foreach ($course_list as $course) {
       $course = node_load($course);
       $term = field_get_items('node', $course, 'field_term');
-      $term = node_load($term[0]['nid']);
-      $dates = field_get_items('node', $term, 'field_term_date_start');
-      if(strtotime($dates[0]['value']) < time() && strtotime($dates[0]['value2']) > time()) {
-        $form['course']['#default_value'] = $course->nid;
+      if($term[0]['nid']) {
+        $term = node_load($term[0]['nid']);
+        $dates = field_get_items('node', $term, 'field_term_date_start');
+        if(strtotime($dates[0]['value']) < time() && strtotime($dates[0]['value2']) > time()) {
+          $form['course']['#default_value'] = $course->nid;
+        }
+        $form['course']['#options'][$term->title][$course->nid] = $course->title;
       }
-      $form['course']['#options'][$term->title][$course->nid] = $course->title;
     }
 
     
@@ -278,13 +280,15 @@ function s4_core_create_signup_form($form, &$form_state, $uid, $option = 'new', 
        ->fields('n', array('nid', 'title'))
        ->condition('type', 'site')
        ->orderBy('title', 'ASC');
-  if(count($default_program)) {
+  if($default_program && count($default_program)) {
   	$programs = array();
   	foreach($default_program as $program) {
   		$programs[] = $program['tid'];
   	}
-		$query->leftJoin('field_data_field_site_restrict', 'r', 'r.entity_id = n.nid AND r.entity_type = :node', array(':node' => 'node'));
-		$query->condition('r.field_site_restrict_tid', $programs, 'IN');  
+	if(count($programs)) {
+	  $query->leftJoin('field_data_field_site_restrict', 'r', 'r.entity_id = n.nid AND r.entity_type = :node', array(':node' => 'node'));
+	  $query->condition('r.field_site_restrict_tid', $programs, 'IN');
+	}
   }
   
   $results = $query->execute();
