@@ -501,7 +501,7 @@ function s4_courses_action_info() {
     ),
     's4_courses_bulk_signup_students_action' => array(
       'type' => 'system',
-      'label' => t('Signup students in bulk'),
+      'label' => t('Place students in bulk'),
       'configurable' => TRUE,
       'triggers' => array('any'),
     ),
@@ -723,7 +723,7 @@ function s4_courses_bulk_signup_students_action_submit($form, $form_state) {
     'course'   => $form_state['input']['course'],
     'site'   => $form_state['input']['site'],
     'site-staff'   => $form_state['input']['site-staff'],
-    'hours'   => $form_state['input']['hours'],
+    'hours'   => ($form_state['input']['hours']) ? intval($form_state['input']['hours']) : 0,
     'email-student' => $form_state['input']['email-student'],
   );
   return $params;

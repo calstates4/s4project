@@ -684,7 +684,7 @@ function s4_courses_views_default_views() {
       'selected' => 1,
       'skip_confirmation' => 0,
       'override_label' => 1,
-      'label' => 'Signup students',
+      'label' => 'Place students',
       'postpone_processing' => 0,
     ),
   );
