@@ -40,7 +40,6 @@ dependencies[] = user
 dependencies[] = libraries
 
 ; Contrib
-dependencies[] = better_exposed_filters
 dependencies[] = captcha
 dependencies[] = cck
 dependencies[] = cck_phone
