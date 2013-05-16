@@ -11,8 +11,6 @@ api = 2
 ;libraries[profiler][destination] = "libraries/profiler"
 
 ; Contrib Modules
-projects[better_exposed_filters][subdir] = "contrib"
-projects[better_exposed_filters][version] = "3.0-beta3"
 
 projects[captcha][subdir] = "contrib"
 projects[captcha][version] = "1.x-dev"
