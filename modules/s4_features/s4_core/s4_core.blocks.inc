@@ -261,7 +261,7 @@ function s4_core_block_s4_page_notifications() {
 */
 function s4_core_block_s4_add_new_site() {
   global $user;
-  if (user_access('moderate site information') && !s4_core_user_can_signup($user)) {
+  if (user_access('moderate site information')) {
     $add_link = l(t('<i class="icon-plus icon-white"></i> Add new site'),
                 'node/add/site',
                 array('html' => TRUE,
@@ -273,7 +273,7 @@ function s4_core_block_s4_add_new_site() {
                 'site-list/manage',
                 array('html' => TRUE,
                      'attributes' =>
-                    array('class' => 'btn btn-success')
+                    array('class' => 'btn')
                 )
                 );
     return array('content' => $add_link . ' ' . $manage_link);
