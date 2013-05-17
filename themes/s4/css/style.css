@@ -91,6 +91,9 @@ h1.title {
 form label {
   font-weight: bold;
 }
+.field-multiple-table .btn-danger {
+  margin-top: 10px;
+}
 fieldset legend {
   font-size: 14px;
   line-height: normal;
