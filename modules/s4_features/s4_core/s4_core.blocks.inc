@@ -89,7 +89,7 @@ function s4_core_block_user_progress() {
 
   $number = 1;
   foreach ($status as $key => $stat) {
-    $status[$key]['data'] = '<div><span class="number">' . ($number) . '</span>' . $stat['data'] . '</div>';
+    $status[$key]['data'] = '<div class="arrow-body"><span class="number">' . ($number) . '</span>' . $stat['data'] . '</div>';
     if (isset($stat['href'])) {
       $status[$key]['data'] = l($status[$key]['data'], $stat['href'], array('html' => TRUE));
       $status[$key]['class'][] = 'clickable';
@@ -99,7 +99,7 @@ function s4_core_block_user_progress() {
       $status[$key]['data'] .= $stat['selection'];
       unset($status[$key]['selection']);
     }
-    $status[$key]['class'][] = 'items-' . count($status);
+    $status[$key]['class'][] = 'span' . floor(11 / count($status));
     $status[$key]['data'] .= '<span class="arrow"></span>';
     $number++;
   }
@@ -107,8 +107,8 @@ function s4_core_block_user_progress() {
         ? 'finished'
         :   '';
   $status[] = array('data' => '<div>Done!</div>',
-            'class' => array('complete', $finished));
-  return array('content' => theme('item_list', array('items' => $status, 'attributes' => array('class' => 'user-signup-status'))) . '<div class="clearfix"></div>');
+            'class' => array('span1', 'complete', $finished));
+  return array('content' => theme('item_list', array('items' => $status, 'attributes' => array('class' => array('user-signup-status', 'row')))) . '<div class="clearfix"></div>');
 }
 
 /**

@@ -1,34 +1,69 @@
-#user-progress #block-s4-core-user-progress { margin-bottom: 30px; }
-	#block-s4-core-user-progress h2 { font-size: 1.2em; }
-.user-signup-status { clear: both; }
-	.user-signup-status li, div.signup, .user-signup-status .selection { border-radius: 4px 0 0 4px; -moz-border-radius: 4px 0 0 4px; -webkit-border-radius: 4px 0 0 4px; height: 32px; font-size: 1.2em; padding-right: 10px; }
-	.user-signup-status li { margin: 0px 20px 0px 0px; float: left; color: #fff; background: #a6a6a6; list-style-type: none;  padding: 0 20px 0 0;  }
-		li.items-4 { width: 18%; }
-		li.items-3 { width: 25%; }
-		li.items-2 { width: 40%; }
-			.user-signup-status li { position: relative; }
-			.user-signup-status li .arrow {
-				width: 0; height: 0; border-top: 16px solid transparent; border-bottom: 16px solid transparent; border-left: 16px solid #a6a6a6; position: absolute; right: -16px; top: 0;
-			}
-		.user-signup-status li div { margin: 5px 0 5px 15px; }
-		.user-signup-status li a, .signup a { color: #fff !important; text-decoration: none; }
-	.user-signup-status li.done, .signup.signed-up { background-color: #75b902; }
-	.user-signup-status li.done .arrow {  border-left-color: #75b902; } 
-		.user-signup-status li.complete.finished { background-color: #e15440 !important; box-shadow: 0 0 10px #e15440; }
-		.user-signup-status li .signup:hover { background-color: #868686; }
-		.user-signup-status li:hover .arrow { border-left-color: #868686;}
-	.user-signup-status li.clickable:hover, .signup:hover, .signup.remove { background-color: #e15440; }
-	.user-signup-status .number { display: block; float: left; margin: -1px 10px 0 0; background: rgba(0,0,0,0.4); color: #fff; width: 24px; height: 24px; font-size: 18px;  border-radius: 12px; -moz-border-radius: 12px; -webkit-border-radius: 12px; text-align: center; }
-	
-	.user-signup-status li.complete { background-image: none; background-color: #5492a9;  }
-	li.complete div { text-align: center; }
 
-.user-signup-status .selection { font-size: .9em; background-color: #5492a9; margin: 7px 0 0 0; height: auto; padding: 0 6px; overflow: hidden; white-space: nowrap;}
-
-.hours-field { font-size: 150%; margin: 15px 0; }
-
-.private-label { color: #222; font-weight: normal; }
-
-@media (max-width: 767px) {
-	#user-progress li { width: 90%; float: none; margin-bottom: 5px;}
+ul.user-signup-status {
+	margin-top: 20px;
+	margin-bottom: 15px;
 }
+
+ul.user-signup-status li {
+	position: relative;
+	margin-bottom: 8px;
+}
+
+.user-signup-status .arrow-body {
+	border-radius: 4px 0 0 4px;
+	-moz-border-radius: 4px 0 0 4px;
+	-webkit-border-radius: 4px 0 0 4px;
+	background: #868686;
+	height: 32px;
+	font-size: 1.2em;
+	color: #fff;
+	font-weight: bold;
+	line-height: 32px;
+}
+
+.user-signup-status .arrow {
+	width: 0;
+	height: 0;
+	border-top: 16px solid transparent;
+	border-bottom: 16px solid transparent;
+	border-left: 16px solid #868686;
+	position: absolute;
+	right: -16px; top: 0;
+}
+
+.user-signup-status .number { 
+	display: block;
+	float: left;
+	margin: 3px 10px 0 10px;
+	background: rgba(0,0,0,0.4);
+	color: #fff;
+	width: 24px;
+	height: 24px;
+	font-size: 18px;
+	border-radius: 12px;
+	-moz-border-radius: 12px;
+	-webkit-border-radius: 12px;
+	text-align: center;
+	line-height: normal;
+}
+
+.user-signup-status .complete div {
+	background-color: #5492a9;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	color: #fff;
+	height: 32px;
+	font-size: 1.2em;
+	line-height: 32px;
+	text-align: center;
+}
+
+.user-signup-status li.done .arrow-body {
+	background-color: #75b902;
+}
+
+.user-signup-status li.done .arrow {
+	border-left-color: #75b902;
+}
+
