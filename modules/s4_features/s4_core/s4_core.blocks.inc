@@ -19,7 +19,7 @@ function s4_core_block_user_progress() {
   }
 
   if (isset($site)) {
-    $site_selection = '<div class="selection">' . l($site->title, 'node/' . $site->nid) . '</div>';
+    $site_selection = '<div class="selection label label-info">' . l($site->title, 'node/' . $site->nid) . '</div>';
   }
   if (isset($_SESSION['s4_signup_program']) && !isset($_SESSION['s4_signup_course'])) {
     $program = taxonomy_term_load($_SESSION['s4_signup_program']);
@@ -27,7 +27,7 @@ function s4_core_block_user_progress() {
             'id'     => 'status-program',
             'class'  => array('done'),
             'href'  => null,
-            'selection' => '<div class="selection">' . $program->name .'</div>',
+            'selection' => '<div class="selection label label-info">' . $program->name .'</div>',
             );
   }
   $status['site'] = array('data'  => 'Site',
@@ -44,7 +44,7 @@ function s4_core_block_user_progress() {
       $site_coordinators = views_get_view_result('site_coordinators', 'block', $site->nid);
     }
     if (isset($coordinator)) {
-      $coordinator_selection = '<div class="selection">' .
+      $coordinator_selection = '<div class="selection label label-info">' .
             l($coordinator->title, 'node/' . $coordinator->nid) . '</div>';
     }
     if (!$site || count($site_coordinators)) {
@@ -365,7 +365,9 @@ function s4_core_block_s4_current_user_link() {
   	$links[] = l('<i class="icon-cog"></i> '. t('Site settings'), 's4/settings', array('html' => TRUE));
   }
   $links[] = array('data' => '', 'class' => array('divider-vertical'));
-  return array('content' => theme('item_list', array('items' => $links, 'attributes' => array('class' => array('nav')))));
+  return array('content' => '<div class="hidden-phone">' . 
+    theme('item_list', array('items' => $links, 'attributes' => array('class' => array('nav')))) .
+    '</div>');
 
 }
 
