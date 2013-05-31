@@ -381,7 +381,7 @@ function s4_courses_edit_course_restrict_form() {
   $default_email = field_get_items('node', $node, 'field_course_faculty_email');
 
   $form['message'] = array(
-    '#markup' => t('You can add sites to your course by browsing the !link and clicking the "Add to my course" buttons on the right.',
+    '#markup' => t('You can add sites to your course by browsing the !link and clicking the "Add to my course" buttons on the left.',
       array('!link' => l(t('site list'), 'site-list'))),
   );
 
