@@ -4,6 +4,12 @@
  * Implements hook_install().
  */
 function s4_sites_install() {
+  
+  /** Disable the feeds log view. **/
+  $views_status = variable_get('views_defaults', array());
+	$views_status['feeds_log'] = TRUE;
+	variable_set('views_defaults', $views_status);
+  
   db_update('block')
     ->condition('module', 'views')
     ->condition('delta', '-exp-sites-page')

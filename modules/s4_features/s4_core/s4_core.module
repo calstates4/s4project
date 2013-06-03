@@ -114,12 +114,12 @@ function s4_core_node_view($node, $view_mode) {
   }
   if ($node->type == 'site' && s4_core_user_can_signup()) {
     if (!s4_core_signup_access($node)) {
-      $output = '<div class="signup denied"><div class="icon"></div>You can\'t sign up for this site.</div>';
+      $output = '<div class="btn disabled"><i class="icon-remove"> You can\'t sign up for this site.</div>';
     }
     else {
-      $output = '<div class="signup"><div class="icon"></div>' .
-            l(t('Signup for this site'), 's4/signup/site/' . $node->nid,
-             array('attributes' => array('data-target' => 'status-site'))) . '</div>';
+      $output = l('<i class="icon-ok-circle icon-white"></i> ' . t('Select this site'), 's4/signup/site/' . $node->nid,
+             array('html' => TRUE,
+             'attributes' => array('class' => array('btn', 'btn-primary', 'btn-large', 'btn-block'))));
     }
     $node->content['s4_core_signup_select_site'] = array(
       '#type' => 'item',
@@ -1857,7 +1857,7 @@ function s4_core_field_formatter_view($entity_type, $entity, $field, $instance, 
      foreach ($items as $delta => $item) {
       $output = array();
       // @todo - the map link wrapper should move out to a theme
-    $output[] = '<div class="map-link-wrapper item-list">';
+    $output[] = '<div class="map-link-wrapper item-list hidden-phone">';
     $output[] = '<span>';
     $output[] = '<div class="map-pointer"></div>';
     $output[] = '<a href="#" class="map-link" lat="' . $item['latitude'] . '" lon="' . $item['longitude'] . '"></a>';

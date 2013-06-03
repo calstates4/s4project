@@ -4,10 +4,15 @@ class views_handler_s4_user_course_select extends views_handler_field {
 
   function render($values) {
     if (isset($_SESSION['s4_signup_course']) && $_SESSION['s4_signup_course'] == $values->nid) {
-      return '<div class="signup signed-up"><div class="icon"></div>' .
-        l(t('Course selected'), 's4/signup/course/' . $values->nid,
-        array('attributes' => array('data-target' => 'signup-course')))
-        . '</div>';
+      
+            return '<a class="btn btn-info disabled"><i class="icon-check icon-white"></i> Program selected</a>';
+return l('<i class="icon-check icon-white"></i> ' .
+				 t('Course selected'), 
+				 's4/signup/course/' . $values->nid,
+         array('html' => TRUE,
+         			 'attributes' => array(
+			         	  'class' => array('btn', 'btn-info'),
+			         	  'data-target' => 'signup-course')));
     }
     global $user;
     $signups = s4_core_get_user_signups($user->uid);
@@ -23,16 +28,17 @@ class views_handler_s4_user_course_select extends views_handler_field {
                : 1;
         $count[$course->nid]++;
         if ($course->nid == $values->nid && ($max === 0 || $count[$course->nid] >= $max)) {
-          return '<div class="signup denied"><div class="icon"></div>' .
-              t('Already signed up') .
-               '</div>';
+          return '<a class="disabled btn btn-info"><i class="icon-white icon-plus"></i> Already placed with this course</a>';
         }
       }
     }
-    return '<div class="signup"><div class="icon"></div>' .
-      l(t('Select this course'), 's4/signup/course/' . $values->nid,
-        array('attributes' => array('data-target' => 'signup-course')))
-      . '</div>';
+    return l('<i class="icon-ok-circle icon-white"></i> ' . 
+    					t('Select this course'),
+    					's4/signup/course/' . $values->nid,
+			         array('html' => TRUE,
+			         	     'attributes' => array(
+			         	     'class' => array('btn', 'btn-primary'),
+			         	     'data-target' => 'signup-course')));
   }
 
   function query() {

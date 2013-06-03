@@ -24,6 +24,7 @@ function s4_core_views_default_views() {
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Your sites';
   $handler->display->display_options['css_class'] = 'intro';
+  $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -38,7 +39,6 @@ function s4_core_views_default_views() {
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
   $handler->display->display_options['header']['area']['label'] = 'Instructions';
-  $handler->display->display_options['header']['area']['empty'] = FALSE;
   $handler->display->display_options['header']['area']['content'] = 'You have been given access to edit and view the students within these sites:';
   $handler->display->display_options['header']['area']['format'] = 'filtered_html';
   /* Field: Content: Title */
@@ -116,6 +116,7 @@ function s4_core_views_default_views() {
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Recent activity';
   $handler->display->display_options['use_ajax'] = TRUE;
+  $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['access']['perm'] = 'view revisions';
   $handler->display->display_options['cache']['type'] = 'none';
@@ -126,7 +127,6 @@ function s4_core_views_default_views() {
   $handler->display->display_options['pager']['options']['items_per_page'] = '30';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['pager']['options']['id'] = '0';
-  $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['style_plugin'] = 'table';
   /* Relationship: Content revision: User */
   $handler->display->display_options['relationships']['uid']['id'] = 'uid';
@@ -247,7 +247,6 @@ function s4_core_views_default_views() {
     t('[field_first_name] [field_last_name]'),
     t('Type'),
     t('Title'),
-    t('node/[nid]'),
     t('Note'),
     t('[note] [log]'),
     t('Updated date'),
@@ -268,6 +267,7 @@ function s4_core_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Site staff';
+  $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -286,7 +286,6 @@ function s4_core_views_default_views() {
   $handler->display->display_options['empty']['area']['table'] = 'views';
   $handler->display->display_options['empty']['area']['field'] = 'area';
   $handler->display->display_options['empty']['area']['label'] = 'No results';
-  $handler->display->display_options['empty']['area']['empty'] = FALSE;
   $handler->display->display_options['empty']['area']['content'] = 'No search results found';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   /* Field: Content: Issues addressed */
@@ -483,7 +482,6 @@ function s4_core_views_default_views() {
     t('Page'),
     t('Feed'),
     t('[field_last_name], [field_first_name] '),
-    t('node/[nid]'),
     t(' at [field_site]'),
     t('Search coordinators'),
   );
@@ -503,6 +501,7 @@ function s4_core_views_default_views() {
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Students';
   $handler->display->display_options['use_ajax'] = TRUE;
+  $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['access']['perm'] = 'edit any signup content';
   $handler->display->display_options['cache']['type'] = 'none';
@@ -609,6 +608,7 @@ function s4_core_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Users';
+  $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['access']['perm'] = 'access user profiles';
   $handler->display->display_options['cache']['type'] = 'none';
@@ -824,6 +824,26 @@ function s4_core_views_default_views() {
   $handler->display->display_options['filters']['field_last_name_value']['expose']['label'] = 'Last Name';
   $handler->display->display_options['filters']['field_last_name_value']['expose']['operator'] = 'field_last_name_value_op';
   $handler->display->display_options['filters']['field_last_name_value']['expose']['identifier'] = 'field_last_name_value';
+  /* Filter criterion: User: E-mail */
+  $handler->display->display_options['filters']['mail']['id'] = 'mail';
+  $handler->display->display_options['filters']['mail']['table'] = 'users';
+  $handler->display->display_options['filters']['mail']['field'] = 'mail';
+  $handler->display->display_options['filters']['mail']['operator'] = 'contains';
+  $handler->display->display_options['filters']['mail']['group'] = 1;
+  $handler->display->display_options['filters']['mail']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['mail']['expose']['operator_id'] = 'mail_op';
+  $handler->display->display_options['filters']['mail']['expose']['label'] = 'E-mail';
+  $handler->display->display_options['filters']['mail']['expose']['operator'] = 'mail_op';
+  $handler->display->display_options['filters']['mail']['expose']['identifier'] = 'mail';
+  $handler->display->display_options['filters']['mail']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    4 => 0,
+    6 => 0,
+    3 => 0,
+    5 => 0,
+    7 => 0,
+  );
   /* Filter criterion: User: Name (raw) */
   $handler->display->display_options['filters']['name']['id'] = 'name';
   $handler->display->display_options['filters']['name']['table'] = 'users';
@@ -855,6 +875,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['filters']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
   $handler->display->display_options['filters']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['filters']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['group'] = 1;
   $handler->display->display_options['filters']['field_site_restrict_tid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['operator_id'] = 'field_site_restrict_tid_op';
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['label'] = 'Program';
@@ -889,12 +910,12 @@ function s4_core_views_default_views() {
     t('Login ID'),
     t('Last login'),
     t('view'),
-    t('user/[uid]'),
     t('Manage user'),
     t('[nothing_1] | [edit_node]'),
     t('Programs'),
     t('Current placements'),
     t('Make placement'),
+    t('E-mail'),
     t('Program'),
     t('Page'),
   );
@@ -913,6 +934,7 @@ function s4_core_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Sign up as part of a program';
+  $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['access']['perm'] = 'signup for service';
   $handler->display->display_options['cache']['type'] = 'none';
@@ -992,6 +1014,7 @@ function s4_core_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Forms';
+  $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['access']['perm'] = 'create webform content';
   $handler->display->display_options['cache']['type'] = 'none';
@@ -1039,7 +1062,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['header']['area']['field'] = 'area';
   $handler->display->display_options['header']['area']['empty'] = TRUE;
   $handler->display->display_options['header']['area']['content'] = '<h2>Online Forms</h2>
-<p><a class="button" href="node/add/webform"><span class="add"></span>Add online form</a> <a class="button" href="forms/public">View public form page</a></p>
+<p><a class="btn" href="node/add/webform"><i class="icon-plus"></i> Add online form</a> <a class="btn" href="forms/public">View public form page</a></p>
 <p><strong>Online forms</strong> resemble paper or database forms and allow users to input new information while also allowing “staff” to query and display existing data in order to run reports. The collected data in the online forms can be downloaded and merged with other data for research purposes. These reports will “tie-back” to the Report tab in S4. </p>
 ';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
@@ -1047,7 +1070,6 @@ function s4_core_views_default_views() {
   $handler->display->display_options['empty']['area']['id'] = 'area';
   $handler->display->display_options['empty']['area']['table'] = 'views';
   $handler->display->display_options['empty']['area']['field'] = 'area';
-  $handler->display->display_options['empty']['area']['empty'] = FALSE;
   $handler->display->display_options['empty']['area']['content'] = 'No online forms created yet.';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   /* Field: Content: Title */
@@ -1057,7 +1079,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Field: Content: Webform submission count */
+  /* Field: Webform: Webform submission count */
   $handler->display->display_options['fields']['webform_submission_count_node']['id'] = 'webform_submission_count_node';
   $handler->display->display_options['fields']['webform_submission_count_node']['table'] = 'node';
   $handler->display->display_options['fields']['webform_submission_count_node']['field'] = 'webform_submission_count_node';
@@ -1128,7 +1150,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['header']['area']['field'] = 'area';
   $handler->display->display_options['header']['area']['empty'] = TRUE;
   $handler->display->display_options['header']['area']['content'] = '<h2>Downloadable Forms</h2>
-<p><a class="button" href="node/add/downloadable-form"><span class="add"></span>Add downloadable form</a></p>
+<p><a class="btn" href="node/add/downloadable-form"><i class="icon-plus"></i> Add downloadable form</a></p>
 <p><strong>Downloadable Forms</strong> are your traditional electronic/paper forms.  This section will allow you to download any electronic template forms you have created to support your program and for which you need/want a hard file copy.   Staff would be responsible for inputting the information gathered into a database or excel file and cannot be stored in S4.<p>';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['empty'] = FALSE;
@@ -1136,7 +1158,6 @@ function s4_core_views_default_views() {
   $handler->display->display_options['empty']['area']['id'] = 'area';
   $handler->display->display_options['empty']['area']['table'] = 'views';
   $handler->display->display_options['empty']['area']['field'] = 'area';
-  $handler->display->display_options['empty']['area']['empty'] = FALSE;
   $handler->display->display_options['empty']['area']['content'] = 'No downloadable forms created yet.';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   $handler->display->display_options['defaults']['fields'] = FALSE;
@@ -1194,7 +1215,6 @@ function s4_core_views_default_views() {
   $handler->display->display_options['empty']['area']['id'] = 'area';
   $handler->display->display_options['empty']['area']['table'] = 'views';
   $handler->display->display_options['empty']['area']['field'] = 'area';
-  $handler->display->display_options['empty']['area']['empty'] = FALSE;
   $handler->display->display_options['empty']['area']['content'] = 'There are no forms available to download.';
   $handler->display->display_options['empty']['area']['format'] = 'filtered_html';
   $handler->display->display_options['defaults']['fields'] = FALSE;
@@ -1367,7 +1387,7 @@ function s4_core_views_default_views() {
     t('next ›'),
     t('last »'),
     t('<h2>Online Forms</h2>
-<p><a class="button" href="node/add/webform"><span class="add"></span>Add online form</a> <a class="button" href="forms/public">View public form page</a></p>
+<p><a class="btn" href="node/add/webform"><i class="icon-plus"></i> Add online form</a> <a class="btn" href="forms/public">View public form page</a></p>
 <p><strong>Online forms</strong> resemble paper or database forms and allow users to input new information while also allowing “staff” to query and display existing data in order to run reports. The collected data in the online forms can be downloaded and merged with other data for research purposes. These reports will “tie-back” to the Report tab in S4. </p>
 '),
     t('No online forms created yet.'),
@@ -1376,7 +1396,7 @@ function s4_core_views_default_views() {
     t('Page'),
     t('Downloadable forms'),
     t('<h2>Downloadable Forms</h2>
-<p><a class="button" href="node/add/downloadable-form"><span class="add"></span>Add downloadable form</a></p>
+<p><a class="btn" href="node/add/downloadable-form"><i class="icon-plus"></i> Add downloadable form</a></p>
 <p><strong>Downloadable Forms</strong> are your traditional electronic/paper forms.  This section will allow you to download any electronic template forms you have created to support your program and for which you need/want a hard file copy.   Staff would be responsible for inputting the information gathered into a database or excel file and cannot be stored in S4.<p>'),
     t('No downloadable forms created yet.'),
     t('Public forms'),
@@ -1402,6 +1422,7 @@ function s4_core_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Your sites';
+  $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -1429,7 +1450,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['fields']['field_site']['id'] = 'field_site';
   $handler->display->display_options['fields']['field_site']['table'] = 'field_data_field_site';
   $handler->display->display_options['fields']['field_site']['field'] = 'field_site';
-  /* Field: Content: Site staff */
+  /* Field: Field: Site staff */
   $handler->display->display_options['fields']['field_coordinator']['id'] = 'field_coordinator';
   $handler->display->display_options['fields']['field_coordinator']['table'] = 'field_data_field_coordinator';
   $handler->display->display_options['fields']['field_coordinator']['field'] = 'field_coordinator';
@@ -1509,7 +1530,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['fields']['field_site']['id'] = 'field_site';
   $handler->display->display_options['fields']['field_site']['table'] = 'field_data_field_site';
   $handler->display->display_options['fields']['field_site']['field'] = 'field_site';
-  /* Field: Content: Site staff */
+  /* Field: Field: Site staff */
   $handler->display->display_options['fields']['field_coordinator']['id'] = 'field_coordinator';
   $handler->display->display_options['fields']['field_coordinator']['table'] = 'field_data_field_coordinator';
   $handler->display->display_options['fields']['field_coordinator']['field'] = 'field_coordinator';
@@ -1577,7 +1598,6 @@ function s4_core_views_default_views() {
     t('last »'),
     t('View'),
     t('Record # [nid]'),
-    t('node/[nid]'),
     t('Course'),
     t('Site'),
     t('Site staff'),

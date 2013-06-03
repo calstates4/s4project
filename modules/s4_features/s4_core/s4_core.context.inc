@@ -143,6 +143,7 @@ function s4_core_context_default_contexts() {
         ),
       ),
     ),
+    'menu' => 'form',
   );
   $context->condition_mode = 1;
 
@@ -378,7 +379,7 @@ function s4_core_context_default_contexts() {
         'views--exp-s4_search-page' => array(
           'module' => 'views',
           'delta' => '-exp-s4_search-page',
-          'region' => 'content_top_left',
+          'region' => 'content',
           'weight' => '-10',
         ),
       ),
@@ -417,15 +418,15 @@ function s4_core_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
-        'views-s4_search-block_1' => array(
-          'module' => 'views',
-          'delta' => 's4_search-block_1',
-          'region' => 'content_right',
-          'weight' => '-10',
-        ),
         'views-s4_search_students-block' => array(
           'module' => 'views',
           'delta' => 's4_search_students-block',
+          'region' => 'content_right',
+          'weight' => '-10',
+        ),
+        'views-s4_search-block_1' => array(
+          'module' => 'views',
+          'delta' => 's4_search-block_1',
           'region' => 'content_right',
           'weight' => '-10',
         ),

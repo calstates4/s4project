@@ -1,71 +1,76 @@
-<div id="branding">
-	<div class="container">
-		<?php if ($site_name): ?>
-			<h1>
-				<?php if ($logo): ?>
-				<a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home">
-					<img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
-				</a>
-				<?php endif; ?>
-				<a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home">
-					<?php print $site_name; ?>
-				</a>
-				<?php if($original_title = variable_get('s4_original_site_title', FALSE)): ?>
-  			 <div class="original-title">
-  			   <?php print t('Part of !link', array('!link' => l($original_title, '<front>'))); ?>
-  			 </div>
-			<?php endif; ?>
-			</h1>
-			
-		<?php endif; ?>
-		
-		<?php if($page['search']): ?>
-			<div id="search">
-				<?php print render($page['search']); ?>
-			</div>
-		<?php endif; ?>
-		<?php /*if($logged_in): ?>
-			<div id="dashboard-link" class="tool-link">
-				<span class="icon"></span>
-				<a href="<?php print $base_path; ?>dashboard">Dashboard</a>
-			</div>
-		<?php endif;*/ ?>
-	</div>
-	<div class="clear"></div>
-
-</div>
-<div id="navigation">
-	<div class="container">
-		<?php print theme('links__system_main_menu', array(
-          'links' => $main_menu,
-          'attributes' => array(
-            'id' => 'main-menu',
-            'class' => array('links', 'clearfix'),
-          ),
-        )); ?>
-	</div>
-</div>
-<?php if($page['content_top_wide']): ?>
-	<div id="user-progress">
+<div class="navbar">
+  <div class="navbar-inner" id="branding" >
 		<div class="container">
-		<?php print render($page['content_top_wide']); ?>
+				<?php if ($site_name): ?>
+					<h1 class="navbar-widget">
+						<?php if ($logo): ?>
+						<a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="brand">
+							<img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
+						</a>
+						<?php endif; ?>
+						<a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="brand">
+							<?php print $site_name; ?>
+						</a>
+						<?php 
+							$original_title = variable_get('s4_original_site_title', FALSE);
+							if($original_title && $original_title != $site_name): 
+						?>
+		  			 <div class="original-title">
+		  			   <?php print t('Part of !link', array('!link' => l($original_title, '<front>'))); ?>
+		  			 </div>
+					<?php endif; ?>
+					</h1>
+					
+				<?php endif; ?>
+			
+			<div class="pull-right navbar-widget">
+				<?php if($page['search']): ?>
+					<div id="search">
+						<?php print render($page['search']); ?>
+					</div>
+				<?php endif; ?>
+			</div>
+		</div>
+  </div>
+</div>
+<div class="navbar">
+  <div class="navbar-inner" id="navigation" >
+		<div class="container">
+			<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </button>
+			<div class="nav-collapse collapse">
+			<?php print theme('links__system_main_menu', array(
+	          'links' => $main_menu,
+	          'attributes' => array(
+	            'id' => 'main-menu',
+	            'class' => array('links', 'nav', 'pull-right'),
+	          ),
+	        )); ?>
+			</div>
 		</div>
 	</div>
+</div>
+<div class="container">
+<?php if($page['content_top_wide']): ?>
+	<div id="user-progress">
+		<?php print render($page['content_top_wide']); ?>
+	</div>
 <?php endif; ?>
-<?php if ($messages): ?>
-	    <div id="messages">
-		      <?php print $messages; ?>
-	    </div>
-	<?php endif; ?>
 <div id="page">
-	
-	<div class="container">
 	
 	
 	<div class="page-header">
 		<?php if ($breadcrumb) print $breadcrumb; ?>
+		<?php if ($messages): ?>
+		    <div id="messages">
+			      <?php print $messages; ?>
+		    </div>
+		<?php endif; ?>
 		<?php if($page['content_subscriptions']): ?>
-			<div id="subscriptions">
+			<div id="subscriptions" class="pull-right">
 				<?php print render($page['content_subscriptions']); ?>
 			</div>
 		<?php endif; ?>
@@ -85,29 +90,39 @@
       <?php if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php endif; ?>
 	</div>
 		<?php if($page['content_top_left'] || $page['content_top_right']): ?>
-			<div id="content_top">
+			<div id="content_top" class="row">
 				<?php if($page['content_top_left']): ?>
-					<div class="column-equal">
+					<div <?php if($page['content_top_right']): ?>class="span6"<?php else: ?>class="span12"<?php endif; ?>>
 						<?php print render($page['content_top_left']); ?>
 					</div>
 				<?php endif; ?>
 				<?php if($page['content_top_right']): ?>
-					<div class="column-equal column-last">
+					<div class="span6">
 						<?php print render($page['content_top_right']); ?>
 					</div>
 				<?php endif; ?>
 			</div>
 		<?php endif; ?>
-		<div id="content_middle">
-			<?php if($page['content']): ?>
-				<div id="content">
-					<?php print render($page['content']); ?>
-				</div>
-			<?php endif; ?>
-			<?php if($page['content_right']): ?>
-				<div class="column column-last">
-					<?php print render($page['content_right']); ?>
-				</div>
+		<div id="content_middle" class="row">
+			<?php if($flip_columns): ?>
+					<div class="span4 column pull-right">
+						<?php print render($page['content_right']); ?>
+					</div>
+					
+					<div id="content" class="span8 pull-left">
+						<?php print render($page['content']); ?>
+					</div>
+			<?php else: ?>
+				<?php if($page['content']): ?>
+					<div id="content" <?php if($page['content_right']): ?>class="span8"<?php else: ?>class="span12"<?php endif; ?>>
+						<?php print render($page['content']); ?>
+					</div>
+				<?php endif; ?>
+				<?php if($page['content_right']): ?>
+					<div class="span4 column">
+						<?php print render($page['content_right']); ?>
+					</div>
+				<?php endif; ?>
 			<?php endif; ?>
 		</div>
 		<?php if($page['content_bottom']): ?>
@@ -115,7 +130,6 @@
 			<?php print render($page['content_bottom']); ?>
 		<?php endif; ?>
 	</div>
-	<div class="clear"></div>
 </div>
 <?php if($page['footer_map']): ?>
 <div id="footer-map">
@@ -125,30 +139,10 @@
 </div>
 <?php endif; ?>
 
-<?php if($page['footer_left'] || $page['footer_middle'] || $page['footer_right'] || $page['footer_bottom']): ?>
-	<div id="footer">
-		<div class="container">
-			<?php if($page['footer_left']): ?>
-				<div class="triptych">
-					<?php print render($page['footer_left']); ?>
-				</div>
-			<?php endif; ?>
-			<?php if($page['footer_middle']): ?>
-				<div class="triptych margin">
-					<?php print render($page['footer_middle']); ?>
-				</div>
-			<?php endif; ?>
-			<?php if($page['footer_right']): ?>
-				<div class="triptych margin">
-					<?php print render($page['footer_right']); ?>
-				</div>
-			<?php endif; ?>
-			<div class="clear"></div>
-			<?php if($page['footer_bottom']): ?>
-				<?php print render($page['footer_bottom']); ?>
-			<?php endif; ?>
-			<div class="clear">
-			</div>
+<?php if($page['footer']): ?>
+	<div id="footer" class="row">
+		<div class="span12">
+			<?php print render($page['footer']); ?>
 		</div>
 	</div>
 <?php endif; ?>

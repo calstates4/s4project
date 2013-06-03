@@ -1,33 +1,32 @@
-name=Student Signup Theme
-description=Theme for the student signup system
+name=S4 Theme
+description=A base theme for S4
 version=1.0
 core=7.x
 
 
+stylesheets[all][] = bootstrap/css/bootstrap.css
 stylesheets[all][] = css/style.css
 stylesheets[all][] = css/colors.css
 stylesheets[print][] = css/print.css
 scripts[] = js/s4.js
 scripts[] = js/placeholder.js
+scripts[] = bootstrap/js/bootstrap.js
 
 ;Overriding the core css files
 ;stylesheets[all][] = system.menus.css
 
 
-regions[search] 			= Search
-regions[site_navigation]	= Site Navigation
+regions[search] 							 = Search
+regions[site_navigation]			 = Site Navigation
 
-regions[help]				= Help
+regions[help]									 = Help
 regions[content_subscriptions] = Content subscriptions
-regions[content_top_wide]	= Content Top Wide
-regions[content_top_left] 	= Content Top Left
-regions[content_top_right]  = Content Top Right
-regions[content] 			= Content
-regions[content_right] 		= Content Right
-regions[content_bottom] 	= Content Bottom
-
-regions[footer_map]			= Footer Map
-regions[footer_left]		= Footer Left
-regions[footer_middle]		= Footer Middle
-regions[footer_right]		= Footer Right
-regions[footer_bottom]		= Footer Bottom
+regions[content_top_wide]			 = Content Top Wide
+regions[content_top_left] 		 = Content Top Left
+regions[content_top_right]  	 = Content Top Right
+regions[content] 							 = Content
+regions[content_right] 				 = Content Right
+regions[content_bottom] 			 = Content Bottom
+															 
+regions[footer_map]       		 = Footer map
+regions[footer]       				 = Footer

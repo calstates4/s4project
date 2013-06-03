@@ -2,7 +2,7 @@ name = S4 - Students Signup for Service and Stuff
 description = A site profile for students to sign up with university community partners for volunteer or internship work
 files[] = student_signup.profile
 
-core = 6.x
+core = 7.x
 theme = s4
 
 
@@ -57,7 +57,6 @@ dependencies[] = ds
 dependencies[] = ds_extras
 dependencies[] = email
 dependencies[] = entity
-dependencies[] = fancybox
 dependencies[] = features
 dependencies[] = feeds
 dependencies[] = feeds_ui
@@ -69,9 +68,8 @@ dependencies[] = gmap
 dependencies[] = gmap_location
 dependencies[] = gmap_macro_builder
 dependencies[] = guiders_js
-dependencies[] = imce
-dependencies[] = imce_wysiwyg
 dependencies[] = insert
+dependencies[] = jquery_update
 dependencies[] = job_scheduler
 dependencies[] = link
 dependencies[] = location
@@ -122,7 +120,7 @@ dependencies[] = webform
 dependencies[] = workbench
 dependencies[] = workbench_moderation
 dependencies[] = wysiwyg
-dependencies[] = wysiwyg_spellcheck
+dependencies[] = ckeditor
 
 ; Custom
 dependencies[] = s4_core

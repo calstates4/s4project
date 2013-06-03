@@ -87,7 +87,7 @@ function s4_core_signup($type, $nid) {
             '<p>' .
                  l(t('Agree'), 's4/signup/' . $type . '/' . $site->nid,
                    array('query' => array('agreed' => 1),
-                          'attributes' => array('class' => array('button')))) .
+                          'attributes' => array('class' => array('btn')))) .
                  ' ' . l(t('Return to site'), 'node/' . $site->nid) .
             '</p>';
       }

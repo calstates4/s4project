@@ -177,13 +177,9 @@ function s4_reporting_form_views_exposed_form_alter(&$form, $form_state) {
 	if ($saved_searches[$form_state['view']->name]) {
 		$saved_searches = views_savedsearches_load_multiple($user->uid, $form_state['view']->vid);
 		if (count($saved_searches)) {
-			$fancybox_settings = variable_get('fancybox_settings', array());
-			if (!empty($fancybox_settings)) {
-				fancybox_activate($fancybox_settings);
-			}
 			drupal_add_js(drupal_get_path('module', 's4_reporting') .'/js/s4_reporting.views.js');
 			$form['show-searches'] = array(
-				'#markup' => '<a href="#saved-search-selector" id="show-searches" class="show-form-fancybox button" data-selector="#saved-search-selector">Saved searches</a>',
+				'#markup' => '<a href="#saved-search-selector" id="show-searches" class="show-form btn" data-toggle="modal">Saved searches</a>',
 			);
 		}
 	}
@@ -215,14 +211,31 @@ function s4_reporting_form_views_exposed_form_alter(&$form, $form_state) {
 }
 
 function s4_reporting_form_views_savedsearches_delete_search_form_alter(&$form, $form_state) {
-	$form['#prefix'] = '<div class="element-invisible"  id="saved-search-selector">';
-	$form['#suffix'] = '</div>';
+	$form['#prefix'] = '<div id="saved-search-selector" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="saved-search-selector" aria-hidden="true"><div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times</button>
+    <h3 id="myModalLabel">Saved searches</h3>
+  </div><div class="modal-body">';
+	$form['#suffix'] = '</div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  </div>
+</div>';
 	$form['saved_collapse']['#collapsible'] = FALSE;
 	$form['saved_collapse']['#collapsed'] = FALSE;
 }
 
 function s4_reporting_form_views_savedsearches_save_search_form_alter(&$form, $form_state) {
-	$form['name']['#title'] = t('Save this search as');
+	$form['set'] = array(
+		'#type' => 'fieldset',
+		'#title' => t('Save this search'),
+		'#collapsible' => TRUE,
+		'#collapsed' => TRUE,
+	);
+	$form['set']['name'] = $form['name'];
+	unset($form['name']);
+	$form['set']['submit'] = $form['submit'];
+	unset($form['submit']);
+	$form['set']['name']['#title'] = t('Save this search as');
 }
 
 function s4_reporting_form_report_node_form_alter(&$form, $form_state) {

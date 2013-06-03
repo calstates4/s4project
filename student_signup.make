@@ -46,9 +46,6 @@ projects[email][version] = "1.2"
 projects[entity][subdir] = "contrib"
 projects[entity][version] = "1.0-rc2"
 
-projects[fancybox][subdir] = "contrib"
-projects[fancybox][version] = "1.x-dev"
-
 projects[features][subdir] = "contrib"
 projects[features][version] = "1.0-beta4"
 
@@ -76,17 +73,14 @@ projects[gmap][version] = "1.x-dev"
 ;projects[Guiders-JS][subdir] = "contrib"
 ;projects[Guiders-JS][version] = "1.x-dev"
 
-projects[imce][subdir] = "contrib"
-projects[imce][version] = "1.5"
-
-projects[imce_wysiwyg][subdir] = "contrib"
-projects[imce_wysiwyg][version] = "1.0"
-
 projects[insert][subdir] = "contrib"
 projects[insert][version] = "1.1"
 
 projects[job_scheduler][subdir] = "contrib"
 projects[job_scheduler][version] = "2.0-alpha2"
+
+projects[jquery_update][subdir] = "contrib"
+projects[jquery_update][version] = "2.3"
 
 projects[libraries][subdir] = "contrib"
 projects[libraries][version] = "1.0"
@@ -176,7 +170,7 @@ projects[views_dynamic_fields][subdir] = "contrib"
 projects[views_dynamic_fields][version] = "1.x-dev"
 
 projects[views_exposed_groups][subdir] = "contrib"
-projects[views_exposed_groups][version] = "1.x-dev"
+projects[views_exposed_groups][version] = "1.0"
 
 projects[views_savedsearches][subdir] = "contrib"
 projects[views_savedsearches][version] = "1.0-beta1"
@@ -196,8 +190,8 @@ projects[webform][version] = "3.18"
 projects[wysiwyg][subdir] = "contrib"
 projects[wysiwyg][version] = "2.1"
 
-projects[wysiwyg_spellcheck][subdir] = "contrib"
-projects[wysiwyg_spellcheck][version] = "1.1"
+projects[wysiwyg_ckeditor][subdir] = "contrib"
+projects[wysiwyg_ckeditor][version] = "1.x-dev"
 
 ; Themes
 
@@ -214,13 +208,6 @@ projects[guiders_js_fixed][version] = "1.x-dev"
 projects[guiders_js_fixed][download][type] = "git"
 projects[guiders_js_fixed][download][url] = "http://git.drupal.org/sandbox/kevee/1355900.git"
 projects[guiders_js_fixed][download][branch] = "master"
-
-; Libraries
-; Download fancybox as a library
-libraries[fancybox][download][type] = "get"
-libraries[fancybox][download][url] = "http://fancybox.googlecode.com/files/jquery.fancybox-1.3.4.zip"
-libraries[fancybox][directory_name] = "fancybox"
-libraries[fancybox][destination] = "libraries"
 
 ; Download tinyMCE as a library
 libraries[tinymce][download][type] = "get"
@@ -243,7 +230,6 @@ libraries[signature-pad][destination] = "libraries"
 projects[wysiwyg][patch][] = "http://drupal.org/files/issues/wysiwyg-entity-exportables-624018-176_1.patch"
 projects[nodeformcols][patch][] = "http://drupal.org/files/nodeformcolum_captcha_error.patch"
 projects[cck_phone][] = "http://drupal.org/files/cck_phone_feeds_1160186_7.patch"
-projects[fancybox][patch][] = "http://drupal.org/files/fancybox_library_sub_folder-1378104-1.patch"
 projects[workbench_moderation][patch][] = "http://drupal.org/files/workbench_moderation_feeds-1470528-1.patch"
 projects[views_data_export][patch][] = "http://drupal.org/files/views_data_export_exposed_input_0.patch"
 projects[views][] = "http://drupal.org/files/views-taxonomy_multiple_term_names-1248300-36.patch"

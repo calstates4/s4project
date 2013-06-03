@@ -112,6 +112,7 @@ function s4_sites_field_default_fields() {
         'active' => 1,
         'module' => 'nodereference_url',
         'settings' => array(
+          'autocomplete_match' => 'contains',
           'edit_fallback' => 0,
           'fallback' => 'select',
           'node_link' => array(
@@ -682,6 +683,7 @@ function s4_sites_field_default_fields() {
         'module' => 'file',
         'settings' => array(
           'insert' => 0,
+          'insert_absolute' => FALSE,
           'insert_class' => '',
           'insert_default' => 'auto',
           'insert_styles' => array(
@@ -812,6 +814,7 @@ function s4_sites_field_default_fields() {
         'active' => 1,
         'module' => 'nodereference_url',
         'settings' => array(
+          'autocomplete_match' => 'contains',
           'edit_fallback' => 0,
           'fallback' => 'select',
           'node_link' => array(
@@ -1634,6 +1637,7 @@ function s4_sites_field_default_fields() {
         'active' => 1,
         'module' => 'nodereference_url',
         'settings' => array(
+          'autocomplete_match' => 'contains',
           'edit_fallback' => 0,
           'fallback' => 'select',
           'node_link' => array(
@@ -2276,6 +2280,7 @@ function s4_sites_field_default_fields() {
         'active' => 1,
         'module' => 'date',
         'settings' => array(
+          'display_all_day' => 0,
           'increment' => '1',
           'input_format' => 'm/d/Y - H:i:s',
           'input_format_custom' => '',
@@ -2471,6 +2476,7 @@ function s4_sites_field_default_fields() {
         'active' => 1,
         'module' => 'date',
         'settings' => array(
+          'display_all_day' => 0,
           'increment' => '1',
           'input_format' => 'm/d/Y - H:i:s',
           'input_format_custom' => '',
@@ -2737,6 +2743,7 @@ function s4_sites_field_default_fields() {
         'module' => 'file',
         'settings' => array(
           'insert' => 0,
+          'insert_absolute' => FALSE,
           'insert_class' => '',
           'insert_default' => 'auto',
           'insert_styles' => array(
@@ -2956,6 +2963,7 @@ function s4_sites_field_default_fields() {
         'active' => 1,
         'module' => 'nodereference_url',
         'settings' => array(
+          'autocomplete_match' => 'contains',
           'edit_fallback' => 0,
           'fallback' => 'select',
           'node_link' => array(
@@ -4646,6 +4654,7 @@ function s4_sites_field_default_fields() {
       'indexes' => array(),
       'module' => 'field_collection',
       'settings' => array(
+        'hide_blank_items' => TRUE,
         'path' => '',
       ),
       'translatable' => '0',
@@ -4700,9 +4709,9 @@ function s4_sites_field_default_fields() {
       ),
       'widget' => array(
         'active' => 0,
-        'module' => 'field_collection_table',
+        'module' => 'field_collection',
         'settings' => array(),
-        'type' => 'field_collection_table',
+        'type' => 'field_collection_embed',
         'weight' => '31',
       ),
     ),
@@ -5887,6 +5896,7 @@ function s4_sites_field_default_fields() {
       'indexes' => array(),
       'module' => 'field_collection',
       'settings' => array(
+        'hide_blank_items' => TRUE,
         'path' => '',
       ),
       'translatable' => '0',
@@ -5941,9 +5951,9 @@ function s4_sites_field_default_fields() {
       ),
       'widget' => array(
         'active' => 0,
-        'module' => 'field_collection_table',
+        'module' => 'field_collection',
         'settings' => array(),
-        'type' => 'field_collection_table',
+        'type' => 'field_collection_embed',
         'weight' => '30',
       ),
     ),

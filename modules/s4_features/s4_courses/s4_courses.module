@@ -258,11 +258,11 @@ function s4_courses_block_view($delta) {
                    'content' => check_markup($message['value'], $message['format']));
     case 's4_courses_add_course':
       if (user_access('create course content')) {
-        return array('content' => l(t('<span class="add"></span>Add new course'),
+        return array('content' => l(t('<i class="icon-plus icon-white"></i> Add new course'),
                   'node/add/course',
                   array('html' => TRUE,
                        'attributes' =>
-                      array('class' => 'button add')
+                      array('class' => 'btn btn-success')
                   )
                   )
           );
@@ -333,6 +333,9 @@ function s4_courses_node_access($node, $op, $account) {
     return;
   }
   $course = field_get_items('node', $node, 'field_course');
+  if(!$course) {
+  	return;
+  }
   if($course[0]['nid']) {
     $course = node_load($course[0]['nid']);
     $faculty = field_get_items('node', $course, 'field_course_faculty');
@@ -378,7 +381,7 @@ function s4_courses_edit_course_restrict_form() {
   $default_email = field_get_items('node', $node, 'field_course_faculty_email');
 
   $form['message'] = array(
-    '#markup' => t('You can add sites to your course by browsing the !link and clicking the "Add to my course" buttons on the right.',
+    '#markup' => t('You can add sites to your course by browsing the !link and clicking the "Add to my course" buttons on the left.',
       array('!link' => l(t('site list'), 'site-list'))),
   );
 
@@ -501,7 +504,7 @@ function s4_courses_action_info() {
     ),
     's4_courses_bulk_signup_students_action' => array(
       'type' => 'system',
-      'label' => t('Signup students in bulk'),
+      'label' => t('Place students in bulk'),
       'configurable' => TRUE,
       'triggers' => array('any'),
     ),
@@ -723,7 +726,7 @@ function s4_courses_bulk_signup_students_action_submit($form, $form_state) {
     'course'   => $form_state['input']['course'],
     'site'   => $form_state['input']['site'],
     'site-staff'   => $form_state['input']['site-staff'],
-    'hours'   => $form_state['input']['hours'],
+    'hours'   => ($form_state['input']['hours']) ? intval($form_state['input']['hours']) : 0,
     'email-student' => $form_state['input']['email-student'],
   );
   return $params;
@@ -880,8 +883,8 @@ function s4_courses_s4_reporting_summary_report() {
  */
 function s4_courses_views_check_faculty_access($view, $account) {
   $node = node_load(arg(1));
-  if ($node->type != 'course' || user_access('create signups for other users')) {
-    return TRUE;
+  if ($node->type != 'course') {
+    return FALSE;
   }
   $faculty = field_get_items('node', $node, 'field_course_faculty');
   foreach($faculty as $instructor) {

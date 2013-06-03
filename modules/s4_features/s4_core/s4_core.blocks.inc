@@ -19,7 +19,7 @@ function s4_core_block_user_progress() {
   }
 
   if (isset($site)) {
-    $site_selection = '<div class="selection">' . l($site->title, 'node/' . $site->nid) . '</div>';
+    $site_selection = '<div class="selection label label-info">' . l($site->title, 'node/' . $site->nid) . '</div>';
   }
   if (isset($_SESSION['s4_signup_program']) && !isset($_SESSION['s4_signup_course'])) {
     $program = taxonomy_term_load($_SESSION['s4_signup_program']);
@@ -27,7 +27,7 @@ function s4_core_block_user_progress() {
             'id'     => 'status-program',
             'class'  => array('done'),
             'href'  => null,
-            'selection' => '<div class="selection">' . $program->name .'</div>',
+            'selection' => '<div class="selection label label-info">' . $program->name .'</div>',
             );
   }
   $status['site'] = array('data'  => 'Site',
@@ -44,7 +44,7 @@ function s4_core_block_user_progress() {
       $site_coordinators = views_get_view_result('site_coordinators', 'block', $site->nid);
     }
     if (isset($coordinator)) {
-      $coordinator_selection = '<div class="selection">' .
+      $coordinator_selection = '<div class="selection label label-info">' .
             l($coordinator->title, 'node/' . $coordinator->nid) . '</div>';
     }
     if (!$site || count($site_coordinators)) {
@@ -89,7 +89,7 @@ function s4_core_block_user_progress() {
 
   $number = 1;
   foreach ($status as $key => $stat) {
-    $status[$key]['data'] = '<div><span class="number">' . ($number) . '</span>' . $stat['data'] . '</div>';
+    $status[$key]['data'] = '<div class="arrow-body"><span class="number">' . ($number) . '</span>' . $stat['data'] . '</div>';
     if (isset($stat['href'])) {
       $status[$key]['data'] = l($status[$key]['data'], $stat['href'], array('html' => TRUE));
       $status[$key]['class'][] = 'clickable';
@@ -99,15 +99,16 @@ function s4_core_block_user_progress() {
       $status[$key]['data'] .= $stat['selection'];
       unset($status[$key]['selection']);
     }
-    $status[$key]['class'][] = 'items-' . count($status);
+    $status[$key]['class'][] = 'span' . floor(11 / count($status));
+    $status[$key]['data'] .= '<span class="arrow"></span>';
     $number++;
   }
   $finished = ($_GET['finished'] == 'finished')
         ? 'finished'
         :   '';
   $status[] = array('data' => '<div>Done!</div>',
-            'class' => array('complete', $finished));
-  return array('content' => theme('item_list', array('items' => $status, 'attributes' => array('class' => 'user-signup-status'))) . '<div class="clearfix"></div>');
+            'class' => array('span1', 'complete', $finished));
+  return array('content' => theme('item_list', array('items' => $status, 'attributes' => array('class' => array('user-signup-status', 'row')))) . '<div class="clearfix"></div>');
 }
 
 /**
@@ -158,7 +159,7 @@ function s4_core_block_site_list_course_restriction() {
               '!link' => l(t('site not included on this list'), 'site-list', array('query' => array('program[]' => $program[0]['tid'])))));
   }
   return array('subject' => '',
-         'content' => '<p class="intro">' . $output . '</p>');
+         'content' => '<p class="lead">' . $output . '</p>');
 }
 
 /**
@@ -210,7 +211,7 @@ function s4_core_block_s4_user_login() {
               array('query' => array('destination' => '<front>')));
   }
   return array('subject' => NULL,
-         'content' => '<p class="intro">' . implode('<br/>', $output) . '</p>');
+         'content' => '<p class="lead">' . implode('<br/>', $output) . '</p>');
 }
 
 
@@ -239,19 +240,17 @@ function s4_core_block_s4_page_notifications() {
     $link = $notification->element_link();
     if ($notification->is_stored()) {
       $link['#title'] = t('<span class="hover">Unsubscribe</span><span class="nohover">Subscribed</span>');
-      $link['#options']['attributes']['class'] = 'subscribed';
+      $link['#options']['attributes']['class'] = 'subscribed btn-success';
     }
     else {
       $link['#title'] = t('Subscribe to changes');
-      $link['#options']['attributes']['class'] = 'not-subscribed';
+      $link['#options']['attributes']['class'] = 'not-subscribed btn-info';
     }
-    $link['#options']['attributes']['class'] .= ' subscription-button';
+    $link['#options']['attributes']['class'] .= ' subscription-button btn';
     $links[] = drupal_render($link);
   }
   if (count($links)) {
-    drupal_add_css(drupal_get_path('module', 's4_core') . '/css/subscriptions.css');
-    return array('subject' => 'Subscriptions',
-          'content' => theme('item_list', array('items' => $links))
+    return array('content' => theme('item_list', array('items' => $links, 'class' => array('nav')))
          );
   }
   return NULL;
@@ -262,19 +261,19 @@ function s4_core_block_s4_page_notifications() {
 */
 function s4_core_block_s4_add_new_site() {
   global $user;
-  if (user_access('moderate site information') && !s4_core_user_can_signup($user)) {
-    $add_link = l(t('<span class="add"></span>Add new site'),
+  if (user_access('moderate site information')) {
+    $add_link = l(t('<i class="icon-plus icon-white"></i> Add new site'),
                 'node/add/site',
                 array('html' => TRUE,
                      'attributes' =>
-                    array('class' => 'button add')
+                    array('class' => 'btn btn-success')
                 )
                 );
     $manage_link = l(t('Manage sites'),
                 'site-list/manage',
                 array('html' => TRUE,
                      'attributes' =>
-                    array('class' => 'button add')
+                    array('class' => 'btn')
                 )
                 );
     return array('content' => $add_link . ' ' . $manage_link);
@@ -288,12 +287,12 @@ function s4_core_block_s4_add_new_site() {
 function s4_core_block_s4_add_new_coordinator() {
   if (user_access('create site content')) {
     $node = node_load(check_plain(arg(1)));
-    return array('content' => l(t('<span class="add"></span>Add new site staff'),
+    return array('content' => l(t('<i class="icon-plus icon-white"></i> Add new site staff'),
                   'node/add/coordinator/' . $node->nid,
                   array('html' => TRUE,
                       'query' => array('destination' => 'node/' . $node->nid . '/site-staff'),
                        'attributes' =>
-                      array('class' => 'button add')
+                      array('class' => 'btn btn-success')
                   )
                   )
           );
@@ -360,7 +359,15 @@ function s4_core_block_s4_current_user_link() {
   }
   $user = user_load($user->uid);
   $first_name = field_get_items('user', $user, 'field_first_name');
-  return array('content' => '<span>' .t('Hello <strong>@username</strong>', array('@username' => $first_name[0]['value'])) . $masquerade_switch .'</span>');
+  $links = array();
+  $links[] = l(t('Hello <strong>@username</strong>', array('@username' => $first_name[0]['value'])),'user/' . $user->uid, array('html' => TRUE)) . $masquerade_switch;
+  if (user_access('access s4 site settings')) {
+  	$links[] = l('<i class="icon-cog"></i> '. t('Site settings'), 's4/settings', array('html' => TRUE));
+  }
+  $links[] = array('data' => '', 'class' => array('divider-vertical'));
+  return array('content' => '<div class="hidden-phone">' . 
+    theme('item_list', array('items' => $links, 'attributes' => array('class' => array('nav')))) .
+    '</div>');
 
 }
 
@@ -368,10 +375,7 @@ function s4_core_block_s4_current_user_link() {
 *  Link to the site settings page
 */
 function s4_core_block_s4_site_settings() {
-  if (!user_access('access s4 site settings')) {
-    return NULL;
-  }
-  return array('content' => l(t('Site settings'), 's4/settings', array('attributes' => array('class' => array('s4-site-settings')))));
+  return null;
 }
 
 function s4_core_block_s4_signup_error() {
@@ -398,7 +402,7 @@ function s4_core_block_s4_signup_error() {
          ->execute()
          ->fetchField();
   $output = t('<h2>Cannnot register</h2>');
-  $output = '<p class="intro">'. t('You cannot register for a placement. The following information may help you if you are part of a course or program and think you should be able to register.') .'</p>';
+  $output = '<p class="lead">'. t('<strong>Sorry!</strong> You cannot register for a placement. The following information may help you if you are part of a course or program and think you should be able to register.') .'</p>';
   foreach(taxonomy_get_tree($vid) as $term) {
     $term = taxonomy_term_load($term->tid);
     $message = field_get_items('taxonomy_term', $term, 'field_program_error');
@@ -413,9 +417,9 @@ function s4_core_block_s4_signup_error() {
 function s4_core_block_s4_welcome_message() {
   $message = variable_get('s4_core_welcome_message', array('value' => FALSE));
   if (!$message['value']) {
-    $message['value'] = '<p class="intro">This where you can give users more information about your program. Let us know in a few sentences what you do, and what the community gets from your program.</p><p>Select <strong>Site Settings</strong> then <strong> General settings</strong> to change this message.</p>';
+    $message['value'] = '<p class="lead">This where you can give users more information about your program. Let us know in a few sentences what you do, and what the community gets from your program.</p><p>Select <strong>Site Settings</strong> then <strong> General settings</strong> to change this message.</p>';
   }
-  return array('content' => $message['value']);
+  return array('content' => '<div class="hero-unit">' . $message['value'] . '</div>');
 }
 
 /**
@@ -425,7 +429,9 @@ function s4_core_block_s4_signup_forms() {
   if (!$_SESSION['s4_signup_site']) {
     return;
   }
-  return array('content' => '<div class="signup"><div class="icon"></div>' .
-                            l(t('Continue signing up'), 's4/signup/site/' . $_SESSION['s4_signup_site'])
-                            . '</div>');
+  return array('content' => 
+                            l('<i class="icon-arrow-right icon-white"></i> ' . t('Continue'), 's4/signup/site/' . $_SESSION['s4_signup_site'],
+             array('html' => TRUE,
+             'attributes' => array('class' => array('btn', 'btn-primary', 'btn-large', 'btn-block')))));
+
 }

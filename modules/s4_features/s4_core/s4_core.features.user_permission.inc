@@ -198,15 +198,6 @@ function s4_core_user_default_permissions() {
     'module' => 'date_tools',
   );
 
-  // Exported permission: administer fancybox
-  $permissions['administer fancybox'] = array(
-    'name' => 'administer fancybox',
-    'roles' => array(
-      0 => 'administrator',
-    ),
-    'module' => 'fancybox',
-  );
-
   // Exported permission: administer features
   $permissions['administer features'] = array(
     'name' => 'administer features',
@@ -259,15 +250,6 @@ function s4_core_user_default_permissions() {
       0 => 'administrator',
     ),
     'module' => 'image',
-  );
-
-  // Exported permission: administer imce
-  $permissions['administer imce'] = array(
-    'name' => 'administer imce',
-    'roles' => array(
-      0 => 'administrator',
-    ),
-    'module' => 'imce',
   );
 
   // Exported permission: administer masquerade

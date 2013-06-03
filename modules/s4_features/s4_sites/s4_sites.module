@@ -427,14 +427,6 @@ function _s4_sites_site_staff_admin_view_access($nid) {
 }
 
 /**
-* Implements hook_init
-*/
-function s4_sites_init() {
-  drupal_add_js(drupal_get_path('module', 's4_sites') . '/js/s4_fancybox.js');
-
-}
-
-/**
 * Implements hook_block_info()
 */
 function s4_sites_block_info() {
@@ -454,7 +446,7 @@ function s4_sites_block_view($delta) {
   switch ($delta) {
     case 's4_sites_search_help':
       return array('subject' => '',
-             'content' => t('<p>Use this search form to find a site that meets your specific needs. Clicking on the <strong>Map link</strong> will show the location of that site on the map to the right.</p>'));
+             'content' => t('<p class="lead">Use this search form to find a site that meets your specific needs. Clicking on the <strong>Map link</strong> will show the location of that site on the map to the right.</p>'));
       break;
     case 's4_sites_site_send_form':
       return array('subject' => 'Attach a form',
@@ -482,7 +474,7 @@ function s4_sites_block_view($delta) {
       if(!$node->type == 'site') {
         return;
       }
-      return array('content' => l(t('Merge with another site'), 'node/'. $node->nid .'/merge'));
+      return array('content' => l('<i class="icon-resize-small"></i> '. t('Merge with another site'), 'node/'. $node->nid .'/merge', array('html' => TRUE, 'attributes' => array('class' => array('btn')))));
     case 's4_sites_site_full':
       $node = menu_get_object();
       if(!$node || $node->type != 'site') {
@@ -751,6 +743,10 @@ function s4_sites_form_site_node_form_alter(&$form, $form_state) {
     drupal_add_js(array('wysiwyg' => array()), 'setting');
     drupal_set_title(t('Request a new site'));
     drupal_add_js(drupal_get_path('module', 's4_sites') .'/js/s4_sites_accordion.js');
+  }
+  else {
+  	$form['actions_bottom'] = $form['actions'];
+		$form['actions_bottom']['#weight'] = 40;
   }
 }
 
@@ -1023,6 +1019,9 @@ function _s4_sites_format_hours_matrix($entity_type, $entity, $field, $instance,
   }
 
   //transpose the $items array into a [$row][$col] = value arangement
+  if(!is_array($raw_items)) {
+  	return;
+  }
   foreach ($raw_items as $delta => $item) {
     $items[$item['row']][$item['col']][] = matrix_cell_value($item, $field);
   }
@@ -1129,6 +1128,7 @@ function _s4_sites_format_hours_matrix($entity_type, $entity, $field, $instance,
     '#theme' => 'table',
     '#header' => $headers,
     '#rows' => $rows,
+    '#attributes' => array('class' => array('hidden-phone')),
     '#caption' => 'Available times are <span class="hours-sample">marked in dark blue</span>.',
   );
   if (!$hour_count) {
