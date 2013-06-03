@@ -545,6 +545,9 @@ function s4_courses_views_default_views() {
 
   /* Display: Course students (Staff view) */
   $handler = $view->new_display('block', 'Course students (Staff view)', 'block_3');
+  $handler->display->display_options['defaults']['access'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['perm'] = 'create signups for other users';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['columns'] = array(

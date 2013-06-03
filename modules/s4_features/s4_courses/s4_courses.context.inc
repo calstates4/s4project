@@ -35,17 +35,17 @@ function s4_courses_context_default_contexts() {
           'region' => 'content_subscriptions',
           'weight' => '-10',
         ),
+        'views-course_students-block' => array(
+          'module' => 'views',
+          'delta' => 'course_students-block',
+          'region' => 'content',
+          'weight' => '-10',
+        ),
         's4_courses-s4_courses_restriction_form' => array(
           'module' => 's4_courses',
           'delta' => 's4_courses_restriction_form',
           'region' => 'content_right',
           'weight' => '-9',
-        ),
-        'views-course_students-block' => array(
-          'module' => 'views',
-          'delta' => 'course_students-block',
-          'region' => 'content_bottom',
-          'weight' => '-10',
         ),
       ),
     ),

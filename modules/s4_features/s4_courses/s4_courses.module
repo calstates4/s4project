@@ -883,8 +883,8 @@ function s4_courses_s4_reporting_summary_report() {
  */
 function s4_courses_views_check_faculty_access($view, $account) {
   $node = node_load(arg(1));
-  if ($node->type != 'course' || user_access('create signups for other users')) {
-    return TRUE;
+  if ($node->type != 'course') {
+    return FALSE;
   }
   $faculty = field_get_items('node', $node, 'field_course_faculty');
   foreach($faculty as $instructor) {
