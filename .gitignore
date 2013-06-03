@@ -8,3 +8,5 @@ themes/student_signup/*
 themes/s4_bootstrap/*
 *.sublime*
 *.DS_Store
+
+modules/s4_features/s4_opportunity/.DS_Store
