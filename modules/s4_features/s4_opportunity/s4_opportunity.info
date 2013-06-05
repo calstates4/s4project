@@ -1,20 +1,22 @@
-name = S4 Opportunities
-description = Provides specific opportunities you can use for internships and field work.
-package= S4
-core = 7.x
+name = "S4 Opportunities"
+description = "Provides specific opportunities you can use for internships and field work."
+package = "S4"
+core = "7.x"
 
-dependencies[] = entity
-dependencies[] = views
+dependencies[] = "ctools"
+dependencies[] = "entity"
 dependencies[] = "entityreference"
 dependencies[] = "features"
+dependencies[] = "relation"
+dependencies[] = "views"
+features[ctools][] = "relation:relation_type_default:1"
+features[relation_type][] = "opportunity_placement"
+files[] = "s4_opportunity.admin.inc"
+files[] = "s4_opportunity_type.admin.inc"
+files[] = "views/s4_opportunity.views.inc"
+files[] = "views/s4_opportunity_handler_link_field.inc"
+files[] = "views/s4_opportunity_handler_delete_link_field.inc"
+files[] = "views/s4_opportunity_handler_edit_link_field.inc"
+files[] = "views/s4_opportunity_handler_s4_opportunity_operations_field.inc"
 
-features[field][] = "node-signup-field_opportunity"
-
-files[] = s4_opportunity.admin.inc
-files[] = s4_opportunity_type.admin.inc
-files[] = views/s4_opportunity.views.inc
-files[] = views/s4_opportunity_handler_link_field.inc
-files[] = views/s4_opportunity_handler_delete_link_field.inc
-files[] = views/s4_opportunity_handler_edit_link_field.inc
-files[] = views/s4_opportunity_handler_s4_opportunity_operations_field.inc
-
+php = "5.2.4"

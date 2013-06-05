@@ -136,6 +136,9 @@ projects[pathauto][version] = "1.0-beta1"
 projects[references][subdir] = "contrib"
 projects[references][version] = "2.x-dev"
 
+projects[relation][subdir] = "contrib"
+projects[relation][version] = "1.0-rc4"
+
 projects[select_or_other][subdir] = "contrib"
 projects[select_or_other][version] = "2.0"
 
@@ -188,7 +191,7 @@ projects[workbench_moderation_notes][subdir] = "contrib"
 projects[workbench_moderation_notes][version] = "1.x-dev"
 
 projects[webform][subdir] = "contrib"
-projects[webform][version] = "3.18"
+projects[webform][version] = "3.19"
 
 projects[wysiwyg][subdir] = "contrib"
 projects[wysiwyg][version] = "2.1"
