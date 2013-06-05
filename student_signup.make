@@ -49,6 +49,9 @@ projects[entity][version] = "1.0"
 projects[entityreference][subdir] = "contrib"
 projects[entityreference][version] = "1.0"
 
+projects[entityreference_prepopulate][subdir] = "contrib"
+projects[entityreference_prepopulate][version] = "1.3"
+
 projects[features][subdir] = "contrib"
 projects[features][version] = "1.0-beta4"
 

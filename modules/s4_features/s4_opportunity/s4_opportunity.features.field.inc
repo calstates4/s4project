@@ -512,9 +512,9 @@ function s4_opportunity_field_default_fields() {
       'settings' => array(
         'custom_add_another' => '',
         'default_value' => 'now',
-        'default_value2' => 'same',
+        'default_value2' => 'strtotime',
         'default_value_code' => '',
-        'default_value_code2' => '',
+        'default_value_code2' => '+1 year',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -531,141 +531,6 @@ function s4_opportunity_field_default_fields() {
         ),
         'type' => 'date_popup',
         'weight' => '6',
-      ),
-    ),
-  );
-
-  // Exported field: 's4_opportunity-internship-field_coordinator'
-  $fields['s4_opportunity-internship-field_coordinator'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '1',
-      'deleted' => '0',
-      'entity_types' => array(),
-      'field_name' => 'field_coordinator',
-      'foreign keys' => array(
-        'nid' => array(
-          'columns' => array(
-            'nid' => 'nid',
-          ),
-          'table' => 'node',
-        ),
-      ),
-      'global_block_settings' => '2',
-      'indexes' => array(
-        'nid' => array(
-          0 => 'nid',
-        ),
-      ),
-      'module' => 'node_reference',
-      'settings' => array(
-        'nodeaccess_nodereference' => array(
-          'all' => array(
-            'view' => 0,
-          ),
-          'author' => array(
-            'delete' => 0,
-            'update' => 'update',
-            'view' => 'view',
-          ),
-          'priority' => '0',
-          'referenced' => array(
-            'delete' => array(
-              'delete' => 0,
-              'update' => 0,
-              'view' => 'view',
-            ),
-            'update' => array(
-              'delete' => 0,
-              'update' => 0,
-              'view' => 'view',
-            ),
-            'view' => array(
-              'delete' => 0,
-              'update' => 0,
-              'view' => 0,
-            ),
-          ),
-        ),
-        'referenceable_types' => array(
-          'contact_record' => 0,
-          'coordinator' => 'coordinator',
-          'course' => 0,
-          'course_term' => 0,
-          'downloadable_form' => 0,
-          'file' => 0,
-          'page' => 0,
-          'signup' => 0,
-          'site' => 0,
-          'webform' => 0,
-        ),
-        'view' => array(
-          'args' => array(),
-          'display_name' => '',
-          'view_name' => '',
-        ),
-      ),
-      'translatable' => '1',
-      'type' => 'node_reference',
-    ),
-    'field_instance' => array(
-      'bundle' => 'internship',
-      'default_value' => NULL,
-      'deleted' => '0',
-      'description' => '',
-      'display' => array(
-        'default' => array(
-          'label' => 'above',
-          'module' => 'node_reference',
-          'settings' => array(),
-          'type' => 'node_reference_default',
-          'weight' => '2',
-        ),
-        'full' => array(
-          'label' => 'above',
-          'module' => 'node_reference',
-          'settings' => array(),
-          'type' => 'node_reference_default',
-          'weight' => '3',
-        ),
-        'notifications' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
-        'teaser' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
-      ),
-      'entity_type' => 's4_opportunity',
-      'field_name' => 'field_coordinator',
-      'label' => 'Site staff',
-      'required' => 0,
-      'settings' => array(
-        'custom_add_another' => '',
-        'user_register_form' => FALSE,
-      ),
-      'widget' => array(
-        'active' => 1,
-        'module' => 'nodereference_url',
-        'settings' => array(
-          'autocomplete_match' => 'contains',
-          'edit_fallback' => 0,
-          'fallback' => 'select',
-          'node_link' => array(
-            'destination' => 'default',
-            'full' => 0,
-            'hover_title' => '',
-            'teaser' => 0,
-            'title' => '',
-          ),
-        ),
-        'type' => 'nodereference_url',
-        'weight' => '2',
       ),
     ),
   );
@@ -723,6 +588,190 @@ function s4_opportunity_field_default_fields() {
         'settings' => array(),
         'type' => 'number',
         'weight' => '5',
+      ),
+    ),
+  );
+
+  // Exported field: 's4_opportunity-internship-field_opportunity_site_staff'
+  $fields['s4_opportunity-internship-field_opportunity_site_staff'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '-1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_opportunity_site_staff',
+      'foreign keys' => array(
+        'node' => array(
+          'columns' => array(
+            'target_id' => 'nid',
+          ),
+          'table' => 'node',
+        ),
+      ),
+      'indexes' => array(
+        'target_id' => array(
+          0 => 'target_id',
+        ),
+      ),
+      'module' => 'entityreference',
+      'settings' => array(
+        'handler' => 'base',
+        'handler_settings' => array(
+          'behaviors' => array(
+            'views-select-list' => array(
+              'status' => 0,
+            ),
+          ),
+          'sort' => array(
+            'type' => 'none',
+          ),
+          'target_bundles' => array(
+            'coordinator' => 'coordinator',
+          ),
+        ),
+        'target_type' => 'node',
+      ),
+      'translatable' => '0',
+      'type' => 'entityreference',
+    ),
+    'field_instance' => array(
+      'bundle' => 'internship',
+      'default_value' => NULL,
+      'default_value_function' => 'entityreference_prepopulate_field_default_value',
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'entityreference',
+          'settings' => array(
+            'link' => FALSE,
+          ),
+          'type' => 'entityreference_label',
+          'weight' => 15,
+        ),
+      ),
+      'display_label' => '',
+      'entity_type' => 's4_opportunity',
+      'field_name' => 'field_opportunity_site_staff',
+      'label' => 'Site staff',
+      'required' => 0,
+      'settings' => array(
+        'behaviors' => array(
+          'prepopulate' => array(
+            'action' => 'hide',
+            'action_on_edit' => 1,
+            'fallback' => 'hide',
+            'og_context' => 0,
+            'skip_perm' => '0',
+            'status' => 1,
+          ),
+        ),
+        'custom_add_another' => '',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'entityreference',
+        'settings' => array(
+          'match_operator' => 'CONTAINS',
+          'path' => '',
+          'size' => '60',
+        ),
+        'type' => 'entityreference_autocomplete',
+        'weight' => '8',
+      ),
+    ),
+  );
+
+  // Exported field: 's4_opportunity-internship-field_opportunity_sites'
+  $fields['s4_opportunity-internship-field_opportunity_sites'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '-1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_opportunity_sites',
+      'foreign keys' => array(
+        'node' => array(
+          'columns' => array(
+            'target_id' => 'nid',
+          ),
+          'table' => 'node',
+        ),
+      ),
+      'indexes' => array(
+        'target_id' => array(
+          0 => 'target_id',
+        ),
+      ),
+      'module' => 'entityreference',
+      'settings' => array(
+        'handler' => 'base',
+        'handler_settings' => array(
+          'behaviors' => array(
+            'views-select-list' => array(
+              'status' => 0,
+            ),
+          ),
+          'sort' => array(
+            'type' => 'none',
+          ),
+          'target_bundles' => array(
+            'site' => 'site',
+          ),
+        ),
+        'target_type' => 'node',
+      ),
+      'translatable' => '0',
+      'type' => 'entityreference',
+    ),
+    'field_instance' => array(
+      'bundle' => 'internship',
+      'default_value' => NULL,
+      'default_value_function' => 'entityreference_prepopulate_field_default_value',
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'entityreference',
+          'settings' => array(
+            'link' => FALSE,
+          ),
+          'type' => 'entityreference_label',
+          'weight' => 14,
+        ),
+      ),
+      'display_label' => '',
+      'entity_type' => 's4_opportunity',
+      'field_name' => 'field_opportunity_sites',
+      'label' => 'Sites',
+      'required' => 0,
+      'settings' => array(
+        'behaviors' => array(
+          'prepopulate' => array(
+            'action' => 'hide',
+            'action_on_edit' => 1,
+            'fallback' => 'hide',
+            'og_context' => 0,
+            'skip_perm' => '0',
+            'status' => 1,
+          ),
+        ),
+        'custom_add_another' => '',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'entityreference',
+        'settings' => array(
+          'match_operator' => 'CONTAINS',
+          'path' => '',
+          'size' => '60',
+        ),
+        'type' => 'entityreference_autocomplete',
+        'weight' => '7',
       ),
     ),
   );
@@ -819,142 +868,6 @@ function s4_opportunity_field_default_fields() {
     ),
   );
 
-  // Exported field: 's4_opportunity-internship-field_sites'
-  $fields['s4_opportunity-internship-field_sites'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '-1',
-      'deleted' => '0',
-      'entity_types' => array(),
-      'field_name' => 'field_sites',
-      'foreign keys' => array(
-        'nid' => array(
-          'columns' => array(
-            'nid' => 'nid',
-          ),
-          'table' => 'node',
-        ),
-      ),
-      'global_block_settings' => '2',
-      'indexes' => array(
-        'nid' => array(
-          0 => 'nid',
-        ),
-      ),
-      'module' => 'node_reference',
-      'settings' => array(
-        'nodeaccess_nodereference' => array(
-          'all' => array(
-            'view' => 0,
-          ),
-          'author' => array(
-            'delete' => 'delete',
-            'update' => 'update',
-            'view' => 'view',
-          ),
-          'priority' => '0',
-          'referenced' => array(
-            'delete' => array(
-              'delete' => 0,
-              'update' => 0,
-              'view' => 0,
-            ),
-            'update' => array(
-              'delete' => 0,
-              'update' => 0,
-              'view' => 0,
-            ),
-            'view' => array(
-              'delete' => 0,
-              'update' => 0,
-              'view' => 'view',
-            ),
-          ),
-        ),
-        'referenceable_types' => array(
-          'contact_record' => 0,
-          'coordinator' => 0,
-          'course' => 0,
-          'course_term' => 0,
-          'downloadable_form' => 0,
-          'file' => 0,
-          'page' => 0,
-          'signup' => 0,
-          'site' => 'site',
-          'webform' => 0,
-        ),
-        'view' => array(
-          'args' => array(),
-          'display_name' => '',
-          'view_name' => '',
-        ),
-      ),
-      'translatable' => '1',
-      'type' => 'node_reference',
-    ),
-    'field_instance' => array(
-      'bundle' => 'internship',
-      'default_value' => NULL,
-      'deleted' => '0',
-      'description' => 'The sites related to this opportunity.',
-      'display' => array(
-        'default' => array(
-          'label' => 'above',
-          'module' => 'node_reference',
-          'settings' => array(),
-          'type' => 'node_reference_default',
-          'weight' => '1',
-        ),
-        'full' => array(
-          'label' => 'above',
-          'module' => 'node_reference',
-          'settings' => array(),
-          'type' => 'node_reference_default',
-          'weight' => '1',
-        ),
-        'notifications' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
-        'teaser' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
-      ),
-      'display_label' => '',
-      'entity_type' => 's4_opportunity',
-      'field_name' => 'field_sites',
-      'label' => 'Sites',
-      'required' => 0,
-      'settings' => array(
-        'custom_add_another' => '',
-        'user_register_form' => FALSE,
-      ),
-      'widget' => array(
-        'active' => 1,
-        'module' => 'nodereference_url',
-        'settings' => array(
-          'autocomplete_match' => 'contains',
-          'edit_fallback' => 1,
-          'fallback' => 'page_not_found',
-          'node_link' => array(
-            'destination' => 'default',
-            'full' => 0,
-            'hover_title' => '',
-            'teaser' => 0,
-            'title' => '',
-          ),
-        ),
-        'type' => 'nodereference_url',
-        'weight' => '4',
-      ),
-    ),
-  );
-
   // Translatables
   // Included for use with string extractors like potx.
   t('Active date');
@@ -968,7 +881,6 @@ function s4_opportunity_field_default_fields() {
   t('Signup Form Results');
   t('Site staff');
   t('Sites');
-  t('The sites related to this opportunity.');
   t('endpoints');
 
   return $fields;

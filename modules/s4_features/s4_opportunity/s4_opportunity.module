@@ -1,5 +1,7 @@
 <?php
 
+include_once('s4_opportunity.features.inc');
+
 /**
  * @file
  * Module for the s4_opportunity Entity - a starting point to create your own Entity
@@ -318,18 +320,6 @@ function s4_opportunity_page_view($s4_opportunity, $view_mode = 'full') {
   return $content;
 }
 
-
-/**
- * Implements hook_views_api().
- */
-function s4_opportunity_views_api() {
-  return array(
-    'api' => 3,
-    'path' => drupal_get_path('module', 's4_opportunity') . '/views',
-  );
-}
-
-
 /**
  * Implement hook_theme().
  */
@@ -369,7 +359,7 @@ function s4_opportunity_s4_site_configuration() {
 function s4_opportunity_menu_local_tasks_alter(&$data, $router_item, $root_path) {
   // Add action link 'admin/structure/opportunities/add' on 'admin/structure/opportunities'.
   if ($root_path == 'admin/content/opportunities') {
-    $item = menu_get_item('admin/content/opportunities/add');
+    $item = menu_get_item('opportunities/add');
     if ($item['access']) {
       $data['actions']['output'][] = array(
         '#theme' => 'menu_local_action',
@@ -380,80 +370,72 @@ function s4_opportunity_menu_local_tasks_alter(&$data, $router_item, $root_path)
 }
 
 /**
+ * Implements hook_block_info().
+ */
+function s4_opportunity_block_info() {
+  return array(
+    'new_opportunity' => array('info' => t('Create opportunity form')),
+    );
+}
+
+/**
+ * Implements hook_
+ */
+function s4_opportunity_block_view($delta) {
+  module_load_include('inc', 's4_opportunity', 's4_opportunity.block');
+  switch($delta) {
+    case 'new_opportunity':
+      return array('subject' => t('Create new opportunity'),
+        'content' => drupal_get_form('s4_opportunity_create_form'));
+  }
+}
+
+/**
  * Add default fields to new opportunity types
  */
 function s4_opportunity_add_default_fields($type) {
-  $field = field_info_field('field_sites');
-  $instance = field_info_instance('s4_opportunity', 'field_sites', $type);
+  $field = field_info_field('field_opportunity_sites');
+  $instance = field_info_instance('s4_opportunity', 'field_opportunity_sites', $type);
   if (empty($field)) {
     $field = array(
+      'active' => '1',
+      'cardinality' => '-1',
+      'deleted' => '0',
       'entity_types' => array(),
-      'field_name' => 'field_sites',
+      'field_name' => 'field_opportunity_sites',
       'foreign keys' => array(
-        'nid' => array(
+        'node' => array(
           'columns' => array(
-            'nid' => 'nid',
+            'target_id' => 'nid',
           ),
           'table' => 'node',
         ),
       ),
-      'global_block_settings' => '2',
       'indexes' => array(
-        'nid' => array(
-          0 => 'nid',
+        'target_id' => array(
+          0 => 'target_id',
         ),
       ),
-      'module' => 'node_reference',
+      'module' => 'entityreference',
       'settings' => array(
-        'nodeaccess_nodereference' => array(
-          'all' => array(
-            'view' => 0,
-          ),
-          'author' => array(
-            'delete' => 'delete',
-            'update' => 'update',
-            'view' => 'view',
-          ),
-          'priority' => '0',
-          'referenced' => array(
-            'delete' => array(
-              'delete' => 0,
-              'update' => 0,
-              'view' => 0,
-            ),
-            'update' => array(
-              'delete' => 0,
-              'update' => 0,
-              'view' => 0,
-            ),
-            'view' => array(
-              'delete' => 0,
-              'update' => 0,
-              'view' => 'view',
+        'handler' => 'base',
+        'handler_settings' => array(
+          'behaviors' => array(
+            'views-select-list' => array(
+              'status' => 0,
             ),
           ),
+          'sort' => array(
+            'type' => 'none',
+          ),
+          'target_bundles' => array(
+            'site' => 'site',
+          ),
         ),
-        'referenceable_types' => array(
-          'contact_record' => 0,
-          'coordinator' => 0,
-          'course' => 0,
-          'course_term' => 0,
-          'downloadable_form' => 0,
-          'fieldtrip' => 0,
-          'file' => 0,
-          'page' => 0,
-          'signup' => 0,
-          'site' => 'site',
-          'webform' => 0,
-        ),
-        'view' => array(
-          'args' => array(),
-          'display_name' => '',
-          'view_name' => '',
-        ),
+        'target_type' => 'node',
       ),
-      'translatable' => '1',
-      'type' => 'node_reference',
+      'translatable' => '0',
+      'type' => 'entityreference',
     );
     $field = field_create_field($field);
   }
@@ -461,236 +443,147 @@ function s4_opportunity_add_default_fields($type) {
     $instance = array(
       'bundle' => $type,
       'default_value' => NULL,
-      'description' => 'The sites related to this opportunity.',
+      'default_value_function' => 'entityreference_prepopulate_field_default_value',
+      'deleted' => '0',
+      'description' => '',
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'node_reference',
-          'settings' => array(),
-          'type' => 'node_reference_default',
-          'weight' => '1',
-        ),
-        'full' => array(
-          'label' => 'above',
-          'module' => 'node_reference',
-          'settings' => array(),
-          'type' => 'node_reference_default',
-          'weight' => '1',
-        ),
-        'notifications' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
-        'teaser' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
+          'module' => 'entityreference',
+          'settings' => array(
+            'link' => FALSE,
+          ),
+          'type' => 'entityreference_label',
+          'weight' => 14,
         ),
       ),
+      'display_label' => '',
       'entity_type' => 's4_opportunity',
-      'field_name' => 'field_sites',
+      'field_name' => 'field_opportunity_sites',
       'label' => 'Sites',
       'required' => 0,
       'settings' => array(
+        'behaviors' => array(
+          'prepopulate' => array(
+            'action' => 'hide',
+            'action_on_edit' => 1,
+            'fallback' => 'hide',
+            'og_context' => 0,
+            'skip_perm' => '0',
+            'status' => 1,
+          ),
+        ),
         'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
-		    'weight' => '4',
-		    'type' => 'nodereference_url',
-		    'module' => 'nodereference_url',
-		    'active' => 1,
-		    'settings' => array(
-		      'fallback' => 'page_not_found',
-		      'edit_fallback' => 1,
-		      'node_link' => array(
-		        'teaser' => 0,
-		        'full' => 0,
-		        'title' => '',
-		        'hover_title' => '',
-		        'destination' => 'default',
-		      ),
-		    ),
-		  ),
+        'active' => 1,
+        'module' => 'entityreference',
+        'settings' => array(
+          'match_operator' => 'CONTAINS',
+          'path' => '',
+          'size' => '60',
+        ),
+        'type' => 'entityreference_autocomplete',
+        'weight' => '7',
+      ),
     );
     $instance = field_create_instance($instance);
   }
 
-  $field = field_info_field('field_coordinator');
-  $instance = field_info_instance('s4_opportunity', 'field_coordinator', $type);
+  $field = field_info_field('field_opportunity_site_staff');
+  $instance = field_info_instance('s4_opportunity', 'field_opportunity_site_staff', $type);
   if (empty($field)) {
     $field = array(
-		  'entity_types' => array(),
-		  'foreign keys' => array(
-		    'nid' => array(
-		      'table' => 'node',
-		      'columns' => array(
-		        'nid' => 'nid',
-		      ),
-		    ),
-		  ),
-		  'global_block_settings' => '2',
-		  'indexes' => array(
-		    'nid' => array(
-		      'nid',
-		    ),
-		  ),
-		  'settings' => array(
-		    'nodeaccess_nodereference' => array(
-		      'all' => array(
-		        'view' => 0,
-		      ),
-		      'author' => array(
-		        'delete' => 0,
-		        'update' => 'update',
-		        'view' => 'view',
-		      ),
-		      'priority' => '0',
-		      'referenced' => array(
-		        'delete' => array(
-		          'delete' => 0,
-		          'update' => 0,
-		          'view' => 'view',
-		        ),
-		        'update' => array(
-		          'delete' => 0,
-		          'update' => 0,
-		          'view' => 'view',
-		        ),
-		        'view' => array(
-		          'delete' => 0,
-		          'update' => 0,
-		          'view' => 0,
-		        ),
-		      ),
-		    ),
-		    'referenceable_types' => array(
-		      'article' => 0,
-		      'contact_record' => 0,
-		      'coordinator' => 'coordinator',
-		      'course' => 0,
-		      'course_term' => 0,
-		      'feed' => 0,
-		      'feed_item' => 0,
-		      'file' => 0,
-		      'news' => 0,
-		      'page' => 0,
-		      'signup' => 0,
-		      'site' => 0,
-		      'webform' => 0,
-		    ),
-		    'view' => array(
-		      'args' => array(),
-		      'display_name' => '',
-		      'view_name' => '',
-		    ),
-		  ),
-		  'translatable' => '1',
-		  'storage' => array(
-		    'type' => 'field_sql_storage',
-		    'settings' => array(),
-		    'module' => 'field_sql_storage',
-		    'active' => '1',
-		    'details' => array(
-		      'sql' => array(
-		        'FIELD_LOAD_CURRENT' => array(
-		          'field_data_field_coordinator' => array(
-		            'nid' => 'field_coordinator_nid',
-		          ),
-		        ),
-		        'FIELD_LOAD_REVISION' => array(
-		          'field_revision_field_coordinator' => array(
-		            'nid' => 'field_coordinator_nid',
-		          ),
-		        ),
-		      ),
-		    ),
-		  ),
-		  'field_name' => 'field_coordinator',
-		  'type' => 'node_reference',
-		  'module' => 'node_reference',
 		  'active' => '1',
-		  'locked' => '0',
-		  'cardinality' => '1',
-		  'deleted' => '0',
-		  'columns' => array(
-		    'nid' => array(
-		      'type' => 'int',
-		      'unsigned' => TRUE,
-		      'not null' => FALSE,
-		    ),
-		  ),
-		  'bundles' => array(
-		    'node' => array(
-		      'signup',
-		    ),
-		  ),
+      'cardinality' => '-1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_opportunity_site_staff',
+      'foreign keys' => array(
+        'node' => array(
+          'columns' => array(
+            'target_id' => 'nid',
+          ),
+          'table' => 'node',
+        ),
+      ),
+      'indexes' => array(
+        'target_id' => array(
+          0 => 'target_id',
+        ),
+      ),
+      'module' => 'entityreference',
+      'settings' => array(
+        'handler' => 'base',
+        'handler_settings' => array(
+          'behaviors' => array(
+            'views-select-list' => array(
+              'status' => 0,
+            ),
+          ),
+          'sort' => array(
+            'type' => 'none',
+          ),
+          'target_bundles' => array(
+            'coordinator' => 'coordinator',
+          ),
+        ),
+        'target_type' => 'node',
+      ),
+      'translatable' => '0',
+      'type' => 'entityreference',
 		);
     $field = field_create_field($field);
   }
   if (empty($instance)) {
     $instance = array(
       'bundle' => $type,
+      'default_value' => NULL,
+      'default_value_function' => 'entityreference_prepopulate_field_default_value',
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'entityreference',
+          'settings' => array(
+            'link' => FALSE,
+          ),
+          'type' => 'entityreference_label',
+          'weight' => 15,
+        ),
+      ),
+      'display_label' => '',
       'entity_type' => 's4_opportunity',
-		  'default_value' => NULL,
-		  'description' => '',
-		  'display' => array(
-		    'default' => array(
-		      'label' => 'above',
-		      'type' => 'node_reference_default',
-		      'weight' => '2',
-		      'settings' => array(),
-		      'module' => 'node_reference',
-		    ),
-		    'full' => array(
-		      'label' => 'above',
-		      'module' => 'node_reference',
-		      'settings' => array(),
-		      'type' => 'node_reference_default',
-		      'weight' => '3',
-		    ),
-		    'notifications' => array(
-		      'label' => 'above',
-		      'settings' => array(),
-		      'type' => 'hidden',
-		      'weight' => 0,
-		    ),
-		    'teaser' => array(
-		      'label' => 'above',
-		      'settings' => array(),
-		      'type' => 'hidden',
-		      'weight' => 0,
-		    ),
-		  ),
-		  'label' => 'Site staff',
-		  'required' => 0,
-		  'settings' => array(
-		    'user_register_form' => FALSE,
-		    'custom_add_another' => '',
-		  ),
-		  'widget' => array(
-		    'active' => 1,
-		    'module' => 'nodereference_url',
-		    'settings' => array(
-		      'edit_fallback' => 0,
-		      'fallback' => 'select',
-		      'node_link' => array(
-		        'destination' => 'default',
-		        'full' => 0,
-		        'hover_title' => '',
-		        'teaser' => 0,
-		        'title' => '',
-		      ),
-		      'autocomplete_match' => 'contains',
-		    ),
-		    'type' => 'nodereference_url',
-		    'weight' => '2',
-		  ),
-		  'field_name' => 'field_coordinator',
-		  'deleted' => '0',
+      'field_name' => 'field_opportunity_site_staff',
+      'label' => 'Site staff',
+      'required' => 0,
+      'settings' => array(
+        'behaviors' => array(
+          'prepopulate' => array(
+            'action' => 'hide',
+            'action_on_edit' => 1,
+            'fallback' => 'hide',
+            'og_context' => 0,
+            'skip_perm' => '0',
+            'status' => 1,
+          ),
+        ),
+        'custom_add_another' => '',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'entityreference',
+        'settings' => array(
+          'match_operator' => 'CONTAINS',
+          'path' => '',
+          'size' => '60',
+        ),
+        'type' => 'entityreference_autocomplete',
+        'weight' => '8',
+      ),
     );
     $instance = field_create_instance($instance);
   }
@@ -942,8 +835,8 @@ function s4_opportunity_add_default_fields($type) {
 		  'settings' => array(
 		    'default_value' => 'now',
 		    'default_value_code' => '',
-		    'default_value2' => 'same',
-		    'default_value_code2' => '',
+		    'default_value2' => 'strtotime',
+        'default_value_code2' => '+1 year',
 		    'custom_add_another' => '',
 		    'user_register_form' => FALSE,
 		  ),

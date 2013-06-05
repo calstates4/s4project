@@ -52,7 +52,7 @@ class s4OpportunityUIController extends EntityDefaultUIController {
     
     // Add menu items to add each different type of entity.
     foreach (s4_opportunity_get_types() as $type) {
-      $items[$this->path . '/add/' . $type->type] = array(
+      $items['opportunities/add/' . $type->type] = array(
         'title' => 'Add ' . $type->label,
         'page callback' => 's4_opportunity_form_wrapper',
         'page arguments' => array(s4_opportunity_create(array('type' => $type->type))),
@@ -74,19 +74,20 @@ class s4OpportunityUIController extends EntityDefaultUIController {
       'file' => 's4_opportunity.admin.inc',
       'file path' => drupal_get_path('module', $this->entityInfo['module'])
     );
-    $items[$this->path . '/opportunity/' . $wildcard . '/edit'] = array(
+    $items['opportunity/' . $wildcard . '/edit'] = array(
       'title' => 'Edit',
       'type' => MENU_DEFAULT_LOCAL_TASK,
       'weight' => -10,
+      'page arguments' => array(1),
       'context' => MENU_CONTEXT_PAGE | MENU_CONTEXT_INLINE,
     );
     
-    $items[$this->path . '/opportunity/' . $wildcard . '/delete'] = array(
+    $items['opportunity/' . $wildcard . '/delete'] = array(
       'title' => 'Delete',
       'page callback' => 's4_opportunity_delete_form_wrapper',
       'page arguments' => array($id_count + 1),
       'access callback' => 's4_opportunity_access',
-      'access arguments' => array('edit', $id_count + 1),
+      'access arguments' => array('edit', 1),
       'type' => MENU_LOCAL_TASK,
       'context' => MENU_CONTEXT_INLINE,
       'weight' => 10,
@@ -198,7 +199,7 @@ function s4_opportunity_edit_form($form, &$form_state, $s4_opportunity) {
   $type = s4_opportunity_type_load($s4_opportunity->type);
   $form['actions']['submit'] = array(
     '#type' => 'submit',
-    '#value' => t('Save %type', array('%type' => $type->label)),
+    '#value' => t('Save @type', array('@type' => $type->label)),
     '#submit' => $submit + array('s4_opportunity_edit_form_submit'),
   );
   
@@ -248,7 +249,8 @@ function s4_opportunity_edit_form_submit(&$form, &$form_state) {
   $s4_opportunity->changed = time();
   
   $s4_opportunity->save();
-  $form_state['redirect'] = 'admin/content/opportunities';
+  $site = field_get_items('s4_opportunity', $s4_opportunity, 'field_opportunity_sites');
+  $form_state['redirect'] = ($site[0]['target_id']) ? 'node/'. $site[0]['target_id'] .'/opportunities' : 'site';
 }
 
 /**
