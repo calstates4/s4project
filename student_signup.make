@@ -113,7 +113,7 @@ projects[messaging][subdir] = "contrib"
 projects[messaging][version] = "1.0-alpha1"
 
 projects[nodeaccess_userreference][subdir] = "contrib"
-projects[nodeaccess_userreference][version] = "3.10"
+projects[nodeaccess_userreference][version] = "3.5"
 
 projects[nodeformcols][subdir] = "contrib"
 projects[nodeformcols][version] = "1.x-dev"
