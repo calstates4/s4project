@@ -60,6 +60,54 @@ function s4_opportunity_type_form($form, &$form_state, $s4_opportunity_type, $op
     '#default_value' => !empty($s4_opportunity_type->data['students_can_place']),
   );
 
+  $online_forms = db_select('node', 'n')
+                  ->condition('type', 'webform')
+                  ->condition('status', 1)
+                  ->fields('n', array('nid', 'title'))
+                  ->orderBy('title')
+                  ->execute()
+                  ->fetchAllKeyed();
+
+  $form['data']['signup_form'] = array(
+    '#type' => 'select',
+    '#title' => t('Signup form'),
+    '#description' => t('Select an !link that students have to complete once they are placed with this type of opportunity', array('!link' => l(t('online form'), 'forms'))),
+    '#options' => $online_forms,
+    '#empty_option' => t(' - None - '),
+    '#default_value' => !empty($s4_opportunity_type->data['signup_form']) ? $s4_opportunity_type->data['signup_form'] : '',
+  );
+
+  $form['data']['email_enable'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Send email to students when their placement is made'),
+    '#default_value' => (!empty($s4_opportunity_type->data['email_enable'])) ? $s4_opportunity_type->data['email_enable'] : 0,
+    );
+
+  $form['data']['email_subject'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Email subject'),
+    '#default_value' => (!empty($s4_opportunity_type->data['email_subject']) ? $s4_opportunity_type->data['email_subject'] : ''),
+    );
+
+  $form['data']['email_body'] = array(
+    '#type' => 'text_format',
+    '#title' => t('Email body'),
+    '#format' => (!empty($s4_opportunity_type->data['email_body']))
+      ? $s4_opportunity_type->data['email_body']['format']
+      : FILTER_FORMAT_DEFAULT,
+    '#default_value' => (!empty($s4_opportunity_type->data['email_body'])) 
+      ? $s4_opportunity_type->data['email_body']['value']
+      : '',
+  );
+
+  if (module_exists('token')) {
+    $form['tokens'] = array(
+      '#theme' => 'token_tree',
+      '#token_types' => array('s4_opportunity', 'user'),
+      '#weight' => $form['field_confirmation_email']['#weight'] + 1,
+    );
+  };
+
   $form['actions'] = array('#type' => 'actions');
   $form['actions']['submit'] = array(
     '#type' => 'submit',

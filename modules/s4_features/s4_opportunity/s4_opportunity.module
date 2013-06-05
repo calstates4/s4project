@@ -41,7 +41,7 @@ function s4_opportunity_entity_info() {
     'module' => 's4_opportunity',
     // The information below is used by the s4OpportunityUIController (which extends the EntityDefaultUIController)
     'admin ui' => array(
-      'path' => 'admin/content/s4_opportunitys',
+      'path' => 'admin/content/opportunities',
       'file' => 's4_opportunity.admin.inc',
       'controller class' => 's4OpportunityUIController',
       'menu wildcard' => '%s4_opportunity',
@@ -109,9 +109,9 @@ function s4_opportunity_permission() {
       'title' => t('Administer s4_opportunity types'),
       'description' => t('Create and delete fields for s4_opportunity types, and set their permissions.'),
     ),
-    'administer s4_opportunitys' => array(
-      'title' => t('Administer s4_opportunitys'),
-      'description' => t('Edit and delete all s4_opportunitys'),
+    'administer opportunities' => array(
+      'title' => t('Administer opportunities'),
+      'description' => t('Edit and delete all opportunities'),
     ),  
   );
   
@@ -139,14 +139,14 @@ function s4_opportunity_permission() {
  *   or just 'edit' (being the same as 'create' or 'update').
  * @param $s4_opportunity
  *   Optionally a s4_opportunity or a s4_opportunity type to check access for. If nothing is
- *   given, access for all s4_opportunitys is determined.
+ *   given, access for all opportunities is determined.
  * @param $account
  *   The user to check for. Leave it to NULL to check for the global user.
  * @return boolean
  *   Whether access is allowed or not.
  */
 function s4_opportunity_access($op, $s4_opportunity = NULL, $account = NULL) {
-  if (user_access('administer s4_opportunitys', $account)) {
+  if (user_access('administer opportunities', $account)) {
     return TRUE;
   }
   if (isset($s4_opportunity) && $type_name = $s4_opportunity->type) {
@@ -210,13 +210,13 @@ function s4_opportunity_type_load($type) {
  * @see s4_opportunity_load_multiple()
  */
 function s4_opportunity_load($s4_opportunity_id, $reset = FALSE) {
-  $s4_opportunitys = s4_opportunity_load_multiple(array($s4_opportunity_id), array(), $reset);
-  return reset($s4_opportunitys);
+  $opportunities = s4_opportunity_load_multiple(array($s4_opportunity_id), array(), $reset);
+  return reset($opportunities);
 }
 
 
 /**
- * Load multiple s4_opportunitys based on certain conditions.
+ * Load multiple opportunities based on certain conditions.
  *
  * @param $s4_opportunity_ids
  *   An array of s4_opportunity IDs.
@@ -244,7 +244,7 @@ function s4_opportunity_delete(s4_opportunity $s4_opportunity) {
 
 
 /**
- * Delete multiple s4_opportunitys.
+ * Delete multiple opportunities.
  *
  * @param $s4_opportunity_ids
  *   An array of s4_opportunity IDs.
@@ -290,7 +290,7 @@ function s4_opportunity_type_delete(s4_opportunityType $type) {
 
 
 /**
- * URI callback for s4_opportunitys
+ * URI callback for opportunities
  */
 function s4_opportunity_uri(s4_opportunity $s4_opportunity){
   return array(
@@ -357,9 +357,9 @@ function s4_opportunity_theme() {
  * Implements hook_menu_local_tasks_alter().
  */
 function s4_opportunity_menu_local_tasks_alter(&$data, $router_item, $root_path) {
-  // Add action link 'admin/structure/s4_opportunitys/add' on 'admin/structure/s4_opportunitys'.
-  if ($root_path == 'admin/content/s4_opportunitys') {
-    $item = menu_get_item('admin/content/s4_opportunitys/add');
+  // Add action link 'admin/structure/opportunities/add' on 'admin/structure/opportunities'.
+  if ($root_path == 'admin/content/opportunities') {
+    $item = menu_get_item('admin/content/opportunities/add');
     if ($item['access']) {
       $data['actions']['output'][] = array(
         '#theme' => 'menu_local_action',

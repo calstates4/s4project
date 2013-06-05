@@ -25,20 +25,20 @@ class s4OpportunityUIController extends EntityDefaultUIController {
     $wildcard = isset($this->entityInfo['admin ui']['menu wildcard']) ? $this->entityInfo['admin ui']['menu wildcard'] : '%' . $this->entityType;
 
     $items[$this->path] = array(
-      'title' => 's4_opportunitys',
-      'description' => 'Add edit and update s4_opportunitys.',
+      'title' => 'Opportunities',
+      'description' => 'Add edit and update opportunities.',
       'page callback' => 'system_admin_menu_block_page',
       'access arguments' => array('access administration pages'),
       'file path' => drupal_get_path('module', 'system'),
       'file' => 'system.admin.inc',
     );
     
-    // Change the overview menu type for the list of s4_opportunitys.
+    // Change the overview menu type for the list of opportunities.
     $items[$this->path]['type'] = MENU_LOCAL_TASK;
     
     // Change the add page menu to multiple types of entities
     $items[$this->path . '/add'] = array(
-      'title' => 'Add a s4_opportunity',
+      'title' => 'Add an opportunity',
       'description' => 'Add a new s4_opportunity',
       'page callback'  => 's4_opportunity_add_page',
       'access callback'  => 's4_opportunity_access',
@@ -64,7 +64,7 @@ class s4OpportunityUIController extends EntityDefaultUIController {
     }
 
     // Loading and editing s4_opportunity entities
-    $items[$this->path . '/s4_opportunity/' . $wildcard] = array(
+    $items[$this->path . '/opportunity/' . $wildcard] = array(
       'page callback' => 's4_opportunity_form_wrapper',
       'page arguments' => array($id_count + 1),
       'access callback' => 's4_opportunity_access',
@@ -74,14 +74,14 @@ class s4OpportunityUIController extends EntityDefaultUIController {
       'file' => 's4_opportunity.admin.inc',
       'file path' => drupal_get_path('module', $this->entityInfo['module'])
     );
-    $items[$this->path . '/s4_opportunity/' . $wildcard . '/edit'] = array(
+    $items[$this->path . '/opportunity/' . $wildcard . '/edit'] = array(
       'title' => 'Edit',
       'type' => MENU_DEFAULT_LOCAL_TASK,
       'weight' => -10,
       'context' => MENU_CONTEXT_PAGE | MENU_CONTEXT_INLINE,
     );
     
-    $items[$this->path . '/s4_opportunity/' . $wildcard . '/delete'] = array(
+    $items[$this->path . '/opportunity/' . $wildcard . '/delete'] = array(
       'title' => 'Delete',
       'page callback' => 's4_opportunity_delete_form_wrapper',
       'page arguments' => array($id_count + 1),
@@ -94,8 +94,8 @@ class s4OpportunityUIController extends EntityDefaultUIController {
       'file path' => drupal_get_path('module', $this->entityInfo['module'])
     );
     
-    // Menu item for viewing s4_opportunitys
-    $items['s4_opportunity/' . $wildcard] = array(
+    // Menu item for viewing opportunities
+    $items['opportunity/' . $wildcard] = array(
       //'title' => 'Title',
       'title callback' => 's4_opportunity_page_title',
       'title arguments' => array(1),
@@ -169,7 +169,7 @@ function s4_opportunity_edit_form($form, &$form_state, $s4_opportunity) {
   // Add the default field elements.
   $form['name'] = array(
     '#type' => 'textfield',
-    '#title' => t('s4_opportunity Name'),
+    '#title' => t('Opportunity Name'),
     '#default_value' => isset($s4_opportunity->name) ? $s4_opportunity->name : '',
     '#maxlength' => 255,
     '#required' => TRUE,
@@ -177,11 +177,6 @@ function s4_opportunity_edit_form($form, &$form_state, $s4_opportunity) {
   );
   
   $form['data']['#tree'] = TRUE;
-  $form['data']['sample_data'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('An interesting s4_opportunity switch'),
-    '#default_value' => isset($s4_opportunity->data['sample_data']) ? $s4_opportunity->data['sample_data'] : 1,
-  );
 
   // Add the field related form elements.
   $form_state['s4_opportunity'] = $s4_opportunity;
@@ -200,18 +195,18 @@ function s4_opportunity_edit_form($form, &$form_state, $s4_opportunity) {
   if (!empty($form['#submit'])) {
     $submit += $form['#submit'];
   }
-
+  $type = s4_opportunity_type_load($s4_opportunity->type);
   $form['actions']['submit'] = array(
     '#type' => 'submit',
-    '#value' => t('Save s4_opportunity'),
+    '#value' => t('Save %type', array('%type' => $type->label)),
     '#submit' => $submit + array('s4_opportunity_edit_form_submit'),
   );
   
   if (!empty($s4_opportunity->name)) {
     $form['actions']['delete'] = array(
       '#type' => 'submit',
-      '#value' => t('Delete s4_opportunity'),
-      '#suffix' => l(t('Cancel'), 'admin/content/s4_opportunitys'),
+      '#value' => t('Delete %type', array('%type' => $type->label)),
+      '#suffix' => l(t('Cancel'), 'admin/content/opportunities'),
       '#submit' => $submit + array('s4_opportunity_form_submit_delete'),
       '#weight' => 45,
     );
@@ -243,7 +238,7 @@ function s4_opportunity_edit_form_validate(&$form, &$form_state) {
 function s4_opportunity_edit_form_submit(&$form, &$form_state) {
   
   $s4_opportunity = entity_ui_controller('s4_opportunity')->entityFormSubmitBuildEntity($form, $form_state);
-  // Save the s4_opportunity and go back to the list of s4_opportunitys
+  // Save the s4_opportunity and go back to the list of opportunities
   
   // Add in created and changed times.
   if ($s4_opportunity->is_new = isset($s4_opportunity->is_new) ? $s4_opportunity->is_new : 0){
@@ -253,7 +248,7 @@ function s4_opportunity_edit_form_submit(&$form, &$form_state) {
   $s4_opportunity->changed = time();
   
   $s4_opportunity->save();
-  $form_state['redirect'] = 'admin/content/s4_opportunitys';
+  $form_state['redirect'] = 'admin/content/opportunities';
 }
 
 /**
@@ -262,7 +257,7 @@ function s4_opportunity_edit_form_submit(&$form, &$form_state) {
  * @todo Remove hard-coded path
  */
 function s4_opportunity_form_submit_delete(&$form, &$form_state) {
-  $form_state['redirect'] = 'admin/content/s4_opportunitys/s4_opportunity/' . $form_state['s4_opportunity']->s4_opportunity_id . '/delete';
+  $form_state['redirect'] = 'admin/content/opportunities/s4_opportunity/' . $form_state['s4_opportunity']->s4_opportunity_id . '/delete';
 }
 
 
@@ -278,10 +273,12 @@ function s4_opportunity_delete_form($form, &$form_state, $s4_opportunity) {
   $form_state['s4_opportunity'] = $s4_opportunity;
 
   $form['#submit'][] = 's4_opportunity_delete_form_submit';
+  $type = s4_opportunity_type_load($s4_opportunity->type);
 
   $form = confirm_form($form,
-    t('Are you sure you want to delete s4_opportunity %name?', array('%name' => $s4_opportunity->name)),
-    'admin/content/s4_opportunitys/s4_opportunity',
+    t('Are you sure you want to delete %type %name?', array('%type' => $type->label, 
+      '%name' => $s4_opportunity->name)),
+    'admin/content/opportunities/s4_opportunity',
     '<p>' . t('This action cannot be undone.') . '</p>',
     t('Delete'),
     t('Cancel'),
@@ -299,10 +296,10 @@ function s4_opportunity_delete_form_submit($form, &$form_state) {
 
   s4_opportunity_delete($s4_opportunity);
 
-  drupal_set_message(t('The s4_opportunity %name has been deleted.', array('%name' => $s4_opportunity->name)));
-  watchdog('s4_opportunity', 'Deleted s4_opportunity %name.', array('%name' => $s4_opportunity->name));
+  drupal_set_message(t('%name has been deleted.', array('%name' => $s4_opportunity->name)));
+  watchdog('s4_opportunity', 'Deleted opportunity %name.', array('%name' => $s4_opportunity->name));
 
-  $form_state['redirect'] = 'admin/content/s4_opportunitys';
+  $form_state['redirect'] = 'admin/content/opportunities';
 }
 
 
@@ -336,7 +333,7 @@ function theme_s4_opportunity_add_list($variables) {
   }
   else {
     if (user_access('administer s4_opportunity types')) {
-      $output = '<p>' . t('s4_opportunity Entities cannot be added because you have not created any s4_opportunity types yet. Go to the <a href="@create-s4_opportunity-type">s4_opportunity type creation page</a> to add a new s4_opportunity type.', array('@create-s4_opportunity-type' => url('admin/structure/s4_opportunity_types/add'))) . '</p>';
+      $output = '<p>' . t('Opportunities cannot be added because you have not created any s4_opportunity types yet. Go to the <a href="@create-s4_opportunity-type">s4_opportunity type creation page</a> to add a new s4_opportunity type.', array('@create-s4_opportunity-type' => url('admin/structure/s4_opportunity_types/add'))) . '</p>';
     }
     else {
       $output = '<p>' . t('No s4_opportunity types have been created yet for you to use.') . '</p>';
@@ -358,7 +355,7 @@ function s4_opportunity_set_breadcrumb() {
     l(t('Home'), '<front>'),
     l(t('Administration'), 'admin'),
     l(t('Content'), 'admin/content'),
-    l(t('s4_opportunitys'), 'admin/content/s4_opportunitys'),
+    l(t('opportunities'), 'admin/content/opportunities'),
   );
 
   drupal_set_breadcrumb($breadcrumb);

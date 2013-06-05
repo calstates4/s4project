@@ -1,6 +1,6 @@
 name = S4 Opportunities
 description = Provides specific opportunities you can use for internships and field work.
-package=S4
+package= S4
 core = 7.x
 
 dependencies[] = entity
