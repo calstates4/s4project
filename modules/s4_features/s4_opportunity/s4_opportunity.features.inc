@@ -13,3 +13,24 @@ function s4_opportunity_ctools_plugin_api() {
     return array("version" => "1");
   }
 }
+
+/**
+ * Implements hook_default_s4_opportunity_type().
+ */
+function s4_opportunity_default_s4_opportunity_type() {
+  $items = array();
+  $items['internship'] = entity_import('s4_opportunity_type', '{
+    "type" : "internship",
+    "label" : "Internship",
+    "weight" : "0",
+    "data" : {
+      "students_can_place" : 1,
+      "signup_form" : "",
+      "email_enable" : 0,
+      "email_subject" : "",
+      "email_body" : { "value" : "", "format" : "filtered_html" }
+    },
+    "rdf_mapping" : []
+  }');
+  return $items;
+}
