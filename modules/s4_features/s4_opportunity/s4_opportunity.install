@@ -43,6 +43,12 @@ function s4_opportunity_schema() {
         'not null' => TRUE,
         'default' => '',
       ),
+      'status' => array(
+        'description' => 'Boolean indicating whether the opportunity is active (visible to non-administrators).',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 1,
+      ),
       'created' => array(
         'description' => 'The Unix timestamp when the s4_opportunity was created.',
         'type' => 'int',

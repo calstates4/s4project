@@ -168,6 +168,8 @@ function s4_opportunity_delete_form_wrapper($s4_opportunity) {
  */
 function s4_opportunity_edit_form($form, &$form_state, $s4_opportunity) {
   // Add the default field elements.
+
+  $type = s4_opportunity_type_load($s4_opportunity->type);
   $form['name'] = array(
     '#type' => 'textfield',
     '#title' => t('Opportunity Name'),
@@ -175,6 +177,15 @@ function s4_opportunity_edit_form($form, &$form_state, $s4_opportunity) {
     '#maxlength' => 255,
     '#required' => TRUE,
     '#weight' => -5,
+  );
+
+  $form['status'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Active'),
+    '#description' => t('Active @types are available for students to be placed with. Inactive @types are only visible to department staff.', array('@types' => check_plain($type->label))),
+    '#default_value' => isset($s4_opportunity->active) ? $s4_opportunity->active : 0,
+    '#maxlength' => 255,
+    '#weight' => -4,
   );
   
   $form['data']['#tree'] = TRUE;
@@ -196,7 +207,6 @@ function s4_opportunity_edit_form($form, &$form_state, $s4_opportunity) {
   if (!empty($form['#submit'])) {
     $submit += $form['#submit'];
   }
-  $type = s4_opportunity_type_load($s4_opportunity->type);
   $form['actions']['submit'] = array(
     '#type' => 'submit',
     '#value' => t('Save @type', array('@type' => $type->label)),
@@ -206,7 +216,7 @@ function s4_opportunity_edit_form($form, &$form_state, $s4_opportunity) {
   if (!empty($s4_opportunity->name)) {
     $form['actions']['delete'] = array(
       '#type' => 'submit',
-      '#value' => t('Delete %type', array('%type' => $type->label)),
+      '#value' => t('Delete %type', array('%type' => check_plain($type->label))),
       '#suffix' => l(t('Cancel'), 'admin/content/opportunities'),
       '#submit' => $submit + array('s4_opportunity_form_submit_delete'),
       '#weight' => 45,
@@ -240,7 +250,7 @@ function s4_opportunity_edit_form_submit(&$form, &$form_state) {
   
   $s4_opportunity = entity_ui_controller('s4_opportunity')->entityFormSubmitBuildEntity($form, $form_state);
   // Save the s4_opportunity and go back to the list of opportunities
-  
+  $s4_opportunity->status = $form_state['values']['status'];
   // Add in created and changed times.
   if ($s4_opportunity->is_new = isset($s4_opportunity->is_new) ? $s4_opportunity->is_new : 0){
     $s4_opportunity->created = time();

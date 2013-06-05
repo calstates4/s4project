@@ -6,7 +6,7 @@
  * as fields.
  */
 
-class s4_opportunity_handler_link_field extends views_handler_field {
+class s4_opportunity_handler_status extends views_handler_field {
   function construct() {
     parent::construct();
 
@@ -16,20 +16,12 @@ class s4_opportunity_handler_link_field extends views_handler_field {
 
   function option_definition() {
     $options = parent::option_definition();
-
-    $options['text'] = array('default' => '', 'translatable' => TRUE);
-
     return $options;
   }
 
   function options_form(&$form, &$form_state) {
     parent::options_form($form, $form_state);
 
-    $form['text'] = array(
-      '#type' => 'textfield',
-      '#title' => t('Text to display'),
-      '#default_value' => $this->options['text'],
-    );
   }
 
   function query() {
@@ -38,9 +30,8 @@ class s4_opportunity_handler_link_field extends views_handler_field {
   }
 
   function render($values) {
-    $text = !empty($this->options['text']) ? $this->options['text'] : t('view');
     $s4_opportunity_id = $values->{$this->aliases['s4_opportunity_id']};
-
-    return l($text, 's4_opportunity/' . $s4_opportunity_id);
+    $opportunity = s4_opportunity_load($s4_opportunity_id);
+    return ($opportunity->status) ? t('Active') : t('Inactive');
   }
 }
