@@ -7,7 +7,7 @@
  */
 
 
-class model_handler_delete_link_field extends model_handler_link_field {
+class s4_opportunity_handler_delete_link_field extends s4_opportunity_handler_link_field {
   function construct() {
     parent::construct();
     $this->additional_fields['type'] = 'type';
@@ -17,15 +17,15 @@ class model_handler_delete_link_field extends model_handler_link_field {
   function render($values) {
     $type = $values->{$this->aliases['type']};
     
-    //Creating a dummy model to check access against
-    $dummy_model = (object) array('type' => $type);
-    if (!model_access('edit', $dummy_model)) {
+    //Creating a dummy s4_opportunity to check access against
+    $dummy_s4_opportunity = (object) array('type' => $type);
+    if (!s4_opportunity_access('edit', $dummy_s4_opportunity)) {
       return;
     }
     
     $text = !empty($this->options['text']) ? $this->options['text'] : t('delete');
-    $model_id = $values->{$this->aliases['model_id']};
+    $s4_opportunity_id = $values->{$this->aliases['s4_opportunity_id']};
     
-    return l($text, 'admin/content/models/model/' . $model_id . '/delete');
+    return l($text, 'admin/content/s4_opportunitys/s4_opportunity/' . $s4_opportunity_id . '/delete');
   }
 }

@@ -6,11 +6,11 @@
  * as fields.
  */
 
-class model_handler_link_field extends views_handler_field {
+class s4_opportunity_handler_link_field extends views_handler_field {
   function construct() {
     parent::construct();
 
-    $this->additional_fields['model_id'] = 'model_id';
+    $this->additional_fields['s4_opportunity_id'] = 's4_opportunity_id';
     $this->additional_fields['type'] = 'type';
   }
 
@@ -39,8 +39,8 @@ class model_handler_link_field extends views_handler_field {
 
   function render($values) {
     $text = !empty($this->options['text']) ? $this->options['text'] : t('view');
-    $model_id = $values->{$this->aliases['model_id']};
+    $s4_opportunity_id = $values->{$this->aliases['s4_opportunity_id']};
 
-    return l($text, 'model/' . $model_id);
+    return l($text, 's4_opportunity/' . $s4_opportunity_id);
   }
 }
