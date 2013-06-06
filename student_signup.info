@@ -69,7 +69,6 @@ dependencies[] = gmap_location
 dependencies[] = gmap_macro_builder
 dependencies[] = guiders_js
 dependencies[] = insert
-dependencies[] = jquery_update
 dependencies[] = job_scheduler
 dependencies[] = link
 dependencies[] = location
