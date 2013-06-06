@@ -530,7 +530,7 @@ function s4_opportunity_field_default_fields() {
           'year_range' => '-3:+3',
         ),
         'type' => 'date_popup',
-        'weight' => '6',
+        'weight' => '4',
       ),
     ),
   );
@@ -587,7 +587,7 @@ function s4_opportunity_field_default_fields() {
         'module' => 'number',
         'settings' => array(),
         'type' => 'number',
-        'weight' => '5',
+        'weight' => '3',
       ),
     ),
   );
@@ -679,7 +679,7 @@ function s4_opportunity_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'entityreference_autocomplete',
-        'weight' => '8',
+        'weight' => '6',
       ),
     ),
   );
@@ -771,7 +771,7 @@ function s4_opportunity_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'entityreference_autocomplete',
-        'weight' => '7',
+        'weight' => '5',
       ),
     ),
   );
@@ -863,7 +863,7 @@ function s4_opportunity_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_buttons',
-        'weight' => '4',
+        'weight' => '0',
       ),
     ),
   );
