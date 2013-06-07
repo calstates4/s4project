@@ -1075,6 +1075,19 @@ function s4_opportunity_add_default_fields($type) {
   }
 }
 
+function s4_opportunity_form_field_ui_field_edit_form_alter(&$form, $form_state) {
+  if ($form['#instance']['entity_type'] != 's4_opportunity') {
+    return null;
+  }
+  
+  $form['instance']['s4_opportunity_risk'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('This is a risk-management field'),
+    '#default_value' => ($form['#instance']['s4_opportunity_risk']) ? $form['#instance']['s4_opportunity_risk'] : FALSE,
+  );
+
+}
+
 /**
  * The class used for s4_opportunity entities
  */
