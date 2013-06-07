@@ -350,12 +350,6 @@ function s4_opportunity_theme() {
       'render element' => 'elements',
       'template' => 's4_opportunity',
     ),
-   's4_opportunity_sample_data' => array(
-      'variables' => array('s4_opportunity_sample_data', 's4_opportunity' => NULL),
-      'template' => 's4_opportunity-sample-data',
-    ),
-
-
   );
 }
 
@@ -1157,10 +1151,6 @@ class s4OpportunityController extends EntityAPIController {
    */
   public function buildContent($entity, $view_mode = 'full', $langcode = NULL, $content = array()) {
     $content = parent::buildContent($entity, $view_mode, $langcode, $content);
-    $content['s4_opportunity_sample_data'] =  array(
-      '#markup' => theme('s4_opportunity_sample_data', array('s4_opportunity_sample_data' => check_plain($entity->data['sample_data']), 's4_opportunity' => $entity)),
-    );
-
     return $content;
   }
 
