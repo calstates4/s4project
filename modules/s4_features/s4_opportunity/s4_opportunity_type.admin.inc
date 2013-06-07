@@ -94,7 +94,7 @@ function s4_opportunity_type_form($form, &$form_state, $s4_opportunity_type, $op
     '#title' => t('Email body'),
     '#format' => (!empty($s4_opportunity_type->data['email_body']))
       ? $s4_opportunity_type->data['email_body']['format']
-      : FILTER_FORMAT_DEFAULT,
+      : filter_default_format(),
     '#default_value' => (!empty($s4_opportunity_type->data['email_body'])) 
       ? $s4_opportunity_type->data['email_body']['value']
       : '',

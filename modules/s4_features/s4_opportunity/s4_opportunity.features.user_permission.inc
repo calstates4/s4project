@@ -10,6 +10,21 @@
 function s4_opportunity_user_default_permissions() {
   $permissions = array();
 
+  // Exported permission: access active opportunities
+  $permissions['access active opportunities'] = array(
+    'name' => 'access active opportunities',
+    'roles' => array(
+      0 => 'authenticated user',
+    ),
+    'module' => 's4_opportunity',
+  );
+
+  // Exported permission: access inactive opportunities
+  $permissions['access inactive opportunities'] = array(
+    'name' => 'access inactive opportunities',
+    'roles' => array(),
+  );
+
   // Exported permission: administer opportunities
   $permissions['administer opportunities'] = array(
     'name' => 'administer opportunities',
@@ -22,6 +37,15 @@ function s4_opportunity_user_default_permissions() {
   // Exported permission: administer s4_opportunity types
   $permissions['administer s4_opportunity types'] = array(
     'name' => 'administer s4_opportunity types',
+    'roles' => array(
+      0 => 'opportunity manager',
+    ),
+    'module' => 's4_opportunity',
+  );
+
+  // Exported permission: place students in opportunities
+  $permissions['place students in opportunities'] = array(
+    'name' => 'place students in opportunities',
     'roles' => array(
       0 => 'opportunity manager',
     ),
