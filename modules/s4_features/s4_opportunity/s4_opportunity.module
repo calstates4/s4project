@@ -1209,10 +1209,11 @@ function s4_opportunity_views_data_alter(&$data) {
       'field' => 'status',
     ),
   );
+
   $data['s4_opportunity']['name'] = array(
+    'title' => t('Name'),
+    'help' => t('Name and optional link to opportunity.'),
     'field' => array(
-      'title' => t('Name'),
-      'help' => t('Name and optional link to opportunity.'),
       'handler' => 's4_opportunity_handler_name',
     ),
     'sort' => array(
@@ -1223,6 +1224,15 @@ function s4_opportunity_views_data_alter(&$data) {
     ),
     'argument' => array(
       'handler' => 'views_handler_argument_string',
+    ),
+  );
+
+
+  $data['s4_opportunity']['s4_opportunity_id'] = array(
+    'title' => t('ID'),
+    'help' => t('The unique ID of this opportunity.'),
+    'field' => array(
+      'handler' => 'views_handler_field',
     ),
   );
 

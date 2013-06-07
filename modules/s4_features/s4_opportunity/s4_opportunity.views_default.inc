@@ -59,6 +59,11 @@ Site',
       'filter_name' => 'field_opportunity_category_tid',
       'weight' => '-5',
     ),
+    'group-name' => array(
+      'group' => '0',
+      'filter_name' => 'name',
+      'weight' => '-6',
+    ),
   );
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '40';
@@ -87,6 +92,28 @@ Site',
   $handler->display->display_options['fields']['status']['id'] = 'status';
   $handler->display->display_options['fields']['status']['table'] = 's4_opportunity';
   $handler->display->display_options['fields']['status']['field'] = 'status';
+  /* Field: Opportunity: Active date */
+  $handler->display->display_options['fields']['field_active_date']['id'] = 'field_active_date';
+  $handler->display->display_options['fields']['field_active_date']['table'] = 'field_data_field_active_date';
+  $handler->display->display_options['fields']['field_active_date']['field'] = 'field_active_date';
+  $handler->display->display_options['fields']['field_active_date']['label'] = 'Active ';
+  $handler->display->display_options['fields']['field_active_date']['settings'] = array(
+    'format_type' => 'short',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+  );
+  /* Field: Opportunity: ID */
+  $handler->display->display_options['fields']['s4_opportunity_id']['id'] = 's4_opportunity_id';
+  $handler->display->display_options['fields']['s4_opportunity_id']['table'] = 's4_opportunity';
+  $handler->display->display_options['fields']['s4_opportunity_id']['field'] = 's4_opportunity_id';
+  $handler->display->display_options['fields']['s4_opportunity_id']['label'] = 'Edit';
+  $handler->display->display_options['fields']['s4_opportunity_id']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['s4_opportunity_id']['alter']['text'] = 'edit';
+  $handler->display->display_options['fields']['s4_opportunity_id']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['s4_opportunity_id']['alter']['path'] = 'opportunity/[s4_opportunity_id]/edit';
+  $handler->display->display_options['fields']['s4_opportunity_id']['element_label_colon'] = FALSE;
   /* Filter criterion: Content: Issues addressed (field_csu_facility) */
   $handler->display->display_options['filters']['field_csu_facility_tid']['id'] = 'field_csu_facility_tid';
   $handler->display->display_options['filters']['field_csu_facility_tid']['table'] = 'field_data_field_csu_facility';
@@ -158,6 +185,7 @@ Site',
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 's4_opportunity';
   $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 'All';
   $handler->display->display_options['filters']['status']['exposed'] = TRUE;
   $handler->display->display_options['filters']['status']['expose']['operator_id'] = '';
   $handler->display->display_options['filters']['status']['expose']['label'] = 'Active';
@@ -196,9 +224,29 @@ Site',
   $handler->display->display_options['filters']['field_opportunity_category_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_opportunity_category_tid']['vocabulary'] = 'opportunity_category';
   $handler->display->display_options['filters']['field_opportunity_category_tid']['error_message'] = FALSE;
+  /* Filter criterion: Opportunity: Name */
+  $handler->display->display_options['filters']['name']['id'] = 'name';
+  $handler->display->display_options['filters']['name']['table'] = 's4_opportunity';
+  $handler->display->display_options['filters']['name']['field'] = 'name';
+  $handler->display->display_options['filters']['name']['operator'] = 'contains';
+  $handler->display->display_options['filters']['name']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['name']['expose']['operator_id'] = 'name_op';
+  $handler->display->display_options['filters']['name']['expose']['label'] = 'Name';
+  $handler->display->display_options['filters']['name']['expose']['operator'] = 'name_op';
+  $handler->display->display_options['filters']['name']['expose']['identifier'] = 'name';
+  $handler->display->display_options['filters']['name']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    4 => 0,
+    6 => 0,
+    3 => 0,
+    5 => 0,
+    7 => 0,
+    8 => 0,
+  );
 
-  /* Display: Page */
-  $handler = $view->new_display('page', 'Page', 'page');
+  /* Display: Manage opportunities */
+  $handler = $view->new_display('page', 'Manage opportunities', 'page');
   $handler->display->display_options['path'] = 'opportunities';
   $handler->display->display_options['menu']['type'] = 'normal';
   $handler->display->display_options['menu']['title'] = 'Opportunities';
@@ -228,12 +276,15 @@ Site',
     t('Site'),
     t('Type'),
     t('Status'),
+    t('Active '),
+    t('Edit'),
+    t('edit'),
     t('Issues addressed'),
     t('Organization type'),
     t('Program(s)'),
     t('Active'),
     t('Category'),
-    t('Page'),
+    t('Manage opportunities'),
   );
   $export['s4_opportunities'] = $view;
 

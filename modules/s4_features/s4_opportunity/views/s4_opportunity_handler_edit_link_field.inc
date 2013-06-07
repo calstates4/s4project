@@ -7,7 +7,7 @@
  */
 
 
-class s4_opportunity_handler_edit_link_field extends s4_opportunity_handler_link_field {
+class s4_opportunity_handler_edit_link_field extends views_handler_field {
   function construct() {
     parent::construct();
     $this->additional_fields['type'] = 'type';
@@ -26,6 +26,6 @@ class s4_opportunity_handler_edit_link_field extends s4_opportunity_handler_link
     $text = !empty($this->options['text']) ? $this->options['text'] : t('edit');
     $s4_opportunity_id = $values->{$this->aliases['s4_opportunity_id']};
     
-    return l($text, 'admin/content/s4_opportunitys/s4_opportunity/' . $s4_opportunity_id . '/edit');
+    return l($text, 'opportunity/' . $s4_opportunity_id . '/edit');
   }
 }
