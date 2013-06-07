@@ -68,13 +68,25 @@ function s4_opportunity_type_form($form, &$form_state, $s4_opportunity_type, $op
                   ->execute()
                   ->fetchAllKeyed();
 
-  $form['data']['signup_form'] = array(
+  $form['data']['student_signup_form'] = array(
     '#type' => 'select',
-    '#title' => t('Signup form'),
+    '#title' => t('Placement form'),
     '#description' => t('Select an !link that students have to complete once they are placed with this type of opportunity', array('!link' => l(t('online form'), 'forms'))),
     '#options' => $online_forms,
     '#empty_option' => t(' - None - '),
     '#default_value' => !empty($s4_opportunity_type->data['signup_form']) ? $s4_opportunity_type->data['signup_form'] : '',
+  );
+
+  $form['data']['faculty_approve'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Faculty have to approve placement form'),
+    '#default_value' => !empty($s4_opportunity_type->data['faculty_approve']),
+  );
+
+  $form['data']['site_staff_approve'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Site staff have to approve placement form'),
+    '#default_value' => !empty($s4_opportunity_type->data['site_staff_approve']),
   );
 
   $form['data']['email_enable'] = array(
