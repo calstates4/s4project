@@ -15,7 +15,8 @@ class s4OpportunityTypeUIController extends EntityDefaultUIController {
    */
   public function hook_menu() {
     $items = parent::hook_menu();
-		$items[$this->path]['description'] = 'Manage s4_opportunity entity types, including adding
+		
+    $items[$this->path]['description'] = 'Manage s4_opportunity entity types, including adding
 		and removing fields and the display of fields.';
     return $items;
   }

@@ -421,6 +421,21 @@ function s4_opportunity_menu_local_tasks_alter(&$data, $router_item, $root_path)
 }
 
 /**
+ *
+ */
+function s4_opportunity_menu_alter(&$items) {
+  //field_lock_menu_access($field, $default_access)
+  $paths = array('admin/structure/s4_opportunity_types/manage/%s4_opportunity_type/fields/%field_ui_menu',
+                 'admin/structure/s4_opportunity_types/manage/%s4_opportunity_type/fields/%field_ui_menu/delete',
+                 'admin/structure/s4_opportunity_types/manage/%s4_opportunity_type/fields/%field_ui_menu/edit',
+                 'admin/structure/s4_opportunity_types/manage/%s4_opportunity_type/fields/%field_ui_menu/field-settings',
+                 'admin/structure/s4_opportunity_types/manage/%s4_opportunity_type/fields/%field_ui_menu/widget-type');
+  foreach($paths as $path) {
+    $items[$path]['access arguments'] = array(6, 'administer s4_opportunity types');
+  }
+}
+
+/**
  * Implements hook_block_info().
  */
 function s4_opportunity_block_info() {
