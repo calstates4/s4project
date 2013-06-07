@@ -1275,28 +1275,6 @@ function s4_core_mail($key, &$message, $params) {
 }
 
 /**
-*  Alter menu access to restrict certain fields form being deleted or edited.
-*/
-function s4_core_menu_alter(&$items) {
-  foreach (entity_get_info() as $entity_type => $entity_info) {
-    if ($entity_info['fieldable']) {
-      foreach ($entity_info['bundles'] as $bundle_name => $bundle_info) {
-          if (isset($bundle_info['admin'])) {
-            // Extract path information from the bundle.
-            $path = $bundle_info['admin']['path'];
-            $items["$path/fields/%field_ui_menu"]['access callback'] = 's4_core_field_alter_access';
-            $items["$path/fields/%field_ui_menu"]['access arguments'] = array(4, 6);
-            $items["$path/fields/%field_ui_menu/edit"]['access callback'] = 's4_core_field_alter_access';
-            $items["$path/fields/%field_ui_menu/edit"]['access arguments'] = array(4, 6);
-            $items["$path/fields/%field_ui_menu/delete"]['access callback'] = 's4_core_field_alter_access';
-            $items["$path/fields/%field_ui_menu/delete"]['access arguments'] = array(4, 6);
-        }
-      }
-    }
-  }
-}
-
-/**
  * Returns whether a given site has downloadable forms.
  */
 function s4_core_site_has_downloadable_forms($node) {
@@ -1331,30 +1309,6 @@ function s4_core_program_has_downloadable_forms($tid) {
 }
 
 /**
-*  Checks whether a field in a given bundle is allowed to be edited
-*/
-function s4_core_field_alter_access($type, $field) {
-  if (!user_access('administer content types')) {
-    return FALSE;
-  }
-  if (user_access('override default field settings')) {
-    return TRUE;
-  }
-  static $access_list;
-  if (!$access_list) {
-    $access_list = module_invoke_all('s4_field_access');
-  }
-  foreach ($access_list as $bundle => $fields) {
-    foreach ($fields as $field_name) {
-      if ($bundle == $type && $field_name == $field) {
-        return FALSE;
-      }
-    }
-  }
-  return TRUE;
-}
-
-/**
 *  Implementation of s4_core_field_access
 */
 function s4_core_s4_field_access() {
@@ -1373,18 +1327,6 @@ function s4_core_s4_field_access() {
         ),
 
   );
-}
-
-/**
-*  Override the node field page to restrict access to certain fields
-*/
-function s4_core_form_field_ui_field_overview_form_alter(&$form, $form_state) {
-  foreach ($form['fields'] as $field_name => $field) {
-    if (!s4_core_field_alter_access($form['#bundle'], $field_name)) {
-      $form['fields'][$field_name]['edit'] = array();
-      $form['fields'][$field_name]['delete'] = array();
-    }
-  }
 }
 
 /**

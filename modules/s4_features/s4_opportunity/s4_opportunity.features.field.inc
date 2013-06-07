@@ -506,9 +506,11 @@ function s4_opportunity_field_default_fields() {
       ),
       'display_label' => '',
       'entity_type' => 's4_opportunity',
+      'field_lock' => 1,
       'field_name' => 'field_active_date',
       'label' => 'Active date',
       'required' => 0,
+      's4_opportunity_risk' => 0,
       'settings' => array(
         'custom_add_another' => '',
         'default_value' => 'now',
@@ -571,9 +573,11 @@ function s4_opportunity_field_default_fields() {
       ),
       'display_label' => '',
       'entity_type' => 's4_opportunity',
+      'field_lock' => 1,
       'field_name' => 'field_maximum_placements',
       'label' => 'Maximum placements',
       'required' => 0,
+      's4_opportunity_risk' => 0,
       'settings' => array(
         'custom_add_another' => '',
         'max' => '',
@@ -641,9 +645,11 @@ function s4_opportunity_field_default_fields() {
       ),
       'display_label' => '',
       'entity_type' => 's4_opportunity',
+      'field_lock' => 1,
       'field_name' => 'field_opportunity_category',
       'label' => 'Category',
       'required' => 0,
+      's4_opportunity_risk' => 0,
       'settings' => array(
         'custom_add_another' => '',
         'user_register_form' => FALSE,
@@ -719,9 +725,11 @@ function s4_opportunity_field_default_fields() {
       ),
       'display_label' => '',
       'entity_type' => 's4_opportunity',
+      'field_lock' => 1,
       'field_name' => 'field_opportunity_site_staff',
       'label' => 'Site staff',
       'required' => 0,
+      's4_opportunity_risk' => 0,
       'settings' => array(
         'behaviors' => array(
           'prepopulate' => array(
@@ -811,9 +819,11 @@ function s4_opportunity_field_default_fields() {
       ),
       'display_label' => '',
       'entity_type' => 's4_opportunity',
+      'field_lock' => 1,
       'field_name' => 'field_opportunity_sites',
       'label' => 'Sites',
       'required' => 0,
+      's4_opportunity_risk' => 0,
       'settings' => array(
         'behaviors' => array(
           'prepopulate' => array(
@@ -916,9 +926,11 @@ function s4_opportunity_field_default_fields() {
       ),
       'display_label' => '',
       'entity_type' => 's4_opportunity',
+      'field_lock' => 1,
       'field_name' => 'field_site_restrict',
       'label' => 'Program(s)',
       'required' => 1,
+      's4_opportunity_risk' => 0,
       's4_sites_field_access' => 0,
       'settings' => array(
         'custom_add_another' => '',
@@ -929,7 +941,7 @@ function s4_opportunity_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_buttons',
-        'weight' => '0',
+        'weight' => 0,
       ),
     ),
   );

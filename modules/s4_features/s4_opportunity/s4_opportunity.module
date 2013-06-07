@@ -473,6 +473,7 @@ function s4_opportunity_add_default_fields($type) {
       'field_name' => 'field_opportunity_sites',
       'label' => 'Sites',
       'required' => 0,
+      'field_lock' => 1,
       'settings' => array(
         'behaviors' => array(
           'prepopulate' => array(
@@ -570,6 +571,7 @@ function s4_opportunity_add_default_fields($type) {
       'field_name' => 'field_opportunity_site_staff',
       'label' => 'Site staff',
       'required' => 0,
+      'field_lock' => 1,
       'settings' => array(
         'behaviors' => array(
           'prepopulate' => array(
@@ -724,6 +726,7 @@ function s4_opportunity_add_default_fields($type) {
 		  'display_label' => '',
 		  'label' => 'Program(s)',
 		  'required' => 1,
+      'field_lock' => 1,
 		  's4_sites_field_access' => 0,
 		  'settings' => array(
 		    'user_register_form' => FALSE,
@@ -867,6 +870,7 @@ function s4_opportunity_add_default_fields($type) {
 		    ),
 		  ),
 		  'required' => 0,
+      'field_lock' => 1,
 		  'description' => 'Select the time when this opportunity is available.',
 		  'display_label' => '',
 		  'field_name' => 'field_active_date',
@@ -960,6 +964,7 @@ function s4_opportunity_add_default_fields($type) {
 		    ),
 		  ),
 		  'required' => 0,
+      'field_lock' => 1,
 		  'description' => 'Enter the maximum number of placements that can be made at any given time.',
 		  'display_label' => '',
 		  'default_value' => NULL,
@@ -1063,6 +1068,7 @@ function s4_opportunity_add_default_fields($type) {
           'weight' => 16,
         ),
       ),
+      'field_lock' => 1,
       'required' => 0,
       'description' => '',
       'display_label' => '',

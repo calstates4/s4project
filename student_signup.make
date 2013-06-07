@@ -64,6 +64,9 @@ projects[feeds_tamper][version] = "1.0-beta3"
 projects[field_display_label][subdir] = "contrib"
 projects[field_display_label][version] = "1.2"
 
+projects[field_lock][subdir] = "contrib"
+projects[field_lock][version] = "1.0"
+
 projects[field_group][subdir] = "contrib"
 projects[field_group][version] = "1.1"
 

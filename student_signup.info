@@ -64,6 +64,7 @@ dependencies[] = feeds_tamper
 dependencies[] = feeds_tamper_ui
 dependencies[] = field_display_label
 dependencies[] = field_group
+dependencies[] = field_lock
 dependencies[] = gmap
 dependencies[] = gmap_location
 dependencies[] = gmap_macro_builder
