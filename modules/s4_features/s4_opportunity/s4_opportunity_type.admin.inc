@@ -90,6 +90,18 @@ function s4_opportunity_type_form($form, &$form_state, $s4_opportunity_type, $op
     '#default_value' => !empty($s4_opportunity_type->data['site_staff_approve']),
   );
 
+  $form['data']['description'] = array(
+    '#type' => 'text_format',
+    '#title' => t('Description'),
+    '#description' => t('The description of this type of opportunity is used when people start a new opportunity.'),
+    '#format' => (!empty($s4_opportunity_type->data['description']))
+      ? $s4_opportunity_type->data['description']['format']
+      : filter_default_format(),
+    '#default_value' => (!empty($s4_opportunity_type->data['description'])) 
+      ? $s4_opportunity_type->data['description']['value']
+      : '',
+    );
+
   $form['data']['email_enable'] = array(
     '#type' => 'checkbox',
     '#title' => t('Send email to students when their placement is made'),

@@ -24,24 +24,24 @@ function s4_button(&$vars) {
  *     Properties used: #action, #method, #attributes, #children
  *
  * @ingroup themeable
- 
-
-function s4_preprocess_form(&$variables) {
-}  
-
-function s4_form($variables) {
-  $element = $variables['element'];
-  if (isset($element['#action'])) {
-    $element['#attributes']['action'] = drupal_strip_dangerous_protocols($element['#action']);
-  }
-  
-  element_set_attributes($element, array('method', 'id'));
-  if (empty($element['#attributes']['accept-charset'])) {
-    $element['#attributes']['accept-charset'] = "UTF-8";
-  }
-
-  return '<form' . drupal_attributes($element['#attributes']) . '>' . $element['#children'] . '</form>';
-}
+ *  
+ * 
+ * function s4_preprocess_form(&$variables) {
+ * }  
+ * 
+ * function s4_form($variables) {
+ *   $element = $variables['element'];
+ *   if (isset($element['#action'])) {
+ *     $element['#attributes']['action'] = drupal_strip_dangerous_protocols($element['#action']);
+ *   }
+ *   
+ *   element_set_attributes($element, array('method', 'id'));
+ *   if (empty($element['#attributes']['accept-charset'])) {
+ *     $element['#attributes']['accept-charset'] = "UTF-8";
+ *   }
+ * 
+ *   return '<form' . drupal_attributes($element['#attributes']) . '>' . $element['#children'] . '</form>';
+ * }
 */
 
 /**
@@ -56,9 +56,6 @@ function s4_form_alter(&$form, &$form_state, $form_id) {
     'user_profile_form',
   );
   
-  // Only wrap in container for certain form
-  if(isset($form['#form_id']) && !in_array($form['#form_id'], $form_ids) && !isset($form['#node_edit_form']))
-    $form['actions']['#theme_wrappers'] = array();
 }  
 
 /**

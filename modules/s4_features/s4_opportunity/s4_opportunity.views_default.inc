@@ -289,6 +289,262 @@ Site',
   $export['s4_opportunities'] = $view;
 
   $view = new view();
+  $view->name = 's4_opportunities_create';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'node';
+  $view->human_name = 'S4 opportunities: Create';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'Select a site staff';
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['perm'] = 'start new opportunities';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['disable_sql_rewrite'] = TRUE;
+  $handler->display->display_options['query']['options']['distinct'] = TRUE;
+  $handler->display->display_options['query']['options']['slave'] = TRUE;
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Search';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '50';
+  $handler->display->display_options['style_plugin'] = 'table';
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['empty'] = TRUE;
+  $handler->display->display_options['header']['area']['content'] = '<p class="lead">Search for and select where this opportunity will be. If we don\'t have that site on the list, you can <a href="../../opportunities/create/sites/new">always create a new site</a>.';
+  $handler->display->display_options['header']['area']['format'] = 'full_html';
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = '<p class="lead">Didn\'t find the site you were looking for? <a href="../../opportunities/create/site/new">Let us know about a new site</a>.';
+  $handler->display->display_options['empty']['area']['format'] = 'full_html';
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = 'Site name';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = '';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
+  /* Field: Content: Location(s) */
+  $handler->display->display_options['fields']['field_location']['id'] = 'field_location';
+  $handler->display->display_options['fields']['field_location']['table'] = 'field_data_field_location';
+  $handler->display->display_options['fields']['field_location']['field'] = 'field_location';
+  $handler->display->display_options['fields']['field_location']['label'] = 'Address';
+  $handler->display->display_options['fields']['field_location']['type'] = 's4_sites_address';
+  $handler->display->display_options['fields']['field_location']['delta_limit'] = '1';
+  $handler->display->display_options['fields']['field_location']['delta_offset'] = '0';
+  /* Field: Content: Published */
+  $handler->display->display_options['fields']['status']['id'] = 'status';
+  $handler->display->display_options['fields']['status']['table'] = 'node';
+  $handler->display->display_options['fields']['status']['field'] = 'status';
+  $handler->display->display_options['fields']['status']['label'] = 'Active';
+  $handler->display->display_options['fields']['status']['type'] = 'custom';
+  $handler->display->display_options['fields']['status']['type_custom_true'] = 'Active';
+  $handler->display->display_options['fields']['status']['type_custom_false'] = 'Inactive';
+  $handler->display->display_options['fields']['status']['not'] = 0;
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = 'Select';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = 'Select';
+  $handler->display->display_options['fields']['nothing']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['nothing']['alter']['path'] = 'opportunities/create/site/[nid]';
+  $handler->display->display_options['fields']['nothing']['alter']['link_class'] = 'btn';
+  /* Sort criterion: Content: Title */
+  $handler->display->display_options['sorts']['title']['id'] = 'title';
+  $handler->display->display_options['sorts']['title']['table'] = 'node';
+  $handler->display->display_options['sorts']['title']['field'] = 'title';
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'site' => 'site',
+  );
+  /* Filter criterion: Search: Search Terms */
+  $handler->display->display_options['filters']['keys']['id'] = 'keys';
+  $handler->display->display_options['filters']['keys']['table'] = 'search_index';
+  $handler->display->display_options['filters']['keys']['field'] = 'keys';
+  $handler->display->display_options['filters']['keys']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['keys']['expose']['operator_id'] = 'keys_op';
+  $handler->display->display_options['filters']['keys']['expose']['label'] = 'Search';
+  $handler->display->display_options['filters']['keys']['expose']['operator'] = 'keys_op';
+  $handler->display->display_options['filters']['keys']['expose']['identifier'] = 'keys';
+  $handler->display->display_options['filters']['keys']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    4 => 0,
+    6 => 0,
+    3 => 0,
+    5 => 0,
+    7 => 0,
+    8 => 0,
+  );
+  /* Filter criterion: Location: City */
+  $handler->display->display_options['filters']['city']['id'] = 'city';
+  $handler->display->display_options['filters']['city']['table'] = 'location';
+  $handler->display->display_options['filters']['city']['field'] = 'city';
+  $handler->display->display_options['filters']['city']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['city']['expose']['operator_id'] = 'city_op';
+  $handler->display->display_options['filters']['city']['expose']['label'] = 'City';
+  $handler->display->display_options['filters']['city']['expose']['operator'] = 'city_op';
+  $handler->display->display_options['filters']['city']['expose']['identifier'] = 'city';
+  $handler->display->display_options['filters']['city']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    4 => 0,
+    6 => 0,
+    3 => 0,
+    5 => 0,
+    7 => 0,
+    8 => 0,
+  );
+
+  /* Display: Sites list */
+  $handler = $view->new_display('page', 'Sites list', 'page');
+  $handler->display->display_options['path'] = 'opportunities/create/sites';
+
+  /* Display: Site staff list */
+  $handler = $view->new_display('page', 'Site staff list', 'page_1');
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['empty'] = TRUE;
+  $handler->display->display_options['header']['area']['content'] = '<p class="lead">Site staff are the people who are responsible for this thing. If you can\'t find one, <a href="../../../opportunities/create/site-staff/new">just create one</a>.';
+  $handler->display->display_options['header']['area']['format'] = 'full_html';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = '';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
+  /* Field: Field: Last Name */
+  $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
+  $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
+  $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
+  /* Field: Field: First Name */
+  $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
+  $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
+  $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
+  /* Field: Content: Role */
+  $handler->display->display_options['fields']['field_staff_role']['id'] = 'field_staff_role';
+  $handler->display->display_options['fields']['field_staff_role']['table'] = 'field_data_field_staff_role';
+  $handler->display->display_options['fields']['field_staff_role']['field'] = 'field_staff_role';
+  /* Field: Content: Job title */
+  $handler->display->display_options['fields']['field_job_title']['id'] = 'field_job_title';
+  $handler->display->display_options['fields']['field_job_title']['table'] = 'field_data_field_job_title';
+  $handler->display->display_options['fields']['field_job_title']['field'] = 'field_job_title';
+  /* Field: Content: Active */
+  $handler->display->display_options['fields']['field_site_staff_active']['id'] = 'field_site_staff_active';
+  $handler->display->display_options['fields']['field_site_staff_active']['table'] = 'field_data_field_site_staff_active';
+  $handler->display->display_options['fields']['field_site_staff_active']['field'] = 'field_site_staff_active';
+  /* Field: Content: Email address */
+  $handler->display->display_options['fields']['field_email']['id'] = 'field_email';
+  $handler->display->display_options['fields']['field_email']['table'] = 'field_data_field_email';
+  $handler->display->display_options['fields']['field_email']['field'] = 'field_email';
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = 'Select';
+  $handler->display->display_options['fields']['nothing']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['nothing']['alter']['path'] = 'opportunities/create/site-staff/[nid]';
+  $handler->display->display_options['fields']['nothing']['alter']['link_class'] = 'btn';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Field: Last Name (field_last_name) */
+  $handler->display->display_options['sorts']['field_last_name_value']['id'] = 'field_last_name_value';
+  $handler->display->display_options['sorts']['field_last_name_value']['table'] = 'field_data_field_last_name';
+  $handler->display->display_options['sorts']['field_last_name_value']['field'] = 'field_last_name_value';
+  /* Sort criterion: Field: First Name (field_first_name) */
+  $handler->display->display_options['sorts']['field_first_name_value']['id'] = 'field_first_name_value';
+  $handler->display->display_options['sorts']['field_first_name_value']['table'] = 'field_data_field_first_name';
+  $handler->display->display_options['sorts']['field_first_name_value']['field'] = 'field_first_name_value';
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Site (field_site) */
+  $handler->display->display_options['arguments']['field_site_nid']['id'] = 'field_site_nid';
+  $handler->display->display_options['arguments']['field_site_nid']['table'] = 'field_data_field_site';
+  $handler->display->display_options['arguments']['field_site_nid']['field'] = 'field_site_nid';
+  $handler->display->display_options['arguments']['field_site_nid']['default_action'] = 'not found';
+  $handler->display->display_options['arguments']['field_site_nid']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['field_site_nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_site_nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_site_nid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'coordinator' => 'coordinator',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  $handler->display->display_options['path'] = 'opportunities/create/site-staff/%';
+  $translatables['s4_opportunities_create'] = array(
+    t('Master'),
+    t('Select a site staff'),
+    t('more'),
+    t('Search'),
+    t('Reset'),
+    t('Sort by'),
+    t('Asc'),
+    t('Desc'),
+    t('Items per page'),
+    t('- All -'),
+    t('Offset'),
+    t('« first'),
+    t('‹ previous'),
+    t('next ›'),
+    t('last »'),
+    t('<p class="lead">Search for and select where this opportunity will be. If we don\'t have that site on the list, you can <a href="../../opportunities/create/sites/new">always create a new site</a>.'),
+    t('<p class="lead">Didn\'t find the site you were looking for? <a href="../../opportunities/create/site/new">Let us know about a new site</a>.'),
+    t('Site name'),
+    t('Address'),
+    t('Active'),
+    t('Inactive'),
+    t('Select'),
+    t('City'),
+    t('Sites list'),
+    t('Site staff list'),
+    t('<p class="lead">Site staff are the people who are responsible for this thing. If you can\'t find one, <a href="../../../opportunities/create/site-staff/new">just create one</a>.'),
+    t('Last Name'),
+    t('First Name'),
+    t('Role'),
+    t('Job title'),
+    t('Email address'),
+    t('Custom text'),
+    t('All'),
+  );
+  $export['s4_opportunities_create'] = $view;
+
+  $view = new view();
   $view->name = 's4_opportunity_site_opportunities';
   $view->description = '';
   $view->tag = 'default';

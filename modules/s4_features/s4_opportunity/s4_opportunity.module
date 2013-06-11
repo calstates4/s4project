@@ -127,6 +127,10 @@ function s4_opportunity_permission() {
       'title' => t('Place students with opportunities'),
       'description' => t('User can place other users with opportunities'),
       ),
+    'start new opportunities' => array(
+      'title' => t('User is allowed to start new opportunities'),
+      'description' => t('Grants access to the create new opportunity wizard.'),
+      )
   );
 
   //Generate permissions per s4_opportunity
@@ -138,6 +142,9 @@ function s4_opportunity_permission() {
       ),
       "view any $type_name s4_opportunity" => array(
         'title' => t('%type_name: View any s4_opportunity', array('%type_name' => $type->label)),
+      ),
+      "create any $type_name s4_opportunity" => array(
+        'title' => t('%type_name: Create any s4_opportunity', array('%type_name' => $type->label)),
       ),
     );
   }
@@ -354,6 +361,11 @@ function s4_opportunity_theme() {
       'render element' => 'elements',
       'template' => 's4_opportunity',
     ),
+    's4_opportunity_create_start' => array(
+      'variables' => array('types' => array()),
+      'template' => 's4_opportunity_create_start',
+      'path' => drupal_get_path('module', 's4_opportunity') .'/theme'
+    )
   );
 }
 
@@ -379,6 +391,61 @@ function s4_opportunity_menu() {
     'page callback' => 'drupal_get_form',
     'page arguments' => array('s4_opportunity_place_form', 2, 3),
     'access arguments' => array('place students in opportunities'),
+    'file' => 's4_opportunity.pages.inc',
+    );
+
+  $items['opportunities/create'] = array(
+    'title' => 'Start a new opportunity',
+    'page callback' => 's4_opportunity_create_start',
+    'access arguments' => array('start new opportunities'),
+    'file' => 's4_opportunity.pages.inc',
+    );
+
+  $items['opportunities/create/%s4_opportunity_type'] = array(
+    'title' => 'Start ',
+    'page callback' => 's4_opportunity_create_start_type',
+    'page arguments' => array(2),
+    'access arguments' => array('start new opportunities'),
+    'file' => 's4_opportunity.pages.inc',
+    );
+
+  $items['opportunities/create/site/%node'] = array(
+    'title' => 'Select site',
+    'page callback' => 's4_opportunity_create_site_select',
+    'page arguments' => array(3),
+    'access arguments' => array('start new opportunities'),
+    'file' => 's4_opportunity.pages.inc',
+    );
+
+  $items['opportunities/create/site-staff/select/%node'] = array(
+    'title' => 'Select site staff',
+    'page callback' => 's4_opportunity_create_site_staff_select',
+    'page arguments' => array(4),
+    'access arguments' => array('start new opportunities'),
+    'file' => 's4_opportunity.pages.inc',
+    );
+
+  $items['opportunities/create/site-staff/new'] = array(
+    'title' => 'Create site staff',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('s4_opportunity_create_new_site_staff_form'),
+    'access arguments' => array('start new opportunities'),
+    'file' => 's4_opportunity.pages.inc',
+    );
+
+  $items['opportunities/create/opportunity'] = array(
+    'title_callback' => 's4_opportunity_create_opportunity_title',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('s4_opportunity_create_opportunity_form'),
+    'access arguments' => array('start new opportunities'),
+    'file' => 's4_opportunity.pages.inc',
+    );
+
+  $items['opportunities/create/students/%user/%node'] = array(
+    'title' => 'Select a student',
+    'page callback' => array('s4_opportunity_create_select_student'),
+    'page arguments' => array(3, 4),
+    'access arguments' => array('start new opportunities'),
     'file' => 's4_opportunity.pages.inc',
     );
 
@@ -441,6 +508,7 @@ function s4_opportunity_menu_alter(&$items) {
 function s4_opportunity_block_info() {
   return array(
     'new_opportunity' => array('info' => t('Create opportunity form')),
+    'opportunity_start' => array('info' => t('Start a new opportunity')),
     );
 }
 
@@ -453,6 +521,13 @@ function s4_opportunity_block_view($delta) {
     case 'new_opportunity':
       return array('subject' => t('Create new opportunity'),
         'content' => drupal_get_form('s4_opportunity_create_form'));
+    case 'opportunity_start':
+      $content = s4_opportunity_block_start();
+      if(!$content) {
+        return;
+      }
+      return array('subject' => t('Start a new opportunity'),
+        'content' => $content);
   }
 }
 
