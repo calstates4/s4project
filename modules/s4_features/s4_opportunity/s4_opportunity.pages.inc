@@ -57,6 +57,7 @@ function s4_opportunity_place_form_submit($form, $form_state) {
 
 function s4_opportunity_create_start() {
 	$types = s4_opportunity_get_types();
+	$_SESSION['s4_opportunity_create'] = array();
 	foreach($types as $k => $type) {
 		if(!user_access('create any '. $type->type .' s4_opportunity')) {
 			unset($types[$k]);
@@ -167,6 +168,23 @@ function s4_opportunity_create_opportunity_form($form, $form_state) {
 	$opportunity = s4_opportunity_create(array('type' => $type->type));
 	$form['#opportunity'] = $opportunity;
 
+	$form['name'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Opportunity Name'),
+    '#default_value' => isset($s4_opportunity->name) ? $s4_opportunity->name : '',
+    '#maxlength' => 255,
+    '#required' => TRUE,
+    '#weight' => -5,
+  );
+
+  $form['status'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Active'),
+    '#description' => t('Active @types are available for students to be placed with. Inactive @types are only visible to department staff.', array('@types' => check_plain($type->label))),
+    '#default_value' => isset($s4_opportunity->active) ? $s4_opportunity->active : 0,
+    '#maxlength' => 255,
+    '#weight' => -4,
+  );
 	field_attach_form('s4_opportunity', $opportunity, $form, $form_state);
 	
 	$form['actions'] = array(
@@ -191,7 +209,7 @@ function s4_opportunity_create_opportunity_form_submit($form, $form_state) {
 	$opportunity = $form['#opportunity'];
   field_attach_submit('s4_opportunity', $opportunity, $form, $form_state);
   $opportunity->save();
-  dpm($opportunity);
+
   $create['opportunity'] = $opportunity->s4_opportunity_id;
 	$_SESSION['s4_opportunity_create'] = $create;
 	drupal_goto('opportunities/create/students');
@@ -214,4 +232,9 @@ function s4_opportunity_create_select_student($user, $course) {
 	$create['students'][$user->uid] = $user->uid;
 	$_SESSION['s4_opportunity_create'] = $create;
 	drupal_goto('opportunities/create/students/'. implode(',', $create['students']));
+}
+
+function s4_opportunity_create_done() {
+	unset($_SESSION['s4_opportunity_create']);
+	drupal_goto('<front>');
 }

@@ -107,8 +107,8 @@ function s4_core_block_user_progress() {
         ? 'finished'
         :   '';
   $status[] = array('data' => '<div>Done!</div>',
-            'class' => array('span1', 'complete', $finished));
-  return array('content' => theme('item_list', array('items' => $status, 'attributes' => array('class' => array('user-signup-status', 'row')))) . '<div class="clearfix"></div>');
+                    'class' => array('span1', 'complete', $finished));
+  return array('content' => theme('item_list', array('items' => $status, 'attributes' => array('class' => array('user-signup-status', 'row')))));
 }
 
 /**

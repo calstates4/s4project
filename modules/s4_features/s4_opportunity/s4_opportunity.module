@@ -448,7 +448,12 @@ function s4_opportunity_menu() {
     'access arguments' => array('start new opportunities'),
     'file' => 's4_opportunity.pages.inc',
     );
-
+  $items['opportunities/create/done'] = array(
+    'title' => 'Done',
+    'page callback' => array('s4_opportunity_create_done'),
+    'access arguments' => array('start new opportunities'),
+    'file' => 's4_opportunity.pages.inc',
+    );
   return $items;
 }
 
@@ -509,6 +514,7 @@ function s4_opportunity_block_info() {
   return array(
     'new_opportunity' => array('info' => t('Create opportunity form')),
     'opportunity_start' => array('info' => t('Start a new opportunity')),
+    'opportunity_progress' => array('info' => t('Opportunity progress bar')),
     );
 }
 
@@ -528,6 +534,11 @@ function s4_opportunity_block_view($delta) {
       }
       return array('subject' => t('Start a new opportunity'),
         'content' => $content);
+    case 'opportunity_progress':
+      if(!isset($_SESSION['s4_opportunity_create']) || !user_access('start new opportunities')) {
+        return;
+      }
+      return array('content' => s4_opportunity_create_progress());
   }
 }
 
