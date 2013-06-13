@@ -355,10 +355,6 @@ function theme_s4_opportunity_add_list($variables) {
   return $output;
 }
 
-
-
-
-
 /**
  * Sets the breadcrumb for administrative s4_opportunity pages.
  */

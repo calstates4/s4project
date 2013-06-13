@@ -196,6 +196,9 @@ projects[workbench_moderation_notes][version] = "1.x-dev"
 projects[webform][subdir] = "contrib"
 projects[webform][version] = "3.19"
 
+projects[webform_table_element][subdir] = "contrib"
+projects[webform_table_element][version] = "1.7"
+
 projects[wysiwyg][subdir] = "contrib"
 projects[wysiwyg][version] = "2.1"
 
