@@ -36,7 +36,7 @@ function s4_opportunity_context_default_contexts() {
           'module' => 's4_opportunity',
           'delta' => 'opportunity_start',
           'region' => 'content',
-          'weight' => '-10',
+          'weight' => '-31',
         ),
       ),
     ),

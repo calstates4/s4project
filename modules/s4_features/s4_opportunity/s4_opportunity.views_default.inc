@@ -300,7 +300,7 @@ Site',
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Select a site staff';
+  $handler->display->display_options['title'] = 'Select a student';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['access']['perm'] = 'start new opportunities';
@@ -319,7 +319,7 @@ Site',
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
   $handler->display->display_options['header']['area']['empty'] = TRUE;
-  $handler->display->display_options['header']['area']['content'] = '<p class="lead">Search for and select where this opportunity will be. If we don\'t have that site on the list, you can <a href="../../opportunities/create/sites/new">always create a new site</a>.';
+  $handler->display->display_options['header']['area']['content'] = '<p class="lead">Search for and select where this opportunity will be. If we don\'t have that site on the list, you can <a href="../../sites/propose">always create a new site</a>.';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
   /* No results behavior: Global: Text area */
   $handler->display->display_options['empty']['area']['id'] = 'area';
@@ -425,6 +425,8 @@ Site',
 
   /* Display: Sites list */
   $handler = $view->new_display('page', 'Sites list', 'page');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Select a site';
   $handler->display->display_options['path'] = 'opportunities/create/sites';
 
   /* Display: Site staff list */
@@ -473,9 +475,10 @@ Site',
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = 'Select';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = 'Select';
   $handler->display->display_options['fields']['nothing']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['nothing']['alter']['path'] = 'opportunities/create/site-staff/[nid]';
+  $handler->display->display_options['fields']['nothing']['alter']['path'] = 'opportunities/create/site-staff/select/[nid]';
   $handler->display->display_options['fields']['nothing']['alter']['link_class'] = 'btn';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Field: Last Name (field_last_name) */
@@ -507,9 +510,136 @@ Site',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
   $handler->display->display_options['path'] = 'opportunities/create/site-staff/%';
+
+  /* Display: Student list */
+  $handler = $view->new_display('page', 'Student list', 'page_2');
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['empty'] = TRUE;
+  $handler->display->display_options['header']['area']['content'] = '<p class="lead">You may place one or more students in this opportunity.</p>';
+  $handler->display->display_options['header']['area']['format'] = 'full_html';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Content: Students (field_course_students) */
+  $handler->display->display_options['relationships']['field_course_students_uid']['id'] = 'field_course_students_uid';
+  $handler->display->display_options['relationships']['field_course_students_uid']['table'] = 'field_data_field_course_students';
+  $handler->display->display_options['relationships']['field_course_students_uid']['field'] = 'field_course_students_uid';
+  $handler->display->display_options['relationships']['field_course_students_uid']['required'] = TRUE;
+  $handler->display->display_options['relationships']['field_course_students_uid']['delta'] = '-1';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Catalog number */
+  $handler->display->display_options['fields']['field_course_catalog_number']['id'] = 'field_course_catalog_number';
+  $handler->display->display_options['fields']['field_course_catalog_number']['table'] = 'field_data_field_course_catalog_number';
+  $handler->display->display_options['fields']['field_course_catalog_number']['field'] = 'field_course_catalog_number';
+  $handler->display->display_options['fields']['field_course_catalog_number']['label'] = '';
+  $handler->display->display_options['fields']['field_course_catalog_number']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_course_catalog_number']['element_label_colon'] = FALSE;
+  /* Field: Content: Section number */
+  $handler->display->display_options['fields']['field_course_section']['id'] = 'field_course_section';
+  $handler->display->display_options['fields']['field_course_section']['table'] = 'field_data_field_course_section';
+  $handler->display->display_options['fields']['field_course_section']['field'] = 'field_course_section';
+  $handler->display->display_options['fields']['field_course_section']['label'] = '';
+  $handler->display->display_options['fields']['field_course_section']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_course_section']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_course_section']['settings'] = array(
+    'thousand_separator' => ' ',
+    'prefix_suffix' => 1,
+  );
+  /* Field: Content: Subject */
+  $handler->display->display_options['fields']['field_course_subject']['id'] = 'field_course_subject';
+  $handler->display->display_options['fields']['field_course_subject']['table'] = 'field_data_field_course_subject';
+  $handler->display->display_options['fields']['field_course_subject']['field'] = 'field_course_subject';
+  $handler->display->display_options['fields']['field_course_subject']['label'] = '';
+  $handler->display->display_options['fields']['field_course_subject']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_course_subject']['element_label_colon'] = FALSE;
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = 'Course';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[field_course_subject] [field_course_catalog_number] ([field_course_section])';
+  /* Field: Field: First Name */
+  $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
+  $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
+  $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
+  $handler->display->display_options['fields']['field_first_name']['relationship'] = 'field_course_students_uid';
+  $handler->display->display_options['fields']['field_first_name']['label'] = 'First name';
+  /* Field: Field: Last Name */
+  $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
+  $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
+  $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
+  $handler->display->display_options['fields']['field_last_name']['relationship'] = 'field_course_students_uid';
+  $handler->display->display_options['fields']['field_last_name']['label'] = 'Last name';
+  /* Field: User: Uid */
+  $handler->display->display_options['fields']['uid']['id'] = 'uid';
+  $handler->display->display_options['fields']['uid']['table'] = 'users';
+  $handler->display->display_options['fields']['uid']['field'] = 'uid';
+  $handler->display->display_options['fields']['uid']['relationship'] = 'field_course_students_uid';
+  $handler->display->display_options['fields']['uid']['label'] = '';
+  $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['uid']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['uid']['link_to_user'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = '';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
+  $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing_1']['label'] = 'Place';
+  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = 'Make placement';
+  $handler->display->display_options['fields']['nothing_1']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['nothing_1']['alter']['path'] = 'opportunities/create/students/[uid]/[nid]';
+  $handler->display->display_options['fields']['nothing_1']['alter']['link_class'] = 'btn';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Content: Title */
+  $handler->display->display_options['sorts']['title']['id'] = 'title';
+  $handler->display->display_options['sorts']['title']['table'] = 'node';
+  $handler->display->display_options['sorts']['title']['field'] = 'title';
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Students (field_course_students) */
+  $handler->display->display_options['arguments']['field_course_students_uid']['id'] = 'field_course_students_uid';
+  $handler->display->display_options['arguments']['field_course_students_uid']['table'] = 'field_data_field_course_students';
+  $handler->display->display_options['arguments']['field_course_students_uid']['field'] = 'field_course_students_uid';
+  $handler->display->display_options['arguments']['field_course_students_uid']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['field_course_students_uid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_course_students_uid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_course_students_uid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['field_course_students_uid']['break_phrase'] = TRUE;
+  $handler->display->display_options['arguments']['field_course_students_uid']['not'] = TRUE;
+  /* Contextual filter: Content: Faculty (field_course_faculty) */
+  $handler->display->display_options['arguments']['field_course_faculty_uid']['id'] = 'field_course_faculty_uid';
+  $handler->display->display_options['arguments']['field_course_faculty_uid']['table'] = 'field_data_field_course_faculty';
+  $handler->display->display_options['arguments']['field_course_faculty_uid']['field'] = 'field_course_faculty_uid';
+  $handler->display->display_options['arguments']['field_course_faculty_uid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['field_course_faculty_uid']['default_argument_type'] = 'current_user';
+  $handler->display->display_options['arguments']['field_course_faculty_uid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_course_faculty_uid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_course_faculty_uid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'course' => 'course',
+  );
+  $handler->display->display_options['path'] = 'opportunities/create/students';
   $translatables['s4_opportunities_create'] = array(
     t('Master'),
-    t('Select a site staff'),
+    t('Select a student'),
     t('more'),
     t('Search'),
     t('Reset'),
@@ -523,7 +653,7 @@ Site',
     t('‹ previous'),
     t('next ›'),
     t('last »'),
-    t('<p class="lead">Search for and select where this opportunity will be. If we don\'t have that site on the list, you can <a href="../../opportunities/create/sites/new">always create a new site</a>.'),
+    t('<p class="lead">Search for and select where this opportunity will be. If we don\'t have that site on the list, you can <a href="../../sites/propose">always create a new site</a>.'),
     t('<p class="lead">Didn\'t find the site you were looking for? <a href="../../opportunities/create/site/new">Let us know about a new site</a>.'),
     t('Site name'),
     t('Address'),
@@ -532,6 +662,7 @@ Site',
     t('Select'),
     t('City'),
     t('Sites list'),
+    t('Select a site'),
     t('Site staff list'),
     t('<p class="lead">Site staff are the people who are responsible for this thing. If you can\'t find one, <a href="../../../opportunities/create/site-staff/new">just create one</a>.'),
     t('Last Name'),
@@ -539,8 +670,16 @@ Site',
     t('Role'),
     t('Job title'),
     t('Email address'),
-    t('Custom text'),
     t('All'),
+    t('Student list'),
+    t('<p class="lead">You may place one or more students in this opportunity.</p>'),
+    t('field_course_students'),
+    t('Course'),
+    t('[field_course_subject] [field_course_catalog_number] ([field_course_section])'),
+    t('First name'),
+    t('Last name'),
+    t('Place'),
+    t('Make placement'),
   );
   $export['s4_opportunities_create'] = $view;
 

@@ -852,135 +852,6 @@ function s4_opportunity_field_default_fields() {
     ),
   );
 
-  // Exported field: 's4_opportunity-internship-field_risks'
-  $fields['s4_opportunity-internship-field_risks'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '-1',
-      'deleted' => '0',
-      'entity_types' => array(),
-      'field_name' => 'field_risks',
-      'foreign keys' => array(),
-      'indexes' => array(
-        'value' => array(
-          0 => 'value',
-        ),
-      ),
-      'module' => 'list',
-      'settings' => array(
-        'allowed_values' => array(
-          'Sharks' => 'Sharks',
-          'Alligators' => 'Alligators',
-          'Tightropes' => 'Tightropes',
-          'Donuts' => 'Donuts',
-        ),
-        'allowed_values_function' => '',
-        'allowed_values_php' => '',
-      ),
-      'translatable' => '0',
-      'type' => 'list_text',
-    ),
-    'field_instance' => array(
-      'bundle' => 'internship',
-      'default_value' => NULL,
-      'default_value_function' => '',
-      'default_value_php' => '',
-      'deleted' => '0',
-      'description' => '',
-      'display' => array(
-        'default' => array(
-          'label' => 'above',
-          'module' => 'list',
-          'settings' => array(),
-          'type' => 'list_default',
-          'weight' => 18,
-        ),
-      ),
-      'display_label' => '',
-      'entity_type' => 's4_opportunity',
-      'field_lock' => 0,
-      'field_name' => 'field_risks',
-      'label' => 'Risks',
-      'required' => 1,
-      's4_opportunity_risk' => 1,
-      'settings' => array(
-        'custom_add_another' => '',
-        'user_register_form' => FALSE,
-      ),
-      'widget' => array(
-        'active' => 1,
-        'module' => 'options',
-        'settings' => array(),
-        'type' => 'options_buttons',
-        'weight' => '4',
-      ),
-    ),
-  );
-
-  // Exported field: 's4_opportunity-internship-field_short_description'
-  $fields['s4_opportunity-internship-field_short_description'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '1',
-      'deleted' => '0',
-      'entity_types' => array(),
-      'field_name' => 'field_short_description',
-      'foreign keys' => array(
-        'format' => array(
-          'columns' => array(
-            'format' => 'format',
-          ),
-          'table' => 'filter_format',
-        ),
-      ),
-      'indexes' => array(
-        'format' => array(
-          0 => 'format',
-        ),
-      ),
-      'module' => 'text',
-      'settings' => array(),
-      'translatable' => '0',
-      'type' => 'text_long',
-    ),
-    'field_instance' => array(
-      'bundle' => 'internship',
-      'default_value' => NULL,
-      'deleted' => '0',
-      'description' => 'Please spell things right.',
-      'display' => array(
-        'default' => array(
-          'label' => 'above',
-          'module' => 'text',
-          'settings' => array(),
-          'type' => 'text_default',
-          'weight' => 17,
-        ),
-      ),
-      'display_label' => '',
-      'entity_type' => 's4_opportunity',
-      'field_lock' => 0,
-      'field_name' => 'field_short_description',
-      'label' => 'Short Description',
-      'required' => 0,
-      's4_opportunity_risk' => 0,
-      'settings' => array(
-        'custom_add_another' => '',
-        'text_processing' => '0',
-        'user_register_form' => FALSE,
-      ),
-      'widget' => array(
-        'active' => 1,
-        'module' => 'text',
-        'settings' => array(
-          'rows' => '5',
-        ),
-        'type' => 'text_textarea',
-        'weight' => '3',
-      ),
-    ),
-  );
-
   // Exported field: 's4_opportunity-internship-field_site_restrict'
   $fields['s4_opportunity-internship-field_site_restrict'] = array(
     'field_config' => array(
@@ -1075,80 +946,6 @@ function s4_opportunity_field_default_fields() {
     ),
   );
 
-  // Exported field: 's4_opportunity-internship-field_test'
-  $fields['s4_opportunity-internship-field_test'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '1',
-      'deleted' => '0',
-      'entity_types' => array(),
-      'field_name' => 'field_test',
-      'foreign keys' => array(),
-      'indexes' => array(),
-      'module' => 'date',
-      'settings' => array(
-        'granularity' => array(
-          'day' => 'day',
-          'hour' => 'hour',
-          'minute' => 'minute',
-          'month' => 'month',
-          'year' => 'year',
-        ),
-        'timezone_db' => 'UTC',
-        'todate' => '',
-        'tz_handling' => 'site',
-      ),
-      'translatable' => '0',
-      'type' => 'datestamp',
-    ),
-    'field_instance' => array(
-      'bundle' => 'internship',
-      'deleted' => '0',
-      'description' => '',
-      'display' => array(
-        'default' => array(
-          'label' => 'above',
-          'module' => 'date',
-          'settings' => array(
-            'format_type' => 'long',
-            'fromto' => 'both',
-            'multiple_from' => '',
-            'multiple_number' => '',
-            'multiple_to' => '',
-          ),
-          'type' => 'date_default',
-          'weight' => 19,
-        ),
-      ),
-      'entity_type' => 's4_opportunity',
-      'field_name' => 'field_test',
-      'label' => 'test',
-      'required' => FALSE,
-      'settings' => array(
-        'custom_add_another' => '',
-        'default_value' => 'now',
-        'default_value2' => 'same',
-        'default_value_code' => '',
-        'default_value_code2' => '',
-        'user_register_form' => FALSE,
-      ),
-      'widget' => array(
-        'module' => 'date',
-        'settings' => array(
-          'display_all_day' => 0,
-          'increment' => 15,
-          'input_format' => 'm/d/Y - H:i:s',
-          'input_format_custom' => '',
-          'label_position' => 'above',
-          'text_parts' => array(),
-          'year_range' => '-3:+3',
-        ),
-        'type' => 'date_text',
-        'weight' => '8',
-      ),
-    ),
-  );
-
   // Translatables
   // Included for use with string extractors like potx.
   t('Active date');
@@ -1157,17 +954,13 @@ function s4_opportunity_field_default_fields() {
   t('Dates');
   t('Enter the maximum number of placements that can be made at any given time.');
   t('Maximum placements');
-  t('Please spell things right.');
   t('Program(s)');
-  t('Risks');
   t('Select the time when this opportunity is available.');
   t('Select which programs can access this site.');
-  t('Short Description');
   t('Signup Form Results');
   t('Site staff');
   t('Sites');
   t('endpoints');
-  t('test');
 
   return $fields;
 }
