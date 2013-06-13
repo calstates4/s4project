@@ -371,6 +371,12 @@ function s4_opportunity_theme() {
 
 function s4_opportunity_s4_site_configuration() {
   return array(
+    'opportunity_general' => array(
+      'group' => t('Opportunities'),
+      'title' => t('Opportunity configuration'),
+      'description' => t('Customize messages and approval processes for opportunities.'),
+      'href' => 'admin/config/s4/opportunities',
+    ),
     'opportunity_types' => array(
       'group' => t('Opportunities'),
       'title' => t('Opportunity types'),
@@ -385,6 +391,15 @@ function s4_opportunity_s4_site_configuration() {
  */
 function s4_opportunity_menu() {
   $items = array();
+
+  $items['admin/config/s4/opportunities'] = array(
+    'title' => 'Opportunities',
+    'type' => MENU_LOCAL_TASK,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('s4_opportunity_admin_form'),
+    'access arguments' => array('administer s4_opportunity types'),
+    'file' => 's4_opportunity.admin.inc',
+    );
 
   $items['opportunities/place/%/%user'] = array(
     'title' => 'Make placement',
@@ -532,7 +547,7 @@ function s4_opportunity_block_view($delta) {
       if(!$content) {
         return;
       }
-      return array('subject' => t('Start a new opportunity'),
+      return array('subject' => variable_get('s4_opportunity_begin_subject', t('Start a new opportunity')),
         'content' => $content);
     case 'opportunity_progress':
       if(!isset($_SESSION['s4_opportunity_create']) || !user_access('start new opportunities')) {
@@ -769,3 +784,13 @@ function s4_opportunity_views_data_alter(&$data) {
     ),
   );
 }
+
+function s4_opportunity_node_insert($node) {
+  if(!($node->type == 'site' && isset($_SESSION['s4_opportunity_create']) && isset($_SESSION['s4_opportunity_create']['type']))) {
+    return;
+  }
+  $_SESSION['s4_opportunity_create']['site'] = $node->nid;
+  $_GET['destination'] = 'opportunities/create/site-staff/new';
+  drupal_get_destination();
+}
+

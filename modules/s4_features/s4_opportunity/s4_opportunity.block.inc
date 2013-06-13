@@ -50,9 +50,8 @@ function s4_opportunity_block_start() {
 		return false;
 	}
 	$type_list = (count($type_list) == 1) ? $type_list[0] : implode(',', $type_list);
-	$output = '<p class="lead">';
-	$output .= t('Start a new @types.', array('@types' => $type_list));
-	$output .= '</p>';
+	$message = variable_get('s4_opportunity_begin_message', array('format' => FILTER_FORMAT_DEFAULT, 'value' => t('Start a new @types.', array('@types' => $type_list))));
+	$output = check_markup($message['value'], $message['format']);
 	$output .= '<p>';
 	$output .= l('Start', 'opportunities/create', array('attributes' => array('class' => array('btn', 'btn-primary'))));
 	$output .= '</p>';

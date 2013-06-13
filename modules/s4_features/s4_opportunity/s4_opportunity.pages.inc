@@ -147,8 +147,9 @@ function s4_opportunity_create_new_site_staff_form_submit($form, $form_state) {
 	$node = $form['#node'];
   field_attach_submit('node', $node, $form, $form_state);
   node_save($node);
-  $node->field_site[$node->language][0]['nid'] = $create['site'];
+  $node->field_site[LANGUAGE_NONE][0]['nid'] = $create['site'];
   node_save($node);
+
   $create['site_staff'] = $node->nid;
 	$_SESSION['s4_opportunity_create'] = $create;
 	drupal_goto('opportunities/create/opportunity');
