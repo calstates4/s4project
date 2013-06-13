@@ -65,7 +65,8 @@ function s4_opportunity_create_progress() {
   $create = $_SESSION['s4_opportunity_create'];
   if($create['type']) {
 	  $type = s4_opportunity_type_load($create['type']);
-	  $status['type'] = array('data'  => 'Type',
+	  $opportunity_label = $type->label;
+	  $status['type'] = array('data'  => t('Type'),
 	            'id'     => 'status-type',
 	            'class'  => array('done'),
 	            'href'  => null,
@@ -73,7 +74,8 @@ function s4_opportunity_create_progress() {
 	            );
   }
   else {
-  	$status['type'] = array('data'  => 'Type',
+  	$opportunity_label = t('Opportunity');
+  	$status['type'] = array('data'  => t('Type'),
 	            'id'     => 'status-type',
 	            'class'  => array(),
 	            'href'  => null,
@@ -82,7 +84,7 @@ function s4_opportunity_create_progress() {
 
   if($create['site']) {
 	  $site = node_load($create['site']);
-	  $status['site'] = array('data'  => 'Site',
+	  $status['site'] = array('data'  => t('Site'),
 	            'id'     => 'status-type',
 	            'class'  => array('done'),
 	            'href'  => null,
@@ -90,7 +92,7 @@ function s4_opportunity_create_progress() {
 	            );
   }
   else {
-  	$status['site'] = array('data'  => 'Site',
+  	$status['site'] = array('data'  => t('Site'),
 	            'id'     => 'status-type',
 	            'class'  => array(),
 	            'href'  => null,
@@ -99,7 +101,7 @@ function s4_opportunity_create_progress() {
 
   if($create['site_staff']) {
 	  $site = node_load($create['site_staff']);
-	  $status['site_staff'] = array('data'  => 'Site staff',
+	  $status['site_staff'] = array('data'  => t('Site staff'),
 	            'id'     => 'status-type',
 	            'class'  => array('done'),
 	            'href'  => null,
@@ -107,16 +109,15 @@ function s4_opportunity_create_progress() {
 	            );
   }
   else {
-  	$status['site_staff'] = array('data'  => 'Site staff',
+  	$status['site_staff'] = array('data'  => t('Site staff'),
 	            'id'     => 'status-type',
 	            'class'  => array(),
 	            'href'  => null,
 	            );
   }
-
   if($create['opportunity']) {
 	  $opportunity = node_load($create['opportunity']);
-	  $status['opportunity'] = array('data'  => 'Opportunity',
+	  $status['opportunity'] = array('data'  => $opportunity_label,
 	            'id'     => 'status-type',
 	            'class'  => array('done'),
 	            'href'  => null,
@@ -124,7 +125,7 @@ function s4_opportunity_create_progress() {
 	            );
   }
   else {
-  	$status['opportunity'] = array('data'  => 'Opportunity',
+  	$status['opportunity'] = array('data'  => $opportunity_label,
 	            'id'     => 'status-type',
 	            'class'  => array(),
 	            'href'  => null,

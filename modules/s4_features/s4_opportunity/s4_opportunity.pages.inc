@@ -63,6 +63,10 @@ function s4_opportunity_create_start() {
 			unset($types[$k]);
 		}
 	}
+	if(count($types) == 1) {
+		$type = reset($types);
+		drupal_goto('opportunities/create/'. $type->type);
+	}
 	return theme('s4_opportunity_create_start', array('types' => $types));
 }
 
