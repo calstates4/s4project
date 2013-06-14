@@ -906,3 +906,23 @@ function s4_courses_permission() {
     ),
   );
 }
+
+function s4_courses_user_is_faculty($user) {
+  $terms = db_query('SELECT entity_id FROM {field_data_field_term_date_start} WHERE
+             field_term_date_start_value <= NOW()
+             AND field_term_date_start_value2 >= NOW()
+             ORDER BY field_term_date_start_value');
+  if(!$terms) {
+    return false;
+  }
+  $term_results = array();
+  foreach ($terms as $term) {
+    $term_results[] = $term->entity_id;
+  }
+  $courses = db_select('field_data_field_course_faculty', 'f')
+              ->condition('field_course_faculty_uid', $user->uid)
+              ->fields('f', array('entity_id'));
+  $courses->leftJoin('field_data_field_term', 't', 't.entity_type = f.entity_type AND t.entity_id = f.entity_id');
+  $courses->condition('t.field_term_nid', $term_results, 'IN');
+  return $courses->execute()->fetchAllKeyed(0,0);
+}

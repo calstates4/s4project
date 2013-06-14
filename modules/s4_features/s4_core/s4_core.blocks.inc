@@ -374,6 +374,7 @@ function s4_core_block_s4_signup_error() {
     return;
   }
   $return = false;
+  global $user;
   if(module_exists('s4_courses')) {
     $view = views_get_view('user_courses');
     $view->set_display('block_2');
@@ -381,8 +382,10 @@ function s4_core_block_s4_signup_error() {
     if(count($view->result)) {
       return;
     }
+    if(s4_courses_user_is_faculty($user)) {
+      return;
+    }
   }
-  global $user;
   $programs = field_get_items('user', $user, 'field_site_restrict');
   if($programs && count($programs)) {
     return;
