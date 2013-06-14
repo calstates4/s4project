@@ -26,16 +26,12 @@ function s4_core_block_user_progress() {
     $status['program'] = array('data'  => 'Program',
             'id'     => 'status-program',
             'class'  => array('done'),
-            'href'  => null,
             'selection' => '<div class="selection label label-info">' . $program->name .'</div>',
             );
   }
   $status['site'] = array('data'  => 'Site',
             'id'     => 'status-site',
             'class'   => (isset($site)) ? array('done') : array(),
-            'href'  => (isset($course))
-                    ? _s4_core_get_course_site_arguments($course)
-                    : 'site-list',
             'selection' => (isset($site_selection)) ? $site_selection : FALSE,
             );
 
@@ -55,9 +51,6 @@ function s4_core_block_user_progress() {
                          ? $coordinator_selection
                          : FALSE
               );
-      if($site) {
-        $status['coordinator']['href'] = 'sites/' . $site->nid . '/coordinators';
-      }
     }
   }
   if (isset($site)) {
@@ -66,7 +59,6 @@ function s4_core_block_user_progress() {
       $status['form'] = array('data' => 'Form',
               'id'   => 'status-form',
                 'class'   => (isset($form_done)) ? array('done') : array(),
-              'href' => 'node/' . $form[0]['nid'],
               'selection' => FALSE
               );
     }
@@ -75,7 +67,6 @@ function s4_core_block_user_progress() {
       $status['form'] = array('data' => 'Forms',
               'id'   => 'status-form',
                 'class'   => (isset($form_done)) ? array('done') : array(),
-              'href' => 'forms/download/' . implode('+', $form_terms),
               'selection' => FALSE
               );
     }
