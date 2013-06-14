@@ -4,7 +4,7 @@ function s4_opportunity_create_form($form_state) {
 	$form = array();
 
 	$options = array();
-
+	
 	foreach (s4_opportunity_get_types() as $type) {
 		if(user_access('administer opportunities') || user_access('edit any ' . $type->type .' s4_opportunity')) {
 			$options[$type->type] = check_plain($type->label);

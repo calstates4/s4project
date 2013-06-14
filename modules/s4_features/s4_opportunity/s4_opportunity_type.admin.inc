@@ -61,6 +61,21 @@ function s4_opportunity_type_form($form, &$form_state, $s4_opportunity_type, $op
     '#default_value' => !empty($s4_opportunity_type->data['students_can_place']),
   );
 
+  $vocabularies = taxonomy_vocabulary_get_names();
+
+  $programs = taxonomy_get_tree($vocabularies['site_restrictions']->vid);
+  $options = array();
+  foreach($programs as $program) {
+    $options[$program->tid] = $program->name;
+  }
+  dpm($s4_opportunity_type->data['programs']);
+  $form['data']['programs'] = array(
+    '#type' => 'checkboxes',
+    '#title' => t('Restrict this opportunity type to only these programs'),
+    '#default_value' => !empty($s4_opportunity_type->data['programs']) ? $s4_opportunity_type->data['programs'] : array(),
+    '#options' => $options,
+  );
+
   $online_forms = db_select('node', 'n')
                   ->condition('type', 'webform')
                   ->condition('status', 1)
