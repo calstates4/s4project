@@ -713,10 +713,6 @@ Site',
   $handler->display->display_options['empty']['area']['empty'] = TRUE;
   $handler->display->display_options['empty']['area']['content'] = '<p class="lead">No opportunities yet! Use the form to the right to create one.</p>';
   $handler->display->display_options['empty']['area']['format'] = 'full_html';
-  /* Relationship: Entity Reference: Referenced Entity */
-  $handler->display->display_options['relationships']['field_opportunity_sites_target_id']['id'] = 'field_opportunity_sites_target_id';
-  $handler->display->display_options['relationships']['field_opportunity_sites_target_id']['table'] = 'field_data_field_opportunity_sites';
-  $handler->display->display_options['relationships']['field_opportunity_sites_target_id']['field'] = 'field_opportunity_sites_target_id';
   /* Field: Opportunity: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 's4_opportunity';
@@ -737,18 +733,15 @@ Site',
   $handler->display->display_options['fields']['type']['table'] = 's4_opportunity';
   $handler->display->display_options['fields']['type']['field'] = 'type';
   $handler->display->display_options['fields']['type']['label'] = 'Type';
-  /* Contextual filter: Content: Nid */
-  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
-  $handler->display->display_options['arguments']['nid']['table'] = 'node';
-  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
-  $handler->display->display_options['arguments']['nid']['relationship'] = 'field_opportunity_sites_target_id';
-  $handler->display->display_options['arguments']['nid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['nid']['title_enable'] = TRUE;
-  $handler->display->display_options['arguments']['nid']['title'] = '%1';
-  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'node';
-  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
-  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
-  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  /* Contextual filter: Opportunity: Sites (field_opportunity_sites) */
+  $handler->display->display_options['arguments']['field_opportunity_sites_target_id']['id'] = 'field_opportunity_sites_target_id';
+  $handler->display->display_options['arguments']['field_opportunity_sites_target_id']['table'] = 'field_data_field_opportunity_sites';
+  $handler->display->display_options['arguments']['field_opportunity_sites_target_id']['field'] = 'field_opportunity_sites_target_id';
+  $handler->display->display_options['arguments']['field_opportunity_sites_target_id']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['field_opportunity_sites_target_id']['default_argument_type'] = 'node';
+  $handler->display->display_options['arguments']['field_opportunity_sites_target_id']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_opportunity_sites_target_id']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_opportunity_sites_target_id']['summary_options']['items_per_page'] = '25';
 
   /* Display: Opportunity site tab */
   $handler = $view->new_display('page', 'Opportunity site tab', 'page');
@@ -775,14 +768,12 @@ Site',
     t('next ›'),
     t('last »'),
     t('<p class="lead">No opportunities yet! Use the form to the right to create one.</p>'),
-    t('Content entity referenced from field_opportunity_sites'),
     t('Name'),
     t('1'),
     t('Program(s)'),
     t('Site staff'),
     t('Type'),
     t('All'),
-    t('%1'),
     t('Opportunity site tab'),
   );
   $export['s4_opportunity_site_opportunities'] = $view;
