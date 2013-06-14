@@ -52,6 +52,39 @@ function s4_opportunity_context_default_contexts() {
   $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
+  $context->name = 'opportunity-progress';
+  $context->description = 'Display the opportunity progress bar.';
+  $context->tag = 'opportunities';
+  $context->conditions = array(
+    'user' => array(
+      'values' => array(
+        'authenticated user' => 'authenticated user',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        's4_opportunity-opportunity_progress' => array(
+          'module' => 's4_opportunity',
+          'delta' => 'opportunity_progress',
+          'region' => 'content_top_wide',
+          'weight' => '-10',
+        ),
+      ),
+    ),
+  );
+  $context->condition_mode = 0;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('Display the opportunity progress bar.');
+  t('opportunities');
+  $export['opportunity-progress'] = $context;
+
+  $context = new stdClass();
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
   $context->name = 'site-opportunities';
   $context->description = 'User is on the site opportunity tab.';
   $context->tag = 'site';
