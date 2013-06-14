@@ -39,6 +39,7 @@ function s4_opportunity_default_s4_opportunity_type() {
     "weight" : "0",
     "data" : {
       "students_can_place" : 1,
+      "programs" : { "139" : "139", "135" : 0, "2" : 0, "1" : 0, "138" : 0 },
       "student_signup_form" : "",
       "faculty_approve" : 0,
       "site_staff_approve" : 1,
