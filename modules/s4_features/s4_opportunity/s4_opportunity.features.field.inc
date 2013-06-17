@@ -81,6 +81,86 @@ function s4_opportunity_field_default_fields() {
     ),
   );
 
+  // Exported field: 'relation-opportunity_placement-field_approving_user'
+  $fields['relation-opportunity_placement-field_approving_user'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_approving_user',
+      'foreign keys' => array(
+        'uid' => array(
+          'columns' => array(
+            'uid' => 'uid',
+          ),
+          'table' => 'users',
+        ),
+      ),
+      'indexes' => array(
+        'uid' => array(
+          0 => 'uid',
+        ),
+      ),
+      'module' => 'user_reference',
+      'settings' => array(
+        'referenceable_roles' => array(
+          2 => 0,
+          3 => 0,
+          4 => 0,
+          5 => 0,
+          6 => 0,
+          7 => 0,
+          8 => 0,
+        ),
+        'referenceable_status' => array(
+          0 => 0,
+          1 => 0,
+        ),
+        'view' => array(
+          'args' => array(),
+          'display_name' => '',
+          'view_name' => '',
+        ),
+      ),
+      'translatable' => '0',
+      'type' => 'user_reference',
+    ),
+    'field_instance' => array(
+      'bundle' => 'opportunity_placement',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'user_reference',
+          'settings' => array(),
+          'type' => 'user_reference_default',
+          'weight' => 6,
+        ),
+      ),
+      'entity_type' => 'relation',
+      'field_name' => 'field_approving_user',
+      'label' => 'Approving user',
+      'required' => FALSE,
+      'settings' => array(
+        'custom_add_another' => '',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'module' => 'user_reference',
+        'settings' => array(
+          'autocomplete_match' => 'contains',
+          'autocomplete_path' => 'user_reference/autocomplete',
+          'size' => 60,
+        ),
+        'type' => 'user_reference_autocomplete',
+        'weight' => '6',
+      ),
+    ),
+  );
+
   // Exported field: 'relation-opportunity_placement-field_coordinator'
   $fields['relation-opportunity_placement-field_coordinator'] = array(
     'field_config' => array(
@@ -456,6 +536,74 @@ function s4_opportunity_field_default_fields() {
     ),
   );
 
+  // Exported field: 'relation-opportunity_placement-field_placement_approved'
+  $fields['relation-opportunity_placement-field_placement_approved'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_placement_approved',
+      'foreign keys' => array(),
+      'indexes' => array(
+        'value' => array(
+          0 => 'value',
+        ),
+      ),
+      'module' => 'list',
+      'settings' => array(
+        'allowed_values' => array(
+          0 => '',
+          1 => '',
+        ),
+        'allowed_values_function' => '',
+        'allowed_values_php' => '',
+      ),
+      'translatable' => '0',
+      'type' => 'list_boolean',
+    ),
+    'field_instance' => array(
+      'bundle' => 'opportunity_placement',
+      'default_value' => array(
+        0 => array(
+          'value' => 0,
+        ),
+      ),
+      'default_value_function' => '',
+      'default_value_php' => '',
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'list',
+          'settings' => array(),
+          'type' => 'list_default',
+          'weight' => 5,
+        ),
+      ),
+      'display_label' => '',
+      'entity_type' => 'relation',
+      'field_lock' => 0,
+      'field_name' => 'field_placement_approved',
+      'label' => 'Approved',
+      'required' => 0,
+      'settings' => array(
+        'custom_add_another' => '',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(
+          'display_label' => 1,
+        ),
+        'type' => 'options_onoff',
+        'weight' => '5',
+      ),
+    ),
+  );
+
   // Exported field: 's4_opportunity-internship-field_active_date'
   $fields['s4_opportunity-internship-field_active_date'] = array(
     'field_config' => array(
@@ -668,7 +816,7 @@ function s4_opportunity_field_default_fields() {
   $fields['s4_opportunity-internship-field_opportunity_group'] = array(
     'field_config' => array(
       'active' => '1',
-      'cardinality' => '1',
+      'cardinality' => '-1',
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_opportunity_group',
@@ -1018,7 +1166,7 @@ function s4_opportunity_field_default_fields() {
   $fields['user-user-field_opportunity_group'] = array(
     'field_config' => array(
       'active' => '1',
-      'cardinality' => '1',
+      'cardinality' => '-1',
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_opportunity_group',
@@ -1061,15 +1209,18 @@ function s4_opportunity_field_default_fields() {
           'weight' => 6,
         ),
       ),
+      'display_label' => '',
       'entity_type' => 'user',
+      'field_lock' => 0,
       'field_name' => 'field_opportunity_group',
-      'label' => 'Approving department',
-      'required' => FALSE,
+      'label' => 'User can approve opportunities for',
+      'required' => 0,
       'settings' => array(
         'custom_add_another' => '',
-        'user_register_form' => FALSE,
+        'user_register_form' => 0,
       ),
       'widget' => array(
+        'active' => 1,
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_buttons',
@@ -1081,7 +1232,9 @@ function s4_opportunity_field_default_fields() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Active date');
+  t('Approved');
   t('Approving department');
+  t('Approving user');
   t('Category');
   t('Course');
   t('Dates');
@@ -1093,6 +1246,7 @@ function s4_opportunity_field_default_fields() {
   t('Signup Form Results');
   t('Site staff');
   t('Sites');
+  t('User can approve opportunities for');
   t('endpoints');
 
   return $fields;

@@ -508,7 +508,7 @@ function s4_opportunity_menu_local_tasks_alter(&$data, $router_item, $root_path)
 }
 
 /**
- *
+ * Implements hook_menu_alter().
  */
 function s4_opportunity_menu_alter(&$items) {
   //field_lock_menu_access($field, $default_access)
@@ -519,6 +519,56 @@ function s4_opportunity_menu_alter(&$items) {
                  'admin/structure/s4_opportunity_types/manage/%s4_opportunity_type/fields/%field_ui_menu/widget-type');
   foreach($paths as $path) {
     $items[$path]['access arguments'] = array(6, 'administer s4_opportunity types');
+  }
+}
+
+/**
+ * Implements hook_entity_presave().
+ */
+function s4_opportunity_entity_presave($relation, $type) {
+  if($type != 'relation' || $relation->relation_type != 'opportunity_placement') {
+    return;
+  }
+
+  $endpoints = field_get_items('relation', $relation, 'endpoints');
+  $opportunity = s4_opportunity_load($endpoints[1]['entity_id']);
+  $type = s4_opportunity_type_load($opportunity->type);
+
+  if(!$type->data['require_approval']) {
+    return;
+  }
+  $group = field_get_items('s4_opportunity', $opportunity, 'field_opportunity_group');
+  if(!$group || !count($group)) {
+    return;
+  }
+  $tids = array();
+  foreach($group as $g) {
+    $tids[] = $g['tid'];
+  }
+  $users = db_select('field_data_field_opportunity_group', 'o')
+             ->condition('entity_type', 'user')
+             ->condition('field_opportunity_group_tid', $tids, 'IN')
+             ->condition('deleted', 0)
+             ->fields('o', array('entity_id'))
+             ->execute()
+             ->fetchAllKeyed(0,0);
+  foreach($users as &$user) {
+    $user = user_load($user);
+    if($user->status) {
+      drupal_mail('s4_opportunity', 'approval_email', $user->mail, null, array('type' => $type, 'opportunity' => $opportunity, 'placement' => $relation));
+    }
+  }
+}
+
+function s4_opportunity_mail($key, &$message, $params) {
+  $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed';
+  $message['headers']['MIME-Version'] = '1.0';
+  $message['headers']['Content-Transfer-Encoding'] = '8Bit';
+  switch ($key) {
+    case 'approval_email':
+      $message['subject'] = $params['type']->data['approval_email_subject'];
+      $message['body'][] = check_markup($params['type']->data['approval_email_body']['value'], $params['type']->data['approval_email_body']['format']);
+      break;
   }
 }
 

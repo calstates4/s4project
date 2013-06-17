@@ -13,7 +13,7 @@ function s4_opportunity_place_form($form, $form_state, $type, $user) {
 			foreach($opportunities as $opportunity) {
 				$options[$opportunity->s4_opportunity_id] = $opportunity->name;
 			}
-			$form['opportunities'] = array(
+			$form['site_options']['opportunities'] = array(
 				'#type' => 'select',
 				'#title' => $type->label,
 				'#options' => $options,
@@ -39,6 +39,18 @@ function s4_opportunity_place_form($form, $form_state, $type, $user) {
 		'#type' => 'submit',
 		'#value' => t('Save @type', array('@type' => $type->label)),
 		);
+
+	unset($form['hours']);
+	unset($form['cc_myself']);
+	unset($form['email_student']);
+
+	$endpoints = array();
+	$relation = relation_create('opportunity_placement', $endpoints);	
+	field_attach_form('relation', $relation, $form, $form_state, entity_language('relation', $relation));
+	foreach(array('endpoints', 'field_form_signup_sid', 'field_course', 'field_coordinator', 'field_approving_user', 'field_placement_approved', 'field_coordinator') as $field) {
+		$form[$field]['#access'] = FALSE;
+	}
+
 	if($form_state['values']['site'] && !count($opportunities)) {
 		$form['actions']['submit']['#disabled'] = TRUE;
 		$form['actions']['submit']['#value'] = t('This site does not have any @type', array('@type' => $type->label));
@@ -48,10 +60,13 @@ function s4_opportunity_place_form($form, $form_state, $type, $user) {
 }
 
 function s4_opportunity_place_form_submit($form, $form_state) {
-	$endpoints = array(array('entity_type' => 'node', 'entity_id' => $form_state['values']['user']),
-												 array('entity_type' => 'node', 'entity_id' => $form_state['values']['opportunities']));
+	$endpoints = array(array('entity_type' => 'user', 'entity_id' => $form_state['values']['user']),
+												 array('entity_type' => 's4_opportunity', 'entity_id' => $form_state['values']['opportunities']));
 	$relation = relation_create('opportunity_placement', $endpoints);
 	field_attach_submit('relation', $relation, $form, $form_state);
+	$relation->field_coordinator[LANGUAGE_NONE][0]['nid'] = $form_state['values']['site-staff'];
+	$relation->field_course[LANGUAGE_NONE][0]['nid'] = $form_state['values']['course'];
+	dpm($relation);
 	relation_save($relation);
 }
 
@@ -225,7 +240,7 @@ function s4_opportunity_create_select_student($user, $course) {
 
 	$create = $_SESSION['s4_opportunity_create'];
 	$endpoints = array(array('entity_type' => 'user', 'entity_id' => $user->uid),
-												 array('entity_type' => 'node', 'entity_id' => $create['opportunity']));
+												 array('entity_type' => 's4_opportunity', 'entity_id' => $create['opportunity']));
 	$relation = relation_create('opportunity_placement', $endpoints);
 	$relation->field_coordinator[LANGUAGE_NONE][0]['nid'] = $create['site_staff'];
 	$relation->field_course[LANGUAGE_NONE][0]['nid'] = $course->nid;

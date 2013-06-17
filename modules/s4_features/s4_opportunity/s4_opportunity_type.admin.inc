@@ -68,7 +68,7 @@ function s4_opportunity_type_form($form, &$form_state, $s4_opportunity_type, $op
   foreach($programs as $program) {
     $options[$program->tid] = $program->name;
   }
-  dpm($s4_opportunity_type->data['programs']);
+  
   $form['data']['programs'] = array(
     '#type' => 'checkboxes',
     '#title' => t('Restrict this opportunity type to only these programs'),
@@ -125,18 +125,42 @@ function s4_opportunity_type_form($form, &$form_state, $s4_opportunity_type, $op
 
   $form['data']['email_subject'] = array(
     '#type' => 'textfield',
-    '#title' => t('Email subject'),
+    '#title' => t('Student email subject'),
     '#default_value' => (!empty($s4_opportunity_type->data['email_subject']) ? $s4_opportunity_type->data['email_subject'] : ''),
     );
 
   $form['data']['email_body'] = array(
     '#type' => 'text_format',
-    '#title' => t('Email body'),
+    '#title' => t('Student email body'),
     '#format' => (!empty($s4_opportunity_type->data['email_body']))
       ? $s4_opportunity_type->data['email_body']['format']
       : filter_default_format(),
     '#default_value' => (!empty($s4_opportunity_type->data['email_body'])) 
       ? $s4_opportunity_type->data['email_body']['value']
+      : '',
+  );
+
+
+  $form['data']['require_approval'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Opportunities of this type must be approved.'),
+    '#default_value' => (!empty($s4_opportunity_type->data['require_approval'])) ? $s4_opportunity_type->data['require_approval'] : 0,
+    );
+
+  $form['data']['approval_email_subject'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Approval email subject'),
+    '#default_value' => (!empty($s4_opportunity_type->data['approval_email_subject']) ? $s4_opportunity_type->data['approval_email_subject'] : ''),
+    );
+
+  $form['data']['approval_email_body'] = array(
+    '#type' => 'text_format',
+    '#title' => t('Approval email body'),
+    '#format' => (!empty($s4_opportunity_type->data['approval_email_body']))
+      ? $s4_opportunity_type->data['approval_email_body']['format']
+      : filter_default_format(),
+    '#default_value' => (!empty($s4_opportunity_type->data['approval_email_body'])) 
+      ? $s4_opportunity_type->data['approval_email_body']['value']
       : '',
   );
 

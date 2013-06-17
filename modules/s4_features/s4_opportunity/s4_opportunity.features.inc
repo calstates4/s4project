@@ -49,7 +49,13 @@ function s4_opportunity_default_s4_opportunity_type() {
       },
       "email_enable" : 0,
       "email_subject" : "",
-      "email_body" : { "value" : "", "format" : "filtered_html" }
+      "email_body" : { "value" : "", "format" : "filtered_html" },
+      "require_approval" : 1,
+      "approval_email_subject" : "Approve, yo!",
+      "approval_email_body" : {
+        "value" : "\\u003Cp\\u003EHey, this must be approved!\\u003C\\/p\\u003E\\r\\n",
+        "format" : "filtered_html"
+      }
     },
     "rdf_mapping" : []
   }');
