@@ -66,7 +66,6 @@ function s4_opportunity_place_form_submit($form, $form_state) {
 	field_attach_submit('relation', $relation, $form, $form_state);
 	$relation->field_coordinator[LANGUAGE_NONE][0]['nid'] = $form_state['values']['site-staff'];
 	$relation->field_course[LANGUAGE_NONE][0]['nid'] = $form_state['values']['course'];
-	dpm($relation);
 	relation_save($relation);
 }
 

@@ -313,6 +313,11 @@ function s4_courses_views_default_views() {
   $handler = $view->new_display('block', 'All faculty students', 'block_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Search your students';
+  $handler->display->display_options['defaults']['access'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    2 => '2',
+  );
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '250';
@@ -1251,7 +1256,7 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['fields']['title_1']['relationship'] = 'field_term_nid';
   $handler->display->display_options['fields']['title_1']['label'] = 'Term';
   $handler->display->display_options['fields']['title_1']['link_to_node'] = FALSE;
-  /* Field: Field: Program */
+  /* Field: Field: Program(s) */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
@@ -1364,7 +1369,7 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['filters']['field_course_section_value']['expose']['label'] = 'Section';
   $handler->display->display_options['filters']['field_course_section_value']['expose']['operator'] = 'field_course_section_value_op';
   $handler->display->display_options['filters']['field_course_section_value']['expose']['identifier'] = 'field_course_section_value';
-  /* Filter criterion: Field: Program (field_site_restrict) */
+  /* Filter criterion: Field: Program(s) (field_site_restrict) */
   $handler->display->display_options['filters']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
   $handler->display->display_options['filters']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['filters']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';
