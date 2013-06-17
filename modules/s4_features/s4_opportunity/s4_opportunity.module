@@ -383,6 +383,12 @@ function s4_opportunity_s4_site_configuration() {
       'description' => t('Define types of opportunities like internships or special projects.'),
       'href' => 'admin/structure/s4_opportunity_types',
     ),
+    'opportunity_groups' => array(
+      'group' => t('Opportunities'),
+      'title' => t('Approval groups'),
+      'description' => t('Define the group of departments or individuals who need to approve new opportunities.'),
+      'href' => 'admin/structure/taxonomy/opportunity_groups',
+      )
   );
 }
 

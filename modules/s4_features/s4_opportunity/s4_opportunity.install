@@ -119,3 +119,15 @@ function s4_opportunity_schema() {
 
   return $schema;
 }
+
+function s4_opportunity_install() {
+  $vocabularies = taxonomy_get_vocabularies();
+  $t = function_exists('t') ? 't' : 'st';
+  foreach($vocabularies as $vocabulary) {
+    if($vocabulary->machine_name == 'opportunity_groups') {
+      $term = array('vid' => $vocabulary->vid,
+                    'name' => $t('Internship program'));
+      taxonomy_term_save((object)$term);
+    }
+  }
+}
