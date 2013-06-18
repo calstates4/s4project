@@ -184,12 +184,44 @@ function s4_opportunity_create_opportunity_form($form, $form_state) {
 	$create = $_SESSION['s4_opportunity_create'];
 	$type = s4_opportunity_type_load($create['type']);
 
+	$site = node_load($_SESSION['s4_opportunity_create']['site']);
+
+	$risk_fields = array('field_health_risk',
+											 'field_site_health_training',
+											 'field_site_instructions',
+											 'field_site_requirements');
+	$risk_output = array();
+	foreach($risk_fields as $field) {
+		$item = field_get_items('node', $site, $field);
+		if($item && $item[0]['value']) {
+			$risk_output[$field] = field_view_field('node', $site, $field);
+		}
+	}
+	if(count($risk_output)) {
+		$form['risk_identification'] = array(
+			'#type' => 'fieldset',
+			'#title' => t('Site risk identification'),
+			'#collapsible' => TRUE,
+			'#weight' => -50
+			);
+		$form['risk_identification']['warning'] = array(
+			'#prefix' => '<div class="alert alert-error">',
+			'#suffix' => '</div>',
+			'#markup' => t('<strong>@site has risk information assocaited with it.</strong> Please read the below risks identified for the site you have selected and make sure to add any additional risk identification to your @type.', array('@site' => $site->title, '@type' => $type->label)),
+			);
+		foreach($risk_output as $field => $render) {
+			$form['risk_identification']['risk_' . $field] = array(
+				'#markup' => drupal_render($render)
+				);
+		}
+	}
+
 	$opportunity = s4_opportunity_create(array('type' => $type->type));
 	$form['#opportunity'] = $opportunity;
 
 	$form['name'] = array(
     '#type' => 'textfield',
-    '#title' => t('Opportunity Name'),
+    '#title' => t('@type Name', array('@type' => $type->label)),
     '#default_value' => isset($s4_opportunity->name) ? $s4_opportunity->name : '',
     '#maxlength' => 255,
     '#required' => TRUE,
@@ -204,6 +236,11 @@ function s4_opportunity_create_opportunity_form($form, $form_state) {
     '#maxlength' => 255,
     '#weight' => -4,
   );
+
+  if(!user_access('administer opportunities')) {
+    $form['status']['#access'] = FALSE;
+  }
+
 	field_attach_form('s4_opportunity', $opportunity, $form, $form_state);
 	
 	$form['actions'] = array(

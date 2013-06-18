@@ -172,7 +172,7 @@ function s4_opportunity_edit_form($form, &$form_state, $s4_opportunity) {
   $type = s4_opportunity_type_load($s4_opportunity->type);
   $form['name'] = array(
     '#type' => 'textfield',
-    '#title' => t('Opportunity Name'),
+    '#title' => t('@type Name', array('@type' => $type->label)),
     '#default_value' => isset($s4_opportunity->name) ? $s4_opportunity->name : '',
     '#maxlength' => 255,
     '#required' => TRUE,
@@ -187,6 +187,10 @@ function s4_opportunity_edit_form($form, &$form_state, $s4_opportunity) {
     '#maxlength' => 255,
     '#weight' => -4,
   );
+
+  if(!user_access('administer opportunities')) {
+    $form['status']['#access'] = FALSE;
+  }
   
   $form['data']['#tree'] = TRUE;
 
