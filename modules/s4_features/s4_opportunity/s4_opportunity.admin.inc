@@ -393,3 +393,26 @@ function s4_opportunity_admin_form() {
   return system_settings_form($form);
 }
 
+/**
+ * Form to disable fields in a site when being created in the context of an opportunity workflow.
+ */
+function s4_opportunity_admin_site_fields_form() {
+  $form = array();
+
+  $fields = field_info_instances('node', 'site');
+  $options = array();
+  foreach($fields as $field_name => $field) {
+    if($field['s4_sites_field_access']) {
+      $options[$field_name] = $field['label'];
+    }
+  }
+
+  $form['s4_opportunity_site_disabled_fields'] = array(
+    '#type' => 'checkboxes',
+    '#title' => t('Check fields that should be disabled when creating a new site as part of an opportunity'),
+    '#options' => $options,
+    '#default_value' => variable_get('s4_opportunity_site_disabled_fields', array())
+    );
+
+  return system_settings_form($form);
+}

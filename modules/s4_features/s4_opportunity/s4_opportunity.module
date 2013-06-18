@@ -388,6 +388,12 @@ function s4_opportunity_s4_site_configuration() {
       'title' => t('Approval groups'),
       'description' => t('Define the group of departments or individuals who need to approve new opportunities.'),
       'href' => 'admin/structure/taxonomy/opportunity_groups',
+      ),
+    'opportunity_site_fields' => array(
+      'group' => t('Opportunities'),
+      'title' => t('Disable site fields for new opportunities'),
+      'description' => t('When a student or faculty creates a site as part of a new opportunity, disable certain fields.'),
+      'href' => 'admin/config/s4/opportunities/site-fields',
       )
   );
 }
@@ -403,6 +409,15 @@ function s4_opportunity_menu() {
     'type' => MENU_LOCAL_TASK,
     'page callback' => 'drupal_get_form',
     'page arguments' => array('s4_opportunity_admin_form'),
+    'access arguments' => array('administer s4_opportunity types'),
+    'file' => 's4_opportunity.admin.inc',
+    );
+
+  $items['admin/config/s4/opportunities/site-fields'] = array(
+    'title' => 'Disable site fields',
+    'type' => MENU_LOCAL_TASK,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('s4_opportunity_admin_site_fields_form'),
     'access arguments' => array('administer s4_opportunity types'),
     'file' => 's4_opportunity.admin.inc',
     );
@@ -841,6 +856,9 @@ function s4_opportunity_views_data_alter(&$data) {
   );
 }
 
+/**
+ * Implements hook_node_insert().
+ */
 function s4_opportunity_node_insert($node) {
   if(!($node->type == 'site' && isset($_SESSION['s4_opportunity_create']) && isset($_SESSION['s4_opportunity_create']['type']))) {
     return;
@@ -848,5 +866,56 @@ function s4_opportunity_node_insert($node) {
   $_SESSION['s4_opportunity_create']['site'] = $node->nid;
   $_GET['destination'] = 'opportunities/create/site-staff/new';
   drupal_get_destination();
+}
+
+/**
+ * Implements hook_token_info().
+ */
+function s4_opportunity_token_info() {
+  $types = array('s4_opportunity' => array(
+      'name' => t('Opportunity'),
+      'description' => t('Information about an opportunity')),
+  );
+
+  $tokens['s4_opportunity']['name'] = array('name' => t('Opportunity name'),
+    'description' => t('The name of the opportunity'));
+  $fields = field_info_fields();
+  $instances = field_info_instances('s4_opportunity');
+  
+  foreach ($fields as $field_name => $field) {
+    if (!empty($field['bundles'])) {
+      foreach ($field['bundles'] as $entity_key => $entity) {
+        if($entity_key == 's4_opportunity') {
+          foreach($entity as $entity_type) {
+            if(isset($bundle_tokens[$entity_type]) && $bundle_tokens[$entity_type]) {
+              $field_token_type = strtr($field['type'], '_', '-') . '-field';
+              $field_token_name = strtr($field_name, '_', '-');
+              $tokens[$bundle_tokens[$entity_type]][$field_token_name] = array(
+                'name' => $field_token_name,
+                'description' => '',
+                'module' => 's4_core',
+              );
+            }
+          }   
+        }
+      }
+    }
+  }
+  return array(
+    'types' => $types,
+    'tokens' => $tokens,
+  );
+}
+
+function s4_opportunity_form_site_node_form_alter(&$form, $form_state) {
+  if(!isset($_SESSION['s4_opportunity_create']['type'])) {
+    return;
+  }
+  $disabled_fields = variable_get('s4_opportunity_site_disabled_fields', array());
+  foreach($disabled_fields as $name => $field) {
+    if ($field) {
+      $form[$name]['#access'] = $form[$name]['#required'] = false;
+    }
+  }
 }
 
