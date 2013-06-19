@@ -240,6 +240,9 @@ h2.block-title {
   margin: 15px 0 20px;
   border-bottom: 1px solid #eeeeee;
 }
+#messages {
+  margin-top: 15px;
+}
 body .navbar,
 body .navbar > .navbar-inner {
   margin: 0;
