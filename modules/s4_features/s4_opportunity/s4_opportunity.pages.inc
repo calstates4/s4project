@@ -261,6 +261,7 @@ function s4_opportunity_create_opportunity_form_validate($form, $form_state) {
 }
 
 function s4_opportunity_create_opportunity_form_submit($form, $form_state) {
+	global $user;
 	$create = $_SESSION['s4_opportunity_create'];
 	$opportunity = $form['#opportunity'];
   field_attach_submit('s4_opportunity', $opportunity, $form, $form_state);
@@ -268,6 +269,11 @@ function s4_opportunity_create_opportunity_form_submit($form, $form_state) {
 
   $create['opportunity'] = $opportunity->s4_opportunity_id;
 	$_SESSION['s4_opportunity_create'] = $create;
+	$result = dpm(views_get_view_result('s4_opportunities_create', 'page_2', $user->uid));
+	if(!$result || !count($result)) {
+		drupal_goto('opportunities/create/place');
+		return;
+	}
 	drupal_goto('opportunities/create/students');
 }
 
@@ -288,6 +294,32 @@ function s4_opportunity_create_select_student($user, $course) {
 	$create['students'][$user->uid] = $user->uid;
 	$_SESSION['s4_opportunity_create'] = $create;
 	drupal_goto('opportunities/create/students/'. implode(',', $create['students']));
+}
+
+function s4_opportunities_place_option() {
+	global $user;
+	_s4_opportunity_create_access_check(array('type', 'site', 'opportunity'));
+	$create = $_SESSION['s4_opportunity_create'];
+	$opportunity = s4_opportunity_load($create['opportunity']);
+	$type = s4_opportunity_type_load($create['type']);
+	drupal_set_title(t('Would you like to place yourself in @name?', array('@name' => $opportunity->name)));
+	return theme('s4_opportunity_place_options', array('opportunity' => $opportunity, 'type' => $type));
+}
+
+function s4_opportunities_place_immediately() {
+	global $user;
+	_s4_opportunity_create_access_check(array('type', 'site', 'opportunity'));
+	$create = $_SESSION['s4_opportunity_create'];
+	$endpoints = array(array('entity_type' => 'user', 'entity_id' => $user->uid),
+												 array('entity_type' => 's4_opportunity', 'entity_id' => $create['opportunity']));
+	$relation = relation_create('opportunity_placement', $endpoints);
+	$relation->field_coordinator[LANGUAGE_NONE][0]['nid'] = $create['site_staff'];
+	$relation->field_course[LANGUAGE_NONE][0]['nid'] = $course->nid;
+	$id = relation_save($relation);
+	drupal_set_message(t('Your request to be placed with @name has been submitted. Thank you.', array('@name' => $opporutnity->name)), 'success');
+	$_SESSION['s4_opportunity_create'] = FALSE;
+	drupal_goto('opportunities/create/done');
+
 }
 
 function s4_opportunity_create_done() {

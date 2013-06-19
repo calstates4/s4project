@@ -10,6 +10,12 @@
 function s4_opportunity_user_default_roles() {
   $roles = array();
 
+  // Exported role: opportunity approver
+  $roles['opportunity approver'] = array(
+    'name' => 'opportunity approver',
+    'weight' => '10',
+  );
+
   // Exported role: opportunity manager
   $roles['opportunity manager'] = array(
     'name' => 'opportunity manager',

@@ -25,7 +25,7 @@ function s4_opportunity_views_default_views() {
   $handler->display->display_options['title'] = 'Opportunities';
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
-  $handler->display->display_options['access']['perm'] = 'administer opportunities';
+  $handler->display->display_options['access']['perm'] = 'approve opportunities';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'views_exposed_groups';
@@ -247,13 +247,16 @@ Site',
 
   /* Display: Manage opportunities */
   $handler = $view->new_display('page', 'Manage opportunities', 'page');
-  $handler->display->display_options['path'] = 'opportunities';
-  $handler->display->display_options['menu']['type'] = 'normal';
+  $handler->display->display_options['path'] = 'opportunities/manage';
   $handler->display->display_options['menu']['title'] = 'Opportunities';
   $handler->display->display_options['menu']['weight'] = '-47';
   $handler->display->display_options['menu']['name'] = 'main-menu';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
+
+  /* Display: Approve opportunities */
+  $handler = $view->new_display('page', 'Approve opportunities', 'page_1');
+  $handler->display->display_options['path'] = 'opportunities/approve';
   $translatables['s4_opportunities'] = array(
     t('Master'),
     t('Opportunities'),
@@ -285,6 +288,7 @@ Site',
     t('Active'),
     t('Category'),
     t('Manage opportunities'),
+    t('Approve opportunities'),
   );
   $export['s4_opportunities'] = $view;
 
@@ -431,6 +435,8 @@ Site',
 
   /* Display: Site staff list */
   $handler = $view->new_display('page', 'Site staff list', 'page_1');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Select a site staff member';
   $handler->display->display_options['defaults']['header'] = FALSE;
   /* Header: Global: Text area */
   $handler->display->display_options['header']['area']['id'] = 'area';
@@ -528,6 +534,11 @@ Site',
   $handler->display->display_options['relationships']['field_course_students_uid']['field'] = 'field_course_students_uid';
   $handler->display->display_options['relationships']['field_course_students_uid']['required'] = TRUE;
   $handler->display->display_options['relationships']['field_course_students_uid']['delta'] = '-1';
+  /* Relationship: Content: Term (field_term) */
+  $handler->display->display_options['relationships']['field_term_nid']['id'] = 'field_term_nid';
+  $handler->display->display_options['relationships']['field_term_nid']['table'] = 'field_data_field_term';
+  $handler->display->display_options['relationships']['field_term_nid']['field'] = 'field_term_nid';
+  $handler->display->display_options['relationships']['field_term_nid']['delta'] = '-1';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Catalog number */
   $handler->display->display_options['fields']['field_course_catalog_number']['id'] = 'field_course_catalog_number';
@@ -636,6 +647,20 @@ Site',
   $handler->display->display_options['filters']['type']['value'] = array(
     'course' => 'course',
   );
+  /* Filter criterion: Content: Term dates -  start date (field_term_date_start) */
+  $handler->display->display_options['filters']['field_term_date_start_value']['id'] = 'field_term_date_start_value';
+  $handler->display->display_options['filters']['field_term_date_start_value']['table'] = 'field_data_field_term_date_start';
+  $handler->display->display_options['filters']['field_term_date_start_value']['field'] = 'field_term_date_start_value';
+  $handler->display->display_options['filters']['field_term_date_start_value']['relationship'] = 'field_term_nid';
+  $handler->display->display_options['filters']['field_term_date_start_value']['operator'] = '<=';
+  $handler->display->display_options['filters']['field_term_date_start_value']['default_date'] = 'now';
+  /* Filter criterion: Content: Term dates - end date (field_term_date_start:value2) */
+  $handler->display->display_options['filters']['field_term_date_start_value2']['id'] = 'field_term_date_start_value2';
+  $handler->display->display_options['filters']['field_term_date_start_value2']['table'] = 'field_data_field_term_date_start';
+  $handler->display->display_options['filters']['field_term_date_start_value2']['field'] = 'field_term_date_start_value2';
+  $handler->display->display_options['filters']['field_term_date_start_value2']['relationship'] = 'field_term_nid';
+  $handler->display->display_options['filters']['field_term_date_start_value2']['operator'] = '>=';
+  $handler->display->display_options['filters']['field_term_date_start_value2']['default_date'] = 'now';
   $handler->display->display_options['path'] = 'opportunities/create/students';
   $translatables['s4_opportunities_create'] = array(
     t('Master'),
@@ -664,6 +689,7 @@ Site',
     t('Sites list'),
     t('Select a site'),
     t('Site staff list'),
+    t('Select a site staff member'),
     t('<p class="lead">Site staff are the people who are responsible for this thing. If you can\'t find one, <a href="../../../opportunities/create/site-staff/new">just create one</a>.'),
     t('Last Name'),
     t('First Name'),
@@ -674,6 +700,7 @@ Site',
     t('Student list'),
     t('<p class="lead">You may place one or more students in this opportunity.</p>'),
     t('field_course_students'),
+    t('field_term'),
     t('Course'),
     t('[field_course_subject] [field_course_catalog_number] ([field_course_section])'),
     t('First name'),

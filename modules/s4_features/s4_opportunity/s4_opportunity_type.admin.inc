@@ -132,6 +132,7 @@ function s4_opportunity_type_form($form, &$form_state, $s4_opportunity_type, $op
   $form['data']['email_body'] = array(
     '#type' => 'text_format',
     '#title' => t('Student email body'),
+    '#description' => t('Remember, you should at least have the token [s4_opportunity:placement_form_link] in the email so the student can complete a placement form.'),
     '#format' => (!empty($s4_opportunity_type->data['email_body']))
       ? $s4_opportunity_type->data['email_body']['format']
       : filter_default_format(),

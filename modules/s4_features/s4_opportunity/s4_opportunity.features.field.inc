@@ -140,20 +140,23 @@ function s4_opportunity_field_default_fields() {
           'weight' => 6,
         ),
       ),
+      'display_label' => '',
       'entity_type' => 'relation',
+      'field_lock' => 0,
       'field_name' => 'field_approving_user',
       'label' => 'Approving user',
-      'required' => FALSE,
+      'required' => 0,
       'settings' => array(
         'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
+        'active' => 1,
         'module' => 'user_reference',
         'settings' => array(
           'autocomplete_match' => 'contains',
           'autocomplete_path' => 'user_reference/autocomplete',
-          'size' => 60,
+          'size' => '60',
         ),
         'type' => 'user_reference_autocomplete',
         'weight' => '6',
@@ -837,7 +840,7 @@ function s4_opportunity_field_default_fields() {
       'settings' => array(
         'allowed_values' => array(
           0 => array(
-            'vocabulary' => 'opportunity_category',
+            'vocabulary' => 'opportunity_groups',
             'parent' => '0',
           ),
         ),
@@ -1187,7 +1190,7 @@ function s4_opportunity_field_default_fields() {
       'settings' => array(
         'allowed_values' => array(
           0 => array(
-            'vocabulary' => 'opportunity_category',
+            'vocabulary' => 'opportunity_groups',
             'parent' => '0',
           ),
         ),

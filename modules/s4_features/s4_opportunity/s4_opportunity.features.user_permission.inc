@@ -43,6 +43,15 @@ function s4_opportunity_user_default_permissions() {
     'module' => 's4_opportunity',
   );
 
+  // Exported permission: approve opportunities
+  $permissions['approve opportunities'] = array(
+    'name' => 'approve opportunities',
+    'roles' => array(
+      0 => 'opportunity approver',
+    ),
+    'module' => 's4_opportunity',
+  );
+
   // Exported permission: place students in opportunities
   $permissions['place students in opportunities'] = array(
     'name' => 'place students in opportunities',

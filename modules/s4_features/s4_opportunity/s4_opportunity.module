@@ -130,6 +130,10 @@ function s4_opportunity_permission() {
     'start new opportunities' => array(
       'title' => t('User is allowed to start new opportunities'),
       'description' => t('Grants access to the create new opportunity wizard.'),
+      ),
+    'approve opportunities' => array(
+      'title' => t('User can approve opportunities'),
+      'description' => t('This user can approve opportunities before they are made active.'),
       )
   );
 
@@ -365,7 +369,11 @@ function s4_opportunity_theme() {
       'variables' => array('types' => array()),
       'template' => 's4_opportunity_create_start',
       'path' => drupal_get_path('module', 's4_opportunity') .'/theme'
-    )
+    ),
+    's4_opportunity_place_options' => array(
+      'variables' => array('opportunity' => array(), 'type' => array()),
+      'template' => 's4_opportunity_place_options',
+      'path' => drupal_get_path('module', 's4_opportunity') .'/theme')
   );
 }
 
@@ -403,6 +411,13 @@ function s4_opportunity_s4_site_configuration() {
  */
 function s4_opportunity_menu() {
   $items = array();
+
+  $items['opportunities'] = array(
+    'title' => 'Opportunities',
+    'type' => MENU_CALLBACK,
+    'page callback' => 's4_opportunity_opportunities_redirect',
+    'access callback' => 's4_opportunity_opportunities_redirect_access',
+    );
 
   $items['admin/config/s4/opportunities'] = array(
     'title' => 'Opportunities',
@@ -479,18 +494,44 @@ function s4_opportunity_menu() {
 
   $items['opportunities/create/students/%user/%node'] = array(
     'title' => 'Select a student',
-    'page callback' => array('s4_opportunity_create_select_student'),
+    'page callback' => 's4_opportunity_create_select_student',
     'page arguments' => array(3, 4),
     'access arguments' => array('start new opportunities'),
     'file' => 's4_opportunity.pages.inc',
     );
   $items['opportunities/create/done'] = array(
     'title' => 'Done',
-    'page callback' => array('s4_opportunity_create_done'),
+    'page callback' => 's4_opportunity_create_done',
+    'access arguments' => array('start new opportunities'),
+    'file' => 's4_opportunity.pages.inc',
+    );
+
+  $items['opportunities/create/place'] = array(
+    'title' => 'Place yourself',
+    'page callback' => 's4_opportunities_place_option',
+    'access arguments' => array('start new opportunities'),
+    'file' => 's4_opportunity.pages.inc',
+    );
+
+  $items['opportunities/create/place-immediately'] = array(
+    'title' => 'Place',
+    'page callback' => 's4_opportunities_place_immediately',
     'access arguments' => array('start new opportunities'),
     'file' => 's4_opportunity.pages.inc',
     );
   return $items;
+}
+
+function s4_opportunity_opportunities_redirect() {
+  if(user_access('administer opportunities')) {
+    drupal_goto('opportunities/manage');
+    return;
+  }
+  drupal_goto('opportunities/approve');
+}
+
+function s4_opportunity_opportunities_redirect_access() {
+  return (user_access('administer opportunities') || user_access('approve opportunities'));
 }
 
 function s4_opportunity_get_site_opportunities($site_id, $type = 'all', $active = TRUE) {
@@ -553,6 +594,7 @@ function s4_opportunity_entity_presave($relation, $type) {
 
   $endpoints = field_get_items('relation', $relation, 'endpoints');
   $opportunity = s4_opportunity_load($endpoints[1]['entity_id']);
+  $student = user_load($endpoints[0]['entity_id']);
   $type = s4_opportunity_type_load($opportunity->type);
 
   if(!$type->data['require_approval']) {
@@ -576,7 +618,7 @@ function s4_opportunity_entity_presave($relation, $type) {
   foreach($users as &$user) {
     $user = user_load($user);
     if($user->status) {
-      drupal_mail('s4_opportunity', 'approval_email', $user->mail, null, array('type' => $type, 'opportunity' => $opportunity, 'placement' => $relation));
+      drupal_mail('s4_opportunity', 'approval_email', $user->mail, null, array('type' => $type, 'opportunity' => $opportunity, 'placement' => $relation, 'student' => $student));
     }
   }
 }
@@ -588,7 +630,11 @@ function s4_opportunity_mail($key, &$message, $params) {
   switch ($key) {
     case 'approval_email':
       $message['subject'] = $params['type']->data['approval_email_subject'];
-      $message['body'][] = check_markup($params['type']->data['approval_email_body']['value'], $params['type']->data['approval_email_body']['format']);
+      $body = token_replace($params['type']->data['approval_email_body']['value'], array('s4_site_staff' => $params['site_staff'],
+                                                   's4_opportunity' => $params['opportunity'],
+                                                   'user' => $params['student']
+                                                   ));
+      $message['body'][] = check_markup($body, $params['type']->data['approval_email_body']['format']);
       break;
   }
 }
@@ -879,6 +925,10 @@ function s4_opportunity_token_info() {
 
   $tokens['s4_opportunity']['name'] = array('name' => t('Opportunity name'),
     'description' => t('The name of the opportunity'));
+  $tokens['s4_opportunity']['placement_form_link'] = array('name' => t('Link to placement form.'),
+    'description' => t('URL to fill out a placement form.'));
+  $tokens['s4_opportunity']['approve_link'] = array('name' => t('Link to placement form.'),
+    'description' => t('URL to approve placement.'));
   $fields = field_info_fields();
   $instances = field_info_instances('s4_opportunity');
   
