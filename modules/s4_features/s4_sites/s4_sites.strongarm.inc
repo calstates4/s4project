@@ -13,6 +13,155 @@ function s4_sites_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'field_bundle_settings_node__contact_record';
+  $strongarm->value = array(
+    'view_modes' => array(
+      'teaser' => array(
+        'custom_settings' => TRUE,
+      ),
+      'notifications' => array(
+        'custom_settings' => TRUE,
+      ),
+      'full' => array(
+        'custom_settings' => FALSE,
+      ),
+      'rss' => array(
+        'custom_settings' => FALSE,
+      ),
+      'search_index' => array(
+        'custom_settings' => FALSE,
+      ),
+      'search_result' => array(
+        'custom_settings' => FALSE,
+      ),
+      'print' => array(
+        'custom_settings' => FALSE,
+      ),
+      'token' => array(
+        'custom_settings' => FALSE,
+      ),
+    ),
+    'extra_fields' => array(
+      'form' => array(),
+      'display' => array(),
+    ),
+  );
+  $export['field_bundle_settings_node__contact_record'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'field_bundle_settings_node__coordinator';
+  $strongarm->value = array(
+    'view_modes' => array(),
+    'extra_fields' => array(
+      'form' => array(
+        'title' => array(
+          'weight' => '0',
+        ),
+      ),
+      'display' => array(),
+    ),
+  );
+  $export['field_bundle_settings_node__coordinator'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'field_bundle_settings_node__file';
+  $strongarm->value = array(
+    'view_modes' => array(
+      'teaser' => array(
+        'custom_settings' => TRUE,
+      ),
+      'notifications' => array(
+        'custom_settings' => TRUE,
+      ),
+      'full' => array(
+        'custom_settings' => FALSE,
+      ),
+      'rss' => array(
+        'custom_settings' => FALSE,
+      ),
+      'search_index' => array(
+        'custom_settings' => FALSE,
+      ),
+      'search_result' => array(
+        'custom_settings' => FALSE,
+      ),
+      'print' => array(
+        'custom_settings' => FALSE,
+      ),
+      'token' => array(
+        'custom_settings' => FALSE,
+      ),
+    ),
+    'extra_fields' => array(
+      'form' => array(),
+      'display' => array(),
+    ),
+  );
+  $export['field_bundle_settings_node__file'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'field_bundle_settings_node__site';
+  $strongarm->value = array(
+    'view_modes' => array(
+      'teaser' => array(
+        'custom_settings' => TRUE,
+      ),
+      'notifications' => array(
+        'custom_settings' => TRUE,
+      ),
+      'full' => array(
+        'custom_settings' => FALSE,
+      ),
+      'rss' => array(
+        'custom_settings' => FALSE,
+      ),
+      'search_index' => array(
+        'custom_settings' => TRUE,
+      ),
+      'search_result' => array(
+        'custom_settings' => FALSE,
+      ),
+      'print' => array(
+        'custom_settings' => FALSE,
+      ),
+      'token' => array(
+        'custom_settings' => FALSE,
+      ),
+    ),
+    'extra_fields' => array(
+      'form' => array(
+        'title' => array(
+          'weight' => '-5',
+        ),
+        'uniqueness' => array(
+          'weight' => '-4',
+        ),
+      ),
+      'display' => array(
+        's4_core_signup_select_site' => array(
+          'default' => array(
+            'weight' => '10',
+            'visible' => TRUE,
+          ),
+          'search_index' => array(
+            'weight' => '9',
+            'visible' => FALSE,
+          ),
+        ),
+      ),
+    ),
+  );
+  $export['field_bundle_settings_node__site'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'gmap_default';
   $strongarm->value = array(
     'width' => '100%',
@@ -74,13 +223,6 @@ function s4_sites_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'gmap_marker_file';
-  $strongarm->value = '1';
-  $export['gmap_marker_file'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
   $strongarm->name = 'gmap_markermanager';
   $strongarm->value = array(
     'gmarkermanager' => array(
@@ -122,6 +264,13 @@ function s4_sites_strongarm() {
     ),
   );
   $export['gmap_markermanager'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'gmap_marker_file';
+  $strongarm->value = '1';
+  $export['gmap_marker_file'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -377,61 +526,66 @@ function s4_sites_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'node_options_contact_record';
+  $strongarm->name = 'menu_options_contact_record';
   $strongarm->value = array(
-    0 => 'status',
+    0 => 'main-menu',
   );
-  $export['node_options_contact_record'] = $strongarm;
+  $export['menu_options_contact_record'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'node_options_coordinator';
+  $strongarm->name = 'menu_options_coordinator';
   $strongarm->value = array(
-    0 => 'status',
-    1 => 'revision',
+    0 => 'main-menu',
   );
-  $export['node_options_coordinator'] = $strongarm;
+  $export['menu_options_coordinator'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'node_options_file';
+  $strongarm->name = 'menu_options_file';
   $strongarm->value = array(
-    0 => 'status',
+    0 => 'main-menu',
   );
-  $export['node_options_file'] = $strongarm;
+  $export['menu_options_file'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'node_options_site';
+  $strongarm->name = 'menu_options_site';
   $strongarm->value = array(
-    0 => 'moderation',
-    1 => 'revision',
+    0 => 'main-menu',
   );
-  $export['node_options_site'] = $strongarm;
+  $export['menu_options_site'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'node_preview_coordinator';
-  $strongarm->value = '0';
-  $export['node_preview_coordinator'] = $strongarm;
+  $strongarm->name = 'menu_parent_contact_record';
+  $strongarm->value = 'main-menu:0';
+  $export['menu_parent_contact_record'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'node_submitted_coordinator';
-  $strongarm->value = 0;
-  $export['node_submitted_coordinator'] = $strongarm;
+  $strongarm->name = 'menu_parent_coordinator';
+  $strongarm->value = 'main-menu:0';
+  $export['menu_parent_coordinator'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'node_submitted_site';
-  $strongarm->value = 0;
-  $export['node_submitted_site'] = $strongarm;
+  $strongarm->name = 'menu_parent_file';
+  $strongarm->value = 'main-menu:0';
+  $export['menu_parent_file'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'menu_parent_site';
+  $strongarm->value = 'main-menu:0';
+  $export['menu_parent_site'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -552,58 +706,23 @@ function s4_sites_strongarm() {
       'field_course_faculty' => array(
         'referenced' => array(
           'view' => 'view',
-          'update' => 0,
-          'delete' => 0,
-          'deny_view' => 0,
-          'deny_update' => 0,
-          'deny_delete' => 0,
-        ),
-        'author' => array(
-          'view' => 0,
-          'update' => 0,
-          'delete' => 0,
-        ),
-        'all' => array(
-          'view' => 0,
-        ),
-        'unused' => '0',
-        'views' => array(
-          'view' => '',
-          'view_args' => '',
         ),
         'priority' => '9',
       ),
       'field_course_students' => array(
         'referenced' => array(
           'view' => 'view',
-          'update' => 0,
-          'delete' => 0,
-        ),
-        'author' => array(
-          'view' => 0,
-          'update' => 0,
-          'delete' => 0,
         ),
         'all' => array(
           'view' => 'view',
         ),
         'unused' => '1',
-        'views' => array(
-          'view' => '',
-          'view_args' => '',
-        ),
-        'priority' => '0',
       ),
     ),
     'site' => array(
       'field_site_users' => array(
         'referenced' => array(
           'update' => 'update',
-          'view' => 0,
-          'delete' => 0,
-          'deny_view' => 0,
-          'deny_update' => 0,
-          'deny_delete' => 0,
         ),
         'author' => array(
           'view' => 'view',
@@ -613,36 +732,12 @@ function s4_sites_strongarm() {
         'all' => array(
           'view' => 'view',
         ),
-        'unused' => '0',
-        'views' => array(
-          'view' => '',
-          'view_args' => '',
-        ),
-        'priority' => '0',
       ),
     ),
     'signup' => array(
       'field_user' => array(
         'referenced' => array(
           'view' => 'view',
-          'update' => 0,
-          'delete' => 0,
-          'deny_view' => 0,
-          'deny_update' => 0,
-          'deny_delete' => 0,
-        ),
-        'author' => array(
-          'view' => 0,
-          'update' => 0,
-          'delete' => 0,
-        ),
-        'all' => array(
-          'view' => 0,
-        ),
-        'unused' => '0',
-        'views' => array(
-          'view' => '',
-          'view_args' => '',
         ),
         'priority' => '2',
       ),
@@ -652,22 +747,12 @@ function s4_sites_strongarm() {
         'referenced' => array(
           'view' => 'view',
           'update' => 'update',
-          'delete' => 0,
         ),
         'author' => array(
           'view' => 'view',
           'update' => 'update',
           'delete' => 'delete',
         ),
-        'all' => array(
-          'view' => 0,
-        ),
-        'unused' => '0',
-        'views' => array(
-          'view' => '',
-          'view_args' => '',
-        ),
-        'priority' => '0',
       ),
     ),
   );
@@ -1218,6 +1303,100 @@ function s4_sites_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'node_options_contact_record';
+  $strongarm->value = array(
+    0 => 'status',
+  );
+  $export['node_options_contact_record'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'node_options_coordinator';
+  $strongarm->value = array(
+    0 => 'status',
+    1 => 'revision',
+  );
+  $export['node_options_coordinator'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'node_options_file';
+  $strongarm->value = array(
+    0 => 'status',
+  );
+  $export['node_options_file'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'node_options_site';
+  $strongarm->value = array(
+    0 => 'moderation',
+    1 => 'revision',
+  );
+  $export['node_options_site'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'node_preview_contact_record';
+  $strongarm->value = '0';
+  $export['node_preview_contact_record'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'node_preview_coordinator';
+  $strongarm->value = '0';
+  $export['node_preview_coordinator'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'node_preview_file';
+  $strongarm->value = '0';
+  $export['node_preview_file'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'node_preview_site';
+  $strongarm->value = '0';
+  $export['node_preview_site'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'node_submitted_contact_record';
+  $strongarm->value = 1;
+  $export['node_submitted_contact_record'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'node_submitted_coordinator';
+  $strongarm->value = 0;
+  $export['node_submitted_coordinator'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'node_submitted_file';
+  $strongarm->value = 1;
+  $export['node_submitted_file'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'node_submitted_site';
+  $strongarm->value = 0;
+  $export['node_submitted_site'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_node_contact_record_pattern';
   $strongarm->value = 'notes/[node:nid]';
   $export['pathauto_node_contact_record_pattern'] = $strongarm;
@@ -1249,6 +1428,13 @@ function s4_sites_strongarm() {
   $strongarm->name = 'pathauto_node_webform_pattern';
   $strongarm->value = 'form/[node:nid]';
   $export['pathauto_node_webform_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_update_action';
+  $strongarm->value = '1';
+  $export['pathauto_update_action'] = $strongarm;
 
   return $export;
 }
