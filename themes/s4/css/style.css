@@ -444,3 +444,7 @@ body .vertical-tabs .form-type-textfield input {
 #page .views-exposed-form .row .views-widget {
   width: 90%;
 }
+body.page-reports .vertical-tab-button.last {
+  margin-top: 30px;
+  border-top: 1px solid #ccc;
+}
