@@ -5,7 +5,7 @@
 */
 function s4_core_block_user_progress() {
   global $user;
-  if (!s4_core_user_can_signup($user) || user_access('create signups for other users')) {
+  if (!s4_core_user_can_signup($user) || $_SESSION['s4_opportunity_create'] || user_access('create signups for other users')) {
     return NULL;
   }
   drupal_add_css(drupal_get_path('module', 's4_core') . '/css/status.css');
