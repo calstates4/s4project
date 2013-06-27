@@ -79,9 +79,6 @@ projects[field_collection_table][version] = "1.0-beta1"
 projects[gmap][subdir] = "contrib"
 projects[gmap][version] = "1.x-dev"
 
-;projects[Guiders-JS][subdir] = "contrib"
-;projects[Guiders-JS][version] = "1.x-dev"
-
 projects[insert][subdir] = "contrib"
 projects[insert][version] = "1.1"
 
