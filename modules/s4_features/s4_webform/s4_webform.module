@@ -20,7 +20,6 @@ function s4_webform_render_submission($field, $entity = FALSE, $entity_type = 'n
 	  global $user;
 	  if (count($form)) {
 	    module_load_include('inc', 'webform', 'includes/webform.submissions');
-	    dpm($form);
 	    $submission = webform_get_submission($form->nid, $sid[0]['value']);
 	      if (!$submission) {
 	        return NULL;
