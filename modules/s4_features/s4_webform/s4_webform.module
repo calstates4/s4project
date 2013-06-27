@@ -3,11 +3,11 @@
 /**
 *  Block helper for rendering a given webform submission
 */
-function s4_webform_render_submission($field, $node = FALSE) {
-  if (!$node) {
-  	$node = menu_get_object();
+function s4_webform_render_submission($field, $entity = FALSE, $entity_type = 'node') {
+  if (!$entity) {
+  	$entity = menu_get_object();
   }
-  $sid = field_get_items('node', $node, $field);
+  $sid = field_get_items($entity_type, $entity, $field);
   $output = '';
   if (!$sid || !count($sid)) {
   	return FALSE;

@@ -26,5 +26,14 @@ function s4_reporting_user_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported permission: xls export views
+  $permissions['xls export views'] = array(
+    'name' => 'xls export views',
+    'roles' => array(
+      0 => 'authenticated user',
+    ),
+    'module' => 'views_export_xls',
+  );
+
   return $permissions;
 }
