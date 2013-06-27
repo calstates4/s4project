@@ -52,6 +52,30 @@ function s4_opportunity_context_default_contexts() {
   $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
+  $context->name = 'opportunity-manage';
+  $context->description = 'User is on an opportunity management page';
+  $context->tag = 'opportunities';
+  $context->conditions = array(
+    'views' => array(
+      'values' => array(
+        's4_opportunities' => 's4_opportunities',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'menu' => 'opportunities',
+  );
+  $context->condition_mode = 0;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('User is on an opportunity management page');
+  t('opportunities');
+  $export['opportunity-manage'] = $context;
+
+  $context = new stdClass();
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
   $context->name = 'opportunity-progress';
   $context->description = 'Display the opportunity progress bar.';
   $context->tag = 'opportunities';

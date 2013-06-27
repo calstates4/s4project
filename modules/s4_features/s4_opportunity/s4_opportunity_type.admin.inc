@@ -84,13 +84,13 @@ function s4_opportunity_type_form($form, &$form_state, $s4_opportunity_type, $op
                   ->execute()
                   ->fetchAllKeyed();
 
-  $form['data']['student_signup_form'] = array(
+  $form['data']['placement_form'] = array(
     '#type' => 'select',
     '#title' => t('Placement form'),
     '#description' => t('Select an !link that students have to complete once they are placed with this type of opportunity', array('!link' => l(t('online form'), 'forms'))),
     '#options' => $online_forms,
     '#empty_option' => t(' - None - '),
-    '#default_value' => !empty($s4_opportunity_type->data['signup_form']) ? $s4_opportunity_type->data['signup_form'] : '',
+    '#default_value' => !empty($s4_opportunity_type->data['placement_form']) ? $s4_opportunity_type->data['placement_form'] : '',
   );
 
   $form['data']['faculty_approve'] = array(
@@ -104,6 +104,12 @@ function s4_opportunity_type_form($form, &$form_state, $s4_opportunity_type, $op
     '#title' => t('Site staff have to approve placement form'),
     '#default_value' => !empty($s4_opportunity_type->data['site_staff_approve']),
   );
+
+  $form['data']['require_approval'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Department staff have to appprove placement'),
+    '#default_value' => (!empty($s4_opportunity_type->data['require_approval'])) ? $s4_opportunity_type->data['require_approval'] : 0,
+    );
 
   $form['data']['description'] = array(
     '#type' => 'text_format',
@@ -141,13 +147,6 @@ function s4_opportunity_type_form($form, &$form_state, $s4_opportunity_type, $op
       : '',
   );
 
-
-  $form['data']['require_approval'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Opportunities of this type must be approved.'),
-    '#default_value' => (!empty($s4_opportunity_type->data['require_approval'])) ? $s4_opportunity_type->data['require_approval'] : 0,
-    );
-
   $form['data']['approval_email_subject'] = array(
     '#type' => 'textfield',
     '#title' => t('Approval email subject'),
@@ -172,6 +171,17 @@ function s4_opportunity_type_form($form, &$form_state, $s4_opportunity_type, $op
       '#weight' => $form['field_confirmation_email']['#weight'] + 1,
     );
   };
+
+  $form['data']['approval_form_text'] = array(
+    '#type' => 'text_format',
+    '#title' => t('Message to display on top of approval screen'),
+    '#format' => (!empty($s4_opportunity_type->data['approval_form_text']))
+      ? $s4_opportunity_type->data['approval_form_text']['format']
+      : filter_default_format(),
+    '#default_value' => (!empty($s4_opportunity_type->data['approval_form_text'])) 
+      ? $s4_opportunity_type->data['approval_form_text']['value']
+      : '',
+  );
 
   $form['actions'] = array('#type' => 'actions');
   $form['actions']['submit'] = array(

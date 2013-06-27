@@ -265,11 +265,11 @@ function s4_opportunity_create_opportunity_form_submit($form, $form_state) {
 	$create = $_SESSION['s4_opportunity_create'];
 	$opportunity = $form['#opportunity'];
   field_attach_submit('s4_opportunity', $opportunity, $form, $form_state);
+  $opportunity->name = check_plain($form_state['values']['name']);
   $opportunity->save();
-
   $create['opportunity'] = $opportunity->s4_opportunity_id;
 	$_SESSION['s4_opportunity_create'] = $create;
-	$result = dpm(views_get_view_result('s4_opportunities_create', 'page_2', $user->uid));
+	$result = views_get_view_result('s4_opportunities_create', 'page_2', $user->uid);
 	if(!$result || !count($result)) {
 		drupal_goto('opportunities/create/place');
 		return;
@@ -302,19 +302,25 @@ function s4_opportunities_place_option() {
 	$create = $_SESSION['s4_opportunity_create'];
 	$opportunity = s4_opportunity_load($create['opportunity']);
 	$type = s4_opportunity_type_load($create['type']);
+	$courses = views_get_view_result('user_courses', 'block_2', $user->uid);
 	drupal_set_title(t('Would you like to place yourself in @name?', array('@name' => $opportunity->name)));
-	return theme('s4_opportunity_place_options', array('opportunity' => $opportunity, 'type' => $type));
+	return theme('s4_opportunity_place_options', array('opportunity' => $opportunity, 'type' => $type, 'courses' => $courses));
 }
 
 function s4_opportunities_place_immediately() {
 	global $user;
+	if(arg(3)) {
+		$course = node_load(arg(3));
+	}
 	_s4_opportunity_create_access_check(array('type', 'site', 'opportunity'));
 	$create = $_SESSION['s4_opportunity_create'];
 	$endpoints = array(array('entity_type' => 'user', 'entity_id' => $user->uid),
 												 array('entity_type' => 's4_opportunity', 'entity_id' => $create['opportunity']));
 	$relation = relation_create('opportunity_placement', $endpoints);
 	$relation->field_coordinator[LANGUAGE_NONE][0]['nid'] = $create['site_staff'];
-	$relation->field_course[LANGUAGE_NONE][0]['nid'] = $course->nid;
+	if($course) {
+		$relation->field_course[LANGUAGE_NONE][0]['nid'] = $course->nid;
+	}
 	$id = relation_save($relation);
 	drupal_set_message(t('Your request to be placed with @name has been submitted. Thank you.', array('@name' => $opporutnity->name)), 'success');
 	$_SESSION['s4_opportunity_create'] = FALSE;
@@ -325,4 +331,97 @@ function s4_opportunities_place_immediately() {
 function s4_opportunity_create_done() {
 	unset($_SESSION['s4_opportunity_create']);
 	drupal_goto('<front>');
+}
+
+function s4_opportunity_approve_form($form, $form_state, $relation) {
+	$form = array();
+	global $user;
+	$endpoints = field_get_items('relation', $relation, 'endpoints');
+	$opportunity = s4_opportunity_load($endpoints[1]['entity_id']);
+	$type = s4_opportunity_type_load($opportunity->type);
+	s4_opportunity_check_placement_approval($opportunity, $relation);
+	
+	if($type->data['approval_form_text']) {
+		$form['message'] = array(
+			'#markup' => check_markup($type->data['approval_form_text']['value'], $type->data['approval_form_text']['format']),
+			'#prefix' => '<div class="well">',
+			'#suffix' => '</div>',
+			);
+	}
+
+	$form['relation'] = array(
+		'#type' => 'value',
+		'#value' => $relation->rid,
+		);
+
+	$form['opportunity'] = array(
+		'#type' => 'value',
+		'#value' => $opportunity->s4_opportunity_id
+		);
+
+	$form['opportunity_type'] = array(
+		'#type' => 'value',
+		'#value' => $type->type
+		);
+
+	$form['relation_view'] = array(
+		'#markup' => drupal_render(relation_view($relation)),
+		);
+
+	$endpoints = array(array('entity_type' => 'user', 'entity_id' => $user->uid),
+										 array('entity_type' => 'relation', 'entity_id' => $relation->rid));
+
+	$approval = relation_create('approval', $endpoints);	
+
+	field_attach_form('relation', $approval, $form, $form_state, entity_language('relation', $relation));
+	
+	$form['endpoints']['#access'] = FALSE;
+	$form['field_approved']['#access'] = FALSE;
+
+	$form['actions'] = array(
+		'#type' => 'actions',
+		'#weight' => 50
+		);
+
+	$form['actions']['submit_approved'] = array(
+		'#type' => 'submit',
+		'#value' => t('Approve @type', array('@type' => $type->label)),
+		'#attributes' => array('class' => array('btn btn-success')),
+		);
+
+	$form['actions']['submit_denied'] = array(
+		'#type' => 'submit',
+		'#value' => t('Deny @type', array('@type' => $type->label)),
+		'#attributes' => array('class' => array('btn btn-danger')),
+		);
+	return $form;
+}
+
+function s4_opportunity_approve_form_submit($form, $form_state) {
+	global $user;
+
+	$opportunity = s4_opportunity_load($form_state['values']['opportunity']);
+	$placement = relation_load($form_state['values']['relation']);
+
+	$endpoints = array(array('entity_type' => 'user', 'entity_id' => $user->uid),
+										 array('entity_type' => 'relation', 'entity_id' => $form_state['values']['relation']));
+	$type = s4_opportunity_type_load($form_state['values']['opportunity_type']);
+	$approval = relation_create('approval', $endpoints);
+	field_attach_submit('relation', $approval, $form, $form_state);
+	$approval->field_approved[LANGUAGE_NONE][0]['value'] = 
+		($form_state['clicked_button']['#value'] == t('Approve @type', array('@type' => $type->label)));
+	relation_save($approval);
+	drupal_set_message(t('Thank you'), 'success');
+	s4_opportunity_check_placement_approval($opportunity, $placement);
+	drupal_goto('<front>');
+}
+
+function s4_opportunity_placement_form($relation) {
+	$endpoints = field_get_items('relation', $relation, 'endpoints');
+	$opportunity = s4_opportunity_load($endpoints[1]['entity_id']);
+	$type = s4_opportunity_type_load($opportunity->type);
+	$_SESSION['s4_opportunity_placement_form'] = array('relation' => $relation->rid,
+			'opportunity' => $opportunity->s4_opportunity_id
+			);
+	drupal_goto('node/'. $type->data['placement_form']);
 }

@@ -60,6 +60,7 @@ function s4_opportunity_block_start() {
 
 
 function s4_opportunity_create_progress() {
+  global $user;
   drupal_add_css(drupal_get_path('module', 's4_core') . '/css/status.css');
   $status = array();
   $create = $_SESSION['s4_opportunity_create'];
@@ -131,23 +132,43 @@ function s4_opportunity_create_progress() {
 	            'href'  => null,
 	            );
   }
-
-  if($create['students']) {
-	  $opportunity = node_load($create['opportunity']);
-	  $status['students'] = array('data'  => 'Students',
-	            'id'     => 'status-type',
-	            'class'  => array('done'),
-	            'href'  => null,
-	            'selection' => '<div class="selection label label-info">' . $opportunity->name .'</div>',
-	            );
-  }
-  else {
-  	$status['students'] = array('data'  => 'Students',
-	            'id'     => 'status-type',
-	            'class'  => array(),
-	            'href'  => null,
-	            );
-  }
+  $result = views_get_view_result('s4_opportunities_create', 'page_2', $user->uid);
+  if(count($result)) {
+	  if($create['students']) {
+		  $opportunity = node_load($create['opportunity']);
+		  $status['students'] = array('data'  => 'Students',
+		            'id'     => 'status-type',
+		            'class'  => array('done'),
+		            'href'  => null,
+		            'selection' => '<div class="selection label label-info">' . $opportunity->name .'</div>',
+		            );
+	  }
+	  else {
+	  	$status['students'] = array('data'  => 'Students',
+		            'id'     => 'status-type',
+		            'class'  => array(),
+		            'href'  => null,
+		            );
+	  }
+	}
+	else {
+		if($create['course']) {
+		  $course = node_load($create['course']);
+		  $status['course'] = array('data'  => 'Course',
+		            'id'     => 'status-type',
+		            'class'  => array('done'),
+		            'href'  => null,
+		            'selection' => '<div class="selection label label-info">' . $course->name .'</div>',
+		            );
+	  }
+	  else {
+	  	$status['course'] = array('data'  => 'Course',
+		            'id'     => 'status-type',
+		            'class'  => array(),
+		            'href'  => null,
+		            );
+	  }
+	}
 
   $number = 1;
   foreach ($status as $key => $stat) {
@@ -168,5 +189,63 @@ function s4_opportunity_create_progress() {
   $status[] = array('data' => '<div>Done!</div>',
             'class' => array('span1', 'complete', $finished));
   return theme('item_list', array('items' => $status, 'attributes' => array('class' => array('user-signup-status', 'row'))));
+}
 
+function _s4_opportunity_block_placement_approval($placement) {
+	$endpoints = field_get_items('relation', $placement, 'endpoints');
+	$opportunity = s4_opportunity_load($endpoints[1]['entity_id']);
+	$type = s4_opportunity_type_load($opportunity->type);
+	if(!$type->data['faculty_approve'] && !$type->data['site_staff_approve'] && !$type->data['require_approval']) {
+		return '<p class="lead">'. t('Approal not required.') .'</p>';
+	}
+	$approvals = s4_opportunity_get_placement_approvals($opportunity, $placement);
+
+  $header = array(t('Type'), t('Name'), t('Status'), t('More'));
+  $rows = array();
+  $types = array('faculty_approve' => array('approve' => 'faculty',
+  																		'type' => t('Faculty')),
+  								'site_staff_approve' => array('approve' => 'site_staff',
+  																		'type' => t('Site staff')),
+  								'require_approval' => array('approve' => 'approver',
+  																		'type' => t('Department')),
+  				    );
+	foreach($types as $type_name => $approval_type) {
+	  if($type->data[$type_name]) {
+	    if(!isset($approvals[$approval_type['approve']]) || !count($approvals[$approval_type['approve']])) {
+	    	$rows[] = array($approval_type['type'], '', '<span class="label label-important">'. t('Not approved') .'</span>', '');
+	    }
+	    else {
+	    	foreach($approvals[$approval_type['approve']] as $approval) {
+		    	$label = field_get_items('relation', $approval, 'field_approved');
+		    	$label = ($label[0]['value'])
+		    		? '<span class="label label-success">'. t('Approved') .'</span>'
+		    		: '<span class="label label-important">'. t('Denied') .'</span>';
+	    		$endpoints = field_get_items('relation', $approval, 'endpoints');
+	    		if($endpoints[0]['entity_type'] == 'user') {
+	    			$user = user_load($endpoints[0]['entity_id']);
+	    			$first_name = field_get_items('user', $user, 'field_first_name');
+	    			$last_name = field_get_items('user', $user, 'field_last_name');
+	    			$name = l($first_name[0]['value'] .' '. $last_name[0]['value'], 'user/' . $user->uid);
+	    		}
+	    		if($endpoints[0]['entity_type'] == 'node') {
+	    			$node = node_load($endpoints[0]['entity_id']);
+	    			$first_name = field_get_items('node', $node, 'field_first_name');
+	    			$last_name = field_get_items('node', $node, 'field_last_name');
+	    			$name = l($first_name[0]['value'] .' '. $last_name[0]['value'], 'node/' . $node->uid);
+	    		}
+	    		
+	    		$rows[] = array($approval_type['type'],
+	    							$name,
+	    							$label,
+	    							l(t('More'), 'relation/'. $approval->rid));
+	    	}
+	    }
+	  }
+	}
+  return theme('table', array('header' => $header, 'rows' => $rows));
+}
+
+function _s4_opportunity_block_placement_form($placement) {
+	$output = s4_webform_render_submission('field_form_signup_sid', $placement, 'relation');
+	return $output['content'];
 }

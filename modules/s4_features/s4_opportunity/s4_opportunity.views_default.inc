@@ -293,6 +293,219 @@ Site',
   $export['s4_opportunities'] = $view;
 
   $view = new view();
+  $view->name = 's4_opportunities_approve';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'relation';
+  $view->human_name = 'S4 opportunities: Approve';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'Faculty approval';
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'none';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '40';
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'rid' => 'rid',
+    'title' => 'title',
+    'field_first_name' => 'field_first_name',
+    'field_last_name' => 'field_last_name',
+  );
+  $handler->display->display_options['style_options']['default'] = 'field_last_name';
+  $handler->display->display_options['style_options']['info'] = array(
+    'rid' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'title' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_first_name' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_last_name' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  /* Relationship: Relation: Relation: Opportunity placement (relation → s4_opportunity) */
+  $handler->display->display_options['relationships']['relation_base_opportunity_placement_s4_opportunity']['id'] = 'relation_base_opportunity_placement_s4_opportunity';
+  $handler->display->display_options['relationships']['relation_base_opportunity_placement_s4_opportunity']['table'] = 'relation';
+  $handler->display->display_options['relationships']['relation_base_opportunity_placement_s4_opportunity']['field'] = 'relation_base_opportunity_placement_s4_opportunity';
+  $handler->display->display_options['relationships']['relation_base_opportunity_placement_s4_opportunity']['label'] = 'Opportunity placement (opportunity)';
+  $handler->display->display_options['relationships']['relation_base_opportunity_placement_s4_opportunity']['r_index'] = '-1';
+  $handler->display->display_options['relationships']['relation_base_opportunity_placement_s4_opportunity']['entity_deduplication_right'] = 1;
+  /* Relationship: Field: Course (field_course) */
+  $handler->display->display_options['relationships']['field_course_nid']['id'] = 'field_course_nid';
+  $handler->display->display_options['relationships']['field_course_nid']['table'] = 'field_data_field_course';
+  $handler->display->display_options['relationships']['field_course_nid']['field'] = 'field_course_nid';
+  $handler->display->display_options['relationships']['field_course_nid']['required'] = TRUE;
+  $handler->display->display_options['relationships']['field_course_nid']['delta'] = '-1';
+  /* Relationship: Relation: Relation: Opportunity placement (relation → user) */
+  $handler->display->display_options['relationships']['relation_base_opportunity_placement_user']['id'] = 'relation_base_opportunity_placement_user';
+  $handler->display->display_options['relationships']['relation_base_opportunity_placement_user']['table'] = 'relation';
+  $handler->display->display_options['relationships']['relation_base_opportunity_placement_user']['field'] = 'relation_base_opportunity_placement_user';
+  $handler->display->display_options['relationships']['relation_base_opportunity_placement_user']['label'] = 'Opportunity placement (user)';
+  $handler->display->display_options['relationships']['relation_base_opportunity_placement_user']['r_index'] = '-1';
+  $handler->display->display_options['relationships']['relation_base_opportunity_placement_user']['entity_deduplication_left'] = 0;
+  /* Relationship: Content: Term (field_term) */
+  $handler->display->display_options['relationships']['field_term_nid']['id'] = 'field_term_nid';
+  $handler->display->display_options['relationships']['field_term_nid']['table'] = 'field_data_field_term';
+  $handler->display->display_options['relationships']['field_term_nid']['field'] = 'field_term_nid';
+  $handler->display->display_options['relationships']['field_term_nid']['relationship'] = 'field_course_nid';
+  $handler->display->display_options['relationships']['field_term_nid']['delta'] = '-1';
+  /* Field: Field: Last Name */
+  $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
+  $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
+  $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
+  $handler->display->display_options['fields']['field_last_name']['relationship'] = 'relation_base_opportunity_placement_user';
+  $handler->display->display_options['fields']['field_last_name']['label'] = 'Last name';
+  /* Field: Field: First Name */
+  $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
+  $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
+  $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
+  $handler->display->display_options['fields']['field_first_name']['relationship'] = 'relation_base_opportunity_placement_user';
+  /* Field: Field: Course */
+  $handler->display->display_options['fields']['field_course']['id'] = 'field_course';
+  $handler->display->display_options['fields']['field_course']['table'] = 'field_data_field_course';
+  $handler->display->display_options['fields']['field_course']['field'] = 'field_course';
+  /* Field: Relation: Rid */
+  $handler->display->display_options['fields']['rid']['id'] = 'rid';
+  $handler->display->display_options['fields']['rid']['table'] = 'relation';
+  $handler->display->display_options['fields']['rid']['field'] = 'rid';
+  $handler->display->display_options['fields']['rid']['label'] = '';
+  $handler->display->display_options['fields']['rid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['rid']['element_label_colon'] = FALSE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['relationship'] = 'field_course_nid';
+  /* Field: Relation: Approved */
+  $handler->display->display_options['fields']['field_approved']['id'] = 'field_approved';
+  $handler->display->display_options['fields']['field_approved']['table'] = 'field_data_field_approved';
+  $handler->display->display_options['fields']['field_approved']['field'] = 'field_approved';
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing']['label'] = 'Approve';
+  $handler->display->display_options['fields']['nothing']['alter']['text'] = 'Approve or deny';
+  $handler->display->display_options['fields']['nothing']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['nothing']['alter']['path'] = 'opportunities/approve/[rid]';
+  $handler->display->display_options['fields']['nothing']['alter']['link_class'] = 'btn btn-success';
+  /* Contextual filter: Content: Faculty (field_course_faculty) */
+  $handler->display->display_options['arguments']['field_course_faculty_uid']['id'] = 'field_course_faculty_uid';
+  $handler->display->display_options['arguments']['field_course_faculty_uid']['table'] = 'field_data_field_course_faculty';
+  $handler->display->display_options['arguments']['field_course_faculty_uid']['field'] = 'field_course_faculty_uid';
+  $handler->display->display_options['arguments']['field_course_faculty_uid']['relationship'] = 'field_course_nid';
+  $handler->display->display_options['arguments']['field_course_faculty_uid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['field_course_faculty_uid']['default_argument_type'] = 'current_user';
+  $handler->display->display_options['arguments']['field_course_faculty_uid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_course_faculty_uid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_course_faculty_uid']['summary_options']['items_per_page'] = '25';
+  /* Filter criterion: Relation: Relation type */
+  $handler->display->display_options['filters']['relation_type']['id'] = 'relation_type';
+  $handler->display->display_options['filters']['relation_type']['table'] = 'relation';
+  $handler->display->display_options['filters']['relation_type']['field'] = 'relation_type';
+  $handler->display->display_options['filters']['relation_type']['value'] = array(
+    'opportunity_placement' => 'opportunity_placement',
+  );
+  /* Filter criterion: Content: Term dates -  start date (field_term_date_start) */
+  $handler->display->display_options['filters']['field_term_date_start_value']['id'] = 'field_term_date_start_value';
+  $handler->display->display_options['filters']['field_term_date_start_value']['table'] = 'field_data_field_term_date_start';
+  $handler->display->display_options['filters']['field_term_date_start_value']['field'] = 'field_term_date_start_value';
+  $handler->display->display_options['filters']['field_term_date_start_value']['relationship'] = 'field_term_nid';
+  $handler->display->display_options['filters']['field_term_date_start_value']['operator'] = '<=';
+  $handler->display->display_options['filters']['field_term_date_start_value']['default_date'] = 'now';
+  /* Filter criterion: Content: Term dates - end date (field_term_date_start:value2) */
+  $handler->display->display_options['filters']['field_term_date_start_value2']['id'] = 'field_term_date_start_value2';
+  $handler->display->display_options['filters']['field_term_date_start_value2']['table'] = 'field_data_field_term_date_start';
+  $handler->display->display_options['filters']['field_term_date_start_value2']['field'] = 'field_term_date_start_value2';
+  $handler->display->display_options['filters']['field_term_date_start_value2']['relationship'] = 'field_term_nid';
+  $handler->display->display_options['filters']['field_term_date_start_value2']['operator'] = '>=';
+  $handler->display->display_options['filters']['field_term_date_start_value2']['default_date'] = 'now';
+  /* Filter criterion: Relation: Approved (field_placement_approved) */
+  $handler->display->display_options['filters']['field_placement_approved_value']['id'] = 'field_placement_approved_value';
+  $handler->display->display_options['filters']['field_placement_approved_value']['table'] = 'field_data_field_placement_approved';
+  $handler->display->display_options['filters']['field_placement_approved_value']['field'] = 'field_placement_approved_value';
+  $handler->display->display_options['filters']['field_placement_approved_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_placement_approved_value']['expose']['operator_id'] = 'field_placement_approved_value_op';
+  $handler->display->display_options['filters']['field_placement_approved_value']['expose']['label'] = 'Approved';
+  $handler->display->display_options['filters']['field_placement_approved_value']['expose']['operator'] = 'field_placement_approved_value_op';
+  $handler->display->display_options['filters']['field_placement_approved_value']['expose']['identifier'] = 'field_placement_approved_value';
+  $handler->display->display_options['filters']['field_placement_approved_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    4 => 0,
+    6 => 0,
+    3 => 0,
+    5 => 0,
+    7 => 0,
+    8 => 0,
+    9 => 0,
+  );
+
+  /* Display: Page */
+  $handler = $view->new_display('page', 'Page', 'page');
+  $handler->display->display_options['path'] = 'opportunities/faculty';
+  $translatables['s4_opportunities_approve'] = array(
+    t('Master'),
+    t('Faculty approval'),
+    t('more'),
+    t('Apply'),
+    t('Reset'),
+    t('Sort by'),
+    t('Asc'),
+    t('Desc'),
+    t('Items per page'),
+    t('- All -'),
+    t('Offset'),
+    t('« first'),
+    t('‹ previous'),
+    t('next ›'),
+    t('last »'),
+    t('Opportunity placement (opportunity)'),
+    t('field_course'),
+    t('Opportunity placement (user)'),
+    t('field_term'),
+    t('Last name'),
+    t('First Name'),
+    t('Course'),
+    t('.'),
+    t(','),
+    t('Title'),
+    t('Approved'),
+    t('Approve'),
+    t('Approve or deny'),
+    t('All'),
+    t('Page'),
+  );
+  $export['s4_opportunities_approve'] = $view;
+
+  $view = new view();
   $view->name = 's4_opportunities_create';
   $view->description = '';
   $view->tag = 'default';

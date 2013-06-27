@@ -371,7 +371,7 @@ function s4_opportunity_theme() {
       'path' => drupal_get_path('module', 's4_opportunity') .'/theme'
     ),
     's4_opportunity_place_options' => array(
-      'variables' => array('opportunity' => array(), 'type' => array()),
+      'variables' => array('opportunity' => array(), 'type' => array(), 'courses' => array()),
       'template' => 's4_opportunity_place_options',
       'path' => drupal_get_path('module', 's4_opportunity') .'/theme')
   );
@@ -519,7 +519,72 @@ function s4_opportunity_menu() {
     'access arguments' => array('start new opportunities'),
     'file' => 's4_opportunity.pages.inc',
     );
+
+  $items['opportunities/approve/%relation'] = array(
+    'title callback' => 's4_opportunity_approve_title',
+    'title arguments' => array(2),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('s4_opportunity_approve_form', 2),
+    'access callback' => 's4_opportunity_approve_access',
+    'access arguments' => array(2),
+    'file' => 's4_opportunity.pages.inc'
+    );
+
+  $items['opportunities/form/%relation'] = array(
+    'title callback' => 'Complete your placement',
+    'page callback' => 's4_opportunity_placement_form',
+    'page arguments' => array(2),
+    'access callback' => 's4_opportunity_placement_form_access',
+    'access arguments' => array(2),
+    'file' => 's4_opportunity.pages.inc'
+    );
   return $items;
+}
+
+function s4_opportunity_placement_form_access($relation) {
+  global $user;
+  $endpoints = field_get_items('relation', $relation, 'endpoints');
+  return ($user->uid == $endpoints[0]['entity_id']);
+}
+
+function _s4_opportunity_get_relation($relation) {
+  $endpoints = field_get_items('relation', $relation, 'endpoints');
+  $user = s4_opportunity_load($endpoints[1]['entity_id']);
+  $opportunity = s4_opportunity_load($endpoints[1]['entity_id']);
+  return array('opportunity' => $opportunity, 'user' => $user);
+}
+
+function s4_opportunity_approve_title($relation) {
+  $opportunity = _s4_opportunity_get_relation($relation);
+  return t('Approve @title', array('@title' => $opportunity['opportunity']->name));
+}
+
+function s4_opportunity_approve_access($relation) {
+  global $user;
+  $user = user_load($user->uid);
+  $opportunity = _s4_opportunity_get_relation($relation);
+  $opportunity_groups = field_get_items('s4_opportunity', $opportunity['opportunity'], 'field_opportunity_group');
+  $user_groups = field_get_items('user', $user, 'field_opportunity_group');
+  foreach($user_groups as $user_group) {
+    foreach($opportunity_groups as $group) {
+      if($group['tid'] == $user_group['tid']) {
+        return true;
+      }
+    }
+  }
+  $course = field_get_items('relation', $relation, 'field_course');
+  if($course && $course = node_load($course[0]['nid'])) {
+    $faculty = field_get_items('node', $course, 'field_course_faculty');
+    foreach($faculty as $instructor) {
+      if($instructor['uid'] == $user->uid) {
+        return true;
+      }
+    }
+  }
+  if(!user_access('approve opportunities')) {
+    return false;
+  }
+  
 }
 
 function s4_opportunity_opportunities_redirect() {
@@ -647,6 +712,8 @@ function s4_opportunity_block_info() {
     'new_opportunity' => array('info' => t('Create opportunity form')),
     'opportunity_start' => array('info' => t('Start a new opportunity')),
     'opportunity_progress' => array('info' => t('Opportunity progress bar')),
+    'placement_approval' => array('info' => t('Opportunity placement approval')),
+    'placement_form' => array('info' => t('Opportunity placement form')),
     );
 }
 
@@ -655,6 +722,13 @@ function s4_opportunity_block_info() {
  */
 function s4_opportunity_block_view($delta) {
   module_load_include('inc', 's4_opportunity', 's4_opportunity.block');
+  if(arg(0) == 'relation' && arg(1)) {
+    $relation = relation_load(arg(1));
+  }
+  if(arg(0) == 'opportunities' && arg(2)) {
+    $relation = relation_load(arg(2));
+  }
+
   switch($delta) {
     case 'new_opportunity':
       return array('subject' => t('Create new opportunity'),
@@ -671,6 +745,16 @@ function s4_opportunity_block_view($delta) {
         return;
       }
       return array('content' => s4_opportunity_create_progress());
+    case 'placement_approval':
+      if($relation) {
+        return array('subject' => t('Approval status'),
+              'content' => _s4_opportunity_block_placement_approval($relation));
+      }
+    case 'placement_form':
+      if($relation) {
+        return array('subject' => t('Placement form'),
+              'content' => _s4_opportunity_block_placement_form($relation));
+      }
   }
 }
 
@@ -969,3 +1053,81 @@ function s4_opportunity_form_site_node_form_alter(&$form, $form_state) {
   }
 }
 
+function s4_opportunity_webform_submission_insert($node, $submission) {
+  if (isset($_SESSION['s4_opportunity_placement_form'])) {
+    $relation = relation_load($_SESSION['s4_opportunity_placement_form']['relation']);
+    $relation->field_form_signup_sid[LANGUAGE_NONE][0]['value'] = $submission->sid;
+    relation_save($relation);
+    unset($_SESSION['s4_opportunity_placement_form']);
+    drupal_set_message(t('Thank you for your submission.'));
+    drupal_goto('<front>');
+  }
+}
+
+function s4_opportunity_check_placement_approval($opportunity, $placement) {
+  $type = s4_opportunity_get_placement_approvals($opportunity->type);
+  $approvals = s4_opportunity_get_placement_approvals($opportunity, $placement);
+  if($type->data['faculty_approve'] && !count($approvals['faculty'])) {
+    return;
+  }
+  if($type->data['site_staff_approve'] && !count($approvals['site_staff'])) {
+    return;
+  }
+  if($type->data['require_approval'] && !count($approvals['approver'])) {
+    return;
+  }
+  $placement->field_placement_approved[LANGUAGE_NONE][0] = 1;
+  relation_save($placement);
+}
+
+function s4_opportunity_get_placement_approvals($opportunity, $placement) {
+  $approvals = db_select('field_data_endpoints', 'e')
+            ->condition('e.bundle', 'approval')
+            ->condition('e.entity_type', 'relation')
+            ->condition('e.deleted', 1, '<>')
+            ->condition('e.endpoints_entity_type', 'relation')
+            ->condition('e.endpoints_entity_id', $placement->rid)
+            ->fields('e', array('entity_id'))
+            ->execute()
+            ->fetchAllkeyed(0,0);
+
+  if(!$approvals) {
+    return array();
+  }
+  $result = array();
+  foreach($approvals as $approval) {
+    $approval = relation_load($approval);
+    $endpoints = field_get_items('relation', $approval, 'endpoints');
+    $user = user_load($endpoints[0]['entity_id']);
+    $course = field_get_items('relation', $placement, 'field_course');
+    if($course && $course = node_load($course[0]['nid'])) {
+      $faculty = field_get_items('node', $course, 'field_course_faculty');
+      foreach($faculty as $instructor) {
+        if($instructor['uid'] == $user->uid) {
+          $result['faculty'][] = $approval;
+        }
+      }
+    }
+
+    $approval_group = field_get_items('user', $user, 'field_opportunity_group');
+    $opportunity_group = field_get_items('s4_opportunity', $opportunity, 'field_opportunity_group');
+    
+    if(count($approval_group)) {
+      foreach($approval_group as $group) {
+        foreach($opportunity_group as $ogroup) {
+          if($ogroup['tid'] == $group['tid']) {
+            $result['approver'][] = $approval;
+          }
+        }
+      }
+    }
+
+    $site_staff = field_get_items('relation', $placement, 'field_coordinator');
+    foreach($site_staff as $staff) {
+      if($staff['uid'] == $user->uid) {
+        $result['site_staff'][] = $approval;
+      }
+    }
+  }
+  return $result;
+}

@@ -10,8 +10,8 @@
 function s4_opportunity_field_default_fields() {
   $fields = array();
 
-  // Exported field: 'relation-opportunity_placement-endpoints'
-  $fields['relation-opportunity_placement-endpoints'] = array(
+  // Exported field: 'relation-approval-endpoints'
+  $fields['relation-approval-endpoints'] = array(
     'field_config' => array(
       'active' => '1',
       'cardinality' => '-1',
@@ -32,7 +32,7 @@ function s4_opportunity_field_default_fields() {
       'type' => 'relation_endpoint',
     ),
     'field_instance' => array(
-      'bundle' => 'opportunity_placement',
+      'bundle' => 'approval',
       'default_value' => NULL,
       'deleted' => '0',
       'description' => '',
@@ -81,50 +81,210 @@ function s4_opportunity_field_default_fields() {
     ),
   );
 
-  // Exported field: 'relation-opportunity_placement-field_approving_user'
-  $fields['relation-opportunity_placement-field_approving_user'] = array(
+  // Exported field: 'relation-approval-field_approved'
+  $fields['relation-approval-field_approved'] = array(
     'field_config' => array(
       'active' => '1',
       'cardinality' => '1',
       'deleted' => '0',
       'entity_types' => array(),
-      'field_name' => 'field_approving_user',
+      'field_name' => 'field_approved',
+      'foreign keys' => array(),
+      'indexes' => array(
+        'value' => array(
+          0 => 'value',
+        ),
+      ),
+      'module' => 'list',
+      'settings' => array(
+        'allowed_values' => array(
+          0 => '',
+          1 => '',
+        ),
+        'allowed_values_function' => '',
+        'allowed_values_php' => '',
+      ),
+      'translatable' => '0',
+      'type' => 'list_boolean',
+    ),
+    'field_instance' => array(
+      'bundle' => 'approval',
+      'default_value' => array(
+        0 => array(
+          'value' => 0,
+        ),
+      ),
+      'default_value_function' => '',
+      'default_value_php' => '',
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'list',
+          'settings' => array(),
+          'type' => 'list_default',
+          'weight' => 2,
+        ),
+      ),
+      'display_label' => '',
+      'entity_type' => 'relation',
+      'field_lock' => 0,
+      'field_name' => 'field_approved',
+      'label' => 'Approved',
+      'required' => 0,
+      'settings' => array(
+        'custom_add_another' => '',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(
+          'display_label' => 1,
+        ),
+        'type' => 'options_onoff',
+        'weight' => '2',
+      ),
+    ),
+  );
+
+  // Exported field: 'relation-approval-field_comments'
+  $fields['relation-approval-field_comments'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_comments',
       'foreign keys' => array(
-        'uid' => array(
+        'format' => array(
           'columns' => array(
-            'uid' => 'uid',
+            'format' => 'format',
           ),
-          'table' => 'users',
+          'table' => 'filter_format',
         ),
       ),
       'indexes' => array(
-        'uid' => array(
-          0 => 'uid',
+        'format' => array(
+          0 => 'format',
         ),
       ),
-      'module' => 'user_reference',
-      'settings' => array(
-        'referenceable_roles' => array(
-          2 => 0,
-          3 => 0,
-          4 => 0,
-          5 => 0,
-          6 => 0,
-          7 => 0,
-          8 => 0,
-        ),
-        'referenceable_status' => array(
-          0 => 0,
-          1 => 0,
-        ),
-        'view' => array(
-          'args' => array(),
-          'display_name' => '',
-          'view_name' => '',
-        ),
-      ),
+      'module' => 'text',
+      'settings' => array(),
       'translatable' => '0',
-      'type' => 'user_reference',
+      'type' => 'text_long',
+    ),
+    'field_instance' => array(
+      'bundle' => 'approval',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => 3,
+        ),
+      ),
+      'display_label' => '',
+      'entity_type' => 'relation',
+      'field_lock' => 0,
+      'field_name' => 'field_comments',
+      'label' => 'Comments',
+      'required' => 0,
+      'settings' => array(
+        'custom_add_another' => '',
+        'text_processing' => '0',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'text',
+        'settings' => array(
+          'rows' => '5',
+        ),
+        'type' => 'text_textarea',
+        'weight' => '3',
+      ),
+    ),
+  );
+
+  // Exported field: 'relation-approval-field_signature'
+  $fields['relation-approval-field_signature'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_signature',
+      'foreign keys' => array(),
+      'indexes' => array(),
+      'module' => 'signaturefield',
+      'settings' => array(),
+      'translatable' => '0',
+      'type' => 'signaturefield',
+    ),
+    'field_instance' => array(
+      'bundle' => 'approval',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'signaturefield',
+          'settings' => array(),
+          'type' => 'signaturefield_formatter',
+          'weight' => 1,
+        ),
+      ),
+      'display_label' => '',
+      'entity_type' => 'relation',
+      'field_lock' => 0,
+      'field_name' => 'field_signature',
+      'label' => 'Signature',
+      'required' => 1,
+      'settings' => array(
+        'custom_add_another' => '',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'signaturefield',
+        'settings' => array(
+          'color' => '',
+          'height' => '',
+          'width' => '',
+        ),
+        'type' => 'signaturefield_default',
+        'weight' => '1',
+      ),
+    ),
+  );
+
+  // Exported field: 'relation-opportunity_placement-endpoints'
+  $fields['relation-opportunity_placement-endpoints'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '-1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'endpoints',
+      'foreign keys' => array(),
+      'indexes' => array(
+        'relation' => array(
+          0 => 'entity_type',
+          1 => 'entity_id',
+          2 => 'r_index',
+        ),
+      ),
+      'module' => 'relation_endpoint',
+      'settings' => array(),
+      'translatable' => '0',
+      'type' => 'relation_endpoint',
     ),
     'field_instance' => array(
       'bundle' => 'opportunity_placement',
@@ -134,32 +294,24 @@ function s4_opportunity_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'user_reference',
           'settings' => array(),
-          'type' => 'user_reference_default',
-          'weight' => 6,
+          'type' => 'hidden',
+          'weight' => '7',
         ),
       ),
-      'display_label' => '',
       'entity_type' => 'relation',
-      'field_lock' => 0,
-      'field_name' => 'field_approving_user',
-      'label' => 'Approving user',
-      'required' => 0,
+      'field_name' => 'endpoints',
+      'label' => 'endpoints',
+      'required' => FALSE,
       'settings' => array(
         'custom_add_another' => '',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
-        'active' => 1,
-        'module' => 'user_reference',
-        'settings' => array(
-          'autocomplete_match' => 'contains',
-          'autocomplete_path' => 'user_reference/autocomplete',
-          'size' => '60',
-        ),
-        'type' => 'user_reference_autocomplete',
-        'weight' => '6',
+        'module' => 'relation_endpoint',
+        'settings' => array(),
+        'type' => 'relation_endpoint',
+        'weight' => '0',
       ),
     ),
   );
@@ -248,7 +400,7 @@ function s4_opportunity_field_default_fields() {
           'module' => 'node_reference',
           'settings' => array(),
           'type' => 'node_reference_default',
-          'weight' => 1,
+          'weight' => '5',
         ),
       ),
       'display_label' => '',
@@ -367,7 +519,7 @@ function s4_opportunity_field_default_fields() {
           'module' => 'node_reference',
           'settings' => array(),
           'type' => 'node_reference_default',
-          'weight' => 2,
+          'weight' => '4',
         ),
       ),
       'display_label' => '',
@@ -447,7 +599,7 @@ function s4_opportunity_field_default_fields() {
             'multiple_to' => '',
           ),
           'type' => 'date_default',
-          'weight' => 3,
+          'weight' => '3',
         ),
       ),
       'display_label' => '',
@@ -505,15 +657,9 @@ function s4_opportunity_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'number',
-          'settings' => array(
-            'decimal_separator' => '.',
-            'prefix_suffix' => TRUE,
-            'scale' => 0,
-            'thousand_separator' => ' ',
-          ),
-          'type' => 'number_integer',
-          'weight' => 4,
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '6',
         ),
       ),
       'display_label' => '',
@@ -556,8 +702,8 @@ function s4_opportunity_field_default_fields() {
       'module' => 'list',
       'settings' => array(
         'allowed_values' => array(
-          0 => '',
-          1 => '',
+          0 => 'Not approved',
+          1 => 'Approved',
         ),
         'allowed_values_function' => '',
         'allowed_values_php' => '',
@@ -582,7 +728,7 @@ function s4_opportunity_field_default_fields() {
           'module' => 'list',
           'settings' => array(),
           'type' => 'list_default',
-          'weight' => 5,
+          'weight' => '0',
         ),
       ),
       'display_label' => '',
@@ -1237,8 +1383,8 @@ function s4_opportunity_field_default_fields() {
   t('Active date');
   t('Approved');
   t('Approving department');
-  t('Approving user');
   t('Category');
+  t('Comments');
   t('Course');
   t('Dates');
   t('Enter the maximum number of placements that can be made at any given time.');
@@ -1246,6 +1392,7 @@ function s4_opportunity_field_default_fields() {
   t('Program(s)');
   t('Select the time when this opportunity is available.');
   t('Select which programs can access this site.');
+  t('Signature');
   t('Signup Form Results');
   t('Site staff');
   t('Sites');
