@@ -2,6 +2,7 @@ libraries/fancybox/*
 libraries/tinymce/*
 libraries/ckeditor/*
 libraries/guiders/*
+libraries/signature-pad/*
 modules/contrib/*
 themes/contrib/*
 themes/student_signup/*
