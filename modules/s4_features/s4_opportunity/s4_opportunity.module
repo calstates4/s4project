@@ -606,11 +606,15 @@ function s4_opportunity_opportunities_redirect() {
     drupal_goto('opportunities/manage');
     return;
   }
-  drupal_goto('opportunities/approve');
+  if(user_access('approve opportunities')) {
+    drupal_goto('opportunities/approve');
+    return;
+  }
+  drupal_goto('opportunities/list');
 }
 
 function s4_opportunity_opportunities_redirect_access() {
-  return (user_access('administer opportunities') || user_access('approve opportunities'));
+  return (user_access('access active opportunities') || user_access('administer opportunities') || user_access('approve opportunities'));
 }
 
 function s4_opportunity_get_site_opportunities($site_id, $type = 'all', $active = TRUE) {
@@ -1149,3 +1153,22 @@ function s4_opportunity_get_placement_approvals($opportunity, $placement) {
   }
   return $result;
 }
+
+/**
+ * Implements hook_feeds_plugins().
+ */
+function s4_opportunity_feeds_plugins() {
+  $info['S4OpportunityFeedsProcessor'] = array(
+    'name' => 'Opportunity processor',
+    'description' => 'Add and update student opportunities contacts.',
+    'help' => 'Create and update opportunities from parsed content.',
+    'handler' => array(
+      'parent' => 'FeedsProcessor',
+      'class' => 'S4OpportunityFeedsProcessor',
+      'file' => 'S4OpportunityFeedsProcessor.inc',
+      'path' => drupal_get_path('module', 's4_opportunity') . '/plugins',
+    ),
+  );
+  return $info;
+}
+

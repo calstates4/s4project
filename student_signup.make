@@ -145,6 +145,9 @@ projects[select_or_other][version] = "2.0"
 projects[signaturefield][subdir] = "contrib"
 projects[signaturefield][version] = "1.x-dev"
 
+projects[semanticviews][subdir] = "contrib"
+projects[semanticviews][version] = "1.x-dev"
+
 projects[strongarm][subdir] = "contrib"
 projects[strongarm][version] = "2.0"
 
