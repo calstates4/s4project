@@ -14,7 +14,8 @@ function s4_opportunity_user_default_permissions() {
   $permissions['access active opportunities'] = array(
     'name' => 'access active opportunities',
     'roles' => array(
-      0 => 'authenticated user',
+      0 => 'anonymous user',
+      1 => 'authenticated user',
     ),
     'module' => 's4_opportunity',
   );

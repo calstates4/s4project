@@ -67,7 +67,7 @@ function _s4_opportunity_add_default_fields($type) {
       'display_label' => '',
       'entity_type' => 's4_opportunity',
       'field_name' => 'field_opportunity_sites',
-      'label' => 'Sites',
+      'label' => t('Sites'),
       'required' => 0,
       'field_lock' => 1,
       'settings' => array(
@@ -165,7 +165,7 @@ function _s4_opportunity_add_default_fields($type) {
       'display_label' => '',
       'entity_type' => 's4_opportunity',
       'field_name' => 'field_opportunity_site_staff',
-      'label' => 'Site staff',
+      'label' => t('Site staff'),
       'required' => 0,
       'field_lock' => 1,
       'settings' => array(
@@ -320,7 +320,7 @@ function _s4_opportunity_add_default_fields($type) {
 		    ),
 		  ),
 		  'display_label' => '',
-		  'label' => 'Program(s)',
+		  'label' => t('Program(s)'),
 		  'required' => 1,
       'field_lock' => 1,
 		  's4_sites_field_access' => 0,
@@ -426,7 +426,7 @@ function _s4_opportunity_add_default_fields($type) {
 
   if (empty($instance)) {
     $instance = array(
-		  'label' => 'Active date',
+		  'label' => t('Active date'),
 		  'widget' => array(
 		    'weight' => '6',
 		    'type' => 'date_popup',
@@ -529,7 +529,7 @@ function _s4_opportunity_add_default_fields($type) {
   }
   if (empty($instance)) {
     $instance = array(
-		  'label' => 'Maximum placements',
+		  'label' => t('Maximum placements'),
 		  'widget' => array(
 		    'weight' => '5',
 		    'type' => 'number',
@@ -643,7 +643,7 @@ function _s4_opportunity_add_default_fields($type) {
   if (empty($instance)) {
     $instance = array(
       'bundle' => $type,
-      'label' => 'Category',
+      'label' => t('Category'),
       'widget' => array(
         'weight' => '9',
         'type' => 'options_select',
@@ -736,7 +736,7 @@ function _s4_opportunity_add_default_fields($type) {
       'entity_type' => 's4_opportunity',
       'field_lock' => 1,
       'field_name' => 'field_opportunity_group',
-      'label' => 'Approving department',
+      'label' => t('Approving department'),
       'required' => 1,
       's4_opportunity_risk' => 0,
       'settings' => array(
@@ -750,6 +750,75 @@ function _s4_opportunity_add_default_fields($type) {
         'type' => 'options_select',
         'weight' => '8',
       ),
+    );
+    $instance = field_create_instance($instance);
+  }
+
+  $field = field_info_field('field_opportunity_description');
+  $instance = field_info_instance('s4_opportunity', 'field_opportunity_description', $type);
+  if (empty($field)) {
+    $field = array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_opportunity_description',
+      'foreign keys' => array(
+        'format' => array(
+          'columns' => array(
+            'format' => 'format',
+          ),
+          'table' => 'filter_format',
+        ),
+      ),
+      'indexes' => array(
+        'format' => array(
+          0 => 'format',
+        ),
+      ),
+      'module' => 'text',
+      'settings' => array(),
+      'translatable' => '0',
+      'type' => 'text_long',
+    );
+    $field = field_create_field($field);
+  }
+  if (empty($instance)) {
+    $instance = array(
+      'bundle' => $type,
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => 18,
+        ),
+      ),
+      'display_label' => '',
+      'entity_type' => 's4_opportunity',
+      'field_lock' => 0,
+      'field_name' => 'field_opportunity_description',
+      'label' => t('Description'),
+      'required' => 0,
+      's4_opportunity_risk' => 0,
+      'settings' => array(
+        'custom_add_another' => '',
+        'text_processing' => '1',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'text',
+        'settings' => array(
+          'rows' => '5',
+        ),
+        'type' => 'text_textarea',
+        'weight' => '1',
+
     );
     $instance = field_create_instance($instance);
   }
