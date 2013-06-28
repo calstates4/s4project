@@ -1092,7 +1092,7 @@ function s4_opportunity_check_placement_approval($opportunity, $placement) {
   }
   if($type->data['require_approval'] && !count($approvals['approver'])) {
     return;
-  }dpm($approvals);
+  }
   
   $placement->field_placement_approved[LANGUAGE_NONE][0]['value'] = 1;
   relation_save($placement);
