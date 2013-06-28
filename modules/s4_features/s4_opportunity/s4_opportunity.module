@@ -563,6 +563,20 @@ function s4_opportunity_approve_access($relation) {
   global $user;
   $user = user_load($user->uid);
   $opportunity = _s4_opportunity_get_relation($relation);
+  if($_GET['email'] && $_GET['key']) {
+    if(md5($relation->rid . $_GET['email'] . drupal_get_hash_salt()) != $_GET['key']) {
+      return false;
+    }
+    $site_staff = field_get_items('relation', $relation, 'field_coordinator');
+    foreach($site_staff as $staff) {
+      $staff = node_load($staff['nid']);
+      $email = field_get_items('node', $staff, 'field_email');
+      if(trim(strtolower($email[0]['email'])) != $_GET['email']) {
+        return false;
+      }
+    }
+    return true;
+  }
   $opportunity_groups = field_get_items('s4_opportunity', $opportunity['opportunity'], 'field_opportunity_group');
   $user_groups = field_get_items('user', $user, 'field_opportunity_group');
   foreach($user_groups as $user_group) {
@@ -1011,7 +1025,10 @@ function s4_opportunity_token_info() {
     'description' => t('The name of the opportunity'));
   $tokens['s4_opportunity']['placement_form_link'] = array('name' => t('Link to placement form.'),
     'description' => t('URL to fill out a placement form.'));
-  $tokens['s4_opportunity']['approve_link'] = array('name' => t('Link to placement form.'),
+  $tokens['s4_opportunity']['approve_link'] = array('name' => t('Link to approve placement (internal users).'),
+    'description' => t('URL for faculty/deparment to approve placement.'));
+
+  $tokens['s4_opportunity']['site_staff_approve_link'] = array('name' => t('Link to approve placement (site staff).'),
     'description' => t('URL to approve placement.'));
   $fields = field_info_fields();
   $instances = field_info_instances('s4_opportunity');
@@ -1075,8 +1092,9 @@ function s4_opportunity_check_placement_approval($opportunity, $placement) {
   }
   if($type->data['require_approval'] && !count($approvals['approver'])) {
     return;
-  }
-  $placement->field_placement_approved[LANGUAGE_NONE][0] = 1;
+  }dpm($approvals);
+  
+  $placement->field_placement_approved[LANGUAGE_NONE][0]['value'] = 1;
   relation_save($placement);
 }
 
@@ -1124,7 +1142,7 @@ function s4_opportunity_get_placement_approvals($opportunity, $placement) {
 
     $site_staff = field_get_items('relation', $placement, 'field_coordinator');
     foreach($site_staff as $staff) {
-      if($staff['uid'] == $user->uid) {
+      if($staff['nid'] == $endpoints[0]['entity_id'] && $endpoints[0]['entity_type'] = 'node') {
         $result['site_staff'][] = $approval;
       }
     }

@@ -336,6 +336,10 @@ function s4_opportunity_create_done() {
 function s4_opportunity_approve_form($form, $form_state, $relation) {
 	$form = array();
 	global $user;
+	if(!$user->uid) {
+		$staff = field_get_items('relation', $relation, 'field_coordinator');
+    $staff = node_load($staff[0]['nid']);
+	}
 	$endpoints = field_get_items('relation', $relation, 'endpoints');
 	$opportunity = s4_opportunity_load($endpoints[1]['entity_id']);
 	$type = s4_opportunity_type_load($opportunity->type);
@@ -367,10 +371,19 @@ function s4_opportunity_approve_form($form, $form_state, $relation) {
 	$form['relation_view'] = array(
 		'#markup' => drupal_render(relation_view($relation)),
 		);
+	if($user->uid) {
+		$endpoints = array(array('entity_type' => 'user', 'entity_id' => $user->uid),
+											 array('entity_type' => 'relation', 'entity_id' => $relation->rid));
+	}
+	else {
+		$form['site_staff'] = array(
+			'#type' => 'value',
+			'#value' => $staff->nid,
+			);
+		$endpoints = array(array('entity_type' => 'node', 'entity_id' => $staff->nid),
+											 array('entity_type' => 'relation', 'entity_id' => $relation->rid));
 
-	$endpoints = array(array('entity_type' => 'user', 'entity_id' => $user->uid),
-										 array('entity_type' => 'relation', 'entity_id' => $relation->rid));
-
+	}
 	$approval = relation_create('approval', $endpoints);	
 
 	field_attach_form('relation', $approval, $form, $form_state, entity_language('relation', $relation));
@@ -402,9 +415,15 @@ function s4_opportunity_approve_form_submit($form, $form_state) {
 
 	$opportunity = s4_opportunity_load($form_state['values']['opportunity']);
 	$placement = relation_load($form_state['values']['relation']);
-
-	$endpoints = array(array('entity_type' => 'user', 'entity_id' => $user->uid),
+	if($user->uid) {
+		$endpoints = array(array('entity_type' => 'user', 'entity_id' => $user->uid),
 										 array('entity_type' => 'relation', 'entity_id' => $form_state['values']['relation']));
+	}
+	else {
+		$staff = node_load($form_state['values']['site_staff']);
+		$endpoints = array(array('entity_type' => 'node', 'entity_id' => $staff->nid),
+										 array('entity_type' => 'relation', 'entity_id' => $form_state['values']['relation']));
+	}
 	$type = s4_opportunity_type_load($form_state['values']['opportunity_type']);
 	$approval = relation_create('approval', $endpoints);
 	field_attach_submit('relation', $approval, $form, $form_state);

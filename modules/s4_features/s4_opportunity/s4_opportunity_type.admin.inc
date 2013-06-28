@@ -164,6 +164,23 @@ function s4_opportunity_type_form($form, &$form_state, $s4_opportunity_type, $op
       : '',
   );
 
+  $form['data']['site_staff_approval_email_subject'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Site staff approval email subject'),
+    '#default_value' => (!empty($s4_opportunity_type->data['site_staff_approval_email_subject']) ? $s4_opportunity_type->data['site_staff_approval_email_subject'] : ''),
+    );
+
+  $form['data']['site_staff_approval_email_subject_body'] = array(
+    '#type' => 'text_format',
+    '#title' => t('Site staff approval email body'),
+    '#format' => (!empty($s4_opportunity_type->data['site_staff_approval_email_subject_body']))
+      ? $s4_opportunity_type->data['site_staff_approval_email_subject_body']['format']
+      : filter_default_format(),
+    '#default_value' => (!empty($s4_opportunity_type->data['site_staff_approval_email_subject_body'])) 
+      ? $s4_opportunity_type->data['site_staff_approval_email_subject_body']['value']
+      : '',
+  );
+
   if (module_exists('token')) {
     $form['tokens'] = array(
       '#theme' => 'token_tree',
