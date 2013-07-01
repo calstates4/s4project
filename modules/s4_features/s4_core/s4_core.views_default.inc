@@ -755,7 +755,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['fields']['nothing']['label'] = 'Manage user';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '[nothing_1] | [edit_node]';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
-  /* Field: Field: Program */
+  /* Field: Field: Program(s) */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
@@ -871,7 +871,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['filters']['uid_raw']['operator'] = '>';
   $handler->display->display_options['filters']['uid_raw']['value']['value'] = '1';
   $handler->display->display_options['filters']['uid_raw']['group'] = 1;
-  /* Filter criterion: Field: Program (field_site_restrict) */
+  /* Filter criterion: Field: Program(s) (field_site_restrict) */
   $handler->display->display_options['filters']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
   $handler->display->display_options['filters']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['filters']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';
@@ -942,7 +942,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['style_plugin'] = 'table';
-  /* Relationship: Field: Program (field_site_restrict) */
+  /* Relationship: Field: Program(s) (field_site_restrict) */
   $handler->display->display_options['relationships']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
   $handler->display->display_options['relationships']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['relationships']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';
@@ -1172,7 +1172,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
-  /* Field: Field: Program */
+  /* Field: Field: Program(s) */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
@@ -1242,7 +1242,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['fields']['field_downloadable_file']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['field_downloadable_file']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_downloadable_file']['group_column'] = 'fid';
-  /* Field: Field: Program */
+  /* Field: Field: Program(s) */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
@@ -1317,7 +1317,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['fields']['field_downloadable_file']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['field_downloadable_file']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_downloadable_file']['group_column'] = 'fid';
-  /* Field: Field: Program */
+  /* Field: Field: Program(s) */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
@@ -1330,7 +1330,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['fields']['field_site_restrict']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_site_restrict']['delta_offset'] = '0';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
-  /* Contextual filter: Field: Program (field_site_restrict) */
+  /* Contextual filter: Field: Program(s) (field_site_restrict) */
   $handler->display->display_options['arguments']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
   $handler->display->display_options['arguments']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['arguments']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';
@@ -1442,7 +1442,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['fields']['nid']['alter']['text'] = 'Record # [nid]';
   $handler->display->display_options['fields']['nid']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['nid']['alter']['path'] = 'node/[nid]';
-  /* Field: Content: Course */
+  /* Field: Field: Course */
   $handler->display->display_options['fields']['field_course']['id'] = 'field_course';
   $handler->display->display_options['fields']['field_course']['table'] = 'field_data_field_course';
   $handler->display->display_options['fields']['field_course']['field'] = 'field_course';
@@ -1516,11 +1516,11 @@ function s4_core_views_default_views() {
   $handler->display->display_options['fields']['nid']['alter']['text'] = 'Record # [nid]';
   $handler->display->display_options['fields']['nid']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['nid']['alter']['path'] = 'node/[nid]';
-  /* Field: Content: Course */
+  /* Field: Field: Course */
   $handler->display->display_options['fields']['field_course']['id'] = 'field_course';
   $handler->display->display_options['fields']['field_course']['table'] = 'field_data_field_course';
   $handler->display->display_options['fields']['field_course']['field'] = 'field_course';
-  /* Field: Field: Program */
+  /* Field: Field: Program(s) */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
@@ -1606,7 +1606,7 @@ function s4_core_views_default_views() {
     t('All'),
     t('Current users sites'),
     t('View your current placements'),
-    t('Program'),
+    t('Program(s)'),
     t('Complete evaluation'),
     t('Cancel'),
     t('User profile sites'),

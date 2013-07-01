@@ -2966,15 +2966,17 @@ Fields',
   $handler->display->display_options['fields']['created']['field'] = 'created';
   $handler->display->display_options['fields']['created']['label'] = 'Date created';
   $handler->display->display_options['fields']['created']['date_format'] = 'short';
-  /* Field: Form Evaluation: Total placements */
+  /* Field: Broken/missing handler */
   $handler->display->display_options['fields']['total_placements']['id'] = 'total_placements';
   $handler->display->display_options['fields']['total_placements']['table'] = 's4_reporting';
   $handler->display->display_options['fields']['total_placements']['field'] = 'total_placements';
+  $handler->display->display_options['fields']['total_placements']['label'] = 'Total placements';
   $handler->display->display_options['fields']['total_placements']['element_label_colon'] = FALSE;
-  /* Field: Form Evaluation: Total hours */
+  /* Field: Broken/missing handler */
   $handler->display->display_options['fields']['total_hours']['id'] = 'total_hours';
   $handler->display->display_options['fields']['total_hours']['table'] = 's4_reporting';
   $handler->display->display_options['fields']['total_hours']['field'] = 'total_hours';
+  $handler->display->display_options['fields']['total_hours']['label'] = 'Total hours';
   /* Field: Content: County */
   $handler->display->display_options['fields']['field_county']['id'] = 'field_county';
   $handler->display->display_options['fields']['field_county']['table'] = 'field_data_field_county';
@@ -3358,8 +3360,6 @@ Fields',
     t('Related programs'),
     t('Date created'),
     t('Total placements'),
-    t('.'),
-    t(','),
     t('Total hours'),
     t('County '),
     t('Subject code subject'),
