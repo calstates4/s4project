@@ -356,6 +356,7 @@ function s4_opportunity_page_view($s4_opportunity, $view_mode = 'full') {
  * Implement hook_theme().
  */
 function s4_opportunity_theme() {
+  $path = drupal_get_path('module', 's4_opportunity') .'/theme';
   return array(
     's4_opportunity_add_list' => array(
       'variables' => array('content' => array()),
@@ -368,12 +369,13 @@ function s4_opportunity_theme() {
     's4_opportunity_create_start' => array(
       'variables' => array('types' => array()),
       'template' => 's4_opportunity_create_start',
-      'path' => drupal_get_path('module', 's4_opportunity') .'/theme'
+      'path' => $path
     ),
     's4_opportunity_place_options' => array(
       'variables' => array('opportunity' => array(), 'type' => array(), 'courses' => array()),
       'template' => 's4_opportunity_place_options',
-      'path' => drupal_get_path('module', 's4_opportunity') .'/theme')
+      'path' => $path
+    ),
   );
 }
 

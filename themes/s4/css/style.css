@@ -448,3 +448,42 @@ body.page-reports .vertical-tab-button.last {
   margin-top: 30px;
   border-top: 1px solid #ccc;
 }
+.search-results .row.search-result {
+  border-bottom: 1px solid #d4d4d5;
+  margin-bottom: 15px;
+}
+.search-results .row.search-result h3 {
+  margin: 0;
+}
+.search-results .popover-link {
+  cursor: pointer;
+}
+.search-results .nav {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+}
+.search-results .nav li {
+  border-bottom: 1px solid #ddd;
+  margin: 0;
+  padding: 10px 15px;
+}
+.search-results .nav li.even {
+  background: #f7f7f7;
+}
+.search-results .nav li.last {
+  border-bottom: none;
+  border-radius: 0 4px 4px 0;
+  -webkit-border-radius: 0 4px 4px 0;
+  -moz-border-radius: 0 4px 4px 0;
+}
+.search-results .site {
+  color: #aaa;
+}
+.search-results .site a {
+  color: #33bbff;
+}
+.search-results .site .popover {
+  color: #000;
+}

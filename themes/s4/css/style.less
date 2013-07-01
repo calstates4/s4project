@@ -619,3 +619,54 @@ body.page-reports {
 		border-top: 1px solid #ccc;
 	}
 }
+
+.search-results {
+
+	.row.search-result {
+		border-bottom: 1px solid #d4d4d5;
+		margin-bottom: 15px;
+		h3 {
+			margin: 0;
+		}
+	}
+
+	.popover-link {
+		cursor: pointer;
+	}
+
+	.nav {
+		border: 1px solid #ddd;
+		border-radius: 4px;
+		-webkit-border-radius: 4px;
+		-moz-border-radius: 4px;
+
+		li {
+			border-bottom: 1px solid #ddd;
+			margin: 0;
+			padding: 10px 15px;
+		}
+
+		li.even {
+			background: lighten(#ddd, 10%);
+		}
+
+		li.last {
+			border-bottom: none;
+			border-radius: 0 4px 4px 0;
+			-webkit-border-radius: 0 4px 4px 0;
+			-moz-border-radius: 0 4px 4px 0;
+		}
+	}
+
+	.site {
+		color: #aaa;
+
+		a {
+			color: lighten(#0088cc, 20%);
+		}
+
+		.popover {
+			color: #000;
+		}
+	}
+}

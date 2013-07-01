@@ -12,6 +12,27 @@
 				});
 				$(window).trigger('resize');
 			}
+
+			if($('.popover-link').length) {
+				$('.popover-link').each(function() {
+					$(this).popover({
+						html   : true,
+						trigger : ($(this).hasClass('hover')) ? 'hover' : 'click',
+						placement : ($(this).hasClass('left')) ? 'left' : 'right',
+						content: $(this).parents('.popover-wrapper').find('.popover-content div').html(),
+						title: $(this).parents('.popover-wrapper').find('.popover-content h4').html(),
+					});
+					$(this).on('click', function(event) {
+						event.preventDefault();
+						var $that = $(this);
+						$('.popover-link').each(function() {
+							if(!$(this).is($that)) {
+								$(this).popover('hide');
+							}
+						});
+					})
+				});
+			}
 		}
 	};
 	
