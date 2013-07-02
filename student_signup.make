@@ -32,7 +32,7 @@ projects[ctools][subdir] = "contrib"
 projects[ctools][version] = "1.x-dev"
 
 projects[date][subdir] = "contrib"
-projects[date][version] = "2.0-alpha3"
+projects[date][version] = "2.6"
 
 projects[ds][subdir] = "contrib"
 projects[ds][version] = "1.7"
