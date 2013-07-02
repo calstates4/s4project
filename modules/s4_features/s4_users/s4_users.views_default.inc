@@ -23,6 +23,7 @@ function s4_users_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Sites';
+  $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -72,7 +73,7 @@ function s4_users_views_default_views() {
       'separator' => '',
     ),
   );
-  /* Relationship: Content: Course (field_course) */
+  /* Relationship: Field: Course (field_course) */
   $handler->display->display_options['relationships']['field_course_nid']['id'] = 'field_course_nid';
   $handler->display->display_options['relationships']['field_course_nid']['table'] = 'field_data_field_course';
   $handler->display->display_options['relationships']['field_course_nid']['field'] = 'field_course_nid';
@@ -84,7 +85,7 @@ function s4_users_views_default_views() {
   $handler->display->display_options['fields']['field_term']['relationship'] = 'field_course_nid';
   $handler->display->display_options['fields']['field_term']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_term']['hide_alter_empty'] = FALSE;
-  /* Field: Content: Course */
+  /* Field: Field: Course */
   $handler->display->display_options['fields']['field_course_1']['id'] = 'field_course_1';
   $handler->display->display_options['fields']['field_course_1']['table'] = 'field_data_field_course';
   $handler->display->display_options['fields']['field_course_1']['field'] = 'field_course';
@@ -100,7 +101,7 @@ function s4_users_views_default_views() {
   $handler->display->display_options['fields']['field_site']['table'] = 'field_data_field_site';
   $handler->display->display_options['fields']['field_site']['field'] = 'field_site';
   $handler->display->display_options['fields']['field_site']['hide_alter_empty'] = FALSE;
-  /* Field: Content: Site staff */
+  /* Field: Field: Site staff */
   $handler->display->display_options['fields']['field_coordinator']['id'] = 'field_coordinator';
   $handler->display->display_options['fields']['field_coordinator']['table'] = 'field_data_field_coordinator';
   $handler->display->display_options['fields']['field_coordinator']['field'] = 'field_coordinator';

@@ -92,6 +92,7 @@ function s4_sites_ds_custom_fields_info() {
   $ds_field->entities = array(
     'node' => 'node',
   );
+  $ds_field->ui_limit = '';
   $ds_field->properties = array(
     'block' => 's4_map|s4_map_site_view_map',
     'block_render' => '1',
@@ -106,6 +107,7 @@ function s4_sites_ds_custom_fields_info() {
   $ds_field->entities = array(
     'node' => 'node',
   );
+  $ds_field->ui_limit = '';
   $ds_field->properties = array(
     'block' => 's4_sites|s4_sites_merge_link',
     'block_render' => '1',
@@ -120,6 +122,7 @@ function s4_sites_ds_custom_fields_info() {
   $ds_field->entities = array(
     'node' => 'node',
   );
+  $ds_field->ui_limit = '';
   $ds_field->properties = array(
     'block' => 's4_sites|s4_sites_return_tab',
     'block_render' => '1',
@@ -134,6 +137,7 @@ function s4_sites_ds_custom_fields_info() {
   $ds_field->entities = array(
     'node' => 'node',
   );
+  $ds_field->ui_limit = '';
   $ds_field->properties = array(
     'block' => 's4_sites|s4_sites_site_full',
     'block_render' => '1',
@@ -148,6 +152,7 @@ function s4_sites_ds_custom_fields_info() {
   $ds_field->entities = array(
     'node' => 'node',
   );
+  $ds_field->ui_limit = '';
   $ds_field->properties = array(
     'block' => 'views|site_coordinators-block_1',
     'block_render' => '1',

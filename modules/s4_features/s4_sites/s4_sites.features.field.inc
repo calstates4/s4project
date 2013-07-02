@@ -959,10 +959,12 @@ function s4_sites_field_default_fields() {
           'weight' => 0,
         ),
       ),
+      'display_label' => '',
       'entity_type' => 'node',
+      'field_lock' => 0,
       'field_name' => 'field_first_name',
       'label' => 'First Name',
-      'required' => 0,
+      'required' => 1,
       'settings' => array(
         'custom_add_another' => '',
         'text_processing' => '0',
@@ -1116,10 +1118,12 @@ function s4_sites_field_default_fields() {
           'weight' => 0,
         ),
       ),
+      'display_label' => '',
       'entity_type' => 'node',
+      'field_lock' => 0,
       'field_name' => 'field_last_name',
       'label' => 'Last Name',
-      'required' => 0,
+      'required' => 1,
       'settings' => array(
         'custom_add_another' => '',
         'text_processing' => '0',
@@ -1692,7 +1696,7 @@ function s4_sites_field_default_fields() {
       'bundle' => 'coordinator',
       'default_value' => NULL,
       'deleted' => '0',
-      'description' => 'Restrict this site staff to the following types of students.',
+      'description' => 'If the site is available to students in multiple programs, then you may wish to limit this site staff to only a subset of the site\'s programs. If you do not check anything, then this site staff is available for any student in any of the programs related to the site.',
       'display' => array(
         'cck_blocks' => array(
           'label' => 'above',
@@ -1719,9 +1723,11 @@ function s4_sites_field_default_fields() {
           'weight' => 0,
         ),
       ),
+      'display_label' => '',
       'entity_type' => 'node',
+      'field_lock' => 0,
       'field_name' => 'field_site_restrict',
-      'label' => 'Restrict to',
+      'label' => 'Program(s)',
       'required' => 0,
       'settings' => array(
         'custom_add_another' => '',
@@ -6661,6 +6667,7 @@ function s4_sites_field_default_fields() {
   t('Form');
   t('Hint: You can click the hours on the left of the table to select that time Monday through Friday.');
   t('How many people does your organization serve?');
+  t('If the site is available to students in multiple programs, then you may wish to limit this site staff to only a subset of the site\'s programs. If you do not check anything, then this site staff is available for any student in any of the programs related to the site.');
   t('If this site staff needs to login and view their students, ask them to create a user account and then enter that account name here.');
   t('If you have multiple location sites that you would like students to be placed at, please provide specific location information. (You may add additional locations using the \'Add another\' button below.)');
   t('If your organization has a presence on Facebook, Twitter, or another social network, please provide the address.');
@@ -6681,8 +6688,6 @@ function s4_sites_field_default_fields() {
   t('Related user');
   t('Reminder date');
   t('Reminder period (days)');
-  t('Restrict this site staff to the following types of students.');
-  t('Restrict to');
   t('Risk identification');
   t('Role');
   t('Saved form record');
