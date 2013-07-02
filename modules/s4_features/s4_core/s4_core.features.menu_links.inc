@@ -40,7 +40,7 @@ function s4_core_menu_default_menu_links() {
     'external' => '0',
     'has_children' => '0',
     'expanded' => '0',
-    'weight' => '-46',
+    'weight' => '-45',
   );
   // Exported menu link: main-menu:reports
   $menu_links['main-menu:reports'] = array(
@@ -58,7 +58,7 @@ function s4_core_menu_default_menu_links() {
     'external' => '0',
     'has_children' => '0',
     'expanded' => '0',
-    'weight' => '-45',
+    'weight' => '-44',
   );
   // Exported menu link: main-menu:s4/logout
   $menu_links['main-menu:s4/logout'] = array(
@@ -76,7 +76,7 @@ function s4_core_menu_default_menu_links() {
     'external' => '0',
     'has_children' => '0',
     'expanded' => '0',
-    'weight' => '-44',
+    'weight' => '-43',
   );
   // Exported menu link: main-menu:users
   $menu_links['main-menu:users'] = array(
@@ -208,7 +208,7 @@ function s4_core_menu_default_menu_links() {
   $menu_links['menu-staff-actions:site-list/manage'] = array(
     'menu_name' => 'menu-staff-actions',
     'link_path' => 'site-list/manage',
-    'router_path' => 'site-list/manage',
+    'router_path' => 'site-list',
     'link_title' => 'Manage sites',
     'options' => array(
       'attributes' => array(

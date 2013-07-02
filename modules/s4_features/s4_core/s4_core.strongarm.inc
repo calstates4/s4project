@@ -13,64 +13,115 @@ function s4_core_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'content_access_settings';
+  $strongarm->name = 'field_bundle_settings_node__signup';
   $strongarm->value = array(
-    'view' => array(
-      'contact_record' => array(
-        0 => 4,
-        1 => 3,
+    'view_modes' => array(
+      'teaser' => array(
+        'custom_settings' => TRUE,
       ),
-      'course' => array(
-        0 => 2,
-        1 => 5,
-        2 => 4,
+      'notifications' => array(
+        'custom_settings' => TRUE,
       ),
-      'file' => array(
-        0 => 6,
-        1 => 3,
-        2 => 4,
+      'full' => array(
+        'custom_settings' => FALSE,
       ),
-      'signup' => array(
-        0 => 6,
-        1 => 3,
-        2 => 4,
+      'rss' => array(
+        'custom_settings' => FALSE,
       ),
-    ),
-    'view_own' => array(
-      'contact_record' => array(
-        0 => 2,
-        1 => 3,
+      'search_index' => array(
+        'custom_settings' => FALSE,
       ),
-      'course' => array(
-        0 => 5,
-        1 => 4,
+      'search_result' => array(
+        'custom_settings' => FALSE,
       ),
-      'file' => array(
-        0 => 6,
-        1 => 3,
-        2 => 4,
+      'print' => array(
+        'custom_settings' => FALSE,
       ),
-      'signup' => array(
-        0 => 2,
-        1 => 6,
-        2 => 3,
-        3 => 4,
+      'token' => array(
+        'custom_settings' => FALSE,
       ),
     ),
-    'per_node' => array(
-      'contact_record' => 0,
-      'course' => 0,
-      'file' => 0,
-      'signup' => 0,
-    ),
-    'priority' => array(
-      'contact_record' => '0',
-      'course' => '0',
-      'file' => '0',
-      'signup' => '0',
+    'extra_fields' => array(
+      'form' => array(
+        'title' => array(
+          'weight' => '-5',
+        ),
+        'path' => array(
+          'weight' => '30',
+        ),
+      ),
+      'display' => array(
+        's4_core_signup_submission' => array(
+          'default' => array(
+            'weight' => '10',
+            'visible' => TRUE,
+          ),
+        ),
+        's4_core_evaluation_submission' => array(
+          'default' => array(
+            'weight' => '10',
+            'visible' => TRUE,
+          ),
+        ),
+        's4_core_assessment_submission' => array(
+          'default' => array(
+            'weight' => '10',
+            'visible' => TRUE,
+          ),
+        ),
+      ),
     ),
   );
-  $export['content_access_settings'] = $strongarm;
+  $export['field_bundle_settings_node__signup'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'field_bundle_settings_node__webform';
+  $strongarm->value = array(
+    'view_modes' => array(
+      'teaser' => array(
+        'custom_settings' => TRUE,
+      ),
+      'notifications' => array(
+        'custom_settings' => TRUE,
+      ),
+      'full' => array(
+        'custom_settings' => FALSE,
+      ),
+      'rss' => array(
+        'custom_settings' => FALSE,
+      ),
+      'search_index' => array(
+        'custom_settings' => FALSE,
+      ),
+      'search_result' => array(
+        'custom_settings' => FALSE,
+      ),
+      'print' => array(
+        'custom_settings' => FALSE,
+      ),
+      'token' => array(
+        'custom_settings' => FALSE,
+      ),
+    ),
+    'extra_fields' => array(
+      'form' => array(
+        'title' => array(
+          'weight' => '-5',
+        ),
+      ),
+      'display' => array(
+        'webform' => array(
+          'default' => array(
+            'weight' => '1',
+            'visible' => TRUE,
+          ),
+        ),
+      ),
+    ),
+  );
+  $export['field_bundle_settings_node__webform'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -78,7 +129,7 @@ function s4_core_strongarm() {
   $strongarm->name = 'front_page_enable';
   $strongarm->value = 1;
   $export['front_page_enable'] = $strongarm;
-  
+
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
@@ -117,6 +168,54 @@ function s4_core_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'menu_options_downloadable_form';
+  $strongarm->value = array(
+    0 => 'main-menu',
+  );
+  $export['menu_options_downloadable_form'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'menu_options_signup';
+  $strongarm->value = array(
+    0 => 'main-menu',
+  );
+  $export['menu_options_signup'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'menu_options_webform';
+  $strongarm->value = array(
+    0 => 'main-menu',
+  );
+  $export['menu_options_webform'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'menu_parent_downloadable_form';
+  $strongarm->value = 'main-menu:0';
+  $export['menu_parent_downloadable_form'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'menu_parent_signup';
+  $strongarm->value = 'main-menu:0';
+  $export['menu_parent_signup'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'menu_parent_webform';
+  $strongarm->value = 'main-menu:0';
+  $export['menu_parent_webform'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'messaging_default_method';
   $strongarm->value = 'mail';
   $export['messaging_default_method'] = $strongarm;
@@ -130,60 +229,6 @@ function s4_core_strongarm() {
     'htmlmail' => 0,
   );
   $export['messaging_method_enabled'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'node_options_downloadable_form';
-  $strongarm->value = array(
-    0 => 'status',
-    1 => 'promote',
-  );
-  $export['node_options_downloadable_form'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'node_options_page';
-  $strongarm->value = array(
-    0 => 'status',
-    1 => 'revision',
-  );
-  $export['node_options_page'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'node_options_signup';
-  $strongarm->value = array(
-    0 => 'status',
-    1 => 'revision',
-  );
-  $export['node_options_signup'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'node_options_webform';
-  $strongarm->value = array(
-    0 => 'status',
-    1 => 'promote',
-  );
-  $export['node_options_webform'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'node_submitted_downloadable_form';
-  $strongarm->value = 0;
-  $export['node_submitted_downloadable_form'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'node_submitted_webform';
-  $strongarm->value = 0;
-  $export['node_submitted_webform'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
@@ -365,6 +410,88 @@ function s4_core_strongarm() {
     ),
   );
   $export['nodeformscols_field_placements_signup_default'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'node_options_downloadable_form';
+  $strongarm->value = array(
+    0 => 'status',
+    1 => 'promote',
+  );
+  $export['node_options_downloadable_form'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'node_options_page';
+  $strongarm->value = array(
+    0 => 'status',
+    1 => 'revision',
+  );
+  $export['node_options_page'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'node_options_signup';
+  $strongarm->value = array(
+    0 => 'status',
+    1 => 'revision',
+  );
+  $export['node_options_signup'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'node_options_webform';
+  $strongarm->value = array(
+    0 => 'status',
+    1 => 'promote',
+  );
+  $export['node_options_webform'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'node_preview_downloadable_form';
+  $strongarm->value = '0';
+  $export['node_preview_downloadable_form'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'node_preview_signup';
+  $strongarm->value = '0';
+  $export['node_preview_signup'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'node_preview_webform';
+  $strongarm->value = '0';
+  $export['node_preview_webform'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'node_submitted_downloadable_form';
+  $strongarm->value = 0;
+  $export['node_submitted_downloadable_form'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'node_submitted_signup';
+  $strongarm->value = 1;
+  $export['node_submitted_signup'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'node_submitted_webform';
+  $strongarm->value = 0;
+  $export['node_submitted_webform'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */

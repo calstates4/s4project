@@ -819,6 +819,7 @@ function s4_courses_field_default_fields() {
         'module' => 'file',
         'settings' => array(
           'insert' => 0,
+          'insert_absolute' => FALSE,
           'insert_class' => '',
           'insert_default' => 'auto',
           'insert_styles' => array(
@@ -1074,6 +1075,7 @@ function s4_courses_field_default_fields() {
         'active' => 1,
         'module' => 'date',
         'settings' => array(
+          'display_all_day' => 0,
           'increment' => '1',
           'input_format' => 'm/d/Y - H:i:s',
           'input_format_custom' => '',
@@ -1317,7 +1319,6 @@ function s4_courses_field_default_fields() {
           'course' => 0,
           'course_term' => 0,
           'downloadable_form' => 0,
-          'fieldtrip' => 0,
           'file' => 0,
           'page' => 0,
           'signup' => 0,
@@ -1680,6 +1681,7 @@ function s4_courses_field_default_fields() {
         'active' => 1,
         'module' => 'date',
         'settings' => array(
+          'display_all_day' => 0,
           'increment' => '1',
           'input_format' => 'm/d/Y - H:i:s',
           'input_format_custom' => '',

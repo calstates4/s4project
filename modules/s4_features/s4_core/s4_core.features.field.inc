@@ -166,6 +166,7 @@ function s4_core_field_default_fields() {
         'module' => 'file',
         'settings' => array(
           'insert' => 0,
+          'insert_absolute' => FALSE,
           'insert_class' => '',
           'insert_default' => 'auto',
           'insert_styles' => array(
@@ -497,6 +498,7 @@ function s4_core_field_default_fields() {
         'module' => 'file',
         'settings' => array(
           'insert' => 0,
+          'insert_absolute' => FALSE,
           'insert_class' => '',
           'insert_default' => 'auto',
           'insert_styles' => array(
@@ -591,6 +593,7 @@ function s4_core_field_default_fields() {
         'module' => 'image',
         'settings' => array(
           'insert' => 1,
+          'insert_absolute' => FALSE,
           'insert_class' => 'user-image',
           'insert_default' => 'image_medium',
           'insert_styles' => array(
@@ -664,15 +667,12 @@ function s4_core_field_default_fields() {
           ),
         ),
         'referenceable_types' => array(
-          'article' => 0,
           'contact_record' => 0,
           'coordinator' => 'coordinator',
           'course' => 0,
           'course_term' => 0,
-          'feed' => 0,
-          'feed_item' => 0,
+          'downloadable_form' => 0,
           'file' => 0,
-          'news' => 0,
           'page' => 0,
           'signup' => 0,
           'site' => 0,
@@ -732,6 +732,7 @@ function s4_core_field_default_fields() {
         'active' => 1,
         'module' => 'nodereference_url',
         'settings' => array(
+          'autocomplete_match' => 'contains',
           'edit_fallback' => 0,
           'fallback' => 'select',
           'node_link' => array(
@@ -806,7 +807,6 @@ function s4_core_field_default_fields() {
           'course' => 'course',
           'course_term' => 0,
           'downloadable_form' => 0,
-          'fieldtrip' => 0,
           'file' => 0,
           'page' => 0,
           'signup' => 0,
@@ -867,6 +867,7 @@ function s4_core_field_default_fields() {
         'active' => 1,
         'module' => 'nodereference_url',
         'settings' => array(
+          'autocomplete_match' => 'contains',
           'edit_fallback' => 0,
           'fallback' => 'select',
           'node_link' => array(
@@ -1264,6 +1265,7 @@ function s4_core_field_default_fields() {
         'active' => 1,
         'module' => 'date',
         'settings' => array(
+          'display_all_day' => 0,
           'increment' => '1',
           'input_format' => 'm/d/Y - H:i:s',
           'input_format_custom' => '',
@@ -1523,6 +1525,7 @@ function s4_core_field_default_fields() {
         'active' => 1,
         'module' => 'date',
         'settings' => array(
+          'display_all_day' => 0,
           'increment' => '1',
           'input_format' => 'm/d/Y - H:i:s',
           'input_format_custom' => '',
@@ -1656,6 +1659,7 @@ function s4_core_field_default_fields() {
         'active' => 1,
         'module' => 'nodereference_url',
         'settings' => array(
+          'autocomplete_match' => 'contains',
           'edit_fallback' => 0,
           'fallback' => 'select',
           'node_link' => array(
@@ -2120,9 +2124,9 @@ function s4_core_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => NULL,
+          'module' => 'email',
           'settings' => array(),
-          'type' => 'default',
+          'type' => 'email_default',
           'weight' => 5,
         ),
       ),
@@ -2972,6 +2976,7 @@ function s4_core_field_default_fields() {
         'active' => 1,
         'module' => 'date',
         'settings' => array(
+          'display_all_day' => 0,
           'increment' => '1',
           'input_format' => 'm/d/Y - H:i:s',
           'input_format_custom' => '',

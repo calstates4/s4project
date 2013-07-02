@@ -750,7 +750,7 @@ Location',
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Field: Field: Program */
+  /* Field: Field: Program(s) */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
@@ -847,7 +847,7 @@ Location',
   $handler->display->display_options['filters']['field_csu_facility_tid']['expose']['multiple'] = TRUE;
   $handler->display->display_options['filters']['field_csu_facility_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_csu_facility_tid']['vocabulary'] = 'issues_addressed';
-  /* Filter criterion: Field: Program (field_site_restrict) */
+  /* Filter criterion: Field: Program(s) (field_site_restrict) */
   $handler->display->display_options['filters']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
   $handler->display->display_options['filters']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['filters']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';
@@ -1137,7 +1137,7 @@ Location',
   $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
   $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
   $handler->display->display_options['fields']['field_last_name']['relationship'] = 'field_user_uid';
-  /* Field: Content: Course */
+  /* Field: Field: Course */
   $handler->display->display_options['fields']['field_course']['id'] = 'field_course';
   $handler->display->display_options['fields']['field_course']['table'] = 'field_data_field_course';
   $handler->display->display_options['fields']['field_course']['field'] = 'field_course';
@@ -1225,7 +1225,7 @@ Location',
   $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
   $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
   $handler->display->display_options['fields']['field_last_name']['relationship'] = 'field_user_uid';
-  /* Field: Content: Course */
+  /* Field: Field: Course */
   $handler->display->display_options['fields']['field_course']['id'] = 'field_course';
   $handler->display->display_options['fields']['field_course']['table'] = 'field_data_field_course';
   $handler->display->display_options['fields']['field_course']['field'] = 'field_course';
@@ -1404,7 +1404,7 @@ Location',
   $handler->display->display_options['fields']['title']['element_type'] = 'h3';
   $handler->display->display_options['fields']['title']['element_class'] = 'coordinator-name';
   $handler->display->display_options['fields']['title']['element_default_classes'] = FALSE;
-  /* Field: Field: Program */
+  /* Field: Field: Program(s) */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
@@ -1470,7 +1470,7 @@ Location',
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Field: Field: Program */
+  /* Field: Field: Program(s) */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
@@ -1621,7 +1621,7 @@ Location',
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['hide_alter_empty'] = FALSE;
-  /* Field: Field: Program */
+  /* Field: Field: Program(s) */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
@@ -1737,7 +1737,7 @@ Location',
   $handler->display->display_options['filters']['field_last_name_value']['expose']['label'] = 'Last name';
   $handler->display->display_options['filters']['field_last_name_value']['expose']['operator'] = 'field_last_name_value_op';
   $handler->display->display_options['filters']['field_last_name_value']['expose']['identifier'] = 'field_last_name_value';
-  /* Filter criterion: Field: Program (field_site_restrict) */
+  /* Filter criterion: Field: Program(s) (field_site_restrict) */
   $handler->display->display_options['filters']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
   $handler->display->display_options['filters']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['filters']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';
@@ -1775,7 +1775,7 @@ Location',
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['label'] = 'First name';
-  /* Field: Field: Program */
+  /* Field: Field: Program(s) */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
@@ -1871,7 +1871,7 @@ Location',
     t('next ›'),
     t('last »'),
     t('Name'),
-    t('Program'),
+    t('Program(s)'),
     t('Phone'),
     t('All'),
     t('%1'),
@@ -1894,6 +1894,7 @@ Location',
     t('[view_node] | [edit_node]'),
     t('First name'),
     t('Last name'),
+    t('Program'),
     t('Block: Active site staff'),
     t('Active Site Staff'),
     t('Email address'),
@@ -2397,7 +2398,7 @@ Location',
   $handler->display->display_options['empty']['area']['field'] = 'area';
   $handler->display->display_options['empty']['area']['content'] = '<p class="lead">No students signed up for this term.</p>';
   $handler->display->display_options['empty']['area']['format'] = 'full_html';
-  /* Relationship: Content: Course (field_course) */
+  /* Relationship: Field: Course (field_course) */
   $handler->display->display_options['relationships']['field_course_nid']['id'] = 'field_course_nid';
   $handler->display->display_options['relationships']['field_course_nid']['table'] = 'field_data_field_course';
   $handler->display->display_options['relationships']['field_course_nid']['field'] = 'field_course_nid';
@@ -2422,7 +2423,7 @@ Location',
   $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
   $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
   $handler->display->display_options['fields']['field_last_name']['relationship'] = 'field_user_uid';
-  /* Field: Content: Course */
+  /* Field: Field: Course */
   $handler->display->display_options['fields']['field_course']['id'] = 'field_course';
   $handler->display->display_options['fields']['field_course']['table'] = 'field_data_field_course';
   $handler->display->display_options['fields']['field_course']['field'] = 'field_course';
@@ -2631,7 +2632,7 @@ Location',
   $handler->display->display_options['fields']['title']['element_type'] = 'h4';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['element_default_classes'] = FALSE;
-  /* Field: Field: Program */
+  /* Field: Field: Program(s) */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
@@ -2721,7 +2722,7 @@ Location',
   $handler->display->display_options['filters']['field_csu_org_type_tid']['reduce_duplicates'] = TRUE;
   $handler->display->display_options['filters']['field_csu_org_type_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_csu_org_type_tid']['vocabulary'] = 'organization_type';
-  /* Filter criterion: Field: Program (field_site_restrict) */
+  /* Filter criterion: Field: Program(s) (field_site_restrict) */
   $handler->display->display_options['filters']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
   $handler->display->display_options['filters']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['filters']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';

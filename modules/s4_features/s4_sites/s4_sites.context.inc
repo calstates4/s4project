@@ -88,8 +88,7 @@ function s4_sites_context_default_contexts() {
         ),
       ),
     ),
-    'breadcrumb' => 'site-list',
-    'menu' => 'site-list',
+    'menu' => 'site',
   );
   $context->condition_mode = 1;
 
