@@ -12,12 +12,7 @@ include_once('s4_sites.features.inc');
 function s4_sites_menu_alter(&$items) {
   $items['node/%/site-staff']['access callback'] = '_s4_sites_site_admin_view_access';
   $items['node/%/site-staff']['access arguments'] = array(1);
-  $items['node/%/notes']['access callback'] = '_s4_sites_site_admin_view_access';
-  $items['node/%/notes']['access arguments'] = array(1);
-  $items['node/%/files']['access callback'] = '_s4_sites_site_admin_view_access';
-  $items['node/%/files']['access arguments'] = array(1);
-  $items['node/%node/moderation']['title'] = 'Approval';
-  $items['node/%node/moderation']['weight'] = 1;
+  unset($items['node/%node/moderation']);
   $items['node/%/site-staff-students']['access callback'] = '_s4_sites_site_staff_admin_view_access';
   $items['node/%/site-staff-students']['access arguments'] = array(1);
 }
@@ -71,6 +66,16 @@ function s4_sites_menu() {
     'access arguments' => array('merge sites'),
     'file' => 's4_sites.pages.inc'
   );
+
+  $items['node/%node/log'] = array(
+    'title' => 'Log',
+    'type' => MENU_LOCAL_TASK,
+    'page callback' => 's4_sites_site_log',
+    'page arguments' => array(1),
+    'access callback' => '_s4_sites_site_admin_view_access',
+    'access arguments' => array(1),
+    'file' => 's4_sites.pages.inc',
+    );
 
   return $items;
 }
@@ -255,8 +260,8 @@ function s4_sites_s4_field_access() {
 *  them to a form record.
 */
 function s4_sites_webform_submission_insert($node, $submission) {
+  global $user;
   if( $_SESSION['s4_sites_evaluation_nid']) {
-    global $user;
     $signup = node_load( $_SESSION['s4_sites_evaluation_nid']);
     $signup_user = field_get_items('node', $signup, 'field_user');
     if($signup_user[0]['uid'] == $user->uid) {
@@ -274,13 +279,13 @@ function s4_sites_webform_submission_insert($node, $submission) {
   node_object_prepare($form);
     $form->language = LANGUAGE_NONE;
   $form->title = $node->title;
-  $form->uid = 0;
+  $form->uid = $user->uid;
   $form->field_site[$form->language][0]['nid'] = $site->nid;
   $form->field_form_sid[$form->language][0]['value'] = $submission->sid;
   node_save($form);
   unset($_SESSION['s4_sites_user_form_site']);
   if (node_access('update', $site)) {
-    drupal_goto('node/'. $form->field_site[$form->language][0]['nid'] .'/forms');
+    drupal_goto('node/'. $form->field_site[$form->language][0]['nid'] .'/log');
   }
   drupal_set_message(t('Thanks for submitting your form!'));
   drupal_goto('<front>');
@@ -413,8 +418,10 @@ function s4_sites_node_access($node, $op,  $account) {
 /**
 *  Menu access test for site contact records
 */
-function _s4_sites_site_admin_view_access($nid) {
-  $node = node_load($nid);
+function _s4_sites_site_admin_view_access($node) {
+  if(!is_object($node)) {
+    $node = node_load($node);
+  }
   return (node_access('update', $node) && $node->type == 'site');
 }
 
@@ -1275,6 +1282,17 @@ function s4_sites_ds_layout_info() {
  */
 function s4_sites_theme_registry_alter(&$items) {
   $items['field_collection_table_multiple_value_fields']['function'] = 's4_sites_theme_field_collection_table';
+}
+
+/**
+ * Implements hook_theme().
+ */
+function s4_sites_theme() {
+  return array('s4_sites_log_page' => array(
+    'template' => 's4-sites-log-page',
+    'path' => drupal_get_path('module', 's4_sites') .'/theme',
+    'variables' => array('site' => array(), 'moderate_form' => '', 'send_form' => '', 'form' => '', 'results' => '')),
+  );
 }
 
 /**

@@ -80,12 +80,6 @@ function s4_sites_context_default_contexts() {
           'region' => 'content_top_right',
           'weight' => '-10',
         ),
-        'workbench-block' => array(
-          'module' => 'workbench',
-          'delta' => 'block',
-          'region' => 'content',
-          'weight' => '-10',
-        ),
       ),
     ),
     'menu' => 'site',
@@ -160,57 +154,6 @@ function s4_sites_context_default_contexts() {
   t('User is viewing a site form');
   t('sites');
   $export['site-form-view'] = $context;
-
-  $context = new stdClass();
-  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
-  $context->api_version = 3;
-  $context->name = 'site-forms';
-  $context->description = 'User is on the site forms page';
-  $context->tag = 'sites';
-  $context->conditions = array(
-    'path' => array(
-      'values' => array(
-        'node/*/forms' => 'node/*/forms',
-      ),
-    ),
-    'user' => array(
-      'values' => array(
-        'administrator' => 'administrator',
-        'staff' => 'staff',
-      ),
-    ),
-  );
-  $context->reactions = array(
-    'block' => array(
-      'blocks' => array(
-        's4_core-s4_subscribe_file_expiration' => array(
-          'module' => 's4_core',
-          'delta' => 's4_subscribe_file_expiration',
-          'region' => 'content_right',
-          'weight' => '-10',
-        ),
-        's4_pages-add_site_file' => array(
-          'module' => 's4_pages',
-          'delta' => 'add_site_file',
-          'region' => 'content_right',
-          'weight' => '-9',
-        ),
-        's4_sites-s4_sites_site_send_form' => array(
-          'module' => 's4_sites',
-          'delta' => 's4_sites_site_send_form',
-          'region' => 'content_right',
-          'weight' => '-7',
-        ),
-      ),
-    ),
-  );
-  $context->condition_mode = 1;
-
-  // Translatables
-  // Included for use with string extractors like potx.
-  t('User is on the site forms page');
-  t('sites');
-  $export['site-forms'] = $context;
 
   $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
@@ -428,45 +371,6 @@ function s4_sites_context_default_contexts() {
   t('User is viewing the site moderation tab');
   t('sites');
   $export['site-moderation'] = $context;
-
-  $context = new stdClass();
-  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
-  $context->api_version = 3;
-  $context->name = 'site-notes';
-  $context->description = 'User is on the site notes page';
-  $context->tag = 'sites';
-  $context->conditions = array(
-    'path' => array(
-      'values' => array(
-        'node/*/notes' => 'node/*/notes',
-      ),
-    ),
-    'user' => array(
-      'values' => array(
-        'administrator' => 'administrator',
-        'staff' => 'staff',
-      ),
-    ),
-  );
-  $context->reactions = array(
-    'block' => array(
-      'blocks' => array(
-        's4_pages-add_contact_record' => array(
-          'module' => 's4_pages',
-          'delta' => 'add_contact_record',
-          'region' => 'content_right',
-          'weight' => '-10',
-        ),
-      ),
-    ),
-  );
-  $context->condition_mode = 1;
-
-  // Translatables
-  // Included for use with string extractors like potx.
-  t('User is on the site notes page');
-  t('sites');
-  $export['site-notes'] = $context;
 
   $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
