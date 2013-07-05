@@ -2,40 +2,27 @@
 
 function s4_opportunity_create_form($form_state) {
 	$form = array();
-
-	$options = array();
+	$site = node_load(check_plain(arg(1)));
+	$links = array();
 	
 	foreach (s4_opportunity_get_types() as $type) {
 		if(user_access('administer opportunities') || user_access('edit any ' . $type->type .' s4_opportunity')) {
-			$options[$type->type] = check_plain($type->label);
+			$links[$type->type] = l(check_plain($type->label), 'opportunities/add/'. $type->type, array('query' => array('field_opportunity_sites' => $site->nid)));
 		}
 	}
+	if(!count($links)) {
+		return;
+	}
+	$output = '<div class="btn-group">';
+  $output .= '<a class="btn btn-success dropdown-toggle" data-toggle="dropdown" href="#">
+    <i class="icon-plus icon-white"></i> '. t('Add') .'
+    <span class="caret"></span>
+  </a>';
 
-	$site = node_load(arg(1));
+  $output .= theme('item_list', array('items' => $links, 'attributes' => array('class' => array('dropdown-menu'))));
+      $output .= '</div>';
 
-	$form['site'] = array(
-		'#type' => 'value',
-		'#value' => $site->nid
-		);
-
-	$form['types'] = array(
-		'#type' => 'select',
-		'#title' => t('Select type of opportunity'),
-		'#options' => $options,
-		);
-
-	$form['submit'] = array(
-		'#type' => 'submit',
-		'#value' => t('Create'),
-		'#html' => TRUE,
-		'#attributes' => array('class' => array('btn', 'btn-success'))
-		);
-
-	return $form;
-}
-
-function s4_opportunity_create_form_submit($form, $form_state) {
-	drupal_goto('opportunities/add/' . $form_state['values']['types'], array('query' => array('field_opportunity_sites' => $form_state['values']['site'])));
+	return $output;
 }
 
 function s4_opportunity_block_start() {

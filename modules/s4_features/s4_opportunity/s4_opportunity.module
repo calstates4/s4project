@@ -751,8 +751,7 @@ function s4_opportunity_block_view($delta) {
 
   switch($delta) {
     case 'new_opportunity':
-      return array('subject' => t('Create new opportunity'),
-        'content' => drupal_get_form('s4_opportunity_create_form'));
+      return array('content' => s4_opportunity_create_form());
     case 'opportunity_start':
       $content = s4_opportunity_block_start();
       if(!$content) {

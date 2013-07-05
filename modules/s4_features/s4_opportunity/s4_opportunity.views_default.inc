@@ -1182,6 +1182,7 @@ Site',
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Search';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '30';
   $handler->display->display_options['style_plugin'] = 'table';
@@ -1221,6 +1222,30 @@ Site',
   $handler->display->display_options['arguments']['field_opportunity_sites_target_id']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['field_opportunity_sites_target_id']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['field_opportunity_sites_target_id']['summary_options']['items_per_page'] = '25';
+  /* Filter criterion: Field: Program(s) (field_site_restrict) */
+  $handler->display->display_options['filters']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['group'] = 1;
+  $handler->display->display_options['filters']['field_site_restrict_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['operator_id'] = 'field_site_restrict_tid_op';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['label'] = 'Program(s)';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['operator'] = 'field_site_restrict_tid_op';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['identifier'] = 'field_site_restrict_tid';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    4 => 0,
+    6 => 0,
+    3 => 0,
+    5 => 0,
+    7 => 0,
+    8 => 0,
+    9 => 0,
+  );
+  $handler->display->display_options['filters']['field_site_restrict_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['vocabulary'] = 'site_restrictions';
 
   /* Display: Opportunity site tab */
   $handler = $view->new_display('page', 'Opportunity site tab', 'page');
@@ -1234,7 +1259,7 @@ Site',
     t('Master'),
     t('Opportunities'),
     t('more'),
-    t('Apply'),
+    t('Search'),
     t('Reset'),
     t('Sort by'),
     t('Asc'),

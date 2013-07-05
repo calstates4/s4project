@@ -125,7 +125,7 @@ function s4_opportunity_context_default_contexts() {
         's4_opportunity-new_opportunity' => array(
           'module' => 's4_opportunity',
           'delta' => 'new_opportunity',
-          'region' => 'content_right',
+          'region' => 'content_subscriptions',
           'weight' => '-10',
         ),
       ),
