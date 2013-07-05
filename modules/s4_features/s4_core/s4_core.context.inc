@@ -135,6 +135,12 @@ function s4_core_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
+        's4_core-s4_add_forms' => array(
+          'module' => 's4_core',
+          'delta' => 's4_add_forms',
+          'region' => 'content_subscriptions',
+          'weight' => '-10',
+        ),
         'views-site_forms-block_1' => array(
           'module' => 'views',
           'delta' => 'site_forms-block_1',
@@ -144,6 +150,9 @@ function s4_core_context_default_contexts() {
       ),
     ),
     'menu' => 'form',
+    'theme_html' => array(
+      'class' => 'equal-columns',
+    ),
   );
   $context->condition_mode = 1;
 

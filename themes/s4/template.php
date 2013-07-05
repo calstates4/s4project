@@ -36,6 +36,15 @@ function s4_process_html(&$variables) {
   }
 }
 
+/**
+ * Implements hook_preprocess_page().
+ */
+function s4_preprocess_page(&$variables) {
+ if($variables['page']['#views_contextual_links_info']['views_ui']['view_name'] == 'site_forms') {
+   $variables['equal_columns'] = true;
+ }
+}
+
 function s4_links__system_main_menu($variables) {
   global $conf;
   if($conf['s4_pages_program_homepage']) {

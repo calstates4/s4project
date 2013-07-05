@@ -85,7 +85,7 @@ function s4_courses_context_default_contexts() {
         's4_courses-s4_courses_add_course' => array(
           'module' => 's4_courses',
           'delta' => 's4_courses_add_course',
-          'region' => 'content_top_left',
+          'region' => 'content_subscriptions',
           'weight' => '-10',
         ),
         'views-terms-block' => array(

@@ -105,12 +105,12 @@
 		<?php endif; ?>
 		<div id="content_middle" class="row">
 			<?php if($page['content']): ?>
-				<div id="content" <?php if($page['content_right']): ?>class="span8"<?php else: ?>class="span12"<?php endif; ?>>
+				<div id="content" <?php if($page['content_right']): ?><?php if($equal_columns): ?>class="span6"<?php else: ?>class="span8"<?php endif; ?><?php else: ?>class="span12"<?php endif; ?>>
 					<?php print render($page['content']); ?>
 				</div>
 			<?php endif; ?>
 			<?php if($page['content_right']): ?>
-				<div class="span4 column">
+				<div <?php if($equal_columns): ?>class="span6<?php else: ?>class="span4<?php endif; ?> column">
 					<?php print render($page['content_right']); ?>
 				</div>
 			<?php endif; ?>

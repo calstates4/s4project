@@ -1024,12 +1024,10 @@ function s4_core_views_default_views() {
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '20';
   $handler->display->display_options['style_plugin'] = 'table';
-  $handler->display->display_options['style_options']['grouping'] = 'field_site_restrict';
   $handler->display->display_options['style_options']['columns'] = array(
     'title' => 'title',
-    'body' => 'body',
-    'field_downloadable_file' => 'field_downloadable_file',
     'field_site_restrict' => 'field_site_restrict',
+    'edit_node' => 'edit_node',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
@@ -1038,34 +1036,25 @@ function s4_core_views_default_views() {
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
-    ),
-    'body' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-    ),
-    'field_downloadable_file' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
+      'empty_column' => 0,
     ),
     'field_site_restrict' => array(
       'align' => '',
       'separator' => '',
+      'empty_column' => 0,
+    ),
+    'edit_node' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
     ),
   );
   /* Header: Global: Text area */
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['empty'] = TRUE;
-  $handler->display->display_options['header']['area']['content'] = '<h2>Online Forms</h2>
-<p><a class="btn" href="node/add/webform"><i class="icon-plus"></i> Add online form</a> <a class="btn" href="forms/public">View public form page</a></p>
-<p><strong>Online forms</strong> resemble paper or database forms and allow users to input new information while also allowing “staff” to query and display existing data in order to run reports. The collected data in the online forms can be downloaded and merged with other data for research purposes. These reports will “tie-back” to the Report tab in S4. </p>
-';
-  $handler->display->display_options['header']['area']['format'] = 'full_html';
+  $handler->display->display_options['header']['area']['content'] = '<h2>Online forms</h2>';
+  $handler->display->display_options['header']['area']['format'] = 'filtered_html';
   /* No results behavior: Global: Text area */
   $handler->display->display_options['empty']['area']['id'] = 'area';
   $handler->display->display_options['empty']['area']['table'] = 'views';
@@ -1079,10 +1068,11 @@ function s4_core_views_default_views() {
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Field: Webform: Webform submission count */
-  $handler->display->display_options['fields']['webform_submission_count_node']['id'] = 'webform_submission_count_node';
-  $handler->display->display_options['fields']['webform_submission_count_node']['table'] = 'node';
-  $handler->display->display_options['fields']['webform_submission_count_node']['field'] = 'webform_submission_count_node';
+  /* Field: Field: Program(s) */
+  $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
+  $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
+  $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
+  $handler->display->display_options['fields']['field_site_restrict']['delta_offset'] = '0';
   /* Field: Content: Edit link */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
@@ -1108,13 +1098,6 @@ function s4_core_views_default_views() {
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'table';
-  $handler->display->display_options['style_options']['grouping'] = array(
-    0 => array(
-      'field' => 'field_site_restrict',
-      'rendered' => 1,
-      'rendered_strip' => 0,
-    ),
-  );
   $handler->display->display_options['style_options']['columns'] = array(
     'title' => 'title',
     'edit_node' => 'edit_node',
@@ -1149,10 +1132,8 @@ function s4_core_views_default_views() {
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
   $handler->display->display_options['header']['area']['empty'] = TRUE;
-  $handler->display->display_options['header']['area']['content'] = '<h2>Downloadable Forms</h2>
-<p><a class="btn" href="node/add/downloadable-form"><i class="icon-plus"></i> Add downloadable form</a></p>
-<p><strong>Downloadable Forms</strong> are your traditional electronic/paper forms.  This section will allow you to download any electronic template forms you have created to support your program and for which you need/want a hard file copy.   Staff would be responsible for inputting the information gathered into a database or excel file and cannot be stored in S4.<p>';
-  $handler->display->display_options['header']['area']['format'] = 'full_html';
+  $handler->display->display_options['header']['area']['content'] = '<h2>Downloadable forms</h2>';
+  $handler->display->display_options['header']['area']['format'] = 'filtered_html';
   $handler->display->display_options['defaults']['empty'] = FALSE;
   /* No results behavior: Global: Text area */
   $handler->display->display_options['empty']['area']['id'] = 'area';
@@ -1168,19 +1149,17 @@ function s4_core_views_default_views() {
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Field: Content: Edit link */
-  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
   /* Field: Field: Program(s) */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
-  $handler->display->display_options['fields']['field_site_restrict']['label'] = '';
-  $handler->display->display_options['fields']['field_site_restrict']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_site_restrict']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_site_restrict']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_site_restrict']['delta_offset'] = '0';
+  /* Field: Content: Edit link */
+  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
+  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
+  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['filter_groups']['groups'] = array(
     1 => 'AND',
@@ -1386,18 +1365,13 @@ function s4_core_views_default_views() {
     t('‹ previous'),
     t('next ›'),
     t('last »'),
-    t('<h2>Online Forms</h2>
-<p><a class="btn" href="node/add/webform"><i class="icon-plus"></i> Add online form</a> <a class="btn" href="forms/public">View public form page</a></p>
-<p><strong>Online forms</strong> resemble paper or database forms and allow users to input new information while also allowing “staff” to query and display existing data in order to run reports. The collected data in the online forms can be downloaded and merged with other data for research purposes. These reports will “tie-back” to the Report tab in S4. </p>
-'),
+    t('<h2>Online forms</h2>'),
     t('No online forms created yet.'),
-    t('# of Submissions'),
+    t('Program(s)'),
     t('Edit link'),
     t('Page'),
     t('Downloadable forms'),
-    t('<h2>Downloadable Forms</h2>
-<p><a class="btn" href="node/add/downloadable-form"><i class="icon-plus"></i> Add downloadable form</a></p>
-<p><strong>Downloadable Forms</strong> are your traditional electronic/paper forms.  This section will allow you to download any electronic template forms you have created to support your program and for which you need/want a hard file copy.   Staff would be responsible for inputting the information gathered into a database or excel file and cannot be stored in S4.<p>'),
+    t('<h2>Downloadable forms</h2>'),
     t('No downloadable forms created yet.'),
     t('Public forms'),
     t('There are no forms available to download.'),

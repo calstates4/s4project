@@ -303,6 +303,35 @@ function s4_core_block_s4_add_new_coordinator() {
 }
 
 /**
+  * 
+  */
+function s4_core_block_s4_add_forms() {
+  $buttons = array();
+
+  if(user_access('create webform content')) {
+    $buttons[] = l('<i class="icon-plus icon-white"></i> '. t('Add online form'),
+                   'node/add/webform',
+                   array('html' => TRUE,
+                         'attributes' => array(
+                            'class' => array('btn', 'btn-success'),
+                          ),
+                        )
+                   );
+  }
+  if(user_access('create downloadable_form content')) {
+    $buttons[] = l('<i class="icon-plus icon-white"></i> '. t('Add downloadable form'),
+                   'node/add/downloadable-form',
+                   array('html' => TRUE,
+                         'attributes' => array(
+                            'class' => array('btn', 'btn-success'),
+                          ),
+                        )
+                   );
+  }
+
+  return array('content' => implode(' ', $buttons));
+}
+/**
 *  Generates a link to export a report view
 */
 function s4_core_block_s4_report_export_link() {
