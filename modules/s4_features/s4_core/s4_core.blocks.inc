@@ -257,16 +257,27 @@ function s4_core_block_s4_add_new_site() {
                 'node/add/site',
                 array('html' => TRUE,
                      'attributes' =>
-                    array('class' => 'btn btn-success')
+                    array('class' => array('btn', 'btn-success'))
                 )
                 );
-    $manage_link = l(t('Manage sites'),
+    if(arg(1) != 'manage') {
+      $manage_link = l(t('Manage sites'),
                 'site-list/manage',
                 array('html' => TRUE,
                      'attributes' =>
-                    array('class' => 'btn')
+                    array('class' => array('btn'))
                 )
                 );
+    }
+    else {
+      $manage_link = l(t('View public list'),
+                'site-list',
+                array('html' => TRUE,
+                     'attributes' =>
+                    array('class' => array('btn'))
+                )
+                );
+    }
     return array('content' => $add_link . ' ' . $manage_link);
   }
 }

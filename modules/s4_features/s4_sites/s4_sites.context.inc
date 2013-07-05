@@ -233,10 +233,9 @@ function s4_sites_context_default_contexts() {
   $context->description = 'User is on the site list for staff page';
   $context->tag = 'sites';
   $context->conditions = array(
-    'path' => array(
+    'views' => array(
       'values' => array(
-        'site-list/staff' => 'site-list/staff',
-        'site-list/staff*' => 'site-list/staff*',
+        's4_manage_sites:page' => 's4_manage_sites:page',
       ),
     ),
   );
@@ -246,7 +245,7 @@ function s4_sites_context_default_contexts() {
         's4_core-s4_add_new_site' => array(
           'module' => 's4_core',
           'delta' => 's4_add_new_site',
-          'region' => 'content_top_left',
+          'region' => 'content_subscriptions',
           'weight' => '-10',
         ),
       ),
