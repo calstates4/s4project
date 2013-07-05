@@ -299,6 +299,39 @@ function s4_sites_context_default_contexts() {
   $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
+  $context->name = 'site-log';
+  $context->description = 'User is on the log tab of a site.';
+  $context->tag = 'sites';
+  $context->conditions = array(
+    'path' => array(
+      'values' => array(
+        'node/*/log' => 'node/*/log',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        's4_sites-s4_sites_add_log' => array(
+          'module' => 's4_sites',
+          'delta' => 's4_sites_add_log',
+          'region' => 'content_subscriptions',
+          'weight' => '-10',
+        ),
+      ),
+    ),
+  );
+  $context->condition_mode = 0;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('User is on the log tab of a site.');
+  t('sites');
+  $export['site-log'] = $context;
+
+  $context = new stdClass();
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
   $context->name = 'site-manage';
   $context->description = 'User is on the manage sites page';
   $context->tag = '';
@@ -378,8 +411,8 @@ function s4_sites_context_default_contexts() {
         's4_core-s4_add_new_coordinator' => array(
           'module' => 's4_core',
           'delta' => 's4_add_new_coordinator',
-          'region' => 'content',
-          'weight' => '-18',
+          'region' => 'content_subscriptions',
+          'weight' => '-10',
         ),
       ),
     ),

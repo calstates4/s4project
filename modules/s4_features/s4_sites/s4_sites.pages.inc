@@ -295,11 +295,7 @@ function s4_sites_site_log_search() {
     '#default_value' => ($settings['type']) ? $settings['type'] : 'any',
     );
 
-  $form['action'] = array(
-    '#type' => 'actions',
-    );
-
-  $form['action']['search'] = array(
+  $form['search'] = array(
     '#type' => 'submit',
     '#value' => t('Search'),
     );

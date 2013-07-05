@@ -443,6 +443,7 @@ function s4_sites_block_info() {
   $blocks['s4_sites_return_tab'] = array('info' => 'Return to site');
   $blocks['s4_sites_merge_link'] = array('info' => 'Merge sites link');
   $blocks['s4_sites_site_full'] = array('info' => 'Site is full indicator');
+  $blocks['s4_sites_add_log'] = array('info' => 'Site log add button');
   return $blocks;
 }
 
@@ -496,6 +497,21 @@ function s4_sites_block_view($delta) {
       if(_s4_core_object_is_full($node)) {
         return array('content' => t('This site is full'));
       }
+    case 's4_sites_add_log' :
+      $site = menu_get_object();
+      $output = '<div class="btn-group">';
+      $output .= '<a class="btn btn-success dropdown-toggle" data-toggle="dropdown" href="#">
+        <i class="icon-plus icon-white"></i> '. t('Add') .'
+        <span class="caret"></span>
+      </a>';
+      $links = array(l(t("Form"), "node/add/file/". $site->nid, array("query" => array("destination" => "node/". $site->nid ."/log"))),
+        l(t('Online form'), '', array('absolute' => TRUE, 'fragment' => 'add-form', 'attributes' => array('data-toggle' => 'modal'))),
+        l(t("Log entry"), "node/add/contact-record/". $site->nid, array("query" => array("destination" => "node/". $site->nid ."/log"))),
+        l(t('Approval'), '', array('absolute' => TRUE, 'fragment' => 'moderate-form', 'attributes' => array('data-toggle' => 'modal'))),
+        );
+      $output .= theme('item_list', array('items' => $links, 'attributes' => array('class' => array('dropdown-menu'))));
+      $output .= '</div>';
+      return array('content' => $output);
   }
 
 }
