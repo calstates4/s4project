@@ -52,7 +52,7 @@ $type = s4_opportunity_type_load($row->s4_opportunity_type);
 		</div>
 	</div>
 	<div class="span3 tags">
-		<ul class="nav nav-stacked">
+		<ul class="nav nav-stacked nav-details">
 			<li class="odd">
 				<div class="popover-wrapper">
 					<a class="popover-link left"><?php print $fields['type']->content; ?></a>

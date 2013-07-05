@@ -152,8 +152,15 @@ h1.title {
 
 
 /** Subscriptions region **/
-#subscriptions ul {
-	list-style-type: none;
+#subscriptions {
+
+	div {
+		float: right;
+	}
+	
+	ul {
+		list-style-type: none;
+	}
 }
 
 /** FORMS **/
@@ -535,6 +542,30 @@ body.page-reports {
 	}
 }
 
+.nav.nav-details {
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+
+	li {
+		border-bottom: 1px solid #ddd;
+		margin: 0;
+		padding: 10px 15px;
+	}
+
+	li.even {
+		background: lighten(#ddd, 10%);
+	}
+
+	li.last {
+		border-bottom: none;
+		border-radius: 0 4px 4px 0;
+		-webkit-border-radius: 0 4px 4px 0;
+		-moz-border-radius: 0 4px 4px 0;
+	}
+}
+
 .search-results {
 
 	.row.search-result {
@@ -553,30 +584,6 @@ body.page-reports {
 
 	.popover-link {
 		cursor: pointer;
-	}
-
-	.nav {
-		border: 1px solid #ddd;
-		border-radius: 4px;
-		-webkit-border-radius: 4px;
-		-moz-border-radius: 4px;
-
-		li {
-			border-bottom: 1px solid #ddd;
-			margin: 0;
-			padding: 10px 15px;
-		}
-
-		li.even {
-			background: lighten(#ddd, 10%);
-		}
-
-		li.last {
-			border-bottom: none;
-			border-radius: 0 4px 4px 0;
-			-webkit-border-radius: 0 4px 4px 0;
-			-moz-border-radius: 0 4px 4px 0;
-		}
 	}
 
 	.meta {

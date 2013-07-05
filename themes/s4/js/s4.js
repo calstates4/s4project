@@ -12,6 +12,11 @@
 				});
 				$(window).trigger('resize');
 			}
+			
+			$('ul.in-page-tabs li > a').on('click', function(event) {
+				event.preventDefault();
+			  $(this).tab('show');
+			});
 
 			if($('.popover-link').length) {
 				$('.popover-link').each(function() {

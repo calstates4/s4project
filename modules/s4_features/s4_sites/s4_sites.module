@@ -482,7 +482,7 @@ function s4_sites_block_view($delta) {
       if(!$node->type == 'site') {
         return;
       }
-      return array('content' => l('<i class="icon-resize-small"></i> '. t('Merge with another site'), 'node/'. $node->nid .'/merge', array('html' => TRUE, 'attributes' => array('class' => array('btn')))));
+      return array('content' => l('<i class="icon-resize-small"></i> '. t('Merge'), 'node/'. $node->nid .'/merge', array('html' => TRUE, 'attributes' => array('class' => array('btn')))));
     case 's4_sites_site_full':
       $node = menu_get_object();
       if(!$node || $node->type != 'site') {
@@ -1307,11 +1307,19 @@ function s4_sites_ds_layout_info() {
 
   $layouts = array(
     's4_site' => array(
-      'label' => t('Two column 75/25'),
+      'label' => t('Two column 75/25 stacked'),
       'path' => $path . '/layouts/s4_site',
       'regions' => array(
         'left' => t('Left'),
-        'right' => t('Right')
+        'right' => t('Right'),
+        'details' => t('Details'),
+        'details_1' => t('Details section one'),
+        'details_2' => t('Details section two'),
+        'details_3' => t('Details section three'),
+        'details_4' => t('Details section four'),
+        'risks' => t('Risks'),
+        'staff' => t('Site staff'),
+        'hours' => t('Hours'),
       ),
       'css' => TRUE,
       'form' => TRUE

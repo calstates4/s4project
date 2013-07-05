@@ -33,7 +33,7 @@
 		<?php print $fields['body']->content; ?>
 	</div>
 	<div class="span3 tags">
-		<ul class="nav nav-stacked">
+		<ul class="nav nav-stacked nav-details">
 			<li class="odd">
 				<?php print $fields['field_site_restrict']->content; ?>
 			</li>
