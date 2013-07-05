@@ -30,7 +30,7 @@ $type = s4_opportunity_type_load($row->s4_opportunity_type);
 	<div class="span9">
 		<h3><?php print $fields['name']->content; ?></h3>
 		<div class="popover-wrapper">
-  		<p class="site">at <?php print $fields['title']->content; ?></p>
+  		<p class="meta">at <?php print $fields['title']->content; ?></p>
   		<div class="popover-content element-invisible">
   			<h4><?php print strip_tags($fields['title']->content); ?></h4>
   			<div>

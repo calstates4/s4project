@@ -104,25 +104,15 @@
 			</div>
 		<?php endif; ?>
 		<div id="content_middle" class="row">
-			<?php if($flip_columns): ?>
-					<div class="span4 column pull-right">
-						<?php print render($page['content_right']); ?>
-					</div>
-					
-					<div id="content" class="span8 pull-left">
-						<?php print render($page['content']); ?>
-					</div>
-			<?php else: ?>
-				<?php if($page['content']): ?>
-					<div id="content" <?php if($page['content_right']): ?>class="span8"<?php else: ?>class="span12"<?php endif; ?>>
-						<?php print render($page['content']); ?>
-					</div>
-				<?php endif; ?>
-				<?php if($page['content_right']): ?>
-					<div class="span4 column">
-						<?php print render($page['content_right']); ?>
-					</div>
-				<?php endif; ?>
+			<?php if($page['content']): ?>
+				<div id="content" <?php if($page['content_right']): ?>class="span8"<?php else: ?>class="span12"<?php endif; ?>>
+					<?php print render($page['content']); ?>
+				</div>
+			<?php endif; ?>
+			<?php if($page['content_right']): ?>
+				<div class="span4 column">
+					<?php print render($page['content_right']); ?>
+				</div>
 			<?php endif; ?>
 		</div>
 		<?php if($page['content_bottom']): ?>

@@ -174,35 +174,17 @@ function s4_sites_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
-        's4_sites-s4_sites_search_help' => array(
-          'module' => 's4_sites',
-          'delta' => 's4_sites_search_help',
-          'region' => 'content_top_left',
+        's4_core-s4_add_new_site' => array(
+          'module' => 's4_core',
+          'delta' => 's4_add_new_site',
+          'region' => 'content_subscriptions',
           'weight' => '-10',
         ),
         's4_core-site_list_course_restriction' => array(
           'module' => 's4_core',
           'delta' => 'site_list_course_restriction',
-          'region' => 'content_top_left',
-          'weight' => '-9',
-        ),
-        's4_core-s4_add_new_site' => array(
-          'module' => 's4_core',
-          'delta' => 's4_add_new_site',
-          'region' => 'content_right',
+          'region' => 'content',
           'weight' => '-10',
-        ),
-        'views--exp-sites-page' => array(
-          'module' => 'views',
-          'delta' => '-exp-sites-page',
-          'region' => 'content_right',
-          'weight' => '-9',
-        ),
-        's4_map-s4_map_site_list_map' => array(
-          'module' => 's4_map',
-          'delta' => 's4_map_site_list_map',
-          'region' => 'content_right',
-          'weight' => '-8',
         ),
       ),
     ),

@@ -834,6 +834,10 @@ function s4_sites_field_formatter_info() {
         'label' => t('Site population'),
         'field types' => array('matrix_text', 'matrix_custom'),
       ),
+      's4_sites_limited_taxonomy_term' => array(
+        'label' => t('Limited taxonomy term'),
+        'field types' => array('taxonomy_term_reference'),
+      ),
   );
 }
 
@@ -896,6 +900,30 @@ function s4_sites_field_formatter_view($entity_type, $entity, $field, $instance,
       );
     }
 
+  }
+  if($display['type'] == 's4_sites_limited_taxonomy_term') {
+    foreach($items as &$item) {
+      $item = taxonomy_term_load($item['tid']);
+      $item = $item->name;
+    }
+    $items_full = $items;
+    $items = array_chunk($items, 5);
+    $output = implode(', ', $items[0]);
+    if(count($items_full) > 5) {
+      $output .= '<div class="popover-wrapper">';
+      $output .= l(t('...and @more more', array('@more' => count($items_full) - 5)), '', array('absolute' => TRUE, 'fragment' => 'term-more-'. $field['field_name'], 'attributes' => array('class' => array('popover-link', 'left'))));
+      $output .= '<div class="popover-content element-invisible">
+            <div>
+              '.
+              implode(', ', $items_full)
+              .'
+            </div>
+          </div>';
+      $output .= '</div>';
+    }
+    $element[$delta] = array(
+      '#markup' => $output,
+    );
   }
   return $element;
 }

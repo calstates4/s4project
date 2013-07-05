@@ -335,78 +335,6 @@ body .vertical-tabs .form-type-textfield input {
   -moz-border-radius: 4px 4px 0 0;
   border-radius: 4px 4px 0 0;
 }
-.site-listing > ul > li {
-  border-top: 2px solid #f3f3f3;
-}
-.site-listing ul {
-  list-style-type: none;
-  margin: 0;
-}
-.site-listing h4 {
-  font-size: 1.2em;
-  font-weight: 700;
-}
-.site-listing h4 a {
-  text-decoration: none;
-}
-.site-listing h4 li {
-  clear: both;
-  padding: 8px 0;
-}
-.site-listing h4 li .site-info {
-  width: 60%;
-}
-.site-listing h4 li .site-restrictions {
-  color: #666666;
-}
-.site-listing h4 li .site-restrictions span {
-  font-weight: 700;
-}
-.site-listing h4 li .item-list li {
-  border: 0;
-  margin: 3px 0;
-}
-.site-listing .map-link-wrapper {
-  position: relative;
-  padding-right: 5px;
-  margin: 10px 15px 0 0;
-}
-.site-listing .map-link-wrapper:hover .arrow {
-  border-left-color: #e15440;
-}
-.site-listing .arrow {
-  width: 0;
-  height: 0;
-  display: block;
-  border-top: 10px solid transparent;
-  border-bottom: 10px solid transparent;
-  border-left: 10px solid transparent;
-  position: absolute;
-  right: -1px;
-  top: 14px;
-}
-.site-listing .map-link {
-  display: block;
-  width: 40px;
-  height: 30px;
-  font-size: 1.3em;
-  text-decoration: none;
-  font-weight: 700;
-  color: #838383;
-  border-radius: 40px;
-  -moz-border-radius: 20px;
-  -webkit-border-radius: 25px;
-  border: 4px solid #838383;
-  padding: 10px 0 0 0;
-  text-align: center;
-}
-.site-listing .map-link:hover {
-  border-color: #e15440;
-  color: #e15440;
-}
-.site-listing address {
-  margin: 0;
-}
 /** MENU **/
 .nav-tabs.nav-stacked li,
 .nav-tabs.nav-stacked li.leaf {
@@ -457,6 +385,10 @@ body.page-reports .vertical-tab-button.last {
 .search-results .row.search-result {
   border-bottom: 1px solid #d4d4d5;
   margin-bottom: 15px;
+  margin-left: 0;
+}
+.search-results .row.search-result .span9 {
+  margin-left: 0;
 }
 .search-results .row.search-result h3 {
   margin: 0;
@@ -484,12 +416,16 @@ body.page-reports .vertical-tab-button.last {
   -webkit-border-radius: 0 4px 4px 0;
   -moz-border-radius: 0 4px 4px 0;
 }
-.search-results .site {
+.search-results .meta {
   color: #aaa;
 }
-.search-results .site a {
+.search-results .meta a {
   color: #33bbff;
 }
-.search-results .site .popover {
+.search-results .meta .popover {
   color: #000;
+}
+.popover-map {
+  width: 250px;
+  height: 200px;
 }

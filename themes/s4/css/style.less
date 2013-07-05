@@ -473,99 +473,6 @@ body .vertical-tabs .form-type-textfield input {
 	
 }
 
-.site-listing {
-	
-	> ul > li {
-		border-top:2px solid #f3f3f3;
-	}
-	
-	ul {
-		list-style-type:none;
-		margin:0;
-	}
-	
-	h4 {
-		font-size:1.2em;
-		font-weight:700;
-		a {
-		text-decoration:none;
-		}
-	}
-	
-	h4 
-	
-	li {
-		clear:both;
-		padding:8px 0;
-		
-		.site-info {
-			width:60%;
-		}
-		
-		.site-restrictions {
-			color:lighten(@text-color,40%);
-			
-			span {
-				font-weight:700;
-			}
-	
-		}
-		
-		.item-list li {
-			border:0;
-			margin:3px 0;
-		}
-
-	}
-
-	.map-link-wrapper {
-		position:relative;
-		padding-right: 5px;
-		margin: 10px 15px 0 0;
-	}
-	
-	.map-link-wrapper:hover .arrow {
-		border-left-color: #e15440;
-	}			
-	
-	.arrow {
-		width: 0; 
-		height: 0; 
-		display: block;
-		border-top: 10px solid transparent;
-		border-bottom: 10px solid transparent;
-		border-left: 10px solid transparent;
-		position: absolute;
-		right: -1px;
-		top: 14px;
-	}
-	
-	.map-link {
-		display:block;
-		width:40px;
-		height:30px;
-		font-size: 1.3em;
-		text-decoration: none;
-		font-weight: 700;
-		color: #838383;
-		border-radius: 40px;
-		-moz-border-radius: 20px;
-		-webkit-border-radius: 25px;
-		border: 4px solid #838383;
-		padding: 10px 0 0 0;
-		text-align: center;
-	}
-	
-	.map-link:hover {
-		border-color: #e15440;
-		color:#e15440;
-	}
-	
-	address {
-		margin:0;
-	}
-}
-
 /** MENU **/
 .nav-tabs.nav-stacked {
 	li, li.leaf {
@@ -633,6 +540,12 @@ body.page-reports {
 	.row.search-result {
 		border-bottom: 1px solid #d4d4d5;
 		margin-bottom: 15px;
+		margin-left: 0;
+
+		.span9 {
+			margin-left: 0;
+		}
+		
 		h3 {
 			margin: 0;
 		}
@@ -666,7 +579,7 @@ body.page-reports {
 		}
 	}
 
-	.site {
+	.meta {
 		color: #aaa;
 
 		a {
@@ -677,4 +590,9 @@ body.page-reports {
 			color: #000;
 		}
 	}
+}
+
+.popover-map {
+	width: 250px;
+	height: 200px;
 }

@@ -2123,53 +2123,18 @@ Location',
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['distinct'] = TRUE;
   $handler->display->display_options['query']['options']['pure_distinct'] = TRUE;
-  $handler->display->display_options['exposed_form']['type'] = 'views_exposed_groups';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Search';
-  $handler->display->display_options['exposed_form']['options']['views_exposed_groups'] = array(
-    'format_groups' => 'fieldsets_collapsed',
-    'groups' => 'Advanced search',
-    'group-title' => array(
-      'group' => 'no-group',
-      'filter_name' => 'title',
-      'weight' => '-4',
-    ),
-    'group-city' => array(
-      'group' => 'no-group',
-      'filter_name' => 'city',
-      'weight' => '-3',
-    ),
-    'group-issues' => array(
-      'group' => '0',
-      'filter_name' => 'field_csu_facility_tid',
-      'weight' => '-7',
-    ),
-    'group-organization' => array(
-      'group' => '0',
-      'filter_name' => 'field_csu_org_type_tid',
-      'weight' => '-6',
-    ),
-    'group-program' => array(
-      'group' => '0',
-      'filter_name' => 'field_site_restrict_tid',
-      'weight' => '-5',
-    ),
-  );
+  $handler->display->display_options['exposed_form']['options']['expose_sort_order'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '20';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['pager']['options']['id'] = '0';
-  $handler->display->display_options['style_plugin'] = 'list';
-  $handler->display->display_options['style_options']['wrapper_class'] = 'site-listing';
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['style_options']['default_row_class'] = FALSE;
+  $handler->display->display_options['style_options']['row_class_special'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['exposed_block'] = TRUE;
-  /* Field: Signup: Site location links */
-  $handler->display->display_options['fields']['site_location_links']['id'] = 'site_location_links';
-  $handler->display->display_options['fields']['site_location_links']['table'] = 's4_signup';
-  $handler->display->display_options['fields']['site_location_links']['field'] = 'site_location_links';
-  $handler->display->display_options['fields']['site_location_links']['label'] = '';
-  $handler->display->display_options['fields']['site_location_links']['element_class'] = 'pull-right';
-  $handler->display->display_options['fields']['site_location_links']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['site_location_links']['hide_alter_empty'] = FALSE;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -2190,6 +2155,45 @@ Location',
   $handler->display->display_options['fields']['field_site_restrict']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['field_site_restrict']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_site_restrict']['delta_offset'] = '0';
+  /* Field: Content: Issues addressed */
+  $handler->display->display_options['fields']['field_csu_facility']['id'] = 'field_csu_facility';
+  $handler->display->display_options['fields']['field_csu_facility']['table'] = 'field_data_field_csu_facility';
+  $handler->display->display_options['fields']['field_csu_facility']['field'] = 'field_csu_facility';
+  $handler->display->display_options['fields']['field_csu_facility']['type'] = 's4_sites_limited_taxonomy_term';
+  $handler->display->display_options['fields']['field_csu_facility']['delta_offset'] = '0';
+  /* Field: Content: Organization type */
+  $handler->display->display_options['fields']['field_csu_org_type']['id'] = 'field_csu_org_type';
+  $handler->display->display_options['fields']['field_csu_org_type']['table'] = 'field_data_field_csu_org_type';
+  $handler->display->display_options['fields']['field_csu_org_type']['field'] = 'field_csu_org_type';
+  $handler->display->display_options['fields']['field_csu_org_type']['type'] = 's4_sites_limited_taxonomy_term';
+  $handler->display->display_options['fields']['field_csu_org_type']['delta_offset'] = '0';
+  /* Field: Location: Latitude */
+  $handler->display->display_options['fields']['latitude']['id'] = 'latitude';
+  $handler->display->display_options['fields']['latitude']['table'] = 'location';
+  $handler->display->display_options['fields']['latitude']['field'] = 'latitude';
+  $handler->display->display_options['fields']['latitude']['style'] = 'dd';
+  /* Field: Location: Longitude */
+  $handler->display->display_options['fields']['longitude']['id'] = 'longitude';
+  $handler->display->display_options['fields']['longitude']['table'] = 'location';
+  $handler->display->display_options['fields']['longitude']['field'] = 'longitude';
+  $handler->display->display_options['fields']['longitude']['style'] = 'dd';
+  /* Field: Content: Body */
+  $handler->display->display_options['fields']['body']['id'] = 'body';
+  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
+  $handler->display->display_options['fields']['body']['field'] = 'body';
+  $handler->display->display_options['fields']['body']['type'] = 'text_trimmed';
+  $handler->display->display_options['fields']['body']['settings'] = array(
+    'trim_length' => '200',
+  );
+  /* Field: Content: Location(s) */
+  $handler->display->display_options['fields']['field_location']['id'] = 'field_location';
+  $handler->display->display_options['fields']['field_location']['table'] = 'field_data_field_location';
+  $handler->display->display_options['fields']['field_location']['field'] = 'field_location';
+  $handler->display->display_options['fields']['field_location']['element_type'] = '0';
+  $handler->display->display_options['fields']['field_location']['element_label_type'] = '0';
+  $handler->display->display_options['fields']['field_location']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['field_location']['type'] = 's4_sites_address';
+  $handler->display->display_options['fields']['field_location']['delta_offset'] = '0';
   /* Sort criterion: Content: Title */
   $handler->display->display_options['sorts']['title']['id'] = 'title';
   $handler->display->display_options['sorts']['title']['table'] = 'node';
@@ -2218,6 +2222,32 @@ Location',
     'site' => 'site',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Field: Program(s) (field_site_restrict) */
+  $handler->display->display_options['filters']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['group'] = 1;
+  $handler->display->display_options['filters']['field_site_restrict_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['operator_id'] = 'field_site_restrict_tid_op';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['label'] = 'Program';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['operator'] = 'field_site_restrict_tid_op';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['identifier'] = 'program';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['remember'] = TRUE;
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    4 => 0,
+    6 => 0,
+    3 => 0,
+    5 => 0,
+    7 => 0,
+    8 => 0,
+    9 => 0,
+  );
+  $handler->display->display_options['filters']['field_site_restrict_tid']['reduce_duplicates'] = TRUE;
+  $handler->display->display_options['filters']['field_site_restrict_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['vocabulary'] = 'site_restrictions';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['error_message'] = FALSE;
   /* Filter criterion: Content: Title */
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
@@ -2270,26 +2300,12 @@ Location',
   $handler->display->display_options['filters']['field_csu_org_type_tid']['reduce_duplicates'] = TRUE;
   $handler->display->display_options['filters']['field_csu_org_type_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_csu_org_type_tid']['vocabulary'] = 'organization_type';
-  /* Filter criterion: Field: Program(s) (field_site_restrict) */
-  $handler->display->display_options['filters']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
-  $handler->display->display_options['filters']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
-  $handler->display->display_options['filters']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';
-  $handler->display->display_options['filters']['field_site_restrict_tid']['group'] = 1;
-  $handler->display->display_options['filters']['field_site_restrict_tid']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['operator_id'] = 'field_site_restrict_tid_op';
-  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['label'] = 'Available programs';
-  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['operator'] = 'field_site_restrict_tid_op';
-  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['identifier'] = 'program';
-  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['remember'] = TRUE;
-  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['multiple'] = TRUE;
-  $handler->display->display_options['filters']['field_site_restrict_tid']['reduce_duplicates'] = TRUE;
-  $handler->display->display_options['filters']['field_site_restrict_tid']['type'] = 'select';
-  $handler->display->display_options['filters']['field_site_restrict_tid']['vocabulary'] = 'site_restrictions';
-  $handler->display->display_options['filters']['field_site_restrict_tid']['error_message'] = FALSE;
 
   /* Display: Site listing page */
   $handler = $view->new_display('page', 'Site listing page', 'page');
-  $handler->display->display_options['exposed_block'] = TRUE;
+  $handler->display->display_options['defaults']['css_class'] = FALSE;
+  $handler->display->display_options['css_class'] = 'search-results';
+  $handler->display->display_options['defaults']['header'] = FALSE;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Content: Nid */
@@ -2390,12 +2406,16 @@ Location',
     t('next ›'),
     t('last »'),
     t('Programs'),
-    t('All'),
-    t('Site name'),
-    t('City'),
     t('Issues addressed'),
     t('Organization type'),
-    t('Available programs'),
+    t('Latitude'),
+    t('Longitude'),
+    t('Body'),
+    t('Location(s)'),
+    t('All'),
+    t('Program'),
+    t('Site name'),
+    t('City'),
     t('Site listing page'),
     t('Block'),
     t('Newest Sites'),

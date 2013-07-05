@@ -15,13 +15,32 @@
 
 			if($('.popover-link').length) {
 				$('.popover-link').each(function() {
-					$(this).popover({
+					var options = {
 						html   : true,
 						trigger : ($(this).hasClass('hover')) ? 'hover' : 'click',
 						placement : ($(this).hasClass('left')) ? 'left' : 'right',
 						content: $(this).parents('.popover-wrapper').find('.popover-content div').html(),
 						title: $(this).parents('.popover-wrapper').find('.popover-content h4').html(),
-					});
+					};
+					if($(this).hasClass('map-link')) {
+						var $mapElement = $('<div class="popover-map"></div>');
+						options.content = $mapElement;
+						$(this).popover(options);
+						$(this).on('click', function(event) {
+							var center = new google.maps.LatLng($(this).data('lat'), $(this).data('lon'));
+							var map = new google.maps.Map($mapElement.get(0),
+		        				   {center      : center,
+												zoom 		    : Drupal.settings.s4_map.zoom,
+								        MapTypeId   : google.maps.MapTypeId.TERRAIN
+								    });
+							var marker = new google.maps.Marker({ position : center, map : map });
+							map.setCenter(center);
+							map.setZoom(15);
+						});
+					}
+					else {
+						$(this).popover(options);
+					}
 					$(this).on('click', function(event) {
 						event.preventDefault();
 						var $that = $(this);
