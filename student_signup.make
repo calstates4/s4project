@@ -221,12 +221,6 @@ projects[guiders_js_fixed][download][type] = "git"
 projects[guiders_js_fixed][download][url] = "http://git.drupal.org/sandbox/kevee/1355900.git"
 projects[guiders_js_fixed][download][branch] = "master"
 
-; Download tinyMCE as a library
-libraries[tinymce][download][type] = "get"
-libraries[tinymce][download][url] = "https://github.com/downloads/tinymce/tinymce/tinymce_3.4.1.zip"
-libraries[tinymce][directory_name] = "tinymce"
-libraries[tinymce][destination] = "libraries"
-
 ; Download the marker manager for gmap
 libraries[markerclusterer][download][type] = "get"
 libraries[markerclusterer][download][url] = "http://gmaps-utility-library-dev.googlecode.com/svn/tags/markerclusterer/1.0/src/markerclusterer_packed.js"
