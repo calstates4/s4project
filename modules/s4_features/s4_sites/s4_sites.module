@@ -681,16 +681,6 @@ function s4_sites_form_site_node_form_alter(&$form, $form_state) {
   drupal_add_js(drupal_get_path('module', 's4_sites') .'/js/s4_site_form.js');
   drupal_add_css(drupal_get_path('module', 's4_sites') .'/css/s4_sites.css');
   
-  $form['field_site_restrict'][$form['field_site_restrict']['#language']]['#ajax'] = array(
-      'callback' => 's4_sites_form_site_node_form_add_default_forms',
-      'wrapper' => 'form-defaults',
-      'progress' => array(
-        'type' => 'throbber',
-        'message' => t('Setting default forms'),
-      ),
-    );
-  $form['field_site_signup_group'][$form['field_site_signup_group']['language']]['#prefix'] = '<div id="form-defaults">';
-  $form['field_site_signup_group'][$form['field_site_signup_group']['language']]['#suffix'] = '</div>';
   if (empty($form['#validate'])) {
     $form['#validate'] = array();
   }
@@ -771,10 +761,6 @@ function s4_sites_form_site_node_form_alter(&$form, $form_state) {
   	$form['actions_bottom'] = $form['actions'];
 		$form['actions_bottom']['#weight'] = 40;
   }
-}
-
-function s4_sites_form_site_node_form_add_default_forms($form, $form_state) {
-  return;
 }
 
 function s4_sites_form_site_node_form_alter_validate($form, &$form_state) {
