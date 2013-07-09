@@ -819,6 +819,7 @@ function _s4_opportunity_add_default_fields($type) {
         'type' => 'text_textarea',
         'weight' => '1',
 
+      ),
     );
     $instance = field_create_instance($instance);
   }
