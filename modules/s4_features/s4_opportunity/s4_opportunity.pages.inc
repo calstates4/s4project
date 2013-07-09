@@ -368,8 +368,23 @@ function s4_opportunity_approve_form($form, $form_state, $relation) {
 		'#value' => $type->type
 		);
 
-	$form['relation_view'] = array(
-		'#markup' => drupal_render(relation_view($relation)),
+	$form['compare'] = array(
+		'#prefix' => '<div class="row">',
+		'#suffix' => '</div>',
+		);
+
+	$form['compare']['opportunity_view'] = array(
+		'#markup' => '<h2>'. $type->label .'</h2>' .
+			drupal_render(s4_opportunity_page_view($opportunity)),
+		'#prefix' => '<div class="span6">',
+		'#suffix' => '</div>',
+		);
+
+	$form['compare']['relation_view'] = array(
+		'#markup' => '<h2>'. t('Placement') .'</h2>' .
+			drupal_render(relation_view($relation)),
+		'#prefix' => '<div class="span6">',
+		'#suffix' => '</div>',
 		);
 	if($user->uid) {
 		$endpoints = array(array('entity_type' => 'user', 'entity_id' => $user->uid),
@@ -384,6 +399,11 @@ function s4_opportunity_approve_form($form, $form_state, $relation) {
 											 array('entity_type' => 'relation', 'entity_id' => $relation->rid));
 
 	}
+
+	$form['approval_header'] = array(
+		'#markup' => '<h1>' . t('Your approval') .'</h1>',
+		);
+
 	$approval = relation_create('approval', $endpoints);	
 
 	field_attach_form('relation', $approval, $form, $form_state, entity_language('relation', $relation));
