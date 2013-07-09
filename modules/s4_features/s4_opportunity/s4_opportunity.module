@@ -682,30 +682,6 @@ function s4_opportunity_entity_presave($relation, $type) {
   $student = user_load($endpoints[0]['entity_id']);
   $type = s4_opportunity_type_load($opportunity->type);
 
-  if(!$type->data['require_approval']) {
-    return;
-  }
-  $group = field_get_items('s4_opportunity', $opportunity, 'field_opportunity_group');
-  if(!$group || !count($group)) {
-    return;
-  }
-  $tids = array();
-  foreach($group as $g) {
-    $tids[] = $g['tid'];
-  }
-  $users = db_select('field_data_field_opportunity_group', 'o')
-             ->condition('entity_type', 'user')
-             ->condition('field_opportunity_group_tid', $tids, 'IN')
-             ->condition('deleted', 0)
-             ->fields('o', array('entity_id'))
-             ->execute()
-             ->fetchAllKeyed(0,0);
-  foreach($users as &$user) {
-    $user = user_load($user);
-    if($user->status) {
-      drupal_mail('s4_opportunity', 'approval_email', $user->mail, null, array('type' => $type, 'opportunity' => $opportunity, 'placement' => $relation, 'student' => $student));
-    }
-  }
 }
 
 function s4_opportunity_mail($key, &$message, $params) {
@@ -717,10 +693,20 @@ function s4_opportunity_mail($key, &$message, $params) {
       $message['subject'] = $params['type']->data['approval_email_subject'];
       $body = token_replace($params['type']->data['approval_email_body']['value'], array('s4_site_staff' => $params['site_staff'],
                                                    's4_opportunity' => $params['opportunity'],
+                                                   'placement' => $params['placement'],
                                                    'user' => $params['student']
                                                    ));
       $message['body'][] = check_markup($body, $params['type']->data['approval_email_body']['format']);
       break;
+    case 'site_staff_approval_email':
+      $message['subject'] = $params['type']->data['site_staff_approval_email_subject'];
+      $body = token_replace($params['type']->data['site_staff_approval_email_body']['value'], array('s4_site_staff' => $params['site_staff'],
+                                                   's4_opportunity' => $params['opportunity'],
+                                                   'placement' => $params['placement'],
+                                                   'user' => $params['student']
+                                                   ));
+      $message['body'][] = check_markup($body, $params['type']->data['site_staff_approval_email_body']['format']);
+      break;     
   }
 }
 
@@ -1063,6 +1049,49 @@ function s4_opportunity_token_info() {
   );
 }
 
+function s4_opportunity_tokens($type, $tokens, array $data = array(), array $options = array()) {
+  $replacements = array();
+  if ($type == 's4_opportunity') {
+    $opportunity_type = s4_opportunity_type_load($data['opportunity']->type);
+    $replacements['[s4_opportunity:approve_link]'] = url('opportunities/approve/'. $data['placement']->rid, array('absolute' => TRUE));
+    $replacements['[s4_opportunity:placement_form_link]'] = url('opportunities/form/'. $data['placement']->rid, array('absolute' => TRUE));
+    $site_staff = field_get_items('relation', $data['placement'], 'field_coordinator');
+    if($site_staff & $site_staff[0]['nid']) {
+      $site_staff = node_load($site_staff[0]['nid']);
+      $email = field_get_items('node', $site_staff, 'field_email');
+      if($email[0]['email']) {
+        $key = md5($data['placement']->rid . $email[0]['email'] . drupal_get_hash_salt());
+        $replacements['[s4_opportunity:site_staff_approve_link]'] = url('opportunities/approve/'. $data['placement']->rid, array('query' => array('key' => $key, 'email' => $email[0]['email']), 'absolute' => TRUE));   
+      }
+    }
+    if(is_object($data['s4_opportunity']) && property_exists($data['s4_opportunity'], 'type')) {
+      $entity = clone $data['s4_opportunity'];
+      list($id, $vid, $bundle) = entity_extract_ids('s4_opportunity', $entity);
+      $fields = field_info_instances('s4_opportunity', $bundle);
+
+      foreach ($fields as $field_name => $field_instance) {
+        $field_token_name = strtr($field_name, '_', '-');
+        // Replace the [entity:field-name] token.
+        $original = $tokens[$field_token_name];
+        if (empty($entity->{$field_name})) {
+          $replacements[$original] = '';
+          continue;
+        }
+        if($original) {
+          $field_output = field_view_field('s4_opportunity', $entity, $field_name);
+          $output = array();
+          foreach (element_children($field_output) as $key) {
+            $output[$key] = $field_output[$key];
+          }
+          $replacements[$original] = render($output);
+        }
+      }
+      unset($entity);
+    }
+  }
+  return $replacements;
+}
+
 function s4_opportunity_form_site_node_form_alter(&$form, $form_state) {
   if(!isset($_SESSION['s4_opportunity_create']['type'])) {
     return;
@@ -1080,9 +1109,58 @@ function s4_opportunity_webform_submission_insert($node, $submission) {
     $relation = relation_load($_SESSION['s4_opportunity_placement_form']['relation']);
     $relation->field_form_signup_sid[LANGUAGE_NONE][0]['value'] = $submission->sid;
     relation_save($relation);
+    $opportunity = s4_opportunity_load($_SESSION['s4_opportunity_placement_form']['opportunity']);
+    s4_opportunity_send_placement_approval($opportunity, $relation);
     unset($_SESSION['s4_opportunity_placement_form']);
     drupal_set_message(t('Thank you for your submission.'));
     drupal_goto('<front>');
+  }
+}
+
+function s4_opportunity_send_placement_approval($opportunity, $placement) {
+  $type = s4_opportunity_get_placement_approvals($opportunity->type);
+  $approvals = s4_opportunity_get_placement_approvals($opportunity, $placement);
+  $endpoints = field_get_items('relation', $placement, 'endpoints');
+  $student = user_load($endpoints[0]['entity_id']);
+  if($type->data['faculty_approve'] && !count($approvals['faculty'])) {
+    $course = field_get_items('relation', $placement, 'field_course');
+    if($course && $course = node_load($course[0]['nid'])) {
+      $faculty = field_get_items('node', $course, 'field_course_faculty');
+      foreach($faculty as $instructor) {
+        $user = user_load($instructor[0]['uid']);
+        drupal_mail('s4_opportunity', 'approval_email', $user->mail, null, array('type' => $type, 'opportunity' => $opportunity, 'placement' => $placement, 'student' => $student));
+      }
+    }
+  }
+  if($type->data['site_staff_approve'] && !count($approvals['site_staff'])) {
+    $staff = field_get_items('relation', $placement, 'field_coordinator');
+    $email = field_get_items('node', $staff, 'field_email');
+    if($email && $email[0]['email']) {
+      drupal_mail('s4_opportunity', 'site_staff_approval_email', $user->mail, null, array('type' => $type, 'opportunity' => $opportunity, 'placement' => $placement, 'student' => $student));
+    }
+  }
+  if($type->data['require_approval'] && !count($approvals['approver'])) {
+    $group = field_get_items('s4_opportunity', $opportunity, 'field_opportunity_group');
+    if(!$group || !count($group)) {
+      return;
+    }
+    $tids = array();
+    foreach($group as $g) {
+      $tids[] = $g['tid'];
+    }
+    $users = db_select('field_data_field_opportunity_group', 'o')
+               ->condition('entity_type', 'user')
+               ->condition('field_opportunity_group_tid', $tids, 'IN')
+               ->condition('deleted', 0)
+               ->fields('o', array('entity_id'))
+               ->execute()
+               ->fetchAllKeyed(0,0);
+    foreach($users as &$user) {
+      $user = user_load($user);
+      if($user->status) {
+        drupal_mail('s4_opportunity', 'approval_email', $user->mail, null, array('type' => $type, 'opportunity' => $opportunity, 'placement' => $placement, 'student' => $student));
+      }
+    }
   }
 }
 

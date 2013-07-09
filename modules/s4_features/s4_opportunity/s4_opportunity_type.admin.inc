@@ -31,7 +31,6 @@ function s4_opportunity_type_form($form, &$form_state, $s4_opportunity_type, $op
     $s4_opportunity_type->label .= ' (cloned)';
     $s4_opportunity_type->type = '';
   }
-
   $form['label'] = array(
     '#title' => t('Label'),
     '#type' => 'textfield',
@@ -170,14 +169,14 @@ function s4_opportunity_type_form($form, &$form_state, $s4_opportunity_type, $op
     '#default_value' => (!empty($s4_opportunity_type->data['site_staff_approval_email_subject']) ? $s4_opportunity_type->data['site_staff_approval_email_subject'] : ''),
     );
 
-  $form['data']['site_staff_approval_email_subject_body'] = array(
+  $form['data']['site_staff_approval_email_body'] = array(
     '#type' => 'text_format',
     '#title' => t('Site staff approval email body'),
-    '#format' => (!empty($s4_opportunity_type->data['site_staff_approval_email_subject_body']))
-      ? $s4_opportunity_type->data['site_staff_approval_email_subject_body']['format']
+    '#format' => (!empty($s4_opportunity_type->data['site_staff_approval_email_body']))
+      ? $s4_opportunity_type->data['site_staff_approval_email_body']['format']
       : filter_default_format(),
-    '#default_value' => (!empty($s4_opportunity_type->data['site_staff_approval_email_subject_body'])) 
-      ? $s4_opportunity_type->data['site_staff_approval_email_subject_body']['value']
+    '#default_value' => (!empty($s4_opportunity_type->data['site_staff_approval_email_body'])) 
+      ? $s4_opportunity_type->data['site_staff_approval_email_body']['value']
       : '',
   );
 
