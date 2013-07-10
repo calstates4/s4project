@@ -533,11 +533,18 @@ function s4_opportunity_menu() {
     );
 
   $items['opportunities/form/%relation'] = array(
-    'title callback' => 'Complete your placement',
+    'title' => 'Complete your placement',
     'page callback' => 's4_opportunity_placement_form',
     'page arguments' => array(2),
     'access callback' => 's4_opportunity_placement_form_access',
     'access arguments' => array(2),
+    'file' => 's4_opportunity.pages.inc'
+    );
+
+  $items['opportunities/faculty'] = array(
+    'title' => 'Approve placements',
+    'page callback' => 's4_opportunity_placement_approve',
+    'access arguments' => array('access content'),
     'file' => 's4_opportunity.pages.inc'
     );
   return $items;
@@ -720,6 +727,7 @@ function s4_opportunity_block_info() {
     'opportunity_progress' => array('info' => t('Opportunity progress bar')),
     'placement_approval' => array('info' => t('Opportunity placement approval')),
     'placement_form' => array('info' => t('Opportunity placement form')),
+    'opportunity_approval' => array('info' => t('Opportunities require approval')),
     );
 }
 
@@ -759,6 +767,14 @@ function s4_opportunity_block_view($delta) {
       if($relation) {
         return array('subject' => t('Placement form'),
               'content' => _s4_opportunity_block_placement_form($relation));
+      }
+    case 'opportunity_approval':
+      global $user;
+      $results = s4_opportunity_get_require_approval($user);
+      if(count($results)) {
+        return array('subject' => t('Approve opportunities'),
+                     'content' => '<p>'. format_plural(count($results), 'You have one opportunity awaiting approval.', 'You have @count opportunities awaiting approval.', array('@count' => count($results))) .'</p><p>'.
+                     l(format_plural(count($results), 'Approve opportunity', 'Approve opportunities'), '/opportunities/faculty', array('attributes' => array('class' => array('btn', 'btn-large', 'btn-primary')))) .'</p>');
       }
   }
 }
@@ -1251,3 +1267,25 @@ function s4_opportunity_feeds_plugins() {
   return $info;
 }
 
+function s4_opportunity_get_require_approval($user) {
+  $placements = array();
+  if(module_exists('s4_courses')) {
+    $courses = s4_courses_user_is_faculty($user);
+    $results = db_query('select distinct c.entity_id FROM field_data_field_course c 
+where c.entity_type = :relation and c.bundle = :opportunity_placement and c.field_course_nid = 55 and c.entity_id 
+NOT IN (SELECT e.endpoints_entity_id FROM field_data_endpoints e 
+INNER JOIN field_data_endpoints e2 ON e2.entity_id = e.entity_id AND e2.endpoints_entity_id = :uid AND e2.endpoints_entity_type = :user
+WHERE e.endpoints_entity_type = :relation AND e.bundle = :approval AND e.entity_type = :relation)', array(
+      ':relation' => 'relation',
+      ':approval' => 'approval',
+      ':opportunity_placement' => 'opportunity_placement',
+      ':user' => 'user',
+      ':uid' => $user->uid,
+      ))->fetchAllKeyed(0,0);
+    foreach($results as $result) {
+      $placements[$result] = relation_load($result);
+    }
+  }
+
+  return $placements;
+}

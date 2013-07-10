@@ -38,6 +38,12 @@ function s4_opportunity_context_default_contexts() {
           'region' => 'content',
           'weight' => '-31',
         ),
+        's4_opportunity-opportunity_approval' => array(
+          'module' => 's4_opportunity',
+          'delta' => 'opportunity_approval',
+          'region' => 'content',
+          'weight' => '-10',
+        ),
       ),
     ),
   );

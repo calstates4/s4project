@@ -40,7 +40,7 @@ function s4_opportunity_block_start() {
 	$message = variable_get('s4_opportunity_begin_message', array('format' => FILTER_FORMAT_DEFAULT, 'value' => t('Start a new @types.', array('@types' => $type_list))));
 	$output = check_markup($message['value'], $message['format']);
 	$output .= '<p>';
-	$output .= l('Start', 'opportunities/create', array('attributes' => array('class' => array('btn', 'btn-primary'))));
+	$output .= l('Start', 'opportunities/create', array('attributes' => array('class' => array('btn', 'btn-primary', 'btn-large'))));
 	$output .= '</p>';
 	return $output;
 }

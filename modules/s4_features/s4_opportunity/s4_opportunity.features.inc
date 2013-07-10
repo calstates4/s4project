@@ -43,25 +43,27 @@ function s4_opportunity_default_s4_opportunity_type() {
     "weight" : "0",
     "data" : {
       "students_can_place" : 1,
-      "programs" : { "139" : "139", "135" : 0, "2" : 0, "1" : 0, "138" : 0 },
+      "programs" : { },
       "placement_form" : "810",
       "faculty_approve" : 1,
       "site_staff_approve" : 1,
       "require_approval" : 1,
       "description" : {
-        "value" : "\\u003Cp\\u003EThis is a thing that is the \\u003Cstrong\\u003Ething\\u003C\\/strong\\u003E.\\u003C\\/p\\u003E\\r\\n",
+        "value" : "",
         "format" : "filtered_html"
       },
       "email_enable" : 0,
       "email_subject" : "",
       "email_body" : { "value" : "", "format" : "filtered_html" },
-      "approval_email_subject" : "Approve, yo!",
+      "approval_email_subject" : "",
       "approval_email_body" : {
-        "value" : "\\u003Cp\\u003EHey, this must be approved!\\u003C\\/p\\u003E\\r\\n",
+        "value" : "",
         "format" : "filtered_html"
       },
+      "site_staff_approval_email_subject" : "",
+      "site_staff_approval_email_subject_body" : { "value" : "", "format" : "filtered_html" },
       "approval_form_text" : {
-        "value" : "\\u003Cp\\u003EHi, there, I love \\u003Cstrong\\u003Eyou\\u003C\\/strong\\u003E!\\u003C\\/p\\u003E\\r\\n",
+        "value" : "",
         "format" : "filtered_html"
       }
     },

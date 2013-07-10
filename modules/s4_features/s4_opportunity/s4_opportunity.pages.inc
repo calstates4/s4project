@@ -464,3 +464,28 @@ function s4_opportunity_placement_form($relation) {
 			);
 	drupal_goto('node/'. $type->data['placement_form']);
 }
+
+function s4_opportunity_placement_approve() {
+	global $user;
+	$user = user_load($user->uid);
+	$results = s4_opportunity_get_require_approval($user);
+	
+	if(!count($results)) {
+		return '<p class="lead">' . t('There are no opportunities requiring your approval.') .'</p>';
+	}
+	$header = array(t('Course'), t('Last name'), t('First name'), t('Opportunity'), t('Approve'));
+	$rows = array();
+
+	foreach($results as $result) {
+		$endpoints = field_get_items('relation', $result, 'endpoints');
+		$student = user_load($endpoints[0]['entity_id']);
+		$opportunity = s4_opportunity_load($endpoints[1]['entity_id']);
+		$first_name = field_get_items('user', $student, 'field_first_name');
+		$last_name = field_get_items('user', $student, 'field_last_name');
+		$course = field_get_items('relation', $result, 'field_course');
+		$course = node_load($course[0]['nid']);
+		$rows[$last_name[0]['value'].$first_name[0]['value'].$result->rid] = array($course->title, $last_name[0]['value'], $first_name[0]['value'], $opportunity->name, l(t('Approve or deny'), 'opportunities/approve/'. $result->rid, array('attributes' => array('class' => array('btn')))));
+	}
+	ksort($rows);
+	return theme('table', array('header' => $header, 'rows' => $rows));
+}
