@@ -728,6 +728,8 @@ function s4_opportunity_block_info() {
     'placement_approval' => array('info' => t('Opportunity placement approval')),
     'placement_form' => array('info' => t('Opportunity placement form')),
     'opportunity_approval' => array('info' => t('Opportunities require approval')),
+    'view_public' => array('info' => t('View public list button')),
+    'view_manage' => array('info' => t('View manage list button'))
     );
 }
 
@@ -744,6 +746,13 @@ function s4_opportunity_block_view($delta) {
   }
 
   switch($delta) {
+    case 'view_public':
+      return array('content' => l(t('View public list'), 'opportunities/list', array('attributes' => array('class' => array('btn')))));
+    case 'view_manage':
+      if(!user_access('administer opportunities')) {
+        return;
+      }
+      return array('content' => l(t('Manage opportunities'), 'opportunities/manage', array('attributes' => array('class' => array('btn')))));
     case 'new_opportunity':
       return array('content' => s4_opportunity_create_form());
     case 'opportunity_start':
