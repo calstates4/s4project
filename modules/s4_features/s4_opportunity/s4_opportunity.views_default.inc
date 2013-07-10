@@ -256,6 +256,9 @@ Site',
 
   /* Display: Manage opportunities */
   $handler = $view->new_display('page', 'Manage opportunities', 'page');
+  $handler->display->display_options['defaults']['access'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'perm';
+  $handler->display->display_options['access']['perm'] = 'administer opportunities';
   $handler->display->display_options['path'] = 'opportunities/manage';
   $handler->display->display_options['menu']['title'] = 'Opportunities';
   $handler->display->display_options['menu']['weight'] = '-47';

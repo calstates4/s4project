@@ -43,29 +43,20 @@ function s4_opportunity_default_s4_opportunity_type() {
     "weight" : "0",
     "data" : {
       "students_can_place" : 1,
-      "programs" : { },
-      "placement_form" : "810",
+      "programs" : [],
+      "placement_form" : "",
       "faculty_approve" : 1,
       "site_staff_approve" : 1,
       "require_approval" : 1,
-      "description" : {
-        "value" : "",
-        "format" : "filtered_html"
-      },
+      "description" : { "value" : "", "format" : "filtered_html" },
       "email_enable" : 0,
       "email_subject" : "",
       "email_body" : { "value" : "", "format" : "filtered_html" },
       "approval_email_subject" : "",
-      "approval_email_body" : {
-        "value" : "",
-        "format" : "filtered_html"
-      },
+      "approval_email_body" : { "value" : "", "format" : "filtered_html" },
       "site_staff_approval_email_subject" : "",
       "site_staff_approval_email_subject_body" : { "value" : "", "format" : "filtered_html" },
-      "approval_form_text" : {
-        "value" : "",
-        "format" : "filtered_html"
-      }
+      "approval_form_text" : { "value" : "", "format" : "filtered_html" }
     },
     "rdf_mapping" : []
   }');

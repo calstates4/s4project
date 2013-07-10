@@ -58,17 +58,61 @@ function s4_opportunity_context_default_contexts() {
   $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
+  $context->name = 'opportunity-list';
+  $context->description = 'User is on the public opportunity list';
+  $context->tag = 'opportunities';
+  $context->conditions = array(
+    'views' => array(
+      'values' => array(
+        's4_opportunities:page_2' => 's4_opportunities:page_2',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        's4_opportunity-view_manage' => array(
+          'module' => 's4_opportunity',
+          'delta' => 'view_manage',
+          'region' => 'content_subscriptions',
+          'weight' => '-10',
+        ),
+      ),
+    ),
+    'menu' => 'opportunities',
+  );
+  $context->condition_mode = 0;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('User is on the public opportunity list');
+  t('opportunities');
+  $export['opportunity-list'] = $context;
+
+  $context = new stdClass();
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
   $context->name = 'opportunity-manage';
   $context->description = 'User is on an opportunity management page';
   $context->tag = 'opportunities';
   $context->conditions = array(
     'views' => array(
       'values' => array(
-        's4_opportunities' => 's4_opportunities',
+        's4_opportunities:page' => 's4_opportunities:page',
       ),
     ),
   );
   $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        's4_opportunity-view_public' => array(
+          'module' => 's4_opportunity',
+          'delta' => 'view_public',
+          'region' => 'content_subscriptions',
+          'weight' => '-10',
+        ),
+      ),
+    ),
     'menu' => 'opportunities',
   );
   $context->condition_mode = 0;
