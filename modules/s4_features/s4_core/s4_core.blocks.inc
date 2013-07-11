@@ -175,13 +175,11 @@ function s4_core_block_s4_user_login_message() {
 function s4_core_block_s4_user_login() {
   global $user;
   $output = array();
-  $auth_types = array('students'        => variable_get('s4_core_auth_students', 'user'),
+  $auth_types = array('students'    => variable_get('s4_core_auth_students', 'user'),
                 'staff'             => variable_get('s4_core_auth_staff', 'user'),
                 'faculty'           => variable_get('s4_core_auth_faculty', 'user'),
                 'community members' => variable_get('s4_core_auth_sites', 'none'));
-  $login_destinations = array('user' => 'user',
-                              'ldap' => 'user',
-                              'cas'  => 'cas/login');
+  $login_destinations = s4_core_login_destinations();
 
   $login_options = array();
   foreach ($auth_types as $audience => $method) {

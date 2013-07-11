@@ -34,8 +34,13 @@
         <a href="<?php print $url; ?>"><?php print $title; ?></a>
     </h2>
   <?php endif; ?>
-
-  <div class="content"<?php print $content_attributes; ?>>
+  <?php unset($content['field_opportunity_group']); ?>
+  <div class="content">
+    <ul class="nav nav-stacked nav-details pull-right span3">
+      <li class="odd"><?php print render($content['field_site_restrict']); ?></li>
+      <li class="even"><?php print render($content['field_opportunity_sites']); ?></li>
+      <li class="odd last"><?php print render($content['field_active_date']); ?></li>
+    </ul>
     <?php
       print render($content);
     ?>

@@ -729,7 +729,8 @@ function s4_opportunity_block_info() {
     'placement_form' => array('info' => t('Opportunity placement form')),
     'opportunity_approval' => array('info' => t('Opportunities require approval')),
     'view_public' => array('info' => t('View public list button')),
-    'view_manage' => array('info' => t('View manage list button'))
+    'view_manage' => array('info' => t('View manage list button')),
+    'opportunity_place' => array('info' => t('Place with opportunity')),
     );
 }
 
@@ -777,6 +778,7 @@ function s4_opportunity_block_view($delta) {
         return array('subject' => t('Placement form'),
               'content' => _s4_opportunity_block_placement_form($relation));
       }
+      break;
     case 'opportunity_approval':
       global $user;
       $results = s4_opportunity_get_require_approval($user);
@@ -785,6 +787,9 @@ function s4_opportunity_block_view($delta) {
                      'content' => '<p>'. format_plural(count($results), 'You have one opportunity awaiting approval.', 'You have @count opportunities awaiting approval.', array('@count' => count($results))) .'</p><p>'.
                      l(format_plural(count($results), 'Approve opportunity', 'Approve opportunities'), '/opportunities/faculty', array('attributes' => array('class' => array('btn', 'btn-large', 'btn-primary')))) .'</p>');
       }
+      break;
+    case 'opportunity_place':
+      return array('content' => _s4_opportunity_place_button());
   }
 }
 
@@ -1297,4 +1302,50 @@ WHERE e.endpoints_entity_type = :relation AND e.bundle = :approval AND e.entity_
   }
 
   return $placements;
+}
+
+/**
+ * Implements hook_context_plugin().
+ */
+function s4_opportunity_context_plugins() {
+  $plugins = array();
+  $plugins['context_condition_s4_opportunity'] = array(
+    'handler' => array(
+      'path' => drupal_get_path('module', 's4_opportunity') .'/plugins',
+      'file' => 'context_condition_s4_opportunity.inc',
+      'class' => 'context_condition_s4_opportunity',
+      'parent' => 'context_condition',
+    ),
+  );
+  return $plugins;
+}
+
+/**
+ * Implements hook_context_registry().
+ */
+function s4_opportunity_context_registry() {
+  return array(
+    'conditions' => array(
+      'context_condition_s4_opportunity' => array(
+        'title' => t('Opportunity'),
+        'plugin' => 'context_condition_s4_opportunity',
+      ),
+    ),
+  );
+}
+
+/**
+ * Implementation of hook_context_page_condition().
+ */
+function s4_opportunity_context_page_condition() {
+  if ($plugin = context_get_plugin('condition', 'context_condition_s4_opportunity')) {
+    $plugin->execute();
+  }
+}
+
+/**
+ * Helper function to determine if user can place with an opportunity
+ */
+function s4_opportunity_user_can_place($user, $opportunity) {
+  return true;
 }

@@ -236,3 +236,20 @@ function _s4_opportunity_block_placement_form($placement) {
 	$output = s4_webform_render_submission('field_form_signup_sid', $placement, 'relation');
 	return $output['content'];
 }
+
+function _s4_opportunity_place_button() {
+	$menu = menu_get_item();
+	global $user;
+	if($menu['load_functions'][1] == 's4_opportunity_load' && $opportunity = $menu['page_arguments'][0]) {
+		$type = s4_opportunity_type_load($opportunity->type);
+	  $user = user_load($user->uid); 
+		if(!$user->uid) {
+			$destinations = s4_core_login_destinations();
+			$destination = $destinations[variable_get('s4_core_auth_students', 'user')];
+			return l(t('Login to place with this @type', array('@type' => $type->label)), $destination, array('query' => array('destination' => 'opportunity/'. $opportunity->s4_opportunity_id), 'attributes' => array('class' => array('btn'))));
+		}
+		if(s4_opportunity_user_can_place($user, $opportunity)) {
+		   return l(t('Place with this @type', array('@type' => $type->label)), 'opportunity/place/'. 1, array('attributes' => array('class' => array('btn', 'btn-success'))));
+		}
+	}
+}

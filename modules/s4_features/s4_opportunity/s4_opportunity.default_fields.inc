@@ -58,7 +58,7 @@ function _s4_opportunity_add_default_fields($type) {
           'label' => 'above',
           'module' => 'entityreference',
           'settings' => array(
-            'link' => FALSE,
+            'link' => TRUE,
           ),
           'type' => 'entityreference_label',
           'weight' => 14,

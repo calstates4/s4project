@@ -62,5 +62,14 @@ function s4_opportunity_user_default_permissions() {
     'module' => 's4_opportunity',
   );
 
+  // Exported permission: start new opportunities
+  $permissions['start new opportunities'] = array(
+    'name' => 'start new opportunities',
+    'roles' => array(
+      0 => 'authenticated user',
+    ),
+    'module' => 's4_opportunity',
+  );
+
   return $permissions;
 }
