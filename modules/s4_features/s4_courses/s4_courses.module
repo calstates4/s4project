@@ -7,43 +7,6 @@
 include_once('s4_courses.features.inc');
 
 /**
-* Implements hook_menu
-*/
-function s4_courses_menu() {
-  $items = array();
-
-  $items['admin/config/s4/courses'] = array(
-    'title' => 'Course Integration',
-    'description' => 'Manage how courses are imported and managed.',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('s4_courses_admin_form'),
-    'file' => 's4_courses.admin.inc',
-    'access arguments' => array('administer site configuration'),
-  );
-
-  return $items;
-}
-
-function s4_courses_get_term_codes($requested_code = FALSE) {
-
-  return $term_codes;
-}
-
-/**
-*  Implementation of hook_s4_site_configuration
-*/
-function s4_courses_s4_site_configuration() {
-  return array(
-    's4_courses' => array(
-      'group' => t('Courses'),
-      'title' => t('Setup courses & course filters'),
-      'description' => t('Manage how S4 integrates with your SIS for courses and create filters to select only courses that are needed for this site'),
-      'href' => 'admin/config/s4/courses',
-    ),
-  );
-}
-
-/**
 *  Implementation of s4_core_field_access
 */
 function s4_courses_s4_field_access() {
@@ -68,23 +31,6 @@ function s4_courses_s4_field_access() {
         ),
 
   );
-}
-
-/**
-*  Returns allowed term codes
-*/
-function s4_courses_get_allowed_term_codes() {
-  $year = date('Y', strtotime('-1 year'));
-  $codes = s4_courses_get_term_codes();
-  $values = array();
-  while (intval($year) < date('Y', strtotime('+3 years'))) {
-    $year_format = str_split($year, 1);
-    foreach ($codes as $code => $value) {
-      $values[$year_format[0] . $year_format[2] . $year_format[3] . $code] = $value . ' ' . $year;
-    }
-    $year = date('Y', strtotime('+1 year', strtotime($year . '-1-1')));
-  }
-  return $values;
 }
 
 /**
