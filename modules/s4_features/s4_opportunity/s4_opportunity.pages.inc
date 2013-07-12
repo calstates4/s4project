@@ -204,16 +204,21 @@ function s4_opportunity_create_opportunity_form($form, $form_state) {
 			'#collapsible' => TRUE,
 			'#weight' => -50
 			);
+
+		$risk = '';
+		foreach($risk_output as $field => $render) {
+			$risk .= drupal_render($render);
+		}
+
 		$form['risk_identification']['warning'] = array(
 			'#prefix' => '<div class="alert alert-error">',
 			'#suffix' => '</div>',
-			'#markup' => t('<strong>@site has risk information assocaited with it.</strong> Please read the below risks identified for the site you have selected and make sure to add any additional risk identification to your @type.', array('@site' => $site->title, '@type' => $type->label)),
+			'#markup' => t('<h3>Please review the risks associated with @site.</h3> !risk', 
+				array('@site' => $site->title,
+						  '@type' => strtolower($type->label),
+						  '!risk' => $risk)),
 			);
-		foreach($risk_output as $field => $render) {
-			$form['risk_identification']['risk_' . $field] = array(
-				'#markup' => drupal_render($render)
-				);
-		}
+		
 	}
 
 	$opportunity = s4_opportunity_create(array('type' => $type->type));
@@ -303,8 +308,9 @@ function s4_opportunities_place_option() {
 	$opportunity = s4_opportunity_load($create['opportunity']);
 	$type = s4_opportunity_type_load($create['type']);
 	$courses = views_get_view_result('user_courses', 'block_2', $user->uid);
-	drupal_set_title(t('Would you like to place yourself in @name?', array('@name' => $opportunity->name)));
-	return theme('s4_opportunity_place_options', array('opportunity' => $opportunity, 'type' => $type, 'courses' => $courses));
+	$results = s4_opportunity_user_can_place($user, $opportunity);
+	drupal_set_title(t('Would you like to sign up for @name?', array('@name' => $opportunity->name)));
+	return theme('s4_opportunity_place_options', array('opportunity' => $opportunity, 'type' => $type, 'courses' => $courses, 'programs' => $results['programs']));
 }
 
 function s4_opportunities_place_immediately() {
@@ -488,4 +494,20 @@ function s4_opportunity_placement_approve() {
 	}
 	ksort($rows);
 	return theme('table', array('header' => $header, 'rows' => $rows));
+}
+
+function s4_opportunity_place_self_confirm($form, $form_state, $opportunity, $type, $entity_id) {
+	$form = array();
+	dpm($opportunity);
+	$form = confirm_form($form,
+    t('Are you sure you want to place ?', array('%type' => $type->label, 
+      '%name' => $s4_opportunity->name)),
+    'admin/content/opportunities/s4_opportunity',
+    '<p>' . t('This action cannot be undone.') . '</p>',
+    t('Delete'),
+    t('Cancel'),
+    'confirm'
+  );
+
+	return $form;
 }

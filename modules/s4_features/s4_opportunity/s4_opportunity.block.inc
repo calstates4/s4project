@@ -248,8 +248,29 @@ function _s4_opportunity_place_button() {
 			$destination = $destinations[variable_get('s4_core_auth_students', 'user')];
 			return l(t('Login to place with this @type', array('@type' => $type->label)), $destination, array('query' => array('destination' => 'opportunity/'. $opportunity->s4_opportunity_id), 'attributes' => array('class' => array('btn'))));
 		}
-		if(s4_opportunity_user_can_place($user, $opportunity)) {
-		   return l(t('Place with this @type', array('@type' => $type->label)), 'opportunity/place/'. 1, array('attributes' => array('class' => array('btn', 'btn-success'))));
+		if($results = s4_opportunity_user_can_place($user, $opportunity)) {
+		  $output = '<div class="btn-group">';
+			$output .= '<a class="btn btn-success dropdown-toggle" data-toggle="dropdown" href="#">
+			  </i> '. t('Place with this @type', array('@type' => $type->label)) .'
+			  <span class="caret"></span>
+			</a>';
+			$links = array();
+			if(isset($results['programs'])) {
+				foreach($results['programs'] as $program) {
+					$links[] = l(t('Program: @program', array('@program' => $program->name)), 'opportunities/place/self/'. $opportunity->s4_opportunity_id .'/program/'. $program->tid);
+				}
+			}
+			if(isset($results['programs']) && isset($results['programs'])) {
+				$links[] = array('class' => array('divider'));
+			}
+			if(isset($results['courses'])) {
+				foreach($results['courses'] as $course) {
+					$links[] = l($course->title, 'opportunities/place/self/'. $opportunity->s4_opportunity_id .'/program/'. $course->nid);
+				}
+			}
+			$output .= theme('item_list', array('items' => $links, 'attributes' => array('class' => array('dropdown-menu'))));
+			$output .= '</div>';
+			return $output;
 		}
 	}
 }

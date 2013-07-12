@@ -372,7 +372,7 @@ function s4_opportunity_theme() {
       'path' => $path
     ),
     's4_opportunity_place_options' => array(
-      'variables' => array('opportunity' => array(), 'type' => array(), 'courses' => array()),
+      'variables' => array('opportunity' => array(), 'type' => array(), 'courses' => array(), 'programs' => array()),
       'template' => 's4_opportunity_place_options',
       'path' => $path
     ),
@@ -547,7 +547,21 @@ function s4_opportunity_menu() {
     'access arguments' => array('access content'),
     'file' => 's4_opportunity.pages.inc'
     );
+
+  $items['opportunities/place/self/%s4_opportunity/%/%'] = array(
+    'title' => 'Place yourself',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('s4_opportunity_place_self_confirm', 3, 4, 5),
+    'access callback' => 's4_opportunity_place_self_access',
+    'access arguments' => array(3, 4, 5),
+    'file' => 's4_opportunity.pages.inc',
+    );
   return $items;
+}
+
+function s4_opportunity_place_self_access($opportunity, $type, $entity_id) {
+  global $user;
+  return s4_opportunity_user_can_place($user, $opportunity);
 }
 
 function s4_opportunity_placement_form_access($relation) {
@@ -1347,5 +1361,30 @@ function s4_opportunity_context_page_condition() {
  * Helper function to determine if user can place with an opportunity
  */
 function s4_opportunity_user_can_place($user, $opportunity) {
-  return true;
+  $user = user_load($user->uid);
+  $user_programs = field_get_items('user', $user, 'field_site_restrict');
+  $opportunity_programs = field_get_items('s4_opportunity', $opportunity, 'field_site_restrict');
+  $results = array();
+  $programs = array();
+  foreach($opportunity_programs as &$program) {
+    $programs[$program['tid']] = $program['tid'];
+  }
+  foreach($user_programs as $program) {
+    if(isset($programs[$program['tid']])) {
+      $results['programs'][$program['tid']] = taxonomy_term_load($program['tid']);
+    }
+  }
+  $courses = views_get_view_result('user_courses', 'block_2', $user->uid);
+  if($courses) {
+    foreach($courses as $course) {
+      $course = node_load($course->nid);
+      $course_programs = field_get_items('node', $course, 'field_site_restrict');
+      foreach($course_programs as $program) {
+        if(isset($programs[$program['tid']])) {
+          $results['courses'][$course->nid] = $course;
+        }
+      }
+    }
+  }
+  return (count($results)) ? $results : false;
 }

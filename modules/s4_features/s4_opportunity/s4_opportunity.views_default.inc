@@ -565,14 +565,14 @@ Site',
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
   $handler->display->display_options['header']['area']['empty'] = TRUE;
-  $handler->display->display_options['header']['area']['content'] = '<p class="lead">Search for and select where this opportunity will be. If we don\'t have that site on the list, you can <a href="../../sites/propose">always create a new site</a>.';
+  $handler->display->display_options['header']['area']['content'] = '<p class="lead">Save yourself some time, and browse the list of existing sites. Don\'t see what you\'re looking for? You can <a href="../../sites/propose">create a new site</a>.';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
   /* No results behavior: Global: Text area */
   $handler->display->display_options['empty']['area']['id'] = 'area';
   $handler->display->display_options['empty']['area']['table'] = 'views';
   $handler->display->display_options['empty']['area']['field'] = 'area';
   $handler->display->display_options['empty']['area']['empty'] = TRUE;
-  $handler->display->display_options['empty']['area']['content'] = '<p class="lead">Didn\'t find the site you were looking for? <a href="../../opportunities/create/site/new">Let us know about a new site</a>.';
+  $handler->display->display_options['empty']['area']['content'] = '<p class="lead">Didn\'t find the site you were looking for? <a href="../../opportunities/create/site/new">Create a new site</a>.';
   $handler->display->display_options['empty']['area']['format'] = 'full_html';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
@@ -613,7 +613,7 @@ Site',
   $handler->display->display_options['fields']['nothing']['alter']['text'] = 'Select';
   $handler->display->display_options['fields']['nothing']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['nothing']['alter']['path'] = 'opportunities/create/site/[nid]';
-  $handler->display->display_options['fields']['nothing']['alter']['link_class'] = 'btn';
+  $handler->display->display_options['fields']['nothing']['alter']['link_class'] = 'btn btn-info';
   /* Sort criterion: Content: Title */
   $handler->display->display_options['sorts']['title']['id'] = 'title';
   $handler->display->display_options['sorts']['title']['table'] = 'node';
@@ -636,7 +636,7 @@ Site',
   $handler->display->display_options['filters']['keys']['field'] = 'keys';
   $handler->display->display_options['filters']['keys']['exposed'] = TRUE;
   $handler->display->display_options['filters']['keys']['expose']['operator_id'] = 'keys_op';
-  $handler->display->display_options['filters']['keys']['expose']['label'] = 'Search';
+  $handler->display->display_options['filters']['keys']['expose']['label'] = 'Search by site, city, or keyword';
   $handler->display->display_options['filters']['keys']['expose']['operator'] = 'keys_op';
   $handler->display->display_options['filters']['keys']['expose']['identifier'] = 'keys';
   $handler->display->display_options['filters']['keys']['expose']['remember_roles'] = array(
@@ -648,25 +648,7 @@ Site',
     5 => 0,
     7 => 0,
     8 => 0,
-  );
-  /* Filter criterion: Location: City */
-  $handler->display->display_options['filters']['city']['id'] = 'city';
-  $handler->display->display_options['filters']['city']['table'] = 'location';
-  $handler->display->display_options['filters']['city']['field'] = 'city';
-  $handler->display->display_options['filters']['city']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['city']['expose']['operator_id'] = 'city_op';
-  $handler->display->display_options['filters']['city']['expose']['label'] = 'City';
-  $handler->display->display_options['filters']['city']['expose']['operator'] = 'city_op';
-  $handler->display->display_options['filters']['city']['expose']['identifier'] = 'city';
-  $handler->display->display_options['filters']['city']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    4 => 0,
-    6 => 0,
-    3 => 0,
-    5 => 0,
-    7 => 0,
-    8 => 0,
+    9 => 0,
   );
 
   /* Display: Sites list */
@@ -678,15 +660,23 @@ Site',
   /* Display: Site staff list */
   $handler = $view->new_display('page', 'Site staff list', 'page_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Select a site staff member';
+  $handler->display->display_options['title'] = 'Identify site supervisor';
   $handler->display->display_options['defaults']['header'] = FALSE;
   /* Header: Global: Text area */
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
   $handler->display->display_options['header']['area']['empty'] = TRUE;
-  $handler->display->display_options['header']['area']['content'] = '<p class="lead">Site staff are the people who are responsible for this thing. If you can\'t find one, <a href="../../../opportunities/create/site-staff/new">just create one</a>.';
+  $handler->display->display_options['header']['area']['content'] = '<p class="lead">A site supervisor is the person responsible for providing mentorship or oversight. If you do not see the supervisor listed below, <a href="../../../opportunities/create/site-staff/new">create a new one</a>.';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
+  $handler->display->display_options['defaults']['empty'] = FALSE;
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = '<p class="lead">The site you selected has no supervisors. Please<a href="../../../opportunities/create/site-staff/new">create a new one</a>.</p>';
+  $handler->display->display_options['empty']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Nid */
   $handler->display->display_options['fields']['nid']['id'] = 'nid';
@@ -727,7 +717,7 @@ Site',
   $handler->display->display_options['fields']['nothing']['alter']['text'] = 'Select';
   $handler->display->display_options['fields']['nothing']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['nothing']['alter']['path'] = 'opportunities/create/site-staff/select/[nid]';
-  $handler->display->display_options['fields']['nothing']['alter']['link_class'] = 'btn';
+  $handler->display->display_options['fields']['nothing']['alter']['link_class'] = 'btn btn-info';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Field: Last Name (field_last_name) */
   $handler->display->display_options['sorts']['field_last_name_value']['id'] = 'field_last_name_value';
@@ -849,7 +839,7 @@ Site',
   $handler->display->display_options['fields']['nothing_1']['alter']['text'] = 'Make placement';
   $handler->display->display_options['fields']['nothing_1']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['nothing_1']['alter']['path'] = 'opportunities/create/students/[uid]/[nid]';
-  $handler->display->display_options['fields']['nothing_1']['alter']['link_class'] = 'btn';
+  $handler->display->display_options['fields']['nothing_1']['alter']['link_class'] = 'btn btn-info';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Content: Title */
   $handler->display->display_options['sorts']['title']['id'] = 'title';
@@ -925,19 +915,20 @@ Site',
     t('‹ previous'),
     t('next ›'),
     t('last »'),
-    t('<p class="lead">Search for and select where this opportunity will be. If we don\'t have that site on the list, you can <a href="../../sites/propose">always create a new site</a>.'),
-    t('<p class="lead">Didn\'t find the site you were looking for? <a href="../../opportunities/create/site/new">Let us know about a new site</a>.'),
+    t('<p class="lead">Save yourself some time, and browse the list of existing sites. Don\'t see what you\'re looking for? You can <a href="../../sites/propose">create a new site</a>.'),
+    t('<p class="lead">Didn\'t find the site you were looking for? <a href="../../opportunities/create/site/new">Create a new site</a>.'),
     t('Site name'),
     t('Address'),
     t('Active'),
     t('Inactive'),
     t('Select'),
-    t('City'),
+    t('Search by site, city, or keyword'),
     t('Sites list'),
     t('Select a site'),
     t('Site staff list'),
-    t('Select a site staff member'),
-    t('<p class="lead">Site staff are the people who are responsible for this thing. If you can\'t find one, <a href="../../../opportunities/create/site-staff/new">just create one</a>.'),
+    t('Identify site supervisor'),
+    t('<p class="lead">A site supervisor is the person responsible for providing mentorship or oversight. If you do not see the supervisor listed below, <a href="../../../opportunities/create/site-staff/new">create a new one</a>.'),
+    t('<p class="lead">The site you selected has no supervisors. Please<a href="../../../opportunities/create/site-staff/new">create a new one</a>.</p>'),
     t('Last Name'),
     t('First Name'),
     t('Role'),
