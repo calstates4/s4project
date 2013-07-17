@@ -24,5 +24,5 @@
 <a href="<?php print url('opportunities/create/done'); ?>">
 	<h4>No, do not place me</h4>
 </a>
-<p>Thanks for letting us know about this <?php print $type->label; ?>!
+<p>Thanks for letting us know about this <?php print strtolower($type->label); ?>!
 </p>
