@@ -182,6 +182,8 @@ function s4_courses_block_info() {
   $blocks['s4_courses_subscriptions'] = array('info' => 'Subscribe to new signups');
   $blocks['s4_courses_restriction_form'] = array('info' => 'Edit course site restriction');
   $blocks['s4_courses_faculty_help'] = array('info' => 'Faculty help');
+  $blocks['s4_courses_add_site'] = array('info' => 'Add to sites');
+  $blocks['s4_courses_add_message'] = array('info' => 'Add to sites message');
   return $blocks;
 }
 
@@ -271,6 +273,23 @@ function s4_courses_block_view($delta) {
     return array('subject' => '',
              'content' => drupal_get_form('s4_courses_edit_course_restrict_form'));
       break;
+    case 's4_courses_add_site':
+      if (!$_SESSION['s4_courses_add_course_current']) {
+        return;
+      }
+      $site = menu_get_object();
+      if(!isset($_SESSION['s4_courses_add_course_current']['sites'][$site->nid])) {
+        return array('content' => l(t('Add to @course', array('@course' => $_SESSION['s4_courses_add_course_current']['title'])), 'faculty/add-site/'. $_SESSION['s4_courses_add_course_current']['course'] .'/'. $site->nid, array('attributes' => array('class' => array('btn', 'btn-success')))));
+      }
+      elseif($_SESSION['s4_courses_add_course_current']['sites'][$site->nid]) {
+        return array('content' => l(t('Remove from @course', array('@course' => $_SESSION['s4_courses_add_course_current']['title'])), 'faculty/remove-site/'. $_SESSION['s4_courses_add_course_current']['course'] .'/'. $site->nid, array('attributes' => array('class' => array('btn', 'btn-danger')))));
+      }
+      break;
+    case 's4_courses_add_message':
+      if (!$_SESSION['s4_courses_add_course_current']) {
+        return;
+      }
+      return array('content' => '<div class="alert alert-info">'. t('You are currently adding sites to %course. !link', array('%course' => $_SESSION['s4_courses_add_course_current']['title'], '!link' => l(t('I\'m done adding sites'), 'faculty/add-sites/done'))) .'</div>');
   }
 }
 
@@ -493,6 +512,99 @@ function s4_courses_email_course_faculty($entity, $context) {
       drupal_mail('s4_core', 'action_send_email', $instructor->mail, language_default(), $context, $reply_to);
     }
   }
+}
+
+function s4_courses_menu() {
+  $items = array();
+
+  $items['faculty/add-sites/%node'] = array(
+    'page callback' => 's4_courses_add_sites_page',
+    'page arguments' => array(2),
+    'access callback' => 's4_courses_add_sites_access',
+    'access arguments' => array(2),
+    );
+
+  $items['faculty/add-sites/done'] = array(
+    'page callback' => 's4_courses_add_sites_done', 
+    'page arguments' => array(0, 'done'),
+    'access arguments' => array('access content'),
+    );
+
+  $items['faculty/add-site/%node/%node'] = array(
+    'page callback' => 's4_courses_add_site',
+    'page arguments' => array(2, 3),
+    'access callback' => 's4_courses_add_sites_access',
+    'access arguments' => array(2),
+    );
+
+  $items['faculty/remove-site/%node/%node'] = array(
+    'page callback' => 's4_courses_remove_site',
+    'page arguments' => array(2, 3),
+    'access callback' => 's4_courses_add_sites_access',
+    'access arguments' => array(2),
+    );
+  return $items;
+}
+
+function s4_courses_add_site($course, $site) {
+  $_SESSION['s4_courses_add_course_current']['sites'][$site->nid] = $site->nid;
+  if (!$sites = field_get_items('node', $course, 'field_sites')) {
+    $sites = array();
+  }
+  $sites[] = array('nid' => $site->nid);
+  $course->field_sites[$course->language] = $sites;
+  node_save($course);
+  drupal_set_message(t('The site %site has been added to %course.', array('%site' => $site->title, '%course' => $course->title)), 'success');
+  drupal_goto(isset($_GET['destination']) ? $_GET['destination'] : 'node/'. $site->nid);
+}
+
+function s4_courses_remove_site($course, $site) {
+  unset($_SESSION['s4_courses_add_course_current']['sites'][$site->nid]);
+  if (!$sites = field_get_items('node', $course, 'field_sites')) {
+    $sites = array();
+  }
+  foreach($sites as $k => $course_site) {
+    if($course_site['nid'] == $site->nid) {
+      unset($sites[$k]);
+    }
+  }
+  $sites = array_values($sites);
+  $course->field_sites[$course->language] = $sites;
+  node_save($course);
+  drupal_set_message(t('The site %site has been removed from %course.', array('%site' => $site->title, '%course' => $course->title)), 'success');
+  drupal_goto(isset($_GET['destination']) ? $_GET['destination'] : 'node/'. $site->nid);
+}
+
+function s4_courses_add_sites_access($node) {
+  global $user;
+  $faculty = field_get_items('node', $node, 'field_course_faculty');
+  if(!$faculty) {
+    return false;
+  }
+  foreach($faculty as $instructor) {
+    if($instructor['uid'] == $user->uid) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function s4_courses_add_sites_done() {
+  $return = $_SESSION['s4_courses_add_course_current'];
+  $_SESSION['s4_courses_add_course_current'] = false;
+  drupal_goto($return['return']);
+}
+
+function s4_courses_add_sites_page($node) {
+  $_SESSION['s4_courses_add_course_current'] = array('course' => $node->nid,
+                                                     'title' => $node->title,
+                                                     'return' => $_GET['return']);
+  $sites = field_get_items('node', $node, 'field_sites');
+  foreach($sites as $site) {
+    $_SESSION['s4_courses_add_course_current']['sites'][$site['nid']] = $site['nid'];
+  }
+  drupal_set_message(t('You are currently adding sites to !course', array('!course' => $node->title)), 'success');
+  drupal_goto('site-list');
 }
 
 /**
@@ -874,10 +986,16 @@ function s4_courses_user_is_faculty($user) {
 }
 
 function s4_courses_s4_frontpage_blocks() {
-  return array('courses' => array('subject' => t('Manage your courses'),
-                                  'content' => t('Some text about managing your courses that is really exciting.'),
-                                  'href' => 'faculty/manage/courses'),
-               'students' => array('subject' => t('Manage your students'),
-                                   'content' => t('Some text about managing your students that is really exciting.'),
-                                   'href' => 'faculty/manage/students'));
+  $result = array();
+  global $User;
+  $courses = views_get_view_result('user_courses', 'page_3', $user->uid);
+  if($courses && count($courses)) {
+    $result =  array('courses' => array('subject' => t('Manage your courses'),
+                                    'content' => t('Some text about managing your courses that is really exciting.'),
+                                    'href' => 'faculty/manage/courses'),
+                 'students' => array('subject' => t('Manage your students'),
+                                     'content' => t('Some text about managing your students that is really exciting.'),
+                                     'href' => 'faculty/manage/students'));
+  }
+  return $result;
 }

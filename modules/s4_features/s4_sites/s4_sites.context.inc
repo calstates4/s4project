@@ -74,11 +74,11 @@ function s4_sites_context_default_contexts() {
           'region' => 'content_subscriptions',
           'weight' => '0',
         ),
-        'views-user_courses-block_1' => array(
-          'module' => 'views',
-          'delta' => 'user_courses-block_1',
-          'region' => 'content_top_right',
-          'weight' => '-10',
+        's4_sites-s4_sites_merge_link' => array(
+          'module' => 's4_sites',
+          'delta' => 's4_sites_merge_link',
+          'region' => 'content_subscriptions',
+          'weight' => '1',
         ),
       ),
     ),
@@ -179,6 +179,12 @@ function s4_sites_context_default_contexts() {
           'delta' => 's4_add_new_site',
           'region' => 'content_subscriptions',
           'weight' => '-10',
+        ),
+        's4_courses-s4_courses_add_message' => array(
+          'module' => 's4_courses',
+          'delta' => 's4_courses_add_message',
+          'region' => 'content_subscriptions',
+          'weight' => '-9',
         ),
         's4_core-site_list_course_restriction' => array(
           'module' => 's4_core',

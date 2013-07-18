@@ -31,6 +31,16 @@
 			<a class="popover-link map-link right" data-lat="<?php print $fields['latitude']->raw; ?>" data-lon="<?php print $fields['longitude']->raw; ?>"><?php print strip_tags(str_replace('<br />', ', ', $fields['field_location']->content)); ?></a>
 		</div>
 		<?php print $fields['body']->content; ?>
+		<?php if ($_SESSION['s4_courses_add_course_current'] && !isset($_SESSION['s4_courses_add_course_current']['sites'][$row->nid])): ?>
+			<a class="btn btn-success" href="faculty/add-site/<?php print $_SESSION['s4_courses_add_course_current']['course']; ?>/<?php print $row->nid; ?>?destination=<?php print $_GET['q']; ?>">
+					Add to <?php print $_SESSION['s4_courses_add_course_current']['title']; ?>
+				</a>
+		<?php endif; ?>
+		<?php if ($_SESSION['s4_courses_add_course_current'] && isset($_SESSION['s4_courses_add_course_current']['sites'][$row->nid])): ?>
+			<a class="btn btn-danger" href="faculty/remove-site/<?php print $_SESSION['s4_courses_add_course_current']['course']; ?>/<?php print $row->nid; ?>?destination=<?php print $_GET['q']; ?>">
+					Remove from <?php print $_SESSION['s4_courses_add_course_current']['title']; ?>
+				</a>
+		<?php endif; ?>
 	</div>
 	<div class="span3 tags">
 		<ul class="nav nav-stacked nav-details">

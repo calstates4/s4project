@@ -133,6 +133,9 @@ function s4_sites_strongarm() {
       'token' => array(
         'custom_settings' => FALSE,
       ),
+      'revision' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -146,7 +149,7 @@ function s4_sites_strongarm() {
       'display' => array(
         's4_core_signup_select_site' => array(
           'default' => array(
-            'weight' => '10',
+            'weight' => '2',
             'visible' => TRUE,
           ),
           'search_index' => array(

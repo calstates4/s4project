@@ -1299,7 +1299,6 @@ Location',
   /* Display: Block: Active site staff */
   $handler = $view->new_display('block', 'Block: Active site staff', 'block_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Active Site Staff';
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
@@ -1437,7 +1436,6 @@ Location',
     t('Last name'),
     t('Program'),
     t('Block: Active site staff'),
-    t('Active Site Staff'),
     t('Email address'),
   );
   $export['site_coordinators'] = $view;

@@ -3123,7 +3123,7 @@ function s4_sites_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => '44',
+          'weight' => '16',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -3208,11 +3208,11 @@ function s4_sites_field_default_fields() {
       'description' => '',
       'display' => array(
         'default' => array(
-          'label' => 'above',
+          'label' => 'inline',
           'module' => 'taxonomy',
           'settings' => array(),
-          'type' => 'taxonomy_term_reference_link',
-          'weight' => '12',
+          'type' => 'taxonomy_term_reference_plain',
+          'weight' => '4',
         ),
         'full' => array(
           'label' => 'above',
@@ -3300,11 +3300,11 @@ function s4_sites_field_default_fields() {
       'description' => '',
       'display' => array(
         'default' => array(
-          'label' => 'above',
+          'label' => 'inline',
           'module' => 'taxonomy',
           'settings' => array(),
-          'type' => 'taxonomy_term_reference_link',
-          'weight' => '13',
+          'type' => 'taxonomy_term_reference_plain',
+          'weight' => '5',
         ),
         'full' => array(
           'label' => 'above',
@@ -3388,10 +3388,9 @@ function s4_sites_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'text',
           'settings' => array(),
-          'type' => 'text_default',
-          'weight' => '37',
+          'type' => 'hidden',
+          'weight' => '39',
         ),
         'full' => array(
           'label' => 'above',
@@ -3478,10 +3477,9 @@ function s4_sites_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'text',
           'settings' => array(),
-          'type' => 'text_default',
-          'weight' => '38',
+          'type' => 'hidden',
+          'weight' => '40',
         ),
         'full' => array(
           'label' => 'above',
@@ -3568,10 +3566,9 @@ function s4_sites_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'text',
           'settings' => array(),
-          'type' => 'text_default',
-          'weight' => '39',
+          'type' => 'hidden',
+          'weight' => '41',
         ),
         'full' => array(
           'label' => 'above',
@@ -3656,10 +3653,9 @@ function s4_sites_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'text',
           'settings' => array(),
-          'type' => 'text_default',
-          'weight' => '2',
+          'type' => 'hidden',
+          'weight' => '34',
         ),
         'full' => array(
           'label' => 'above',
@@ -3818,7 +3814,7 @@ function s4_sites_field_default_fields() {
           'module' => 's4_sites',
           'settings' => array(),
           'type' => 's4_sites_address',
-          'weight' => '18',
+          'weight' => '10',
         ),
         'full' => array(
           'label' => 'above',
@@ -3902,7 +3898,7 @@ function s4_sites_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => '6',
+          'weight' => '32',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -3974,7 +3970,7 @@ function s4_sites_field_default_fields() {
           'module' => 'cck_phone',
           'settings' => array(),
           'type' => 'local_phone_number',
-          'weight' => '15',
+          'weight' => '7',
         ),
         'full' => array(
           'label' => 'above',
@@ -4303,7 +4299,7 @@ function s4_sites_field_default_fields() {
             'thousand_separator' => ',',
           ),
           'type' => 'number_integer',
-          'weight' => '20',
+          'weight' => '17',
         ),
         'full' => array(
           'label' => 'above',
@@ -4398,7 +4394,7 @@ function s4_sites_field_default_fields() {
             'thousand_separator' => ' ',
           ),
           'type' => 'number_integer',
-          'weight' => '25',
+          'weight' => '14',
         ),
         'full' => array(
           'label' => 'above',
@@ -4524,7 +4520,7 @@ function s4_sites_field_default_fields() {
           'module' => 's4_sites',
           'settings' => array(),
           'type' => 's4_sites_population_matrix',
-          'weight' => '21',
+          'weight' => '12',
         ),
         'full' => array(
           'label' => 'above',
@@ -4599,7 +4595,7 @@ function s4_sites_field_default_fields() {
           'module' => 'email',
           'settings' => array(),
           'type' => 'email_default',
-          'weight' => '17',
+          'weight' => '9',
         ),
         'full' => array(
           'label' => 'above',
@@ -4674,15 +4670,9 @@ function s4_sites_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'field_collection',
-          'settings' => array(
-            'add' => 'Add',
-            'delete' => 'Delete',
-            'description' => TRUE,
-            'edit' => 'Edit',
-          ),
-          'type' => 'field_collection_list',
-          'weight' => '42',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '44',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -4764,7 +4754,7 @@ function s4_sites_field_default_fields() {
           'module' => 'link',
           'settings' => array(),
           'type' => 'link_default',
-          'weight' => '19',
+          'weight' => '11',
         ),
         'full' => array(
           'label' => 'above',
@@ -4866,7 +4856,7 @@ function s4_sites_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => '1',
+          'weight' => '28',
         ),
         'full' => array(
           'label' => 'above',
@@ -5010,7 +5000,7 @@ function s4_sites_field_default_fields() {
           'module' => 's4_sites',
           'settings' => array(),
           'type' => 's4_sites_hours_matrix',
-          'weight' => '5',
+          'weight' => '31',
         ),
         'full' => array(
           'label' => 'above',
@@ -5109,7 +5099,7 @@ function s4_sites_field_default_fields() {
           'module' => 'list',
           'settings' => array(),
           'type' => 'list_default',
-          'weight' => '26',
+          'weight' => '15',
         ),
         'full' => array(
           'label' => 'above',
@@ -5194,7 +5184,7 @@ function s4_sites_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => '8',
+          'weight' => '35',
         ),
         'full' => array(
           'label' => 'above',
@@ -5285,10 +5275,9 @@ function s4_sites_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'list',
           'settings' => array(),
-          'type' => 'list_default',
-          'weight' => '40',
+          'type' => 'hidden',
+          'weight' => '42',
         ),
         'full' => array(
           'label' => 'above',
@@ -5382,7 +5371,7 @@ function s4_sites_field_default_fields() {
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_link',
-          'weight' => '22',
+          'weight' => '13',
         ),
         'full' => array(
           'label' => 'above',
@@ -5473,7 +5462,7 @@ function s4_sites_field_default_fields() {
           'module' => 'list',
           'settings' => array(),
           'type' => 'list_default',
-          'weight' => '23',
+          'weight' => '18',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -5573,10 +5562,9 @@ function s4_sites_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'list',
           'settings' => array(),
-          'type' => 'list_default',
-          'weight' => '43',
+          'type' => 'hidden',
+          'weight' => '45',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -5652,10 +5640,9 @@ function s4_sites_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'text',
           'settings' => array(),
-          'type' => 'text_default',
-          'weight' => '3',
+          'type' => 'hidden',
+          'weight' => '29',
         ),
         'full' => array(
           'label' => 'above',
@@ -5747,10 +5734,9 @@ function s4_sites_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'taxonomy',
           'settings' => array(),
-          'type' => 'taxonomy_term_reference_link',
-          'weight' => '24',
+          'type' => 'hidden',
+          'weight' => '36',
         ),
         'full' => array(
           'label' => 'above',
@@ -5839,11 +5825,11 @@ function s4_sites_field_default_fields() {
       'description' => 'Select which programs can access this site.',
       'display' => array(
         'default' => array(
-          'label' => 'above',
+          'label' => 'inline',
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_plain',
-          'weight' => '11',
+          'weight' => '3',
         ),
         'full' => array(
           'label' => 'above',
@@ -5916,15 +5902,9 @@ function s4_sites_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'field_collection',
-          'settings' => array(
-            'add' => 'Add',
-            'delete' => 'Delete',
-            'description' => TRUE,
-            'edit' => 'Edit',
-          ),
-          'type' => 'field_collection_list',
-          'weight' => '41',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '43',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -6000,10 +5980,9 @@ function s4_sites_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'text',
           'settings' => array(),
-          'type' => 'text_default',
-          'weight' => '7',
+          'type' => 'hidden',
+          'weight' => '33',
         ),
         'full' => array(
           'label' => 'above',
@@ -6127,10 +6106,9 @@ function s4_sites_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'user_reference',
           'settings' => array(),
-          'type' => 'user_reference_default',
-          'weight' => '36',
+          'type' => 'hidden',
+          'weight' => '38',
         ),
         'full' => array(
           'label' => 'above',
@@ -6222,10 +6200,9 @@ function s4_sites_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'taxonomy',
           'settings' => array(),
-          'type' => 'taxonomy_term_reference_link',
-          'weight' => '35',
+          'type' => 'hidden',
+          'weight' => '37',
         ),
         'full' => array(
           'label' => 'above',
@@ -6317,7 +6294,7 @@ function s4_sites_field_default_fields() {
           'module' => 'link',
           'settings' => array(),
           'type' => 'link_default',
-          'weight' => '14',
+          'weight' => '6',
         ),
         'full' => array(
           'label' => 'above',

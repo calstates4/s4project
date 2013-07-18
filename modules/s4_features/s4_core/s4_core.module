@@ -281,16 +281,6 @@ function s4_core_menu() {
     'access arguments' => array('signup for service'),
   );
 
-  $items['s4/course-list/%/%/%'] = array(
-    'title' => 'Add to course',
-    'description' => 'Adding a site to a course list',
-    'page callback' => 's4_core_add_site_to_course',
-    'file' => 's4_core.pages.inc',
-    'page arguments' => array(2, 3, 4),
-    'access callback' => 's4_core_add_site_to_course_access',
-    'access arguments' => array(3),
-  );
-
   $items['s4/evaluation/%node'] = array(
     'title' => 'Complete evaluation',
     'description' => 'Complete an evaluation of a site',
@@ -447,21 +437,6 @@ function s4_core_signup_evaluation_access($node) {
   global $user;
   $student = field_get_items('node', $node, 'field_user');
   return ($student[0]['uid'] == $user->uid);
-}
-
-/**
-*  Checks whether the user is allowed to add a site to a course list
-*/
-function s4_core_add_site_to_course_access($course) {
-  global $user;
-  $course = node_load($course);
-  $faculty_list = field_get_items('node', $course, 'field_course_faculty');
-  foreach ($faculty_list as $faculty) {
-    if ($faculty['uid'] == $user->uid) {
-      return TRUE;
-    }
-  }
-  return FALSE;
 }
 
 /**

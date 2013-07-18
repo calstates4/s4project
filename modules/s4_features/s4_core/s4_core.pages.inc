@@ -24,38 +24,6 @@ function s4_core_signup_evaluation($node) {
 }
 
 /**
-*  Menu callback to handle when a user has added a site to
-*  a course.
-*/
-function s4_core_add_site_to_course($op = 'add', $course, $site) {
-  $course = node_load($course);
-  $site = node_load($site);
-  if (!$sites = field_get_items('node', $course, 'field_sites')) {
-    $sites = array();
-  }
-  if ($op == 'add') {
-    $sites[] = array('nid' => $site->nid);
-    $message = t('Site added');
-  }
-  if ($op == 'remove') {
-    foreach ($sites as $key => $course_site) {
-      if ($course_site['nid'] == $site->nid) {
-        unset($sites[$key]);
-      }
-    }
-    $message = t('Site removed');
-  }
-  $course->field_sites[$course->language] = $sites;
-  node_save($course);
-  if ($_GET['js']) {
-    print json_encode(array('success' => 1, 'action' => $op, 'message' => $message));
-    die();
-  }
-  drupal_goto('node/' . $site->nid);
-  return '';
-}
-
-/**
 *  Menu callback to handle signup actions by users
 *  This should handle all links which add additional data
 *  to the current user's signup record
