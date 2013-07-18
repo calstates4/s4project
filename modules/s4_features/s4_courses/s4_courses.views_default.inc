@@ -735,6 +735,27 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['fields']['uid']['alter']['path'] = 'signup/create/[uid]/!1';
   $handler->display->display_options['fields']['uid']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['uid']['link_to_user'] = FALSE;
+
+  /* Display: Manage students page */
+  $handler = $view->new_display('page', 'Manage students page', 'page_1');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Manage your students';
+  $handler->display->display_options['defaults']['access'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    2 => '2',
+  );
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Faculty (field_course_faculty) */
+  $handler->display->display_options['arguments']['field_course_faculty_uid']['id'] = 'field_course_faculty_uid';
+  $handler->display->display_options['arguments']['field_course_faculty_uid']['table'] = 'field_data_field_course_faculty';
+  $handler->display->display_options['arguments']['field_course_faculty_uid']['field'] = 'field_course_faculty_uid';
+  $handler->display->display_options['arguments']['field_course_faculty_uid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['field_course_faculty_uid']['default_argument_type'] = 'current_user';
+  $handler->display->display_options['arguments']['field_course_faculty_uid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_course_faculty_uid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_course_faculty_uid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['path'] = 'faculty/manage/students';
   $translatables['course_students'] = array(
     t('Master'),
     t('Course students'),
@@ -773,6 +794,8 @@ function s4_courses_views_default_views() {
     t('[field_first_name] [field_last_name]'),
     t('Course students (Staff view)'),
     t('Make placement'),
+    t('Manage students page'),
+    t('Manage your students'),
   );
   $export['course_students'] = $view;
 

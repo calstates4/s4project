@@ -289,7 +289,7 @@ function s4_courses_block_view($delta) {
       if (!$_SESSION['s4_courses_add_course_current']) {
         return;
       }
-      return array('content' => '<div class="alert alert-info">'. t('You are currently adding sites to %course. !link', array('%course' => $_SESSION['s4_courses_add_course_current']['title'], '!link' => l(t('I\'m done adding sites'), 'faculty/add-sites/done'))) .'</div>');
+      return array('content' => '<div class="alert alert-info">'. t('You are currently adding sites to %course. !link', array('%course' => $_SESSION['s4_courses_add_course_current']['title'], '!link' => l(t('Return to my courses'), 'faculty/add-sites/done'))) .'</div>');
   }
 }
 
@@ -868,6 +868,28 @@ function s4_courses_context_plugins() {
     ),
   );
   return $plugins;
+}
+
+function s4_courses_user_login(&$edit, $account) {
+    $rid = db_select('role', 'r')
+            ->condition('r.name', 'faculty')
+            ->fields('r', array('rid'))
+            ->execute()
+            ->fetchField();
+  if(s4_courses_user_is_faculty($account)) {
+    foreach($account->roles as $role) {
+      if($role == 'faculty') {
+        return;
+      }
+    }
+    $account->roles[$rid] = 'faculty';
+    user_save($account);
+    return;
+  }
+  if(isset($account->roles[$rid])) {
+    unset($account->roles[$rid]);
+    user_save($account);
+  }
 }
 
 /**
