@@ -80,8 +80,25 @@ function _s4_pages_site_student_access($node) {
 }
 
 function _s4_pages_homepage() {
-  return '';
-}  
+  global $user;
+  if(user_access('create signups for other users')) {
+    return '';
+  }
+  foreach($user as $role) {
+    if ($role == 'staff') {
+      return '';
+    }
+  }
+  $title = s4_pages_dashboard_title();
+  drupal_set_title($title);
+  $blocks = array();
+  $alerts = array();
+  foreach(module_implements('s4_frontpage_blocks') as $module) {
+    $function_name = $module . '_s4_frontpage_blocks';
+    $blocks += $function_name();
+  }
+  return theme('s4_pages_frontpage', array('title' => $title, 'blocks' => $blocks, 'alerts' => $alerts));
+}
 
 function s4_pages_permission() {
   return array(
@@ -97,7 +114,6 @@ function s4_pages_permission() {
 */
 function s4_pages_block_info() {
   $blocks['overview_paragraph']['info'] = 'Overview paragraph';
-  $blocks['dashboard_title']['info']    = 'Dashboard header';
   $blocks['add_contact_record']['info'] = 'Add contact record button';
   $blocks['add_site_file']['info']    = 'Add site file button';
   $blocks['program_listing']['info']    = 'Program homepages';
@@ -155,7 +171,13 @@ function s4_pages_theme() {
     'overview_paragraph' => array(
       'variables' => array('paragraph' => '', 'registration' => true),
       'template'  => 'overview_paragraph',
+      'path' => drupal_get_path('module', 's4_pages') .'/theme',
     ),
+    's4_pages_frontpage' => array(
+      'variables' => array('title' => '', 'sections' => array(), 'alerts' => array()),
+      'template' => 's4-page-frontpage',
+      'path' => drupal_get_path('module', 's4_pages') .'/theme',
+      ),
   );
 }
 
@@ -190,8 +212,7 @@ function s4_pages_dashboard_title() {
                  array('@name' => $name))
        : t('Hi, @name, what would you like to do?',
                  array('@name' => $name));
-  return array('subject' => NULL,
-         'content' => '<h1>' . $title . '</h1>');
+  return $title;
 }
 
 /**

@@ -160,56 +160,5 @@ function s4_courses_context_default_contexts() {
   t('course');
   $export['course-staff'] = $context;
 
-  $context = new stdClass();
-  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
-  $context->api_version = 3;
-  $context->name = 'frontpage-courses';
-  $context->description = 'Frontpage course information';
-  $context->tag = 'frontpage';
-  $context->conditions = array(
-    'path' => array(
-      'values' => array(
-        '<front>' => '<front>',
-        'homepage' => 'homepage',
-      ),
-    ),
-    'user' => array(
-      'values' => array(
-        'authenticated user' => 'authenticated user',
-      ),
-    ),
-  );
-  $context->reactions = array(
-    'block' => array(
-      'blocks' => array(
-        's4_courses-s4_courses_faculty_help' => array(
-          'module' => 's4_courses',
-          'delta' => 's4_courses_faculty_help',
-          'region' => 'content_top_left',
-          'weight' => '-10',
-        ),
-        'views-user_courses-block' => array(
-          'module' => 'views',
-          'delta' => 'user_courses-block',
-          'region' => 'content_top_right',
-          'weight' => '-10',
-        ),
-        'views-user_courses-block_2' => array(
-          'module' => 'views',
-          'delta' => 'user_courses-block_2',
-          'region' => 'content',
-          'weight' => '-10',
-        ),
-      ),
-    ),
-  );
-  $context->condition_mode = 1;
-
-  // Translatables
-  // Included for use with string extractors like potx.
-  t('Frontpage course information');
-  t('frontpage');
-  $export['frontpage-courses'] = $context;
-
   return $export;
 }

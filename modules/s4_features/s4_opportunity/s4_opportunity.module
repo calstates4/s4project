@@ -807,6 +807,25 @@ function s4_opportunity_block_view($delta) {
   }
 }
 
+function s4_opportunity_s4_frontpage_blocks() {
+  $message = variable_get('s4_opportunity_begin_message', array('format' => FILTER_FORMAT_DEFAULT, 'value' => t('Start a new @types.', array('@types' => $type_list))));
+  $output = check_markup($message['value'], $message['format']);
+  $types = s4_opportunity_get_types();
+  $type_list = array();
+  foreach($types as $k => $type) {
+    if(user_access('create any '. $type->type .' s4_opportunity')) {
+      $type_list[] = $type->label;
+    }
+  }
+  if(!count($type_list)) {
+    return false;
+  }
+  return array('opportunity_start' => array('subject' => variable_get('s4_opportunity_begin_subject', t('Start a new opportunity')),
+                                           'content' => $output,
+                                           'href' => 'opportunities/create',
+                                           )
+    );
+}
 /**
  * Add default fields to new opportunity types
  */

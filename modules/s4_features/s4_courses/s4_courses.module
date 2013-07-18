@@ -872,3 +872,12 @@ function s4_courses_user_is_faculty($user) {
   $courses->condition('t.field_term_nid', $term_results, 'IN');
   return $courses->execute()->fetchAllKeyed(0,0);
 }
+
+function s4_courses_s4_frontpage_blocks() {
+  return array('courses' => array('subject' => t('Manage your courses'),
+                                  'content' => t('Some text about managing your courses that is really exciting.'),
+                                  'href' => 'faculty/manage/courses'),
+               'students' => array('subject' => t('Manage your students'),
+                                   'content' => t('Some text about managing your students that is really exciting.'),
+                                   'href' => 'faculty/manage/students'));
+}
