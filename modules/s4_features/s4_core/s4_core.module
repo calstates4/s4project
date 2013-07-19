@@ -1871,3 +1871,20 @@ function s4_core_login_destinations() {
                'cas'  => 'cas/login',
               );
 }
+
+function s4_core_s4_frontpage_blocks() {
+  if(!s4_core_user_can_signup()) {
+    return;
+  }
+  $blocks = array();
+  $courses = views_get_view_result('user_courses', 'block_2', $user->uid);
+  if($courses) {
+    $blocks['user_courses'] = array(
+        'subject' => t('Make a placement'),
+        'content' => '<p class="lead">'. t('You have courses that still require placements.') .'</p>' .
+          views_embed_view('user_courses', 'block_2', $user->uid),
+        'alert' => TRUE,
+      );
+  }
+  return $blocks;
+}

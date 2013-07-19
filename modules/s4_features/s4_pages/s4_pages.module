@@ -95,8 +95,18 @@ function _s4_pages_homepage() {
   $alerts = array();
   foreach(module_implements('s4_frontpage_blocks') as $module) {
     $function_name = $module . '_s4_frontpage_blocks';
-    $blocks += $function_name();
+    $module_blocks = $function_name();
+    if(is_array($module_blocks)) {
+      $blocks += $module_blocks;
+    }
   }
+  foreach($blocks as $k => $block) {
+    if(isset($block['alert'])) {
+      unset($blocks[$k]);
+      $alerts[] = $block;
+    }
+  }
+  dpm($blocks); dpm($alerts);
   return theme('s4_pages_frontpage', array('title' => $title, 'blocks' => $blocks, 'alerts' => $alerts));
 }
 

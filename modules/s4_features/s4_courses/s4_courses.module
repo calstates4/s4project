@@ -988,30 +988,39 @@ function s4_courses_permission() {
 }
 
 function s4_courses_user_is_faculty($user) {
+  $faculty = &drupal_static(__FUNCTION__);
+  if(isset($faculty[$user->uid])) {
+    return $faculty[$user->uid];
+  }
   $terms = db_query('SELECT entity_id FROM {field_data_field_term_date_start} WHERE
              field_term_date_start_value <= NOW()
              AND field_term_date_start_value2 >= NOW()
              ORDER BY field_term_date_start_value');
   if(!$terms) {
-    return false;
+    $faculty[$user->uid] = FALSE;
+    return FALSE;
   }
   $term_results = array();
   foreach ($terms as $term) {
     $term_results[] = $term->entity_id;
+  }
+  if(!$term_results || !count($term_results)) {
+    $faculty[$user->uid] = FALSE;
+    return FALSE;
   }
   $courses = db_select('field_data_field_course_faculty', 'f')
               ->condition('field_course_faculty_uid', $user->uid)
               ->fields('f', array('entity_id'));
   $courses->leftJoin('field_data_field_term', 't', 't.entity_type = f.entity_type AND t.entity_id = f.entity_id');
   $courses->condition('t.field_term_nid', $term_results, 'IN');
-  return $courses->execute()->fetchAllKeyed(0,0);
+  $faculty[$user->uid] = $courses->execute()->fetchAllKeyed(0,0);
+  return $faculty[$user->uid];
 }
 
 function s4_courses_s4_frontpage_blocks() {
   $result = array();
-  global $User;
-  $courses = views_get_view_result('user_courses', 'page_3', $user->uid);
-  if($courses && count($courses)) {
+  global $user;
+  if(s4_courses_user_is_faculty($user)) {
     $result =  array('courses' => array('subject' => t('Manage your courses'),
                                     'content' => t('Some text about managing your courses that is really exciting.'),
                                     'href' => 'faculty/manage/courses'),
