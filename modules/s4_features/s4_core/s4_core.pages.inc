@@ -147,28 +147,16 @@ function s4_core_signup($type, $nid) {
           return;
         }
       }
-      if(isset($_SESSION['s4_signup_program'])) {
-        $program = taxonomy_term_load($_SESSION['s4_signup_program']);
-        $forms = field_get_items('taxonomy_term', $program, 'field_site_form');
-        if($forms && count($forms)) {
-          drupal_goto('node/' . $form[0]['nid']);
-        }
-      }
-      if (isset($_SESSION['s4_signup_course'])) {
-        $programs = field_get_items('node', $site, 'field_site_restrict');
-        $course = node_load($_SESSION['s4_signup_course']);
-        $course_programs = field_site_restrict('node', $course, 'field_site_restrict');
-        if($course_programs) {
-          foreach($course_programs as $cp) {
-            foreach($programs as $program) {
-              if($cp['tid'] == $p['tid']) {
-                $program = taxonomy_term_load($_SESSION['s4_signup_program']);
-                $forms = field_get_items('taxonomy_term', $program, 'field_site_form');
-                if($forms && count($forms)) {
-                  drupal_goto('node/' . $form[0]['nid']);
-                }
-              }
-            }
+    }
+    if(isset($_SESSION['s4_signup_program'])) {
+      $site_programs = field_get_items('node', $site, 'field_site_restrict');
+      foreach($site_programs as $program) {
+        if(isset($_SESSION['s4_signup_program'][$program['tid']]) && $_SESSION['s4_signup_program'][$program['tid']]) {
+          $term = taxonomy_term_load($program['tid']);
+          $form = field_get_items('taxonomy_term', $term, 'field_site_form');
+          if($form && count($form)) {
+            drupal_goto('node/'. $form[0]['nid']);
+            return;
           }
         }
       }
