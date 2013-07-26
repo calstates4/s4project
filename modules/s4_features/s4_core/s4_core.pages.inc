@@ -148,6 +148,19 @@ function s4_core_signup($type, $nid) {
         }
       }
     }
+    if(isset($_SESSION['s4_signup_program'])) {
+      $site_programs = field_get_items('node', $site, 'field_site_restrict');
+      foreach($site_programs as $program) {
+        if(isset($_SESSION['s4_signup_program'][$program['tid']]) && $_SESSION['s4_signup_program'][$program['tid']]) {
+          $term = taxonomy_term_load($program['tid']);
+          $form = field_get_items('taxonomy_term', $term, 'field_site_form');
+          if($form && count($form)) {
+            drupal_goto('node/'. $form[0]['nid']);
+            return;
+          }
+        }
+      }
+    }
     s4_core_user_signup_completed();
   }
 
