@@ -768,14 +768,7 @@ function _s4_core_create_signup($uid = 0, $signup = array()) {
 function s4_core_webform_submission_insert($node, $submission) {
   if (isset($_SESSION['s4_signup_site'])) {
     $site = node_load($_SESSION['s4_signup_site']);
-    $forms = field_get_items('node', $site, 'field_site_signup_group');
-    foreach($forms as $form) {
-      $form = field_collection_item_load($form['value']);
-      $webform = field_get_items('field_collection_item', $form, 'field_site_form');
-      if ($node->nid == $webform[0]['nid']) {
-        s4_core_user_signup_completed($submission->sid);
-      }
-    }
+    s4_core_user_signup_completed($submission->sid);
   }
   if (isset($_SESSION['s4_core_site_eval_signup'])) {
     $signup = node_load($_SESSION['s4_core_site_eval_signup']);
