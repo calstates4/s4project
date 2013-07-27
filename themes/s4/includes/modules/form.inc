@@ -177,7 +177,22 @@ function s4_form_element_label(&$variables) {
  */
 function s4_preprocess_button(&$vars) {
   $vars['element']['#attributes']['class'][] = 'btn';
-
+  if(isset($vars['element']['#drop_down'])) {
+    $list = array();
+    foreach($vars['element']['#drop_down'] as $item) {
+      $item['#drop_down_item'] = TRUE;
+      $list[] = drupal_render($item);
+    }
+    $vars['element']['#prefix'] = '<div class="btn-group">';
+    $vars['element']['#suffix'] = '<button class="btn dropdown-toggle btn-primary" data-toggle="dropdown">
+    <span class="caret"></span>
+  </button>'. theme('item_list', array('items' => $list, 'attributes' => array('class' => array('dropdown-menu')))) .
+      '</div>';
+  }
+  if (isset($vars['element']['#drop_down_item']) && $vars['element']['#drop_down_item']) {
+    $vars['element']['#attributes']['class'] = array();
+    return;
+  }
   if (isset($vars['element']['#value'])) {
     $classes = array(
       //specifics
@@ -233,8 +248,9 @@ function s4_button($variables) {
   if (!empty($element['#attributes']['disabled'])) {
     $element['#attributes']['class'][] = 'form-button-disabled';
   }
-
-  return '<button' . drupal_attributes($element['#attributes']) . '>'. $label .'</button>
-  '; // This line break adds inherent margin between multiple buttons
+  $prefix = ($element['#prefix']) ? $element['#prefix'] : '';
+  $suffix = ($element['#suffix']) ? $element['#suffix'] : '';
+  return $prefix . '<button' . drupal_attributes($element['#attributes']) . '>'. $label .'</button>
+  ' . $suffix; // This line break adds inherent margin between multiple buttons
 }
 

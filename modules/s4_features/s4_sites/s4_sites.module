@@ -758,8 +758,18 @@ function s4_sites_form_site_node_form_alter(&$form, $form_state) {
     drupal_add_js(drupal_get_path('module', 's4_sites') .'/js/s4_sites_accordion.js');
   }
   else {
-  	$form['actions_bottom'] = $form['actions'];
+  	$form['actions']['publish_now']['#weight'] = 1;
+    $form['actions']['submit']['#weight'] = 2;
+    $form['actions']['unpublish']['#weight'] = 3;
+    $form['actions']['delete']['#weight'] = 4;
+    $form['actions_bottom'] = $form['actions'];
 		$form['actions_bottom']['#weight'] = 40;
+    foreach(array('submit', 'unpublish', 'delete') as $type) {
+      $form['actions']['publish_now']['#drop_down'][$type] = $form['actions'][$type];
+      $form['actions']['publish_now']['#drop_down'][$type]['#prefix'] = '<li>';
+      $form['actions']['publish_now']['#drop_down'][$type]['#suffix'] = '</li>';
+      unset($form['actions'][$type]);
+    }
   }
 }
 
@@ -1327,9 +1337,10 @@ function s4_sites_theme_registry_alter(&$items) {
  */
 function s4_sites_theme() {
   return array('s4_sites_log_page' => array(
-    'template' => 's4-sites-log-page',
-    'path' => drupal_get_path('module', 's4_sites') .'/theme',
-    'variables' => array('site' => array(), 'moderate_form' => '', 'send_form' => '', 'form' => '', 'results' => '')),
+        'template' => 's4-sites-log-page',
+        'path' => drupal_get_path('module', 's4_sites') .'/theme',
+        'variables' => array('site' => array(), 'moderate_form' => '', 'send_form' => '', 'form' => '', 'results' => ''),
+        ), 
   );
 }
 
