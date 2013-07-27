@@ -40,6 +40,10 @@ function s4_opportunity_place_form($form, $form_state, $type, $user) {
 		'#value' => t('Save @type', array('@type' => $type->label)),
 		);
 
+	$form['modal'] = array(
+    '#type' => 'value', 
+    '#value' => ((isset($_GET['modal']) && $_GET['modal']) || $form_state['values']['modal']),
+  );
 	unset($form['hours']);
 	unset($form['cc_myself']);
 	unset($form['email_student']);
@@ -67,6 +71,10 @@ function s4_opportunity_place_form_submit($form, $form_state) {
 	$relation->field_coordinator[LANGUAGE_NONE][0]['nid'] = $form_state['values']['site-staff'];
 	$relation->field_course[LANGUAGE_NONE][0]['nid'] = $form_state['values']['course'];
 	relation_save($relation);
+
+	if($form_state['values']['modal']) {
+    s4_core_modal_close(true);
+  }
 }
 
 function s4_opportunity_create_start() {
@@ -498,7 +506,6 @@ function s4_opportunity_placement_approve() {
 
 function s4_opportunity_place_self_confirm($form, $form_state, $opportunity, $type, $entity_id) {
 	$form = array();
-	dpm($opportunity);
 	$form = confirm_form($form,
     t('Are you sure you want to place ?', array('%type' => $type->label, 
       '%name' => $s4_opportunity->name)),

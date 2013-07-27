@@ -34,6 +34,10 @@ function s4_process_html(&$variables) {
   if (module_exists('color')) {
     _color_html_alter($variables);
   }
+  if(isset($_GET['modal']) && $_GET['modal'] == 'modal') {
+    $variables['classes_array'][] = 'overlay';
+    $variables['classes'] = implode(' ', $variables['classes_array']);
+  }
 }
 
 /**

@@ -735,6 +735,17 @@ function _s4_core_create_signup($uid = 0, $signup = array()) {
   return $node;
 }
 
+/**
+ * 
+ */
+function s4_core_modal_close($full = false) {
+  if($full) {
+    print '<html><head><script>parent.Drupal.behaviors.s4Theme.closeModal(true);</script></head><body></body><html>';
+    die();
+  }
+  drupal_add_js(array('s4ModalClose' => $refresh), 'setting');
+}
+
 
 /**
 * Implements hook_webform_submission_insert
@@ -743,15 +754,7 @@ function _s4_core_create_signup($uid = 0, $signup = array()) {
 */
 function s4_core_webform_submission_insert($node, $submission) {
   if (isset($_SESSION['s4_signup_site'])) {
-    $site = node_load($_SESSION['s4_signup_site']);
-    $forms = field_get_items('node', $site, 'field_site_signup_group');
-    foreach($forms as $form) {
-      $form = field_collection_item_load($form['value']);
-      $webform = field_get_items('field_collection_item', $form, 'field_site_form');
-      if ($node->nid == $webform[0]['nid']) {
-        s4_core_user_signup_completed($submission->sid);
-      }
-    }
+    s4_core_user_signup_completed($submission->sid);
   }
   if (isset($_SESSION['s4_core_site_eval_signup'])) {
     $signup = node_load($_SESSION['s4_core_site_eval_signup']);
@@ -775,15 +778,6 @@ function s4_core_webform_submission_insert($node, $submission) {
 }
 
 /**
- * Implements hook_admin_paths_alter()
- */
-function s4_core_admin_paths_alter(&$paths) {
-  $paths = array('signup/create/*' => TRUE,
-                 'node/*/signup-delete' => TRUE);
-}
-
-
-/**
  * Implements hook_form_FORM_ID_alter().
  */
 function s4_core_form_taxonomy_form_term_alter(&$form) {
@@ -794,6 +788,20 @@ function s4_core_form_taxonomy_form_term_alter(&$form) {
       '#token_types' => array('s4_signup', 'user'),
       '#weight' => $form['field_confirmation_email']['#weight'] + 1,
     );
+  }
+}
+
+/**
+ * Implements hook_node_load().
+ */
+function s4_core_node_load($nodes, $types) {
+  if(!in_array('webform', $types)) {
+    return;
+  }
+  foreach($nodes as $node) {
+    if($node->type == 'webform') {
+      $node->webform['submit_notice'] = 0;
+    }
   }
 }
 
@@ -1884,6 +1892,14 @@ function s4_core_s4_frontpage_blocks() {
         'content' => '<p class="lead">'. t('You have courses that still require placements.') .'</p>' .
           views_embed_view('user_courses', 'block_2', $user->uid),
         'alert' => TRUE,
+      );
+  }
+  $placements = views_get_view_result('user_signups', 'block', $user->uid);
+  if($placements) {
+    $blocks['placements'] = array(
+      'subject' => t('View your placements'),
+      'content' => t('You currently have @count placements.', array('@count' => count($placements))),
+      'href' => 'my/placements',
       );
   }
   return $blocks;

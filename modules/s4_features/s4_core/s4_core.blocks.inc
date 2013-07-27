@@ -5,7 +5,7 @@
 */
 function s4_core_block_user_progress() {
   global $user;
-  if (!s4_core_user_can_signup($user) || $_SESSION['s4_opportunity_create'] || user_access('create signups for other users')) {
+  if (!s4_core_user_can_signup($user) || $_SESSION['s4_opportunity_create'] || user_access('create signups for other users') || (!$_SESSION['s4_signup_program'] && !$_SESSION['s4_signup_course'])) {
     return NULL;
   }
   drupal_add_css(drupal_get_path('module', 's4_core') . '/css/status.css');
@@ -19,7 +19,7 @@ function s4_core_block_user_progress() {
   }
 
   if (isset($site)) {
-    $site_selection = '<div class="selection label label-info">' . l($site->title, 'node/' . $site->nid) . '</div>';
+    $site_selection = l($site->title, 'node/' . $site->nid);
   }
   if (isset($_SESSION['s4_signup_program']) && !isset($_SESSION['s4_signup_course'])) {
     $program = taxonomy_term_load($_SESSION['s4_signup_program']);

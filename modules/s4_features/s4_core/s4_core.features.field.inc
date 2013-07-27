@@ -2653,7 +2653,7 @@ function s4_core_field_default_fields() {
           'rows' => '5',
         ),
         'type' => 'text_textarea',
-        'weight' => '9',
+        'weight' => '10',
       ),
     ),
   );
@@ -2991,6 +2991,114 @@ function s4_core_field_default_fields() {
     ),
   );
 
+  // Exported field: 'taxonomy_term-site_restrictions-field_site_form'
+  $fields['taxonomy_term-site_restrictions-field_site_form'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_site_form',
+      'foreign keys' => array(
+        'nid' => array(
+          'columns' => array(
+            'nid' => 'nid',
+          ),
+          'table' => 'node',
+        ),
+      ),
+      'global_block_settings' => '1',
+      'indexes' => array(
+        'nid' => array(
+          0 => 'nid',
+        ),
+      ),
+      'module' => 'node_reference',
+      'settings' => array(
+        'nodeaccess_nodereference' => array(
+          'all' => array(
+            'view' => 'view',
+          ),
+          'author' => array(
+            'delete' => 0,
+            'update' => 0,
+            'view' => 0,
+          ),
+          'priority' => '0',
+          'referenced' => array(
+            'delete' => array(
+              'delete' => 0,
+              'update' => 0,
+              'view' => 0,
+            ),
+            'update' => array(
+              'delete' => 0,
+              'update' => 0,
+              'view' => 0,
+            ),
+            'view' => array(
+              'delete' => 0,
+              'update' => 0,
+              'view' => 0,
+            ),
+          ),
+          'unused' => '0',
+        ),
+        'referenceable_types' => array(
+          'contact_record' => 0,
+          'coordinator' => 0,
+          'course' => 0,
+          'course_term' => 0,
+          'downloadable_form' => 0,
+          'file' => 0,
+          'page' => 0,
+          'signup' => 0,
+          'site' => 0,
+          'webform' => 'webform',
+        ),
+        'view' => array(
+          'args' => array(),
+          'display_name' => '',
+          'view_name' => '',
+        ),
+      ),
+      'translatable' => '1',
+      'type' => 'node_reference',
+    ),
+    'field_instance' => array(
+      'bundle' => 'site_restrictions',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => 'If a site does not have it\'s own placement form, any student signing up with this program will have to complete this form.',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'node_reference',
+          'settings' => array(),
+          'type' => 'node_reference_default',
+          'weight' => 20,
+        ),
+      ),
+      'display_label' => '',
+      'entity_type' => 'taxonomy_term',
+      'field_lock' => 0,
+      'field_name' => 'field_site_form',
+      'label' => 'Default placement form',
+      'required' => 0,
+      'settings' => array(
+        'custom_add_another' => '',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(),
+        'type' => 'options_select',
+        'weight' => '6',
+      ),
+    ),
+  );
+
   // Exported field: 'taxonomy_term-site_restrictions-field_start_over'
   $fields['taxonomy_term-site_restrictions-field_start_over'] = array(
     'field_config' => array(
@@ -3188,6 +3296,7 @@ function s4_core_field_default_fields() {
   t('Assessment results');
   t('Body');
   t('Course');
+  t('Default placement form');
   t('Enable email reminders');
   t('Enter the length of the grace period to delete and start over a student\'s placement. Students cannot start over after their service period (i.e. the semester or term they were in a course) regardless. For no limit, enter zero.');
   t('Estimate the total number of hours you have worked at this site.');
@@ -3201,6 +3310,7 @@ function s4_core_field_default_fields() {
   t('Form instructions');
   t('Frontpage title');
   t('Grace period in days');
+  t('If a site does not have it\'s own placement form, any student signing up with this program will have to complete this form.');
   t('Images');
   t('Last expected date of service');
   t('Let us know the last date you will be working on this site. This can be an approximation, and if you are singing up as part of a course, this will be automatically the last day of the semester.');

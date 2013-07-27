@@ -116,6 +116,19 @@ function s4_core_signup($type, $nid) {
         }
       }
     }
+    if(isset($_SESSION['s4_signup_program'])) {
+      $site_programs = field_get_items('node', $site, 'field_site_restrict');
+      foreach($site_programs as $program) {
+        if(isset($_SESSION['s4_signup_program'][$program['tid']]) && $_SESSION['s4_signup_program'][$program['tid']]) {
+          $term = taxonomy_term_load($program['tid']);
+          $form = field_get_items('taxonomy_term', $term, 'field_site_form');
+          if($form && count($form)) {
+            drupal_goto('node/'. $form[0]['nid']);
+            return;
+          }
+        }
+      }
+    }
     s4_core_user_signup_completed();
   }
 
@@ -395,6 +408,11 @@ function s4_core_create_signup_form($form, &$form_state, $uid, $option = 'new', 
     '#type' => 'submit',
     '#value' => ($existing_node) ? t('Update placement') : t('Create placement'),
   );
+
+  $form['modal'] = array(
+    '#type' => 'value', 
+    '#value' => ((isset($_GET['modal']) && $_GET['modal']) || $form_state['values']['modal']),
+  );
   
   $form['actions']['cancel'] = array(
     '#type' => 'markup',
@@ -427,6 +445,9 @@ function s4_core_create_signup_form_submit($form, $form_state) {
     }
     $node->revision = TRUE;
     node_save($node);
+    if($form_state['values']['modal']) {
+      s4_core_modal_close(true);
+    }
     drupal_goto(($form_state['values']['destination']) ? $form_state['values']['destination'] : 'node/'. $node->nid);
     return;
   }
@@ -448,8 +469,9 @@ function s4_core_create_signup_form_submit($form, $form_state) {
   drupal_set_message(t('Created !signup record', array('!signup' => l(t('signup #@number', array('@number' => $signup->nid)), 'node/' . $signup->nid))));
   $site = node_load($form_state['values']['site']);
   $form = field_get_items('node', $site, 'field_site_form');
-  if(module_exists('overlay')) {
-    overlay_close_dialog();
+
+  if($form_state['values']['modal']) {
+    s4_core_modal_close(true);
   }
   else {
     drupal_goto($form_state['values']['destination']);

@@ -57,6 +57,32 @@
 					})
 				});
 			}
+			$('.iframe-modal').on('click', function(event) {
+				event.preventDefault();
+				if(!$('#modal-iframe').length) {
+					$('body').append('<div id="modal-iframe" class="modal hide fade modal-wide" tabindex="-1" role="dialog">' +
+						'<div class="modal-header">' +
+							'<button type="button" class="close" data-dismiss="modal">&times;</button>' +
+								'<h3></h3>' +
+						'</div>' +
+						'<div class="modal-body">' +
+					      '<iframe src="" width="99.6%" frameborder="0"></iframe>' +
+						'</div>' +
+					'</div>');
+				}
+				$('#modal-iframe .modal-header h3').html($(this).data('modal-title'));
+				$('#modal-iframe .modal-body').css('max-height', ($(window).height() * .75) + 'px');
+				$('#modal-iframe iframe').attr('src', $(this).attr('href'))
+												  			 .css('height', ($(window).height() * .7) + 'px');
+				$('#modal-iframe').modal({ show : true });
+			})
+		},
+
+		closeModal : function(refresh) {
+			$('#modal-iframe').modal('hide');
+			if(refresh) {
+				window.location.href = window.location.href;
+			}
 		}
 	};
 	

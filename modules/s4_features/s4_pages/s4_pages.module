@@ -106,7 +106,6 @@ function _s4_pages_homepage() {
       $alerts[] = $block;
     }
   }
-  dpm($blocks); dpm($alerts);
   return theme('s4_pages_frontpage', array('title' => $title, 'blocks' => $blocks, 'alerts' => $alerts));
 }
 
