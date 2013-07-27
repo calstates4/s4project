@@ -436,3 +436,6 @@ body.page-reports .vertical-tab-button.last {
   width: 250px;
   height: 200px;
 }
+.sticky-header {
+  z-index: 100;
+}
