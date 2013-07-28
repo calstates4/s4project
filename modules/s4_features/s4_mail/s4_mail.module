@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the S4 Mail feature.
+ */
+
+include_once('s4_mail.features.inc');
