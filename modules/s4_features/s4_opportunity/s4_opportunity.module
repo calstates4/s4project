@@ -1407,3 +1407,39 @@ function s4_opportunity_user_can_place($user, $opportunity) {
   }
   return (count($results)) ? $results : false;
 }
+
+function s4_opportunity_get_user_placements($user = FALSE, $current = TRUE) {
+  if(!$user) {
+    global $user;
+  }
+
+  $query = db_select('field_data_endpoints', 'e')
+           ->condition('e.endpoints_entity_type', 'user')
+           ->condition('e.endpoints_entity_id', $user->uid)
+           ->condition('e.entity_type', 'relation')
+           ->condition('e.bundle', 'opportunity_placement')
+           ->fields('e', array('entity_id'));
+  if($current) {
+    $query->leftJoin('field_data_field_dates', 'd', 'd.entity_id = e.entity_id AND d.entity_type = e.entity_type');
+    $query->condition('d.field_dates_value', date('Y-m-d'), '<=')
+          ->condition('d.field_dates_value2', date('Y-m-d'), '>=');
+  }
+  $results = $query->execute()->fetchAllKeyed(0,0);
+  foreach($results as &$result) {
+    $result = _s4_opportunity_get_relation(relation_load($result));
+  }
+  return $results;
+}
+
+function s4_opportunity_s4_student_signup_list_alter(&$list, $values) {
+  $user = user_load($values->uid);
+  $opportunities = s4_opportunity_get_user_placements($user);
+  if(!count($opportunities)) {
+    return;
+  }
+  foreach($opportunities as $rid => $opportunity) {
+    $type = s4_opportunity_type_load($opportunity['opportunity']->type);
+    $list[] = t('@type: !link', array('@type' => $type->label, '!link' => l($opportunity['opportunity']->name, 'relation/'. $rid)));
+  }
+
+}
