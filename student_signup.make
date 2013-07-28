@@ -106,9 +106,6 @@ projects[matrix][version] = "2.x-dev"
 projects[masquerade][subdir] = "contrib"
 projects[masquerade][version] = "1.0-rc4"
 
-projects[messaging][subdir] = "contrib"
-projects[messaging][version] = "1.0-alpha1"
-
 projects[nodeaccess_userreference][subdir] = "contrib"
 projects[nodeaccess_userreference][version] = "3.5"
 
@@ -120,9 +117,6 @@ projects[nodereference_count][version] = "1.x-dev"
 
 projects[nodereference_url][subdir] = "contrib"
 projects[nodereference_url][version] = "1.11"
-
-projects[notifications][subdir] = "contrib"
-projects[notifications][version] = "1.0-alpha1"
 
 projects[options_element][subdir] = "contrib"
 projects[options_element][version] = "1.4"

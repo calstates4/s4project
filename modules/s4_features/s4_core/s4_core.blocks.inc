@@ -218,31 +218,7 @@ function s4_core_block_jump_to_node() {
 *  Subscription links block
 */
 function s4_core_block_s4_page_notifications() {
-  global $user;
-  if (!$user->uid) {
-    return NULL;
-  }
-  $list = notifications_subscription_list('page subscriptions')
-      ->filter_option('subscriptions_block');
-  $links = array();
-  foreach ($list->get_instances() as $notification) {
-    $link = $notification->element_link();
-    if ($notification->is_stored()) {
-      $link['#title'] = t('<span class="hover">Unsubscribe</span><span class="nohover">Subscribed</span>');
-      $link['#options']['attributes']['class'] = 'subscribed btn-success';
-    }
-    else {
-      $link['#title'] = t('Subscribe to changes');
-      $link['#options']['attributes']['class'] = 'not-subscribed btn-info';
-    }
-    $link['#options']['attributes']['class'] .= ' subscription-button btn';
-    $links[] = drupal_render($link);
-  }
-  if (count($links)) {
-    return array('content' => theme('item_list', array('items' => $links, 'class' => array('nav')))
-         );
-  }
-  return NULL;
+  
 }
 
 /**

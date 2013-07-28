@@ -68,12 +68,6 @@ function s4_sites_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
-        's4_core-s4_page_notifications' => array(
-          'module' => 's4_core',
-          'delta' => 's4_page_notifications',
-          'region' => 'content_subscriptions',
-          'weight' => '0',
-        ),
         's4_sites-s4_sites_merge_link' => array(
           'module' => 's4_sites',
           'delta' => 's4_sites_merge_link',

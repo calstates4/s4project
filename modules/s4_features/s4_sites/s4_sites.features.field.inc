@@ -255,7 +255,6 @@ function s4_sites_field_default_fields() {
           'course' => 0,
           'course_term' => 0,
           'downloadable_form' => 0,
-          'fieldtrip' => 0,
           'file' => 0,
           'page' => 0,
           'signup' => 0,

@@ -4,13 +4,5 @@
 * Implements hook_install
 */
 function s4_courses_install() {
-  
-  //Register our trigger for course signup notifications
-  db_insert('trigger_assignments')
-    ->fields(array(
-      'hook' => 'course_signup',
-      'aid' => 's4_courses_signup_post_action',
-    ))
-    ->execute();
 
 }
