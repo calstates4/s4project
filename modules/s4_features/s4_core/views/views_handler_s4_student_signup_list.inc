@@ -43,6 +43,7 @@ class views_handler_s4_student_signup_list extends views_handler_field {
       }
      
     }
+    drupal_alter('s4_student_signup_list', $list);
     if (count($list) == 0) {
       return '';
     }
