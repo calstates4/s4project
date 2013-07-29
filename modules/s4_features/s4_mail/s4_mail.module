@@ -5,3 +5,156 @@
  */
 
 include_once('s4_mail.features.inc');
+
+function s4_mail_menu() {
+	$items = array();
+
+	$items['admin/config/s4/s4-mail'] = array(
+		'type' => MENU_LOCAL_TASK,
+		'title' => 'Mail',
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('s4_mail_admin_form'),
+		'access arguments' => array('administer site configuration'),
+		'file' => 's4_mail.admin.inc',
+		);
+
+	return $items;
+}
+
+function s4_mail_send($key, $to, $subject, $message, $format = FALSE, $tokens = FALSE, $sender = FALSE, $cc = FALSE) {
+	$params = array('subject' => $subject,
+									'cc' => $cc,
+									);
+	$params['message']['value'] = ($tokens) ? token_replace($message, $tokens) : $message;
+	$params['message']['format'] = ($format) ? $format : filter_default_format();
+	$sender = ($sender) ? $sender : variable_get('site_mail', '');
+	if(variable_get('s4_mail_debug', FALSE)) {
+		$count = drupal_static(__FUNCTION__);
+		if($count < 3) {
+			drupal_set_message(t('Mail would have been sent to @to subject @subject', array('@to' => $to, '@subject' => $subject)));
+			if(function_exists('dpm')) {
+				dpm($params);
+			}
+		}
+		$count++;
+		return;
+	}
+	drupal_mail('s4_mail', 'normal', $to, language_default(), $params, $sender);
+}
+
+function s4_mail_send_subscriptions($flag, $entity_id, $tokens, $subject, $message) {
+	
+}
+
+function s4_mail_mail($key, &$message, $params) {
+	$message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed';
+  $message['headers']['MIME-Version'] = '1.0';
+  $message['headers']['Content-Transfer-Encoding'] = '8Bit';
+  $message['subject'] = $params['subject'];
+  if(isset($params['message']['format'])) {
+  	$message['body'][] = check_markup($params['message']['value'], $params['message']['format']);
+  }
+  if($params['cc']) {
+    $message['headers']['Cc'] = implode(', ', $params['cc']);
+  }
+}
+
+function s4_mail_block_info() {
+	$blocks['s4_mail_subscribe'] = array('info' => t('S4 Subscription'));
+	$blocks['s4_expire_forms'] = array('info' => t('Expired forms subscriptions'));
+	return $blocks;
+}
+
+function s4_mail_block_view($delta) {
+	switch($delta) {
+		case 's4_mail_subscribe':
+			$node = menu_get_object();
+			$function = 's4_mail_block_'. $node->type;
+			if(function_exists($function)) {
+				return array('content' => $function($node));
+			}
+			break;
+		case 's4_expire_forms':
+			return array('content' => s4_mail_block_form_subscriptions());
+	}
+}
+
+function s4_mail_block_course($node) {
+	global $user;
+	$flag = flag_get_flag('subscription_course_placements');
+	$faculty = field_get_items('node', $node, 'field_course_faculty');
+	if(!$flag->access($node->nid) || !$faculty || !count($faculty)) {
+		return;
+	}
+	$is_faculty = FALSE;
+	foreach($faculty as $instructor) {
+		if($instructor['uid'] == $user->uid) {
+			$is_faculty = TRUE;
+			break;
+		}
+	}
+	if(!$is_faculty) {
+		return;
+	}
+	return $flag->theme($flag->is_flagged($node->nid) ? 'unflag' : 'flag', $node->nid, array('needs_wrapping_element' => TRUE));
+}
+
+function s4_mail_block_site($node) {
+	global $user;
+	$flag = flag_get_flag('subscription_site_placements');
+	if(!$flag->access($node->nid)) {
+		return;
+	}
+	return $flag->theme($flag->is_flagged($node->nid) ? 'unflag' : 'flag', $node->nid, array('needs_wrapping_element' => TRUE));
+}
+
+function s4_mail_block_form_subscriptions() {
+	$modal = '<a href="#form-subscriptions" data-toggle="modal" class="btn">'. t('Manage form subscriptions') .'</a> <div id="form-subscriptions" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times</button>
+    <h3 id="myModalLabel">'. t('Manage form subscriptions') .'</h3>
+  </div>
+  '. drupal_render(drupal_get_form('s4_mail_subscription_form_expiration_form')) .'
+
+</div>';
+	return $modal;
+}
+
+function s4_mail_subscription_form_expiration_form() {
+	$form = array();
+	$flag = flag_get_flag('subscription_expired_forms');
+
+	$options = array();
+	$default = array();
+	$vocabulary = taxonomy_vocabulary_machine_name_load('site_restrictions');
+  $terms = taxonomy_get_tree($vocabulary->vid);
+  foreach($terms as $term) {
+  	$options[$term->tid] = $term->name;
+  	$default[$term->tid] = ($flag->is_flagged($term->tid)) ? $term->tid : 0;
+  }
+
+	$form['programs'] = array(
+		'#type' => 'checkboxes',
+		'#title' => t('Email me when a site form is about to expire in one the following programs.'),
+		'#options' => $options,
+		'#default_value' => $default,
+		'#prefix' => '<div class="modal-body">',
+		'#suffix' => '</div>'
+	);
+
+	$form['submit'] = array(
+		'#type' => 'submit',
+		'#value' => t('Save'),
+		'#prefix' => '<div class="modal-footer">',
+		'#suffix' => '</div>'
+	);
+	return $form;
+}
+
+function s4_mail_subscription_form_expiration_form_submit($form, $form_state) {
+	$flag = flag_get_flag('subscription_expired_forms');
+	foreach($form_state['values']['programs'] as $id => $enabled) {
+		$action = ($enabled) ? 'flag' : 'unflag';
+	}
+	drupal_set_message(t('Your subscription has been updated.'), 'success');
+}

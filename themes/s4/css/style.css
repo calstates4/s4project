@@ -93,6 +93,9 @@ h1.title {
 #subscriptions ul {
   list-style-type: none;
 }
+#subscriptions .modal div {
+  float: none;
+}
 /** FORMS **/
 label {
   font-weight: bold;

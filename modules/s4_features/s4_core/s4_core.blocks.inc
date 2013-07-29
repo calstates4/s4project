@@ -317,39 +317,6 @@ function s4_core_block_s4_report_export_link() {
                     'attributes' => array('class' => 'button export-link'))));
 }
 
-/**
-*  Link to subscribe to file expiration notices
-*/
-function s4_core_block_s4_subscribe_file_expiration() {
-  if (!user_access('get file expiration notifications')) {
-    return NULL;
-  }
-  drupal_add_css(drupal_get_path('module', 's4_core') . '/css/subscriptions.css');
-  global $user;
-  $query = db_select('notifications_subscription', 'n');
-  $query->condition('n.uid', $user->uid)
-      ->condition('n.type', 'document_expiration')
-      ->fields('n', array('sid'));
-  $result = $query->execute();
-  $sid = $result->fetchField();
-  if ($sid) {
-    $link = l(t('<span class="hover">Cancel email subscription</span><span class="nohover">Email me when a form will expire</span>'),
-          'notifications/unsubscribe/' . $sid,
-          array('html' => TRUE,
-              'attributes' => array('class' => 'subscription-button subscribed'),
-              'query' => array('destination' => $_GET['q'])));
-  }
-  else {
-    $link = l(t('Email me when a form expires'),
-          'notifications/subscribe/document_expiration',
-          array('html' => TRUE,
-              'attributes' => array('class' => 'subscription-button not-subscribed'),
-              'query' => array('destination' => $_GET['q'])));
-  }
-  return array('title' => '',
-         'content' => $link);
-}
-
 /*
 *  Provides a link to the current user's informaiton
 */

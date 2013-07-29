@@ -47,10 +47,9 @@ function s4_courses_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'text',
           'settings' => array(),
-          'type' => 'text_default',
-          'weight' => '14',
+          'type' => 'hidden',
+          'weight' => '23',
         ),
         'full' => array(
           'label' => 'above',
@@ -133,10 +132,9 @@ function s4_courses_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'taxonomy',
           'settings' => array(),
-          'type' => 'taxonomy_term_reference_plain',
-          'weight' => '20',
+          'type' => 'hidden',
+          'weight' => '16',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -244,10 +242,9 @@ function s4_courses_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'user_reference',
           'settings' => array(),
-          'type' => 'user_reference_default',
-          'weight' => '2',
+          'type' => 'hidden',
+          'weight' => '4',
         ),
         'full' => array(
           'label' => 'above',
@@ -339,10 +336,9 @@ function s4_courses_field_default_fields() {
         ),
         'default' => array(
           'label' => 'above',
-          'module' => 'list',
           'settings' => array(),
-          'type' => 'list_default',
-          'weight' => '13',
+          'type' => 'hidden',
+          'weight' => '22',
         ),
         'full' => array(
           'label' => 'above',
@@ -412,15 +408,9 @@ function s4_courses_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'number',
-          'settings' => array(
-            'decimal_separator' => '.',
-            'prefix_suffix' => TRUE,
-            'scale' => 0,
-            'thousand_separator' => ' ',
-          ),
-          'type' => 'number_integer',
-          'weight' => '15',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '24',
         ),
         'full' => array(
           'label' => 'above',
@@ -487,10 +477,9 @@ function s4_courses_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'nodereference_count',
           'settings' => array(),
-          'type' => 'nodereference_count_default',
-          'weight' => '19',
+          'type' => 'hidden',
+          'weight' => '28',
         ),
         'full' => array(
           'label' => 'above',
@@ -605,10 +594,9 @@ function s4_courses_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'user_reference',
           'settings' => array(),
-          'type' => 'user_reference_default',
-          'weight' => '18',
+          'type' => 'hidden',
+          'weight' => '27',
         ),
         'full' => array(
           'label' => 'above',
@@ -689,10 +677,9 @@ function s4_courses_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'text',
           'settings' => array(),
-          'type' => 'text_default',
-          'weight' => '12',
+          'type' => 'hidden',
+          'weight' => '21',
         ),
         'full' => array(
           'label' => 'above',
@@ -778,10 +765,9 @@ function s4_courses_field_default_fields() {
         ),
         'default' => array(
           'label' => 'above',
-          'module' => 'file',
           'settings' => array(),
-          'type' => 'file_default',
-          'weight' => '11',
+          'type' => 'hidden',
+          'weight' => '20',
         ),
         'full' => array(
           'label' => 'above',
@@ -876,10 +862,9 @@ function s4_courses_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'text',
           'settings' => array(),
-          'type' => 'text_default',
-          'weight' => '16',
+          'type' => 'hidden',
+          'weight' => '25',
         ),
         'full' => array(
           'label' => 'above',
@@ -948,15 +933,9 @@ function s4_courses_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'number',
-          'settings' => array(
-            'decimal_separator' => '.',
-            'prefix_suffix' => TRUE,
-            'scale' => 0,
-            'thousand_separator' => ' ',
-          ),
-          'type' => 'number_integer',
-          'weight' => '3',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '17',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -1027,17 +1006,9 @@ function s4_courses_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'date',
-          'settings' => array(
-            'format_type' => 'long',
-            'fromto' => 'both',
-            'multiple_from' => '',
-            'multiple_number' => '',
-            'multiple_to' => '',
-            'show_repeat_rule' => 'show',
-          ),
-          'type' => 'date_default',
-          'weight' => '10',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '19',
         ),
         'full' => array(
           'label' => 'above',
@@ -1132,10 +1103,9 @@ function s4_courses_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'taxonomy',
           'settings' => array(),
-          'type' => 'taxonomy_term_reference_plain',
-          'weight' => '4',
+          'type' => 'hidden',
+          'weight' => '18',
         ),
         'full' => array(
           'label' => 'above',
@@ -1342,10 +1312,9 @@ function s4_courses_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'node_reference',
           'settings' => array(),
-          'type' => 'node_reference_default',
-          'weight' => '1',
+          'type' => 'hidden',
+          'weight' => '3',
         ),
         'full' => array(
           'label' => 'above',
@@ -1472,10 +1441,9 @@ function s4_courses_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'node_reference',
           'settings' => array(),
-          'type' => 'node_reference_default',
-          'weight' => '17',
+          'type' => 'hidden',
+          'weight' => '26',
         ),
         'full' => array(
           'label' => 'above',

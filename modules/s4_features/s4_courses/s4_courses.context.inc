@@ -29,16 +29,10 @@ function s4_courses_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
-        's4_courses-s4_courses_subscriptions' => array(
-          'module' => 's4_courses',
-          'delta' => 's4_courses_subscriptions',
+        's4_mail-s4_mail_subscribe' => array(
+          'module' => 's4_mail',
+          'delta' => 's4_mail_subscribe',
           'region' => 'content_subscriptions',
-          'weight' => '-10',
-        ),
-        'views-course_students-block' => array(
-          'module' => 'views',
-          'delta' => 'course_students-block',
-          'region' => 'content',
           'weight' => '-10',
         ),
         's4_courses-s4_courses_restriction_form' => array(
@@ -130,23 +124,17 @@ function s4_courses_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
-        'views-course_students-block_3' => array(
-          'module' => 'views',
-          'delta' => 'course_students-block_3',
-          'region' => 'content',
-          'weight' => '-10',
-        ),
         'views-course_students-block_2' => array(
           'module' => 'views',
           'delta' => 'course_students-block_2',
           'region' => 'content_right',
-          'weight' => '-63',
+          'weight' => '-57',
         ),
         's4_courses-s4_courses_restriction_form' => array(
           'module' => 's4_courses',
           'delta' => 's4_courses_restriction_form',
           'region' => 'content_right',
-          'weight' => '-61',
+          'weight' => '-57',
         ),
       ),
     ),

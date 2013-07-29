@@ -29,7 +29,6 @@ function s4_core_block_info() {
   $blocks['s4_add_new_site'] = array('info' => 'Add new site button');
   $blocks['s4_add_new_coordinator'] = array('info' => 'Add new coordinator button');
   $blocks['s4_report_export_link'] = array('info' => 'Export report link');
-  $blocks['s4_subscribe_file_expiration'] = array('info' => 'Subscribe to file expiration link');
   $blocks['s4_current_user_link'] = array('info' => 'Logged-in user link');
   $blocks['s4_site_settings'] = array('info' => 'S4 site settings');
   $blocks['s4_welcome_message'] = array('info' => 'S4 Welcome Message');

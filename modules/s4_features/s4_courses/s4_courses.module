@@ -179,7 +179,6 @@ function s4_courses_form_s4_core_admin_form_alter(&$form, $form_state) {
 */
 function s4_courses_block_info() {
   $blocks['s4_courses_add_course'] = array('info' => 'Add new course button');
-  $blocks['s4_courses_subscriptions'] = array('info' => 'Subscribe to new signups');
   $blocks['s4_courses_restriction_form'] = array('info' => 'Edit course site restriction');
   $blocks['s4_courses_faculty_help'] = array('info' => 'Faculty help');
   $blocks['s4_courses_add_site'] = array('info' => 'Add to sites');
@@ -214,44 +213,6 @@ function s4_courses_block_view($delta) {
                   )
                   )
           );
-      }
-      break;
-    case 's4_courses_subscriptions':
-      global $user;
-      $node = menu_get_object();
-      $faculty = field_get_items('node', $node, 'field_course_faculty');
-      foreach ($faculty as $uid) {
-        if ($uid['uid'] == $user->uid) {
-          $query = db_select('notifications_subscription', 's');
-          $query->leftJoin('notifications_subscription_fields', 'f', 's.sid = f.sid');
-          $query->condition('s.uid', $user->uid)
-              ->condition('s.type', 'course_signup')
-              ->condition('f.type', 'node:nid')
-              ->condition('f.value', $node->nid)
-              ->fields('s', array('sid'));
-          $subscription = $query->execute()->fetchField();
-          if ($subscription) {
-            $text = '<span class="hover">Unsubscribe</span><span class="nohover">Subscribed</span>';
-            $url = 'notifications/unsubscribe/' . $subscription;
-            $query = array(0 => $node->nid, 'destination' => 'node/' . $node->nid);
-            $class = 'subscribed';
-          }
-          else {
-            $text = 'Subscribe to signups';
-            $url = 'notifications/subscribe/course_signup';
-            $query = array(0 => $node->nid, 'destination' => 'node/' . $node->nid);
-            $class = 'not-subscribed';
-          }
-          return array('content' => l($text, $url,
-                        array('query' => $query,
-                            'html' => TRUE,
-                            'attributes' =>
-                              array('class' => 'subscription-button ' . $class)
-                            )
-                        ) .
-                        '<div class="small">' . t('Receive an email when a student signs up with a site.') .'</div>'
-                );
-        }
       }
       break;
     case 's4_courses_restriction_form':

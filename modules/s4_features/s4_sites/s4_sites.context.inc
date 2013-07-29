@@ -74,6 +74,12 @@ function s4_sites_context_default_contexts() {
           'region' => 'content_subscriptions',
           'weight' => '1',
         ),
+        's4_mail-s4_mail_subscribe' => array(
+          'module' => 's4_mail',
+          'delta' => 's4_mail_subscribe',
+          'region' => 'content_subscriptions',
+          'weight' => '2',
+        ),
       ),
     ),
     'menu' => 'site',
@@ -103,7 +109,7 @@ function s4_sites_context_default_contexts() {
     ),
   );
   $context->reactions = array(
-    'menu' => 'site-list',
+    'menu' => 'site',
   );
   $context->condition_mode = 0;
 
@@ -242,11 +248,17 @@ function s4_sites_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
+        's4_mail-s4_expire_forms' => array(
+          'module' => 's4_mail',
+          'delta' => 's4_expire_forms',
+          'region' => 'content_subscriptions',
+          'weight' => '-58',
+        ),
         's4_core-s4_add_new_site' => array(
           'module' => 's4_core',
           'delta' => 's4_add_new_site',
           'region' => 'content_subscriptions',
-          'weight' => '-10',
+          'weight' => '-57',
         ),
       ),
     ),

@@ -25,7 +25,7 @@ function s4_mail_flag_default_flags() {
     'unflag_long' => '',
     'unflag_message' => '',
     'unflag_denied_text' => '',
-    'link_type' => 'toggle',
+    'link_type' => 'normal',
     'weight' => 0,
     'show_in_links' => array(
       'full' => 0,
@@ -43,11 +43,11 @@ function s4_mail_flag_default_flags() {
     'access_author' => '',
     'show_contextual_link' => 0,
     'i18n' => 0,
-    'api_version' => 3,
     'module' => 's4_mail',
     'locked' => array(
       0 => 'name',
     ),
+    'api_version' => 3,
   );
   // Exported flag: "Expired forms subscription".
   $flags['subscription_expired_forms'] = array(
@@ -65,7 +65,7 @@ function s4_mail_flag_default_flags() {
     'unflag_long' => '',
     'unflag_message' => '',
     'unflag_denied_text' => '',
-    'link_type' => 'toggle',
+    'link_type' => 'normal',
     'weight' => 0,
     'show_in_links' => array(
       'full' => 0,
@@ -75,11 +75,11 @@ function s4_mail_flag_default_flags() {
     'show_on_form' => 0,
     'access_author' => '',
     'show_contextual_link' => 0,
-    'api_version' => 3,
     'module' => 's4_mail',
     'locked' => array(
       0 => 'name',
     ),
+    'api_version' => 3,
   );
   // Exported flag: "Subscribe to site placements".
   $flags['subscription_site_placements'] = array(
@@ -97,7 +97,7 @@ function s4_mail_flag_default_flags() {
     'unflag_long' => '',
     'unflag_message' => '',
     'unflag_denied_text' => '',
-    'link_type' => 'toggle',
+    'link_type' => 'normal',
     'weight' => 0,
     'show_in_links' => array(
       'full' => 0,
@@ -115,11 +115,11 @@ function s4_mail_flag_default_flags() {
     'access_author' => '',
     'show_contextual_link' => 0,
     'i18n' => 0,
-    'api_version' => 3,
     'module' => 's4_mail',
     'locked' => array(
       0 => 'name',
     ),
+    'api_version' => 3,
   );
   return $flags;
 

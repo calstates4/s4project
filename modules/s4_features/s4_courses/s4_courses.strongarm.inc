@@ -40,6 +40,9 @@ function s4_courses_strongarm() {
       'print' => array(
         'custom_settings' => FALSE,
       ),
+      'revision' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
