@@ -218,6 +218,9 @@ function s4_s4_links($variables) {
 }
 
 function s4_preprocess_table(&$variables) {
+  if(isset($variables['attributes']['class']) && !is_array($variables['attributes']['class'])) {
+    $variables['attributes']['class'] = array($variables['attributes']['class']);
+  }
   $variables['attributes']['class'][] = 'table';
   $variables['attributes']['class'][] = 'table-striped';
 }
