@@ -45,7 +45,6 @@ function s4_mail_send($key, $to, $subject, $message, $format = FALSE, $tokens = 
 
 function s4_mail_send_subscriptions($flag, $entity_type, $entity_id, $subject, $message, $format = FALSE, $tokens = FALSE, $sender = FALSE) {
 	$uids = flag_get_entity_flags($entity_type, $entity_id, $flag);
-	dpm($entity_type);
 	foreach($uids as $uid) {
 		$user = user_load($uid->uid);
 		s4_mail_send('subscription', $user->mail, $subject, $message, $format, $tokens, $sender);
@@ -57,9 +56,7 @@ function s4_mail_mail($key, &$message, $params) {
   $message['headers']['MIME-Version'] = '1.0';
   $message['headers']['Content-Transfer-Encoding'] = '8Bit';
   $message['subject'] = $params['subject'];
-  if(isset($params['message']['format'])) {
-  	$message['body'][] = check_markup($params['message']['value'], $params['message']['format']);
-  }
+  $message['body'][] = check_markup($params['message']['value'], $params['message']['format']);
   if($params['cc']) {
     $message['headers']['Cc'] = implode(', ', $params['cc']);
   }
