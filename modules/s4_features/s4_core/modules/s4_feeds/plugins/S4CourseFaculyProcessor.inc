@@ -70,10 +70,10 @@ class S4CourseFaculyProcessor extends FeedsProcessor {
     
     foreach ($mappings as $map) {
       if ($map['target'] == 'sis_id') {
-        $sis_id_key = $map['source'];
+        $sis_id_key = strtolower($map['source']);
       }
       if ($map['target'] == 'course_id') {
-        $course_id_key = $map['source'];
+        $course_id_key = strtolower($map['source']);
       }
     }
     
