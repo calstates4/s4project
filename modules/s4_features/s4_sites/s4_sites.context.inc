@@ -248,17 +248,17 @@ function s4_sites_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
-        's4_mail-s4_expire_forms' => array(
+        's4_mail-s4_manage_subscriptions' => array(
           'module' => 's4_mail',
-          'delta' => 's4_expire_forms',
+          'delta' => 's4_manage_subscriptions',
           'region' => 'content_subscriptions',
-          'weight' => '-58',
+          'weight' => '-10',
         ),
         's4_core-s4_add_new_site' => array(
           'module' => 's4_core',
           'delta' => 's4_add_new_site',
           'region' => 'content_subscriptions',
-          'weight' => '-57',
+          'weight' => '-9',
         ),
       ),
     ),

@@ -136,12 +136,6 @@ function s4_courses_field_default_fields() {
           'type' => 'hidden',
           'weight' => '16',
         ),
-        'notifications' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
         'teaser' => array(
           'label' => 'above',
           'settings' => array(),
@@ -936,12 +930,6 @@ function s4_courses_field_default_fields() {
           'settings' => array(),
           'type' => 'hidden',
           'weight' => '17',
-        ),
-        'notifications' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
         ),
         'teaser' => array(
           'label' => 'above',
