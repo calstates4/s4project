@@ -336,7 +336,6 @@ function s4_sites_node_insert($node) {
     $programs = field_get_items('node', $node, 'field_site_restrict');
     foreach($programs as $program) {
       $program = taxonomy_term_load($program['tid']);
-      dpm($program);
       $subject = t('New site: [node:title]');
       $message = t('A new site has been created in the program [term:name]:<br/> [node:title]');
       $tokens['node'] = $node;
