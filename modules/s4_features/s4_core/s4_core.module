@@ -1455,22 +1455,32 @@ function theme_s4_core_views_savedsearches_list($variables) {
 *  Here we check on any signups which have expired and send out emails
 */
 function s4_core_cron() {
-  $last_date = variable_get('s4_core_file_expiration_last_notice', time() - (7 * 24 * 60 * 60));
-  $query = db_select('field_data_field_expiration_reminder', 'r')
-         ->fields('r', array('entity_id'))
-         ->condition('field_expiration_reminder_value', 1);
-  $query->leftJoin('field_data_field_expiration_reminder_date', 'd', 'd.entity_id = r.entity_id');
-  $query->fields('d', array('field_expiration_reminder_date_value'))
-      ->condition('field_expiration_reminder_date_value', date('Y-m-d', $last_date), '>=')
-      ->condition('field_expiration_reminder_date_value', date('Y-m-d'), '<=')
-      ->orderBy('field_expiration_reminder_date_value', 'DESC');
+  $last_date = variable_get('s4_core_file_expiration_last_notice', date('Y-m-d'));
+  if($last_date != date('Y-m-d')) {
+    $query = db_select('field_data_field_expiration_reminder', 'r')
+           ->fields('r', array('entity_id'))
+           ->condition('field_expiration_reminder_value', 1);
+    $query->leftJoin('field_data_field_expiration_reminder_date', 'd', 'd.entity_id = r.entity_id');
+    $query->fields('d', array('field_expiration_reminder_date_value'))
+        ->condition('field_expiration_reminder_date_value', date('Y-m-d') . 'T00:00:00', '=')
+        ->orderBy('field_expiration_reminder_date_value', 'DESC');
+    $result = $query->execute();
+    
+    foreach ($result as $r) {
+      $node = node_load($r->entity_id);
+      $site = field_get_items('node', $node, 'field_site');
+      $site = node_load($site[0]['nid']);
+      $programs = field_get_items('node', $site, 'field_site_restrict');
+      $subject = t('Expiring form for @site', array('@site' => $site->title));
+      $message = t('The form [node:title] will expire on [node:field_expiration_date].');
+      $tokens['node'] = $node;
+      foreach($programs as $program) {
+        s4_mail_send_subscriptions('subscription_expired_forms', 'taxonomy_term', $program['tid'], $subject, $message, filter_default_format(), $tokens);
 
-  $result = $query->execute();
-  foreach ($result as $r) {
-    $node = node_load($r->entity_id);
-    _trigger_node($node, 'document_expiration');
+      }
+    }
+    variable_set('s4_core_file_expiration_last_notice', date('Y-m-d'));
   }
-  variable_set('s4_core_file_expiration_last_notice', time());
   
   $reminder_query = db_select('field_data_field_enable_email_reminders', 'r')
                     ->fields('r', array('entity_id'))
