@@ -231,6 +231,14 @@ function s4_core_create_signup_form($form, &$form_state, $uid, $option = 'new', 
       '#title' => 'Course',
       '#options' => $courses,
       '#attributes' => array('class' => array('chosen')),
+      '#ajax' => array(
+        'callback' => 's4_core_site_options_courses',
+        'wrapper' => 'site-list',
+        'progress' => array(
+          'type' => 'throbber',
+          'message' => t('Changing sites'),
+        ),
+      ),
     );
 
     foreach ($course_list as $course) {
@@ -261,15 +269,20 @@ function s4_core_create_signup_form($form, &$form_state, $uid, $option = 'new', 
        ->fields('n', array('nid', 'title'))
        ->condition('type', 'site')
        ->orderBy('title', 'ASC');
+  if($form_state['values']['course'] || $form['course']['#default_value']) {
+    $nid = ($form_state['values']['course']) ? $form_state['values']['course'] : $form['course']['#default_value'];
+    $course = node_load($nid);
+    $default_program = field_get_items('node', $course, 'field_site_restrict');
+  }
   if($default_program && count($default_program)) {
   	$programs = array();
-  	foreach($default_program as $program) {
-  		$programs[] = $program['tid'];
+    	foreach($default_program as $program) {
+    		$programs[] = $program['tid'];
+    	}
+  	if(count($programs)) {
+  	  $query->leftJoin('field_data_field_site_restrict', 'r', 'r.entity_id = n.nid AND r.entity_type = :node', array(':node' => 'node'));
+  	  $query->condition('r.field_site_restrict_tid', $programs, 'IN');
   	}
-	if(count($programs)) {
-	  $query->leftJoin('field_data_field_site_restrict', 'r', 'r.entity_id = n.nid AND r.entity_type = :node', array(':node' => 'node'));
-	  $query->condition('r.field_site_restrict_tid', $programs, 'IN');
-	}
   }
   
   $results = $query->execute();
@@ -283,6 +296,8 @@ function s4_core_create_signup_form($form, &$form_state, $uid, $option = 'new', 
     '#attributes' => array('class' => array('chosen')),
     '#required' => TRUE,
     '#empty_option' => t('-- Select a site --'),
+    '#prefix' => '<div id="site-list">',
+    '#suffix' => '</div>',
     '#ajax' => array(
       'callback' => 's4_core_site_options_choice',
       'wrapper' => 'site-options',

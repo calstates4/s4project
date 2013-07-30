@@ -1791,6 +1791,11 @@ function s4_core_site_options_choice(&$form, $form_state) {
   return $form['site_options'];
 }
 
+function s4_core_site_options_courses(&$form, $form_state) {
+  module_load_include('inc', 's4_core', 's4_core.pages');
+  return $form['site'];
+}
+
 function s4_core_login_destinations() {
   return array('user' => 'user',
                'ldap' => 'user',
