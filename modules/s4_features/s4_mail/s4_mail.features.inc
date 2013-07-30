@@ -81,6 +81,38 @@ function s4_mail_flag_default_flags() {
     ),
     'api_version' => 3,
   );
+  // Exported flag: "New site subscription".
+  $flags['subscription_new_sites'] = array(
+    'entity_type' => 'taxonomy_term',
+    'title' => 'New site subscription',
+    'global' => '0',
+    'types' => array(
+      0 => 'site_restrictions',
+    ),
+    'errors' => array(),
+    'flag_short' => 'Subscribe to new sites',
+    'flag_long' => '',
+    'flag_message' => '',
+    'unflag_short' => 'Unsubscribe to new sites',
+    'unflag_long' => '',
+    'unflag_message' => '',
+    'unflag_denied_text' => '',
+    'link_type' => 'toggle',
+    'weight' => 0,
+    'show_in_links' => array(
+      'full' => 0,
+      'token' => 0,
+    ),
+    'show_as_field' => 0,
+    'show_on_form' => 0,
+    'access_author' => '',
+    'show_contextual_link' => 0,
+    'api_version' => 3,
+    'module' => 's4_mail',
+    'locked' => array(
+      0 => 'name',
+    ),
+  );
   // Exported flag: "Subscribe to site placements".
   $flags['subscription_site_placements'] = array(
     'entity_type' => 'node',

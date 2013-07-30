@@ -311,6 +311,41 @@ function s4_sites_permission() {
     );
 }
 
+/**
+*  Implementation of hook_node_insert
+*/
+function s4_sites_node_insert($node) {
+  if ($node->type == 'signup') {
+    $course = field_get_items('node', $node, 'field_course');
+    $course = node_load($course[0]['nid']);
+    $subject = t('New placement in [site:name]');
+    $message = t('<strong>[user:field_last_name] [user:field_first_name]</strong> has been placed in <strong>[s4_signup:field-site]</strong> with the staff member <strong>[s4_site_staff:field-first-name] [s4_site_staff:field-last-name]</strong>.');
+    $tokens['s4_signup'] = $node;
+    $tokens['s4_course'] = $course;
+    $coordinator = field_get_items('node', $node, 'field_coordinator');
+    $tokens['s4_site_staff'] = node_load($coordinator[0]['nid']);
+    $site = field_get_items('node', $node, 'field_site');
+    $site = node_load($site[0]['nid']);
+    $user = field_get_items('node', $node, 'field_user');
+    $user = user_load($user[0]['uid']);
+    $tokens['user'] = $user;
+    $tokens['course'] = node_load($node->field_course[$node->language][0]['nid']);
+    s4_mail_send_subscriptions('subscription_site_placements', 'node', $site->nid, $subject, $message, filter_default_format(), $tokens);
+  }
+  if($node->type == 'site') {
+    $programs = field_get_items('node', $node, 'field_site_restrict');
+    foreach($programs as $program) {
+      $program = taxonomy_term_load($program['tid']);
+      dpm($program);
+      $subject = t('New site: [node:title]');
+      $message = t('A new site has been created in the program [term:name]:<br/> [node:title]');
+      $tokens['node'] = $node;
+      $tokens['term'] = $program;
+      s4_mail_send_subscriptions('subscription_new_sites', 'taxonomy_term', $program->tid, $subject, $message, filter_default_format(), $tokens);
+    }
+  }
+}
+
 function s4_sites_node_view($node, $view_mode, $language) {
   if($view_mode != 'full') {
     return;

@@ -17,7 +17,7 @@ function s4_feeds_feeds_plugins() {
     ),
   );
   $info['S4CourseFaculyProcessor'] = array(
-    'name' => 'Course faculy processor',
+    'name' => 'Course faculty processor',
     'description' => 'Add and update course faculty records.',
     'help' => 'Create and update faculty records from parsed content.',
     'handler' => array(

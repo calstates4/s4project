@@ -717,8 +717,22 @@ function s4_courses_node_event($action, $node) {
 function s4_courses_node_insert($node) {
   if ($node->type == 'signup') {
     $course = field_get_items('node', $node, 'field_course');
+    if(!$course || !count($course)) {
+      return;
+    }
     $course = node_load($course[0]['nid']);
-    _trigger_node($course, 'course_signup');
+    $subject = t('New placement in [s4_course:field-course-subject] [s4_course:field-course-catalog-number] ([s4_course:field-course-section])');
+    $message = t('<strong>[user:field_last_name] [user:field_first_name]</strong> has been placed in <strong>[s4_signup:field-site]</strong> with the staff member <strong>[s4_site_staff:field-first-name] [s4_site_staff:field-last-name]</strong>.');
+    $tokens['s4_signup'] = $node;
+    $tokens['s4_course'] = $course;
+    $coordinator = field_get_items('node', $node, 'field_coordinator');
+    $tokens['s4_site_staff'] = node_load($coordinator[0]['nid']);
+    $site = field_get_items('node', $node, 'field_site');
+    $user = field_get_items('node', $node, 'field_user');
+    $user = user_load($user[0]['uid']);
+    $tokens['user'] = $user;
+    $tokens['course'] = node_load($node->field_course[$node->language][0]['nid']);
+    s4_mail_send_subscriptions('subscription_course_placements', 'node', $course->nid, $subject, $message, filter_default_format(), $tokens);
   }
 }
 
