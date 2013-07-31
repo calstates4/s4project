@@ -572,7 +572,7 @@ function s4_opportunity_placement_form_access($relation) {
 
 function _s4_opportunity_get_relation($relation) {
   $endpoints = field_get_items('relation', $relation, 'endpoints');
-  $user = s4_opportunity_load($endpoints[1]['entity_id']);
+  $user = user_load($endpoints[0]['entity_id']);
   $opportunity = s4_opportunity_load($endpoints[1]['entity_id']);
   return array('opportunity' => $opportunity, 'user' => $user);
 }
@@ -1180,6 +1180,22 @@ function s4_opportunity_webform_submission_insert($node, $submission) {
   }
 }
 
+function s4_opportunity_entity_insert($relation, $type) {
+  if($type != 'relation') {
+    return;
+  }
+  $placement = _s4_opportunity_get_relation($relation);
+  $type = s4_opportunity_type_load($placement['opportunity']->type);
+  $sid = field_get_items('relation', $relation, 'field_form_signup_sid');
+  if($sid[0]['value']) {
+    return;
+  }
+  if($type->data['email_enable']) {
+    $tokens = array();
+    s4_mail_send('s4_opportunity', $placement['user']->mail, $type->data['email_subject'], $type->data['email_body']['value'], $type->data['email_body']['format'], $tokens);
+  }
+}
+
 function s4_opportunity_send_placement_approval($opportunity, $placement) {
   $type = s4_opportunity_get_placement_approvals($opportunity->type);
   $approvals = s4_opportunity_get_placement_approvals($opportunity, $placement);
@@ -1191,7 +1207,9 @@ function s4_opportunity_send_placement_approval($opportunity, $placement) {
       $faculty = field_get_items('node', $course, 'field_course_faculty');
       foreach($faculty as $instructor) {
         $user = user_load($instructor[0]['uid']);
-        drupal_mail('s4_opportunity', 'approval_email', $user->mail, null, array('type' => $type, 'opportunity' => $opportunity, 'placement' => $placement, 'student' => $student));
+        $tokens = array('type' => $type, 'opportunity' => $opportunity, 'placement' => $placement, 'student' => $student);
+        s4_mail_send('s4_opportunity', $user->mail, $params['type']->data['approval_email_subject'], $params['type']->data['approval_email_body']['value'], $params['type']->data['approval_email_body']['format'], $tokens);
+        //drupal_mail('s4_opportunity', 'approval_email', $user->mail, null, array('type' => $type, 'opportunity' => $opportunity, 'placement' => $placement, 'student' => $student));
       }
     }
   }
@@ -1199,7 +1217,10 @@ function s4_opportunity_send_placement_approval($opportunity, $placement) {
     $staff = field_get_items('relation', $placement, 'field_coordinator');
     $email = field_get_items('node', $staff, 'field_email');
     if($email && $email[0]['email']) {
-      drupal_mail('s4_opportunity', 'site_staff_approval_email', $user->mail, null, array('type' => $type, 'opportunity' => $opportunity, 'placement' => $placement, 'student' => $student));
+      $tokens = array('type' => $type, 'opportunity' => $opportunity, 'placement' => $placement, 'student' => $student);
+      s4_mail_send('s4_opportunity', $user->mail, $params['type']->data['site_staff_approval_email_subject'], $params['type']->data['site_staff_approval_email_body']['value'], $params['type']->data['site_staff_approval_email_body']['format'], $tokens);
+
+      //drupal_mail('s4_opportunity', 'site_staff_approval_email', $user->mail, null, array('type' => $type, 'opportunity' => $opportunity, 'placement' => $placement, 'student' => $student));
     }
   }
   if($type->data['require_approval'] && !count($approvals['approver'])) {
@@ -1221,7 +1242,9 @@ function s4_opportunity_send_placement_approval($opportunity, $placement) {
     foreach($users as &$user) {
       $user = user_load($user);
       if($user->status) {
-        drupal_mail('s4_opportunity', 'approval_email', $user->mail, null, array('type' => $type, 'opportunity' => $opportunity, 'placement' => $placement, 'student' => $student));
+        $tokens = array('type' => $type, 'opportunity' => $opportunity, 'placement' => $placement, 'student' => $student);
+        s4_mail_send('s4_opportunity', $user->mail, $params['type']->data['approval_email_subject'], $params['type']->data['approval_email_body']['value'], $params['type']->data['approval_email_body']['format'], $tokens);
+               // drupal_mail('s4_opportunity', 'approval_email', $user->mail, null, array('type' => $type, 'opportunity' => $opportunity, 'placement' => $placement, 'student' => $student));
       }
     }
   }
