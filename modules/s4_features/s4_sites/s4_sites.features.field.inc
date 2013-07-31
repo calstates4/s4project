@@ -3122,7 +3122,7 @@ function s4_sites_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => '7',
+          'weight' => '8',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -3655,7 +3655,7 @@ function s4_sites_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => '21',
+          'weight' => '19',
         ),
         'full' => array(
           'label' => 'above',
@@ -3814,7 +3814,7 @@ function s4_sites_field_default_fields() {
           'module' => 's4_sites',
           'settings' => array(),
           'type' => 's4_sites_address',
-          'weight' => '6',
+          'weight' => '7',
         ),
         'full' => array(
           'label' => 'above',
@@ -3898,7 +3898,7 @@ function s4_sites_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => '26',
+          'weight' => '25',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -3970,7 +3970,7 @@ function s4_sites_field_default_fields() {
           'module' => 'cck_phone',
           'settings' => array(),
           'type' => 'local_phone_number',
-          'weight' => '4',
+          'weight' => '5',
         ),
         'full' => array(
           'label' => 'above',
@@ -4299,7 +4299,7 @@ function s4_sites_field_default_fields() {
             'thousand_separator' => ',',
           ),
           'type' => 'number_integer',
-          'weight' => '11',
+          'weight' => '27',
         ),
         'full' => array(
           'label' => 'above',
@@ -4394,7 +4394,7 @@ function s4_sites_field_default_fields() {
             'thousand_separator' => ' ',
           ),
           'type' => 'number_integer',
-          'weight' => '10',
+          'weight' => '9',
         ),
         'full' => array(
           'label' => 'above',
@@ -4520,7 +4520,7 @@ function s4_sites_field_default_fields() {
           'module' => 's4_sites',
           'settings' => array(),
           'type' => 's4_sites_population_matrix',
-          'weight' => '8',
+          'weight' => '29',
         ),
         'full' => array(
           'label' => 'above',
@@ -4595,7 +4595,7 @@ function s4_sites_field_default_fields() {
           'module' => 'email',
           'settings' => array(),
           'type' => 'email_default',
-          'weight' => '5',
+          'weight' => '6',
         ),
         'full' => array(
           'label' => 'above',
@@ -4750,11 +4750,11 @@ function s4_sites_field_default_fields() {
       'description' => 'If your organization has a presence on Facebook, Twitter, or another social network, please provide the address.',
       'display' => array(
         'default' => array(
-          'label' => 'above',
+          'label' => 'hidden',
           'module' => 'link',
           'settings' => array(),
           'type' => 'link_default',
-          'weight' => '18',
+          'weight' => '13',
         ),
         'full' => array(
           'label' => 'above',
@@ -4784,13 +4784,14 @@ function s4_sites_field_default_fields() {
       ),
       'display_label' => '',
       'entity_type' => 'node',
+      'field_lock' => 0,
       'field_name' => 'field_site_facebook_page',
       'label' => 'Social network page',
       'required' => 0,
       's4_sites_field_access' => 1,
       'settings' => array(
         'attributes' => array(
-          'class' => 'social-link',
+          'class' => 'btn btn-small',
           'configurable_title' => 0,
           'rel' => '',
           'target' => '_blank',
@@ -4801,9 +4802,10 @@ function s4_sites_field_default_fields() {
           'url_cutoff' => '80',
         ),
         'enable_tokens' => 0,
-        'title' => 'none',
+        'rel_remove' => 'default',
+        'title' => 'value',
         'title_maxlength' => '128',
-        'title_value' => '',
+        'title_value' => 'Visit social network',
         'url' => 0,
         'user_register_form' => FALSE,
         'validate_url' => 1,
@@ -4856,7 +4858,7 @@ function s4_sites_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => '19',
+          'weight' => '17',
         ),
         'full' => array(
           'label' => 'above',
@@ -5000,7 +5002,7 @@ function s4_sites_field_default_fields() {
           'module' => 's4_sites',
           'settings' => array(),
           'type' => 's4_sites_hours_matrix',
-          'weight' => '25',
+          'weight' => '24',
         ),
         'full' => array(
           'label' => 'above',
@@ -5099,7 +5101,7 @@ function s4_sites_field_default_fields() {
           'module' => 'list',
           'settings' => array(),
           'type' => 'list_default',
-          'weight' => '24',
+          'weight' => '23',
         ),
         'full' => array(
           'label' => 'above',
@@ -5184,7 +5186,7 @@ function s4_sites_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => '22',
+          'weight' => '20',
         ),
         'full' => array(
           'label' => 'above',
@@ -5371,7 +5373,7 @@ function s4_sites_field_default_fields() {
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_link',
-          'weight' => '9',
+          'weight' => '28',
         ),
         'full' => array(
           'label' => 'above',
@@ -5462,7 +5464,7 @@ function s4_sites_field_default_fields() {
           'module' => 'list',
           'settings' => array(),
           'type' => 'list_default',
-          'weight' => '12',
+          'weight' => '10',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -5643,7 +5645,7 @@ function s4_sites_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => '13',
+          'weight' => '11',
         ),
         'full' => array(
           'label' => 'above',
@@ -5738,7 +5740,7 @@ function s4_sites_field_default_fields() {
           'module' => 's4_sites',
           'settings' => array(),
           'type' => 's4_sites_limited_taxonomy_term',
-          'weight' => '38',
+          'weight' => '21',
         ),
         'full' => array(
           'label' => 'above',
@@ -5985,7 +5987,7 @@ function s4_sites_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => '20',
+          'weight' => '18',
         ),
         'full' => array(
           'label' => 'above',
@@ -6293,11 +6295,11 @@ function s4_sites_field_default_fields() {
       'description' => 'Enter the URL to this site\'s website.',
       'display' => array(
         'default' => array(
-          'label' => 'above',
+          'label' => 'hidden',
           'module' => 'link',
           'settings' => array(),
           'type' => 'link_default',
-          'weight' => '17',
+          'weight' => '12',
         ),
         'full' => array(
           'label' => 'above',
@@ -6326,13 +6328,14 @@ function s4_sites_field_default_fields() {
       ),
       'display_label' => '',
       'entity_type' => 'node',
+      'field_lock' => 0,
       'field_name' => 'field_website',
       'label' => 'Website',
       'required' => 0,
       's4_sites_field_access' => 1,
       'settings' => array(
         'attributes' => array(
-          'class' => 'site-website',
+          'class' => 'btn btn-small',
           'configurable_title' => 0,
           'rel' => '',
           'target' => '_blank',
@@ -6343,7 +6346,8 @@ function s4_sites_field_default_fields() {
           'url_cutoff' => '80',
         ),
         'enable_tokens' => 1,
-        'title' => 'none',
+        'rel_remove' => 'default',
+        'title' => 'value',
         'title_maxlength' => '128',
         'title_value' => 'Visit Website',
         'url' => 0,

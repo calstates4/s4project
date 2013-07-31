@@ -149,7 +149,7 @@ function s4_sites_strongarm() {
       'display' => array(
         's4_core_signup_select_site' => array(
           'default' => array(
-            'weight' => '2',
+            'weight' => '3',
             'visible' => TRUE,
           ),
           'search_index' => array(
