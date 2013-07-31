@@ -114,7 +114,7 @@ function s4_core_node_view($node, $view_mode) {
   }
   if ($node->type == 'site' && s4_core_user_can_signup()) {
     if (!s4_core_signup_access($node)) {
-      $output = '<div class="btn disabled"><i class="icon-remove"> You can\'t sign up for this site.</div>';
+      $output = '<div class="btn disabled"><i class="icon-remove"></i> You can\'t sign up for this site.</div>';
     }
     else {
       $output = l('<i class="icon-ok-circle icon-white"></i> ' . t('Select this site'), 's4/signup/site/' . $node->nid,
