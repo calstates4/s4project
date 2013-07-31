@@ -31,7 +31,7 @@
     <ul class="nav nav-tabs in-page-tabs" id="site-tabs">
       <li class="active"><a href="#details">Details</a></li>
       <?php if($risks): ?>
-        <li><a href="#risks">Risks</a></li>
+        <li><a class="text-error" href="#risks">Risks</a></li>
       <?php endif; ?>
       <?php if($staff): ?>
         <li><a href="#staff">Site staff</a></li>
@@ -40,7 +40,8 @@
         <li><a href="#demographics">Population &amp; Language</a></li>
       <?php endif; ?>
       <?php if($opportunities): ?>
-        <li><a href="#opportunities">Opportunities</a></li>
+        <?php $count = s4_opportunity_get_site_opportunities($node->nid); ?>
+        <li><a href="#opportunities">Opportunities <span class="badge badge-important"><?php print count($count); ?></span></a></li>
       <?php endif; ?>
       <?php if($hours): ?>
         <li><a href="#hours">Hours</a></li>
