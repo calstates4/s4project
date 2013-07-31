@@ -9,6 +9,17 @@ include_once(drupal_get_path('theme', 's4') . '/includes/modules/admin.inc');
 include_once(drupal_get_path('theme', 's4') . '/includes/modules/menu.inc');
 include_once(drupal_get_path('theme', 's4') . '/includes/modules/views.inc');
 
+/**
+ * Helper function to return even/odd classes
+ */
+function s4_even_odd($reset = FALSE) {
+  $even = &drupal_static(__FUNCTION__, FALSE);
+  if($reset) {
+    $even = FALSE;
+  }
+  $even = !$even;
+  return ($even) ? 'even' : 'odd';
+}
 
 /**
 *  Add more body classes for the toolbar

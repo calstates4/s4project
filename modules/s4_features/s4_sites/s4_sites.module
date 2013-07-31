@@ -522,15 +522,10 @@ function s4_sites_block_view($delta) {
       if(!$node || $node->type != 'site') {
         return;
       }
-      
-        return array('content' => t('This site is full'));
-      $max = field_get_items('node', $node, 'field_signups_max');
-      if(!$max || $max[0]['value'] == 0) {
-        return;
+      if(_s4_core_object_is_full($node, FALSE, TRUE)) {
+        return array('content' => '<div class="alert alert-danger"><h3>'. t('This site is full') .'</h3></div>');
       }
-      if(_s4_core_object_is_full($node)) {
-        return array('content' => t('This site is full'));
-      }
+      break;
     case 's4_sites_add_log' :
       $site = menu_get_object();
       $output = '<div class="btn-group">';
@@ -1350,6 +1345,10 @@ function s4_sites_ds_layout_info() {
         'risks' => t('Risks'),
         'staff' => t('Site staff'),
         'hours' => t('Hours'),
+        'opportunities' => t('Opportunities'),
+        'demographics' => t('Demographics'),
+        'language' => t('Language'),
+        'population' => t('Population'),
       ),
       'css' => TRUE,
       'form' => TRUE

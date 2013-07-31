@@ -73,6 +73,9 @@ body .navbar-inner {
 body .navbar .container {
   width: 940px;
 }
+body address {
+  margin: 0;
+}
 @media (max-width: 767px) {
   body .navbar .container {
     width: auto;

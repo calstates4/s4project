@@ -184,11 +184,11 @@ function s4_core_signup_access($node, $user = FALSE) {
 /**
  * Returns if an object (site or site staff) is already full.
  */
-function _s4_core_object_is_full($node, $user = FALSE) {
+function _s4_core_object_is_full($node, $user = FALSE, $ignore_access = FALSE) {
   if (!$user) {
     global $user;
   }
-  if (user_access('ignore maximum limits on site', $user)) {
+  if (user_access('ignore maximum limits on site', $user) && !$ignore_access) {
     return FALSE;
   }
   $max = field_get_items('node', $node, 'field_signups_max');
