@@ -1,6 +1,7 @@
 <div class="row">
 	<div class="span12">
 		<?php print $form; ?>
+	</div>
 </div>
 <div class="row">
 	<div class="span12">
