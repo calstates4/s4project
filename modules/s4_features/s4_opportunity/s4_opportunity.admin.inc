@@ -64,28 +64,21 @@ class s4OpportunityUIController extends EntityDefaultUIController {
     }
 
     // Loading and editing s4_opportunity entities
-    $items[$this->path . '/opportunity/' . $wildcard] = array(
+    $items['opportunity/' . $wildcard .'/edit'] = array(
       'page callback' => 's4_opportunity_form_wrapper',
-      'page arguments' => array($id_count + 1),
+      'page arguments' => array(1),
       'access callback' => 's4_opportunity_access',
       'access arguments' => array('edit', $id_count + 1),
       'weight' => 0,
-      'context' => MENU_CONTEXT_PAGE | MENU_CONTEXT_INLINE,
       'file' => 's4_opportunity.admin.inc',
-      'file path' => drupal_get_path('module', $this->entityInfo['module'])
-    );
-    $items['opportunity/' . $wildcard . '/edit'] = array(
-      'title' => 'Edit',
-      'type' => MENU_DEFAULT_LOCAL_TASK,
-      'weight' => -10,
-      'page arguments' => array(1),
-      'context' => MENU_CONTEXT_PAGE | MENU_CONTEXT_INLINE,
+      'file path' => drupal_get_path('module', $this->entityInfo['module']),
+      'type' => MENU_LOCAL_TASK
     );
     
     $items['opportunity/' . $wildcard . '/delete'] = array(
       'title' => 'Delete',
       'page callback' => 's4_opportunity_delete_form_wrapper',
-      'page arguments' => array($id_count + 1),
+      'page arguments' => array(1),
       'access callback' => 's4_opportunity_access',
       'access arguments' => array('edit', 1),
       'type' => MENU_LOCAL_TASK,
@@ -95,7 +88,7 @@ class s4OpportunityUIController extends EntityDefaultUIController {
       'file path' => drupal_get_path('module', $this->entityInfo['module'])
     );
     
-    // Menu item for viewing opportunities
+    // Menu item for viewing s4_opportunitys
     $items['opportunity/' . $wildcard] = array(
       //'title' => 'Title',
       'title callback' => 's4_opportunity_page_title',
@@ -104,8 +97,16 @@ class s4OpportunityUIController extends EntityDefaultUIController {
       'page arguments' => array(1),
       'access callback' => 's4_opportunity_access',
       'access arguments' => array('view', 1),
-      'type' => MENU_CALLBACK,
+      'type' => MENU_LOCAL_TASK,
     );
+
+    // Menu item for viewing s4_opportunitys
+    $items['opportunity/' . $wildcard .'/view'] = array(
+      'title' => 'View',
+      'type' => MENU_DEFAULT_LOCAL_TASK,
+      'weight' => -1
+    );
+
     return $items;
   }
   
@@ -140,6 +141,7 @@ class s4OpportunityUIController extends EntityDefaultUIController {
 function s4_opportunity_form_wrapper($s4_opportunity) {
   // Add the breadcrumb for the form's location.
   s4_opportunity_set_breadcrumb();
+  drupal_set_title($s4_opportunity->name);
   return drupal_get_form('s4_opportunity_edit_form', $s4_opportunity);
 }
 

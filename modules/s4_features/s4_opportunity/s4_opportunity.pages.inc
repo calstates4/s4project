@@ -504,17 +504,56 @@ function s4_opportunity_placement_approve() {
 	return theme('table', array('header' => $header, 'rows' => $rows));
 }
 
-function s4_opportunity_place_self_confirm($form, $form_state, $opportunity, $type, $entity_id) {
+function s4_opportunity_place_self_confirm($form, $form_state, $opportunity, $placement_type, $entity_id) {
 	$form = array();
+	$type = s4_opportunity_load($opportunity->type);
+
+	$form['opportunity'] = array(
+		'#type' => 'value',
+		'#value' => $opportunity,
+		);
+
+	$form['placement_type'] = array(
+		'#type' => 'value',
+		'#value' => $placement_type,
+		);
+
+	$form['entity_id'] = array(
+		'#type' => 'value',
+		'#value' => $entity_id,
+		);
+
 	$form = confirm_form($form,
-    t('Are you sure you want to place ?', array('%type' => $type->label, 
-      '%name' => $s4_opportunity->name)),
+    t('Are you sure you want to place with the @type %name?', array('@type' => $type->label, 
+      '%name' => $opportunity->name)),
     'admin/content/opportunities/s4_opportunity',
     '<p>' . t('This action cannot be undone.') . '</p>',
-    t('Delete'),
+    t('Make placement'),
     t('Cancel'),
     'confirm'
   );
 
 	return $form;
+}
+
+function s4_opportunity_place_self_confirm_submit($form, $form_state) {
+	global $user;
+	if($form_state['values']['placement_type'] == 'course') {
+		$course = node_load($form_state['values']['placement_type']);
+	}
+	
+	$endpoints = array(array('entity_type' => 'user', 'entity_id' => $user->uid),
+												 array('entity_type' => 's4_opportunity', 'entity_id' => $form_state['values']['opportunity']->s4_opportunity_id));
+	$relation = relation_create('opportunity_placement', $endpoints);
+	$staff = field_get_items('s4_opportunity', $form_state['values']['opportunity'], 'field_opportunity_site_staff');
+	if($staff[0]['entity_id']) {
+		$relation->field_coordinator[LANGUAGE_NONE][0]['nid'] = $staff[0]['entity_id'];	
+	}
+	if($course) {
+		$relation->field_course[LANGUAGE_NONE][0]['nid'] = $course->nid;
+	}
+	$id = relation_save($relation);
+	drupal_set_message(t('Your request to be placed with @name has been submitted. Thank you.', array('@name' => $opporutnity->name)), 'success');
+	$_SESSION['s4_opportunity_create'] = FALSE;
+	drupal_goto('opportunities/create/done');
 }

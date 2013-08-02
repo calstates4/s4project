@@ -68,12 +68,12 @@ function s4_courses_ds_layout_settings_info() {
   $ds_layout->settings = array(
     'regions' => array(
       'ds_content' => array(
-        0 => 'field_site_restrict_to_list',
+        0 => 'field_sites',
         1 => 'course_students',
       ),
     ),
     'fields' => array(
-      'field_site_restrict_to_list' => 'ds_content',
+      'field_sites' => 'ds_content',
       'course_students' => 'ds_content',
     ),
     'classes' => array(),

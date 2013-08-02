@@ -207,7 +207,7 @@ function s4_sites_site_log($node) {
                    theme('username', array('account' => user_load($item->uid))),
                    $note,
                    l('edit', 'node/'. $item->nid .'/edit', array('query' => array('destination' => 'node/'. $node->nid .'/log'), 
-                      'attributes' => array('class' => array('btn')))));
+                      'attributes' => array('class' => array('btn', 'btn-small', 'btn-info')))));
     }
     else {
       if(in_array($types, array('approval', 'any'))) {
@@ -255,7 +255,7 @@ function s4_sites_site_log($node) {
         }
         $action = '';
         if($node->vid != $revision['vid'] && $revision['vid'] != $node->workbench_moderation['current']->vid) {
-          $action = l('revert', 'node/'. $node->nid .'/revisions/' . $revision['vid'] .'/revert', array('attributes' => array('class' => array('btn'))));
+          $action = l('revert', 'node/'. $node->nid .'/revisions/' . $revision['vid'] .'/revert', array('attributes' => array('class' => array('btn', 'btn-small', 'btn-danger'))));
         }
         $rows[] = array('data' => array(format_date($revision['timestamp'], 'short'),
                                    t('Version'),

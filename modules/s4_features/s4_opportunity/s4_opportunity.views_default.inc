@@ -977,8 +977,13 @@ Site',
   $handler->display->display_options['empty']['area']['table'] = 'views';
   $handler->display->display_options['empty']['area']['field'] = 'area';
   $handler->display->display_options['empty']['area']['empty'] = TRUE;
-  $handler->display->display_options['empty']['area']['content'] = '<p class="lead">No opportunities yet! Use the form to the right to create one.</p>';
+  $handler->display->display_options['empty']['area']['content'] = '<p class="lead">No opportunities yet! Use the button above to create one.</p>';
   $handler->display->display_options['empty']['area']['format'] = 'full_html';
+  /* Field: Opportunity: ID */
+  $handler->display->display_options['fields']['s4_opportunity_id']['id'] = 's4_opportunity_id';
+  $handler->display->display_options['fields']['s4_opportunity_id']['table'] = 's4_opportunity';
+  $handler->display->display_options['fields']['s4_opportunity_id']['field'] = 's4_opportunity_id';
+  $handler->display->display_options['fields']['s4_opportunity_id']['exclude'] = TRUE;
   /* Field: Opportunity: Name */
   $handler->display->display_options['fields']['name']['id'] = 'name';
   $handler->display->display_options['fields']['name']['table'] = 's4_opportunity';
@@ -999,15 +1004,32 @@ Site',
   $handler->display->display_options['fields']['type']['table'] = 's4_opportunity';
   $handler->display->display_options['fields']['type']['field'] = 'type';
   $handler->display->display_options['fields']['type']['label'] = 'Type';
+  /* Field: Opportunity: Delete Link */
+  $handler->display->display_options['fields']['delete_s4_opportunity']['id'] = 'delete_s4_opportunity';
+  $handler->display->display_options['fields']['delete_s4_opportunity']['table'] = 's4_opportunity';
+  $handler->display->display_options['fields']['delete_s4_opportunity']['field'] = 'delete_s4_opportunity';
+  $handler->display->display_options['fields']['delete_s4_opportunity']['label'] = 'Delete';
+  /* Field: Opportunity: Edit Link */
+  $handler->display->display_options['fields']['edit_s4_opportunity']['id'] = 'edit_s4_opportunity';
+  $handler->display->display_options['fields']['edit_s4_opportunity']['table'] = 's4_opportunity';
+  $handler->display->display_options['fields']['edit_s4_opportunity']['field'] = 'edit_s4_opportunity';
+  $handler->display->display_options['fields']['edit_s4_opportunity']['label'] = 'Edit';
   /* Contextual filter: Opportunity: Sites (field_opportunity_sites) */
   $handler->display->display_options['arguments']['field_opportunity_sites_target_id']['id'] = 'field_opportunity_sites_target_id';
   $handler->display->display_options['arguments']['field_opportunity_sites_target_id']['table'] = 'field_data_field_opportunity_sites';
   $handler->display->display_options['arguments']['field_opportunity_sites_target_id']['field'] = 'field_opportunity_sites_target_id';
   $handler->display->display_options['arguments']['field_opportunity_sites_target_id']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['field_opportunity_sites_target_id']['title_enable'] = TRUE;
+  $handler->display->display_options['arguments']['field_opportunity_sites_target_id']['title'] = '%1';
   $handler->display->display_options['arguments']['field_opportunity_sites_target_id']['default_argument_type'] = 'node';
   $handler->display->display_options['arguments']['field_opportunity_sites_target_id']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['field_opportunity_sites_target_id']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['field_opportunity_sites_target_id']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['field_opportunity_sites_target_id']['specify_validation'] = TRUE;
+  $handler->display->display_options['arguments']['field_opportunity_sites_target_id']['validate']['type'] = 'node';
+  $handler->display->display_options['arguments']['field_opportunity_sites_target_id']['validate_options']['types'] = array(
+    'site' => 'site',
+  );
   /* Filter criterion: Field: Program(s) (field_site_restrict) */
   $handler->display->display_options['filters']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
   $handler->display->display_options['filters']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
@@ -1041,6 +1063,84 @@ Site',
   $handler->display->display_options['menu']['weight'] = '0';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
+
+  /* Display: Public opportunities list */
+  $handler = $view->new_display('block', 'Public opportunities list', 'block_1');
+  $handler->display->display_options['defaults']['css_class'] = FALSE;
+  $handler->display->display_options['css_class'] = 'search-results';
+  $handler->display->display_options['defaults']['access'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'none';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'semanticviews_default';
+  $handler->display->display_options['style_options']['row']['class'] = 'search-result row';
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['empty'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Opportunity: Name */
+  $handler->display->display_options['fields']['name']['id'] = 'name';
+  $handler->display->display_options['fields']['name']['table'] = 's4_opportunity';
+  $handler->display->display_options['fields']['name']['field'] = 'name';
+  $handler->display->display_options['fields']['name']['label'] = '';
+  $handler->display->display_options['fields']['name']['element_type'] = 'h3';
+  $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['name']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['name']['link'] = 1;
+  /* Field: Field: Program(s) */
+  $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
+  $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
+  $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
+  $handler->display->display_options['fields']['field_site_restrict']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_site_restrict']['delta_offset'] = '0';
+  /* Field: Field: Site staff */
+  $handler->display->display_options['fields']['field_coordinator']['id'] = 'field_coordinator';
+  $handler->display->display_options['fields']['field_coordinator']['table'] = 'field_data_field_coordinator';
+  $handler->display->display_options['fields']['field_coordinator']['field'] = 'field_coordinator';
+  /* Field: Opportunity: Opportunity type */
+  $handler->display->display_options['fields']['type']['id'] = 'type';
+  $handler->display->display_options['fields']['type']['table'] = 's4_opportunity';
+  $handler->display->display_options['fields']['type']['field'] = 'type';
+  $handler->display->display_options['fields']['type']['label'] = 'Type';
+  /* Field: Opportunity: Make placement */
+  $handler->display->display_options['fields']['make_placement']['id'] = 'make_placement';
+  $handler->display->display_options['fields']['make_placement']['table'] = 's4_opportunity';
+  $handler->display->display_options['fields']['make_placement']['field'] = 'make_placement';
+  $handler->display->display_options['fields']['make_placement']['label'] = '';
+  $handler->display->display_options['fields']['make_placement']['element_label_colon'] = FALSE;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Field: Program(s) (field_site_restrict) */
+  $handler->display->display_options['filters']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['group'] = 1;
+  $handler->display->display_options['filters']['field_site_restrict_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['operator_id'] = 'field_site_restrict_tid_op';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['label'] = 'Program(s)';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['operator'] = 'field_site_restrict_tid_op';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['identifier'] = 'field_site_restrict_tid';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    4 => 0,
+    6 => 0,
+    3 => 0,
+    5 => 0,
+    7 => 0,
+    8 => 0,
+    9 => 0,
+  );
+  $handler->display->display_options['filters']['field_site_restrict_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['vocabulary'] = 'site_restrictions';
+  /* Filter criterion: Opportunity: Status */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 's4_opportunity';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
+  $handler->display->display_options['block_description'] = 'Site opportunities';
   $translatables['s4_opportunity_site_opportunities'] = array(
     t('Master'),
     t('Opportunities'),
@@ -1057,14 +1157,20 @@ Site',
     t('‹ previous'),
     t('next ›'),
     t('last »'),
-    t('<p class="lead">No opportunities yet! Use the form to the right to create one.</p>'),
+    t('<p class="lead">No opportunities yet! Use the button above to create one.</p>'),
+    t('ID'),
     t('Name'),
     t('1'),
     t('Program(s)'),
     t('Site staff'),
     t('Type'),
+    t('Delete'),
+    t('Edit'),
     t('All'),
+    t('%1'),
     t('Opportunity site tab'),
+    t('Public opportunities list'),
+    t('Site opportunities'),
   );
   $export['s4_opportunity_site_opportunities'] = $view;
 

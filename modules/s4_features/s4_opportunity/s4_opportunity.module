@@ -349,6 +349,15 @@ function s4_opportunity_page_view($s4_opportunity, $view_mode = 'full') {
   $controller = entity_get_controller('s4_opportunity');
   $content = $controller->view(array($s4_opportunity->s4_opportunity_id => $s4_opportunity));
   drupal_set_title($s4_opportunity->name);
+  $site = field_get_items('s4_opportunity', $s4_opportunity, 'field_opportunity_sites');
+  $site = node_load($site[0]['target_id']);
+  drupal_set_breadcrumb(
+    array(l(t('Home'), '<front>'),
+          l(t('Sites'), 'site-list'),
+          l($site->title, 'node/'. $site->nid),
+          $s4_opportunity->name
+    )
+  );
   return $content;
 }
 
@@ -1052,6 +1061,14 @@ function s4_opportunity_views_data_alter(&$data) {
       'handler' => 's4_opportunity_handler_s4_opportunity_operations_field',
     ),
   );
+
+  $data['s4_opportunity']['make_placement'] = array(
+    'field' => array(
+      'title' => t('Make placement'),
+      'help' => t('Shows a make placement button by the opportunity.'),
+      'handler' => 's4_opportunity_handler_s4_opportunity_make_placement_field',
+    ),
+  );
 }
 
 /**
@@ -1465,4 +1482,21 @@ function s4_opportunity_s4_student_signup_list_alter(&$list, $values) {
     $list[] = t('@type: !link', array('@type' => $type->label, '!link' => l($opportunity['opportunity']->name, 'relation/'. $rid)));
   }
 
+}
+
+function _s4_opportunity_place_button($opportunity = false) {
+  if(!$opportunity) {
+    $menu = menu_get_item();
+    if($menu['load_functions'][1] != 's4_opportunity_load') {
+      return;
+    }
+    $opportunity = $menu['page_arguments'][0];
+  }
+  $type = s4_opportunity_type_load($opportunity->type);
+  if($type->data['students_can_place'] && isset($_SESSION['s4_signup_course']) || isset($_SESSION['s4_signup_program'])) {
+    $destination = (isset($_SESSION['s4_signup_course'])) ? 'course' : 'program';
+    $destination_id = (isset($_SESSION['s4_signup_course'])) ? $_SESSION['s4_signup_course'] : array_pop($_SESSION['s4_signup_program']);
+    return l(t('Select this @type', array('@type' => $type->label)),'opportunities/place/self/'. $opportunity->s4_opportunity_id .'/'.  $destination .'/'. $destination_id,
+          array('attributes' => array('class' => array('btn', 'btn-success'))));
+  }
 }

@@ -43,19 +43,25 @@ function s4_opportunity_default_s4_opportunity_type() {
     "weight" : "0",
     "data" : {
       "students_can_place" : 1,
-      "programs" : [],
+      "programs" : { "135" : 0, "2" : 0, "1" : 0, "139" : 0, "138" : 0 },
       "placement_form" : "810",
       "faculty_approve" : 1,
       "site_staff_approve" : 1,
       "require_approval" : 1,
       "description" : { "value" : "", "format" : "filtered_html" },
-      "email_enable" : 0,
-      "email_subject" : "",
-      "email_body" : { "value" : "", "format" : "filtered_html" },
+      "email_enable" : 1,
+      "email_subject" : "Your placement",
+      "email_body" : {
+        "value" : "\\u003Cp\\u003EIs aWESOME!\\u003C\\/p\\u003E\\r\\n",
+        "format" : "filtered_html"
+      },
       "approval_email_subject" : "Approve, yo!",
       "approval_email_body" : { "value" : "", "format" : "filtered_html" },
-      "site_staff_approval_email_subject" : "",
-      "site_staff_approval_email_subject_body" : { "value" : "", "format" : "filtered_html" },
+      "site_staff_approval_email_subject" : "site staff approve",
+      "site_staff_approval_email_body" : {
+        "value" : "\\u003Cp\\u003Eapprove!\\u003C\\/p\\u003E\\r\\n",
+        "format" : "filtered_html"
+      },
       "approval_form_text" : { "value" : "", "format" : "filtered_html" }
     },
     "rdf_mapping" : []

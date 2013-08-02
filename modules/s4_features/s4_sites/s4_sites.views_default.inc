@@ -1153,15 +1153,26 @@ Location',
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = '';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
   /* Field: Field: Last Name */
   $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
   $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
   $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
+  $handler->display->display_options['fields']['field_last_name']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['field_last_name']['alter']['path'] = 'node/[nid]';
   $handler->display->display_options['fields']['field_last_name']['hide_alter_empty'] = FALSE;
   /* Field: Field: First Name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
+  $handler->display->display_options['fields']['field_first_name']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['field_first_name']['alter']['path'] = 'node/[nid]';
   $handler->display->display_options['fields']['field_first_name']['hide_alter_empty'] = FALSE;
   /* Field: Field: Program(s) */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
@@ -1214,29 +1225,15 @@ Location',
   $handler->display->display_options['fields']['field_site_staff_active']['id'] = 'field_site_staff_active';
   $handler->display->display_options['fields']['field_site_staff_active']['table'] = 'field_data_field_site_staff_active';
   $handler->display->display_options['fields']['field_site_staff_active']['field'] = 'field_site_staff_active';
-  /* Field: Content: Edit link */
-  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['label'] = 'Edit';
-  $handler->display->display_options['fields']['edit_node']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['edit_node']['hide_alter_empty'] = FALSE;
-  /* Field: Content: Link */
-  $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
-  $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
-  $handler->display->display_options['fields']['view_node']['label'] = '';
-  $handler->display->display_options['fields']['view_node']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['view_node']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['view_node']['alter']['text'] = 'view';
-  $handler->display->display_options['fields']['view_node']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['view_node']['hide_alter_empty'] = FALSE;
   /* Field: Global: Custom text */
-  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
-  $handler->display->display_options['fields']['nothing']['table'] = 'views';
-  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
-  $handler->display->display_options['fields']['nothing']['label'] = 'Options';
-  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[view_node] | [edit_node]';
+  $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
+  $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing_1']['label'] = 'Edit';
+  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = 'edit';
+  $handler->display->display_options['fields']['nothing_1']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['nothing_1']['alter']['path'] = 'node/[nid]/edit';
+  $handler->display->display_options['fields']['nothing_1']['alter']['link_class'] = 'btn btn-small btn-info';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Type */
@@ -1430,9 +1427,7 @@ Location',
     t('Register?'),
     t('Active'),
     t('Edit'),
-    t('view'),
-    t('Options'),
-    t('[view_node] | [edit_node]'),
+    t('edit'),
     t('First name'),
     t('Last name'),
     t('Program'),
