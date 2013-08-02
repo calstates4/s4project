@@ -1817,6 +1817,15 @@ function s4_core_s4_frontpage_blocks() {
         'alert' => TRUE,
       );
   }
+  $programs = views_get_view_result('s4_user_programs', 'block', $user->uid);
+  if($programs) {
+    $blocks['user_programs'] = array(
+        'subject' => t('Make a placement'),
+        'content' => '<p class="lead">'. format_plural(count($programs), 'You can place as part of a program.', 'You are part of @count programs.') .'</p>' .
+          views_embed_view('s4_user_programs', 'block', $user->uid),
+        'alert' => TRUE,
+      );
+  }
   $placements = views_get_view_result('user_signups', 'block', $user->uid);
   if($placements) {
     $blocks['placements'] = array(
