@@ -3,7 +3,6 @@
 		
 		attach : function() {
 			$('#search input[type=text]').placeholder();
-			
 			$('#footer-map .map').css('height', $('#footer-map').height() + 'px');
 			
 			if($('.horizontal-tabs-panes').length) {
@@ -75,7 +74,13 @@
 				$('#modal-iframe iframe').attr('src', $(this).attr('href'))
 												  			 .css('height', ($(window).height() * .7) + 'px');
 				$('#modal-iframe').modal({ show : true });
-			})
+			});
+
+			
+			if(window.location.hash && $(window.location.hash).hasClass('tab-pane')) {
+				$('a[href=' + window.location.hash +']').trigger('click');
+			}
+
 		},
 
 		closeModal : function(refresh) {
