@@ -14,7 +14,6 @@ api = 2
 
 projects[captcha][subdir] = "contrib"
 projects[captcha][version] = "1.x-dev"
-projects[captcha][patch][] = "http://drupal.org/files/captcha-918856-session-reuse-124.patch"
 
 projects[cck][subdir] = "contrib"
 projects[cck][version] = "2.x-dev"
