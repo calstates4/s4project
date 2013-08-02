@@ -67,7 +67,7 @@ function s4_sites_menu() {
     'file' => 's4_sites.pages.inc'
   );
 
-  $items['node/%node/log'] = array(
+  $items['node/%node/site-log'] = array(
     'title' => 'Log',
     'type' => MENU_LOCAL_TASK,
     'page callback' => 's4_sites_site_log',
@@ -793,7 +793,7 @@ function s4_sites_form_site_node_form_alter(&$form, $form_state) {
     $form['actions']['delete']['#weight'] = 4;
     $form['actions_bottom'] = $form['actions'];
 		$form['actions_bottom']['#weight'] = 40;
-    foreach(array('submit', 'unpublish', 'delete') as $type) {
+    foreach(array('submit', 'unpublish', 'delete', 'preview') as $type) {
       $form['actions']['publish_now']['#drop_down'][$type] = $form['actions'][$type];
       $form['actions']['publish_now']['#drop_down'][$type]['#prefix'] = '<li>';
       $form['actions']['publish_now']['#drop_down'][$type]['#suffix'] = '</li>';
