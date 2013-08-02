@@ -44,13 +44,26 @@
 	</div>
 	<div class="span3 tags">
 		<ul class="nav nav-stacked nav-details">
-			<li class="odd">
+			<?php s4_even_odd(TRUE); ?>
+			<?php if(strlen(trim($row->field_field_website[0]['raw']['url']))): ?>
+				<li class="<?php print s4_even_odd(); ?>">
+					<?php print l(t('Visit website'), trim($row->field_field_website[0]['raw']['url']),
+							array('attributes' => array('target' => '_blank',
+									'class' => array('btn')))); ?>
+				</li>
+			<?php endif; ?>
+			<?php if($fields['field_phone']->content && strlen(trim($row->field_field_phone[0]['raw']['number']))): ?>
+				<li class="<?php print s4_even_odd(); ?> lead">
+					<?php print $fields['field_phone']->content; ?>
+				</li>
+			<?php endif; ?>
+			<li class="<?php print s4_even_odd(); ?>">
 				<?php print $fields['field_site_restrict']->content; ?>
 			</li>
-			<li class="even">
+			<li class="<?php print s4_even_odd(); ?>">
 				<strong>Type:</strong> <?php print $fields['field_csu_org_type']->content; ?>
 			</li>
-			<li class="odd last">
+			<li class="<?php print s4_even_odd(); ?> last">
 				<strong>Issues:</strong> <?php print $fields['field_csu_facility']->content; ?>
 			</li>
 		</ul>
