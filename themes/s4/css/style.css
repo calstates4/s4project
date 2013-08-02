@@ -385,7 +385,8 @@ body .vertical-tabs .form-type-textfield input {
 .overlay .breadcrumb,
 .overlay h1.title,
 .overlay #branding,
-.overlay #admin-menu {
+.overlay #admin-menu,
+.overlay .page-header {
   display: none;
 }
 #page .views-exposed-form .row {

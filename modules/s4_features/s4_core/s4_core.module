@@ -539,6 +539,18 @@ function s4_core_get_user_signups($uid) {
   return $signups;
 }
 
+function s4_core_form_node_delete_confirm_alter(&$form) {
+  if($form['#node']->type != 'signup' || !isset($_GET['modal'])) {
+    return;
+  }
+  $form['#modal'] = TRUE;
+  $form['#submit'][] = 's4_core_form_node_delete_confirm_alter_submit';
+}
+
+function s4_core_form_node_delete_confirm_alter_submit($form, $form_state) {
+  s4_core_modal_close(true);
+}
+
 /**
 *  Menu callback when the signup is completed
 */
