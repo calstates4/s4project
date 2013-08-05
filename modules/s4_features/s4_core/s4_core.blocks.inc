@@ -26,7 +26,7 @@ function s4_core_block_user_progress() {
     $status['program'] = array('data'  => 'Program',
             'id'     => 'status-program',
             'class'  => array('done'),
-            'selection' => '<div class="selection label label-info">' . $program->name .'</div>',
+            'selection' => '<div class="selection">' . $program->name .'</div>',
             );
   }
   $status['site'] = array('data'  => 'Site',
@@ -40,7 +40,7 @@ function s4_core_block_user_progress() {
       $site_coordinators = views_get_view_result('site_coordinators', 'block', $site->nid);
     }
     if (isset($coordinator)) {
-      $coordinator_selection = '<div class="selection label label-info">' .
+      $coordinator_selection = '<div class="selection">' .
             l($coordinator->title, 'node/' . $coordinator->nid) . '</div>';
     }
     if (!$site || count($site_coordinators)) {

@@ -225,9 +225,9 @@ libraries[markerclusterer][destination] = "modules/contrib/gmap/thirdparty"
 ; Download Signature Pad as a library
 libraries[signature-pad][download][type] = "git"
 libraries[signature-pad][download][url] = "https://github.com/thomasjbradley/signature-pad.git"
+libraries[signature-pad][download][revision] = "f1d8798886a81b50816206080fe36ea39602f4b9"
 libraries[signature-pad][directory_name] = "signature-pad"
 libraries[signature-pad][destination] = "libraries"
-libraries[signature-pad][revision] = "f1d8798886a81b50816206080fe36ea39602f4b9"
 
 ; Patches
 projects[wysiwyg][patch][] = "http://drupal.org/files/issues/wysiwyg-entity-exportables-624018-176_1.patch"

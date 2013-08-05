@@ -58,7 +58,7 @@ function s4_opportunity_create_progress() {
 	            'id'     => 'status-type',
 	            'class'  => array('done'),
 	            'href'  => null,
-	            'selection' => '<div class="selection label label-info">' . $type->label .'</div>',
+	            'selection' => '<div class="selection">' . $type->label .'</div>',
 	            );
   }
   else {
@@ -76,7 +76,7 @@ function s4_opportunity_create_progress() {
 	            'id'     => 'status-type',
 	            'class'  => array('done'),
 	            'href'  => null,
-	            'selection' => '<div class="selection label label-info">' . $site->title .'</div>',
+	            'selection' => '<div class="selection">' . $site->title .'</div>',
 	            );
   }
   else {
@@ -93,7 +93,7 @@ function s4_opportunity_create_progress() {
 	            'id'     => 'status-type',
 	            'class'  => array('done'),
 	            'href'  => null,
-	            'selection' => '<div class="selection label label-info">' . $site->site_staff .'</div>',
+	            'selection' => '<div class="selection">' . $site->site_staff .'</div>',
 	            );
   }
   else {
@@ -109,7 +109,7 @@ function s4_opportunity_create_progress() {
 	            'id'     => 'status-type',
 	            'class'  => array('done'),
 	            'href'  => null,
-	            'selection' => '<div class="selection label label-info">' . $opportunity->name .'</div>',
+	            'selection' => '<div class="selection">' . $opportunity->name .'</div>',
 	            );
   }
   else {
@@ -127,7 +127,7 @@ function s4_opportunity_create_progress() {
 		            'id'     => 'status-type',
 		            'class'  => array('done'),
 		            'href'  => null,
-		            'selection' => '<div class="selection label label-info">' . $opportunity->name .'</div>',
+		            'selection' => '<div class="selection">' . $opportunity->name .'</div>',
 		            );
 	  }
 	  else {
@@ -145,7 +145,7 @@ function s4_opportunity_create_progress() {
 		            'id'     => 'status-type',
 		            'class'  => array('done'),
 		            'href'  => null,
-		            'selection' => '<div class="selection label label-info">' . $course->name .'</div>',
+		            'selection' => '<div class="selection">' . $course->name .'</div>',
 		            );
 	  }
 	  else {
