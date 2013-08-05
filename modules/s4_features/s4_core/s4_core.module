@@ -1281,12 +1281,8 @@ function s4_core_site_has_downloadable_forms($node) {
   if (!count($terms)) {
     return FALSE;
   }
-  $forms = db_select('field_data_field_site_restrict', 'r')
-           ->fields('r', array('entity_id'))
-           ->condition('bundle', 'downloadable_form')
-           ->condition('field_site_restrict_tid', $terms, 'IN')
-           ->execute()
-           ->fetchAllKeyed(0, 0);
+  $forms = views_get_view_result('site_forms', 'page_3', implode('+', $terms));
+
   return (count($forms)) ? $terms : FALSE;
 }
 

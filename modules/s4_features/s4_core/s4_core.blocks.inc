@@ -62,7 +62,7 @@ function s4_core_block_user_progress() {
               'selection' => FALSE
               );
     }
-    $form_terms = s4_core_site_has_downloadable_forms($site);
+    $form_terms = s4_core_site_has_downloadable_forms($site, TRUE);
     if (count($form_terms) && !$_SESSION['s4_core_viewed_downloadable_forms']) {
       $status['form'] = array('data' => 'Forms',
               'id'   => 'status-form',

@@ -40,7 +40,7 @@ function s4_core_signup($type, $nid) {
       $instructions = field_get_items('node', $site, 'field_site_instructions_required', $node->language);
       $instruction_text = field_get_items('node', $site, 'field_site_instructions');
       $locations = field_get_items('node', $site, 'field_location');
-      $form_terms = s4_core_site_has_downloadable_forms($site);
+      $form_terms = s4_core_site_has_downloadable_forms($site, TRUE);
       $program_forms = s4_core_program_has_downloadable_forms($_SESSION['s4_signup_program']);
       if ($_GET['agreed']) {
         $_SESSION['s4_signup_agreed'] = TRUE;
