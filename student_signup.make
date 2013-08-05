@@ -121,7 +121,7 @@ projects[nodereference_url][subdir] = "contrib"
 projects[nodereference_url][version] = "1.11"
 
 projects[options_element][subdir] = "contrib"
-projects[options_element][version] = "1.4"
+projects[options_element][version] = "1.9"
 
 projects[office_html][subdir] = "contrib"
 projects[office_html][version] = "1.0-alpha1"
