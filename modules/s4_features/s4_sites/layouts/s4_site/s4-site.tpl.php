@@ -40,8 +40,10 @@
         <li><a href="#demographics">Population &amp; Language</a></li>
       <?php endif; ?>
       <?php if($opportunities): ?>
-        <?php $count = s4_opportunity_get_site_opportunities($node->nid); ?>
-        <li><a href="#opportunities">Opportunities <span class="badge badge-important"><?php print count($count); ?></span></a></li>
+        <?php $opportunity_count = s4_opportunity_get_site_opportunities($node->nid); ?>
+        <?php if(count($opportunity_count)): ?>
+          <li><a href="#opportunities">Opportunities <span class="badge badge-important"><?php print count($opportunity_count); ?></span></a></li>
+        <?php endif; ?>
       <?php endif; ?>
       <?php if($hours): ?>
         <li><a href="#hours">Hours</a></li>
@@ -106,7 +108,7 @@
           </div>
         </div>
       <?php endif; ?>
-      <?php if($opportunities): ?>
+      <?php if($opportunities && count($opportunity_count)): ?>
         <div class="tab-pane fade" id="opportunities">  
           <?php print $opportunities; ?>
         </div>
