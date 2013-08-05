@@ -6492,68 +6492,6 @@ function s4_sites_field_default_fields() {
     ),
   );
 
-  // Exported field: 'taxonomy_term-site_restrictions-field_form_instructions'
-  $fields['taxonomy_term-site_restrictions-field_form_instructions'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '1',
-      'deleted' => '0',
-      'entity_types' => array(),
-      'field_name' => 'field_form_instructions',
-      'foreign keys' => array(
-        'format' => array(
-          'columns' => array(
-            'format' => 'format',
-          ),
-          'table' => 'filter_format',
-        ),
-      ),
-      'indexes' => array(
-        'format' => array(
-          0 => 'format',
-        ),
-      ),
-      'module' => 'text',
-      'settings' => array(),
-      'translatable' => '0',
-      'type' => 'text_long',
-    ),
-    'field_instance' => array(
-      'bundle' => 'site_restrictions',
-      'default_value' => NULL,
-      'deleted' => '0',
-      'description' => 'This message appears when users are viewing your paper forms and are in the process of signing up.',
-      'display' => array(
-        'default' => array(
-          'label' => 'above',
-          'module' => 'text',
-          'settings' => array(),
-          'type' => 'text_default',
-          'weight' => 1,
-        ),
-      ),
-      'display_label' => '',
-      'entity_type' => 'taxonomy_term',
-      'field_name' => 'field_form_instructions',
-      'label' => 'Downloadable form instructions',
-      'required' => 0,
-      'settings' => array(
-        'custom_add_another' => '',
-        'text_processing' => '1',
-        'user_register_form' => FALSE,
-      ),
-      'widget' => array(
-        'active' => 1,
-        'module' => 'text',
-        'settings' => array(
-          'rows' => '5',
-        ),
-        'type' => 'text_textarea',
-        'weight' => '5',
-      ),
-    ),
-  );
-
   // Exported field: 'taxonomy_term-site_restrictions-field_thank_you_message'
   $fields['taxonomy_term-site_restrictions-field_thank_you_message'] = array(
     'field_config' => array(
@@ -6633,7 +6571,6 @@ function s4_sites_field_default_fields() {
   t('County');
   t('Days and hours will you accept students for service (check all that apply)');
   t('Do you have a partnership with another CSU campus?');
-  t('Downloadable form instructions');
   t('Educational organization');
   t('Email address');
   t('Enable expiration reminder');
@@ -6694,7 +6631,6 @@ function s4_sites_field_default_fields() {
   t('These are other users (besides department staff) who can edit this site\'s information, along with information about associated coordinators.');
   t('This field is updated automatically based on the first location in the site.');
   t('This information will be displayed to students before they sign up. This could contain additional information the student needs to know when they sign up for issues like TB testing, background checks, or specialized training');
-  t('This message appears when users are viewing your paper forms and are in the process of signing up.');
   t('This will be shown to the public, so only include a generic email contact for the site.');
   t('Training and orientation information');
   t('Website');
