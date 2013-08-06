@@ -306,40 +306,32 @@ function s4_courses_form_course_node_form_alter(&$form, $form_state) {
   $form['title']['#required'] = FALSE;
 }
 
-function s4_courses_edit_course_restrict_form() {
+function s4_courses_edit_course_restrict_form($form_state) {
   $node = menu_get_object();
   $form = array();
 
   $default = field_get_items('node', $node, 'field_site_restrict_to_list');
   $default_email = field_get_items('node', $node, 'field_course_faculty_email');
-
-  $form['field_site_restrict_to_list'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Prevent students from placing with sites not assigned to this course.'),
-    '#default_value' => $default[0]['value'],
-  );
-
-  $form['field_course_faculty_email'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Send emails for this course with faculty email address.'),
-    '#default_value' => $default_email[0]['value'],
-  );
-
+  
+  field_attach_form('node', $node, $form, $form_state);
+  
+  foreach($form as $key => &$field) {
+    if(strpos($key, '#') !== 0 && !in_array($key, array('field_site_restrict_to_list', 'field_course_faculty_email'))) {
+        unset($form[$key]);
+    }
+  }
   $form['submit'] = array(
     '#type' => 'submit',
     '#value' => 'Update',
+    '#weight' => 40
   );
-
   return $form;
 }
 
 function s4_courses_edit_course_restrict_form_submit($form, $form_state) {
-  $node = menu_get_object();
-  $node->field_site_restrict_to_list[$node->language][0]['value'] =
-     $form_state['values']['field_site_restrict_to_list'];
-  $node->field_course_faculty_email[$node->language][0]['value'] =
-    $form_state['values']['field_course_faculty_email'];
-  node_save($node);
+  
+  field_attach_submit('node', $form['#entity'], $form, $form_state);
+  node_save($form['#entity']);
   drupal_set_message(t('Your course has been updated.'));
 }
 

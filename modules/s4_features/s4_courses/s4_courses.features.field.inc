@@ -322,7 +322,7 @@ function s4_courses_field_default_fields() {
       'default_value_function' => '',
       'default_value_php' => '',
       'deleted' => '0',
-      'description' => 'When checked, emails from this system to students about evaluations will be sent from the faculty member\'s account.',
+      'description' => '',
       'display' => array(
         'cck_blocks' => array(
           'label' => 'above',
@@ -357,8 +357,9 @@ function s4_courses_field_default_fields() {
       ),
       'display_label' => 'Send emails as faculty',
       'entity_type' => 'node',
+      'field_lock' => 0,
       'field_name' => 'field_course_faculty_email',
-      'label' => 'Allow system to send emails on behalf of faculty members',
+      'label' => 'Send emails for this course with faculty email address',
       'required' => 0,
       'settings' => array(
         'custom_add_another' => '',
@@ -1186,7 +1187,7 @@ function s4_courses_field_default_fields() {
       'default_value_function' => '',
       'default_value_php' => '',
       'deleted' => '0',
-      'description' => 'When checked, students will only be able to choose from the site list.',
+      'description' => '',
       'display' => array(
         'default' => array(
           'label' => 'above',
@@ -1213,9 +1214,11 @@ function s4_courses_field_default_fields() {
           'weight' => 0,
         ),
       ),
+      'display_label' => '',
       'entity_type' => 'node',
+      'field_lock' => 0,
       'field_name' => 'field_site_restrict_to_list',
-      'label' => 'Restrict students to only these sites',
+      'label' => 'Prevent students from placing with sites not assigned to this course.',
       'required' => 0,
       'settings' => array(
         'custom_add_another' => '',
@@ -1669,7 +1672,6 @@ function s4_courses_field_default_fields() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Allow system to send emails on behalf of faculty members');
   t('Available programs');
   t('Catalog number');
   t('Course department');
@@ -1680,8 +1682,9 @@ function s4_courses_field_default_fields() {
   t('If you want only a handful of sites which are recommended or required, select those sites here.');
   t('Maximum number of placements per student');
   t('On this date, evaluation forms will start being sent to students via email and also be available on the site itself.');
-  t('Restrict students to only these sites');
+  t('Prevent students from placing with sites not assigned to this course.');
   t('Section number');
+  t('Send emails for this course with faculty email address');
   t('Show this term to students/faculty on their dashboard as the "Current" term during this time period. These can be set to the first day of the term and the last date, or a few weeks before/after to let students who are registering late easily find their course. Regardless of these dates, past courses are shown to users under their "past sites" dashboard block; however, they can no longer register for those sites after this date has passed.');
   t('Signups');
   t('Sites');
@@ -1693,8 +1696,6 @@ function s4_courses_field_default_fields() {
   t('Term dates');
   t('Type in the user names of people who should be assigned as extra faculty to this course.');
   t('What kinds of sites or coordinators this course is allowed to access.');
-  t('When checked, emails from this system to students about evaluations will be sent from the faculty member\'s account.');
-  t('When checked, students will only be able to choose from the site list.');
 
   return $fields;
 }
