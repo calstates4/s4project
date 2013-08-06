@@ -248,8 +248,8 @@ function s4_button($variables) {
   if (!empty($element['#attributes']['disabled'])) {
     $element['#attributes']['class'][] = 'form-button-disabled';
   }
-  $prefix = ($element['#prefix']) ? $element['#prefix'] : '';
-  $suffix = ($element['#suffix']) ? $element['#suffix'] : '';
+  $prefix = (isset($element['#prefix'])) ? $element['#prefix'] : '';
+  $suffix = (isset($element['#suffix'])) ? $element['#suffix'] : '';
   return $prefix . '<button' . drupal_attributes($element['#attributes']) . '>'. $label .'</button>
   ' . $suffix; // This line break adds inherent margin between multiple buttons
 }

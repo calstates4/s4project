@@ -15,8 +15,8 @@ class context_condition_s4_opportunity extends context_condition {
     return $form;
   }
 
-  function execute($value) {
-    foreach ($this->get_contexts($value) as $context) {
+  function execute($value = array()) {
+    foreach ($value && $this->get_contexts($value) as $context) {
       if(arg(0) == 'opportunity' && s4_opportunity_load(arg(1))) {
         $this->condition_met($context, $value);
       }

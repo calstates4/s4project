@@ -25,13 +25,13 @@ function s4_even_odd($reset = FALSE) {
 *  Add more body classes for the toolbar
 */
 function s4_preprocess_html(&$vars) {
-  if(!$vars['page']['content_right']) {
+  if(!isset($vars['page']['content_right'])) {
     $vars['classes_array'][] = 'no-content-sidebar';
   }
-  if(!$vars['page']['content_top_right']) {
+  if(!isset($vars['page']['content_top_right'])) {
     $vars['classes_array'][] = 'no-content-top-right';
   }
-  if($vars['page']['footer_map']) {
+  if(isset($vars['page']['footer_map'])) {
     $vars['classes_array'][] = 'has-footer-map';
   }
   drupal_add_css(path_to_theme() . '/css/ie7.css', array('group' => CSS_THEME, 'browsers' => array('IE' => 'lte IE 8', '!IE' => FALSE), 'preprocess' => FALSE));
@@ -55,15 +55,19 @@ function s4_process_html(&$variables) {
  * Implements hook_preprocess_page().
  */
 function s4_preprocess_page(&$variables) {
- if($variables['page']['#views_contextual_links_info']['views_ui']['view_name'] == 'site_forms'
+ if(isset($variables['page']['#views_contextual_links_info'])
+    && $variables['page']['#views_contextual_links_info']['views_ui']['view_name'] == 'site_forms'
     && $variables['page']['#views_contextual_links_info']['views_ui']['view_display_id'] == 'page') {
    $variables['equal_columns'] = true;
+ }
+ else {
+  $variables['equal_columns'] = false;
  }
 }
 
 function s4_links__system_main_menu($variables) {
   global $conf;
-  if($conf['s4_pages_program_homepage']) {
+  if(isset($conf['s4_pages_program_homepage']) && $conf['s4_pages_program_homepage']) {
     
     foreach($variables['links'] as &$link) {
       if($link['href'] == 'site') {
