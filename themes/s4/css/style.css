@@ -99,6 +99,9 @@ h1.title {
 #subscriptions .modal div {
   float: none;
 }
+#subscriptions .btn {
+  margin-left: 15px;
+}
 /** FORMS **/
 label {
   font-weight: bold;
