@@ -383,6 +383,12 @@ function s4_core_context_default_contexts() {
   $context->description = 'User is viewing the signup form list';
   $context->tag = 'signup';
   $context->conditions = array(
+    'path' => array(
+      'values' => array(
+        'forms/download' => 'forms/download',
+        'forms/download/*' => 'forms/download/*',
+      ),
+    ),
     'views' => array(
       'values' => array(
         'site_forms:page_3' => 'site_forms:page_3',

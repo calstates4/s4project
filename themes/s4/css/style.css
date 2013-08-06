@@ -455,6 +455,10 @@ body.page-reports .vertical-tab-button.last {
 .toolbar.toolbar-drawer .sticky-header {
   top: 65em;
 }
+input.hours-field {
+  height: auto;
+  font-size: 3em;
+}
 .form-actions .btn-group .btn {
   margin-right: 0;
 }

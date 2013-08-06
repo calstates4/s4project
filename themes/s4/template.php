@@ -55,7 +55,8 @@ function s4_process_html(&$variables) {
  * Implements hook_preprocess_page().
  */
 function s4_preprocess_page(&$variables) {
- if($variables['page']['#views_contextual_links_info']['views_ui']['view_name'] == 'site_forms') {
+ if($variables['page']['#views_contextual_links_info']['views_ui']['view_name'] == 'site_forms'
+    && $variables['page']['#views_contextual_links_info']['views_ui']['view_display_id'] == 'page') {
    $variables['equal_columns'] = true;
  }
 }

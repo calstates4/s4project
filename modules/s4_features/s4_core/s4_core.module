@@ -585,7 +585,7 @@ function s4_core_student_signup_hours() {
     '#type' => 'textfield',
     '#title' => 'Please estimate the minimum number of hours you will serve at this site',
     '#description' => 'You will have a chance to correct this when you complete your site evaluation, but it is helpful for us to know a rough estimate before you start your service.',
-    '#attributes' => array('class' => array('hours-field')),
+    '#attributes' => array('class' => array('hours-field', 'input-small')),
   );
 
   $form['submit'] = array(
