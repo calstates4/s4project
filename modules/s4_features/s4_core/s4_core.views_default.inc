@@ -791,6 +791,13 @@ function s4_core_views_default_views() {
   $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: User: The user ID */
+  $handler->display->display_options['filters']['uid_raw']['id'] = 'uid_raw';
+  $handler->display->display_options['filters']['uid_raw']['table'] = 'users';
+  $handler->display->display_options['filters']['uid_raw']['field'] = 'uid_raw';
+  $handler->display->display_options['filters']['uid_raw']['operator'] = '>';
+  $handler->display->display_options['filters']['uid_raw']['value']['value'] = '1';
+  $handler->display->display_options['filters']['uid_raw']['group'] = 1;
   /* Filter criterion: User: Roles */
   $handler->display->display_options['filters']['rid']['id'] = 'rid';
   $handler->display->display_options['filters']['rid']['table'] = 'users_roles';
@@ -864,13 +871,29 @@ function s4_core_views_default_views() {
     0 => 0,
   );
   $handler->display->display_options['filters']['uid']['group'] = 1;
-  /* Filter criterion: User: The user ID */
-  $handler->display->display_options['filters']['uid_raw']['id'] = 'uid_raw';
-  $handler->display->display_options['filters']['uid_raw']['table'] = 'users';
-  $handler->display->display_options['filters']['uid_raw']['field'] = 'uid_raw';
-  $handler->display->display_options['filters']['uid_raw']['operator'] = '>';
-  $handler->display->display_options['filters']['uid_raw']['value']['value'] = '1';
-  $handler->display->display_options['filters']['uid_raw']['group'] = 1;
+  /* Filter criterion: User: SIS ID (field_sis_id) */
+  $handler->display->display_options['filters']['field_sis_id_value']['id'] = 'field_sis_id_value';
+  $handler->display->display_options['filters']['field_sis_id_value']['table'] = 'field_data_field_sis_id';
+  $handler->display->display_options['filters']['field_sis_id_value']['field'] = 'field_sis_id_value';
+  $handler->display->display_options['filters']['field_sis_id_value']['operator'] = 'contains';
+  $handler->display->display_options['filters']['field_sis_id_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_sis_id_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_sis_id_value']['expose']['operator_id'] = 'field_sis_id_value_op';
+  $handler->display->display_options['filters']['field_sis_id_value']['expose']['label'] = 'Student or employee ID';
+  $handler->display->display_options['filters']['field_sis_id_value']['expose']['operator'] = 'field_sis_id_value_op';
+  $handler->display->display_options['filters']['field_sis_id_value']['expose']['identifier'] = 'field_sis_id_value';
+  $handler->display->display_options['filters']['field_sis_id_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    4 => 0,
+    6 => 0,
+    3 => 0,
+    5 => 0,
+    7 => 0,
+    8 => 0,
+    9 => 0,
+    10 => 0,
+  );
   /* Filter criterion: Field: Program(s) (field_site_restrict) */
   $handler->display->display_options['filters']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
   $handler->display->display_options['filters']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
@@ -916,6 +939,7 @@ function s4_core_views_default_views() {
     t('Current placements'),
     t('Make placement'),
     t('E-mail'),
+    t('Student or employee ID'),
     t('Program'),
     t('Page'),
   );
