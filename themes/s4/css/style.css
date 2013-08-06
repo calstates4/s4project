@@ -90,6 +90,9 @@ h1.title {
   font-family: 'Roboto Slab', 'Helvetica Neue', Aria, Helvetica, sans-serif;
 }
 /** Subscriptions region **/
+#subscriptions {
+  margin-top: 10px;
+}
 #subscriptions div {
   float: right;
 }
