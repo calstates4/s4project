@@ -499,7 +499,6 @@ function s4_courses_views_default_views() {
   /* Display: Course faculty */
   $handler = $view->new_display('block', 'Course faculty', 'block_2');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Faculty';
   $handler->display->display_options['defaults']['css_class'] = FALSE;
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'list';
@@ -789,7 +788,6 @@ function s4_courses_views_default_views() {
     t('Evaluation status'),
     t('Complete assessment'),
     t('Course faculty'),
-    t('Faculty'),
     t('field_course_faculty'),
     t('[field_first_name] [field_last_name]'),
     t('Course students (Staff view)'),

@@ -183,6 +183,7 @@ function s4_courses_block_info() {
   $blocks['s4_courses_faculty_help'] = array('info' => 'Faculty help');
   $blocks['s4_courses_add_site'] = array('info' => 'Add to sites');
   $blocks['s4_courses_add_message'] = array('info' => 'Add to sites message');
+  $blocks['s4_couress_add_sites'] = array('info' => 'Course add sites button');
   return $blocks;
 }
 
@@ -251,6 +252,12 @@ function s4_courses_block_view($delta) {
         return;
       }
       return array('content' => '<div class="alert alert-info">'. t('You are currently adding sites to %course. !link', array('%course' => $_SESSION['s4_courses_add_course_current']['title'], '!link' => l(t('Return to my courses'), 'faculty/add-sites/done'))) .'</div>');
+    case 's4_couress_add_sites';
+      $node = menu_get_object();
+      if($node->type != 'course' || !node_access('update', $node)) {
+        return;
+      }
+      return array('content' => l('<i class="icon-plus icon-white"></i> '. t('Add sites to this course'), 'faculty/add-sites/' . $node->nid, array('html' => TRUE, 'query' => array('return' => 'node/'. $node->nid), 'attributes' => array('class' => array('btn', 'btn-success')))));
   }
 }
 
@@ -306,21 +313,15 @@ function s4_courses_edit_course_restrict_form() {
   $default = field_get_items('node', $node, 'field_site_restrict_to_list');
   $default_email = field_get_items('node', $node, 'field_course_faculty_email');
 
-  $form['message'] = array(
-    '#markup' => t('You can add sites to your course by browsing the !link and clicking the "Add to my course" buttons on the left.',
-      array('!link' => l(t('site list'), 'site-list'))),
-  );
-
   $form['field_site_restrict_to_list'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Restrict students to only selected sites'),
-    '#description' => t('When checked, students will not be able to register for any other sites.'),
+    '#title' => t('Prevent students from placing with sites not assigned to this course.'),
     '#default_value' => $default[0]['value'],
   );
 
   $form['field_course_faculty_email'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Send evaluation reminders from my email account'),
+    '#title' => t('Send emails for this course with faculty email address.'),
     '#default_value' => $default_email[0]['value'],
   );
 

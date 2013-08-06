@@ -17,7 +17,7 @@ function s4_courses_strongarm() {
   $strongarm->value = array(
     'view_modes' => array(
       'teaser' => array(
-        'custom_settings' => TRUE,
+        'custom_settings' => FALSE,
       ),
       'notifications' => array(
         'custom_settings' => TRUE,

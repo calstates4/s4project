@@ -1757,8 +1757,8 @@ function s4_core_field_formatter_view($entity_type, $entity, $field, $instance, 
         '#markup' => '<address>' . implode('<br />', $output) . '</address>',
       );
     }
-
   }
+
   return $element;
 }
 

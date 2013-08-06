@@ -1332,7 +1332,7 @@ function s4_sites_ds_layout_info() {
 
   $layouts = array(
     's4_site' => array(
-      'label' => t('Two column 75/25 stacked'),
+      'label' => t('Site page'),
       'path' => $path . '/layouts/s4_site',
       'regions' => array(
         'left' => t('Left'),
@@ -1351,6 +1351,16 @@ function s4_sites_ds_layout_info() {
         'population' => t('Population'),
       ),
       'css' => TRUE,
+      'form' => TRUE
+    ),
+    's4_75_25' => array(
+      'label' => t('75% / 25%'),
+      'path' => $path . '/layouts/s4_75_25',
+      'regions' => array(
+        'left' => t('Left'),
+        'right' => t('Right')
+      ),
+      'css' => FALSE,
       'form' => TRUE
     ),
   );
