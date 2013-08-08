@@ -219,7 +219,7 @@ function s4_pages_dashboard_title() {
   $title = (isset($_GET['finished']))
        ? t('Great, @name, you\'re all signed up!',
                  array('@name' => $name))
-       : t('Hi, @name, what would you like to do?',
+       : t('Hi @name, what would you like to do?',
                  array('@name' => $name));
   return $title;
 }
