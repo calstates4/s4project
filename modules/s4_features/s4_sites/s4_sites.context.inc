@@ -317,7 +317,7 @@ function s4_sites_context_default_contexts() {
   $context->conditions = array(
     'path' => array(
       'values' => array(
-        'node/*/log' => 'node/*/log',
+        'node/*/site-log' => 'node/*/site-log',
       ),
     ),
   );

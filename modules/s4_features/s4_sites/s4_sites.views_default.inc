@@ -952,7 +952,7 @@ Location',
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_site_restrict']['delta_offset'] = '0';
-  /* Field: Content: Phone number */
+  /* Field: Content: Main phone number */
   $handler->display->display_options['fields']['field_phone']['id'] = 'field_phone';
   $handler->display->display_options['fields']['field_phone']['table'] = 'field_data_field_phone';
   $handler->display->display_options['fields']['field_phone']['field'] = 'field_phone';
@@ -1027,7 +1027,7 @@ Location',
   $handler->display->display_options['fields']['field_email']['table'] = 'field_data_field_email';
   $handler->display->display_options['fields']['field_email']['field'] = 'field_email';
   $handler->display->display_options['fields']['field_email']['label'] = 'Email';
-  /* Field: Content: Phone number */
+  /* Field: Content: Main phone number */
   $handler->display->display_options['fields']['field_phone']['id'] = 'field_phone';
   $handler->display->display_options['fields']['field_phone']['table'] = 'field_data_field_phone';
   $handler->display->display_options['fields']['field_phone']['field'] = 'field_phone';
@@ -1180,7 +1180,7 @@ Location',
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_site_restrict']['delta_offset'] = '0';
-  /* Field: Content: Phone number */
+  /* Field: Content: Main phone number */
   $handler->display->display_options['fields']['field_phone']['id'] = 'field_phone';
   $handler->display->display_options['fields']['field_phone']['table'] = 'field_data_field_phone';
   $handler->display->display_options['fields']['field_phone']['field'] = 'field_phone';
@@ -1205,7 +1205,7 @@ Location',
   $handler->display->display_options['fields']['field_job_title']['id'] = 'field_job_title';
   $handler->display->display_options['fields']['field_job_title']['table'] = 'field_data_field_job_title';
   $handler->display->display_options['fields']['field_job_title']['field'] = 'field_job_title';
-  /* Field: Content: Maximum number of students */
+  /* Field: Content: Maximum number of students your site can accept at any given time */
   $handler->display->display_options['fields']['field_signups_max']['id'] = 'field_signups_max';
   $handler->display->display_options['fields']['field_signups_max']['table'] = 'field_data_field_signups_max';
   $handler->display->display_options['fields']['field_signups_max']['field'] = 'field_signups_max';
@@ -1325,7 +1325,7 @@ Location',
   $handler->display->display_options['fields']['field_job_title']['table'] = 'field_data_field_job_title';
   $handler->display->display_options['fields']['field_job_title']['field'] = 'field_job_title';
   $handler->display->display_options['fields']['field_job_title']['element_label_colon'] = FALSE;
-  /* Field: Content: Phone number */
+  /* Field: Content: Main phone number */
   $handler->display->display_options['fields']['field_phone']['id'] = 'field_phone';
   $handler->display->display_options['fields']['field_phone']['table'] = 'field_data_field_phone';
   $handler->display->display_options['fields']['field_phone']['field'] = 'field_phone';
@@ -1492,7 +1492,7 @@ Location',
   $handler->display->display_options['fields']['field_site_facebook_page']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['field_site_facebook_page']['click_sort_column'] = 'url';
   $handler->display->display_options['fields']['field_site_facebook_page']['type'] = 'url';
-  /* Field: Content: Phone number */
+  /* Field: Content: Main phone number */
   $handler->display->display_options['fields']['field_phone']['id'] = 'field_phone';
   $handler->display->display_options['fields']['field_phone']['table'] = 'field_data_field_phone';
   $handler->display->display_options['fields']['field_phone']['field'] = 'field_phone';
@@ -1541,7 +1541,7 @@ Location',
   $handler->display->display_options['fields']['field_site_demographics']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['field_site_demographics']['type'] = 's4_sites_population_matrix';
   $handler->display->display_options['fields']['field_site_demographics']['delta_offset'] = '0';
-  /* Field: Content: Maximum number of students */
+  /* Field: Content: Maximum number of students your site can accept at any given time */
   $handler->display->display_options['fields']['field_signups_max']['id'] = 'field_signups_max';
   $handler->display->display_options['fields']['field_signups_max']['table'] = 'field_data_field_signups_max';
   $handler->display->display_options['fields']['field_signups_max']['field'] = 'field_signups_max';
@@ -1614,12 +1614,12 @@ Location',
     t('Issues addressed'),
     t('Website'),
     t('Social network page'),
-    t('Phone number'),
+    t('Main phone number'),
     t('Location(s)'),
     t('Suggested languages'),
     t('Number of people served'),
     t('Population served'),
-    t('Maximum number of students'),
+    t('Maximum number of students your site can accept at any given time'),
     t('Minimum hours'),
     t('All'),
     t('Block'),
@@ -2181,10 +2181,11 @@ Location',
   $handler->display->display_options['fields']['field_location']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['field_location']['type'] = 's4_sites_address';
   $handler->display->display_options['fields']['field_location']['delta_offset'] = '0';
-  /* Field: Content: Phone number */
+  /* Field: Content: Main phone number */
   $handler->display->display_options['fields']['field_phone']['id'] = 'field_phone';
   $handler->display->display_options['fields']['field_phone']['table'] = 'field_data_field_phone';
   $handler->display->display_options['fields']['field_phone']['field'] = 'field_phone';
+  $handler->display->display_options['fields']['field_phone']['label'] = 'Phone number';
   $handler->display->display_options['fields']['field_phone']['click_sort_column'] = 'number';
   $handler->display->display_options['fields']['field_phone']['type'] = 's4_sites_local_phone_number';
   $handler->display->display_options['fields']['field_phone']['delta_offset'] = '0';
