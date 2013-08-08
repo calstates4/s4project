@@ -30,7 +30,7 @@
   <div class="span12">
     <ul class="nav nav-tabs in-page-tabs" id="site-tabs">
       <li class="active"><a href="#details">Details</a></li>
-      <?php if($risks): ?>
+      <?php if($risks || $risks_sidebar): ?>
         <li><a class="text-error" href="#risks">Risks</a></li>
       <?php endif; ?>
       <?php if($staff): ?>
@@ -85,7 +85,16 @@
       </div>
       <?php if($risks): ?>
         <div class="tab-pane fade" id="risks">  
-          <?php print $risks; ?>
+          <div class="row">
+            <div class="span9">
+              <?php print $risks; ?>
+            </div>
+            <div class="span3">
+              <?php if($risks_sidebar): ?>
+                <?php print $risks_sidebar; ?>
+              <?php endif; ?>
+            </div>
+          </div>
         </div>
       <?php endif; ?>
       <?php if($staff): ?>

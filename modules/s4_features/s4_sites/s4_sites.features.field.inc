@@ -3655,7 +3655,7 @@ function s4_sites_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => '19',
+          'weight' => '20',
         ),
         'full' => array(
           'label' => 'above',
@@ -4858,7 +4858,7 @@ function s4_sites_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => '17',
+          'weight' => '18',
         ),
         'full' => array(
           'label' => 'above',
@@ -5186,7 +5186,7 @@ function s4_sites_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => '20',
+          'weight' => '17',
         ),
         'full' => array(
           'label' => 'above',
@@ -5739,7 +5739,7 @@ function s4_sites_field_default_fields() {
           'label' => 'above',
           'module' => 's4_sites',
           'settings' => array(),
-          'type' => 's4_sites_limited_taxonomy_term',
+          'type' => 's4_sites_nav_box_taxonomy_term',
           'weight' => '21',
         ),
         'full' => array(
@@ -5768,8 +5768,9 @@ function s4_sites_field_default_fields() {
           'weight' => 0,
         ),
       ),
-      'display_label' => '',
+      'display_label' => 'Special requirements',
       'entity_type' => 'node',
+      'field_lock' => 0,
       'field_name' => 'field_site_requirements',
       'label' => 'Site special requirements',
       'required' => 0,
@@ -5987,7 +5988,7 @@ function s4_sites_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => '18',
+          'weight' => '19',
         ),
         'full' => array(
           'label' => 'above',

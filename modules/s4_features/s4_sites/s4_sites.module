@@ -879,6 +879,10 @@ function s4_sites_field_formatter_info() {
         'label' => t('Limited taxonomy term'),
         'field types' => array('taxonomy_term_reference'),
       ),
+      's4_sites_nav_box_taxonomy_term' => array(
+        'label' => t('Nav box taxonomy term'),
+        'field types' => array('taxonomy_term_reference'),
+      ),
   );
 }
 
@@ -962,9 +966,21 @@ function s4_sites_field_formatter_view($entity_type, $entity, $field, $instance,
           </div>';
       $output .= '</div>';
     }
-    $element[$delta] = array(
+    $element[0] = array(
       '#markup' => $output,
     );
+  }
+  if($display['type'] == 's4_sites_nav_box_taxonomy_term') {
+    $list_items = array();
+    foreach($items as $delta => $item) {
+      $class = ($delta % 2 == 0) ? 'odd' : 'even';
+      $item = taxonomy_term_load($item['tid']);
+      $list_items[] = array('class' => array($class), 'data' => $item->name);
+    }
+    $element[0] = array(
+      '#markup' => theme('item_list', array('items' => $list_items, 'attributes' => array('class' => array('nav', 'nav-stacked', 'nav-details')))),
+    );
+    dpm($element);
   }
   return $element;
 }
@@ -1343,6 +1359,7 @@ function s4_sites_ds_layout_info() {
         'details_3' => t('Details section three'),
         'details_4' => t('Details section four'),
         'risks' => t('Risks'),
+        'risks_sidebar' => t('Risks Sidebar'),
         'staff' => t('Site staff'),
         'hours' => t('Hours'),
         'opportunities' => t('Opportunities'),
