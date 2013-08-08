@@ -1819,7 +1819,7 @@ function s4_core_s4_frontpage_blocks() {
   $courses = views_get_view_result('user_courses', 'block_2', $user->uid);
   if($courses) {
     $blocks['user_courses'] = array(
-        'subject' => t('Make a placement'),
+        'subject' => t('Make a placement in a course'),
         'content' => '<p class="lead">'. t('You have courses that still require placements.') .'</p>' .
           views_embed_view('user_courses', 'block_2', $user->uid),
         'alert' => TRUE,
@@ -1828,7 +1828,7 @@ function s4_core_s4_frontpage_blocks() {
   $programs = views_get_view_result('s4_user_programs', 'block', $user->uid);
   if($programs) {
     $blocks['user_programs'] = array(
-        'subject' => t('Make a placement'),
+        'subject' => t('Make a placement in a program'),
         'content' => '<p class="lead">'. format_plural(count($programs), 'You can place as part of a program.', 'You are part of @count programs.') .'</p>' .
           views_embed_view('s4_user_programs', 'block', $user->uid),
         'alert' => TRUE,
