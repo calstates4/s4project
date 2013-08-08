@@ -857,6 +857,9 @@ function s4_courses_views_check_faculty_access($view, $account) {
   if ($node->type != 'course') {
     return FALSE;
   }
+  if(node_access('update', $node)) {
+    return TRUE;
+  }
   $faculty = field_get_items('node', $node, 'field_course_faculty');
   foreach($faculty as $instructor) {
     if ($instructor['uid'] == $account->uid) {
