@@ -467,6 +467,9 @@ function s4_courses_remove_site($course, $site) {
 
 function s4_courses_add_sites_access($node) {
   global $user;
+  if(node_access('update', $node)) {
+    return TRUE;
+  }
   $faculty = field_get_items('node', $node, 'field_course_faculty');
   if(!$faculty) {
     return false;
