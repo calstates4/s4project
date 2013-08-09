@@ -11,7 +11,7 @@ projects[drupal][version] = 7.22
 
 ; Add Student Signup to the full distribution build.
 projects[student_signup][type] = profile
-projects[student_signup][version] = 1.x-dev
+projects[student_signup][version] = 1.2
 projects[student_signup][download][type] = git
 projects[student_signup][download][url] = git://github.com/calstates4/s4project.git
-projects[student_signup][download][branch] = dev
+projects[student_signup][download][branch] = master
