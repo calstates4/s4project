@@ -215,14 +215,14 @@ function s4_opportunity_edit_form($form, &$form_state, $s4_opportunity) {
   }
   $form['actions']['submit'] = array(
     '#type' => 'submit',
-    '#value' => t('Save @type', array('@type' => $type->label)),
+    '#value' => t('Save @type', array('@type' => check_plain($type->label))),
     '#submit' => $submit + array('s4_opportunity_edit_form_submit'),
   );
   
   if (!empty($s4_opportunity->name)) {
     $form['actions']['delete'] = array(
       '#type' => 'submit',
-      '#value' => t('Delete %type', array('%type' => check_plain($type->label))),
+      '#value' => t('Delete @type', array('@type' => check_plain($type->label))),
       '#suffix' => l(t('Cancel'), 'admin/content/opportunities'),
       '#submit' => $submit + array('s4_opportunity_form_submit_delete'),
       '#weight' => 45,
@@ -294,8 +294,8 @@ function s4_opportunity_delete_form($form, &$form_state, $s4_opportunity) {
   $type = s4_opportunity_type_load($s4_opportunity->type);
 
   $form = confirm_form($form,
-    t('Are you sure you want to delete @type @name?', array('@type' => $type->label, 
-      '@name' => $s4_opportunity->name)),
+    t('Are you sure you want to delete %type %name?', array('%type' => $type->label, 
+      '%name' => $s4_opportunity->name)),
     'admin/content/opportunities/s4_opportunity',
     '<p>' . t('This action cannot be undone.') . '</p>',
     t('Delete'),
