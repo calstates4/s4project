@@ -174,7 +174,7 @@ function s4_reporting_form_views_exposed_form_alter(&$form, $form_state) {
 	global $user;
 	$user = user_load($user->uid);
 	$saved_searches = variable_get('views_savedsearches', array());
-	if ($saved_searches[$form_state['view']->name]) {
+	if (isset($saved_searches[$form_state['view']->name]) && $saved_searches[$form_state['view']->name]) {
 		$saved_searches = views_savedsearches_load_multiple($user->uid, $form_state['view']->vid);
 		if (count($saved_searches)) {
 			drupal_add_js(drupal_get_path('module', 's4_reporting') .'/js/s4_reporting.views.js');

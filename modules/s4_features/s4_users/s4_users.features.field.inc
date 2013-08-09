@@ -58,6 +58,7 @@ function s4_users_field_default_fields() {
       'label' => 'First Name',
       'required' => 1,
       'settings' => array(
+        'custom_add_another' => '',
         'text_processing' => '0',
         'user_register_form' => 1,
       ),
@@ -121,6 +122,7 @@ function s4_users_field_default_fields() {
       'label' => 'Last Name',
       'required' => 1,
       'settings' => array(
+        'custom_add_another' => '',
         'text_processing' => '0',
         'user_register_form' => 1,
       ),
@@ -186,9 +188,10 @@ function s4_users_field_default_fields() {
       'display_label' => '',
       'entity_type' => 'user',
       'field_name' => 'field_program_default',
-      'label' => 'Default programs for reports',
+      'label' => 'Default programs',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => 0,
       ),
       'widget' => array(
@@ -248,6 +251,7 @@ function s4_users_field_default_fields() {
       'label' => 'SIS ID',
       'required' => FALSE,
       'settings' => array(
+        'custom_add_another' => '',
         'text_processing' => 0,
         'user_register_form' => FALSE,
       ),
@@ -257,7 +261,7 @@ function s4_users_field_default_fields() {
           'size' => 60,
         ),
         'type' => 'text_textfield',
-        'weight' => '9',
+        'weight' => '10',
       ),
     ),
   );
@@ -316,6 +320,7 @@ function s4_users_field_default_fields() {
       'label' => 'Available programs',
       'required' => 0,
       'settings' => array(
+        'custom_add_another' => '',
         'user_register_form' => 0,
       ),
       'widget' => array(
@@ -331,7 +336,7 @@ function s4_users_field_default_fields() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Available programs');
-  t('Default programs for reports');
+  t('Default programs');
   t('First Name');
   t('Last Name');
   t('SIS ID');

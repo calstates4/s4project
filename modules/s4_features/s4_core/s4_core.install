@@ -5,12 +5,6 @@
 */
 function s4_core_install() {
   //Register our trigger for course signup notifications
-  db_insert('trigger_assignments')
-    ->fields(array(
-      'hook' => 'document_expiration',
-      'aid' => 's4_core_document_about_to_expire_action',
-    ))
-    ->execute();
   
   db_insert('login_destination')
     ->fields(array(

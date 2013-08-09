@@ -419,7 +419,7 @@ function s4_demo_feeds_importer_default() {
           ),
         ),
         'update_existing' => '0',
-        'input_format' => 'filtered_html',
+        'input_format' => 'plain_text',
         'authorize' => 1,
         'skip_hash_check' => 0,
         'bundle' => 'coordinator',

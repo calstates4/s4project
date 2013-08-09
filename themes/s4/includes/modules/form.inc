@@ -24,24 +24,24 @@ function s4_button(&$vars) {
  *     Properties used: #action, #method, #attributes, #children
  *
  * @ingroup themeable
- 
-
-function s4_preprocess_form(&$variables) {
-}  
-
-function s4_form($variables) {
-  $element = $variables['element'];
-  if (isset($element['#action'])) {
-    $element['#attributes']['action'] = drupal_strip_dangerous_protocols($element['#action']);
-  }
-  
-  element_set_attributes($element, array('method', 'id'));
-  if (empty($element['#attributes']['accept-charset'])) {
-    $element['#attributes']['accept-charset'] = "UTF-8";
-  }
-
-  return '<form' . drupal_attributes($element['#attributes']) . '>' . $element['#children'] . '</form>';
-}
+ *  
+ * 
+ * function s4_preprocess_form(&$variables) {
+ * }  
+ * 
+ * function s4_form($variables) {
+ *   $element = $variables['element'];
+ *   if (isset($element['#action'])) {
+ *     $element['#attributes']['action'] = drupal_strip_dangerous_protocols($element['#action']);
+ *   }
+ *   
+ *   element_set_attributes($element, array('method', 'id'));
+ *   if (empty($element['#attributes']['accept-charset'])) {
+ *     $element['#attributes']['accept-charset'] = "UTF-8";
+ *   }
+ * 
+ *   return '<form' . drupal_attributes($element['#attributes']) . '>' . $element['#children'] . '</form>';
+ * }
 */
 
 /**
@@ -56,9 +56,6 @@ function s4_form_alter(&$form, &$form_state, $form_id) {
     'user_profile_form',
   );
   
-  // Only wrap in container for certain form
-  if(isset($form['#form_id']) && !in_array($form['#form_id'], $form_ids) && !isset($form['#node_edit_form']))
-    $form['actions']['#theme_wrappers'] = array();
 }  
 
 /**
@@ -180,7 +177,22 @@ function s4_form_element_label(&$variables) {
  */
 function s4_preprocess_button(&$vars) {
   $vars['element']['#attributes']['class'][] = 'btn';
-
+  if(isset($vars['element']['#drop_down'])) {
+    $list = array();
+    foreach($vars['element']['#drop_down'] as $item) {
+      $item['#drop_down_item'] = TRUE;
+      $list[] = drupal_render($item);
+    }
+    $vars['element']['#prefix'] = '<div class="btn-group">';
+    $vars['element']['#suffix'] = '<button class="btn dropdown-toggle btn-primary" data-toggle="dropdown">
+    <span class="caret"></span>
+  </button>'. theme('item_list', array('items' => $list, 'attributes' => array('class' => array('dropdown-menu')))) .
+      '</div>';
+  }
+  if (isset($vars['element']['#drop_down_item']) && $vars['element']['#drop_down_item']) {
+    $vars['element']['#attributes']['class'] = array();
+    return;
+  }
   if (isset($vars['element']['#value'])) {
     $classes = array(
       //specifics
@@ -236,8 +248,9 @@ function s4_button($variables) {
   if (!empty($element['#attributes']['disabled'])) {
     $element['#attributes']['class'][] = 'form-button-disabled';
   }
-
-  return '<button' . drupal_attributes($element['#attributes']) . '>'. $label .'</button>
-  '; // This line break adds inherent margin between multiple buttons
+  $prefix = (isset($element['#prefix'])) ? $element['#prefix'] : '';
+  $suffix = (isset($element['#suffix'])) ? $element['#suffix'] : '';
+  return $prefix . '<button' . drupal_attributes($element['#attributes']) . '>'. $label .'</button>
+  ' . $suffix; // This line break adds inherent margin between multiple buttons
 }
 

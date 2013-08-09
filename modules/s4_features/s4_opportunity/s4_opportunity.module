@@ -1,0 +1,1499 @@
+<?php
+
+include_once('s4_opportunity.features.inc');
+
+/**
+ * @file
+ * Module for the s4_opportunity Entity - a starting point to create your own Entity
+ * and associated administration interface
+ */
+
+
+/**
+ * Implement hook_entity_info().
+ *
+ * We define two entities here - the actual entity that will hold our domain
+ * specific information and an entity that holds information about the different
+ * types of entities. See here: http://drupal.org/node/977380 for a discussion on this
+ * choice.
+ */
+function s4_opportunity_entity_info() {
+  $return['s4_opportunity'] = array(
+    'label' => t('Opportunity'),
+    // The entity class and controller class extend the classes provided by the
+    // Entity API
+    'entity class' => 's4_opportunity',
+    'controller class' => 's4OpportunityController',
+    'base table' => 's4_opportunity',
+    'fieldable' => TRUE,
+    'entity keys' => array(
+        'id' => 's4_opportunity_id',
+        'bundle' => 'type',
+    ),
+    // Bundles are defined by the s4_opportunity types below
+    'bundles' => array(),
+    // Bundle keys tell the FieldAPI how to extract information from the bundle objects
+    'bundle keys' => array(
+      'bundle' => 'type',
+    ),
+    'label callback' => 'entity_class_label',
+    'uri callback' => 'entity_class_uri',
+    'creation callback' => 's4_opportunity_create',
+    'access callback' => 's4_opportunity_access',
+    'module' => 's4_opportunity',
+    // The information below is used by the s4OpportunityUIController (which extends the EntityDefaultUIController)
+    'admin ui' => array(
+      'path' => 'admin/content/opportunities',
+      'file' => 's4_opportunity.admin.inc',
+      'controller class' => 's4OpportunityUIController',
+      'menu wildcard' => '%s4_opportunity',
+    ),
+  );
+  // The entity that holds information about the entity types
+  $return['s4_opportunity_type'] = array(
+    'label' => t('Opportunity Type'),
+    'entity class' => 's4_opportunityType',
+    'controller class' => 's4OpportunityTypeController',
+    'base table' => 's4_opportunity_type',
+    'fieldable' => FALSE,
+    'bundle of' => 's4_opportunity',
+    'exportable' => TRUE,
+    'entity keys' => array(
+      'id' => 'id',
+      'name' => 'type',
+      'label' => 'label',
+    ),
+    'access callback' => 's4_opportunity_type_access',
+    'module' => 's4_opportunity',
+    // Enable the entity API's admin UI.
+    'admin ui' => array(
+      'path' => 'admin/structure/s4_opportunity_types',
+      'file' => 's4_opportunity_type.admin.inc',
+      'controller class' => 's4OpportunityTypeUIController',
+    ),
+  );
+
+  return $return;
+}
+
+
+/**
+ * Implements hook_entity_info_alter().
+ *
+ * We are adding the info about the s4_opportunity types via a hook to avoid a recursion
+ * issue as loading the s4_opportunity types requires the entity info as well.
+ *
+ * @todo This needs to be improved
+ */
+function s4_opportunity_entity_info_alter(&$entity_info) {
+  foreach (s4_opportunity_get_types() as $type => $info) {
+    $entity_info['s4_opportunity']['bundles'][$type] = array(
+      'label' => $info->label,
+      'admin' => array(
+        'path' => 'admin/structure/s4_opportunity_types/manage/%s4_opportunity_type',
+        'real path' => 'admin/structure/s4_opportunity_types/manage/' . $type,
+        'bundle argument' => 4,
+        'access arguments' => array('administer s4_opportunity types'),
+      ),
+    );
+  }
+}
+
+
+/**
+ * Implements hook_permission().
+ */
+function s4_opportunity_permission() {
+  // We set up permisssions to manage entity types, manage all entities and the
+  // permissions for each individual entity
+  $permissions = array(
+    'administer s4_opportunity types' => array(
+      'title' => t('Administer s4_opportunity types'),
+      'description' => t('Create and delete fields for s4_opportunity types, and set their permissions.'),
+    ),
+    'administer opportunities' => array(
+      'title' => t('Administer opportunities'),
+      'description' => t('Edit and delete all opportunities'),
+    ),
+    'access inactive opportunities' => array(
+      'title' => t('Access inactive opportunities'),
+      'description' => t('View opportunities that are inactive'),
+    ),
+    'access active opportunities' => array(
+      'title' => t('Access active opportunities'),
+      'description' => t('View opportunities that are active'),
+    ),
+    'place students in opportunities' => array(
+      'title' => t('Place students with opportunities'),
+      'description' => t('User can place other users with opportunities'),
+      ),
+    'start new opportunities' => array(
+      'title' => t('User is allowed to start new opportunities'),
+      'description' => t('Grants access to the create new opportunity wizard.'),
+      ),
+    'approve opportunities' => array(
+      'title' => t('User can approve opportunities'),
+      'description' => t('This user can approve opportunities before they are made active.'),
+      )
+  );
+
+  //Generate permissions per s4_opportunity
+  foreach (s4_opportunity_get_types() as $type) {
+    $type_name = check_plain($type->type);
+    $permissions += array(
+      "edit any $type_name s4_opportunity" => array(
+        'title' => t('%type_name: Edit any s4_opportunity', array('%type_name' => $type->label)),
+      ),
+      "view any $type_name s4_opportunity" => array(
+        'title' => t('%type_name: View any s4_opportunity', array('%type_name' => $type->label)),
+      ),
+      "create any $type_name s4_opportunity" => array(
+        'title' => t('%type_name: Create any s4_opportunity', array('%type_name' => $type->label)),
+      ),
+    );
+  }
+  return $permissions;
+}
+
+
+/**
+ * Determines whether the given user has access to a s4_opportunity.
+ *
+ * @param $op
+ *   The operation being performed. One of 'view', 'update', 'create', 'delete'
+ *   or just 'edit' (being the same as 'create' or 'update').
+ * @param $s4_opportunity
+ *   Optionally a s4_opportunity or a s4_opportunity type to check access for. If nothing is
+ *   given, access for all opportunities is determined.
+ * @param $account
+ *   The user to check for. Leave it to NULL to check for the global user.
+ * @return boolean
+ *   Whether access is allowed or not.
+ */
+function s4_opportunity_access($op, $s4_opportunity = NULL, $account = NULL) {
+  if (user_access('administer opportunities', $account)) {
+    return TRUE;
+  }
+  if ($op == 'view') {
+    if ($s4_opportunity->status && user_access('access active opportunities')) {
+      return true;
+    }
+    if (!$s4_opportunity->status && user_access('access inactive opportunities')) {
+      return false;
+    }
+    return false;
+  }
+  if (isset($s4_opportunity) && $type_name = $s4_opportunity->type) {
+    $op = ($op == 'view') ? 'view' : 'edit';
+    if (user_access("$op any $type_name s4_opportunity", $account)) {
+      return TRUE;
+    }
+  }
+  return FALSE;
+}
+
+
+/**
+ * Access callback for the entity API.
+ */
+function s4_opportunity_type_access($op, $type = NULL, $account = NULL) {
+  return user_access('administer s4_opportunity types', $account);
+}
+
+
+/**
+ * Gets an array of all s4_opportunity types, keyed by the type name.
+ *
+ * @param $type_name
+ *   If set, the type with the given name is returned.
+ * @return s4_opportunityType[]
+ *   Depending whether $type isset, an array of s4_opportunity types or a single one.
+ */
+function s4_opportunity_get_types($type_name = NULL) {
+  // entity_load will get the Entity controller for our s4_opportunity entity and call the load
+  // function of that object - we are loading entities by name here.
+  $types = entity_load_multiple_by_name('s4_opportunity_type', isset($type_name) ? array($type_name) : FALSE);
+  return isset($type_name) ? reset($types) : $types;
+}
+
+
+/**
+ * Menu argument loader; Load a s4_opportunity type by string.
+ *
+ * @param $type
+ *   The machine-readable name of a s4_opportunity type to load.
+ * @return
+ *   A s4_opportunity type array or FALSE if $type does not exist.
+ */
+function s4_opportunity_type_load($type) {
+  return s4_opportunity_get_types($type);
+}
+
+
+/**
+ * Fetch a s4_opportunity object. Make sure that the wildcard you choose
+ * in the s4_opportunity entity definition fits the function name here.
+ *
+ * @param $s4_opportunity_id
+ *   Integer specifying the s4_opportunity id.
+ * @param $reset
+ *   A boolean indicating that the internal cache should be reset.
+ * @return
+ *   A fully-loaded $s4_opportunity object or FALSE if it cannot be loaded.
+ *
+ * @see s4_opportunity_load_multiple()
+ */
+function s4_opportunity_load($s4_opportunity_id, $reset = FALSE) {
+  $opportunities = s4_opportunity_load_multiple(array($s4_opportunity_id), array(), $reset);
+  return reset($opportunities);
+}
+
+
+/**
+ * Load multiple opportunities based on certain conditions.
+ *
+ * @param $s4_opportunity_ids
+ *   An array of s4_opportunity IDs.
+ * @param $conditions
+ *   An array of conditions to match against the {s4_opportunity} table.
+ * @param $reset
+ *   A boolean indicating that the internal cache should be reset.
+ * @return
+ *   An array of s4_opportunity objects, indexed by s4_opportunity_id.
+ *
+ * @see entity_load()
+ * @see s4_opportunity_load()
+ */
+function s4_opportunity_load_multiple($s4_opportunity_ids = array(), $conditions = array(), $reset = FALSE) {
+  return entity_load('s4_opportunity', $s4_opportunity_ids, $conditions, $reset);
+}
+
+
+/**
+ * Deletes a s4_opportunity.
+ */
+function s4_opportunity_delete(s4_opportunity $s4_opportunity) {
+  $s4_opportunity->delete();
+}
+
+
+/**
+ * Delete multiple opportunities.
+ *
+ * @param $s4_opportunity_ids
+ *   An array of s4_opportunity IDs.
+ */
+function s4_opportunity_delete_multiple(array $s4_opportunity_ids) {
+  entity_get_controller('s4_opportunity')->delete($s4_opportunity_ids);
+}
+
+
+/**
+ * Create a s4_opportunity object.
+ */
+function s4_opportunity_create($values = array()) {
+  return entity_get_controller('s4_opportunity')->create($values);
+}
+
+
+/**
+ * Saves a s4_opportunity to the database.
+ *
+ * @param $s4_opportunity
+ *   The s4_opportunity object.
+ */
+function s4_opportunity_save(s4_opportunity $s4_opportunity) {
+  return $s4_opportunity->save();
+}
+
+
+/**
+ * Saves a s4_opportunity type to the db.
+ */
+function s4_opportunity_type_save(s4_opportunityType $type) {
+  $type->save();
+}
+
+
+/**
+ * Deletes a s4_opportunity type from the db.
+ */
+function s4_opportunity_type_delete(s4_opportunityType $type) {
+  $type->delete();
+}
+
+
+/**
+ * URI callback for opportunities
+ */
+function s4_opportunity_uri(s4_opportunity $s4_opportunity){
+  return array(
+    'path' => 's4_opportunity/' . $s4_opportunity->s4_opportunity_id,
+  );
+}
+
+
+/**
+ * Menu title callback for showing individual entities
+ */
+function s4_opportunity_page_title(s4_opportunity $s4_opportunity){
+  return $s4_opportunity->name;
+}
+
+
+/**
+ * Sets up content to show an individual s4_opportunity
+ * @todo - get rid of drupal_set_title();
+ */
+function s4_opportunity_page_view($s4_opportunity, $view_mode = 'full') {
+  $controller = entity_get_controller('s4_opportunity');
+  $content = $controller->view(array($s4_opportunity->s4_opportunity_id => $s4_opportunity));
+  drupal_set_title($s4_opportunity->name);
+  $site = field_get_items('s4_opportunity', $s4_opportunity, 'field_opportunity_sites');
+  $site = node_load($site[0]['target_id']);
+  drupal_set_breadcrumb(
+    array(l(t('Home'), '<front>'),
+          l(t('Sites'), 'site-list'),
+          l($site->title, 'node/'. $site->nid),
+          $s4_opportunity->name
+    )
+  );
+  return $content;
+}
+
+/**
+ * Implement hook_theme().
+ */
+function s4_opportunity_theme() {
+  $path = drupal_get_path('module', 's4_opportunity') .'/theme';
+  return array(
+    's4_opportunity_add_list' => array(
+      'variables' => array('content' => array()),
+      'file' => 's4_opportunity.admin.inc',
+    ),
+    's4_opportunity' => array(
+      'render element' => 'elements',
+      'template' => 's4_opportunity',
+    ),
+    's4_opportunity_create_start' => array(
+      'variables' => array('types' => array()),
+      'template' => 's4_opportunity_create_start',
+      'path' => $path
+    ),
+    's4_opportunity_place_options' => array(
+      'variables' => array('opportunity' => array(), 'type' => array(), 'courses' => array(), 'programs' => array()),
+      'template' => 's4_opportunity_place_options',
+      'path' => $path
+    ),
+  );
+}
+
+function s4_opportunity_s4_site_configuration() {
+  return array(
+    'opportunity_general' => array(
+      'group' => t('Opportunities'),
+      'title' => t('Opportunity configuration'),
+      'description' => t('Customize messages and approval processes for opportunities.'),
+      'href' => 'admin/config/s4/opportunities',
+    ),
+    'opportunity_types' => array(
+      'group' => t('Opportunities'),
+      'title' => t('Opportunity types'),
+      'description' => t('Define types of opportunities like internships or special projects.'),
+      'href' => 'admin/structure/s4_opportunity_types',
+    ),
+    'opportunity_groups' => array(
+      'group' => t('Opportunities'),
+      'title' => t('Approval groups'),
+      'description' => t('Define the group of departments or individuals who need to approve new opportunities.'),
+      'href' => 'admin/structure/taxonomy/opportunity_groups',
+      ),
+    'opportunity_site_fields' => array(
+      'group' => t('Opportunities'),
+      'title' => t('Disable site fields for new opportunities'),
+      'description' => t('When a student or faculty creates a site as part of a new opportunity, disable certain fields.'),
+      'href' => 'admin/config/s4/opportunities/site-fields',
+      )
+  );
+}
+
+/**
+ * Implements hook_menu().
+ */
+function s4_opportunity_menu() {
+  $items = array();
+
+  $items['opportunities'] = array(
+    'title' => 'Opportunities',
+    'type' => MENU_CALLBACK,
+    'page callback' => 's4_opportunity_opportunities_redirect',
+    'access callback' => 's4_opportunity_opportunities_redirect_access',
+    );
+
+  $items['admin/config/s4/opportunities'] = array(
+    'title' => 'Opportunities',
+    'type' => MENU_LOCAL_TASK,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('s4_opportunity_admin_form'),
+    'access arguments' => array('administer s4_opportunity types'),
+    'file' => 's4_opportunity.admin.inc',
+    );
+
+  $items['admin/config/s4/opportunities/site-fields'] = array(
+    'title' => 'Disable site fields',
+    'type' => MENU_LOCAL_TASK,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('s4_opportunity_admin_site_fields_form'),
+    'access arguments' => array('administer s4_opportunity types'),
+    'file' => 's4_opportunity.admin.inc',
+    );
+
+  $items['opportunities/place/%/%user'] = array(
+    'title' => 'Make placement',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('s4_opportunity_place_form', 2, 3),
+    'access arguments' => array('place students in opportunities'),
+    'file' => 's4_opportunity.pages.inc',
+    );
+
+  $items['opportunities/create'] = array(
+    'title' => 'Start a new opportunity',
+    'page callback' => 's4_opportunity_create_start',
+    'access arguments' => array('start new opportunities'),
+    'file' => 's4_opportunity.pages.inc',
+    );
+
+  $items['opportunities/create/%s4_opportunity_type'] = array(
+    'title' => 'Start ',
+    'page callback' => 's4_opportunity_create_start_type',
+    'page arguments' => array(2),
+    'access arguments' => array('start new opportunities'),
+    'file' => 's4_opportunity.pages.inc',
+    );
+
+  $items['opportunities/create/site/%node'] = array(
+    'title' => 'Select site',
+    'page callback' => 's4_opportunity_create_site_select',
+    'page arguments' => array(3),
+    'access arguments' => array('start new opportunities'),
+    'file' => 's4_opportunity.pages.inc',
+    );
+
+  $items['opportunities/create/site-staff/select/%node'] = array(
+    'title' => 'Select site staff',
+    'page callback' => 's4_opportunity_create_site_staff_select',
+    'page arguments' => array(4),
+    'access arguments' => array('start new opportunities'),
+    'file' => 's4_opportunity.pages.inc',
+    );
+
+  $items['opportunities/create/site-staff/new'] = array(
+    'title' => 'Create site staff',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('s4_opportunity_create_new_site_staff_form'),
+    'access arguments' => array('start new opportunities'),
+    'file' => 's4_opportunity.pages.inc',
+    );
+
+  $items['opportunities/create/opportunity'] = array(
+    'title_callback' => 's4_opportunity_create_opportunity_title',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('s4_opportunity_create_opportunity_form'),
+    'access arguments' => array('start new opportunities'),
+    'file' => 's4_opportunity.pages.inc',
+    );
+
+  $items['opportunities/create/students/%user/%node'] = array(
+    'title' => 'Select a student',
+    'page callback' => 's4_opportunity_create_select_student',
+    'page arguments' => array(3, 4),
+    'access arguments' => array('start new opportunities'),
+    'file' => 's4_opportunity.pages.inc',
+    );
+  $items['opportunities/create/done'] = array(
+    'title' => 'Done',
+    'page callback' => 's4_opportunity_create_done',
+    'access arguments' => array('start new opportunities'),
+    'file' => 's4_opportunity.pages.inc',
+    );
+
+  $items['opportunities/create/place'] = array(
+    'title' => 'Place yourself',
+    'page callback' => 's4_opportunities_place_option',
+    'access arguments' => array('start new opportunities'),
+    'file' => 's4_opportunity.pages.inc',
+    );
+
+  $items['opportunities/create/place-immediately'] = array(
+    'title' => 'Place',
+    'page callback' => 's4_opportunities_place_immediately',
+    'access arguments' => array('start new opportunities'),
+    'file' => 's4_opportunity.pages.inc',
+    );
+
+  $items['opportunities/approve/%relation'] = array(
+    'title callback' => 's4_opportunity_approve_title',
+    'title arguments' => array(2),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('s4_opportunity_approve_form', 2),
+    'access callback' => 's4_opportunity_approve_access',
+    'access arguments' => array(2),
+    'file' => 's4_opportunity.pages.inc'
+    );
+
+  $items['opportunities/form/%relation'] = array(
+    'title' => 'Complete your placement',
+    'page callback' => 's4_opportunity_placement_form',
+    'page arguments' => array(2),
+    'access callback' => 's4_opportunity_placement_form_access',
+    'access arguments' => array(2),
+    'file' => 's4_opportunity.pages.inc'
+    );
+
+  $items['opportunities/faculty'] = array(
+    'title' => 'Approve placements',
+    'page callback' => 's4_opportunity_placement_approve',
+    'access arguments' => array('access content'),
+    'file' => 's4_opportunity.pages.inc'
+    );
+
+  $items['opportunities/place/self/%s4_opportunity/%/%'] = array(
+    'title' => 'Place yourself',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('s4_opportunity_place_self_confirm', 3, 4, 5),
+    'access callback' => 's4_opportunity_place_self_access',
+    'access arguments' => array(3, 4, 5),
+    'file' => 's4_opportunity.pages.inc',
+    );
+  return $items;
+}
+
+function s4_opportunity_place_self_access($opportunity, $type, $entity_id) {
+  global $user;
+  return s4_opportunity_user_can_place($user, $opportunity);
+}
+
+function s4_opportunity_placement_form_access($relation) {
+  global $user;
+  $endpoints = field_get_items('relation', $relation, 'endpoints');
+  return ($user->uid == $endpoints[0]['entity_id']);
+}
+
+function _s4_opportunity_get_relation($relation) {
+  $endpoints = field_get_items('relation', $relation, 'endpoints');
+  $user = user_load($endpoints[0]['entity_id']);
+  $opportunity = s4_opportunity_load($endpoints[1]['entity_id']);
+  return array('opportunity' => $opportunity, 'user' => $user);
+}
+
+function s4_opportunity_approve_title($relation) {
+  $opportunity = _s4_opportunity_get_relation($relation);
+  return t('Approve @title', array('@title' => $opportunity['opportunity']->name));
+}
+
+function s4_opportunity_approve_access($relation) {
+  global $user;
+  $user = user_load($user->uid);
+  $opportunity = _s4_opportunity_get_relation($relation);
+  if($_GET['email'] && $_GET['key']) {
+    if(md5($relation->rid . $_GET['email'] . drupal_get_hash_salt()) != $_GET['key']) {
+      return false;
+    }
+    $site_staff = field_get_items('relation', $relation, 'field_coordinator');
+    foreach($site_staff as $staff) {
+      $staff = node_load($staff['nid']);
+      $email = field_get_items('node', $staff, 'field_email');
+      if(trim(strtolower($email[0]['email'])) != $_GET['email']) {
+        return false;
+      }
+    }
+    return true;
+  }
+  $opportunity_groups = field_get_items('s4_opportunity', $opportunity['opportunity'], 'field_opportunity_group');
+  $user_groups = field_get_items('user', $user, 'field_opportunity_group');
+  foreach($user_groups as $user_group) {
+    foreach($opportunity_groups as $group) {
+      if($group['tid'] == $user_group['tid']) {
+        return true;
+      }
+    }
+  }
+  $course = field_get_items('relation', $relation, 'field_course');
+  if($course && $course = node_load($course[0]['nid'])) {
+    $faculty = field_get_items('node', $course, 'field_course_faculty');
+    foreach($faculty as $instructor) {
+      if($instructor['uid'] == $user->uid) {
+        return true;
+      }
+    }
+  }
+  if(!user_access('approve opportunities')) {
+    return false;
+  }
+  
+}
+
+function s4_opportunity_opportunities_redirect() {
+  if(user_access('administer opportunities')) {
+    drupal_goto('opportunities/manage');
+    return;
+  }
+  if(user_access('approve opportunities')) {
+    drupal_goto('opportunities/approve');
+    return;
+  }
+  drupal_goto('opportunities/list');
+}
+
+function s4_opportunity_opportunities_redirect_access() {
+  return (user_access('access active opportunities') || user_access('administer opportunities') || user_access('approve opportunities'));
+}
+
+function s4_opportunity_get_site_opportunities($site_id, $type = 'all', $active = TRUE) {
+  $query = db_select('field_data_field_opportunity_sites', 's')
+            ->fields('s', array('entity_id'))
+            ->condition('s.field_opportunity_sites_target_id', $site_id)
+            ->condition('entity_type' , 's4_opportunity');
+  $query->leftJoin('s4_opportunity', 'o', 'o.s4_opportunity_id = s.entity_id');
+  if($active) {
+    $query->condition('o.status', '0', '<>');
+  }
+  if($type != 'all') {
+    $query->condition('o.type', $type);
+  }
+  $opportunities = $query->execute()->fetchAllKeyed(0, 0);
+  foreach($opportunities as &$opportunity) {
+    $opportunity = s4_opportunity_load($opportunity);
+  }
+  return $opportunities;
+}
+
+/**
+ * Implements hook_menu_local_tasks_alter().
+ */
+function s4_opportunity_menu_local_tasks_alter(&$data, $router_item, $root_path) {
+  // Add action link 'admin/structure/opportunities/add' on 'admin/structure/opportunities'.
+  if ($root_path == 'admin/content/opportunities') {
+    $item = menu_get_item('opportunities/add');
+    if ($item['access']) {
+      $data['actions']['output'][] = array(
+        '#theme' => 'menu_local_action',
+        '#link' => $item,
+      );
+    }
+  }
+}
+
+/**
+ * Implements hook_menu_alter().
+ */
+function s4_opportunity_menu_alter(&$items) {
+  //field_lock_menu_access($field, $default_access)
+  $paths = array('admin/structure/s4_opportunity_types/manage/%s4_opportunity_type/fields/%field_ui_menu',
+                 'admin/structure/s4_opportunity_types/manage/%s4_opportunity_type/fields/%field_ui_menu/delete',
+                 'admin/structure/s4_opportunity_types/manage/%s4_opportunity_type/fields/%field_ui_menu/edit',
+                 'admin/structure/s4_opportunity_types/manage/%s4_opportunity_type/fields/%field_ui_menu/field-settings',
+                 'admin/structure/s4_opportunity_types/manage/%s4_opportunity_type/fields/%field_ui_menu/widget-type');
+  foreach($paths as $path) {
+    $items[$path]['access arguments'] = array(6, 'administer s4_opportunity types');
+  }
+}
+
+/**
+ * Implements hook_entity_presave().
+ */
+function s4_opportunity_entity_presave($relation, $type) {
+  if($type != 'relation' || $relation->relation_type != 'opportunity_placement') {
+    return;
+  }
+
+  $endpoints = field_get_items('relation', $relation, 'endpoints');
+  $opportunity = s4_opportunity_load($endpoints[1]['entity_id']);
+  $student = user_load($endpoints[0]['entity_id']);
+  $type = s4_opportunity_type_load($opportunity->type);
+
+}
+
+function s4_opportunity_mail($key, &$message, $params) {
+  $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed';
+  $message['headers']['MIME-Version'] = '1.0';
+  $message['headers']['Content-Transfer-Encoding'] = '8Bit';
+  switch ($key) {
+    case 'approval_email':
+      $message['subject'] = $params['type']->data['approval_email_subject'];
+      $body = token_replace($params['type']->data['approval_email_body']['value'], array('s4_site_staff' => $params['site_staff'],
+                                                   's4_opportunity' => $params['opportunity'],
+                                                   'placement' => $params['placement'],
+                                                   'user' => $params['student']
+                                                   ));
+      $message['body'][] = check_markup($body, $params['type']->data['approval_email_body']['format']);
+      break;
+    case 'site_staff_approval_email':
+      $message['subject'] = $params['type']->data['site_staff_approval_email_subject'];
+      $body = token_replace($params['type']->data['site_staff_approval_email_body']['value'], array('s4_site_staff' => $params['site_staff'],
+                                                   's4_opportunity' => $params['opportunity'],
+                                                   'placement' => $params['placement'],
+                                                   'user' => $params['student']
+                                                   ));
+      $message['body'][] = check_markup($body, $params['type']->data['site_staff_approval_email_body']['format']);
+      break;     
+  }
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function s4_opportunity_block_info() {
+  return array(
+    'new_opportunity' => array('info' => t('Create opportunity form')),
+    'opportunity_start' => array('info' => t('Start a new opportunity')),
+    'opportunity_progress' => array('info' => t('Opportunity progress bar')),
+    'placement_approval' => array('info' => t('Opportunity placement approval')),
+    'placement_form' => array('info' => t('Opportunity placement form')),
+    'opportunity_approval' => array('info' => t('Opportunities require approval')),
+    'view_public' => array('info' => t('View public list button')),
+    'view_manage' => array('info' => t('View manage list button')),
+    'opportunity_place' => array('info' => t('Place with opportunity')),
+    );
+}
+
+/**
+ * Implements hook_
+ */
+function s4_opportunity_block_view($delta) {
+  module_load_include('inc', 's4_opportunity', 's4_opportunity.block');
+  if(arg(0) == 'relation' && arg(1)) {
+    $relation = relation_load(arg(1));
+  }
+  if(arg(0) == 'opportunities' && arg(2)) {
+    $relation = relation_load(arg(2));
+  }
+
+  switch($delta) {
+    case 'view_public':
+      return array('content' => l(t('View public list'), 'opportunities/list', array('attributes' => array('class' => array('btn')))));
+    case 'view_manage':
+      if(!user_access('administer opportunities')) {
+        return;
+      }
+      return array('content' => l(t('Manage opportunities'), 'opportunities/manage', array('attributes' => array('class' => array('btn')))));
+    case 'new_opportunity':
+      return array('content' => s4_opportunity_create_form());
+    case 'opportunity_start':
+      $content = s4_opportunity_block_start();
+      if(!$content) {
+        return;
+      }
+      return array('subject' => variable_get('s4_opportunity_begin_subject', t('Start a new opportunity')),
+        'content' => $content);
+    case 'opportunity_progress':
+      if(!isset($_SESSION['s4_opportunity_create']) || !user_access('start new opportunities')) {
+        return;
+      }
+      return array('content' => s4_opportunity_create_progress());
+    case 'placement_approval':
+      if($relation) {
+        return array('subject' => t('Approval status'),
+              'content' => _s4_opportunity_block_placement_approval($relation));
+      }
+    case 'placement_form':
+      if($relation) {
+        return array('subject' => t('Placement form'),
+              'content' => _s4_opportunity_block_placement_form($relation));
+      }
+      break;
+    case 'opportunity_approval':
+      global $user;
+      $results = s4_opportunity_get_require_approval($user);
+      if(count($results)) {
+        return array('subject' => t('Approve opportunities'),
+                     'content' => '<p>'. format_plural(count($results), 'You have one opportunity awaiting approval.', 'You have @count opportunities awaiting approval.', array('@count' => count($results))) .'</p><p>'.
+                     l(format_plural(count($results), 'Approve opportunity', 'Approve opportunities'), '/opportunities/faculty', array('attributes' => array('class' => array('btn', 'btn-large', 'btn-primary')))) .'</p>');
+      }
+      break;
+    case 'opportunity_place':
+      return array('content' => _s4_opportunity_place_button());
+  }
+}
+
+function s4_opportunity_s4_frontpage_blocks() {
+  $message = variable_get('s4_opportunity_begin_message', array('format' => FILTER_FORMAT_DEFAULT, 'value' => t('Start a new @types.', array('@types' => $type_list))));
+  $output = check_markup($message['value'], $message['format']);
+  $types = s4_opportunity_get_types();
+  $type_list = array();
+  foreach($types as $k => $type) {
+    if(user_access('create any '. $type->type .' s4_opportunity')) {
+      $type_list[] = $type->label;
+    }
+  }
+  if(!count($type_list)) {
+    return false;
+  }
+  return array('opportunity_start' => array('subject' => variable_get('s4_opportunity_begin_subject', t('Start a new opportunity')),
+                                           'content' => $output,
+                                           'href' => 'opportunities/create',
+                                           )
+    );
+}
+/**
+ * Add default fields to new opportunity types
+ */
+function s4_opportunity_add_default_fields($type) {
+  module_load_include('inc', 's4_opportunity', 's4_opportunity.default_fields');
+  _s4_opportunity_add_default_fields($type);
+}
+
+function s4_opportunity_form_field_ui_field_edit_form_alter(&$form, $form_state) {
+  if ($form['#instance']['entity_type'] != 's4_opportunity') {
+    return null;
+  }
+  
+  $form['instance']['s4_opportunity_risk'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('This is a risk-management field'),
+    '#default_value' => ($form['#instance']['s4_opportunity_risk']) ? $form['#instance']['s4_opportunity_risk'] : FALSE,
+  );
+
+}
+
+/**
+ * The class used for s4_opportunity entities
+ */
+class s4_opportunity extends Entity {
+
+  public function __construct($values = array()) {
+    parent::__construct($values, 's4_opportunity');
+  }
+
+  protected function defaultLabel() {
+    return $this->name;
+  }
+
+  protected function defaultUri() {
+    return array('path' => 'opportunity/' . $this->s4_opportunity_id);
+  }
+
+
+}
+
+
+/**
+ * The class used for s4_opportunity type entities
+ */
+class s4_opportunityType extends Entity {
+
+  public $type;
+  public $label;
+
+  public function __construct($values = array()) {
+    parent::__construct($values, 's4_opportunity_type');
+  }
+
+}
+
+
+/**
+ * The Controller for s4_opportunity entities
+ */
+class s4OpportunityController extends EntityAPIController {
+  public function __construct($entityType) {
+    parent::__construct($entityType);
+  }
+
+
+  /**
+   * Create a s4_opportunity - we first set up the values that are specific
+   * to our s4_opportunity schema but then also go through the EntityAPIController
+   * function.
+   *
+   * @param $type
+   *   The machine-readable type of the s4_opportunity.
+   *
+   * @return
+   *   A s4_opportunity object with all default fields initialized.
+   */
+  public function create(array $values = array()) {
+    // Add values that are specific to our s4_opportunity
+    $values += array(
+      's4_opportunity_id' => '',
+      'is_new' => TRUE,
+      'title' => '',
+      'created' => '',
+      'changed' => '',
+      'data' => '',
+    );
+
+    $s4_opportunity = parent::create($values);
+    return $s4_opportunity;
+  }
+
+  /**
+   * Overriding the buldContent function to add entity specific fields
+   */
+  public function buildContent($entity, $view_mode = 'full', $langcode = NULL, $content = array()) {
+    $content = parent::buildContent($entity, $view_mode, $langcode, $content);
+    return $content;
+  }
+
+}
+
+
+/**
+ * The Controller for s4_opportunity entities
+ */
+class s4OpportunityTypeController extends EntityAPIControllerExportable {
+  public function __construct($entityType) {
+    parent::__construct($entityType);
+  }
+
+   /**
+   * Create a s4_opportunity type - we first set up the values that are specific
+   * to our s4_opportunity type schema but then also go through the EntityAPIController
+   * function.
+   *
+   * @param $type
+   *   The machine-readable type of the s4_opportunity.
+   *
+   * @return
+   *   A s4_opportunity type object with all default fields initialized.
+   */
+  public function create(array $values = array()) {
+    // Add values that are specific to our s4_opportunity
+    $values += array(
+      'id' => '',
+      'is_new' => TRUE,
+      'data' => '',
+    );
+    $s4_opportunity_type = parent::create($values);
+    return $s4_opportunity_type;
+  }
+
+}
+
+function s4_opportunity_views_data_alter(&$data) { 
+  $data['s4_user_signup']['make_placement_link']['field'] = array(
+      'handler' => 'views_handler_make_opportunity_placement_link',
+      'click sortable' => FALSE,
+    );
+
+  $data['s4_opportunity']['table']['base'] = array(
+    'field' => 's4_opportunity_id',
+    'title' => t('Opportunity'),
+    'weight' => -10,
+    'access query tag' => 's4_opportunity_access',
+    'defaults' => array(
+      'field' => 'status',
+    ),
+  );
+
+  $data['s4_opportunity']['name'] = array(
+    'title' => t('Name'),
+    'help' => t('Name and optional link to opportunity.'),
+    'field' => array(
+      'handler' => 's4_opportunity_handler_name',
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort',
+    ),
+    'filter' => array(
+      'handler' => 'views_handler_filter_string',
+    ),
+    'argument' => array(
+      'handler' => 'views_handler_argument_string',
+    ),
+  );
+
+
+  $data['s4_opportunity']['s4_opportunity_id'] = array(
+    'title' => t('ID'),
+    'help' => t('The unique ID of this opportunity.'),
+    'field' => array(
+      'handler' => 'views_handler_field',
+    ),
+  );
+
+  $data['s4_opportunity']['status'] = array(
+    'field' => array(
+      'title' => t('Status'),
+      'help' => t('Status of the opportunity.'),
+      'handler' => 's4_opportunity_handler_status',
+    ),
+    'filter' => array(
+      'handler' => 'views_handler_filter_boolean_operator',
+      'title' => t('Status'),
+      'label' => t('Status'),
+      'type' => 'yes-no',
+      'use equal' => TRUE, // Use status = 1 instead of status <> 0 in WHERE statment
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort',
+    ),
+  );
+
+  $data['s4_opportunity']['type'] = array(
+    'field' => array(
+      'title' => t('Opportunity type'),
+      'help' => t('Type of opportunity.'),
+      'handler' => 's4_opportunity_handler_type',
+    ),
+  );
+
+  $data['s4_opportunity']['edit_s4_opportunity'] = array(
+    'field' => array(
+      'title' => t('Edit Link'),
+      'help' => t('Provide a link to the edit form for the s4_opportunity.'),
+      'handler' => 's4_opportunity_handler_edit_link_field',
+    ),
+  );
+  $data['s4_opportunity']['delete_s4_opportunity'] = array(
+    'field' => array(
+      'title' => t('Delete Link'),
+      'help' => t('Provide a link to delete the s4_opportunity.'),
+      'handler' => 's4_opportunity_handler_delete_link_field',
+    ),
+  );
+  // This content of this field are decided based on the menu structure that
+  // follows s4_opportunitys/s4_opportunity/%s4_opportunity_id/op
+  $data['s4_opportunity']['operations'] = array(
+    'field' => array(
+      'title' => t('Operations links'),
+      'help' => t('Display all operations available for this s4_opportunity.'),
+      'handler' => 's4_opportunity_handler_s4_opportunity_operations_field',
+    ),
+  );
+
+  $data['s4_opportunity']['make_placement'] = array(
+    'field' => array(
+      'title' => t('Make placement'),
+      'help' => t('Shows a make placement button by the opportunity.'),
+      'handler' => 's4_opportunity_handler_s4_opportunity_make_placement_field',
+    ),
+  );
+}
+
+/**
+ * Implements hook_node_insert().
+ */
+function s4_opportunity_node_insert($node) {
+  if(!($node->type == 'site' && isset($_SESSION['s4_opportunity_create']) && isset($_SESSION['s4_opportunity_create']['type']))) {
+    return;
+  }
+  $_SESSION['s4_opportunity_create']['site'] = $node->nid;
+  $_GET['destination'] = 'opportunities/create/site-staff/new';
+  drupal_get_destination();
+}
+
+/**
+ * Implements hook_token_info().
+ */
+function s4_opportunity_token_info() {
+  $types = array('s4_opportunity' => array(
+      'name' => t('Opportunity'),
+      'description' => t('Information about an opportunity')),
+  );
+
+  $tokens['s4_opportunity']['name'] = array('name' => t('Opportunity name'),
+    'description' => t('The name of the opportunity'));
+  $tokens['s4_opportunity']['placement_form_link'] = array('name' => t('Link to placement form.'),
+    'description' => t('URL to fill out a placement form.'));
+  $tokens['s4_opportunity']['approve_link'] = array('name' => t('Link to approve placement (internal users).'),
+    'description' => t('URL for faculty/deparment to approve placement.'));
+
+  $tokens['s4_opportunity']['site_staff_approve_link'] = array('name' => t('Link to approve placement (site staff).'),
+    'description' => t('URL to approve placement.'));
+  $fields = field_info_fields();
+  $instances = field_info_instances('s4_opportunity');
+  
+  foreach ($fields as $field_name => $field) {
+    if (!empty($field['bundles'])) {
+      foreach ($field['bundles'] as $entity_key => $entity) {
+        if($entity_key == 's4_opportunity') {
+          foreach($entity as $entity_type) {
+            if(isset($bundle_tokens[$entity_type]) && $bundle_tokens[$entity_type]) {
+              $field_token_type = strtr($field['type'], '_', '-') . '-field';
+              $field_token_name = strtr($field_name, '_', '-');
+              $tokens[$bundle_tokens[$entity_type]][$field_token_name] = array(
+                'name' => $field_token_name,
+                'description' => '',
+                'module' => 's4_core',
+              );
+            }
+          }   
+        }
+      }
+    }
+  }
+  return array(
+    'types' => $types,
+    'tokens' => $tokens,
+  );
+}
+
+function s4_opportunity_tokens($type, $tokens, array $data = array(), array $options = array()) {
+  $replacements = array();
+  if ($type == 's4_opportunity') {
+    $opportunity_type = s4_opportunity_type_load($data['opportunity']->type);
+    $replacements['[s4_opportunity:approve_link]'] = url('opportunities/approve/'. $data['placement']->rid, array('absolute' => TRUE));
+    $replacements['[s4_opportunity:placement_form_link]'] = url('opportunities/form/'. $data['placement']->rid, array('absolute' => TRUE));
+    $site_staff = field_get_items('relation', $data['placement'], 'field_coordinator');
+    if($site_staff & $site_staff[0]['nid']) {
+      $site_staff = node_load($site_staff[0]['nid']);
+      $email = field_get_items('node', $site_staff, 'field_email');
+      if($email[0]['email']) {
+        $key = md5($data['placement']->rid . $email[0]['email'] . drupal_get_hash_salt());
+        $replacements['[s4_opportunity:site_staff_approve_link]'] = url('opportunities/approve/'. $data['placement']->rid, array('query' => array('key' => $key, 'email' => $email[0]['email']), 'absolute' => TRUE));   
+      }
+    }
+    if(is_object($data['s4_opportunity']) && property_exists($data['s4_opportunity'], 'type')) {
+      $entity = clone $data['s4_opportunity'];
+      list($id, $vid, $bundle) = entity_extract_ids('s4_opportunity', $entity);
+      $fields = field_info_instances('s4_opportunity', $bundle);
+
+      foreach ($fields as $field_name => $field_instance) {
+        $field_token_name = strtr($field_name, '_', '-');
+        // Replace the [entity:field-name] token.
+        $original = $tokens[$field_token_name];
+        if (empty($entity->{$field_name})) {
+          $replacements[$original] = '';
+          continue;
+        }
+        if($original) {
+          $field_output = field_view_field('s4_opportunity', $entity, $field_name);
+          $output = array();
+          foreach (element_children($field_output) as $key) {
+            $output[$key] = $field_output[$key];
+          }
+          $replacements[$original] = render($output);
+        }
+      }
+      unset($entity);
+    }
+  }
+  return $replacements;
+}
+
+function s4_opportunity_form_site_node_form_alter(&$form, $form_state) {
+  if(!isset($_SESSION['s4_opportunity_create']['type'])) {
+    return;
+  }
+  $disabled_fields = variable_get('s4_opportunity_site_disabled_fields', array());
+  foreach($disabled_fields as $name => $field) {
+    if ($field) {
+      $form[$name]['#access'] = $form[$name]['#required'] = false;
+    }
+  }
+}
+
+function s4_opportunity_webform_submission_insert($node, $submission) {
+  if (isset($_SESSION['s4_opportunity_placement_form'])) {
+    $relation = relation_load($_SESSION['s4_opportunity_placement_form']['relation']);
+    $relation->field_form_signup_sid[LANGUAGE_NONE][0]['value'] = $submission->sid;
+    relation_save($relation);
+    $opportunity = s4_opportunity_load($_SESSION['s4_opportunity_placement_form']['opportunity']);
+    s4_opportunity_send_placement_approval($opportunity, $relation);
+    unset($_SESSION['s4_opportunity_placement_form']);
+    drupal_set_message(t('Thank you for your submission.'));
+    drupal_goto('<front>');
+  }
+}
+
+function s4_opportunity_entity_insert($relation, $type) {
+  if($type != 'relation') {
+    return;
+  }
+  $placement = _s4_opportunity_get_relation($relation);
+  $type = s4_opportunity_type_load($placement['opportunity']->type);
+  $sid = field_get_items('relation', $relation, 'field_form_signup_sid');
+  if($sid[0]['value']) {
+    return;
+  }
+  if($type->data['email_enable']) {
+    $tokens = array();
+    s4_mail_send('s4_opportunity', $placement['user']->mail, $type->data['email_subject'], $type->data['email_body']['value'], $type->data['email_body']['format'], $tokens);
+  }
+}
+
+function s4_opportunity_send_placement_approval($opportunity, $placement) {
+  $type = s4_opportunity_get_placement_approvals($opportunity->type);
+  $approvals = s4_opportunity_get_placement_approvals($opportunity, $placement);
+  $endpoints = field_get_items('relation', $placement, 'endpoints');
+  $student = user_load($endpoints[0]['entity_id']);
+  if($type->data['faculty_approve'] && !count($approvals['faculty'])) {
+    $course = field_get_items('relation', $placement, 'field_course');
+    if($course && $course = node_load($course[0]['nid'])) {
+      $faculty = field_get_items('node', $course, 'field_course_faculty');
+      foreach($faculty as $instructor) {
+        $user = user_load($instructor[0]['uid']);
+        $tokens = array('type' => $type, 'opportunity' => $opportunity, 'placement' => $placement, 'student' => $student);
+        s4_mail_send('s4_opportunity', $user->mail, $params['type']->data['approval_email_subject'], $params['type']->data['approval_email_body']['value'], $params['type']->data['approval_email_body']['format'], $tokens);
+      }
+    }
+  }
+  if($type->data['site_staff_approve'] && !count($approvals['site_staff'])) {
+    $staff = field_get_items('relation', $placement, 'field_coordinator');
+    $email = field_get_items('node', $staff, 'field_email');
+    if($email && $email[0]['email']) {
+      $tokens = array('type' => $type, 'opportunity' => $opportunity, 'placement' => $placement, 'student' => $student);
+      s4_mail_send('s4_opportunity', $user->mail, $params['type']->data['site_staff_approval_email_subject'], $params['type']->data['site_staff_approval_email_body']['value'], $params['type']->data['site_staff_approval_email_body']['format'], $tokens);
+
+    }
+  }
+  if($type->data['require_approval'] && !count($approvals['approver'])) {
+    $group = field_get_items('s4_opportunity', $opportunity, 'field_opportunity_group');
+    if(!$group || !count($group)) {
+      return;
+    }
+    $tids = array();
+    foreach($group as $g) {
+      $tids[] = $g['tid'];
+    }
+    $users = db_select('field_data_field_opportunity_group', 'o')
+               ->condition('entity_type', 'user')
+               ->condition('field_opportunity_group_tid', $tids, 'IN')
+               ->condition('deleted', 0)
+               ->fields('o', array('entity_id'))
+               ->execute()
+               ->fetchAllKeyed(0,0);
+    foreach($users as &$user) {
+      $user = user_load($user);
+      if($user->status) {
+        $tokens = array('type' => $type, 'opportunity' => $opportunity, 'placement' => $placement, 'student' => $student);
+        s4_mail_send('s4_opportunity', $user->mail, $params['type']->data['approval_email_subject'], $params['type']->data['approval_email_body']['value'], $params['type']->data['approval_email_body']['format'], $tokens);
+      }
+    }
+  }
+}
+
+function s4_opportunity_check_placement_approval($opportunity, $placement) {
+  $type = s4_opportunity_get_placement_approvals($opportunity->type);
+  $approvals = s4_opportunity_get_placement_approvals($opportunity, $placement);
+  if($type->data['faculty_approve'] && !count($approvals['faculty'])) {
+    return;
+  }
+  if($type->data['site_staff_approve'] && !count($approvals['site_staff'])) {
+    return;
+  }
+  if($type->data['require_approval'] && !count($approvals['approver'])) {
+    return;
+  }
+  
+  $placement->field_placement_approved[LANGUAGE_NONE][0]['value'] = 1;
+  relation_save($placement);
+}
+
+function s4_opportunity_get_placement_approvals($opportunity, $placement) {
+  $approvals = db_select('field_data_endpoints', 'e')
+            ->condition('e.bundle', 'approval')
+            ->condition('e.entity_type', 'relation')
+            ->condition('e.deleted', 1, '<>')
+            ->condition('e.endpoints_entity_type', 'relation')
+            ->condition('e.endpoints_entity_id', $placement->rid)
+            ->fields('e', array('entity_id'))
+            ->execute()
+            ->fetchAllkeyed(0,0);
+
+  if(!$approvals) {
+    return array();
+  }
+  $result = array();
+  foreach($approvals as $approval) {
+    $approval = relation_load($approval);
+    $endpoints = field_get_items('relation', $approval, 'endpoints');
+    $user = user_load($endpoints[0]['entity_id']);
+    $course = field_get_items('relation', $placement, 'field_course');
+    if($course && $course = node_load($course[0]['nid'])) {
+      $faculty = field_get_items('node', $course, 'field_course_faculty');
+      foreach($faculty as $instructor) {
+        if($instructor['uid'] == $user->uid) {
+          $result['faculty'][] = $approval;
+        }
+      }
+    }
+
+    $approval_group = field_get_items('user', $user, 'field_opportunity_group');
+    $opportunity_group = field_get_items('s4_opportunity', $opportunity, 'field_opportunity_group');
+    
+    if(count($approval_group)) {
+      foreach($approval_group as $group) {
+        foreach($opportunity_group as $ogroup) {
+          if($ogroup['tid'] == $group['tid']) {
+            $result['approver'][] = $approval;
+          }
+        }
+      }
+    }
+
+    $site_staff = field_get_items('relation', $placement, 'field_coordinator');
+    foreach($site_staff as $staff) {
+      if($staff['nid'] == $endpoints[0]['entity_id'] && $endpoints[0]['entity_type'] = 'node') {
+        $result['site_staff'][] = $approval;
+      }
+    }
+  }
+  return $result;
+}
+
+/**
+ * Implements hook_feeds_plugins().
+ */
+function s4_opportunity_feeds_plugins() {
+  $info['S4OpportunityFeedsProcessor'] = array(
+    'name' => 'Opportunity processor',
+    'description' => 'Add and update student opportunities contacts.',
+    'help' => 'Create and update opportunities from parsed content.',
+    'handler' => array(
+      'parent' => 'FeedsProcessor',
+      'class' => 'S4OpportunityFeedsProcessor',
+      'file' => 'S4OpportunityFeedsProcessor.inc',
+      'path' => drupal_get_path('module', 's4_opportunity') . '/plugins',
+    ),
+  );
+  return $info;
+}
+
+function s4_opportunity_get_require_approval($user) {
+  $placements = array();
+  if(module_exists('s4_courses')) {
+    $courses = s4_courses_user_is_faculty($user);
+    $results = db_query('select distinct c.entity_id FROM field_data_field_course c 
+where c.entity_type = :relation and c.bundle = :opportunity_placement and c.field_course_nid = 55 and c.entity_id 
+NOT IN (SELECT e.endpoints_entity_id FROM field_data_endpoints e 
+INNER JOIN field_data_endpoints e2 ON e2.entity_id = e.entity_id AND e2.endpoints_entity_id = :uid AND e2.endpoints_entity_type = :user
+WHERE e.endpoints_entity_type = :relation AND e.bundle = :approval AND e.entity_type = :relation)', array(
+      ':relation' => 'relation',
+      ':approval' => 'approval',
+      ':opportunity_placement' => 'opportunity_placement',
+      ':user' => 'user',
+      ':uid' => $user->uid,
+      ))->fetchAllKeyed(0,0);
+    foreach($results as $result) {
+      $placements[$result] = relation_load($result);
+    }
+  }
+
+  return $placements;
+}
+
+/**
+ * Implements hook_context_plugin().
+ */
+function s4_opportunity_context_plugins() {
+  $plugins = array();
+  $plugins['context_condition_s4_opportunity'] = array(
+    'handler' => array(
+      'path' => drupal_get_path('module', 's4_opportunity') .'/plugins',
+      'file' => 'context_condition_s4_opportunity.inc',
+      'class' => 'context_condition_s4_opportunity',
+      'parent' => 'context_condition',
+    ),
+  );
+  return $plugins;
+}
+
+/**
+ * Implements hook_context_registry().
+ */
+function s4_opportunity_context_registry() {
+  return array(
+    'conditions' => array(
+      'context_condition_s4_opportunity' => array(
+        'title' => t('Opportunity'),
+        'plugin' => 'context_condition_s4_opportunity',
+      ),
+    ),
+  );
+}
+
+/**
+ * Implementation of hook_context_page_condition().
+ */
+function s4_opportunity_context_page_condition() {
+  if ($plugin = context_get_plugin('condition', 'context_condition_s4_opportunity')) {
+    $plugin->execute();
+  }
+}
+
+/**
+ * Helper function to determine if user can place with an opportunity
+ */
+function s4_opportunity_user_can_place($user, $opportunity) {
+  $user = user_load($user->uid);
+  $user_programs = field_get_items('user', $user, 'field_site_restrict');
+  $opportunity_programs = field_get_items('s4_opportunity', $opportunity, 'field_site_restrict');
+  $results = array();
+  $programs = array();
+  foreach($opportunity_programs as &$program) {
+    $programs[$program['tid']] = $program['tid'];
+  }
+  foreach($user_programs as $program) {
+    if(isset($programs[$program['tid']])) {
+      $results['programs'][$program['tid']] = taxonomy_term_load($program['tid']);
+    }
+  }
+  $courses = views_get_view_result('user_courses', 'block_2', $user->uid);
+  if($courses) {
+    foreach($courses as $course) {
+      $course = node_load($course->nid);
+      $course_programs = field_get_items('node', $course, 'field_site_restrict');
+      foreach($course_programs as $program) {
+        if(isset($programs[$program['tid']])) {
+          $results['courses'][$course->nid] = $course;
+        }
+      }
+    }
+  }
+  return (count($results)) ? $results : false;
+}
+
+function s4_opportunity_get_user_placements($user = FALSE, $current = TRUE) {
+  if(!$user) {
+    global $user;
+  }
+
+  $query = db_select('field_data_endpoints', 'e')
+           ->condition('e.endpoints_entity_type', 'user')
+           ->condition('e.endpoints_entity_id', $user->uid)
+           ->condition('e.entity_type', 'relation')
+           ->condition('e.bundle', 'opportunity_placement')
+           ->fields('e', array('entity_id'));
+  if($current) {
+    $query->leftJoin('field_data_field_dates', 'd', 'd.entity_id = e.entity_id AND d.entity_type = e.entity_type');
+    $query->condition('d.field_dates_value', date('Y-m-d'), '<=')
+          ->condition('d.field_dates_value2', date('Y-m-d'), '>=');
+  }
+  $results = $query->execute()->fetchAllKeyed(0,0);
+  foreach($results as &$result) {
+    $result = _s4_opportunity_get_relation(relation_load($result));
+  }
+  return $results;
+}
+
+function s4_opportunity_s4_student_signup_list_alter(&$list, $values) {
+  $user = user_load($values->uid);
+  $opportunities = s4_opportunity_get_user_placements($user);
+  if(!count($opportunities)) {
+    return;
+  }
+  foreach($opportunities as $rid => $opportunity) {
+    $type = s4_opportunity_type_load($opportunity['opportunity']->type);
+    $list[] = t('@type: !link', array('@type' => $type->label, '!link' => l($opportunity['opportunity']->name, 'relation/'. $rid)));
+  }
+
+}
+
+function _s4_opportunity_place_button($opportunity = false) {
+  if(!$opportunity) {
+    $menu = menu_get_item();
+    if($menu['load_functions'][1] != 's4_opportunity_load') {
+      return;
+    }
+    $opportunity = $menu['page_arguments'][0];
+  }
+  $type = s4_opportunity_type_load($opportunity->type);
+  if($type->data['students_can_place'] && isset($_SESSION['s4_signup_course']) || isset($_SESSION['s4_signup_program'])) {
+    $destination = (isset($_SESSION['s4_signup_course'])) ? 'course' : 'program';
+    $destination_id = (isset($_SESSION['s4_signup_course'])) ? $_SESSION['s4_signup_course'] : array_pop($_SESSION['s4_signup_program']);
+    return l(t('Select this @type', array('@type' => $type->label)),'opportunities/place/self/'. $opportunity->s4_opportunity_id .'/'.  $destination .'/'. $destination_id,
+          array('attributes' => array('class' => array('btn', 'btn-success'))));
+  }
+}

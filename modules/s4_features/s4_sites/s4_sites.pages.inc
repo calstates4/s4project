@@ -148,3 +148,162 @@ function s4_sites_merge_sites_finished($success, $results, $operations) {
   }
   drupal_set_message($message);
 }
+
+function s4_sites_site_log($node) {
+  $form = drupal_render(drupal_get_form('s4_sites_site_log_search'));
+  $types = $_SESSION['s4_sites_site_log']['type'];
+  $bundle = ($types && $types != 'any') ? array($types) : array('file', 'contact_record');
+  $query = db_select('field_data_field_site', 's')
+           ->condition('field_site_nid', $node->nid)
+           ->condition('entity_type', 'node')
+           ->condition('bundle', $bundle, 'IN');
+  $query->leftJoin('node', 'n', 'n.nid = s.entity_id');
+  $query->addField('s', 'entity_id', 'id');
+  $query->addField('s', 'bundle', 'type');
+  $query->addField('n', 'created', 'timestamp');
+  if(in_array($types, array('versions', 'approval', 'any'))) {
+    $workbench_query = db_select('workbench_moderation_node_history', 'h');
+    $workbench_query->addField('h', 'hid', 'id');
+    $workbench_query->addField('h', 'vid', 'type');
+    $workbench_query->addField('h', 'stamp', 'timestamp');
+    $workbench_query->condition('h.nid', $node->nid);
+    $workbench_query->orderBy('timestamp', 'DESC');
+    $query->union($workbench_query, 'UNION ALL');
+  }
+  
+  $results = $query->execute()->fetchAllKeyed();
+  
+  $header = array(t('Date'), t('Type'), t('Name'), t('User'), t('Note'), t('Action'));
+  $rows = array();
+  foreach($results as $result => $type) {
+    if(in_array($type, array('file', 'contact_record'))) {
+      $item = node_load($result);
+      $type = ($item->type == 'file') ? t('Form') : t('Log entry');
+      $note = '';
+      if($item->type == 'file') {
+        $files = field_get_items('node', $item, 'field_files');
+        if($files && count($files)) {
+          $file_display = array();
+          foreach($files as $file) {
+            $file_display[] = drupal_render(field_view_value('node', $item, 'field_files', $file));
+          }
+          if(count($file_display) == 1) {
+            $note = $file_display[0];
+          }
+          else {
+            $note = theme_item_list(array('items' => $file_display));
+          }
+        }
+      }
+      else {
+        $body = field_get_items('node', $item, 'body');
+        if($body && count($body)) {
+          $note = drupal_render(field_view_value('node', $item, 'body', $body[0], 'teaser'));
+        }
+      }
+      $rows[] = array(format_date($item->created, 'short'),
+                   $type,
+                   l($item->title , 'node/'. $item->nid),
+                   theme('username', array('account' => user_load($item->uid))),
+                   $note,
+                   l('edit', 'node/'. $item->nid .'/edit', array('query' => array('destination' => 'node/'. $node->nid .'/log'), 
+                      'attributes' => array('class' => array('btn', 'btn-small', 'btn-info')))));
+    }
+    else {
+      if(in_array($types, array('approval', 'any'))) {
+        $moderation = db_select('workbench_moderation_node_history', 'h')
+                    ->fields('h')
+                    ->condition('nid', $node->nid)
+                    ->condition('hid', $result)
+                    ->execute()
+                    ->fetchAssoc();
+        $note = t('From @from_state --> @to_state <br/>%note',
+            array(
+              '@from_state' => workbench_moderation_state_label($moderation['from_state']),
+              '@to_state' => workbench_moderation_state_label($moderation['state']),
+              '%note' => $moderation['note'],
+            )
+          );
+        $rows[] = array(format_date($moderation['stamp'], 'short'),
+               t('Approval'),
+               '',
+               theme('username', array('account' => user_load($moderation['uid']))),
+               $note,
+               ''
+               );
+      }
+      if(in_array($types, array('versions', 'any'))) {
+        if(isset($displayed_revisions[$type])) {
+          continue;
+        }
+        $displayed_revisions[$type] = $type;
+        $revision = db_select('node_revision', 'r')
+                    ->fields('r')
+                    ->condition('nid', $node->nid)
+                    ->condition('vid', $type)
+                    ->execute()
+                    ->fetchAssoc();
+        $note = '';
+        $class = '';
+        if(!empty($node->workbench_moderation['published']) && $revision['vid'] == $node->workbench_moderation['published']->vid) {
+          $note = '<strong>'. t('This is the current published version') .'</strong>';
+          $class = 'published';
+        }
+        elseif($revision['vid'] == $node->workbench_moderation['current']->vid) {
+          $note = '<strong>'. t('This is the current draft') .'</strong>';
+          $class = 'draft';          
+        }
+        $action = '';
+        if($node->vid != $revision['vid'] && $revision['vid'] != $node->workbench_moderation['current']->vid) {
+          $action = l('revert', 'node/'. $node->nid .'/revisions/' . $revision['vid'] .'/revert', array('attributes' => array('class' => array('btn', 'btn-small', 'btn-danger'))));
+        }
+        $rows[] = array('data' => array(format_date($revision['timestamp'], 'short'),
+                                   t('Version'),
+                                   l($revision['title'], 'node/'. $node->nid .'/revisions/' . $revision['vid'] .'/view'),
+                                   theme('username', array('account' => user_load($revision['uid']))),
+                                   $revision['log'] .' '. $note,
+                                   $action
+                                  ),
+                        'class' => array($class),
+                        );
+      }
+    }
+  }
+
+  $send_form = drupal_render(drupal_get_form('s4_sites_send_site_form'));
+  $node_current = workbench_moderation_node_current_load($node);
+  $moderate_form = drupal_render(drupal_get_form('workbench_moderation_moderate_form', $node_current));
+  $results = theme('table', array('header' => $header, 'rows' => $rows));
+
+  return theme('s4_sites_log_page', array('moderate_form' => $moderate_form, 'send_form' => $send_form, 'site' => $node, 'form' => $form, 'results' => $results));
+}
+
+function s4_sites_site_log_search() {
+  $form = array();
+
+  $settings = $_SESSION['s4_sites_site_log'];
+
+  $form['type'] = array(
+    '#type' => 'select',
+    '#title' => t('Type of entry'),
+    '#options' => array('any' => t('-- Any --'),
+                        'file' => t('Form'),
+                        'contact_record' => t('Log entry'),
+                        'versions' => t('Versons'),
+                        'approval' => t('Approval'),
+                       ),
+    '#default_value' => ($settings['type']) ? $settings['type'] : 'any',
+    );
+
+  $form['search'] = array(
+    '#type' => 'submit',
+    '#value' => t('Search'),
+    );
+
+  return $form;
+}
+
+function s4_sites_site_log_search_submit($form, $form_state) {
+  $_SESSION['s4_sites_site_log'] = array();
+  $_SESSION['s4_sites_site_log']['type'] = $form_state['values']['type'];
+}

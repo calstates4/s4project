@@ -5,7 +5,7 @@
 */
 function s4_core_block_user_progress() {
   global $user;
-  if (!s4_core_user_can_signup($user) || user_access('create signups for other users')) {
+  if (!s4_core_user_can_signup($user) || $_SESSION['s4_opportunity_create'] || user_access('create signups for other users') || (!$_SESSION['s4_signup_program'] && !$_SESSION['s4_signup_course'])) {
     return NULL;
   }
   drupal_add_css(drupal_get_path('module', 's4_core') . '/css/status.css');
@@ -19,23 +19,19 @@ function s4_core_block_user_progress() {
   }
 
   if (isset($site)) {
-    $site_selection = '<div class="selection label label-info">' . l($site->title, 'node/' . $site->nid) . '</div>';
+    $site_selection = l($site->title, 'node/' . $site->nid);
   }
   if (isset($_SESSION['s4_signup_program']) && !isset($_SESSION['s4_signup_course'])) {
     $program = taxonomy_term_load($_SESSION['s4_signup_program']);
     $status['program'] = array('data'  => 'Program',
             'id'     => 'status-program',
             'class'  => array('done'),
-            'href'  => null,
-            'selection' => '<div class="selection label label-info">' . $program->name .'</div>',
+            'selection' => '<div class="selection">' . $program->name .'</div>',
             );
   }
   $status['site'] = array('data'  => 'Site',
             'id'     => 'status-site',
             'class'   => (isset($site)) ? array('done') : array(),
-            'href'  => (isset($course))
-                    ? _s4_core_get_course_site_arguments($course)
-                    : 'site-list',
             'selection' => (isset($site_selection)) ? $site_selection : FALSE,
             );
 
@@ -44,7 +40,7 @@ function s4_core_block_user_progress() {
       $site_coordinators = views_get_view_result('site_coordinators', 'block', $site->nid);
     }
     if (isset($coordinator)) {
-      $coordinator_selection = '<div class="selection label label-info">' .
+      $coordinator_selection = '<div class="selection">' .
             l($coordinator->title, 'node/' . $coordinator->nid) . '</div>';
     }
     if (!$site || count($site_coordinators)) {
@@ -55,9 +51,6 @@ function s4_core_block_user_progress() {
                          ? $coordinator_selection
                          : FALSE
               );
-      if($site) {
-        $status['coordinator']['href'] = 'sites/' . $site->nid . '/coordinators';
-      }
     }
   }
   if (isset($site)) {
@@ -66,16 +59,14 @@ function s4_core_block_user_progress() {
       $status['form'] = array('data' => 'Form',
               'id'   => 'status-form',
                 'class'   => (isset($form_done)) ? array('done') : array(),
-              'href' => 'node/' . $form[0]['nid'],
               'selection' => FALSE
               );
     }
-    $form_terms = s4_core_site_has_downloadable_forms($site);
+    $form_terms = s4_core_site_has_downloadable_forms($site, TRUE);
     if (count($form_terms) && !$_SESSION['s4_core_viewed_downloadable_forms']) {
       $status['form'] = array('data' => 'Forms',
               'id'   => 'status-form',
                 'class'   => (isset($form_done)) ? array('done') : array(),
-              'href' => 'forms/download/' . implode('+', $form_terms),
               'selection' => FALSE
               );
     }
@@ -107,8 +98,8 @@ function s4_core_block_user_progress() {
         ? 'finished'
         :   '';
   $status[] = array('data' => '<div>Done!</div>',
-            'class' => array('span1', 'complete', $finished));
-  return array('content' => theme('item_list', array('items' => $status, 'attributes' => array('class' => array('user-signup-status', 'row')))) . '<div class="clearfix"></div>');
+                    'class' => array('span1', 'complete', $finished));
+  return array('content' => theme('item_list', array('items' => $status, 'attributes' => array('class' => array('user-signup-status', 'row')))));
 }
 
 /**
@@ -184,13 +175,11 @@ function s4_core_block_s4_user_login_message() {
 function s4_core_block_s4_user_login() {
   global $user;
   $output = array();
-  $auth_types = array('students'        => variable_get('s4_core_auth_students', 'user'),
+  $auth_types = array('students'    => variable_get('s4_core_auth_students', 'user'),
                 'staff'             => variable_get('s4_core_auth_staff', 'user'),
                 'faculty'           => variable_get('s4_core_auth_faculty', 'user'),
                 'community members' => variable_get('s4_core_auth_sites', 'none'));
-  $login_destinations = array('user' => 'user',
-                              'ldap' => 'user',
-                              'cas'  => 'cas/login');
+  $login_destinations = s4_core_login_destinations();
 
   $login_options = array();
   foreach ($auth_types as $audience => $method) {
@@ -229,31 +218,7 @@ function s4_core_block_jump_to_node() {
 *  Subscription links block
 */
 function s4_core_block_s4_page_notifications() {
-  global $user;
-  if (!$user->uid) {
-    return NULL;
-  }
-  $list = notifications_subscription_list('page subscriptions')
-      ->filter_option('subscriptions_block');
-  $links = array();
-  foreach ($list->get_instances() as $notification) {
-    $link = $notification->element_link();
-    if ($notification->is_stored()) {
-      $link['#title'] = t('<span class="hover">Unsubscribe</span><span class="nohover">Subscribed</span>');
-      $link['#options']['attributes']['class'] = 'subscribed btn-success';
-    }
-    else {
-      $link['#title'] = t('Subscribe to changes');
-      $link['#options']['attributes']['class'] = 'not-subscribed btn-info';
-    }
-    $link['#options']['attributes']['class'] .= ' subscription-button btn';
-    $links[] = drupal_render($link);
-  }
-  if (count($links)) {
-    return array('content' => theme('item_list', array('items' => $links, 'class' => array('nav')))
-         );
-  }
-  return NULL;
+  
 }
 
 /**
@@ -266,16 +231,27 @@ function s4_core_block_s4_add_new_site() {
                 'node/add/site',
                 array('html' => TRUE,
                      'attributes' =>
-                    array('class' => 'btn btn-success')
+                    array('class' => array('btn', 'btn-success'))
                 )
                 );
-    $manage_link = l(t('Manage sites'),
+    if(arg(1) != 'manage') {
+      $manage_link = l(t('Manage sites'),
                 'site-list/manage',
                 array('html' => TRUE,
                      'attributes' =>
-                    array('class' => 'btn')
+                    array('class' => array('btn'))
                 )
                 );
+    }
+    else {
+      $manage_link = l(t('View public list'),
+                'site-list',
+                array('html' => TRUE,
+                     'attributes' =>
+                    array('class' => array('btn'))
+                )
+                );
+    }
     return array('content' => $add_link . ' ' . $manage_link);
   }
 }
@@ -301,6 +277,35 @@ function s4_core_block_s4_add_new_coordinator() {
 }
 
 /**
+  * 
+  */
+function s4_core_block_s4_add_forms() {
+  $buttons = array();
+
+  if(user_access('create webform content')) {
+    $buttons[] = l('<i class="icon-plus icon-white"></i> '. t('Add online form'),
+                   'node/add/webform',
+                   array('html' => TRUE,
+                         'attributes' => array(
+                            'class' => array('btn', 'btn-success'),
+                          ),
+                        )
+                   );
+  }
+  if(user_access('create downloadable_form content')) {
+    $buttons[] = l('<i class="icon-plus icon-white"></i> '. t('Add downloadable form'),
+                   'node/add/downloadable-form',
+                   array('html' => TRUE,
+                         'attributes' => array(
+                            'class' => array('btn', 'btn-success'),
+                          ),
+                        )
+                   );
+  }
+
+  return array('content' => implode(' ', $buttons));
+}
+/**
 *  Generates a link to export a report view
 */
 function s4_core_block_s4_report_export_link() {
@@ -310,39 +315,6 @@ function s4_core_block_s4_report_export_link() {
   return array('content' => l(t('Export data'), $url . '/export',
                 array('query' => $arguments,
                     'attributes' => array('class' => 'button export-link'))));
-}
-
-/**
-*  Link to subscribe to file expiration notices
-*/
-function s4_core_block_s4_subscribe_file_expiration() {
-  if (!user_access('get file expiration notifications')) {
-    return NULL;
-  }
-  drupal_add_css(drupal_get_path('module', 's4_core') . '/css/subscriptions.css');
-  global $user;
-  $query = db_select('notifications_subscription', 'n');
-  $query->condition('n.uid', $user->uid)
-      ->condition('n.type', 'document_expiration')
-      ->fields('n', array('sid'));
-  $result = $query->execute();
-  $sid = $result->fetchField();
-  if ($sid) {
-    $link = l(t('<span class="hover">Cancel email subscription</span><span class="nohover">Email me when a form will expire</span>'),
-          'notifications/unsubscribe/' . $sid,
-          array('html' => TRUE,
-              'attributes' => array('class' => 'subscription-button subscribed'),
-              'query' => array('destination' => $_GET['q'])));
-  }
-  else {
-    $link = l(t('Email me when a form expires'),
-          'notifications/subscribe/document_expiration',
-          array('html' => TRUE,
-              'attributes' => array('class' => 'subscription-button not-subscribed'),
-              'query' => array('destination' => $_GET['q'])));
-  }
-  return array('title' => '',
-         'content' => $link);
 }
 
 /*
@@ -383,6 +355,7 @@ function s4_core_block_s4_signup_error() {
     return;
   }
   $return = false;
+  global $user;
   if(module_exists('s4_courses')) {
     $view = views_get_view('user_courses');
     $view->set_display('block_2');
@@ -390,8 +363,10 @@ function s4_core_block_s4_signup_error() {
     if(count($view->result)) {
       return;
     }
+    if(s4_courses_user_is_faculty($user)) {
+      return;
+    }
   }
-  global $user;
   $programs = field_get_items('user', $user, 'field_site_restrict');
   if($programs && count($programs)) {
     return;

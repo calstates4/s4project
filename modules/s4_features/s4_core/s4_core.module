@@ -29,12 +29,12 @@ function s4_core_block_info() {
   $blocks['s4_add_new_site'] = array('info' => 'Add new site button');
   $blocks['s4_add_new_coordinator'] = array('info' => 'Add new coordinator button');
   $blocks['s4_report_export_link'] = array('info' => 'Export report link');
-  $blocks['s4_subscribe_file_expiration'] = array('info' => 'Subscribe to file expiration link');
   $blocks['s4_current_user_link'] = array('info' => 'Logged-in user link');
   $blocks['s4_site_settings'] = array('info' => 'S4 site settings');
   $blocks['s4_welcome_message'] = array('info' => 'S4 Welcome Message');
   $blocks['s4_signup_forms'] = array('info' => 'S4 Signup form jump link');
   $blocks['s4_signup_error'] = array('info' => 'S4 Signup student error');
+  $blocks['s4_add_forms'] = array('info' => 'Add forms buttons');
   return $blocks;
 }
 
@@ -114,7 +114,7 @@ function s4_core_node_view($node, $view_mode) {
   }
   if ($node->type == 'site' && s4_core_user_can_signup()) {
     if (!s4_core_signup_access($node)) {
-      $output = '<div class="btn disabled"><i class="icon-remove"> You can\'t sign up for this site.</div>';
+      $output = '<div class="btn disabled"><i class="icon-remove"></i> You can\'t sign up for this site.</div>';
     }
     else {
       $output = l('<i class="icon-ok-circle icon-white"></i> ' . t('Select this site'), 's4/signup/site/' . $node->nid,
@@ -184,11 +184,11 @@ function s4_core_signup_access($node, $user = FALSE) {
 /**
  * Returns if an object (site or site staff) is already full.
  */
-function _s4_core_object_is_full($node, $user = FALSE) {
+function _s4_core_object_is_full($node, $user = FALSE, $ignore_access = FALSE) {
   if (!$user) {
     global $user;
   }
-  if (user_access('ignore maximum limits on site', $user)) {
+  if (user_access('ignore maximum limits on site', $user) && !$ignore_access) {
     return FALSE;
   }
   $max = field_get_items('node', $node, 'field_signups_max');
@@ -278,16 +278,6 @@ function s4_core_menu() {
     'file' => 's4_core.pages.inc',
     'page arguments' => array(2, 3),
     'access arguments' => array('signup for service'),
-  );
-
-  $items['s4/course-list/%/%/%'] = array(
-    'title' => 'Add to course',
-    'description' => 'Adding a site to a course list',
-    'page callback' => 's4_core_add_site_to_course',
-    'file' => 's4_core.pages.inc',
-    'page arguments' => array(2, 3, 4),
-    'access callback' => 's4_core_add_site_to_course_access',
-    'access arguments' => array(3),
   );
 
   $items['s4/evaluation/%node'] = array(
@@ -449,21 +439,6 @@ function s4_core_signup_evaluation_access($node) {
 }
 
 /**
-*  Checks whether the user is allowed to add a site to a course list
-*/
-function s4_core_add_site_to_course_access($course) {
-  global $user;
-  $course = node_load($course);
-  $faculty_list = field_get_items('node', $course, 'field_course_faculty');
-  foreach ($faculty_list as $faculty) {
-    if ($faculty['uid'] == $user->uid) {
-      return TRUE;
-    }
-  }
-  return FALSE;
-}
-
-/**
 * Implements hook_permission
 */
 function s4_core_permission() {
@@ -564,6 +539,18 @@ function s4_core_get_user_signups($uid) {
   return $signups;
 }
 
+function s4_core_form_node_delete_confirm_alter(&$form) {
+  if($form['#node']->type != 'signup' || !isset($_GET['modal'])) {
+    return;
+  }
+  $form['#modal'] = TRUE;
+  $form['#submit'][] = 's4_core_form_node_delete_confirm_alter_submit';
+}
+
+function s4_core_form_node_delete_confirm_alter_submit($form, $form_state) {
+  s4_core_modal_close(true);
+}
+
 /**
 *  Menu callback when the signup is completed
 */
@@ -598,7 +585,7 @@ function s4_core_student_signup_hours() {
     '#type' => 'textfield',
     '#title' => 'Please estimate the minimum number of hours you will serve at this site',
     '#description' => 'You will have a chance to correct this when you complete your site evaluation, but it is helpful for us to know a rough estimate before you start your service.',
-    '#attributes' => array('class' => array('hours-field')),
+    '#attributes' => array('class' => array('hours-field', 'input-small')),
   );
 
   $form['submit'] = array(
@@ -759,6 +746,17 @@ function _s4_core_create_signup($uid = 0, $signup = array()) {
   return $node;
 }
 
+/**
+ * 
+ */
+function s4_core_modal_close($full = false) {
+  if($full) {
+    print '<html><head><script>parent.Drupal.behaviors.s4Theme.closeModal(true);</script></head><body></body><html>';
+    die();
+  }
+  drupal_add_js(array('s4ModalClose' => $refresh), 'setting');
+}
+
 
 /**
 * Implements hook_webform_submission_insert
@@ -791,15 +789,6 @@ function s4_core_webform_submission_insert($node, $submission) {
 }
 
 /**
- * Implements hook_admin_paths_alter()
- */
-function s4_core_admin_paths_alter(&$paths) {
-  $paths = array('signup/create/*' => TRUE,
-                 'node/*/signup-delete' => TRUE);
-}
-
-
-/**
  * Implements hook_form_FORM_ID_alter().
  */
 function s4_core_form_taxonomy_form_term_alter(&$form) {
@@ -810,6 +799,20 @@ function s4_core_form_taxonomy_form_term_alter(&$form) {
       '#token_types' => array('s4_signup', 'user'),
       '#weight' => $form['field_confirmation_email']['#weight'] + 1,
     );
+  }
+}
+
+/**
+ * Implements hook_node_load().
+ */
+function s4_core_node_load($nodes, $types) {
+  if(!in_array('webform', $types)) {
+    return;
+  }
+  foreach($nodes as $node) {
+    if($node->type == 'webform') {
+      $node->webform['submit_notice'] = 0;
+    }
   }
 }
 
@@ -1267,28 +1270,6 @@ function s4_core_mail($key, &$message, $params) {
 }
 
 /**
-*  Alter menu access to restrict certain fields form being deleted or edited.
-*/
-function s4_core_menu_alter(&$items) {
-  foreach (entity_get_info() as $entity_type => $entity_info) {
-    if ($entity_info['fieldable']) {
-      foreach ($entity_info['bundles'] as $bundle_name => $bundle_info) {
-          if (isset($bundle_info['admin'])) {
-            // Extract path information from the bundle.
-            $path = $bundle_info['admin']['path'];
-            $items["$path/fields/%field_ui_menu"]['access callback'] = 's4_core_field_alter_access';
-            $items["$path/fields/%field_ui_menu"]['access arguments'] = array(4, 6);
-            $items["$path/fields/%field_ui_menu/edit"]['access callback'] = 's4_core_field_alter_access';
-            $items["$path/fields/%field_ui_menu/edit"]['access arguments'] = array(4, 6);
-            $items["$path/fields/%field_ui_menu/delete"]['access callback'] = 's4_core_field_alter_access';
-            $items["$path/fields/%field_ui_menu/delete"]['access arguments'] = array(4, 6);
-        }
-      }
-    }
-  }
-}
-
-/**
  * Returns whether a given site has downloadable forms.
  */
 function s4_core_site_has_downloadable_forms($node) {
@@ -1300,12 +1281,8 @@ function s4_core_site_has_downloadable_forms($node) {
   if (!count($terms)) {
     return FALSE;
   }
-  $forms = db_select('field_data_field_site_restrict', 'r')
-           ->fields('r', array('entity_id'))
-           ->condition('bundle', 'downloadable_form')
-           ->condition('field_site_restrict_tid', $terms, 'IN')
-           ->execute()
-           ->fetchAllKeyed(0, 0);
+  $forms = views_get_view_result('site_forms', 'page_3', implode('+', $terms));
+
   return (count($forms)) ? $terms : FALSE;
 }
 
@@ -1320,30 +1297,6 @@ function s4_core_program_has_downloadable_forms($tid) {
            ->execute()
            ->fetchAllKeyed(0, 0);
   return (count($forms)) ? $terms : FALSE;
-}
-
-/**
-*  Checks whether a field in a given bundle is allowed to be edited
-*/
-function s4_core_field_alter_access($type, $field) {
-  if (!user_access('administer content types')) {
-    return FALSE;
-  }
-  if (user_access('override default field settings')) {
-    return TRUE;
-  }
-  static $access_list;
-  if (!$access_list) {
-    $access_list = module_invoke_all('s4_field_access');
-  }
-  foreach ($access_list as $bundle => $fields) {
-    foreach ($fields as $field_name) {
-      if ($bundle == $type && $field_name == $field) {
-        return FALSE;
-      }
-    }
-  }
-  return TRUE;
 }
 
 /**
@@ -1365,18 +1318,6 @@ function s4_core_s4_field_access() {
         ),
 
   );
-}
-
-/**
-*  Override the node field page to restrict access to certain fields
-*/
-function s4_core_form_field_ui_field_overview_form_alter(&$form, $form_state) {
-  foreach ($form['fields'] as $field_name => $field) {
-    if (!s4_core_field_alter_access($form['#bundle'], $field_name)) {
-      $form['fields'][$field_name]['edit'] = array();
-      $form['fields'][$field_name]['delete'] = array();
-    }
-  }
 }
 
 /**
@@ -1522,22 +1463,32 @@ function theme_s4_core_views_savedsearches_list($variables) {
 *  Here we check on any signups which have expired and send out emails
 */
 function s4_core_cron() {
-  $last_date = variable_get('s4_core_file_expiration_last_notice', time() - (7 * 24 * 60 * 60));
-  $query = db_select('field_data_field_expiration_reminder', 'r')
-         ->fields('r', array('entity_id'))
-         ->condition('field_expiration_reminder_value', 1);
-  $query->leftJoin('field_data_field_expiration_reminder_date', 'd', 'd.entity_id = r.entity_id');
-  $query->fields('d', array('field_expiration_reminder_date_value'))
-      ->condition('field_expiration_reminder_date_value', date('Y-m-d', $last_date), '>=')
-      ->condition('field_expiration_reminder_date_value', date('Y-m-d'), '<=')
-      ->orderBy('field_expiration_reminder_date_value', 'DESC');
+  $last_date = variable_get('s4_core_file_expiration_last_notice', date('Y-m-d'));
+  if($last_date != date('Y-m-d')) {
+    $query = db_select('field_data_field_expiration_reminder', 'r')
+           ->fields('r', array('entity_id'))
+           ->condition('field_expiration_reminder_value', 1);
+    $query->leftJoin('field_data_field_expiration_reminder_date', 'd', 'd.entity_id = r.entity_id');
+    $query->fields('d', array('field_expiration_reminder_date_value'))
+        ->condition('field_expiration_reminder_date_value', date('Y-m-d') . 'T00:00:00', '=')
+        ->orderBy('field_expiration_reminder_date_value', 'DESC');
+    $result = $query->execute();
+    
+    foreach ($result as $r) {
+      $node = node_load($r->entity_id);
+      $site = field_get_items('node', $node, 'field_site');
+      $site = node_load($site[0]['nid']);
+      $programs = field_get_items('node', $site, 'field_site_restrict');
+      $subject = t('Expiring form for @site', array('@site' => $site->title));
+      $message = t('The form [node:title] will expire on [node:field_expiration_date].');
+      $tokens['node'] = $node;
+      foreach($programs as $program) {
+        s4_mail_send_subscriptions('subscription_expired_forms', 'taxonomy_term', $program['tid'], $subject, $message, filter_default_format(), $tokens);
 
-  $result = $query->execute();
-  foreach ($result as $r) {
-    $node = node_load($r->entity_id);
-    _trigger_node($node, 'document_expiration');
+      }
+    }
+    variable_set('s4_core_file_expiration_last_notice', date('Y-m-d'));
   }
-  variable_set('s4_core_file_expiration_last_notice', time());
   
   $reminder_query = db_select('field_data_field_enable_email_reminders', 'r')
                     ->fields('r', array('entity_id'))
@@ -1725,97 +1676,6 @@ function s4_core_token_info() {
     );
 }
 
-/**
-* Implements hook_notifications
-*/
-function s4_core_notifications($op) {
-  switch ($op) {
-    case 'subscription types':
-      $types['document_expiration'] = array(
-        'title' => t('Document expiration'),
-        'class' => 'Notifications_Document_Expiration',
-        'object_types' => array('node_type'),
-        'access' => array('subscribe to content'),
-        'description' => t('Subscribe to notifications when documents are about to expire.'),
-        'display_options' => array('node_links'),
-      );
-      return $types;
-
-    case 'field types':
-      return array();
-
-    case 'object types':
-      $types['document'] = array(
-        'title' => t('Signup'),
-        'class' => 'Notifications_Document',
-      );
-      return $types;
-
-    case 'event types':
-      $types['document_expiration'] = array(
-        'object' => 'node',
-        'action' => 'document_expiration',
-        'title' => t('Document is about to expire'),
-        'class' => 'Notification_Document_Expires_Event',
-        'template' => 's4_core-document-about-to-expire',
-        'triggers' => array('node' => array('document_expiration')),
-        'actions' => array('s4_core_document_about_to_expire_action'),
-      );
-      return $types;
-
-    case 'message templates':
-      $types['s4_core-document-about-to-expire'] = array(
-        'object' => 'node',
-        'title' => t('Document about to expire'),
-        'class' => 'Notification_Document_Expires_Template',
-      );
-      return $types;
-
-    case 'display options':
-      $options['node_links'] = array(
-        '#title' => t('Full node links'),
-        '#description' => t('Subscription links will be displayed for full node pages.'),
-      );
-      return $options;
-
-    case 'event classes':
-      return array('node' => t('Node'));
-
-    case 'event actions':
-      return array(
-        'document_expiration' => t('Document expiration'),
-      );
-  }
-}
-
-function s4_core_document_about_to_expire_action($node, $context = array()) {
-  $node = $context['node'];
-  if ($node->type == 'file') {
-     s4_core_node_event('document_expiration', $node)->trigger();
-  }
-}
-
-function s4_core_notifications_subscription($op, $subscription = NULL) {
-  switch ($op) {
-    case 'page objects':
-      $objects = array();
-      // Return objects on current page to which we can subscribe
-      if (arg(0) == 'node' && is_numeric(arg(1)) && ($node = menu_get_object('file')) && $node->type == 'file') {
-        $objects[] = notifications_object('file', $node);
-      }
-      return $objects;
-      break;
-  }
-}
-
-function s4_core_node_event($action, $node) {
-  $page = &drupal_static(__FUNCTION__);
-  if (!isset($page[$action][$node->nid])) {
-    $page[$action][$node->nid] = notifications_event('document_expiration', $action)->add_object('node', $node);
-  }
-  return $page[$action][$node->nid];
-}
-
 function s4_core_trigger_info() {
   return array(
     'node' => array(
@@ -1897,8 +1757,8 @@ function s4_core_field_formatter_view($entity_type, $entity, $field, $instance, 
         '#markup' => '<address>' . implode('<br />', $output) . '</address>',
       );
     }
-
   }
+
   return $element;
 }
 
@@ -1937,4 +1797,50 @@ function s4_core_s4_help($path) {
 function s4_core_site_options_choice(&$form, $form_state) {
   module_load_include('inc', 's4_core', 's4_core.pages');
   return $form['site_options'];
+}
+
+function s4_core_site_options_courses(&$form, $form_state) {
+  module_load_include('inc', 's4_core', 's4_core.pages');
+  return $form['site'];
+}
+
+function s4_core_login_destinations() {
+  return array('user' => 'user',
+               'ldap' => 'user',
+               'cas'  => 'cas/login',
+              );
+}
+
+function s4_core_s4_frontpage_blocks() {
+  if(!s4_core_user_can_signup()) {
+    return;
+  }
+  $blocks = array();
+  $courses = views_get_view_result('user_courses', 'block_2', $user->uid);
+  if($courses) {
+    $blocks['user_courses'] = array(
+        'subject' => t('Make a placement in a course'),
+        'content' => '<p class="lead">'. t('You have courses that still require placements.') .'</p>' .
+          views_embed_view('user_courses', 'block_2', $user->uid),
+        'alert' => TRUE,
+      );
+  }
+  $programs = views_get_view_result('s4_user_programs', 'block', $user->uid);
+  if($programs) {
+    $blocks['user_programs'] = array(
+        'subject' => t('Make a placement in a program'),
+        'content' => '<p class="lead">'. format_plural(count($programs), 'You can place as part of a program.', 'You are part of @count programs.') .'</p>' .
+          views_embed_view('s4_user_programs', 'block', $user->uid),
+        'alert' => TRUE,
+      );
+  }
+  $placements = views_get_view_result('user_signups', 'block', $user->uid);
+  if($placements) {
+    $blocks['placements'] = array(
+      'subject' => t('View your placements'),
+      'content' => t('You currently have @count placements.', array('@count' => count($placements))),
+      'href' => 'my/placements',
+      );
+  }
+  return $blocks;
 }

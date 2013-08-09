@@ -10,6 +10,7 @@ stylesheets[all][] = css/colors.css
 stylesheets[print][] = css/print.css
 scripts[] = js/s4.js
 scripts[] = js/placeholder.js
+scripts[] = js/jquery-migrate.min.js
 scripts[] = bootstrap/js/bootstrap.js
 
 ;Overriding the core css files

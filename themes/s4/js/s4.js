@@ -3,14 +3,90 @@
 		
 		attach : function() {
 			$('#search input[type=text]').placeholder();
-			
 			$('#footer-map .map').css('height', $('#footer-map').height() + 'px');
 			
 			if($('.horizontal-tabs-panes').length) {
-				$(window).resize(function() {
-					$('.horizontal-tabs-panes').find('fieldset:not(table fieldset), table').css('width', ($('.horizontal-tabs-panes').width() - 28) + 'px');
+				$(window).on('resize', function() {
+					$('.horizontal-tabs-panes').find('fieldset:not(table fieldset), table, .fieldset-wrapper:not(table .fieldset-wrapper)').css('width', ($('.horizontal-tabs-panes').width() - 28) + 'px');
 				});
 				$(window).trigger('resize');
+			}
+			
+			$('ul.in-page-tabs li > a').on('click', function(event) {
+				event.preventDefault();
+			  $(this).tab('show');
+			});
+
+			if($('.popover-link').length) {
+				$('.popover-link').each(function() {
+					var options = {
+						html   : true,
+						trigger : ($(this).hasClass('hover')) ? 'hover' : 'click',
+						placement : ($(this).hasClass('left')) ? 'left' : 'right',
+						content: $(this).parents('.popover-wrapper').find('.popover-content div').html(),
+						title: $(this).parents('.popover-wrapper').find('.popover-content h4').html(),
+					};
+					if($(this).hasClass('map-link')) {
+						var $mapElement = $('<div class="popover-map"></div>');
+						options.content = $mapElement;
+						$(this).popover(options);
+						$(this).on('click', function(event) {
+							var center = new google.maps.LatLng($(this).data('lat'), $(this).data('lon'));
+							var map = new google.maps.Map($mapElement.get(0),
+		        				   {center      : center,
+												zoom 		    : Drupal.settings.s4_map.zoom,
+								        MapTypeId   : google.maps.MapTypeId.TERRAIN
+								    });
+							var marker = new google.maps.Marker({ position : center, map : map });
+							map.setCenter(center);
+							map.setZoom(15);
+						});
+					}
+					else {
+						$(this).popover(options);
+					}
+					$(this).on('click', function(event) {
+						event.preventDefault();
+						var $that = $(this);
+						$('.popover-link').each(function() {
+							if(!$(this).is($that)) {
+								$(this).popover('hide');
+							}
+						});
+					})
+				});
+			}
+			$('.iframe-modal').on('click', function(event) {
+				event.preventDefault();
+				if(!$('#modal-iframe').length) {
+					$('body').append('<div id="modal-iframe" class="modal hide fade modal-wide" tabindex="-1" role="dialog">' +
+						'<div class="modal-header">' +
+							'<button type="button" class="close" data-dismiss="modal">&times;</button>' +
+								'<h3></h3>' +
+						'</div>' +
+						'<div class="modal-body">' +
+					      '<iframe src="" width="99.6%" frameborder="0"></iframe>' +
+						'</div>' +
+					'</div>');
+				}
+				$('#modal-iframe .modal-header h3').html($(this).data('modal-title'));
+				$('#modal-iframe .modal-body').css('max-height', ($(window).height() * .75) + 'px');
+				$('#modal-iframe iframe').attr('src', $(this).attr('href'))
+												  			 .css('height', ($(window).height() * .7) + 'px');
+				$('#modal-iframe').modal({ show : true });
+			});
+
+			
+			if(window.location.hash && $(window.location.hash).hasClass('tab-pane')) {
+				$('a[href=' + window.location.hash +']').trigger('click');
+			}
+
+		},
+
+		closeModal : function(refresh) {
+			$('#modal-iframe').modal('hide');
+			if(refresh) {
+				window.location.href = window.location.href;
 			}
 		}
 	};

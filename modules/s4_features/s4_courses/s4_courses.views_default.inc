@@ -499,7 +499,6 @@ function s4_courses_views_default_views() {
   /* Display: Course faculty */
   $handler = $view->new_display('block', 'Course faculty', 'block_2');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Faculty';
   $handler->display->display_options['defaults']['css_class'] = FALSE;
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'list';
@@ -735,6 +734,27 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['fields']['uid']['alter']['path'] = 'signup/create/[uid]/!1';
   $handler->display->display_options['fields']['uid']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['uid']['link_to_user'] = FALSE;
+
+  /* Display: Manage students page */
+  $handler = $view->new_display('page', 'Manage students page', 'page_1');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Manage your students';
+  $handler->display->display_options['defaults']['access'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'role';
+  $handler->display->display_options['access']['role'] = array(
+    2 => '2',
+  );
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Faculty (field_course_faculty) */
+  $handler->display->display_options['arguments']['field_course_faculty_uid']['id'] = 'field_course_faculty_uid';
+  $handler->display->display_options['arguments']['field_course_faculty_uid']['table'] = 'field_data_field_course_faculty';
+  $handler->display->display_options['arguments']['field_course_faculty_uid']['field'] = 'field_course_faculty_uid';
+  $handler->display->display_options['arguments']['field_course_faculty_uid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['field_course_faculty_uid']['default_argument_type'] = 'current_user';
+  $handler->display->display_options['arguments']['field_course_faculty_uid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['field_course_faculty_uid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['field_course_faculty_uid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['path'] = 'faculty/manage/students';
   $translatables['course_students'] = array(
     t('Master'),
     t('Course students'),
@@ -768,11 +788,12 @@ function s4_courses_views_default_views() {
     t('Evaluation status'),
     t('Complete assessment'),
     t('Course faculty'),
-    t('Faculty'),
     t('field_course_faculty'),
     t('[field_first_name] [field_last_name]'),
     t('Course students (Staff view)'),
     t('Make placement'),
+    t('Manage students page'),
+    t('Manage your students'),
   );
   $export['course_students'] = $view;
 
@@ -1031,6 +1052,7 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['access']['perm'] = 'signup for service';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['disable_sql_rewrite'] = TRUE;
   $handler->display->display_options['query']['options']['distinct'] = TRUE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'full';
@@ -1195,6 +1217,8 @@ function s4_courses_views_default_views() {
   $handler = $view->new_display('page', 'Staff course listing', 'page_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['title'] = 'Courses';
+  $handler->display->display_options['defaults']['group_by'] = FALSE;
+  $handler->display->display_options['group_by'] = TRUE;
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['access']['perm'] = 'create course content';
@@ -1256,7 +1280,7 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['fields']['title_1']['relationship'] = 'field_term_nid';
   $handler->display->display_options['fields']['title_1']['label'] = 'Term';
   $handler->display->display_options['fields']['title_1']['link_to_node'] = FALSE;
-  /* Field: Field: Program */
+  /* Field: Field: Program(s) */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
@@ -1369,7 +1393,7 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['filters']['field_course_section_value']['expose']['label'] = 'Section';
   $handler->display->display_options['filters']['field_course_section_value']['expose']['operator'] = 'field_course_section_value_op';
   $handler->display->display_options['filters']['field_course_section_value']['expose']['identifier'] = 'field_course_section_value';
-  /* Filter criterion: Field: Program (field_site_restrict) */
+  /* Filter criterion: Field: Program(s) (field_site_restrict) */
   $handler->display->display_options['filters']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
   $handler->display->display_options['filters']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['filters']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';
@@ -1701,6 +1725,71 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['arguments']['field_course_students_uid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['field_course_students_uid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['field_course_students_uid']['summary_options']['items_per_page'] = '25';
+
+  /* Display: Faculty manage courses */
+  $handler = $view->new_display('page', 'Faculty manage courses', 'page_3');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Manage courses';
+  $handler->display->display_options['defaults']['empty'] = FALSE;
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['label'] = 'No courses';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = '<p class="lead">No courses found.</p>
+<p>You are not listed as teaching any courses this semester. Certain courses are not part of this website, if you believe this is an error, please contact your department staff.</p>';
+  $handler->display->display_options['empty']['area']['format'] = 'full_html';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Content: Term (field_term) */
+  $handler->display->display_options['relationships']['field_term_nid']['id'] = 'field_term_nid';
+  $handler->display->display_options['relationships']['field_term_nid']['table'] = 'field_data_field_term';
+  $handler->display->display_options['relationships']['field_term_nid']['field'] = 'field_term_nid';
+  $handler->display->display_options['relationships']['field_term_nid']['required'] = TRUE;
+  $handler->display->display_options['relationships']['field_term_nid']['delta'] = '-1';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = 'Course';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title_1']['id'] = 'title_1';
+  $handler->display->display_options['fields']['title_1']['table'] = 'node';
+  $handler->display->display_options['fields']['title_1']['field'] = 'title';
+  $handler->display->display_options['fields']['title_1']['relationship'] = 'field_term_nid';
+  $handler->display->display_options['fields']['title_1']['label'] = '';
+  $handler->display->display_options['fields']['title_1']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['title_1']['link_to_node'] = FALSE;
+  /* Field: Field: Program(s) */
+  $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
+  $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
+  $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
+  $handler->display->display_options['fields']['field_site_restrict']['label'] = 'Program';
+  $handler->display->display_options['fields']['field_site_restrict']['delta_offset'] = '0';
+  /* Field: Course: Total course enrollment */
+  $handler->display->display_options['fields']['course_student_enrollment']['id'] = 'course_student_enrollment';
+  $handler->display->display_options['fields']['course_student_enrollment']['table'] = 's4_course';
+  $handler->display->display_options['fields']['course_student_enrollment']['field'] = 'course_student_enrollment';
+  $handler->display->display_options['fields']['course_student_enrollment']['label'] = 'Enrollment';
+  /* Field: Course: Total course placements */
+  $handler->display->display_options['fields']['course_student_placements']['id'] = 'course_student_placements';
+  $handler->display->display_options['fields']['course_student_placements']['table'] = 's4_course';
+  $handler->display->display_options['fields']['course_student_placements']['field'] = 'course_student_placements';
+  $handler->display->display_options['fields']['course_student_placements']['label'] = 'Placements';
+  $handler->display->display_options['fields']['course_student_placements']['display_percentage'] = TRUE;
+  /* Field: Field: Sites */
+  $handler->display->display_options['fields']['field_sites']['id'] = 'field_sites';
+  $handler->display->display_options['fields']['field_sites']['table'] = 'field_data_field_sites';
+  $handler->display->display_options['fields']['field_sites']['field'] = 'field_sites';
+  $handler->display->display_options['fields']['field_sites']['delta_offset'] = '0';
+  /* Field: Course: Faculty actions */
+  $handler->display->display_options['fields']['course_faculty_actions']['id'] = 'course_faculty_actions';
+  $handler->display->display_options['fields']['course_faculty_actions']['table'] = 's4_course';
+  $handler->display->display_options['fields']['course_faculty_actions']['field'] = 'course_faculty_actions';
+  $handler->display->display_options['path'] = 'faculty/manage/courses';
   $translatables['user_courses'] = array(
     t('Master'),
     t('Sign up for service'),
@@ -1760,6 +1849,12 @@ function s4_courses_views_default_views() {
     t('<p class="intro">To begin looking for a site, click the <strong>Select this Course</strong> link near the course you are taking for this service.</p>'),
     t('User profile block'),
     t('Current courses'),
+    t('Faculty manage courses'),
+    t('Manage courses'),
+    t('<p class="lead">No courses found.</p>
+<p>You are not listed as teaching any courses this semester. Certain courses are not part of this website, if you believe this is an error, please contact your department staff.</p>'),
+    t('Program'),
+    t('Faculty actions'),
   );
   $export['user_courses'] = $view;
 

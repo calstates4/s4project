@@ -92,6 +92,7 @@ function s4_css_alter(&$css) {
 function s4_js_alter(&$js) {
   $excludes = _s4_alter(s4_theme_get_info('exclude'), 'js');
   $js = array_diff_key($js, $excludes);
+  $js['misc/jquery.js']['data'] = drupal_get_path('theme', 's4') . '/js/jquery-1.10.1.js';
 }
 
 function _s4_alter($files, $type) {
@@ -217,6 +218,9 @@ function s4_s4_links($variables) {
 }
 
 function s4_preprocess_table(&$variables) {
+  if(isset($variables['attributes']['class']) && !is_array($variables['attributes']['class'])) {
+    $variables['attributes']['class'] = array($variables['attributes']['class']);
+  }
   $variables['attributes']['class'][] = 'table';
   $variables['attributes']['class'][] = 'table-striped';
 }

@@ -52,23 +52,28 @@ function s4_sites_ds_field_settings_info() {
   $ds_fieldsetting->bundle = 'site';
   $ds_fieldsetting->view_mode = 'default';
   $ds_fieldsetting->settings = array(
-    'map' => array(
-      'weight' => '17',
+    'add_to_sites_link' => array(
+      'weight' => '0',
       'label' => 'hidden',
       'format' => 'default',
     ),
-    'merge_sites_link' => array(
-      'weight' => '10',
+    'map' => array(
+      'weight' => '4',
       'label' => 'hidden',
       'format' => 'default',
     ),
     'site_is_full' => array(
-      'weight' => '9',
+      'weight' => '2',
+      'label' => 'hidden',
+      'format' => 'default',
+    ),
+    'site_opportunities' => array(
+      'weight' => '26',
       'label' => 'hidden',
       'format' => 'default',
     ),
     'site_staff' => array(
-      'weight' => '4',
+      'weight' => '22',
       'label' => 'hidden',
       'format' => 'default',
     ),
@@ -86,12 +91,28 @@ function s4_sites_ds_custom_fields_info() {
 
   $ds_field = new stdClass();
   $ds_field->api_version = 1;
+  $ds_field->field = 'add_to_sites_link';
+  $ds_field->label = 'Add to sites link';
+  $ds_field->field_type = 6;
+  $ds_field->entities = array(
+    'node' => 'node',
+  );
+  $ds_field->ui_limit = 'site|*';
+  $ds_field->properties = array(
+    'block' => 's4_courses|s4_courses_add_site',
+    'block_render' => '1',
+  );
+  $export['add_to_sites_link'] = $ds_field;
+
+  $ds_field = new stdClass();
+  $ds_field->api_version = 1;
   $ds_field->field = 'map';
   $ds_field->label = 'Map';
   $ds_field->field_type = 6;
   $ds_field->entities = array(
     'node' => 'node',
   );
+  $ds_field->ui_limit = '';
   $ds_field->properties = array(
     'block' => 's4_map|s4_map_site_view_map',
     'block_render' => '1',
@@ -106,6 +127,7 @@ function s4_sites_ds_custom_fields_info() {
   $ds_field->entities = array(
     'node' => 'node',
   );
+  $ds_field->ui_limit = '';
   $ds_field->properties = array(
     'block' => 's4_sites|s4_sites_merge_link',
     'block_render' => '1',
@@ -120,6 +142,7 @@ function s4_sites_ds_custom_fields_info() {
   $ds_field->entities = array(
     'node' => 'node',
   );
+  $ds_field->ui_limit = '';
   $ds_field->properties = array(
     'block' => 's4_sites|s4_sites_return_tab',
     'block_render' => '1',
@@ -134,11 +157,27 @@ function s4_sites_ds_custom_fields_info() {
   $ds_field->entities = array(
     'node' => 'node',
   );
+  $ds_field->ui_limit = '';
   $ds_field->properties = array(
     'block' => 's4_sites|s4_sites_site_full',
     'block_render' => '1',
   );
   $export['site_is_full'] = $ds_field;
+
+  $ds_field = new stdClass();
+  $ds_field->api_version = 1;
+  $ds_field->field = 'site_opportunities';
+  $ds_field->label = 'Site Opportunities';
+  $ds_field->field_type = 6;
+  $ds_field->entities = array(
+    'node' => 'node',
+  );
+  $ds_field->ui_limit = 'site|*';
+  $ds_field->properties = array(
+    'block' => 'views|efea6a94fb18c085977a2ebcc3e657d0',
+    'block_render' => '3',
+  );
+  $export['site_opportunities'] = $ds_field;
 
   $ds_field = new stdClass();
   $ds_field->api_version = 1;
@@ -148,6 +187,7 @@ function s4_sites_ds_custom_fields_info() {
   $ds_field->entities = array(
     'node' => 'node',
   );
+  $ds_field->ui_limit = '';
   $ds_field->properties = array(
     'block' => 'views|site_coordinators-block_1',
     'block_render' => '1',
@@ -241,74 +281,121 @@ function s4_sites_ds_layout_settings_info() {
   $ds_layout->view_mode = 'default';
   $ds_layout->layout = 's4_site';
   $ds_layout->settings = array(
-    'hide_empty_regions' => 1,
-    'hide_sidebars' => 0,
     'regions' => array(
       'left' => array(
-        0 => 'body',
-        1 => 'field_site_health_training',
-        2 => 'field_health_risk',
-        3 => 'field_site_projects',
-        4 => 'field_site_instructions',
-        5 => 'field_site_tour',
-        6 => 'field_health_risk',
-        7 => 'site_staff',
-        8 => 'field_site_hours',
-        9 => 'field_operating_hours',
+        0 => 'add_to_sites_link',
+        1 => 'body',
       ),
       'right' => array(
-        0 => 'merge_sites_link',
-        1 => 's4_sites_site_full',
-        2 => 's4_core_signup_select_site',
-        3 => 'field_csu_facility',
-        4 => 'field_site_restrict',
-        5 => 'field_csu_org_type',
-        6 => 'field_website',
-        7 => 'field_phone',
-        8 => 'field_site_email',
-        9 => 'field_location',
-        10 => 'map',
-        11 => 'field_county',
-        12 => 'field_site_facebook_page',
-        13 => 'field_population_size',
-        14 => 'field_site_demographics',
-        15 => 'field_site_language',
-        16 => 'field_site_language_bilingual',
-        17 => 'field_site_requirements',
-        18 => 'field_signups_max',
-        19 => 'field_site_hours_minimum',
+        2 => 'site_is_full',
+        3 => 's4_core_signup_select_site',
+        4 => 'map',
+      ),
+      'details' => array(
+        5 => 'field_phone',
+        6 => 'field_site_email',
+        7 => 'field_location',
+        8 => 'field_county',
+        9 => 'field_signups_max',
+        10 => 'field_site_language_bilingual',
+        11 => 'field_site_projects',
+      ),
+      'details_1' => array(
+        12 => 'field_website',
+        13 => 'field_site_facebook_page',
+      ),
+      'details_2' => array(
+        14 => 'field_site_restrict',
+      ),
+      'details_3' => array(
+        15 => 'field_csu_facility',
+      ),
+      'details_4' => array(
+        16 => 'field_csu_org_type',
+      ),
+      'risks' => array(
+        17 => 'field_site_instructions',
+        18 => 'field_site_health_training',
+        19 => 'field_site_tour',
+        20 => 'field_health_risk',
+      ),
+      'risks_sidebar' => array(
+        21 => 'field_site_requirements',
+      ),
+      'staff' => array(
+        22 => 'site_staff',
+      ),
+      'hours' => array(
+        23 => 'field_site_hours_minimum',
+        24 => 'field_site_hours',
+        25 => 'field_operating_hours',
+      ),
+      'opportunities' => array(
+        26 => 'site_opportunities',
+      ),
+      'demographics' => array(
+        27 => 'field_population_size',
+      ),
+      'language' => array(
+        28 => 'field_site_language',
+      ),
+      'population' => array(
+        29 => 'field_site_demographics',
       ),
     ),
     'fields' => array(
+      'add_to_sites_link' => 'left',
       'body' => 'left',
-      'field_site_language_bilingual' => 'right',
-      'field_site_health_training' => 'left',
-      'field_health_risk' => 'left',
-      'field_site_projects' => 'left',
-      'site_staff' => 'left',
-      'field_site_hours' => 'left',
-      'field_operating_hours' => 'left',
+      'site_is_full' => 'right',
       's4_core_signup_select_site' => 'right',
-      'field_site_tour' => 'left',
-      'field_csu_facility' => 'right',
-      'field_site_restrict' => 'right',
-      'field_csu_org_type' => 'right',
-      'field_website' => 'right',
-      'field_phone' => 'right',
-      'field_site_email' => 'right',
-      'field_location' => 'right',
-      'field_site_facebook_page' => 'right',
-      'field_population_size' => 'right',
-      'field_site_demographics' => 'right',
-      'field_site_instructions' => 'left',
-      'field_site_language' => 'right',
-      'field_site_requirements' => 'right',
-      'field_site_hours_minimum' => 'right',
-      'merge_sites_link' => 'right',
-      'field_signups_max' => 'right',
       'map' => 'right',
+      'field_phone' => 'details',
+      'field_site_email' => 'details',
+      'field_location' => 'details',
+      'field_county' => 'details',
+      'field_signups_max' => 'details',
+      'field_site_language_bilingual' => 'details',
+      'field_site_projects' => 'details',
+      'field_website' => 'details_1',
+      'field_site_facebook_page' => 'details_1',
+      'field_site_restrict' => 'details_2',
+      'field_csu_facility' => 'details_3',
+      'field_csu_org_type' => 'details_4',
+      'field_site_instructions' => 'risks',
+      'field_site_health_training' => 'risks',
+      'field_site_tour' => 'risks',
+      'field_health_risk' => 'risks',
+      'field_site_requirements' => 'risks_sidebar',
+      'site_staff' => 'staff',
+      'field_site_hours_minimum' => 'hours',
+      'field_site_hours' => 'hours',
+      'field_operating_hours' => 'hours',
+      'site_opportunities' => 'opportunities',
+      'field_population_size' => 'demographics',
+      'field_site_language' => 'language',
+      'field_site_demographics' => 'population',
     ),
     'classes' => array(),
+    'wrappers' => array(
+      'left' => 'div',
+      'right' => 'div',
+      'details' => 'div',
+      'details_1' => 'div',
+      'details_2' => 'div',
+      'details_3' => 'div',
+      'details_4' => 'div',
+      'risks' => 'div',
+      'risks_sidebar' => 'div',
+      'staff' => 'div',
+      'hours' => 'div',
+      'opportunities' => 'div',
+      'demographics' => 'div',
+      'language' => 'div',
+      'population' => 'div',
+    ),
+    'layout_wrapper' => 'div',
+    'layout_attributes' => '',
+    'layout_attributes_merge' => 1,
   );
   $export['node|site|default'] = $ds_layout;
 

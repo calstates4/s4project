@@ -33,6 +33,18 @@ function s4_courses_views_data() {
       'handler' => 'views_handler_sort',
     ),
   );
+
+  $data['s4_course']['course_faculty_actions'] = array(
+    'title' => t('Faculty actions'),
+    'help' => t('Faculty actions for a course.'),
+    'field' => array(
+      'handler' => 'views_handler_s4_courses_faculty_actions',
+      'click sortable' => FALSE,
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort',
+    ),
+  );
   
   return $data;
 }

@@ -31,7 +31,7 @@ projects[ctools][subdir] = "contrib"
 projects[ctools][version] = "1.x-dev"
 
 projects[date][subdir] = "contrib"
-projects[date][version] = "2.0-alpha3"
+projects[date][version] = "2.6"
 
 projects[ds][subdir] = "contrib"
 projects[ds][version] = "1.7"
@@ -43,7 +43,13 @@ projects[email][subdir] = "contrib"
 projects[email][version] = "1.2"
 
 projects[entity][subdir] = "contrib"
-projects[entity][version] = "1.0-rc2"
+projects[entity][version] = "1.0"
+
+projects[entityreference][subdir] = "contrib"
+projects[entityreference][version] = "1.0"
+
+projects[entityreference_prepopulate][subdir] = "contrib"
+projects[entityreference_prepopulate][version] = "1.3"
 
 projects[features][subdir] = "contrib"
 projects[features][version] = "1.0-beta4"
@@ -57,6 +63,9 @@ projects[feeds_tamper][version] = "1.0-beta3"
 projects[field_display_label][subdir] = "contrib"
 projects[field_display_label][version] = "1.2"
 
+projects[field_lock][subdir] = "contrib"
+projects[field_lock][version] = "1.0"
+
 projects[field_group][subdir] = "contrib"
 projects[field_group][version] = "1.1"
 
@@ -66,20 +75,17 @@ projects[field_collection][version] = "1.0-beta3"
 projects[field_collection_table][subdir] = "contrib"
 projects[field_collection_table][version] = "1.0-beta1"
 
+projects[flag][subdir] = "contrib"
+projects[flag][version] = "3.0"
+
 projects[gmap][subdir] = "contrib"
 projects[gmap][version] = "1.x-dev"
-
-;projects[Guiders-JS][subdir] = "contrib"
-;projects[Guiders-JS][version] = "1.x-dev"
 
 projects[insert][subdir] = "contrib"
 projects[insert][version] = "1.1"
 
 projects[job_scheduler][subdir] = "contrib"
 projects[job_scheduler][version] = "2.0-alpha2"
-
-projects[jquery_update][subdir] = "contrib"
-projects[jquery_update][version] = "2.3"
 
 projects[libraries][subdir] = "contrib"
 projects[libraries][version] = "1.0"
@@ -102,9 +108,6 @@ projects[matrix][version] = "2.x-dev"
 projects[masquerade][subdir] = "contrib"
 projects[masquerade][version] = "1.0-rc4"
 
-projects[messaging][subdir] = "contrib"
-projects[messaging][version] = "1.0-alpha1"
-
 projects[nodeaccess_userreference][subdir] = "contrib"
 projects[nodeaccess_userreference][version] = "3.5"
 
@@ -117,11 +120,8 @@ projects[nodereference_count][version] = "1.x-dev"
 projects[nodereference_url][subdir] = "contrib"
 projects[nodereference_url][version] = "1.11"
 
-projects[notifications][subdir] = "contrib"
-projects[notifications][version] = "1.0-alpha1"
-
 projects[options_element][subdir] = "contrib"
-projects[options_element][version] = "1.4"
+projects[options_element][version] = "1.9"
 
 projects[office_html][subdir] = "contrib"
 projects[office_html][version] = "1.0-alpha1"
@@ -131,6 +131,9 @@ projects[pathauto][version] = "1.0-beta1"
 
 projects[references][subdir] = "contrib"
 projects[references][version] = "2.x-dev"
+
+projects[relation][subdir] = "contrib"
+projects[relation][version] = "1.0-rc4"
 
 projects[select_or_other][subdir] = "contrib"
 projects[select_or_other][version] = "2.0"
@@ -162,6 +165,9 @@ projects[views_bulk_operations][version] = "3.1"
 projects[views_data_export][subdir] = "contrib"
 projects[views_data_export][version] = "3.0-beta6"
 
+projects[views_export_xls][subdir] = "contrib"
+projects[views_export_xls][version] = "1.0"
+
 projects[views_datasource][subdir] = "contrib"
 projects[views_datasource][version] = "1.x-dev"
 
@@ -184,7 +190,10 @@ projects[workbench_moderation_notes][subdir] = "contrib"
 projects[workbench_moderation_notes][version] = "1.x-dev"
 
 projects[webform][subdir] = "contrib"
-projects[webform][version] = "3.18"
+projects[webform][version] = "3.19"
+
+projects[webform_table_element][subdir] = "contrib"
+projects[webform_table_element][version] = "1.7"
 
 projects[wysiwyg][subdir] = "contrib"
 projects[wysiwyg][version] = "2.1"
@@ -208,12 +217,6 @@ projects[guiders_js_fixed][download][type] = "git"
 projects[guiders_js_fixed][download][url] = "http://git.drupal.org/sandbox/kevee/1355900.git"
 projects[guiders_js_fixed][download][branch] = "master"
 
-; Download tinyMCE as a library
-libraries[tinymce][download][type] = "get"
-libraries[tinymce][download][url] = "https://github.com/downloads/tinymce/tinymce/tinymce_3.4.1.zip"
-libraries[tinymce][directory_name] = "tinymce"
-libraries[tinymce][destination] = "libraries"
-
 ; Download the marker manager for gmap
 libraries[markerclusterer][download][type] = "get"
 libraries[markerclusterer][download][url] = "http://gmaps-utility-library-dev.googlecode.com/svn/tags/markerclusterer/1.0/src/markerclusterer_packed.js"
@@ -229,7 +232,6 @@ libraries[signature-pad][destination] = "libraries"
 ; Patches
 projects[wysiwyg][patch][] = "http://drupal.org/files/issues/wysiwyg-entity-exportables-624018-176_1.patch"
 projects[nodeformcols][patch][] = "http://drupal.org/files/nodeformcolum_captcha_error.patch"
-projects[cck_phone][] = "http://drupal.org/files/cck_phone_feeds_1160186_7.patch"
+projects[cck_phone][patch][] = "http://drupal.org/files/cck_phone_feeds_1160186_7.patch"
 projects[workbench_moderation][patch][] = "http://drupal.org/files/workbench_moderation_feeds-1470528-1.patch"
 projects[views_data_export][patch][] = "http://drupal.org/files/views_data_export_exposed_input_0.patch"
-projects[views][] = "http://drupal.org/files/views-taxonomy_multiple_term_names-1248300-36.patch"

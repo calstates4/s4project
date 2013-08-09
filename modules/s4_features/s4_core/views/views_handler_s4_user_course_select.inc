@@ -5,8 +5,7 @@ class views_handler_s4_user_course_select extends views_handler_field {
   function render($values) {
     if (isset($_SESSION['s4_signup_course']) && $_SESSION['s4_signup_course'] == $values->nid) {
       
-            return '<a class="btn btn-info disabled"><i class="icon-check icon-white"></i> Program selected</a>';
-return l('<i class="icon-check icon-white"></i> ' .
+      return l('<i class="icon-check icon-white"></i> ' .
 				 t('Course selected'), 
 				 's4/signup/course/' . $values->nid,
          array('html' => TRUE,
@@ -28,7 +27,7 @@ return l('<i class="icon-check icon-white"></i> ' .
                : 1;
         $count[$course->nid]++;
         if ($course->nid == $values->nid && ($max === 0 || $count[$course->nid] >= $max)) {
-          return '<a class="disabled btn btn-info"><i class="icon-white icon-plus"></i> Already placed with this course</a>';
+          return '<a class="disabled btn btn-info"><i class="icon-white icon-remove"></i> Already placed with this course</a>';
         }
       }
     }

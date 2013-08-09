@@ -21,7 +21,7 @@ function s4_core_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Confirmation Email',
-    'weight' => '7',
+    'weight' => '8',
     'children' => array(
       0 => 'field_confirmation_email',
       1 => 'field_confirmation_email_sender',
@@ -51,7 +51,7 @@ function s4_core_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Email reminders',
-    'weight' => '11',
+    'weight' => '12',
     'children' => array(
       0 => 'field_enable_email_reminders',
       1 => 'field_reminder_email_subject',
@@ -81,7 +81,7 @@ function s4_core_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Evaluation email',
-    'weight' => '8',
+    'weight' => '9',
     'children' => array(
       0 => 'field_evaluation_email_body',
       1 => 'field_evaluation_email_subject',
@@ -109,7 +109,7 @@ function s4_core_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Custom homepage',
-    'weight' => '10',
+    'weight' => '11',
     'children' => array(
       0 => 'field_welcome_message',
       1 => 'field_statistics_message',
@@ -138,7 +138,7 @@ function s4_core_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Starting over',
-    'weight' => '6',
+    'weight' => '7',
     'children' => array(
       0 => 'field_start_over',
       1 => 'field_grace_period',

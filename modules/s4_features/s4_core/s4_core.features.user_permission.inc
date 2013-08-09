@@ -86,16 +86,6 @@ function s4_core_user_default_permissions() {
     'module' => 'dashboard',
   );
 
-  // Exported permission: access overlay
-  $permissions['access overlay'] = array(
-    'name' => 'access overlay',
-    'roles' => array(
-      0 => 'administrator',
-      1 => 'staff',
-    ),
-    'module' => 'overlay',
-  );
-
   // Exported permission: access own webform results
   $permissions['access own webform results'] = array(
     'name' => 'access own webform results',
@@ -270,15 +260,6 @@ function s4_core_user_default_permissions() {
     'module' => 'menu',
   );
 
-  // Exported permission: administer messaging
-  $permissions['administer messaging'] = array(
-    'name' => 'administer messaging',
-    'roles' => array(
-      0 => 'administrator',
-    ),
-    'module' => 'messaging',
-  );
-
   // Exported permission: administer modules
   $permissions['administer modules'] = array(
     'name' => 'administer modules',
@@ -295,15 +276,6 @@ function s4_core_user_default_permissions() {
       0 => 'administrator',
     ),
     'module' => 'node',
-  );
-
-  // Exported permission: administer notifications
-  $permissions['administer notifications'] = array(
-    'name' => 'administer notifications',
-    'roles' => array(
-      0 => 'administrator',
-    ),
-    'module' => 'notifications',
   );
 
   // Exported permission: administer page manager
@@ -499,15 +471,6 @@ function s4_core_user_default_permissions() {
       1 => 'staff',
     ),
     'module' => 's4_core',
-  );
-
-  // Exported permission: create subscriptions
-  $permissions['create subscriptions'] = array(
-    'name' => 'create subscriptions',
-    'roles' => array(
-      0 => 'authenticated user',
-    ),
-    'module' => 'notifications',
   );
 
   // Exported permission: create url aliases
@@ -734,15 +697,6 @@ function s4_core_user_default_permissions() {
     'module' => 'webform',
   );
 
-  // Exported permission: get file expiration notifications
-  $permissions['get file expiration notifications'] = array(
-    'name' => 'get file expiration notifications',
-    'roles' => array(
-      0 => 'authenticated user',
-    ),
-    'module' => 's4_core',
-  );
-
   // Exported permission: ignore maximum limits on site
   $permissions['ignore maximum limits on site'] = array(
     'name' => 'ignore maximum limits on site',
@@ -753,24 +707,6 @@ function s4_core_user_default_permissions() {
     'module' => 's4_core',
   );
 
-  // Exported permission: maintain own subscriptions
-  $permissions['maintain own subscriptions'] = array(
-    'name' => 'maintain own subscriptions',
-    'roles' => array(
-      0 => 'authenticated user',
-    ),
-    'module' => 'notifications',
-  );
-
-  // Exported permission: manage all subscriptions
-  $permissions['manage all subscriptions'] = array(
-    'name' => 'manage all subscriptions',
-    'roles' => array(
-      0 => 'administrator',
-    ),
-    'module' => 'notifications',
-  );
-
   // Exported permission: manage features
   $permissions['manage features'] = array(
     'name' => 'manage features',
@@ -778,15 +714,6 @@ function s4_core_user_default_permissions() {
       0 => 'administrator',
     ),
     'module' => 'features',
-  );
-
-  // Exported permission: manage own subscriptions
-  $permissions['manage own subscriptions'] = array(
-    'name' => 'manage own subscriptions',
-    'roles' => array(
-      0 => 'authenticated user',
-    ),
-    'module' => 'notifications_account',
   );
 
   // Exported permission: masquerade as admin
@@ -878,15 +805,6 @@ function s4_core_user_default_permissions() {
     'module' => 's4_core',
   );
 
-  // Exported permission: skip notifications
-  $permissions['skip notifications'] = array(
-    'name' => 'skip notifications',
-    'roles' => array(
-      0 => 'administrator',
-    ),
-    'module' => 'notifications',
-  );
-
   // Exported permission: submit latitude/longitude
   $permissions['submit latitude/longitude'] = array(
     'name' => 'submit latitude/longitude',
@@ -894,25 +812,6 @@ function s4_core_user_default_permissions() {
       0 => 'administrator',
     ),
     'module' => 'location',
-  );
-
-  // Exported permission: subscribe to content
-  $permissions['subscribe to content'] = array(
-    'name' => 'subscribe to content',
-    'roles' => array(
-      0 => 'authenticated user',
-    ),
-    'module' => 'notifications_content',
-  );
-
-  // Exported permission: subscribe to content type
-  $permissions['subscribe to content type'] = array(
-    'name' => 'subscribe to content type',
-    'roles' => array(
-      0 => 'administrator',
-      1 => 'staff',
-    ),
-    'module' => 'notifications_content',
   );
 
   // Exported permission: switch shortcut sets
@@ -978,15 +877,6 @@ function s4_core_user_default_permissions() {
       2 => 'staff',
     ),
     'module' => 'view_unpublished',
-  );
-
-  // Exported permission: view date repeats
-  $permissions['view date repeats'] = array(
-    'name' => 'view date repeats',
-    'roles' => array(
-      0 => 'authenticated user',
-    ),
-    'module' => 'date',
   );
 
   // Exported permission: view location directory

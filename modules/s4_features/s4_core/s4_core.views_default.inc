@@ -755,7 +755,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['fields']['nothing']['label'] = 'Manage user';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '[nothing_1] | [edit_node]';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
-  /* Field: Field: Program */
+  /* Field: Field: Program(s) */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
@@ -791,6 +791,13 @@ function s4_core_views_default_views() {
   $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: User: The user ID */
+  $handler->display->display_options['filters']['uid_raw']['id'] = 'uid_raw';
+  $handler->display->display_options['filters']['uid_raw']['table'] = 'users';
+  $handler->display->display_options['filters']['uid_raw']['field'] = 'uid_raw';
+  $handler->display->display_options['filters']['uid_raw']['operator'] = '>';
+  $handler->display->display_options['filters']['uid_raw']['value']['value'] = '1';
+  $handler->display->display_options['filters']['uid_raw']['group'] = 1;
   /* Filter criterion: User: Roles */
   $handler->display->display_options['filters']['rid']['id'] = 'rid';
   $handler->display->display_options['filters']['rid']['table'] = 'users_roles';
@@ -864,14 +871,30 @@ function s4_core_views_default_views() {
     0 => 0,
   );
   $handler->display->display_options['filters']['uid']['group'] = 1;
-  /* Filter criterion: User: The user ID */
-  $handler->display->display_options['filters']['uid_raw']['id'] = 'uid_raw';
-  $handler->display->display_options['filters']['uid_raw']['table'] = 'users';
-  $handler->display->display_options['filters']['uid_raw']['field'] = 'uid_raw';
-  $handler->display->display_options['filters']['uid_raw']['operator'] = '>';
-  $handler->display->display_options['filters']['uid_raw']['value']['value'] = '1';
-  $handler->display->display_options['filters']['uid_raw']['group'] = 1;
-  /* Filter criterion: Field: Program (field_site_restrict) */
+  /* Filter criterion: User: SIS ID (field_sis_id) */
+  $handler->display->display_options['filters']['field_sis_id_value']['id'] = 'field_sis_id_value';
+  $handler->display->display_options['filters']['field_sis_id_value']['table'] = 'field_data_field_sis_id';
+  $handler->display->display_options['filters']['field_sis_id_value']['field'] = 'field_sis_id_value';
+  $handler->display->display_options['filters']['field_sis_id_value']['operator'] = 'contains';
+  $handler->display->display_options['filters']['field_sis_id_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_sis_id_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_sis_id_value']['expose']['operator_id'] = 'field_sis_id_value_op';
+  $handler->display->display_options['filters']['field_sis_id_value']['expose']['label'] = 'Student or employee ID';
+  $handler->display->display_options['filters']['field_sis_id_value']['expose']['operator'] = 'field_sis_id_value_op';
+  $handler->display->display_options['filters']['field_sis_id_value']['expose']['identifier'] = 'field_sis_id_value';
+  $handler->display->display_options['filters']['field_sis_id_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    4 => 0,
+    6 => 0,
+    3 => 0,
+    5 => 0,
+    7 => 0,
+    8 => 0,
+    9 => 0,
+    10 => 0,
+  );
+  /* Filter criterion: Field: Program(s) (field_site_restrict) */
   $handler->display->display_options['filters']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
   $handler->display->display_options['filters']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['filters']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';
@@ -916,6 +939,7 @@ function s4_core_views_default_views() {
     t('Current placements'),
     t('Make placement'),
     t('E-mail'),
+    t('Student or employee ID'),
     t('Program'),
     t('Page'),
   );
@@ -942,7 +966,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['style_plugin'] = 'table';
-  /* Relationship: Field: Program (field_site_restrict) */
+  /* Relationship: Field: Program(s) (field_site_restrict) */
   $handler->display->display_options['relationships']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
   $handler->display->display_options['relationships']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['relationships']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';
@@ -1024,12 +1048,10 @@ function s4_core_views_default_views() {
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '20';
   $handler->display->display_options['style_plugin'] = 'table';
-  $handler->display->display_options['style_options']['grouping'] = 'field_site_restrict';
   $handler->display->display_options['style_options']['columns'] = array(
     'title' => 'title',
-    'body' => 'body',
-    'field_downloadable_file' => 'field_downloadable_file',
     'field_site_restrict' => 'field_site_restrict',
+    'edit_node' => 'edit_node',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
   $handler->display->display_options['style_options']['info'] = array(
@@ -1038,34 +1060,25 @@ function s4_core_views_default_views() {
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
-    ),
-    'body' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-    ),
-    'field_downloadable_file' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
+      'empty_column' => 0,
     ),
     'field_site_restrict' => array(
       'align' => '',
       'separator' => '',
+      'empty_column' => 0,
+    ),
+    'edit_node' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
     ),
   );
   /* Header: Global: Text area */
   $handler->display->display_options['header']['area']['id'] = 'area';
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['empty'] = TRUE;
-  $handler->display->display_options['header']['area']['content'] = '<h2>Online Forms</h2>
-<p><a class="btn" href="node/add/webform"><i class="icon-plus"></i> Add online form</a> <a class="btn" href="forms/public">View public form page</a></p>
-<p><strong>Online forms</strong> resemble paper or database forms and allow users to input new information while also allowing “staff” to query and display existing data in order to run reports. The collected data in the online forms can be downloaded and merged with other data for research purposes. These reports will “tie-back” to the Report tab in S4. </p>
-';
-  $handler->display->display_options['header']['area']['format'] = 'full_html';
+  $handler->display->display_options['header']['area']['content'] = '<h2>Online forms</h2>';
+  $handler->display->display_options['header']['area']['format'] = 'filtered_html';
   /* No results behavior: Global: Text area */
   $handler->display->display_options['empty']['area']['id'] = 'area';
   $handler->display->display_options['empty']['area']['table'] = 'views';
@@ -1079,10 +1092,11 @@ function s4_core_views_default_views() {
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Field: Webform: Webform submission count */
-  $handler->display->display_options['fields']['webform_submission_count_node']['id'] = 'webform_submission_count_node';
-  $handler->display->display_options['fields']['webform_submission_count_node']['table'] = 'node';
-  $handler->display->display_options['fields']['webform_submission_count_node']['field'] = 'webform_submission_count_node';
+  /* Field: Field: Program(s) */
+  $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
+  $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
+  $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
+  $handler->display->display_options['fields']['field_site_restrict']['delta_offset'] = '0';
   /* Field: Content: Edit link */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
@@ -1108,13 +1122,6 @@ function s4_core_views_default_views() {
   $handler->display->display_options['defaults']['title'] = FALSE;
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'table';
-  $handler->display->display_options['style_options']['grouping'] = array(
-    0 => array(
-      'field' => 'field_site_restrict',
-      'rendered' => 1,
-      'rendered_strip' => 0,
-    ),
-  );
   $handler->display->display_options['style_options']['columns'] = array(
     'title' => 'title',
     'edit_node' => 'edit_node',
@@ -1149,10 +1156,8 @@ function s4_core_views_default_views() {
   $handler->display->display_options['header']['area']['table'] = 'views';
   $handler->display->display_options['header']['area']['field'] = 'area';
   $handler->display->display_options['header']['area']['empty'] = TRUE;
-  $handler->display->display_options['header']['area']['content'] = '<h2>Downloadable Forms</h2>
-<p><a class="btn" href="node/add/downloadable-form"><i class="icon-plus"></i> Add downloadable form</a></p>
-<p><strong>Downloadable Forms</strong> are your traditional electronic/paper forms.  This section will allow you to download any electronic template forms you have created to support your program and for which you need/want a hard file copy.   Staff would be responsible for inputting the information gathered into a database or excel file and cannot be stored in S4.<p>';
-  $handler->display->display_options['header']['area']['format'] = 'full_html';
+  $handler->display->display_options['header']['area']['content'] = '<h2>Downloadable forms</h2>';
+  $handler->display->display_options['header']['area']['format'] = 'filtered_html';
   $handler->display->display_options['defaults']['empty'] = FALSE;
   /* No results behavior: Global: Text area */
   $handler->display->display_options['empty']['area']['id'] = 'area';
@@ -1168,19 +1173,17 @@ function s4_core_views_default_views() {
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Field: Field: Program(s) */
+  $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
+  $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
+  $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
+  $handler->display->display_options['fields']['field_site_restrict']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_site_restrict']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_site_restrict']['delta_offset'] = '0';
   /* Field: Content: Edit link */
   $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
-  /* Field: Field: Program */
-  $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
-  $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
-  $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
-  $handler->display->display_options['fields']['field_site_restrict']['label'] = '';
-  $handler->display->display_options['fields']['field_site_restrict']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['field_site_restrict']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_site_restrict']['type'] = 'taxonomy_term_reference_plain';
-  $handler->display->display_options['fields']['field_site_restrict']['delta_offset'] = '0';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['filter_groups']['groups'] = array(
     1 => 'AND',
@@ -1242,7 +1245,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['fields']['field_downloadable_file']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['field_downloadable_file']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_downloadable_file']['group_column'] = 'fid';
-  /* Field: Field: Program */
+  /* Field: Field: Program(s) */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
@@ -1317,7 +1320,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['fields']['field_downloadable_file']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['field_downloadable_file']['click_sort_column'] = 'fid';
   $handler->display->display_options['fields']['field_downloadable_file']['group_column'] = 'fid';
-  /* Field: Field: Program */
+  /* Field: Field: Program(s) */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
@@ -1330,7 +1333,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['fields']['field_site_restrict']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_site_restrict']['delta_offset'] = '0';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
-  /* Contextual filter: Field: Program (field_site_restrict) */
+  /* Contextual filter: Field: Program(s) (field_site_restrict) */
   $handler->display->display_options['arguments']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
   $handler->display->display_options['arguments']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['arguments']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';
@@ -1386,18 +1389,13 @@ function s4_core_views_default_views() {
     t('‹ previous'),
     t('next ›'),
     t('last »'),
-    t('<h2>Online Forms</h2>
-<p><a class="btn" href="node/add/webform"><i class="icon-plus"></i> Add online form</a> <a class="btn" href="forms/public">View public form page</a></p>
-<p><strong>Online forms</strong> resemble paper or database forms and allow users to input new information while also allowing “staff” to query and display existing data in order to run reports. The collected data in the online forms can be downloaded and merged with other data for research purposes. These reports will “tie-back” to the Report tab in S4. </p>
-'),
+    t('<h2>Online forms</h2>'),
     t('No online forms created yet.'),
-    t('# of Submissions'),
+    t('Program(s)'),
     t('Edit link'),
     t('Page'),
     t('Downloadable forms'),
-    t('<h2>Downloadable Forms</h2>
-<p><a class="btn" href="node/add/downloadable-form"><i class="icon-plus"></i> Add downloadable form</a></p>
-<p><strong>Downloadable Forms</strong> are your traditional electronic/paper forms.  This section will allow you to download any electronic template forms you have created to support your program and for which you need/want a hard file copy.   Staff would be responsible for inputting the information gathered into a database or excel file and cannot be stored in S4.<p>'),
+    t('<h2>Downloadable forms</h2>'),
     t('No downloadable forms created yet.'),
     t('Public forms'),
     t('There are no forms available to download.'),
@@ -1442,7 +1440,7 @@ function s4_core_views_default_views() {
   $handler->display->display_options['fields']['nid']['alter']['text'] = 'Record # [nid]';
   $handler->display->display_options['fields']['nid']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['nid']['alter']['path'] = 'node/[nid]';
-  /* Field: Content: Course */
+  /* Field: Field: Course */
   $handler->display->display_options['fields']['field_course']['id'] = 'field_course';
   $handler->display->display_options['fields']['field_course']['table'] = 'field_data_field_course';
   $handler->display->display_options['fields']['field_course']['field'] = 'field_course';
@@ -1501,6 +1499,12 @@ function s4_core_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'signup' => 'signup',
   );
+  /* Filter criterion: Content: Last expected date of service (field_signup_last_date) */
+  $handler->display->display_options['filters']['field_signup_last_date_value']['id'] = 'field_signup_last_date_value';
+  $handler->display->display_options['filters']['field_signup_last_date_value']['table'] = 'field_data_field_signup_last_date';
+  $handler->display->display_options['filters']['field_signup_last_date_value']['field'] = 'field_signup_last_date_value';
+  $handler->display->display_options['filters']['field_signup_last_date_value']['operator'] = '>=';
+  $handler->display->display_options['filters']['field_signup_last_date_value']['default_date'] = 'now +4 days';
 
   /* Display: Current users sites */
   $handler = $view->new_display('block', 'Current users sites', 'block');
@@ -1516,11 +1520,11 @@ function s4_core_views_default_views() {
   $handler->display->display_options['fields']['nid']['alter']['text'] = 'Record # [nid]';
   $handler->display->display_options['fields']['nid']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['nid']['alter']['path'] = 'node/[nid]';
-  /* Field: Content: Course */
+  /* Field: Field: Course */
   $handler->display->display_options['fields']['field_course']['id'] = 'field_course';
   $handler->display->display_options['fields']['field_course']['table'] = 'field_data_field_course';
   $handler->display->display_options['fields']['field_course']['field'] = 'field_course';
-  /* Field: Field: Program */
+  /* Field: Field: Program(s) */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
@@ -1580,6 +1584,63 @@ function s4_core_views_default_views() {
   $handler->display->display_options['arguments']['field_user_uid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['field_user_uid']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['block_description'] = 'User profile sites';
+
+  /* Display: Page */
+  $handler = $view->new_display('page', 'Page', 'page_1');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Your placements';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = 'View';
+  $handler->display->display_options['fields']['nid']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['nid']['alter']['text'] = 'Record # [nid]';
+  $handler->display->display_options['fields']['nid']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['nid']['alter']['path'] = 'node/[nid]';
+  /* Field: Field: Course */
+  $handler->display->display_options['fields']['field_course']['id'] = 'field_course';
+  $handler->display->display_options['fields']['field_course']['table'] = 'field_data_field_course';
+  $handler->display->display_options['fields']['field_course']['field'] = 'field_course';
+  /* Field: Content: Site */
+  $handler->display->display_options['fields']['field_site']['id'] = 'field_site';
+  $handler->display->display_options['fields']['field_site']['table'] = 'field_data_field_site';
+  $handler->display->display_options['fields']['field_site']['field'] = 'field_site';
+  /* Field: Field: Site staff */
+  $handler->display->display_options['fields']['field_coordinator']['id'] = 'field_coordinator';
+  $handler->display->display_options['fields']['field_coordinator']['table'] = 'field_data_field_coordinator';
+  $handler->display->display_options['fields']['field_coordinator']['field'] = 'field_coordinator';
+  /* Field: Content: Post date */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'node';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['label'] = 'Date';
+  $handler->display->display_options['fields']['created']['date_format'] = 'long';
+  /* Field: Content: Last expected date of service */
+  $handler->display->display_options['fields']['field_signup_last_date']['id'] = 'field_signup_last_date';
+  $handler->display->display_options['fields']['field_signup_last_date']['table'] = 'field_data_field_signup_last_date';
+  $handler->display->display_options['fields']['field_signup_last_date']['field'] = 'field_signup_last_date';
+  $handler->display->display_options['fields']['field_signup_last_date']['label'] = 'End date';
+  $handler->display->display_options['fields']['field_signup_last_date']['settings'] = array(
+    'format_type' => 'short',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+    'show_repeat_rule' => 'show',
+  );
+  /* Field: Signup: Cancel signup link */
+  $handler->display->display_options['fields']['cancel_signup_link']['id'] = 'cancel_signup_link';
+  $handler->display->display_options['fields']['cancel_signup_link']['table'] = 's4_signup';
+  $handler->display->display_options['fields']['cancel_signup_link']['field'] = 'cancel_signup_link';
+  $handler->display->display_options['fields']['cancel_signup_link']['label'] = 'Cancel placement';
+  /* Field: Site Data: Evaluation link */
+  $handler->display->display_options['fields']['evaluation_link']['id'] = 'evaluation_link';
+  $handler->display->display_options['fields']['evaluation_link']['table'] = 's4_sites';
+  $handler->display->display_options['fields']['evaluation_link']['field'] = 'evaluation_link';
+  $handler->display->display_options['fields']['evaluation_link']['label'] = 'Evaluation';
+  $handler->display->display_options['path'] = 'my/placements';
   $translatables['user_signups'] = array(
     t('Master'),
     t('Your sites'),
@@ -1606,11 +1667,15 @@ function s4_core_views_default_views() {
     t('All'),
     t('Current users sites'),
     t('View your current placements'),
-    t('Program'),
+    t('Program(s)'),
     t('Complete evaluation'),
     t('Cancel'),
     t('User profile sites'),
     t('Sites'),
+    t('Page'),
+    t('Your placements'),
+    t('Cancel placement'),
+    t('Evaluation'),
   );
   $export['user_signups'] = $view;
 

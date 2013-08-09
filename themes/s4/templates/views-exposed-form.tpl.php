@@ -18,13 +18,14 @@
  *
  * @ingroup views_templates
  */
+
+$count = 0;
 ?>
 <?php if (!empty($q)): ?>
   <?php
     // This ensures that, if clean URLs are off, the 'q' is added first so that
     // it shows up first in the URL.
     print $q;
-    $count = 0;
   ?>
 <?php endif; ?>
 <div class="views-exposed-form">

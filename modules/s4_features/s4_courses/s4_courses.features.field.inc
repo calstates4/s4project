@@ -47,16 +47,15 @@ function s4_courses_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'text',
           'settings' => array(),
-          'type' => 'text_default',
-          'weight' => '14',
+          'type' => 'hidden',
+          'weight' => '25',
         ),
         'full' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '13',
+          'weight' => '23',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -133,22 +132,17 @@ function s4_courses_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'taxonomy',
+          'module' => 's4_sites',
           'settings' => array(),
-          'type' => 'taxonomy_term_reference_plain',
-          'weight' => '20',
+          'type' => 's4_sites_limited_taxonomy_term',
+          'weight' => '4',
         ),
-        'notifications' => array(
+        'full' => array(
           'label' => 'above',
+          'module' => 's4_sites',
           'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
-        'teaser' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
+          'type' => 's4_sites_limited_taxonomy_term',
+          'weight' => '16',
         ),
       ),
       'display_label' => 'Department',
@@ -244,17 +238,16 @@ function s4_courses_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'user_reference',
           'settings' => array(),
-          'type' => 'user_reference_default',
-          'weight' => '2',
+          'type' => 'hidden',
+          'weight' => '20',
         ),
         'full' => array(
           'label' => 'above',
           'module' => 'user_reference',
           'settings' => array(),
           'type' => 'user_reference_default',
-          'weight' => '2',
+          'weight' => '15',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -329,7 +322,7 @@ function s4_courses_field_default_fields() {
       'default_value_function' => '',
       'default_value_php' => '',
       'deleted' => '0',
-      'description' => 'When checked, emails from this system to students about evaluations will be sent from the faculty member\'s account.',
+      'description' => '',
       'display' => array(
         'cck_blocks' => array(
           'label' => 'above',
@@ -339,16 +332,15 @@ function s4_courses_field_default_fields() {
         ),
         'default' => array(
           'label' => 'above',
-          'module' => 'list',
           'settings' => array(),
-          'type' => 'list_default',
-          'weight' => '13',
+          'type' => 'hidden',
+          'weight' => '24',
         ),
         'full' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '12',
+          'weight' => '22',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -365,8 +357,9 @@ function s4_courses_field_default_fields() {
       ),
       'display_label' => 'Send emails as faculty',
       'entity_type' => 'node',
+      'field_lock' => 0,
       'field_name' => 'field_course_faculty_email',
-      'label' => 'Allow system to send emails on behalf of faculty members',
+      'label' => 'Send emails for this course with faculty email address',
       'required' => 0,
       'settings' => array(
         'custom_add_another' => '',
@@ -412,21 +405,15 @@ function s4_courses_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'number',
-          'settings' => array(
-            'decimal_separator' => '.',
-            'prefix_suffix' => TRUE,
-            'scale' => 0,
-            'thousand_separator' => ' ',
-          ),
-          'type' => 'number_integer',
-          'weight' => '15',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '26',
         ),
         'full' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '14',
+          'weight' => '24',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -487,16 +474,15 @@ function s4_courses_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'nodereference_count',
           'settings' => array(),
-          'type' => 'nodereference_count_default',
-          'weight' => '19',
+          'type' => 'hidden',
+          'weight' => '30',
         ),
         'full' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '19',
+          'weight' => '28',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -605,16 +591,15 @@ function s4_courses_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'user_reference',
           'settings' => array(),
-          'type' => 'user_reference_default',
-          'weight' => '18',
+          'type' => 'hidden',
+          'weight' => '29',
         ),
         'full' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '17',
+          'weight' => '27',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -689,16 +674,15 @@ function s4_courses_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'text',
           'settings' => array(),
-          'type' => 'text_default',
-          'weight' => '12',
+          'type' => 'hidden',
+          'weight' => '23',
         ),
         'full' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '11',
+          'weight' => '21',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -778,16 +762,15 @@ function s4_courses_field_default_fields() {
         ),
         'default' => array(
           'label' => 'above',
-          'module' => 'file',
           'settings' => array(),
-          'type' => 'file_default',
-          'weight' => '11',
+          'type' => 'hidden',
+          'weight' => '22',
         ),
         'full' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '10',
+          'weight' => '20',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -819,6 +802,7 @@ function s4_courses_field_default_fields() {
         'module' => 'file',
         'settings' => array(
           'insert' => 0,
+          'insert_absolute' => FALSE,
           'insert_class' => '',
           'insert_default' => 'auto',
           'insert_styles' => array(
@@ -875,16 +859,15 @@ function s4_courses_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'text',
           'settings' => array(),
-          'type' => 'text_default',
-          'weight' => '16',
+          'type' => 'hidden',
+          'weight' => '27',
         ),
         'full' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '15',
+          'weight' => '25',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -955,19 +938,19 @@ function s4_courses_field_default_fields() {
             'thousand_separator' => ' ',
           ),
           'type' => 'number_integer',
-          'weight' => '3',
+          'weight' => '5',
         ),
-        'notifications' => array(
+        'full' => array(
           'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
-        'teaser' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
+          'module' => 'number',
+          'settings' => array(
+            'decimal_separator' => '.',
+            'prefix_suffix' => TRUE,
+            'scale' => 0,
+            'thousand_separator' => ' ',
+          ),
+          'type' => 'number_integer',
+          'weight' => '17',
         ),
       ),
       'display_label' => '',
@@ -1026,23 +1009,15 @@ function s4_courses_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'date',
-          'settings' => array(
-            'format_type' => 'long',
-            'fromto' => 'both',
-            'multiple_from' => '',
-            'multiple_number' => '',
-            'multiple_to' => '',
-            'show_repeat_rule' => 'show',
-          ),
-          'type' => 'date_default',
-          'weight' => '10',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '21',
         ),
         'full' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '4',
+          'weight' => '19',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -1074,6 +1049,7 @@ function s4_courses_field_default_fields() {
         'active' => 1,
         'module' => 'date',
         'settings' => array(
+          'display_all_day' => 0,
           'increment' => '1',
           'input_format' => 'm/d/Y - H:i:s',
           'input_format_custom' => '',
@@ -1130,15 +1106,16 @@ function s4_courses_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'taxonomy',
+          'module' => 's4_sites',
           'settings' => array(),
-          'type' => 'taxonomy_term_reference_plain',
-          'weight' => '4',
+          'type' => 's4_sites_limited_taxonomy_term',
+          'weight' => '6',
         ),
         'full' => array(
           'label' => 'above',
+          'module' => 's4_sites',
           'settings' => array(),
-          'type' => 'hidden',
+          'type' => 's4_sites_limited_taxonomy_term',
           'weight' => '18',
         ),
         'notifications' => array(
@@ -1210,21 +1187,19 @@ function s4_courses_field_default_fields() {
       'default_value_function' => '',
       'default_value_php' => '',
       'deleted' => '0',
-      'description' => 'When checked, students will only be able to choose from the site list.',
+      'description' => '',
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'list',
           'settings' => array(),
-          'type' => 'list_default',
-          'weight' => '0',
+          'type' => 'hidden',
+          'weight' => '19',
         ),
         'full' => array(
           'label' => 'above',
-          'module' => 'list',
           'settings' => array(),
-          'type' => 'list_default',
-          'weight' => '0',
+          'type' => 'hidden',
+          'weight' => '14',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -1239,9 +1214,11 @@ function s4_courses_field_default_fields() {
           'weight' => 0,
         ),
       ),
+      'display_label' => '',
       'entity_type' => 'node',
+      'field_lock' => 0,
       'field_name' => 'field_site_restrict_to_list',
-      'label' => 'Restrict students to only these sites',
+      'label' => 'Prevent students from placing with sites not assigned to this course.',
       'required' => 0,
       'settings' => array(
         'custom_add_another' => '',
@@ -1317,7 +1294,6 @@ function s4_courses_field_default_fields() {
           'course' => 0,
           'course_term' => 0,
           'downloadable_form' => 0,
-          'fieldtrip' => 0,
           'file' => 0,
           'page' => 0,
           'signup' => 0,
@@ -1344,7 +1320,7 @@ function s4_courses_field_default_fields() {
           'module' => 'node_reference',
           'settings' => array(),
           'type' => 'node_reference_default',
-          'weight' => '1',
+          'weight' => '3',
         ),
         'full' => array(
           'label' => 'above',
@@ -1471,16 +1447,15 @@ function s4_courses_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'node_reference',
           'settings' => array(),
-          'type' => 'node_reference_default',
-          'weight' => '17',
+          'type' => 'hidden',
+          'weight' => '28',
         ),
         'full' => array(
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '16',
+          'weight' => '26',
         ),
         'notifications' => array(
           'label' => 'above',
@@ -1680,6 +1655,7 @@ function s4_courses_field_default_fields() {
         'active' => 1,
         'module' => 'date',
         'settings' => array(
+          'display_all_day' => 0,
           'increment' => '1',
           'input_format' => 'm/d/Y - H:i:s',
           'input_format_custom' => '',
@@ -1694,103 +1670,21 @@ function s4_courses_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-course_term-field_term_filter'
-  $fields['node-course_term-field_term_filter'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '1',
-      'deleted' => '0',
-      'entity_types' => array(),
-      'field_name' => 'field_term_filter',
-      'foreign keys' => array(
-        'format' => array(
-          'columns' => array(
-            'format' => 'format',
-          ),
-          'table' => 'filter_format',
-        ),
-      ),
-      'global_block_settings' => '1',
-      'indexes' => array(
-        'format' => array(
-          0 => 'format',
-        ),
-      ),
-      'module' => 'text',
-      'settings' => array(),
-      'translatable' => '1',
-      'type' => 'text_long',
-    ),
-    'field_instance' => array(
-      'bundle' => 'course_term',
-      'default_value' => NULL,
-      'deleted' => '0',
-      'description' => 'If your SIS import tool does not filter out service learning courses, you can enter a filter pattern here. If your import tool already does the filtering for you, leave this blank. If you enter content into this field, it will override the default filter.',
-      'display' => array(
-        'cck_blocks' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
-        'default' => array(
-          'label' => 'above',
-          'module' => 'text',
-          'settings' => array(),
-          'type' => 'text_default',
-          'weight' => 2,
-        ),
-        'notifications' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
-        'teaser' => array(
-          'label' => 'above',
-          'settings' => array(),
-          'type' => 'hidden',
-          'weight' => 0,
-        ),
-      ),
-      'entity_type' => 'node',
-      'field_name' => 'field_term_filter',
-      'label' => 'Course filter',
-      'required' => 0,
-      'settings' => array(
-        'custom_add_another' => '',
-        'text_processing' => '0',
-        'user_register_form' => FALSE,
-      ),
-      'widget' => array(
-        'active' => 1,
-        'module' => 'text',
-        'settings' => array(
-          'rows' => '10',
-        ),
-        'type' => 'text_textarea',
-        'weight' => '-2',
-      ),
-    ),
-  );
-
   // Translatables
   // Included for use with string extractors like potx.
-  t('Allow system to send emails on behalf of faculty members');
   t('Available programs');
   t('Catalog number');
   t('Course department');
-  t('Course filter');
   t('Course title');
   t('Date to send evaluations');
   t('Enter the code your student information system uses to refer to this term code.');
   t('Faculty');
   t('If you want only a handful of sites which are recommended or required, select those sites here.');
-  t('If your SIS import tool does not filter out service learning courses, you can enter a filter pattern here. If your import tool already does the filtering for you, leave this blank. If you enter content into this field, it will override the default filter.');
   t('Maximum number of placements per student');
   t('On this date, evaluation forms will start being sent to students via email and also be available on the site itself.');
-  t('Restrict students to only these sites');
+  t('Prevent students from placing with sites not assigned to this course.');
   t('Section number');
+  t('Send emails for this course with faculty email address');
   t('Show this term to students/faculty on their dashboard as the "Current" term during this time period. These can be set to the first day of the term and the last date, or a few weeks before/after to let students who are registering late easily find their course. Regardless of these dates, past courses are shown to users under their "past sites" dashboard block; however, they can no longer register for those sites after this date has passed.');
   t('Signups');
   t('Sites');
@@ -1802,8 +1696,6 @@ function s4_courses_field_default_fields() {
   t('Term dates');
   t('Type in the user names of people who should be assigned as extra faculty to this course.');
   t('What kinds of sites or coordinators this course is allowed to access.');
-  t('When checked, emails from this system to students about evaluations will be sent from the faculty member\'s account.');
-  t('When checked, students will only be able to choose from the site list.');
 
   return $fields;
 }

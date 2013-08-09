@@ -23,6 +23,7 @@ function s4_reporting_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'S4 Reports: Courses';
+  $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['access']['perm'] = 'access s4 reporting';
   $handler->display->display_options['cache']['type'] = 'none';
@@ -99,8 +100,7 @@ Fields',
   $handler->display->display_options['header']['result']['id'] = 'result';
   $handler->display->display_options['header']['result']['table'] = 'views';
   $handler->display->display_options['header']['result']['field'] = 'result';
-  $handler->display->display_options['header']['result']['empty'] = FALSE;
-  /* Relationship: Content: Course (field_course) */
+  /* Relationship: Field: Course (field_course) */
   $handler->display->display_options['relationships']['field_course_nid']['id'] = 'field_course_nid';
   $handler->display->display_options['relationships']['field_course_nid']['table'] = 'field_data_field_course';
   $handler->display->display_options['relationships']['field_course_nid']['field'] = 'field_course_nid';
@@ -117,74 +117,76 @@ Fields',
   $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['label'] = '';
   $handler->display->display_options['fields']['views_bulk_operations']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['entity_load_capacity'] = '1';
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['operations'] = array(
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['display_type'] = '1';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['enable_select_all_pages'] = 1;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['force_single'] = 0;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['entity_load_capacity'] = '1';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_operations'] = array(
     'action::s4_reporting_summary' => array(
       'selected' => 1,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 1,
       'label' => 'Run summary report',
+      'postpone_processing' => 0,
     ),
     'action::node_assign_owner_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::views_bulk_operations_delete_item' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::system_message_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::s4_courses_email_course_faculty' => array(
       'selected' => 1,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 1,
       'label' => 'Email faculty',
+      'postpone_processing' => 0,
     ),
     'action::views_bulk_operations_script_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::s4_core_cleanup_duplicate_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::node_make_sticky_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::node_make_unsticky_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::views_bulk_operations_modify_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
@@ -194,6 +196,7 @@ Fields',
           '_all_' => '_all_',
         ),
       ),
+      'postpone_processing' => 0,
     ),
     'action::views_bulk_operations_argument_selector_action' => array(
       'selected' => 0,
@@ -206,108 +209,104 @@ Fields',
     ),
     'action::node_promote_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::node_publish_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::system_goto_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::node_unpromote_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::s4_reporting_forms_site' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::s4_reporting_forms_signup' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::node_save_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::system_send_email_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::s4_core_email_site_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::s4_core_email_site_coordinator_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::s4_core_email_user_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::s4_courses_bulk_signup_students_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::node_unpublish_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::node_unpublish_by_keyword_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
   );
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['enable_select_all_pages'] = 1;
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['display_type'] = '1';
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['display_result'] = 1;
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['force_single'] = 0;
-  /* Field: Field: Program */
+  /* Field: Field: Program(s) */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
@@ -549,7 +548,7 @@ Fields',
     t('Displaying @start - @end of @total'),
     t('field_course'),
     t('field_site'),
-    t('Program'),
+    t('Program(s)'),
     t('Term'),
     t('Subject'),
     t('Catalog number'),
@@ -582,6 +581,7 @@ Fields',
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Faculty report';
+  $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['access']['perm'] = 'access s4 reporting';
   $handler->display->display_options['cache']['type'] = 'none';
@@ -661,13 +661,12 @@ Fields',
   $handler->display->display_options['header']['result']['id'] = 'result';
   $handler->display->display_options['header']['result']['table'] = 'views';
   $handler->display->display_options['header']['result']['field'] = 'result';
-  $handler->display->display_options['header']['result']['empty'] = FALSE;
   /* Relationship: User: Faculty (field_course_faculty) - reverse */
   $handler->display->display_options['relationships']['reverse_field_course_faculty_node']['id'] = 'reverse_field_course_faculty_node';
   $handler->display->display_options['relationships']['reverse_field_course_faculty_node']['table'] = 'users';
   $handler->display->display_options['relationships']['reverse_field_course_faculty_node']['field'] = 'reverse_field_course_faculty_node';
   $handler->display->display_options['relationships']['reverse_field_course_faculty_node']['required'] = TRUE;
-  /* Relationship: Content: Course (field_course) - reverse */
+  /* Relationship: Content: Course (field_course) - reverse (to Content) */
   $handler->display->display_options['relationships']['reverse_field_course_node']['id'] = 'reverse_field_course_node';
   $handler->display->display_options['relationships']['reverse_field_course_node']['table'] = 'node';
   $handler->display->display_options['relationships']['reverse_field_course_node']['field'] = 'reverse_field_course_node';
@@ -683,53 +682,55 @@ Fields',
   $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'users';
   $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['label'] = 'Email';
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['entity_load_capacity'] = '10';
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['operations'] = array(
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['display_type'] = '1';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['enable_select_all_pages'] = 1;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['force_single'] = 0;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['entity_load_capacity'] = '10';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_operations'] = array(
     'action::system_block_ip_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::user_block_user_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::views_bulk_operations_delete_item' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::system_message_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::views_bulk_operations_script_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::flag_user_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::views_bulk_operations_modify_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
@@ -739,13 +740,14 @@ Fields',
           '_all_' => '_all_',
         ),
       ),
+      'postpone_processing' => 0,
     ),
     'action::views_bulk_operations_user_roles_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::views_bulk_operations_argument_selector_action' => array(
       'selected' => 0,
@@ -758,51 +760,47 @@ Fields',
     ),
     'action::system_goto_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::system_send_email_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::s4_core_email_site_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::s4_core_email_site_coordinator_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::s4_core_email_user_action' => array(
       'selected' => 1,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 1,
       'label' => 'Send faculty email',
+      'postpone_processing' => 0,
     ),
     'action::s4_courses_bulk_signup_students_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
   );
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['enable_select_all_pages'] = 1;
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['display_type'] = '1';
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['display_result'] = 1;
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['force_single'] = 0;
   /* Field: User: Uid */
   $handler->display->display_options['fields']['uid']['id'] = 'uid';
   $handler->display->display_options['fields']['uid']['table'] = 'users';
@@ -986,7 +984,7 @@ Fields',
   $handler->display->display_options['filters']['province']['expose']['label'] = 'State';
   $handler->display->display_options['filters']['province']['expose']['operator'] = 'province_op';
   $handler->display->display_options['filters']['province']['expose']['identifier'] = 'province';
-  /* Filter criterion: Field: Program (field_site_restrict) */
+  /* Filter criterion: Field: Program(s) (field_site_restrict) */
   $handler->display->display_options['filters']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
   $handler->display->display_options['filters']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['filters']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';
@@ -1045,7 +1043,6 @@ Fields',
     t('field_site'),
     t('Email'),
     t('Last name'),
-    t('user/[uid]'),
     t('First name'),
     t('Login name'),
     t('E-mail '),
@@ -1078,6 +1075,7 @@ Fields',
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Site staff report';
   $handler->display->display_options['css_class'] = 'report-view';
+  $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['link_display'] = 'page';
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['access']['perm'] = 'access s4 reporting';
@@ -1450,12 +1448,11 @@ Fields',
   $handler->display->display_options['header']['result']['id'] = 'result';
   $handler->display->display_options['header']['result']['table'] = 'views';
   $handler->display->display_options['header']['result']['field'] = 'result';
-  $handler->display->display_options['header']['result']['empty'] = FALSE;
-  /* Relationship: Content: Site staff (field_coordinator) - reverse */
+  /* Relationship: Content: Site staff (field_coordinator) - reverse (to Content) */
   $handler->display->display_options['relationships']['reverse_field_coordinator_node']['id'] = 'reverse_field_coordinator_node';
   $handler->display->display_options['relationships']['reverse_field_coordinator_node']['table'] = 'node';
   $handler->display->display_options['relationships']['reverse_field_coordinator_node']['field'] = 'reverse_field_coordinator_node';
-  /* Relationship: Content: Course (field_course) */
+  /* Relationship: Field: Course (field_course) */
   $handler->display->display_options['relationships']['field_course_nid']['id'] = 'field_course_nid';
   $handler->display->display_options['relationships']['field_course_nid']['table'] = 'field_data_field_course';
   $handler->display->display_options['relationships']['field_course_nid']['field'] = 'field_course_nid';
@@ -1473,67 +1470,69 @@ Fields',
   $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['label'] = '';
   $handler->display->display_options['fields']['views_bulk_operations']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['entity_load_capacity'] = '10';
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['operations'] = array(
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['display_type'] = '1';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['enable_select_all_pages'] = 1;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['force_single'] = 0;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['entity_load_capacity'] = '10';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_operations'] = array(
     'action::s4_reporting_summary' => array(
       'selected' => 1,
-      'use_queue' => 0,
       'skip_confirmation' => 1,
       'override_label' => 1,
       'label' => 'Run summary report',
+      'postpone_processing' => 0,
     ),
     'action::node_assign_owner_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::views_bulk_operations_delete_item' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::system_message_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::views_bulk_operations_script_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::s4_core_cleanup_duplicate_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::node_make_sticky_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::node_make_unsticky_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::views_bulk_operations_modify_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
@@ -1543,6 +1542,7 @@ Fields',
           '_all_' => '_all_',
         ),
       ),
+      'postpone_processing' => 0,
     ),
     'action::views_bulk_operations_argument_selector_action' => array(
       'selected' => 0,
@@ -1555,107 +1555,103 @@ Fields',
     ),
     'action::node_promote_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::node_publish_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::system_goto_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::node_unpromote_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::s4_reporting_forms_site' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::s4_reporting_forms_signup' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::node_save_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::system_send_email_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::s4_core_email_site_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::s4_core_email_site_coordinator_action' => array(
       'selected' => 1,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 1,
       'label' => 'Send email',
+      'postpone_processing' => 0,
     ),
     'action::s4_core_email_user_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::s4_courses_bulk_signup_students_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::node_unpublish_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::node_unpublish_by_keyword_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
   );
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['enable_select_all_pages'] = 1;
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['display_type'] = '1';
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['display_result'] = 1;
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['force_single'] = 0;
   /* Field: Field: Last Name */
   $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
   $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
@@ -1680,7 +1676,7 @@ Fields',
   $handler->display->display_options['fields']['field_staff_role']['table'] = 'field_data_field_staff_role';
   $handler->display->display_options['fields']['field_staff_role']['field'] = 'field_staff_role';
   $handler->display->display_options['fields']['field_staff_role']['label'] = 'Staff role';
-  /* Field: Field: Program */
+  /* Field: Field: Program(s) */
   $handler->display->display_options['fields']['field_site_restrict_1']['id'] = 'field_site_restrict_1';
   $handler->display->display_options['fields']['field_site_restrict_1']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict_1']['field'] = 'field_site_restrict';
@@ -1786,7 +1782,7 @@ Fields',
   $handler->display->display_options['fields']['field_tags']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['field_tags']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_tags']['delta_offset'] = '0';
-  /* Field: Field: Program */
+  /* Field: Field: Program(s) */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
@@ -1959,7 +1955,7 @@ Fields',
   $handler->display->display_options['filters']['field_district_state_upper_value']['expose']['label'] = 'State upper district';
   $handler->display->display_options['filters']['field_district_state_upper_value']['expose']['operator'] = 'field_district_state_upper_value_op';
   $handler->display->display_options['filters']['field_district_state_upper_value']['expose']['identifier'] = 'field_district_state_upper_value';
-  /* Filter criterion: Field: Program (field_site_restrict) */
+  /* Filter criterion: Field: Program(s) (field_site_restrict) */
   $handler->display->display_options['filters']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
   $handler->display->display_options['filters']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['filters']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';
@@ -2001,11 +1997,6 @@ Fields',
   $handler->display->display_options['filters']['field_signup_start_date_value']['expose']['label'] = 'Site had at least one student between the following dates';
   $handler->display->display_options['filters']['field_signup_start_date_value']['expose']['operator'] = 'field_signup_start_date_value_op';
   $handler->display->display_options['filters']['field_signup_start_date_value']['expose']['identifier'] = 'field_signup_start_date_value';
-  $handler->display->display_options['filters']['field_signup_start_date_value']['granularity'] = 'day';
-  $handler->display->display_options['filters']['field_signup_start_date_value']['form_type'] = 'date_select';
-  $handler->display->display_options['filters']['field_signup_start_date_value']['default_date'] = '';
-  $handler->display->display_options['filters']['field_signup_start_date_value']['default_to_date'] = '';
-  $handler->display->display_options['filters']['field_signup_start_date_value']['year_range'] = '-3:+3';
   /* Filter criterion: Content: Subject (field_course_subject) */
   $handler->display->display_options['filters']['field_course_subject_value']['id'] = 'field_course_subject_value';
   $handler->display->display_options['filters']['field_course_subject_value']['table'] = 'field_data_field_course_subject';
@@ -2062,7 +2053,7 @@ Fields',
   $handler->display->display_options['filters']['field_staff_role_tid']['expose']['multiple'] = TRUE;
   $handler->display->display_options['filters']['field_staff_role_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_staff_role_tid']['vocabulary'] = 'site_staff_role';
-  /* Filter criterion: Field: Program (field_site_restrict) */
+  /* Filter criterion: Field: Program(s) (field_site_restrict) */
   $handler->display->display_options['filters']['field_site_restrict_tid_2']['id'] = 'field_site_restrict_tid_2';
   $handler->display->display_options['filters']['field_site_restrict_tid_2']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['filters']['field_site_restrict_tid_2']['field'] = 'field_site_restrict_tid';
@@ -2086,7 +2077,7 @@ Fields',
   $handler->display->display_options['filters']['created']['expose']['use_operator'] = TRUE;
   $handler->display->display_options['filters']['created']['expose']['operator'] = 'created_op';
   $handler->display->display_options['filters']['created']['expose']['identifier'] = 'created';
-  /* Filter criterion: Field: Program (field_site_restrict) */
+  /* Filter criterion: Field: Program(s) (field_site_restrict) */
   $handler->display->display_options['filters']['field_site_restrict_tid_1']['id'] = 'field_site_restrict_tid_1';
   $handler->display->display_options['filters']['field_site_restrict_tid_1']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['filters']['field_site_restrict_tid_1']['field'] = 'field_site_restrict_tid';
@@ -2205,6 +2196,7 @@ Fields',
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Site Report';
   $handler->display->display_options['css_class'] = 'report-view';
+  $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['link_display'] = 'page';
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['access']['perm'] = 'access s4 reporting';
@@ -2567,7 +2559,7 @@ Fields',
   $handler->display->display_options['relationships']['reverse_field_site_node']['id'] = 'reverse_field_site_node';
   $handler->display->display_options['relationships']['reverse_field_site_node']['table'] = 'node';
   $handler->display->display_options['relationships']['reverse_field_site_node']['field'] = 'reverse_field_site_node';
-  /* Relationship: Content: Course (field_course) */
+  /* Relationship: Field: Course (field_course) */
   $handler->display->display_options['relationships']['field_course_nid']['id'] = 'field_course_nid';
   $handler->display->display_options['relationships']['field_course_nid']['table'] = 'field_data_field_course';
   $handler->display->display_options['relationships']['field_course_nid']['field'] = 'field_course_nid';
@@ -2578,67 +2570,69 @@ Fields',
   $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'node';
   $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['label'] = 'Bulk operations';
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['entity_load_capacity'] = '1';
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['operations'] = array(
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['display_type'] = '1';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['enable_select_all_pages'] = 1;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['force_single'] = 0;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['entity_load_capacity'] = '1';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_operations'] = array(
     'action::s4_reporting_summary' => array(
       'selected' => 1,
-      'use_queue' => 0,
       'skip_confirmation' => 1,
       'override_label' => 1,
       'label' => 'Run summary report',
+      'postpone_processing' => 0,
     ),
     'action::node_assign_owner_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::views_bulk_operations_delete_item' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::system_message_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::views_bulk_operations_script_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::s4_core_cleanup_duplicate_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::node_make_sticky_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::node_make_unsticky_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::views_bulk_operations_modify_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
@@ -2648,6 +2642,7 @@ Fields',
           '_all_' => '_all_',
         ),
       ),
+      'postpone_processing' => 0,
     ),
     'action::views_bulk_operations_argument_selector_action' => array(
       'selected' => 0,
@@ -2660,107 +2655,103 @@ Fields',
     ),
     'action::node_promote_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::node_publish_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::system_goto_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::node_unpromote_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::s4_reporting_forms_site' => array(
       'selected' => 1,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 1,
       'label' => 'Run form report',
+      'postpone_processing' => 0,
     ),
     'action::s4_reporting_forms_signup' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::node_save_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::system_send_email_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::s4_core_email_site_action' => array(
       'selected' => 1,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 1,
       'label' => 'Send email to main site contact',
+      'postpone_processing' => 0,
     ),
     'action::s4_core_email_site_coordinator_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::s4_core_email_user_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::s4_courses_bulk_signup_students_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::node_unpublish_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::node_unpublish_by_keyword_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
   );
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['enable_select_all_pages'] = 1;
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['display_type'] = '1';
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['display_result'] = 1;
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['force_single'] = 0;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -2961,7 +2952,7 @@ Fields',
   $handler->display->display_options['fields']['field_site_language']['label'] = 'Languages';
   $handler->display->display_options['fields']['field_site_language']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['field_site_language']['delta_offset'] = '0';
-  /* Field: Field: Program */
+  /* Field: Field: Program(s) */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
@@ -2975,15 +2966,17 @@ Fields',
   $handler->display->display_options['fields']['created']['field'] = 'created';
   $handler->display->display_options['fields']['created']['label'] = 'Date created';
   $handler->display->display_options['fields']['created']['date_format'] = 'short';
-  /* Field: Form Evaluation: Total placements */
+  /* Field: Broken/missing handler */
   $handler->display->display_options['fields']['total_placements']['id'] = 'total_placements';
   $handler->display->display_options['fields']['total_placements']['table'] = 's4_reporting';
   $handler->display->display_options['fields']['total_placements']['field'] = 'total_placements';
+  $handler->display->display_options['fields']['total_placements']['label'] = 'Total placements';
   $handler->display->display_options['fields']['total_placements']['element_label_colon'] = FALSE;
-  /* Field: Form Evaluation: Total hours */
+  /* Field: Broken/missing handler */
   $handler->display->display_options['fields']['total_hours']['id'] = 'total_hours';
   $handler->display->display_options['fields']['total_hours']['table'] = 's4_reporting';
   $handler->display->display_options['fields']['total_hours']['field'] = 'total_hours';
+  $handler->display->display_options['fields']['total_hours']['label'] = 'Total hours';
   /* Field: Content: County */
   $handler->display->display_options['fields']['field_county']['id'] = 'field_county';
   $handler->display->display_options['fields']['field_county']['table'] = 'field_data_field_county';
@@ -3177,7 +3170,7 @@ Fields',
   $handler->display->display_options['filters']['field_district_state_upper_value']['expose']['label'] = 'State upper district';
   $handler->display->display_options['filters']['field_district_state_upper_value']['expose']['operator'] = 'field_district_state_upper_value_op';
   $handler->display->display_options['filters']['field_district_state_upper_value']['expose']['identifier'] = 'field_district_state_upper_value';
-  /* Filter criterion: Field: Program (field_site_restrict) */
+  /* Filter criterion: Field: Program(s) (field_site_restrict) */
   $handler->display->display_options['filters']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
   $handler->display->display_options['filters']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['filters']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';
@@ -3216,11 +3209,6 @@ Fields',
   $handler->display->display_options['filters']['field_signup_start_date_value']['expose']['label'] = 'Site had at least one student between the following dates';
   $handler->display->display_options['filters']['field_signup_start_date_value']['expose']['operator'] = 'field_signup_start_date_value_op';
   $handler->display->display_options['filters']['field_signup_start_date_value']['expose']['identifier'] = 'field_signup_start_date_value';
-  $handler->display->display_options['filters']['field_signup_start_date_value']['granularity'] = 'day';
-  $handler->display->display_options['filters']['field_signup_start_date_value']['form_type'] = 'date_select';
-  $handler->display->display_options['filters']['field_signup_start_date_value']['default_date'] = '';
-  $handler->display->display_options['filters']['field_signup_start_date_value']['default_to_date'] = '';
-  $handler->display->display_options['filters']['field_signup_start_date_value']['year_range'] = '-3:+3';
   /* Filter criterion: Content: Subject (field_course_subject) */
   $handler->display->display_options['filters']['field_course_subject_value']['id'] = 'field_course_subject_value';
   $handler->display->display_options['filters']['field_course_subject_value']['table'] = 'field_data_field_course_subject';
@@ -3297,7 +3285,6 @@ Fields',
   $handler->display->display_options['header']['result']['id'] = 'result';
   $handler->display->display_options['header']['result']['table'] = 'views';
   $handler->display->display_options['header']['result']['field'] = 'result';
-  $handler->display->display_options['header']['result']['empty'] = FALSE;
   $handler->display->display_options['header']['result']['content'] = 'Showing @start - @end of @total';
   $handler->display->display_options['path'] = 'reports/sites';
   $handler->display->display_options['menu']['type'] = 'default tab';
@@ -3373,8 +3360,6 @@ Fields',
     t('Related programs'),
     t('Date created'),
     t('Total placements'),
-    t('.'),
-    t(','),
     t('Total hours'),
     t('County '),
     t('Subject code subject'),
@@ -3413,6 +3398,7 @@ Fields',
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Student report';
+  $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['access']['perm'] = 'access s4 reporting';
   $handler->display->display_options['cache']['type'] = 'none';
@@ -3675,7 +3661,6 @@ Fields',
   $handler->display->display_options['header']['result']['id'] = 'result';
   $handler->display->display_options['header']['result']['table'] = 'views';
   $handler->display->display_options['header']['result']['field'] = 'result';
-  $handler->display->display_options['header']['result']['empty'] = FALSE;
   /* Relationship: User: Students (field_course_students) - reverse */
   $handler->display->display_options['relationships']['reverse_field_course_students_node']['id'] = 'reverse_field_course_students_node';
   $handler->display->display_options['relationships']['reverse_field_course_students_node']['table'] = 'users';
@@ -3690,13 +3675,13 @@ Fields',
   $handler->display->display_options['relationships']['field_site_nid']['field'] = 'field_site_nid';
   $handler->display->display_options['relationships']['field_site_nid']['relationship'] = 'reverse_field_user_node';
   $handler->display->display_options['relationships']['field_site_nid']['delta'] = '-1';
-  /* Relationship: Content: Site staff (field_coordinator) */
+  /* Relationship: Field: Site staff (field_coordinator) */
   $handler->display->display_options['relationships']['field_coordinator_nid']['id'] = 'field_coordinator_nid';
   $handler->display->display_options['relationships']['field_coordinator_nid']['table'] = 'field_data_field_coordinator';
   $handler->display->display_options['relationships']['field_coordinator_nid']['field'] = 'field_coordinator_nid';
   $handler->display->display_options['relationships']['field_coordinator_nid']['relationship'] = 'reverse_field_user_node';
   $handler->display->display_options['relationships']['field_coordinator_nid']['delta'] = '-1';
-  /* Relationship: Content: Course (field_course) */
+  /* Relationship: Field: Course (field_course) */
   $handler->display->display_options['relationships']['field_course_nid']['id'] = 'field_course_nid';
   $handler->display->display_options['relationships']['field_course_nid']['table'] = 'field_data_field_course';
   $handler->display->display_options['relationships']['field_course_nid']['field'] = 'field_course_nid';
@@ -3708,53 +3693,55 @@ Fields',
   $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'users';
   $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['label'] = 'Bulk operations';
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['entity_load_capacity'] = '3';
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['operations'] = array(
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['display_type'] = '1';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['enable_select_all_pages'] = 1;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['force_single'] = 0;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['entity_load_capacity'] = '3';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_operations'] = array(
     'action::system_block_ip_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::user_block_user_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::s4_reporting_summary' => array(
       'selected' => 1,
-      'use_queue' => 0,
       'skip_confirmation' => 1,
       'override_label' => 1,
       'label' => 'Run summary report',
+      'postpone_processing' => 0,
     ),
     'action::views_bulk_operations_delete_item' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::system_message_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::views_bulk_operations_script_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::views_bulk_operations_modify_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
@@ -3764,13 +3751,14 @@ Fields',
           '_all_' => '_all_',
         ),
       ),
+      'postpone_processing' => 0,
     ),
     'action::views_bulk_operations_user_roles_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::views_bulk_operations_argument_selector_action' => array(
       'selected' => 0,
@@ -3783,65 +3771,61 @@ Fields',
     ),
     'action::system_goto_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::s4_reporting_forms_site' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::s4_reporting_forms_signup' => array(
       'selected' => 1,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 1,
       'label' => 'Run form report',
+      'postpone_processing' => 0,
     ),
     'action::system_send_email_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::s4_core_email_site_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::s4_core_email_site_coordinator_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
     'action::s4_core_email_user_action' => array(
       'selected' => 1,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 1,
       'label' => 'Send student email',
+      'postpone_processing' => 0,
     ),
     'action::s4_courses_bulk_signup_students_action' => array(
       'selected' => 0,
-      'use_queue' => 0,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
+      'postpone_processing' => 0,
     ),
   );
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['enable_select_all_pages'] = 1;
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['display_type'] = '1';
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['display_result'] = 1;
-  $handler->display->display_options['fields']['views_bulk_operations']['vbo']['force_single'] = 0;
   /* Field: User: Uid */
   $handler->display->display_options['fields']['uid']['id'] = 'uid';
   $handler->display->display_options['fields']['uid']['table'] = 'users';
@@ -3864,7 +3848,7 @@ Fields',
   $handler->display->display_options['fields']['field_first_name']['label'] = 'First name';
   $handler->display->display_options['fields']['field_first_name']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['field_first_name']['alter']['path'] = 'user/[uid]';
-  /* Field: Field: Program */
+  /* Field: Field: Program(s) */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
@@ -3946,7 +3930,6 @@ Fields',
   $handler->display->display_options['fields']['field_email']['field'] = 'field_email';
   $handler->display->display_options['fields']['field_email']['relationship'] = 'field_coordinator_nid';
   $handler->display->display_options['fields']['field_email']['label'] = 'Site staff email';
-  $handler->display->display_options['fields']['field_email']['type'] = 'email_default';
   /* Field: Content: Job title */
   $handler->display->display_options['fields']['field_job_title']['id'] = 'field_job_title';
   $handler->display->display_options['fields']['field_job_title']['table'] = 'field_data_field_job_title';
@@ -4019,7 +4002,7 @@ Fields',
   $handler->display->display_options['filters']['field_last_name_value_1']['expose']['label'] = 'Last name';
   $handler->display->display_options['filters']['field_last_name_value_1']['expose']['operator'] = 'field_last_name_value_1_op';
   $handler->display->display_options['filters']['field_last_name_value_1']['expose']['identifier'] = 'field_last_name_value_1';
-  /* Filter criterion: Field: Program (field_site_restrict) */
+  /* Filter criterion: Field: Program(s) (field_site_restrict) */
   $handler->display->display_options['filters']['field_site_restrict_tid_1']['id'] = 'field_site_restrict_tid_1';
   $handler->display->display_options['filters']['field_site_restrict_tid_1']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['filters']['field_site_restrict_tid_1']['field'] = 'field_site_restrict_tid';
@@ -4135,12 +4118,7 @@ Fields',
   $handler->display->display_options['filters']['field_signup_start_date_value']['expose']['label'] = 'First day of service';
   $handler->display->display_options['filters']['field_signup_start_date_value']['expose']['operator'] = 'field_signup_start_date_value_op';
   $handler->display->display_options['filters']['field_signup_start_date_value']['expose']['identifier'] = 'field_signup_start_date_value';
-  $handler->display->display_options['filters']['field_signup_start_date_value']['granularity'] = 'day';
-  $handler->display->display_options['filters']['field_signup_start_date_value']['form_type'] = 'date_select';
-  $handler->display->display_options['filters']['field_signup_start_date_value']['default_date'] = '';
-  $handler->display->display_options['filters']['field_signup_start_date_value']['default_to_date'] = '';
-  $handler->display->display_options['filters']['field_signup_start_date_value']['year_range'] = '-3:+3';
-  /* Filter criterion: Field: Program (field_site_restrict) */
+  /* Filter criterion: Field: Program(s) (field_site_restrict) */
   $handler->display->display_options['filters']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
   $handler->display->display_options['filters']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['filters']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';
@@ -4201,7 +4179,7 @@ Fields',
   $handler->display->display_options['filters']['city']['expose']['label'] = 'City';
   $handler->display->display_options['filters']['city']['expose']['operator'] = 'city_op';
   $handler->display->display_options['filters']['city']['expose']['identifier'] = 'city';
-  /* Filter criterion: Field: Program (field_site_restrict) */
+  /* Filter criterion: Field: Program(s) (field_site_restrict) */
   $handler->display->display_options['filters']['field_site_restrict_tid_2']['id'] = 'field_site_restrict_tid_2';
   $handler->display->display_options['filters']['field_site_restrict_tid_2']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['filters']['field_site_restrict_tid_2']['field'] = 'field_site_restrict_tid';
@@ -4226,7 +4204,7 @@ Fields',
   $handler->display->display_options['filters']['field_site_nid']['expose']['operator'] = 'field_site_nid_op';
   $handler->display->display_options['filters']['field_site_nid']['expose']['identifier'] = 'field_site_nid';
   $handler->display->display_options['filters']['field_site_nid']['expose']['multiple'] = TRUE;
-  /* Filter criterion: Field: Program (field_site_restrict) */
+  /* Filter criterion: Field: Program(s) (field_site_restrict) */
   $handler->display->display_options['filters']['field_site_restrict_tid_3']['id'] = 'field_site_restrict_tid_3';
   $handler->display->display_options['filters']['field_site_restrict_tid_3']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['filters']['field_site_restrict_tid_3']['field'] = 'field_site_restrict_tid';
@@ -4297,7 +4275,6 @@ Fields',
     t('field_signup_course'),
     t('Bulk operations'),
     t('Last name'),
-    t('user/[uid]'),
     t('First name'),
     t('Program '),
     t('Login name'),
@@ -4344,6 +4321,7 @@ Fields',
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'S4 Reports: Site forms';
+  $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['access']['perm'] = 'access s4 reporting';
   $handler->display->display_options['cache']['type'] = 'none';
@@ -4475,7 +4453,6 @@ Fields',
   $handler->display->display_options['header']['result']['id'] = 'result';
   $handler->display->display_options['header']['result']['table'] = 'views';
   $handler->display->display_options['header']['result']['field'] = 'result';
-  $handler->display->display_options['header']['result']['empty'] = FALSE;
   /* Relationship: Content: Site (field_site) */
   $handler->display->display_options['relationships']['field_site_nid']['id'] = 'field_site_nid';
   $handler->display->display_options['relationships']['field_site_nid']['table'] = 'field_data_field_site';
@@ -4527,12 +4504,11 @@ Fields',
   $handler->display->display_options['fields']['field_file_tags']['field'] = 'field_file_tags';
   $handler->display->display_options['fields']['field_file_tags']['label'] = 'Tag(s)';
   $handler->display->display_options['fields']['field_file_tags']['delta_offset'] = '0';
-  /* Field: Field: Program */
+  /* Field: Field: Program(s) */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['relationship'] = 'field_site_nid';
-  $handler->display->display_options['fields']['field_site_restrict']['label'] = 'Program(s)';
   $handler->display->display_options['fields']['field_site_restrict']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_site_restrict']['delta_offset'] = '0';
   /* Field: Content: Post date */
@@ -4589,10 +4565,7 @@ Fields',
   $handler->display->display_options['filters']['field_expiration_date_value']['expose']['label'] = 'Expiration date';
   $handler->display->display_options['filters']['field_expiration_date_value']['expose']['operator'] = 'field_expiration_date_value_op';
   $handler->display->display_options['filters']['field_expiration_date_value']['expose']['identifier'] = 'field_expiration_date_value';
-  $handler->display->display_options['filters']['field_expiration_date_value']['granularity'] = 'day';
   $handler->display->display_options['filters']['field_expiration_date_value']['form_type'] = 'date_popup';
-  $handler->display->display_options['filters']['field_expiration_date_value']['default_date'] = '';
-  $handler->display->display_options['filters']['field_expiration_date_value']['default_to_date'] = '';
   $handler->display->display_options['filters']['field_expiration_date_value']['year_range'] = '-10:+10';
   /* Filter criterion: Content: File category (field_file_category) */
   $handler->display->display_options['filters']['field_file_category_tid']['id'] = 'field_file_category_tid';
@@ -4660,7 +4633,7 @@ Fields',
   $handler->display->display_options['filters']['field_file_tags_tid']['expose']['identifier'] = 'field_file_tags_tid';
   $handler->display->display_options['filters']['field_file_tags_tid']['vocabulary'] = 'file_tags';
   $handler->display->display_options['filters']['field_file_tags_tid']['error_message'] = FALSE;
-  /* Filter criterion: Field: Program (field_site_restrict) */
+  /* Filter criterion: Field: Program(s) (field_site_restrict) */
   $handler->display->display_options['filters']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
   $handler->display->display_options['filters']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['filters']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';

@@ -36,14 +36,14 @@ class views_handler_s4_student_signup_list extends views_handler_field {
       if(user_access('create signups for other users')) {
         $list[$row['nid']] .= ' - '. l(t('edit'), 
           'signup/create/'. $uid .'/edit/'.$row['nid'], 
-          array('attributes' => array('class' => 'modal-edit')));
+          array('query' => array('modal' => 'modal'), 'attributes' => array('class' => array('iframe-modal'), 'data-modal-title' => t('Edit placement for @first @last', array('@first' => $values->field_data_field_first_name_field_first_name_value, '@last' => $values->field_data_field_last_name_field_last_name_value)))));
         $list[$row['nid']] .= ' - '. l(t('delete'), 
           'node/'. $row['nid'] .'/signup-delete', 
-          array('attributes' => array('class' => 'modal-edit'),
-                'query' => array(drupal_get_destination())));
+          array('query' => array('modal' => 'modal'), 'attributes' => array('class' => array('iframe-modal'), 'data-modal-title' => t('Delete placement for @first @last', array('@first' => $values->field_data_field_first_name_field_first_name_value, '@last' => $values->field_data_field_last_name_field_last_name_value)))));
       }
      
     }
+    drupal_alter('s4_student_signup_list', $list, $values);
     if (count($list) == 0) {
       return '';
     }

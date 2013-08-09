@@ -11,458 +11,6 @@ function s4_sites_views_default_views() {
   $export = array();
 
   $view = new view();
-  $view->name = 'contact_records';
-  $view->description = '';
-  $view->tag = 'default';
-  $view->base_table = 'node';
-  $view->human_name = 'Site notes & forms';
-  $view->core = 7;
-  $view->api_version = '3.0';
-  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
-
-  /* Display: Master */
-  $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Notes and Forms';
-  $handler->display->display_options['use_more_always'] = FALSE;
-  $handler->display->display_options['access']['type'] = 'type_role';
-  $handler->display->display_options['access']['role'] = array(
-    4 => '4',
-    5 => '5',
-    3 => '3',
-    6 => '6',
-  );
-  $handler->display->display_options['access']['node_type'] = 'site';
-  $handler->display->display_options['cache']['type'] = 'none';
-  $handler->display->display_options['query']['type'] = 'views_query';
-  $handler->display->display_options['query']['options']['query_comment'] = FALSE;
-  $handler->display->display_options['exposed_form']['type'] = 'basic';
-  $handler->display->display_options['pager']['type'] = 'full';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '20';
-  $handler->display->display_options['style_plugin'] = 'table';
-  $handler->display->display_options['style_options']['columns'] = array(
-    'created' => 'created',
-    'field_expiration_date' => 'field_expiration_date',
-    'title' => 'title',
-    'field_file_category' => 'field_file_category',
-    'field_files' => 'field_files',
-  );
-  $handler->display->display_options['style_options']['default'] = 'created';
-  $handler->display->display_options['style_options']['info'] = array(
-    'created' => array(
-      'sortable' => 1,
-      'default_sort_order' => 'desc',
-      'align' => '',
-      'separator' => '',
-    ),
-    'field_expiration_date' => array(
-      'sortable' => 1,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-    ),
-    'title' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-    ),
-    'field_file_category' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-    ),
-    'field_files' => array(
-      'align' => '',
-      'separator' => '',
-    ),
-  );
-  /* Field: Content: Post date */
-  $handler->display->display_options['fields']['created']['id'] = 'created';
-  $handler->display->display_options['fields']['created']['table'] = 'node';
-  $handler->display->display_options['fields']['created']['field'] = 'created';
-  $handler->display->display_options['fields']['created']['label'] = 'Date';
-  $handler->display->display_options['fields']['created']['date_format'] = 'long';
-  /* Field: Content: Title */
-  $handler->display->display_options['fields']['title']['id'] = 'title';
-  $handler->display->display_options['fields']['title']['table'] = 'node';
-  $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = '';
-  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Field: Content: Contact tags */
-  $handler->display->display_options['fields']['field_contact_tags']['id'] = 'field_contact_tags';
-  $handler->display->display_options['fields']['field_contact_tags']['table'] = 'field_data_field_contact_tags';
-  $handler->display->display_options['fields']['field_contact_tags']['field'] = 'field_contact_tags';
-  $handler->display->display_options['fields']['field_contact_tags']['delta_offset'] = '0';
-  /* Field: Content: Contact type */
-  $handler->display->display_options['fields']['field_contact']['id'] = 'field_contact';
-  $handler->display->display_options['fields']['field_contact']['table'] = 'field_data_field_contact';
-  $handler->display->display_options['fields']['field_contact']['field'] = 'field_contact';
-  /* Field: Content: Files */
-  $handler->display->display_options['fields']['field_files']['id'] = 'field_files';
-  $handler->display->display_options['fields']['field_files']['table'] = 'field_data_field_files';
-  $handler->display->display_options['fields']['field_files']['field'] = 'field_files';
-  $handler->display->display_options['fields']['field_files']['click_sort_column'] = 'fid';
-  $handler->display->display_options['fields']['field_files']['delta_offset'] = '0';
-  /* Sort criterion: Content: Post date */
-  $handler->display->display_options['sorts']['created']['id'] = 'created';
-  $handler->display->display_options['sorts']['created']['table'] = 'node';
-  $handler->display->display_options['sorts']['created']['field'] = 'created';
-  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  /* Contextual filter: Content: Site (field_site) */
-  $handler->display->display_options['arguments']['field_site_nid']['id'] = 'field_site_nid';
-  $handler->display->display_options['arguments']['field_site_nid']['table'] = 'field_data_field_site';
-  $handler->display->display_options['arguments']['field_site_nid']['field'] = 'field_site_nid';
-  $handler->display->display_options['arguments']['field_site_nid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['field_site_nid']['title_enable'] = TRUE;
-  $handler->display->display_options['arguments']['field_site_nid']['title'] = '%1';
-  $handler->display->display_options['arguments']['field_site_nid']['default_argument_type'] = 'node';
-  $handler->display->display_options['arguments']['field_site_nid']['default_argument_skip_url'] = TRUE;
-  $handler->display->display_options['arguments']['field_site_nid']['summary']['number_of_records'] = '0';
-  $handler->display->display_options['arguments']['field_site_nid']['summary']['format'] = 'default_summary';
-  $handler->display->display_options['arguments']['field_site_nid']['summary_options']['items_per_page'] = '25';
-  /* Filter criterion: Content: Published */
-  $handler->display->display_options['filters']['status']['id'] = 'status';
-  $handler->display->display_options['filters']['status']['table'] = 'node';
-  $handler->display->display_options['filters']['status']['field'] = 'status';
-  $handler->display->display_options['filters']['status']['value'] = 1;
-  $handler->display->display_options['filters']['status']['group'] = 0;
-  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Content: Type */
-  $handler->display->display_options['filters']['type']['id'] = 'type';
-  $handler->display->display_options['filters']['type']['table'] = 'node';
-  $handler->display->display_options['filters']['type']['field'] = 'type';
-  $handler->display->display_options['filters']['type']['value'] = array(
-    'contact_record' => 'contact_record',
-  );
-  /* Filter criterion: Search: Search Terms */
-  $handler->display->display_options['filters']['keys']['id'] = 'keys';
-  $handler->display->display_options['filters']['keys']['table'] = 'search_index';
-  $handler->display->display_options['filters']['keys']['field'] = 'keys';
-  $handler->display->display_options['filters']['keys']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['keys']['expose']['operator_id'] = 'keys_op';
-  $handler->display->display_options['filters']['keys']['expose']['label'] = 'Search';
-  $handler->display->display_options['filters']['keys']['expose']['operator'] = 'keys_op';
-  $handler->display->display_options['filters']['keys']['expose']['identifier'] = 'keys';
-
-  /* Display: Files close to expiration */
-  $handler = $view->new_display('block', 'Files close to expiration', 'block_3');
-  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
-  $handler->display->display_options['style_plugin'] = 'table';
-  $handler->display->display_options['style_options']['columns'] = array(
-    'created' => 'created',
-    'field_expiration_date' => 'field_expiration_date',
-    'field_site' => 'field_site',
-    'title' => 'title',
-    'field_file_category' => 'field_file_category',
-    'field_files' => 'field_files',
-  );
-  $handler->display->display_options['style_options']['default'] = 'created';
-  $handler->display->display_options['style_options']['info'] = array(
-    'created' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'desc',
-      'align' => '',
-      'separator' => '',
-    ),
-    'field_expiration_date' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-    ),
-    'field_site' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-    ),
-    'title' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-    ),
-    'field_file_category' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-    ),
-    'field_files' => array(
-      'align' => '',
-      'separator' => '',
-    ),
-  );
-  $handler->display->display_options['defaults']['style_options'] = FALSE;
-  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
-  $handler->display->display_options['defaults']['row_options'] = FALSE;
-  $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Content: Expiration date */
-  $handler->display->display_options['fields']['field_expiration_date']['id'] = 'field_expiration_date';
-  $handler->display->display_options['fields']['field_expiration_date']['table'] = 'field_data_field_expiration_date';
-  $handler->display->display_options['fields']['field_expiration_date']['field'] = 'field_expiration_date';
-  $handler->display->display_options['fields']['field_expiration_date']['label'] = 'Expires';
-  $handler->display->display_options['fields']['field_expiration_date']['settings'] = array(
-    'format_type' => 'long',
-    'fromto' => 'both',
-    'multiple_number' => '',
-    'multiple_from' => '',
-    'multiple_to' => '',
-    'show_repeat_rule' => 'show',
-  );
-  /* Field: Content: Site */
-  $handler->display->display_options['fields']['field_site']['id'] = 'field_site';
-  $handler->display->display_options['fields']['field_site']['table'] = 'field_data_field_site';
-  $handler->display->display_options['fields']['field_site']['field'] = 'field_site';
-  /* Field: Content: Title */
-  $handler->display->display_options['fields']['title']['id'] = 'title';
-  $handler->display->display_options['fields']['title']['table'] = 'node';
-  $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = '';
-  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Field: Content: File category */
-  $handler->display->display_options['fields']['field_file_category']['id'] = 'field_file_category';
-  $handler->display->display_options['fields']['field_file_category']['table'] = 'field_data_field_file_category';
-  $handler->display->display_options['fields']['field_file_category']['field'] = 'field_file_category';
-  $handler->display->display_options['fields']['field_file_category']['label'] = 'Category';
-  /* Field: Content: Files */
-  $handler->display->display_options['fields']['field_files']['id'] = 'field_files';
-  $handler->display->display_options['fields']['field_files']['table'] = 'field_data_field_files';
-  $handler->display->display_options['fields']['field_files']['field'] = 'field_files';
-  $handler->display->display_options['fields']['field_files']['click_sort_column'] = 'fid';
-  $handler->display->display_options['fields']['field_files']['delta_offset'] = '0';
-  $handler->display->display_options['defaults']['sorts'] = FALSE;
-  /* Sort criterion: Content: Expiration date (field_expiration_date) */
-  $handler->display->display_options['sorts']['field_expiration_date_value']['id'] = 'field_expiration_date_value';
-  $handler->display->display_options['sorts']['field_expiration_date_value']['table'] = 'field_data_field_expiration_date';
-  $handler->display->display_options['sorts']['field_expiration_date_value']['field'] = 'field_expiration_date_value';
-  $handler->display->display_options['sorts']['field_expiration_date_value']['order'] = 'DESC';
-  /* Sort criterion: Content: Post date */
-  $handler->display->display_options['sorts']['created']['id'] = 'created';
-  $handler->display->display_options['sorts']['created']['table'] = 'node';
-  $handler->display->display_options['sorts']['created']['field'] = 'created';
-  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  $handler->display->display_options['defaults']['arguments'] = FALSE;
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
-  $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Content: Published */
-  $handler->display->display_options['filters']['status']['id'] = 'status';
-  $handler->display->display_options['filters']['status']['table'] = 'node';
-  $handler->display->display_options['filters']['status']['field'] = 'status';
-  $handler->display->display_options['filters']['status']['value'] = 1;
-  $handler->display->display_options['filters']['status']['group'] = 0;
-  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Content: Type */
-  $handler->display->display_options['filters']['type']['id'] = 'type';
-  $handler->display->display_options['filters']['type']['table'] = 'node';
-  $handler->display->display_options['filters']['type']['field'] = 'type';
-  $handler->display->display_options['filters']['type']['value'] = array(
-    'file' => 'file',
-  );
-
-  /* Display: Site notes */
-  $handler = $view->new_display('page', 'Site notes', 'page_1');
-  $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Site notes';
-  $handler->display->display_options['defaults']['arguments'] = FALSE;
-  /* Contextual filter: Content: Site (field_site) */
-  $handler->display->display_options['arguments']['field_site_nid']['id'] = 'field_site_nid';
-  $handler->display->display_options['arguments']['field_site_nid']['table'] = 'field_data_field_site';
-  $handler->display->display_options['arguments']['field_site_nid']['field'] = 'field_site_nid';
-  $handler->display->display_options['arguments']['field_site_nid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['field_site_nid']['title_enable'] = TRUE;
-  $handler->display->display_options['arguments']['field_site_nid']['title'] = '%1';
-  $handler->display->display_options['arguments']['field_site_nid']['default_argument_type'] = 'node';
-  $handler->display->display_options['arguments']['field_site_nid']['default_argument_skip_url'] = TRUE;
-  $handler->display->display_options['arguments']['field_site_nid']['summary']['number_of_records'] = '0';
-  $handler->display->display_options['arguments']['field_site_nid']['summary']['format'] = 'default_summary';
-  $handler->display->display_options['arguments']['field_site_nid']['summary_options']['items_per_page'] = '25';
-  $handler->display->display_options['path'] = 'node/%/notes';
-  $handler->display->display_options['menu']['type'] = 'tab';
-  $handler->display->display_options['menu']['title'] = 'Notes';
-  $handler->display->display_options['menu']['weight'] = '2';
-
-  /* Display: Site forms */
-  $handler = $view->new_display('page', 'Site forms', 'page_2');
-  $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Site forms';
-  $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Content: Title */
-  $handler->display->display_options['fields']['title']['id'] = 'title';
-  $handler->display->display_options['fields']['title']['table'] = 'node';
-  $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = 'Name';
-  $handler->display->display_options['fields']['title']['alter']['text'] = '[title] [timestamp]';
-  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['title']['hide_alter_empty'] = FALSE;
-  /* Field: Content: Post date */
-  $handler->display->display_options['fields']['created']['id'] = 'created';
-  $handler->display->display_options['fields']['created']['table'] = 'node';
-  $handler->display->display_options['fields']['created']['field'] = 'created';
-  $handler->display->display_options['fields']['created']['label'] = 'Date';
-  $handler->display->display_options['fields']['created']['date_format'] = 'long';
-  /* Field: Content: Expiration date */
-  $handler->display->display_options['fields']['field_expiration_date']['id'] = 'field_expiration_date';
-  $handler->display->display_options['fields']['field_expiration_date']['table'] = 'field_data_field_expiration_date';
-  $handler->display->display_options['fields']['field_expiration_date']['field'] = 'field_expiration_date';
-  $handler->display->display_options['fields']['field_expiration_date']['hide_alter_empty'] = FALSE;
-  $handler->display->display_options['fields']['field_expiration_date']['settings'] = array(
-    'format_type' => 'long',
-    'fromto' => 'both',
-    'multiple_number' => '',
-    'multiple_from' => '',
-    'multiple_to' => '',
-    'show_repeat_rule' => 'show',
-  );
-  /* Field: Content: Files */
-  $handler->display->display_options['fields']['field_files']['id'] = 'field_files';
-  $handler->display->display_options['fields']['field_files']['table'] = 'field_data_field_files';
-  $handler->display->display_options['fields']['field_files']['field'] = 'field_files';
-  $handler->display->display_options['fields']['field_files']['click_sort_column'] = 'fid';
-  $handler->display->display_options['fields']['field_files']['delta_offset'] = '0';
-  /* Field: Content: File category */
-  $handler->display->display_options['fields']['field_file_category']['id'] = 'field_file_category';
-  $handler->display->display_options['fields']['field_file_category']['table'] = 'field_data_field_file_category';
-  $handler->display->display_options['fields']['field_file_category']['field'] = 'field_file_category';
-  $handler->display->display_options['fields']['field_file_category']['label'] = 'Category';
-  $handler->display->display_options['fields']['field_file_category']['hide_alter_empty'] = FALSE;
-  $handler->display->display_options['fields']['field_file_category']['type'] = 'taxonomy_term_reference_plain';
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
-  $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Content: Published */
-  $handler->display->display_options['filters']['status']['id'] = 'status';
-  $handler->display->display_options['filters']['status']['table'] = 'node';
-  $handler->display->display_options['filters']['status']['field'] = 'status';
-  $handler->display->display_options['filters']['status']['value'] = 1;
-  $handler->display->display_options['filters']['status']['group'] = 0;
-  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Content: Type */
-  $handler->display->display_options['filters']['type']['id'] = 'type';
-  $handler->display->display_options['filters']['type']['table'] = 'node';
-  $handler->display->display_options['filters']['type']['field'] = 'type';
-  $handler->display->display_options['filters']['type']['value'] = array(
-    'file' => 'file',
-  );
-  /* Filter criterion: Search: Search Terms */
-  $handler->display->display_options['filters']['keys']['id'] = 'keys';
-  $handler->display->display_options['filters']['keys']['table'] = 'search_index';
-  $handler->display->display_options['filters']['keys']['field'] = 'keys';
-  $handler->display->display_options['filters']['keys']['group'] = '0';
-  $handler->display->display_options['filters']['keys']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['keys']['expose']['operator_id'] = 'keys_op';
-  $handler->display->display_options['filters']['keys']['expose']['label'] = 'Search Terms';
-  $handler->display->display_options['filters']['keys']['expose']['operator'] = 'keys_op';
-  $handler->display->display_options['filters']['keys']['expose']['identifier'] = 'keys';
-  $handler->display->display_options['path'] = 'node/%/forms';
-  $handler->display->display_options['menu']['type'] = 'tab';
-  $handler->display->display_options['menu']['title'] = 'Forms';
-  $handler->display->display_options['menu']['weight'] = '3';
-
-  /* Display: Approval notes & forms */
-  $handler = $view->new_display('block', 'Approval notes & forms', 'block_1');
-  $handler->display->display_options['defaults']['use_ajax'] = FALSE;
-  $handler->display->display_options['use_ajax'] = TRUE;
-  $handler->display->display_options['defaults']['pager'] = FALSE;
-  $handler->display->display_options['pager']['type'] = 'mini';
-  $handler->display->display_options['pager']['options']['items_per_page'] = '20';
-  $handler->display->display_options['pager']['options']['offset'] = '0';
-  $handler->display->display_options['pager']['options']['id'] = '0';
-  $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Content: Post date */
-  $handler->display->display_options['fields']['created']['id'] = 'created';
-  $handler->display->display_options['fields']['created']['table'] = 'node';
-  $handler->display->display_options['fields']['created']['field'] = 'created';
-  $handler->display->display_options['fields']['created']['label'] = 'Date';
-  $handler->display->display_options['fields']['created']['hide_alter_empty'] = FALSE;
-  $handler->display->display_options['fields']['created']['date_format'] = 'long';
-  /* Field: Content: Title */
-  $handler->display->display_options['fields']['title']['id'] = 'title';
-  $handler->display->display_options['fields']['title']['table'] = 'node';
-  $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = '';
-  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Field: Content: Contact type */
-  $handler->display->display_options['fields']['field_contact']['id'] = 'field_contact';
-  $handler->display->display_options['fields']['field_contact']['table'] = 'field_data_field_contact';
-  $handler->display->display_options['fields']['field_contact']['field'] = 'field_contact';
-  /* Field: Content: Files */
-  $handler->display->display_options['fields']['field_files']['id'] = 'field_files';
-  $handler->display->display_options['fields']['field_files']['table'] = 'field_data_field_files';
-  $handler->display->display_options['fields']['field_files']['field'] = 'field_files';
-  $handler->display->display_options['fields']['field_files']['click_sort_column'] = 'fid';
-  $handler->display->display_options['fields']['field_files']['delta_offset'] = '0';
-  $handler->display->display_options['defaults']['arguments'] = FALSE;
-  /* Contextual filter: Content: Site (field_site) */
-  $handler->display->display_options['arguments']['field_site_nid']['id'] = 'field_site_nid';
-  $handler->display->display_options['arguments']['field_site_nid']['table'] = 'field_data_field_site';
-  $handler->display->display_options['arguments']['field_site_nid']['field'] = 'field_site_nid';
-  $handler->display->display_options['arguments']['field_site_nid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['field_site_nid']['title_enable'] = TRUE;
-  $handler->display->display_options['arguments']['field_site_nid']['title'] = '%1';
-  $handler->display->display_options['arguments']['field_site_nid']['default_argument_type'] = 'node';
-  $handler->display->display_options['arguments']['field_site_nid']['default_argument_skip_url'] = TRUE;
-  $handler->display->display_options['arguments']['field_site_nid']['summary']['number_of_records'] = '0';
-  $handler->display->display_options['arguments']['field_site_nid']['summary']['format'] = 'default_summary';
-  $handler->display->display_options['arguments']['field_site_nid']['summary_options']['items_per_page'] = '25';
-  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
-  $handler->display->display_options['defaults']['filters'] = FALSE;
-  /* Filter criterion: Content: Published */
-  $handler->display->display_options['filters']['status']['id'] = 'status';
-  $handler->display->display_options['filters']['status']['table'] = 'node';
-  $handler->display->display_options['filters']['status']['field'] = 'status';
-  $handler->display->display_options['filters']['status']['value'] = 1;
-  $handler->display->display_options['filters']['status']['group'] = 0;
-  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: Content: Type */
-  $handler->display->display_options['filters']['type']['id'] = 'type';
-  $handler->display->display_options['filters']['type']['table'] = 'node';
-  $handler->display->display_options['filters']['type']['field'] = 'type';
-  $handler->display->display_options['filters']['type']['value'] = array(
-    'contact_record' => 'contact_record',
-    'file' => 'file',
-  );
-  $translatables['contact_records'] = array(
-    t('Master'),
-    t('Notes and Forms'),
-    t('more'),
-    t('Apply'),
-    t('Reset'),
-    t('Sort by'),
-    t('Asc'),
-    t('Desc'),
-    t('Items per page'),
-    t('- All -'),
-    t('Offset'),
-    t('« first'),
-    t('‹ previous'),
-    t('next ›'),
-    t('last »'),
-    t('Date'),
-    t('Contact tags'),
-    t('Contact type'),
-    t('Files'),
-    t('All'),
-    t('%1'),
-    t('Search'),
-    t('Files close to expiration'),
-    t('Expires'),
-    t('Site'),
-    t('Category'),
-    t('Site notes'),
-    t('Site forms'),
-    t('Name'),
-    t('[title] [timestamp]'),
-    t('Expiration date'),
-    t('Search Terms'),
-    t('Approval notes & forms'),
-  );
-  $export['contact_records'] = $view;
-
-  $view = new view();
   $view->name = 'location_gmap';
   $view->description = '';
   $view->tag = 'default';
@@ -623,6 +171,7 @@ function s4_sites_views_default_views() {
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Manage sites';
   $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['group_by'] = TRUE;
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -737,20 +286,13 @@ Location',
       'empty_column' => 0,
     ),
   );
-  /* Header: Global: Text area */
-  $handler->display->display_options['header']['area']['id'] = 'area';
-  $handler->display->display_options['header']['area']['table'] = 'views';
-  $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['empty'] = TRUE;
-  $handler->display->display_options['header']['area']['content'] = '<a class="btn btn-success" href="../node/add/site"><i class="icon-plus icon-white"></i> Add new site</a> <a class="btn" href="../site-list">View public list</a>';
-  $handler->display->display_options['header']['area']['format'] = 'full_html';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Field: Field: Program */
+  /* Field: Field: Program(s) */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
@@ -779,6 +321,11 @@ Location',
   $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
   $handler->display->display_options['fields']['edit_node']['label'] = 'Edit';
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -815,12 +362,6 @@ Location',
   $handler->display->display_options['filters']['title']['expose']['label'] = 'Site name';
   $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
   $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
-  /* Filter criterion: Workbench Moderation: Current */
-  $handler->display->display_options['filters']['current']['id'] = 'current';
-  $handler->display->display_options['filters']['current']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['filters']['current']['field'] = 'current';
-  $handler->display->display_options['filters']['current']['value'] = '1';
-  $handler->display->display_options['filters']['current']['group'] = 1;
   /* Filter criterion: Content: Organization type (field_csu_org_type) */
   $handler->display->display_options['filters']['field_csu_org_type_tid']['id'] = 'field_csu_org_type_tid';
   $handler->display->display_options['filters']['field_csu_org_type_tid']['table'] = 'field_data_field_csu_org_type';
@@ -847,7 +388,7 @@ Location',
   $handler->display->display_options['filters']['field_csu_facility_tid']['expose']['multiple'] = TRUE;
   $handler->display->display_options['filters']['field_csu_facility_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_csu_facility_tid']['vocabulary'] = 'issues_addressed';
-  /* Filter criterion: Field: Program (field_site_restrict) */
+  /* Filter criterion: Field: Program(s) (field_site_restrict) */
   $handler->display->display_options['filters']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
   $handler->display->display_options['filters']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['filters']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';
@@ -988,13 +529,13 @@ Location',
     t('‹ previous'),
     t('next ›'),
     t('last »'),
-    t('<a class="btn btn-success" href="../node/add/site"><i class="icon-plus icon-white"></i> Add new site</a> <a class="btn" href="../site-list">View public list</a>'),
     t('Title'),
     t('Programs'),
     t('Active'),
     t('Approval Status'),
     t('Updated date'),
     t('Edit'),
+    t('Nid'),
     t('All'),
     t('Site name'),
     t('Organization type'),
@@ -1137,7 +678,7 @@ Location',
   $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
   $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
   $handler->display->display_options['fields']['field_last_name']['relationship'] = 'field_user_uid';
-  /* Field: Content: Course */
+  /* Field: Field: Course */
   $handler->display->display_options['fields']['field_course']['id'] = 'field_course';
   $handler->display->display_options['fields']['field_course']['table'] = 'field_data_field_course';
   $handler->display->display_options['fields']['field_course']['field'] = 'field_course';
@@ -1225,7 +766,7 @@ Location',
   $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
   $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
   $handler->display->display_options['fields']['field_last_name']['relationship'] = 'field_user_uid';
-  /* Field: Content: Course */
+  /* Field: Field: Course */
   $handler->display->display_options['fields']['field_course']['id'] = 'field_course';
   $handler->display->display_options['fields']['field_course']['table'] = 'field_data_field_course';
   $handler->display->display_options['fields']['field_course']['field'] = 'field_course';
@@ -1389,6 +930,7 @@ Location',
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['query_comment'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Search';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '15';
   $handler->display->display_options['pager']['options']['offset'] = '0';
@@ -1404,7 +946,7 @@ Location',
   $handler->display->display_options['fields']['title']['element_type'] = 'h3';
   $handler->display->display_options['fields']['title']['element_class'] = 'coordinator-name';
   $handler->display->display_options['fields']['title']['element_default_classes'] = FALSE;
-  /* Field: Field: Program */
+  /* Field: Field: Program(s) */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
@@ -1470,7 +1012,7 @@ Location',
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Field: Field: Program */
+  /* Field: Field: Program(s) */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
@@ -1611,17 +1153,28 @@ Location',
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['label'] = '';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
   /* Field: Field: Last Name */
   $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
   $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
   $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
+  $handler->display->display_options['fields']['field_last_name']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['field_last_name']['alter']['path'] = 'node/[nid]';
   $handler->display->display_options['fields']['field_last_name']['hide_alter_empty'] = FALSE;
   /* Field: Field: First Name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
+  $handler->display->display_options['fields']['field_first_name']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['field_first_name']['alter']['path'] = 'node/[nid]';
   $handler->display->display_options['fields']['field_first_name']['hide_alter_empty'] = FALSE;
-  /* Field: Field: Program */
+  /* Field: Field: Program(s) */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
@@ -1672,29 +1225,15 @@ Location',
   $handler->display->display_options['fields']['field_site_staff_active']['id'] = 'field_site_staff_active';
   $handler->display->display_options['fields']['field_site_staff_active']['table'] = 'field_data_field_site_staff_active';
   $handler->display->display_options['fields']['field_site_staff_active']['field'] = 'field_site_staff_active';
-  /* Field: Content: Edit link */
-  $handler->display->display_options['fields']['edit_node']['id'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['edit_node']['field'] = 'edit_node';
-  $handler->display->display_options['fields']['edit_node']['label'] = 'Edit';
-  $handler->display->display_options['fields']['edit_node']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['edit_node']['hide_alter_empty'] = FALSE;
-  /* Field: Content: Link */
-  $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
-  $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
-  $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
-  $handler->display->display_options['fields']['view_node']['label'] = '';
-  $handler->display->display_options['fields']['view_node']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['view_node']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['view_node']['alter']['text'] = 'view';
-  $handler->display->display_options['fields']['view_node']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['view_node']['hide_alter_empty'] = FALSE;
   /* Field: Global: Custom text */
-  $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
-  $handler->display->display_options['fields']['nothing']['table'] = 'views';
-  $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
-  $handler->display->display_options['fields']['nothing']['label'] = 'Options';
-  $handler->display->display_options['fields']['nothing']['alter']['text'] = '[view_node] | [edit_node]';
+  $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
+  $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing_1']['label'] = 'Edit';
+  $handler->display->display_options['fields']['nothing_1']['alter']['text'] = 'edit';
+  $handler->display->display_options['fields']['nothing_1']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['nothing_1']['alter']['path'] = 'node/[nid]/edit';
+  $handler->display->display_options['fields']['nothing_1']['alter']['link_class'] = 'btn btn-small btn-info';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Type */
@@ -1737,7 +1276,7 @@ Location',
   $handler->display->display_options['filters']['field_last_name_value']['expose']['label'] = 'Last name';
   $handler->display->display_options['filters']['field_last_name_value']['expose']['operator'] = 'field_last_name_value_op';
   $handler->display->display_options['filters']['field_last_name_value']['expose']['identifier'] = 'field_last_name_value';
-  /* Filter criterion: Field: Program (field_site_restrict) */
+  /* Filter criterion: Field: Program(s) (field_site_restrict) */
   $handler->display->display_options['filters']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
   $handler->display->display_options['filters']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['filters']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';
@@ -1758,7 +1297,6 @@ Location',
   /* Display: Block: Active site staff */
   $handler = $view->new_display('block', 'Block: Active site staff', 'block_1');
   $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['title'] = 'Active Site Staff';
   $handler->display->display_options['defaults']['access'] = FALSE;
   $handler->display->display_options['access']['type'] = 'role';
   $handler->display->display_options['access']['role'] = array(
@@ -1775,7 +1313,7 @@ Location',
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
   $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['label'] = 'First name';
-  /* Field: Field: Program */
+  /* Field: Field: Program(s) */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
@@ -1858,7 +1396,7 @@ Location',
     t('Master'),
     t('Site Staff'),
     t('more'),
-    t('Apply'),
+    t('Search'),
     t('Reset'),
     t('Sort by'),
     t('Asc'),
@@ -1871,7 +1409,7 @@ Location',
     t('next ›'),
     t('last »'),
     t('Name'),
-    t('Program'),
+    t('Program(s)'),
     t('Phone'),
     t('All'),
     t('%1'),
@@ -1889,13 +1427,11 @@ Location',
     t('Register?'),
     t('Active'),
     t('Edit'),
-    t('view'),
-    t('Options'),
-    t('[view_node] | [edit_node]'),
+    t('edit'),
     t('First name'),
     t('Last name'),
+    t('Program'),
     t('Block: Active site staff'),
-    t('Active Site Staff'),
     t('Email address'),
   );
   $export['site_coordinators'] = $view;
@@ -2397,7 +1933,7 @@ Location',
   $handler->display->display_options['empty']['area']['field'] = 'area';
   $handler->display->display_options['empty']['area']['content'] = '<p class="lead">No students signed up for this term.</p>';
   $handler->display->display_options['empty']['area']['format'] = 'full_html';
-  /* Relationship: Content: Course (field_course) */
+  /* Relationship: Field: Course (field_course) */
   $handler->display->display_options['relationships']['field_course_nid']['id'] = 'field_course_nid';
   $handler->display->display_options['relationships']['field_course_nid']['table'] = 'field_data_field_course';
   $handler->display->display_options['relationships']['field_course_nid']['field'] = 'field_course_nid';
@@ -2422,7 +1958,7 @@ Location',
   $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
   $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
   $handler->display->display_options['fields']['field_last_name']['relationship'] = 'field_user_uid';
-  /* Field: Content: Course */
+  /* Field: Field: Course */
   $handler->display->display_options['fields']['field_course']['id'] = 'field_course';
   $handler->display->display_options['fields']['field_course']['table'] = 'field_data_field_course';
   $handler->display->display_options['fields']['field_course']['field'] = 'field_course';
@@ -2574,53 +2110,18 @@ Location',
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['query']['options']['distinct'] = TRUE;
   $handler->display->display_options['query']['options']['pure_distinct'] = TRUE;
-  $handler->display->display_options['exposed_form']['type'] = 'views_exposed_groups';
+  $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Search';
-  $handler->display->display_options['exposed_form']['options']['views_exposed_groups'] = array(
-    'format_groups' => 'fieldsets_collapsed',
-    'groups' => 'Advanced search',
-    'group-title' => array(
-      'group' => 'no-group',
-      'filter_name' => 'title',
-      'weight' => '-4',
-    ),
-    'group-city' => array(
-      'group' => 'no-group',
-      'filter_name' => 'city',
-      'weight' => '-3',
-    ),
-    'group-issues' => array(
-      'group' => '0',
-      'filter_name' => 'field_csu_facility_tid',
-      'weight' => '-7',
-    ),
-    'group-organization' => array(
-      'group' => '0',
-      'filter_name' => 'field_csu_org_type_tid',
-      'weight' => '-6',
-    ),
-    'group-program' => array(
-      'group' => '0',
-      'filter_name' => 'field_site_restrict_tid',
-      'weight' => '-5',
-    ),
-  );
+  $handler->display->display_options['exposed_form']['options']['expose_sort_order'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '20';
   $handler->display->display_options['pager']['options']['offset'] = '0';
   $handler->display->display_options['pager']['options']['id'] = '0';
-  $handler->display->display_options['style_plugin'] = 'list';
-  $handler->display->display_options['style_options']['wrapper_class'] = 'site-listing';
+  $handler->display->display_options['style_plugin'] = 'default';
+  $handler->display->display_options['style_options']['default_row_class'] = FALSE;
+  $handler->display->display_options['style_options']['row_class_special'] = FALSE;
   $handler->display->display_options['row_plugin'] = 'fields';
   $handler->display->display_options['exposed_block'] = TRUE;
-  /* Field: Signup: Site location links */
-  $handler->display->display_options['fields']['site_location_links']['id'] = 'site_location_links';
-  $handler->display->display_options['fields']['site_location_links']['table'] = 's4_signup';
-  $handler->display->display_options['fields']['site_location_links']['field'] = 'site_location_links';
-  $handler->display->display_options['fields']['site_location_links']['label'] = '';
-  $handler->display->display_options['fields']['site_location_links']['element_class'] = 'pull-right';
-  $handler->display->display_options['fields']['site_location_links']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['site_location_links']['hide_alter_empty'] = FALSE;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
@@ -2631,7 +2132,7 @@ Location',
   $handler->display->display_options['fields']['title']['element_type'] = 'h4';
   $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title']['element_default_classes'] = FALSE;
-  /* Field: Field: Program */
+  /* Field: Field: Program(s) */
   $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
   $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
@@ -2641,6 +2142,60 @@ Location',
   $handler->display->display_options['fields']['field_site_restrict']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['field_site_restrict']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_site_restrict']['delta_offset'] = '0';
+  /* Field: Content: Issues addressed */
+  $handler->display->display_options['fields']['field_csu_facility']['id'] = 'field_csu_facility';
+  $handler->display->display_options['fields']['field_csu_facility']['table'] = 'field_data_field_csu_facility';
+  $handler->display->display_options['fields']['field_csu_facility']['field'] = 'field_csu_facility';
+  $handler->display->display_options['fields']['field_csu_facility']['type'] = 's4_sites_limited_taxonomy_term';
+  $handler->display->display_options['fields']['field_csu_facility']['delta_offset'] = '0';
+  /* Field: Content: Organization type */
+  $handler->display->display_options['fields']['field_csu_org_type']['id'] = 'field_csu_org_type';
+  $handler->display->display_options['fields']['field_csu_org_type']['table'] = 'field_data_field_csu_org_type';
+  $handler->display->display_options['fields']['field_csu_org_type']['field'] = 'field_csu_org_type';
+  $handler->display->display_options['fields']['field_csu_org_type']['type'] = 's4_sites_limited_taxonomy_term';
+  $handler->display->display_options['fields']['field_csu_org_type']['delta_offset'] = '0';
+  /* Field: Location: Latitude */
+  $handler->display->display_options['fields']['latitude']['id'] = 'latitude';
+  $handler->display->display_options['fields']['latitude']['table'] = 'location';
+  $handler->display->display_options['fields']['latitude']['field'] = 'latitude';
+  $handler->display->display_options['fields']['latitude']['style'] = 'dd';
+  /* Field: Location: Longitude */
+  $handler->display->display_options['fields']['longitude']['id'] = 'longitude';
+  $handler->display->display_options['fields']['longitude']['table'] = 'location';
+  $handler->display->display_options['fields']['longitude']['field'] = 'longitude';
+  $handler->display->display_options['fields']['longitude']['style'] = 'dd';
+  /* Field: Content: Body */
+  $handler->display->display_options['fields']['body']['id'] = 'body';
+  $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
+  $handler->display->display_options['fields']['body']['field'] = 'body';
+  $handler->display->display_options['fields']['body']['type'] = 'text_trimmed';
+  $handler->display->display_options['fields']['body']['settings'] = array(
+    'trim_length' => '200',
+  );
+  /* Field: Content: Location(s) */
+  $handler->display->display_options['fields']['field_location']['id'] = 'field_location';
+  $handler->display->display_options['fields']['field_location']['table'] = 'field_data_field_location';
+  $handler->display->display_options['fields']['field_location']['field'] = 'field_location';
+  $handler->display->display_options['fields']['field_location']['element_type'] = '0';
+  $handler->display->display_options['fields']['field_location']['element_label_type'] = '0';
+  $handler->display->display_options['fields']['field_location']['element_default_classes'] = FALSE;
+  $handler->display->display_options['fields']['field_location']['type'] = 's4_sites_address';
+  $handler->display->display_options['fields']['field_location']['delta_offset'] = '0';
+  /* Field: Content: Phone number */
+  $handler->display->display_options['fields']['field_phone']['id'] = 'field_phone';
+  $handler->display->display_options['fields']['field_phone']['table'] = 'field_data_field_phone';
+  $handler->display->display_options['fields']['field_phone']['field'] = 'field_phone';
+  $handler->display->display_options['fields']['field_phone']['click_sort_column'] = 'number';
+  $handler->display->display_options['fields']['field_phone']['type'] = 's4_sites_local_phone_number';
+  $handler->display->display_options['fields']['field_phone']['delta_offset'] = '0';
+  /* Field: Content: Website */
+  $handler->display->display_options['fields']['field_website']['id'] = 'field_website';
+  $handler->display->display_options['fields']['field_website']['table'] = 'field_data_field_website';
+  $handler->display->display_options['fields']['field_website']['field'] = 'field_website';
+  $handler->display->display_options['fields']['field_website']['label'] = '';
+  $handler->display->display_options['fields']['field_website']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_website']['click_sort_column'] = 'url';
+  $handler->display->display_options['fields']['field_website']['type'] = 'link_plain';
   /* Sort criterion: Content: Title */
   $handler->display->display_options['sorts']['title']['id'] = 'title';
   $handler->display->display_options['sorts']['title']['table'] = 'node';
@@ -2669,6 +2224,32 @@ Location',
     'site' => 'site',
   );
   $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Field: Program(s) (field_site_restrict) */
+  $handler->display->display_options['filters']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['group'] = 1;
+  $handler->display->display_options['filters']['field_site_restrict_tid']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['operator_id'] = 'field_site_restrict_tid_op';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['label'] = 'Program';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['operator'] = 'field_site_restrict_tid_op';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['identifier'] = 'program';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['remember'] = TRUE;
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    4 => 0,
+    6 => 0,
+    3 => 0,
+    5 => 0,
+    7 => 0,
+    8 => 0,
+    9 => 0,
+  );
+  $handler->display->display_options['filters']['field_site_restrict_tid']['reduce_duplicates'] = TRUE;
+  $handler->display->display_options['filters']['field_site_restrict_tid']['type'] = 'select';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['vocabulary'] = 'site_restrictions';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['error_message'] = FALSE;
   /* Filter criterion: Content: Title */
   $handler->display->display_options['filters']['title']['id'] = 'title';
   $handler->display->display_options['filters']['title']['table'] = 'node';
@@ -2721,26 +2302,12 @@ Location',
   $handler->display->display_options['filters']['field_csu_org_type_tid']['reduce_duplicates'] = TRUE;
   $handler->display->display_options['filters']['field_csu_org_type_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_csu_org_type_tid']['vocabulary'] = 'organization_type';
-  /* Filter criterion: Field: Program (field_site_restrict) */
-  $handler->display->display_options['filters']['field_site_restrict_tid']['id'] = 'field_site_restrict_tid';
-  $handler->display->display_options['filters']['field_site_restrict_tid']['table'] = 'field_data_field_site_restrict';
-  $handler->display->display_options['filters']['field_site_restrict_tid']['field'] = 'field_site_restrict_tid';
-  $handler->display->display_options['filters']['field_site_restrict_tid']['group'] = 1;
-  $handler->display->display_options['filters']['field_site_restrict_tid']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['operator_id'] = 'field_site_restrict_tid_op';
-  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['label'] = 'Available programs';
-  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['operator'] = 'field_site_restrict_tid_op';
-  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['identifier'] = 'program';
-  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['remember'] = TRUE;
-  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['multiple'] = TRUE;
-  $handler->display->display_options['filters']['field_site_restrict_tid']['reduce_duplicates'] = TRUE;
-  $handler->display->display_options['filters']['field_site_restrict_tid']['type'] = 'select';
-  $handler->display->display_options['filters']['field_site_restrict_tid']['vocabulary'] = 'site_restrictions';
-  $handler->display->display_options['filters']['field_site_restrict_tid']['error_message'] = FALSE;
 
   /* Display: Site listing page */
   $handler = $view->new_display('page', 'Site listing page', 'page');
-  $handler->display->display_options['exposed_block'] = TRUE;
+  $handler->display->display_options['defaults']['css_class'] = FALSE;
+  $handler->display->display_options['css_class'] = 'search-results';
+  $handler->display->display_options['defaults']['header'] = FALSE;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Content: Nid */
@@ -2841,12 +2408,17 @@ Location',
     t('next ›'),
     t('last »'),
     t('Programs'),
-    t('All'),
-    t('Site name'),
-    t('City'),
     t('Issues addressed'),
     t('Organization type'),
-    t('Available programs'),
+    t('Latitude'),
+    t('Longitude'),
+    t('Body'),
+    t('Location(s)'),
+    t('Phone number'),
+    t('All'),
+    t('Program'),
+    t('Site name'),
+    t('City'),
     t('Site listing page'),
     t('Block'),
     t('Newest Sites'),

@@ -24,38 +24,6 @@ function s4_core_signup_evaluation($node) {
 }
 
 /**
-*  Menu callback to handle when a user has added a site to
-*  a course.
-*/
-function s4_core_add_site_to_course($op = 'add', $course, $site) {
-  $course = node_load($course);
-  $site = node_load($site);
-  if (!$sites = field_get_items('node', $course, 'field_sites')) {
-    $sites = array();
-  }
-  if ($op == 'add') {
-    $sites[] = array('nid' => $site->nid);
-    $message = t('Site added');
-  }
-  if ($op == 'remove') {
-    foreach ($sites as $key => $course_site) {
-      if ($course_site['nid'] == $site->nid) {
-        unset($sites[$key]);
-      }
-    }
-    $message = t('Site removed');
-  }
-  $course->field_sites[$course->language] = $sites;
-  node_save($course);
-  if ($_GET['js']) {
-    print json_encode(array('success' => 1, 'action' => $op, 'message' => $message));
-    die();
-  }
-  drupal_goto('node/' . $site->nid);
-  return '';
-}
-
-/**
 *  Menu callback to handle signup actions by users
 *  This should handle all links which add additional data
 *  to the current user's signup record
@@ -72,7 +40,7 @@ function s4_core_signup($type, $nid) {
       $instructions = field_get_items('node', $site, 'field_site_instructions_required', $node->language);
       $instruction_text = field_get_items('node', $site, 'field_site_instructions');
       $locations = field_get_items('node', $site, 'field_location');
-      $form_terms = s4_core_site_has_downloadable_forms($site);
+      $form_terms = s4_core_site_has_downloadable_forms($site, TRUE);
       $program_forms = s4_core_program_has_downloadable_forms($_SESSION['s4_signup_program']);
       if ($_GET['agreed']) {
         $_SESSION['s4_signup_agreed'] = TRUE;
@@ -151,7 +119,7 @@ function s4_core_signup($type, $nid) {
     if(isset($_SESSION['s4_signup_program'])) {
       $site_programs = field_get_items('node', $site, 'field_site_restrict');
       foreach($site_programs as $program) {
-        if(isset($_SESSION['s4_signup_program'][$program['tid']]) && $_SESSION['s4_signup_program'][$program['tid']]) {
+        if($_SESSION['s4_signup_program'] == $program['tid'] || (isset($_SESSION['s4_signup_program'][$program['tid']]) && $_SESSION['s4_signup_program'][$program['tid']])) {
           $term = taxonomy_term_load($program['tid']);
           $form = field_get_items('taxonomy_term', $term, 'field_site_form');
           if($form && count($form)) {
@@ -263,6 +231,14 @@ function s4_core_create_signup_form($form, &$form_state, $uid, $option = 'new', 
       '#title' => 'Course',
       '#options' => $courses,
       '#attributes' => array('class' => array('chosen')),
+      '#ajax' => array(
+        'callback' => 's4_core_site_options_courses',
+        'wrapper' => 'site-list',
+        'progress' => array(
+          'type' => 'throbber',
+          'message' => t('Changing sites'),
+        ),
+      ),
     );
 
     foreach ($course_list as $course) {
@@ -293,15 +269,20 @@ function s4_core_create_signup_form($form, &$form_state, $uid, $option = 'new', 
        ->fields('n', array('nid', 'title'))
        ->condition('type', 'site')
        ->orderBy('title', 'ASC');
+  if($form_state['values']['course'] || $form['course']['#default_value']) {
+    $nid = ($form_state['values']['course']) ? $form_state['values']['course'] : $form['course']['#default_value'];
+    $course = node_load($nid);
+    $default_program = field_get_items('node', $course, 'field_site_restrict');
+  }
   if($default_program && count($default_program)) {
   	$programs = array();
-  	foreach($default_program as $program) {
-  		$programs[] = $program['tid'];
+    	foreach($default_program as $program) {
+    		$programs[] = $program['tid'];
+    	}
+  	if(count($programs)) {
+  	  $query->leftJoin('field_data_field_site_restrict', 'r', 'r.entity_id = n.nid AND r.entity_type = :node', array(':node' => 'node'));
+  	  $query->condition('r.field_site_restrict_tid', $programs, 'IN');
   	}
-	if(count($programs)) {
-	  $query->leftJoin('field_data_field_site_restrict', 'r', 'r.entity_id = n.nid AND r.entity_type = :node', array(':node' => 'node'));
-	  $query->condition('r.field_site_restrict_tid', $programs, 'IN');
-	}
   }
   
   $results = $query->execute();
@@ -315,6 +296,8 @@ function s4_core_create_signup_form($form, &$form_state, $uid, $option = 'new', 
     '#attributes' => array('class' => array('chosen')),
     '#required' => TRUE,
     '#empty_option' => t('-- Select a site --'),
+    '#prefix' => '<div id="site-list">',
+    '#suffix' => '</div>',
     '#ajax' => array(
       'callback' => 's4_core_site_options_choice',
       'wrapper' => 'site-options',
@@ -440,6 +423,11 @@ function s4_core_create_signup_form($form, &$form_state, $uid, $option = 'new', 
     '#type' => 'submit',
     '#value' => ($existing_node) ? t('Update placement') : t('Create placement'),
   );
+
+  $form['modal'] = array(
+    '#type' => 'value', 
+    '#value' => ((isset($_GET['modal']) && $_GET['modal']) || $form_state['values']['modal']),
+  );
   
   $form['actions']['cancel'] = array(
     '#type' => 'markup',
@@ -472,6 +460,9 @@ function s4_core_create_signup_form_submit($form, $form_state) {
     }
     $node->revision = TRUE;
     node_save($node);
+    if($form_state['values']['modal']) {
+      s4_core_modal_close(true);
+    }
     drupal_goto(($form_state['values']['destination']) ? $form_state['values']['destination'] : 'node/'. $node->nid);
     return;
   }
@@ -493,8 +484,9 @@ function s4_core_create_signup_form_submit($form, $form_state) {
   drupal_set_message(t('Created !signup record', array('!signup' => l(t('signup #@number', array('@number' => $signup->nid)), 'node/' . $signup->nid))));
   $site = node_load($form_state['values']['site']);
   $form = field_get_items('node', $site, 'field_site_form');
-  if(module_exists('overlay')) {
-    overlay_close_dialog();
+
+  if($form_state['values']['modal']) {
+    s4_core_modal_close(true);
   }
   else {
     drupal_goto($form_state['values']['destination']);

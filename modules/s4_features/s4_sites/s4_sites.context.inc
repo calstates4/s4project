@@ -68,28 +68,21 @@ function s4_sites_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
-        's4_core-s4_page_notifications' => array(
-          'module' => 's4_core',
-          'delta' => 's4_page_notifications',
+        's4_sites-s4_sites_merge_link' => array(
+          'module' => 's4_sites',
+          'delta' => 's4_sites_merge_link',
           'region' => 'content_subscriptions',
-          'weight' => '0',
+          'weight' => '1',
         ),
-        'views-user_courses-block_1' => array(
-          'module' => 'views',
-          'delta' => 'user_courses-block_1',
-          'region' => 'content_top_right',
-          'weight' => '-10',
-        ),
-        'workbench-block' => array(
-          'module' => 'workbench',
-          'delta' => 'block',
-          'region' => 'content',
-          'weight' => '-10',
+        's4_mail-s4_mail_subscribe' => array(
+          'module' => 's4_mail',
+          'delta' => 's4_mail_subscribe',
+          'region' => 'content_subscriptions',
+          'weight' => '2',
         ),
       ),
     ),
-    'breadcrumb' => 'site-list',
-    'menu' => 'site-list',
+    'menu' => 'site',
   );
   $context->condition_mode = 1;
 
@@ -116,7 +109,7 @@ function s4_sites_context_default_contexts() {
     ),
   );
   $context->reactions = array(
-    'menu' => 'site-list',
+    'menu' => 'site',
   );
   $context->condition_mode = 0;
 
@@ -165,57 +158,6 @@ function s4_sites_context_default_contexts() {
   $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
-  $context->name = 'site-forms';
-  $context->description = 'User is on the site forms page';
-  $context->tag = 'sites';
-  $context->conditions = array(
-    'path' => array(
-      'values' => array(
-        'node/*/forms' => 'node/*/forms',
-      ),
-    ),
-    'user' => array(
-      'values' => array(
-        'administrator' => 'administrator',
-        'staff' => 'staff',
-      ),
-    ),
-  );
-  $context->reactions = array(
-    'block' => array(
-      'blocks' => array(
-        's4_core-s4_subscribe_file_expiration' => array(
-          'module' => 's4_core',
-          'delta' => 's4_subscribe_file_expiration',
-          'region' => 'content_right',
-          'weight' => '-10',
-        ),
-        's4_pages-add_site_file' => array(
-          'module' => 's4_pages',
-          'delta' => 'add_site_file',
-          'region' => 'content_right',
-          'weight' => '-9',
-        ),
-        's4_sites-s4_sites_site_send_form' => array(
-          'module' => 's4_sites',
-          'delta' => 's4_sites_site_send_form',
-          'region' => 'content_right',
-          'weight' => '-7',
-        ),
-      ),
-    ),
-  );
-  $context->condition_mode = 1;
-
-  // Translatables
-  // Included for use with string extractors like potx.
-  t('User is on the site forms page');
-  t('sites');
-  $export['site-forms'] = $context;
-
-  $context = new stdClass();
-  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
-  $context->api_version = 3;
   $context->name = 'site-list';
   $context->description = 'User is on the site list and search page';
   $context->tag = 'sites';
@@ -232,35 +174,23 @@ function s4_sites_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
-        's4_sites-s4_sites_search_help' => array(
-          'module' => 's4_sites',
-          'delta' => 's4_sites_search_help',
-          'region' => 'content_top_left',
+        's4_core-s4_add_new_site' => array(
+          'module' => 's4_core',
+          'delta' => 's4_add_new_site',
+          'region' => 'content_subscriptions',
           'weight' => '-10',
+        ),
+        's4_courses-s4_courses_add_message' => array(
+          'module' => 's4_courses',
+          'delta' => 's4_courses_add_message',
+          'region' => 'content_subscriptions',
+          'weight' => '-9',
         ),
         's4_core-site_list_course_restriction' => array(
           'module' => 's4_core',
           'delta' => 'site_list_course_restriction',
-          'region' => 'content_top_left',
-          'weight' => '-9',
-        ),
-        's4_core-s4_add_new_site' => array(
-          'module' => 's4_core',
-          'delta' => 's4_add_new_site',
-          'region' => 'content_right',
+          'region' => 'content',
           'weight' => '-10',
-        ),
-        'views--exp-sites-page' => array(
-          'module' => 'views',
-          'delta' => '-exp-sites-page',
-          'region' => 'content_right',
-          'weight' => '-9',
-        ),
-        's4_map-s4_map_site_list_map' => array(
-          'module' => 's4_map',
-          'delta' => 's4_map_site_list_map',
-          'region' => 'content_right',
-          'weight' => '-8',
         ),
       ),
     ),
@@ -309,21 +239,26 @@ function s4_sites_context_default_contexts() {
   $context->description = 'User is on the site list for staff page';
   $context->tag = 'sites';
   $context->conditions = array(
-    'path' => array(
+    'views' => array(
       'values' => array(
-        'site-list/staff' => 'site-list/staff',
-        'site-list/staff*' => 'site-list/staff*',
+        's4_manage_sites:page' => 's4_manage_sites:page',
       ),
     ),
   );
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
+        's4_mail-s4_manage_subscriptions' => array(
+          'module' => 's4_mail',
+          'delta' => 's4_manage_subscriptions',
+          'region' => 'content_subscriptions',
+          'weight' => '-10',
+        ),
         's4_core-s4_add_new_site' => array(
           'module' => 's4_core',
           'delta' => 's4_add_new_site',
-          'region' => 'content_top_left',
-          'weight' => '-10',
+          'region' => 'content_subscriptions',
+          'weight' => '-9',
         ),
       ),
     ),
@@ -372,6 +307,39 @@ function s4_sites_context_default_contexts() {
   t('User is on the site location listing');
   t('sites');
   $export['site-location-list'] = $context;
+
+  $context = new stdClass();
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
+  $context->name = 'site-log';
+  $context->description = 'User is on the log tab of a site.';
+  $context->tag = 'sites';
+  $context->conditions = array(
+    'path' => array(
+      'values' => array(
+        'node/*/site-log' => 'node/*/site-log',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        's4_sites-s4_sites_add_log' => array(
+          'module' => 's4_sites',
+          'delta' => 's4_sites_add_log',
+          'region' => 'content_subscriptions',
+          'weight' => '-10',
+        ),
+      ),
+    ),
+  );
+  $context->condition_mode = 0;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('User is on the log tab of a site.');
+  t('sites');
+  $export['site-log'] = $context;
 
   $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
@@ -433,45 +401,6 @@ function s4_sites_context_default_contexts() {
   $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
-  $context->name = 'site-notes';
-  $context->description = 'User is on the site notes page';
-  $context->tag = 'sites';
-  $context->conditions = array(
-    'path' => array(
-      'values' => array(
-        'node/*/notes' => 'node/*/notes',
-      ),
-    ),
-    'user' => array(
-      'values' => array(
-        'administrator' => 'administrator',
-        'staff' => 'staff',
-      ),
-    ),
-  );
-  $context->reactions = array(
-    'block' => array(
-      'blocks' => array(
-        's4_pages-add_contact_record' => array(
-          'module' => 's4_pages',
-          'delta' => 'add_contact_record',
-          'region' => 'content_right',
-          'weight' => '-10',
-        ),
-      ),
-    ),
-  );
-  $context->condition_mode = 1;
-
-  // Translatables
-  // Included for use with string extractors like potx.
-  t('User is on the site notes page');
-  t('sites');
-  $export['site-notes'] = $context;
-
-  $context = new stdClass();
-  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
-  $context->api_version = 3;
   $context->name = 'site-staff';
   $context->description = 'User is on the site staff page';
   $context->tag = 'sites';
@@ -494,8 +423,8 @@ function s4_sites_context_default_contexts() {
         's4_core-s4_add_new_coordinator' => array(
           'module' => 's4_core',
           'delta' => 's4_add_new_coordinator',
-          'region' => 'content',
-          'weight' => '-18',
+          'region' => 'content_subscriptions',
+          'weight' => '-10',
         ),
       ),
     ),
