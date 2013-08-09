@@ -294,8 +294,8 @@ function s4_opportunity_delete_form($form, &$form_state, $s4_opportunity) {
   $type = s4_opportunity_type_load($s4_opportunity->type);
 
   $form = confirm_form($form,
-    t('Are you sure you want to delete %type %name?', array('%type' => $type->label, 
-      '%name' => $s4_opportunity->name)),
+    t('Are you sure you want to delete @type @name?', array('@type' => $type->label, 
+      '@name' => $s4_opportunity->name)),
     'admin/content/opportunities/s4_opportunity',
     '<p>' . t('This action cannot be undone.') . '</p>',
     t('Delete'),
