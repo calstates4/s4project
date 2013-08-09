@@ -980,7 +980,6 @@ function s4_sites_field_formatter_view($entity_type, $entity, $field, $instance,
     $element[0] = array(
       '#markup' => theme('item_list', array('items' => $list_items, 'attributes' => array('class' => array('nav', 'nav-stacked', 'nav-details')))),
     );
-    dpm($element);
   }
   return $element;
 }
@@ -1111,10 +1110,7 @@ function _s4_sites_format_hours_matrix($entity_type, $entity, $field, $instance,
   }
 
   //transpose the $items array into a [$row][$col] = value arangement
-  if(!is_array($raw_items)) {
-  	return;
-  }
-  foreach ($raw_items as $delta => $item) {
+  foreach ($items as $delta => $item) {
     $items[$item['row']][$item['col']][] = matrix_cell_value($item, $field);
   }
 
@@ -1159,7 +1155,6 @@ function _s4_sites_format_hours_matrix($entity_type, $entity, $field, $instance,
       $rows[$row][$col] = $value;
     }
   }
-  
   //collapse any multi-valued results into a list
   foreach ($rows as $row_id => $row) {
     foreach ($row as $col_id => $values) {
