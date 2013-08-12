@@ -790,14 +790,17 @@ function s4_sites_form_site_node_form_alter(&$form, $form_state) {
   	$form['actions']['publish_now']['#weight'] = 1;
     $form['actions']['submit']['#weight'] = 2;
     $form['actions']['unpublish']['#weight'] = 3;
-    $form['actions']['delete']['#weight'] = 4;
+    $form['actions']['delete']['#weight'] = 5;
+
     $form['actions_bottom'] = $form['actions'];
 		$form['actions_bottom']['#weight'] = 40;
-    foreach(array('submit', 'unpublish', 'delete', 'preview') as $type) {
-      $form['actions']['publish_now']['#drop_down'][$type] = $form['actions'][$type];
-      $form['actions']['publish_now']['#drop_down'][$type]['#prefix'] = '<li>';
-      $form['actions']['publish_now']['#drop_down'][$type]['#suffix'] = '</li>';
-      unset($form['actions'][$type]);
+    foreach(array('submit', 'unpublish', 'delete', 'preview', 'preview_changes') as $type) {
+      if(isset($form['actions'][$type])) {
+        $form['actions']['publish_now']['#drop_down'][$type] = $form['actions'][$type];
+        $form['actions']['publish_now']['#drop_down'][$type]['#prefix'] = '<li>';
+        $form['actions']['publish_now']['#drop_down'][$type]['#suffix'] = '</li>';
+        unset($form['actions'][$type]);
+      }
     }
   }
 }
