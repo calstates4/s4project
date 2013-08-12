@@ -305,10 +305,11 @@ Location',
   $handler->display->display_options['fields']['status']['field'] = 'status';
   $handler->display->display_options['fields']['status']['label'] = 'Active';
   $handler->display->display_options['fields']['status']['not'] = 0;
-  /* Field: Workbench Moderation: State */
+  /* Field: MAX(Workbench Moderation: State) */
   $handler->display->display_options['fields']['state']['id'] = 'state';
   $handler->display->display_options['fields']['state']['table'] = 'workbench_moderation_node_history';
   $handler->display->display_options['fields']['state']['field'] = 'state';
+  $handler->display->display_options['fields']['state']['group_type'] = 'max';
   $handler->display->display_options['fields']['state']['label'] = 'Approval Status';
   $handler->display->display_options['fields']['state']['machine_name'] = 0;
   /* Field: Content: Updated date */
