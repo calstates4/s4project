@@ -789,7 +789,7 @@ Site',
   $handler->display->display_options['empty']['area']['table'] = 'views';
   $handler->display->display_options['empty']['area']['field'] = 'area';
   $handler->display->display_options['empty']['area']['empty'] = TRUE;
-  $handler->display->display_options['empty']['area']['content'] = '<p class="lead">Didn\'t find the site you were looking for? <a href="../../opportunities/create/site/new">Create a new site</a>.';
+  $handler->display->display_options['empty']['area']['content'] = '<p class="lead">Didn\'t find the site you were looking for? <a href="../../sites/propose">Create a new site</a>.';
   $handler->display->display_options['empty']['area']['format'] = 'full_html';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
@@ -1133,7 +1133,7 @@ Site',
     t('next ›'),
     t('last »'),
     t('<p class="lead">Save yourself some time, and browse the list of existing sites. Don\'t see what you\'re looking for? You can <a href="../../sites/propose">create a new site</a>.'),
-    t('<p class="lead">Didn\'t find the site you were looking for? <a href="../../opportunities/create/site/new">Create a new site</a>.'),
+    t('<p class="lead">Didn\'t find the site you were looking for? <a href="../../sites/propose">Create a new site</a>.'),
     t('Site name'),
     t('Address'),
     t('Active'),
