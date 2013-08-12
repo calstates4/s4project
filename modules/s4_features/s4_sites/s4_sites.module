@@ -1526,7 +1526,7 @@ function s4_sites_form_views_exposed_form_alter(&$form, $form_state) {
 
 function s4_sites_s4_frontpage_blocks() {
   return array('courses' => array('subject' => t('Browse the list of sites'),
-                                    'content' => t('Some text about managing your courses that is really exciting.'),
+                                    'content' => t('View all available sites for your program.'),
                                     'href' => 'site-list'),
     );
 }
