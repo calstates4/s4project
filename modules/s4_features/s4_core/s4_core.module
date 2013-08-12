@@ -873,17 +873,18 @@ function s4_core_node_delete($node) {
     $site = field_get_items('node', $node, 'field_site');
     if($site[0]['nid']) {
       $site = node_load($site[0]['nid']);
+      if($site) {
+        $site_form = field_get_items('node', $site, 'field_site_form');
+        if ($site_form[0]['nid'] && $signup_sid[0]['value']) {
+          $site_form = node_load($site_form[0]['nid']);
+          webform_submission_delete($site_node, $signup_sid[0]['value']);
+        }
 
-      $site_form = field_get_items('node', $site, 'field_site_form');
-      if ($site_form[0]['nid'] && $signup_sid[0]['value']) {
-        $site_form = node_load($site_form[0]['nid']);
-        webform_submission_delete($site_node, $signup_sid[0]['value']);
-      }
-
-      $eval_form = field_get_items('node', $site, 'field_site_eval_form');
-      if ($eval_form[0]['nid'] && $eval_sid[0]['value']) {
-        $eval_form = node_load($eval_form[0]['nid']);
-        webform_submission_delete($eval_form, $eval_sid[0]['value']);
+        $eval_form = field_get_items('node', $site, 'field_site_eval_form');
+        if ($eval_form[0]['nid'] && $eval_sid[0]['value']) {
+          $eval_form = node_load($eval_form[0]['nid']);
+          webform_submission_delete($eval_form, $eval_sid[0]['value']);
+        }
       }
     }
   }
