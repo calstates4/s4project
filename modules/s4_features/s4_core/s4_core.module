@@ -873,17 +873,18 @@ function s4_core_node_delete($node) {
     $site = field_get_items('node', $node, 'field_site');
     if($site[0]['nid']) {
       $site = node_load($site[0]['nid']);
+      if($site) {
+        $site_form = field_get_items('node', $site, 'field_site_form');
+        if ($site_form[0]['nid'] && $signup_sid[0]['value']) {
+          $site_form = node_load($site_form[0]['nid']);
+          webform_submission_delete($site_node, $signup_sid[0]['value']);
+        }
 
-      $site_form = field_get_items('node', $site, 'field_site_form');
-      if ($site_form[0]['nid'] && $signup_sid[0]['value']) {
-        $site_form = node_load($site_form[0]['nid']);
-        webform_submission_delete($site_node, $signup_sid[0]['value']);
-      }
-
-      $eval_form = field_get_items('node', $site, 'field_site_eval_form');
-      if ($eval_form[0]['nid'] && $eval_sid[0]['value']) {
-        $eval_form = node_load($eval_form[0]['nid']);
-        webform_submission_delete($eval_form, $eval_sid[0]['value']);
+        $eval_form = field_get_items('node', $site, 'field_site_eval_form');
+        if ($eval_form[0]['nid'] && $eval_sid[0]['value']) {
+          $eval_form = node_load($eval_form[0]['nid']);
+          webform_submission_delete($eval_form, $eval_sid[0]['value']);
+        }
       }
     }
   }
@@ -1815,15 +1816,38 @@ function s4_core_s4_frontpage_blocks() {
   if(!s4_core_user_can_signup()) {
     return;
   }
+  global $user;
   $blocks = array();
   $courses = views_get_view_result('user_courses', 'block_2', $user->uid);
+  
   if($courses) {
-    $blocks['user_courses'] = array(
-        'subject' => t('Make a placement in a course'),
-        'content' => '<p class="lead">'. t('You have courses that still require placements.') .'</p>' .
-          views_embed_view('user_courses', 'block_2', $user->uid),
-        'alert' => TRUE,
-      );
+
+    $signups = s4_core_get_user_signups($user->uid);
+    $count = array();
+    $show = (count($signups)) ? false : true;
+    foreach ($signups as $signup) {
+      $course = field_get_items('node', $signup, 'field_course');
+      $course = node_load($course[0]['nid']);
+      if($course) {
+        $count[$course->nid] = ($count[$course->nid]) ? $count[$course->nid] : 0;
+        $max = field_get_items('node', $course, 'field_max_placements');
+        $max = ($max[0]['value'] || $max[0]['value'] == 0)
+               ? $max[0]['value']
+               : 1;
+        $count[$course->nid]++;
+        if ($course->nid == $values->nid && ($max === 0 || $count[$course->nid] < $max)) {
+          $show = true;       
+        }
+      }
+    }
+    if($show) {
+      $blocks['user_courses'] = array(
+              'subject' => t('Make a placement in a course'),
+              'content' => '<p class="lead">'. t('You have courses that still require placements.') .'</p>' .
+                views_embed_view('user_courses', 'block_2', $user->uid),
+              'alert' => TRUE,
+            );   
+    }
   }
   $programs = views_get_view_result('s4_user_programs', 'block', $user->uid);
   if($programs) {
@@ -1838,7 +1862,7 @@ function s4_core_s4_frontpage_blocks() {
   if($placements) {
     $blocks['placements'] = array(
       'subject' => t('View your placements'),
-      'content' => t('You currently have @count placements.', array('@count' => count($placements))),
+      'content' => format_plural(count($placements), 'You have one placement.', 'You have @count placements.', array('@count' => count($placements))),
       'href' => 'my/placements',
       );
   }

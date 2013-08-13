@@ -175,7 +175,7 @@ function s4_users_field_default_fields() {
       'bundle' => 'user',
       'default_value' => NULL,
       'deleted' => '0',
-      'description' => '',
+      'description' => 'Only useful if you are running reports, this sets the default program(s) for reports and the course and site management pages.',
       'display' => array(
         'default' => array(
           'label' => 'above',
@@ -187,8 +187,9 @@ function s4_users_field_default_fields() {
       ),
       'display_label' => '',
       'entity_type' => 'user',
+      'field_lock' => 0,
       'field_name' => 'field_program_default',
-      'label' => 'Default programs',
+      'label' => 'Default programs for reports',
       'required' => 0,
       'settings' => array(
         'custom_add_another' => '',
@@ -336,9 +337,10 @@ function s4_users_field_default_fields() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Available programs');
-  t('Default programs');
+  t('Default programs for reports');
   t('First Name');
   t('Last Name');
+  t('Only useful if you are running reports, this sets the default program(s) for reports and the course and site management pages.');
   t('SIS ID');
 
   return $fields;

@@ -151,7 +151,7 @@ function s4_sites_merge_sites_finished($success, $results, $operations) {
 
 function s4_sites_site_log($node) {
   $form = drupal_render(drupal_get_form('s4_sites_site_log_search'));
-  $types = $_SESSION['s4_sites_site_log']['type'];
+  $types = (isset($_SESSION['s4_sites_site_log']['type'])) ? $_SESSION['s4_sites_site_log']['type'] : 'any';
   $bundle = ($types && $types != 'any') ? array($types) : array('file', 'contact_record');
   $query = db_select('field_data_field_site', 's')
            ->condition('field_site_nid', $node->nid)
@@ -161,6 +161,7 @@ function s4_sites_site_log($node) {
   $query->addField('s', 'entity_id', 'id');
   $query->addField('s', 'bundle', 'type');
   $query->addField('n', 'created', 'timestamp');
+  
   if(in_array($types, array('versions', 'approval', 'any'))) {
     $workbench_query = db_select('workbench_moderation_node_history', 'h');
     $workbench_query->addField('h', 'hid', 'id');
@@ -176,7 +177,7 @@ function s4_sites_site_log($node) {
   $header = array(t('Date'), t('Type'), t('Name'), t('User'), t('Note'), t('Action'));
   $rows = array();
   foreach($results as $result => $type) {
-    if(in_array($type, array('file', 'contact_record'))) {
+    if(in_array($type, array('file', 'contact_record', 'any'))) {
       $item = node_load($result);
       $type = ($item->type == 'file') ? t('Form') : t('Log entry');
       $note = '';
