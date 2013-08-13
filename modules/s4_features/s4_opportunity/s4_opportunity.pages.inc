@@ -113,6 +113,45 @@ function s4_opportunity_create_start_type($type) {
 	drupal_goto('opportunities/create/sites');
 }
 
+function s4_opportunity_create_site_form() {
+	$create = $_SESSION['s4_opportunity_create'];
+	_s4_opportunity_create_access_check(array('type'));
+	$type = s4_opportunity_type_load($create['type']);
+
+	module_load_include('inc', 'node', 'node.pages');
+	$node = new stdClass();
+	$node->type = 'file';
+
+	$form = node_add('file');
+
+	drupal_set_message(check_markup($type->data['site_form_message']['value'], $type->data['site_form_message']['format']));
+
+	$hidden = array('field_expiration_reminder', 'field_site', 'field_form_sid');
+	foreach($hidden as $hide)  {
+		$form[$hide]['#access'] = FALSE;
+		if(isset($form[$hide][LANGUAGE_NONE][0])) {
+			$form[$hide][LANGUAGE_NONE][0]['#value'] = $form[$hide][LANGUAGE_NONE][0]['#default_value'] = array();
+			$form[$hide][LANGUAGE_NONE][0]['value']['#default_value'] = '';
+		}
+	}
+	$create['new_site'] = TRUE;
+	$_SESSION['s4_opportunity_create'] = $create;
+	return $form;
+}
+
+function s4_opportunity_create_site_form_submit($form, $form_state) {
+	$create = $_SESSION['s4_opportunity_create'];
+	$node = $form['#node'];
+  field_attach_submit('node', $node, $form, $form_state);
+  node_save($node);
+  $node->field_site[LANGUAGE_NONE][0]['nid'] = $create['site'];
+  node_save($node);
+
+  $create['site_form'] = $node->nid;
+	$_SESSION['s4_opportunity_create'] = $create;
+	drupal_goto('opportunities/create/site-staff/new');
+}
+
 function s4_opportunity_create_site_select($site) {
 	$create = $_SESSION['s4_opportunity_create'];
 	_s4_opportunity_create_access_check(array('type'));
@@ -126,7 +165,7 @@ function s4_opportunity_create_site_staff_select($site_staff) {
 	_s4_opportunity_create_access_check(array('type', 'site'));
 	$create['site_staff'] = $site_staff->nid;
 	$_SESSION['s4_opportunity_create'] = $create;
-	drupal_goto('opportunities/create/opportunity');
+	drupal_goto('opportunities/create/opportunity', array('query' => array('field_opportunity_sites' => $create['site'])));
 }
 
 function s4_opportunity_create_new_site_staff_form($form, $form_state) {
@@ -178,7 +217,7 @@ function s4_opportunity_create_new_site_staff_form_submit($form, $form_state) {
 
   $create['site_staff'] = $node->nid;
 	$_SESSION['s4_opportunity_create'] = $create;
-	drupal_goto('opportunities/create/opportunity');
+	drupal_goto('opportunities/create/opportunity', array('query' => array('field_opportunity_sites' => $create['site'])));
 }
 
 function s4_opportunity_create_opportunity_title() {
@@ -279,6 +318,7 @@ function s4_opportunity_create_opportunity_form_submit($form, $form_state) {
 	$opportunity = $form['#opportunity'];
   field_attach_submit('s4_opportunity', $opportunity, $form, $form_state);
   $opportunity->name = check_plain($form_state['values']['name']);
+  $opportunity->field_opportunity_sites[LANGUAGE_NONE][0]['target_id'] = $create['site'];
   $opportunity->save();
   $create['opportunity'] = $opportunity->s4_opportunity_id;
 	$_SESSION['s4_opportunity_create'] = $create;
