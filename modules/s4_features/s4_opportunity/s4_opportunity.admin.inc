@@ -380,7 +380,7 @@ function s4_opportunity_admin_form() {
 
   $form['s4_opportunity_begin_subject'] = array(
     '#type' => 'textfield',
-    '#title' => t('Subject of the create an opportnity block'),
+    '#title' => t('Subject of the create an opportunity block'),
     '#default_value' => variable_get('s4_opportunity_begin_subject', t('Start a new opportunity'))
     );
 

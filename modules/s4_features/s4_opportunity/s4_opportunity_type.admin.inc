@@ -75,6 +75,24 @@ function s4_opportunity_type_form($form, &$form_state, $s4_opportunity_type, $op
     '#options' => $options,
   );
 
+  $form['data']['site_form'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Require attaching a site form when creating new sites'),
+    '#default_value' => !empty($s4_opportunity_type->data['site_form']) ? $s4_opportunity_type->data['site_form'] : 0,
+  );
+
+  $form['data']['site_form_message'] = array(
+    '#type' => 'text_format',
+    '#title' => t('Site form message'),
+    '#description' => t('Message that appears above the create site form step.'),
+    '#format' => (!empty($s4_opportunity_type->data['site_form_message']))
+      ? $s4_opportunity_type->data['site_form_message']['format']
+      : filter_default_format(),
+    '#default_value' => (!empty($s4_opportunity_type->data['site_form_message'])) 
+      ? $s4_opportunity_type->data['site_form_message']['value']
+      : '',
+  );
+
   $online_forms = db_select('node', 'n')
                   ->condition('type', 'webform')
                   ->condition('status', 1)
