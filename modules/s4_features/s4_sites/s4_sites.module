@@ -811,6 +811,13 @@ function s4_sites_form_site_node_form_alter_validate($form, &$form_state) {
   }
 }
 
+function s4_sites_form_workbench_moderation_node_unpublish_form_alter(&$form, $form_state) {
+  $form['#submit'][] = 's4_sites_form_workbench_moderation_node_unpublish_form_alter_submit';
+}
+
+function s4_sites_form_workbench_moderation_node_unpublish_form_alter_submit($form, &$form_state) {
+  $form_state['redirect'] = 'node/'. $form_state['values']['node']->nid;
+}
 
 function s4_sites_form_site_node_form_alter_submit($form, &$form_state) {
   node_form_submit($form, $form_state);
@@ -818,8 +825,8 @@ function s4_sites_form_site_node_form_alter_submit($form, &$form_state) {
     $node = node_load($form_state['nid']);
     workbench_moderation_moderate($node, 'published');
   }
-  if ($form_state['triggering_element']['#value'] == $form['actions']['unpublish']['#value'] && isset($form_state['nid'])) {
-    $node = node_load($form_state['nid']);
+  if ($form_state['triggering_element']['#value'] == t('Make inactive') && isset($form['nid'])) {
+    $node = node_load($form['nid']['#value']);
     workbench_moderation_moderate($node, 'published');
     $node = node_load($node->nid, NULL, TRUE);
     drupal_goto('node/'. $node->nid .'/moderation/'. $node->workbench_moderation['published']->vid .'/unpublish');
