@@ -154,3 +154,8 @@ function s4_sites_install() {
     );
     //node_save($node);
 }
+
+function s4_sites_update_7100(&$sandbox) {
+  drupal_load('module', 'features');
+  features_revert(array('s4_sites' => array('views')));
+}
