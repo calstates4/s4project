@@ -3,8 +3,8 @@
 class views_handler_s4_courses_student_count extends views_handler_field {
 
   function render($values) {
-    $language = $values->_field_data['nid']['entity']->language;
-    return count($values->_field_data['nid']['entity']->field_course_students[$language]);
+  	$node = $values->_field_data['nid_1']['entity'];
+  	return count(field_get_items('node', $node, 'field_course_students'));
   }
   
   function query() {
