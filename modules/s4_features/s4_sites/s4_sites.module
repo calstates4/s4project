@@ -285,7 +285,7 @@ function s4_sites_webform_submission_insert($node, $submission) {
   node_save($form);
   unset($_SESSION['s4_sites_user_form_site']);
   if (node_access('update', $site)) {
-    drupal_goto('node/'. $form->field_site[$form->language][0]['nid'] .'/log');
+    drupal_goto('node/'. $form->field_site[$form->language][0]['nid'] .'/site-log');
   }
   drupal_set_message(t('Thanks for submitting your form!'));
   drupal_goto('<front>');
@@ -533,9 +533,9 @@ function s4_sites_block_view($delta) {
         <i class="icon-plus icon-white"></i> '. t('Add') .'
         <span class="caret"></span>
       </a>';
-      $links = array(l(t("Form"), "node/add/file/". $site->nid, array("query" => array("destination" => "node/". $site->nid ."/log"))),
+      $links = array(l(t("Form"), "node/add/file/". $site->nid, array("query" => array("destination" => "node/". $site->nid ."/site-log"))),
         l(t('Online form'), '', array('absolute' => TRUE, 'fragment' => 'add-form', 'attributes' => array('data-toggle' => 'modal'))),
-        l(t("Log entry"), "node/add/contact-record/". $site->nid, array("query" => array("destination" => "node/". $site->nid ."/log"))),
+        l(t("Log entry"), "node/add/contact-record/". $site->nid, array("query" => array("destination" => "node/". $site->nid ."/site-log"))),
         l(t('Approval'), '', array('absolute' => TRUE, 'fragment' => 'moderate-form', 'attributes' => array('data-toggle' => 'modal'))),
         );
       $output .= theme('item_list', array('items' => $links, 'attributes' => array('class' => array('dropdown-menu'))));
