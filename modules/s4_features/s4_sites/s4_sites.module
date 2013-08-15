@@ -82,7 +82,14 @@ function s4_sites_menu() {
 
 function s4_sites_redirect() {
   if(user_access('moderate site information')) {
-    drupal_goto('site-list/manage');
+    global $user;
+    $user = user_load($user->uid);
+    $default_programs = field_get_items('user', $user, 'field_program_default');
+    $query = array();
+    foreach($default_programs as $program) {
+      $query['programs'][] = $program['tid'];
+    }
+    drupal_goto('site-list/manage', array('query' => $query));
     return;
   }
   drupal_goto('site-list');
