@@ -433,7 +433,40 @@ function s4_courses_menu() {
     'access callback' => 's4_courses_add_sites_access',
     'access arguments' => array(2),
     );
+
+  $items['courses/manage'] = array(
+    'page callback' => 's4_courses_course_manage_redirect',
+    'access arguments' => array('access content'),
+    );
   return $items;
+}
+
+function s4_courses_course_manage_redirect() {
+  global $user;
+  $user = user_load($user->uid);
+  $default_programs = field_get_items('user', $user, 'field_program_default');
+  $query = array();
+  foreach($default_programs as $program) {
+    $query['programs'][] = $program['tid'];
+  }
+  $terms = _s4_courses_get_current_terms();
+  if($cache = cache_get('s4_courses_current_term_nids')) {
+    $query['terms'] = $cache->data;
+  }
+  else {
+    foreach($terms as $term) {
+      $items = array();
+      $term_nid = db_select('field_data_field_term_code', 'c')
+           ->condition('field_term_code_value', $term)
+           ->fields('c', array('entity_id'))
+           ->execute()
+           ->fetchField();
+      $query['terms'][] = $term_nid;
+    }
+    cache_set('s4_courses_current_term_nids', $query['terms'], 'cache', time() + (12 * 60 * 60));
+  }
+  drupal_goto('courses', array('query' => $query));
+  return;
 }
 
 function s4_courses_add_site($course, $site) {

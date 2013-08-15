@@ -187,19 +187,19 @@ Location',
     'group-title' => array(
       'group' => '0',
       'filter_name' => 'title',
-      'weight' => '-12',
+      'weight' => '-11',
     ),
     'group-field_csu_org_type_tid' => array(
       'group' => '0',
       'filter_name' => 'field_csu_org_type_tid',
-      'weight' => '-12',
+      'weight' => '-10',
     ),
     'group-field_csu_facility_tid' => array(
       'group' => '0',
       'filter_name' => 'field_csu_facility_tid',
-      'weight' => '-12',
+      'weight' => '-9',
     ),
-    'group-field_site_restrict_tid' => array(
+    'group-programs' => array(
       'group' => '0',
       'filter_name' => 'field_site_restrict_tid',
       'weight' => '-12',
@@ -207,7 +207,7 @@ Location',
     'group-city' => array(
       'group' => '2',
       'filter_name' => 'city',
-      'weight' => '-13',
+      'weight' => '-12',
     ),
     'group-province' => array(
       'group' => '2',
@@ -399,8 +399,20 @@ Location',
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['operator_id'] = 'field_site_restrict_tid_op';
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['label'] = 'Programs';
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['operator'] = 'field_site_restrict_tid_op';
-  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['identifier'] = 'field_site_restrict_tid';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['identifier'] = 'programs';
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    4 => 0,
+    6 => 0,
+    3 => 0,
+    5 => 0,
+    7 => 0,
+    8 => 0,
+    9 => 0,
+    10 => 0,
+  );
   $handler->display->display_options['filters']['field_site_restrict_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_site_restrict_tid']['vocabulary'] = 'site_restrictions';
   $handler->display->display_options['filters']['field_site_restrict_tid']['error_message'] = FALSE;
