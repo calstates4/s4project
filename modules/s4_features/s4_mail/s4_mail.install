@@ -1,0 +1,6 @@
+<?php
+
+function s4_mail_update_7100(&$sandbox) {
+  drupal_load('module', 'features');
+  features_revert(array('s4_mail' => array('flag')));
+}
