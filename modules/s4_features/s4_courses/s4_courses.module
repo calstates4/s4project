@@ -949,7 +949,7 @@ function s4_courses_s4_frontpage_blocks() {
   global $user;
   if(s4_courses_user_is_faculty($user)) {
     $result =  array('courses' => array('subject' => t('Manage your courses'),
-                                    'content' => t('See a list of your current courses, manage the sites avaialable to your students, and view enrollment.'),
+                                    'content' => t('See a list of your current courses, manage the sites available to your students, and view enrollment.'),
                                     'href' => 'faculty/manage/courses'),
                  'students' => array('subject' => t('Manage your students'),
                                      'content' => t('See where all your current students are placed.'),
