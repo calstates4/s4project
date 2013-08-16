@@ -937,8 +937,14 @@ function s4_sites_field_formatter_view($entity_type, $entity, $field, $instance,
   if ($display['type'] == 's4_sites_local_phone_number') {
     foreach ($items as $delta => $item) {
       $extension = ($item['extension']) ? $item['extension'] : FALSE;
+      $country = (isset($item['country_codes'])) ? $item['country_codes'] : false;
+      if($country) {
+        module_load_include('inc', 'cck_phone', 'cck_phone_countrycodes');
+        $country = cck_phone_countrycodes($item['country_codes']);
+        $country = ($country['code'] != '+1') ? $country['code'] : FALSE;
+      }
       $element[$delta] = array(
-        '#markup' => _s4_sites_format_phone($item['number'], $extension),
+        '#markup' => _s4_sites_format_phone($item['number'], $extension, $country),
       );
     }
   }
@@ -1021,7 +1027,7 @@ function s4_sites_field_formatter_view($entity_type, $entity, $field, $instance,
 /**
 *  Field formatter for phone numbers
 */
-function _s4_sites_format_phone($number, $extension = FALSE) {
+function _s4_sites_format_phone($number, $extension = FALSE, $country = FALSE) {
   $regex = '/^
     ([2-9][0-8]\d)  # area code (Allowed range of [2-9] for the first digit, [0-8] for the second, and [0-9] for the third digit)
     ([2-9]\d{2})    # 3-digit prefix (cannot start with 0 or 1)
@@ -1029,12 +1035,18 @@ function _s4_sites_format_phone($number, $extension = FALSE) {
     /x';
 
   $result = preg_match($regex, $number, $matches);
+  if($country) {
+
+  }
+  else {
+    $country = '';
+  }
+  $extension = ($extension) ? t(' ext. @extension', array('@extension' => $extension)) : '';
 
   if ($result) {
-    $extension = ($extension) ? t(' ext. @extension', array('@extension' => $extension)) : '';
-    return $cc['code'] . ' (' . $matches[1] . ') ' . $matches[2] . '-' . $matches[3] . $extension;
+    return $country . ' (' . $matches[1] . ') ' . $matches[2] . '-' . $matches[3] . $extension;
   }
-  return '';
+  return $country . $number . $extension;
 }
 
 /**
