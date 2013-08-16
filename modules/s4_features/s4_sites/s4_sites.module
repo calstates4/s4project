@@ -716,7 +716,7 @@ function s4_sites_form_field_ui_field_edit_form_alter(&$form, $form_state) {
 function s4_sites_form_site_node_form_alter(&$form, $form_state) {
   drupal_add_js(drupal_get_path('module', 's4_sites') .'/js/s4_site_form.js');
   drupal_add_css(drupal_get_path('module', 's4_sites') .'/css/s4_sites.css');
-  
+
   if (empty($form['#validate'])) {
     $form['#validate'] = array();
   }
@@ -901,6 +901,23 @@ function s4_sites_field_formatter_info() {
         'field types' => array('taxonomy_term_reference'),
       ),
   );
+}
+
+/**
+ * Implements hook_field_widget_form_alter().
+ */
+function s4_sites_field_widget_form_alter(&$element, &$form_state, $context) {
+  if($element['#type'] != 'phone_number') {
+    return;
+  }
+  $element['#process'][] = 's4_sites_field_widget_phone_number_process';
+}
+
+function s4_sites_field_widget_phone_number_process($element, &$form_state, $form) {
+  if(isset($element['extension'])) {
+    $element['extension']['#attributes']['class'] = array('input-mini');
+  }
+  return $element;
 }
 
 /**
