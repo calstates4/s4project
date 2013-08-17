@@ -1402,8 +1402,20 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['operator_id'] = 'field_site_restrict_tid_op';
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['label'] = 'Course programs';
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['operator'] = 'field_site_restrict_tid_op';
-  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['identifier'] = 'field_site_restrict_tid';
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['identifier'] = 'programs';
   $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_site_restrict_tid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    4 => 0,
+    6 => 0,
+    3 => 0,
+    5 => 0,
+    7 => 0,
+    8 => 0,
+    9 => 0,
+    10 => 0,
+  );
   $handler->display->display_options['filters']['field_site_restrict_tid']['reduce_duplicates'] = TRUE;
   $handler->display->display_options['filters']['field_site_restrict_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_site_restrict_tid']['vocabulary'] = 'site_restrictions';
@@ -1441,9 +1453,21 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['filters']['field_term_nid']['expose']['operator_id'] = 'field_term_nid_op';
   $handler->display->display_options['filters']['field_term_nid']['expose']['label'] = 'Term';
   $handler->display->display_options['filters']['field_term_nid']['expose']['operator'] = 'field_term_nid_op';
-  $handler->display->display_options['filters']['field_term_nid']['expose']['identifier'] = 'field_term_nid';
+  $handler->display->display_options['filters']['field_term_nid']['expose']['identifier'] = 'terms';
   $handler->display->display_options['filters']['field_term_nid']['expose']['remember'] = TRUE;
   $handler->display->display_options['filters']['field_term_nid']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_term_nid']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    4 => 0,
+    6 => 0,
+    3 => 0,
+    5 => 0,
+    7 => 0,
+    8 => 0,
+    9 => 0,
+    10 => 0,
+  );
   /* Filter criterion: Content: Course department (field_course_department) */
   $handler->display->display_options['filters']['field_course_department_tid']['id'] = 'field_course_department_tid';
   $handler->display->display_options['filters']['field_course_department_tid']['table'] = 'field_data_field_course_department';
