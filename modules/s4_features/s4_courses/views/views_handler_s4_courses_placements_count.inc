@@ -3,8 +3,11 @@
 class views_handler_s4_courses_placements_count extends views_handler_field {
 
   function render($values) {
-    $language = $values->_field_data['nid']['entity']->language;
-    $enrollment = count($values->_field_data['nid']['entity']->field_course_students[$language]);
+    $node = $values->_field_data['nid_1']['entity'];
+    if(!$node) {
+      $node = node_load($values->nid);
+    }
+    $enrollment = count(field_get_items('node', $node, 'field_course_students'));
     if(!$enrollment) {
       return 0;
     }

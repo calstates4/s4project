@@ -21,7 +21,7 @@ function s4_mail_flag_default_flags() {
     'flag_short' => 'Subscribe to placements',
     'flag_long' => '',
     'flag_message' => '',
-    'unflag_short' => 'Unsubscribe to placements',
+    'unflag_short' => 'Unsubscribe from placements',
     'unflag_long' => '',
     'unflag_message' => '',
     'unflag_denied_text' => '',
@@ -33,7 +33,7 @@ function s4_mail_flag_default_flags() {
       'rss' => 0,
       'search_index' => 0,
       'search_result' => 0,
-      'notifications' => 0,
+      'diff_standard' => 0,
       'print' => 0,
       'token' => 0,
       'revision' => 0,
@@ -107,11 +107,11 @@ function s4_mail_flag_default_flags() {
     'show_on_form' => 0,
     'access_author' => '',
     'show_contextual_link' => 0,
-    'api_version' => 3,
     'module' => 's4_mail',
     'locked' => array(
       0 => 'name',
     ),
+    'api_version' => 3,
   );
   // Exported flag: "Subscribe to site placements".
   $flags['subscription_site_placements'] = array(
@@ -125,7 +125,7 @@ function s4_mail_flag_default_flags() {
     'flag_short' => 'Subscribe to placements',
     'flag_long' => '',
     'flag_message' => '',
-    'unflag_short' => 'Unsubscribe to placements',
+    'unflag_short' => 'Unsubscribe from placements',
     'unflag_long' => '',
     'unflag_message' => '',
     'unflag_denied_text' => '',
@@ -137,7 +137,7 @@ function s4_mail_flag_default_flags() {
       'rss' => 0,
       'search_index' => 0,
       'search_result' => 0,
-      'notifications' => 0,
+      'diff_standard' => 0,
       'print' => 0,
       'token' => 0,
       'revision' => 0,

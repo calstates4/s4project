@@ -10,11 +10,11 @@
 function s4_courses_menu_default_menu_links() {
   $menu_links = array();
 
-  // Exported menu link: main-menu:courses
-  $menu_links['main-menu:courses'] = array(
+  // Exported menu link: main-menu:courses/manage
+  $menu_links['main-menu:courses/manage'] = array(
     'menu_name' => 'main-menu',
-    'link_path' => 'courses',
-    'router_path' => 'courses',
+    'link_path' => 'courses/manage',
+    'router_path' => 'courses/manage',
     'link_title' => 'Courses',
     'options' => array(
       'attributes' => array(
