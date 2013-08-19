@@ -173,7 +173,7 @@ function s4_opportunity_create_progress() {
     $status[$key]['data'] .= '<span class="arrow"></span>';
     $number++;
   }
-  $status[] = array('data' => '<div>Done!</div>',
+  $status[] = array('data' => '<div>' . t('Done!') . '</div><small>' . l('Start over', 'opportunities/create') .'</small>',
             'class' => array('span1', 'complete', $finished));
   return theme('item_list', array('items' => $status, 'attributes' => array('class' => array('user-signup-status', 'row'))));
 }

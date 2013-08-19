@@ -1233,7 +1233,7 @@ function s4_opportunity_entity_insert($relation, $type) {
     return;
   }
   if($type->data['email_enable']) {
-    $tokens = array();
+    $tokens = array('type' => $type, 'placement' => $relation, 's4_opportunity' => $placement['opportunity'], 'user' => $placement['user']);
     s4_mail_send('s4_opportunity', $placement['user']->mail, $type->data['email_subject'], $type->data['email_body']['value'], $type->data['email_body']['format'], $tokens);
   }
 }
