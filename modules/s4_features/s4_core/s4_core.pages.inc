@@ -75,7 +75,7 @@ function s4_core_signup($type, $nid) {
         }
         drupal_set_message(t('Site @site selected.', array('@site' => $site->title)));
         if (module_exists('views')) {
-          $site_coordinators = views_get_view_result('site_coordinators', 'block', $site->nid);
+          $site_coordinators = views_get_view_result('site_coordinators', 'block_1', $site->nid);
           if (!count($site_coordinators)) {
             drupal_set_message(t('This site does not have any coordinators, so we\'re skipping this step.'));
             $site_skip_coordinator = TRUE;
