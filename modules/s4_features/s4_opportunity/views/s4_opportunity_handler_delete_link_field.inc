@@ -19,7 +19,7 @@ class s4_opportunity_handler_delete_link_field extends views_handler_field {
     $text = !empty($this->options['text']) ? $this->options['text'] : t('delete');
     $s4_opportunity_id = $values->s4_opportunity_id;
     
-    return l($text, 'admin/content/s4_opportunitys/s4_opportunity/' . $s4_opportunity_id . '/delete', array('attributes' => array('class' => array('btn btn-small btn-danger'))));
+    return l($text, 'opportunity/' . $s4_opportunity_id . '/delete', array('attributes' => array('class' => array('btn btn-small btn-danger')), 'query' => array('destination' => $_GET['q'])));
   }
 
   function query() {

@@ -19,7 +19,8 @@ function s4_core_block_user_progress() {
   }
 
   if (isset($site)) {
-    $site_selection = l($site->title, 'node/' . $site->nid);
+    $title = (strlen($site->title) > 30) ? substr($site->title, 0, 30) .'...' : $site->title;
+    $site_selection = l($title, 'node/' . $site->nid);
   }
   if (isset($_SESSION['s4_signup_program']) && !isset($_SESSION['s4_signup_course'])) {
     $program = taxonomy_term_load($_SESSION['s4_signup_program']);
@@ -32,7 +33,7 @@ function s4_core_block_user_progress() {
   $status['site'] = array('data'  => 'Site',
             'id'     => 'status-site',
             'class'   => (isset($site)) ? array('done') : array(),
-            'selection' => (isset($site_selection)) ? $site_selection : FALSE,
+            'selection' => (isset($site_selection)) ? '<div class="selection">' . $site_selection .'</div>': FALSE,
             );
 
   if (variable_get('s4_core_signup_require_coordinator', 1)) {

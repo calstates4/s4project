@@ -164,3 +164,22 @@ function s4_sites_update_7101(&$sandbox) {
   drupal_load('module', 'features');
   features_revert(array('s4_sites' => array('views_view')));
 }
+
+/**
+ * Reset locations with no lat/lon
+ */
+function s4_sites_update_7102(&$sandbox) {
+  db_update('location')
+    ->fields(array('source' => 4))
+    ->condition('latitude', 0)
+    ->condition('longitude', 0)
+    ->execute();
+}
+
+/**
+ * Fix display suite for file content type.
+ */
+function s4_sites_update_7103(&$sandbox) {
+  drupal_load('module', 'features');
+  features_revert(array('s4_sites' => array('ds_layout_settings')));
+}

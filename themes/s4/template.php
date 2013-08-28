@@ -34,7 +34,6 @@ function s4_preprocess_html(&$vars) {
   if(isset($vars['page']['footer_map'])) {
     $vars['classes_array'][] = 'has-footer-map';
   }
-  drupal_add_css(path_to_theme() . '/css/ie7.css', array('group' => CSS_THEME, 'browsers' => array('IE' => 'lte IE 8', '!IE' => FALSE), 'preprocess' => FALSE));
 }
 
 /**
