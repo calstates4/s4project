@@ -240,6 +240,10 @@ function s4_core_create_signup_form($form, &$form_state, $uid, $option = 'new', 
         ),
       ),
     );
+    $user_programs = field_get_items('user', $account, 'field_site_restrict');
+    if(count($user_programs)) {
+      $form['course']['#options']['none'] = ' -- '. t('No course') .' -- ';
+    }
 
     foreach ($course_list as $course) {
       $course = node_load($course);
@@ -269,7 +273,8 @@ function s4_core_create_signup_form($form, &$form_state, $uid, $option = 'new', 
        ->fields('n', array('nid', 'title'))
        ->condition('type', 'site')
        ->orderBy('title', 'ASC');
-  if($form_state['values']['course'] || $form['course']['#default_value']) {
+  if(($form_state['values']['course'] || $form['course']['#default_value']) &&
+     $form_state['values']['course'] != 'none') {
     $nid = ($form_state['values']['course']) ? $form_state['values']['course'] : $form['course']['#default_value'];
     $course = node_load($nid);
     $default_program = field_get_items('node', $course, 'field_site_restrict');
@@ -452,7 +457,7 @@ function s4_core_create_signup_form_submit($form, $form_state) {
       : 0;
     $node->field_site_restrict[$node->language][0]['tid'] = $form_state['values']['program'];
     $node->field_signup_hours[$node->language][0]['value'] = $form_state['values']['hours'];
-    if($form_state['values']['course']) {
+    if($form_state['values']['course'] && $form_state['values']['course'] != 'none') {
       $node->field_course[$node->language][0]['nid'] = $form_state['values']['course'];
     }
     if($form_state['values']['revision_log']) {
