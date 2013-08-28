@@ -175,3 +175,11 @@ function s4_sites_update_7102(&$sandbox) {
     ->condition('longitude', 0)
     ->execute();
 }
+
+/**
+ * Fix display suite for file content type.
+ */
+function s4_sites_update_7103(&$sandbox) {
+  drupal_load('module', 'features');
+  features_revert(array('s4_sites' => array('ds_layout_settings')));
+}
