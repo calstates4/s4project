@@ -1,9 +1,17 @@
 <?php
 
 /**
-* Implements hook_install
+* Rebuild view and menu link features
 */
 function s4_courses_update_7100(&$sandbox) {
   drupal_load('module', 'features');
   features_revert(array('s4_courses' => array('views_view', 'menu_links')));
+}
+
+/**
+* Remove duplicate course link
+*/
+function s4_courses_update_7101(&$sandbox) {
+  menu_link_delete(null, 'courses');
+  return t('Rebuilt courses link in main menu');
 }

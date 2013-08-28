@@ -436,7 +436,7 @@ function s4_courses_menu() {
 
   $items['courses/manage'] = array(
     'page callback' => 's4_courses_course_manage_redirect',
-    'access arguments' => array('access content'),
+    'access arguments' => array('create course content'),
     );
   return $items;
 }
