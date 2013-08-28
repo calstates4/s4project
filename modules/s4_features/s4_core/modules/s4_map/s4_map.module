@@ -121,24 +121,29 @@ function s4_map_block_view($delta) {
 		  $node = menu_get_object();
 		  $locations = field_get_items('node', $node, 'field_location');
 		  if(!$locations || !count($locations)) {
-  		  return;
+  		  return array('content' => '<div class="well no-map"><h4>' . t('Could not map site') .'</h4></div>');
 		  }
 		  $coordinates = array();
 		  foreach($locations as $location) {
-		    $address = array($location['name'],
+        if($location['latitude'] != 0 && $location['longitude'] != 0) {
+          $address = array($location['name'],
                                                     $location['street'],
                                                     $location['additional'],
                                                     $location['city'] .', '. $location['province'] .' &nbsp;'. $location['postal_code']);
-        foreach($address as $k => $a) {
-          if(!$a) {
-            unset($address[$k]);
+          foreach($address as $k => $a) {
+            if(!$a) {
+              unset($address[$k]);
+            }
           }
+          $address[] = l(t('Directions'), 'http://maps.google.com/?q='. implode(',', $address), array('attributes' => array('target' => '_blank')));
+    		  $coordinates[] = array('name' => implode('<br/>', $address),
+    		                         'lat' => $location['latitude'],
+    		                         'lon' => $location['longitude']);
         }
-        $address[] = l(t('Directions'), 'http://maps.google.com/?q='. implode(',', $address), array('attributes' => array('target' => '_blank')));
-  		  $coordinates[] = array('name' => implode('<br/>', $address),
-  		                         'lat' => $location['latitude'],
-  		                         'lon' => $location['longitude']);
 		  }
+      if(!count($coordinates)) {
+        return array('content' => '<div class="well no-map"><h4>' . t('Could not map site') .'</h4></div>');
+      }
 		  drupal_add_js(array('s4_map_site_coordinates' => $coordinates), 'setting');
 		  return array('subject' => null,
 		         'content' => '<div class="map site-view" id="site-view-map"></div>',
