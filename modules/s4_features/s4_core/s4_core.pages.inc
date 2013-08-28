@@ -453,7 +453,7 @@ function s4_core_create_signup_form_submit($form, $form_state) {
     $node->field_site_restrict[$node->language][0]['tid'] = $form_state['values']['program'];
     $node->field_signup_hours[$node->language][0]['value'] = $form_state['values']['hours'];
     if($form_state['values']['course']) {
-      $node->field_course[$node->course][0]['nid'] = $form_state['values']['course'];
+      $node->field_course[$node->language][0]['nid'] = $form_state['values']['course'];
     }
     if($form_state['values']['revision_log']) {
       $node->log = check_plain($form_state['values']['revision_log']);
