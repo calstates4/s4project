@@ -1678,6 +1678,12 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['fields']['field_course_title']['table'] = 'field_data_field_course_title';
   $handler->display->display_options['fields']['field_course_title']['field'] = 'field_course_title';
   $handler->display->display_options['fields']['field_course_title']['label'] = 'Title';
+  /* Field: Field: Program(s) */
+  $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
+  $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
+  $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
+  $handler->display->display_options['fields']['field_site_restrict']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_site_restrict']['delta_offset'] = '0';
   /* Field: Signup: User select course */
   $handler->display->display_options['fields']['user_course_select']['id'] = 'user_course_select';
   $handler->display->display_options['fields']['user_course_select']['table'] = 's4_signup';
@@ -1871,6 +1877,7 @@ function s4_courses_views_default_views() {
     t('Sign up as part of a course'),
     t('Directions'),
     t('<p class="intro">To begin looking for a site, click the <strong>Select this Course</strong> link near the course you are taking for this service.</p>'),
+    t('Program(s)'),
     t('User profile block'),
     t('Current courses'),
     t('Faculty manage courses'),
