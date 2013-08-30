@@ -54,8 +54,25 @@ function s4_core_block_user_progress() {
               );
     }
   }
+  if(isset($_SESSION['s4_signup_program'])) {
+    $programs = (is_array($_SESSION['s4_signup_program'])) ? array_keys($_SESSION['s4_signup_program']) : array($_SESSION['s4_signup_program']);
+    foreach($programs as $program) {
+      $term = taxonomy_term_load($program);
+      $form = field_get_items('taxonomy_term', $term, 'field_site_form');
+      if($form && count($form)) {
+        if ($form !== FALSE && count($form)) {
+          $status['form'] = array('data' => 'Form',
+                  'id'   => 'status-form',
+                    'class'   => (isset($form_done)) ? array('done') : array(),
+                  'selection' => FALSE
+                  );
+        }
+      }
+    }
+  }
   if (isset($site)) {
     $form = field_get_items('node', $site, 'field_site_form');
+    
     if ($form !== FALSE && count($form)) {
       $status['form'] = array('data' => 'Form',
               'id'   => 'status-form',
