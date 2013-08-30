@@ -1755,6 +1755,7 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['arguments']['field_course_students_uid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['field_course_students_uid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['field_course_students_uid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['block_description'] = 'User profile: current courses';
 
   /* Display: Faculty manage courses */
   $handler = $view->new_display('page', 'Faculty manage courses', 'page_3');
@@ -1880,6 +1881,7 @@ function s4_courses_views_default_views() {
     t('Program(s)'),
     t('User profile block'),
     t('Current courses'),
+    t('User profile: current courses'),
     t('Faculty manage courses'),
     t('Manage courses'),
     t('<p class="lead">No courses found.</p>
