@@ -2985,7 +2985,7 @@ function s4_core_field_default_fields() {
     ),
   );
 
-// Exported field: 'taxonomy_term-site_restrictions-field_start_over'
+  // Exported field: 'taxonomy_term-site_restrictions-field_start_over'
   $fields['taxonomy_term-site_restrictions-field_start_over'] = array(
     'field_config' => array(
       'active' => '1',
@@ -3182,7 +3182,6 @@ function s4_core_field_default_fields() {
   t('Assessment results');
   t('Body');
   t('Course');
-  t('Default placement form');
   t('Enable email reminders');
   t('Enter the length of the grace period to delete and start over a student\'s placement. Students cannot start over after their service period (i.e. the semester or term they were in a course) regardless. For no limit, enter zero.');
   t('Estimate the total number of hours you have worked at this site.');
@@ -3196,7 +3195,6 @@ function s4_core_field_default_fields() {
   t('Form instructions');
   t('Frontpage title');
   t('Grace period in days');
-  t('If a site does not have it\'s own placement form, any student signing up with this program will have to complete this form.');
   t('Images');
   t('Last expected date of service');
   t('Let us know the last date you will be working on this site. This can be an approximation, and if you are singing up as part of a course, this will be automatically the last day of the semester.');
