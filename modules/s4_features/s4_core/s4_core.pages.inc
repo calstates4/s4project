@@ -67,7 +67,8 @@ function s4_core_signup($type, $nid) {
         }
         if (($program_forms || $form_terms) && !$_SESSION['s4_core_viewed_downloadable_forms']) {
           $_SESSION['s4_core_viewed_downloadable_forms'] = TRUE;
-          drupal_goto('forms/download/' . implode('+', $form_terms));
+          $signup_programs = (is_array($_SESSION['s4_signup_program'])) ? array_keys($_SESSION['s4_signup_program']) : array($_SESSION['s4_signup_program']);
+          drupal_goto('forms/download/' . implode('+', $signup_programs));
         }
         $form = field_get_items('node', $site, 'field_site_form');
         if ($form) {
