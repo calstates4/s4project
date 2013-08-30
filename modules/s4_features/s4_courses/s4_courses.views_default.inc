@@ -308,6 +308,12 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['fields']['student_signup_node']['table'] = 's4_signup';
   $handler->display->display_options['fields']['student_signup_node']['field'] = 'student_signup_node';
   $handler->display->display_options['fields']['student_signup_node']['label'] = 'Placements';
+  /* Field: User Signup: Make placement link */
+  $handler->display->display_options['fields']['make_placement_link']['id'] = 'make_placement_link';
+  $handler->display->display_options['fields']['make_placement_link']['table'] = 's4_user_signup';
+  $handler->display->display_options['fields']['make_placement_link']['field'] = 'make_placement_link';
+  $handler->display->display_options['fields']['make_placement_link']['relationship'] = 'field_course_students_uid';
+  $handler->display->display_options['fields']['make_placement_link']['label'] = 'Place';
 
   /* Display: All faculty students */
   $handler = $view->new_display('block', 'All faculty students', 'block_1');
@@ -774,6 +780,7 @@ function s4_courses_views_default_views() {
     t('All'),
     t('User'),
     t('Placements'),
+    t('Place'),
     t('All faculty students'),
     t('Search your students'),
     t('Items per page'),

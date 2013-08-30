@@ -23,3 +23,11 @@ function s4_courses_update_7102(&$sandbox) {
   drupal_load('module', 'features');
   features_revert(array('s4_courses' => array('views_view')));
 }
+
+/**
+* Add place link in list of course students.
+*/
+function s4_courses_update_7103(&$sandbox) {
+  drupal_load('module', 'features');
+  features_revert(array('s4_courses' => array('views_view')));
+}
