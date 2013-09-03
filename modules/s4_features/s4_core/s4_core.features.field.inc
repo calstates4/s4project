@@ -2075,12 +2075,13 @@ function s4_core_field_default_fields() {
       ),
       'display_label' => '',
       'entity_type' => 'taxonomy_term',
+      'field_lock' => 0,
       'field_name' => 'field_confirmation_email',
       'label' => 'Student confirmation email',
       'required' => 0,
       'settings' => array(
         'custom_add_another' => '',
-        'text_processing' => '0',
+        'text_processing' => '1',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -2385,12 +2386,13 @@ function s4_core_field_default_fields() {
       ),
       'display_label' => '',
       'entity_type' => 'taxonomy_term',
+      'field_lock' => 0,
       'field_name' => 'field_evaluation_email_body',
       'label' => 'Evaluation email body',
       'required' => 0,
       'settings' => array(
         'custom_add_another' => '',
-        'text_processing' => '0',
+        'text_processing' => '1',
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -2823,6 +2825,7 @@ function s4_core_field_default_fields() {
       ),
       'display_label' => '',
       'entity_type' => 'taxonomy_term',
+      'field_lock' => 0,
       'field_name' => 'field_reminder_email_body',
       'label' => 'Reminder email body',
       'required' => 0,
