@@ -18,7 +18,7 @@ function s4_courses_ds_field_settings_info() {
   $ds_fieldsetting->view_mode = 'default';
   $ds_fieldsetting->settings = array(
     'course_faculty_list' => array(
-      'weight' => '2',
+      'weight' => '3',
       'label' => 'above',
       'format' => 'default',
     ),
@@ -132,21 +132,25 @@ function s4_courses_ds_layout_settings_info() {
       ),
       'right' => array(
         1 => 'course_settings',
-        2 => 'course_faculty_list',
-        3 => 'field_sites',
-        4 => 'field_course_department',
-        5 => 'field_max_placements',
-        6 => 'field_site_restrict',
+        2 => 'field_course_syllabus',
+        3 => 'course_faculty_list',
+        4 => 'field_sites',
+        5 => 'field_course_department',
+        6 => 'field_max_placements',
+        7 => 'field_site_restrict',
+        8 => 'field_course_subject',
       ),
     ),
     'fields' => array(
       'course_students' => 'left',
       'course_settings' => 'right',
+      'field_course_syllabus' => 'right',
       'course_faculty_list' => 'right',
       'field_sites' => 'right',
       'field_course_department' => 'right',
       'field_max_placements' => 'right',
       'field_site_restrict' => 'right',
+      'field_course_subject' => 'right',
     ),
     'classes' => array(),
     'wrappers' => array(

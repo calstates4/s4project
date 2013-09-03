@@ -316,7 +316,7 @@ function s4_courses_edit_course_restrict_form($form_state) {
   field_attach_form('node', $node, $form, $form_state);
   
   foreach($form as $key => &$field) {
-    if(strpos($key, '#') !== 0 && !in_array($key, array('field_site_restrict_to_list', 'field_course_faculty_email'))) {
+    if(strpos($key, '#') !== 0 && !in_array($key, array('field_course_syllabus', 'field_site_restrict_to_list', 'field_course_faculty_email'))) {
         unset($form[$key]);
     }
   }
