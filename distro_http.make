@@ -14,4 +14,4 @@ projects[student_signup][type] = profile
 projects[student_signup][version] = 1.2.3
 projects[student_signup][download][type] = git
 projects[student_signup][download][url] = https://github.com/calstates4/s4project.git
-projects[student_signup][download][branch] = master
+projects[student_signup][download][branch] = dev
