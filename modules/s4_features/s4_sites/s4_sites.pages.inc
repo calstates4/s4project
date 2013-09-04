@@ -207,7 +207,7 @@ function s4_sites_site_log($node) {
                    l($item->title , 'node/'. $item->nid),
                    theme('username', array('account' => user_load($item->uid))),
                    $note,
-                   l('edit', 'node/'. $item->nid .'/edit', array('query' => array('destination' => 'node/'. $node->nid .'/log'), 
+                   l('edit', 'node/'. $item->nid .'/edit', array('query' => array('destination' => 'node/'. $node->nid .'/site-log'), 
                       'attributes' => array('class' => array('btn', 'btn-small', 'btn-info')))));
     }
     else {
