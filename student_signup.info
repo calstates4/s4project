@@ -1,7 +1,7 @@
 name = S4 - Supporting Students and Service Sites
 description = A site profile for students to sign up with university community partners for volunteer or internship work
 files[] = student_signup.profile
-version = 1.2.3
+version = 1.2.4
 
 core = 7.x
 theme = s4
