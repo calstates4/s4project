@@ -26,7 +26,7 @@ class views_handler_s4_user_course_select extends views_handler_field {
                ? $max[0]['value']
                : 1;
         $count[$course->nid]++;
-        if ($course->nid == $values->nid && ($max === 0 || $count[$course->nid] >= $max)) {
+        if ($course->nid == $values->nid && ($count[$course->nid] >= $max)) {
           return '<a class="disabled btn btn-info"><i class="icon-white icon-remove"></i> Already placed with this course</a>';
         }
       }

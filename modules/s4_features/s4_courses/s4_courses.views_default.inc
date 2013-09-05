@@ -308,6 +308,12 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['fields']['student_signup_node']['table'] = 's4_signup';
   $handler->display->display_options['fields']['student_signup_node']['field'] = 'student_signup_node';
   $handler->display->display_options['fields']['student_signup_node']['label'] = 'Placements';
+  /* Field: User Signup: Make placement link */
+  $handler->display->display_options['fields']['make_placement_link']['id'] = 'make_placement_link';
+  $handler->display->display_options['fields']['make_placement_link']['table'] = 's4_user_signup';
+  $handler->display->display_options['fields']['make_placement_link']['field'] = 'make_placement_link';
+  $handler->display->display_options['fields']['make_placement_link']['relationship'] = 'field_course_students_uid';
+  $handler->display->display_options['fields']['make_placement_link']['label'] = 'Place';
 
   /* Display: All faculty students */
   $handler = $view->new_display('block', 'All faculty students', 'block_1');
@@ -774,6 +780,7 @@ function s4_courses_views_default_views() {
     t('All'),
     t('User'),
     t('Placements'),
+    t('Place'),
     t('All faculty students'),
     t('Search your students'),
     t('Items per page'),
@@ -1678,6 +1685,12 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['fields']['field_course_title']['table'] = 'field_data_field_course_title';
   $handler->display->display_options['fields']['field_course_title']['field'] = 'field_course_title';
   $handler->display->display_options['fields']['field_course_title']['label'] = 'Title';
+  /* Field: Field: Program(s) */
+  $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
+  $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
+  $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
+  $handler->display->display_options['fields']['field_site_restrict']['type'] = 'taxonomy_term_reference_plain';
+  $handler->display->display_options['fields']['field_site_restrict']['delta_offset'] = '0';
   /* Field: Signup: User select course */
   $handler->display->display_options['fields']['user_course_select']['id'] = 'user_course_select';
   $handler->display->display_options['fields']['user_course_select']['table'] = 's4_signup';
@@ -1749,6 +1762,7 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['arguments']['field_course_students_uid']['summary']['number_of_records'] = '0';
   $handler->display->display_options['arguments']['field_course_students_uid']['summary']['format'] = 'default_summary';
   $handler->display->display_options['arguments']['field_course_students_uid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['block_description'] = 'User profile: current courses';
 
   /* Display: Faculty manage courses */
   $handler = $view->new_display('page', 'Faculty manage courses', 'page_3');
@@ -1871,8 +1885,10 @@ function s4_courses_views_default_views() {
     t('Sign up as part of a course'),
     t('Directions'),
     t('<p class="intro">To begin looking for a site, click the <strong>Select this Course</strong> link near the course you are taking for this service.</p>'),
+    t('Program(s)'),
     t('User profile block'),
     t('Current courses'),
+    t('User profile: current courses'),
     t('Faculty manage courses'),
     t('Manage courses'),
     t('<p class="lead">No courses found.</p>

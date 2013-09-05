@@ -533,47 +533,5 @@ function s4_core_context_default_contexts() {
   t('user');
   $export['user-login-page'] = $context;
 
-  $context = new stdClass();
-  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
-  $context->api_version = 3;
-  $context->name = 'user-profile-view';
-  $context->description = 'Staff is viewing a user\'s profile';
-  $context->tag = 'user';
-  $context->conditions = array(
-    'user' => array(
-      'values' => array(
-        'administrator' => 'administrator',
-        'staff' => 'staff',
-      ),
-    ),
-    'user_page' => array(
-      'values' => array(
-        'view' => 'view',
-      ),
-      'options' => array(
-        'mode' => 'all',
-      ),
-    ),
-  );
-  $context->reactions = array(
-    'block' => array(
-      'blocks' => array(
-        'views-user_signups-block_1' => array(
-          'module' => 'views',
-          'delta' => 'user_signups-block_1',
-          'region' => 'content_bottom',
-          'weight' => '-10',
-        ),
-      ),
-    ),
-  );
-  $context->condition_mode = 1;
-
-  // Translatables
-  // Included for use with string extractors like potx.
-  t('Staff is viewing a user\'s profile');
-  t('user');
-  $export['user-profile-view'] = $context;
-
   return $export;
 }
