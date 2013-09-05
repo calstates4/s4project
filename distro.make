@@ -7,11 +7,11 @@ api = 2
 core = 7.x
 
 projects[drupal][type] = core
-projects[drupal][version] = 7.22
+projects[drupal][version] = 7.23
 
 ; Add Student Signup to the full distribution build.
 projects[student_signup][type] = profile
-projects[student_signup][version] = 1.2.3
+projects[student_signup][version] = 1.2.4
 projects[student_signup][download][type] = git
 projects[student_signup][download][url] = git://github.com/calstates4/s4project.git
 projects[student_signup][download][branch] = master
