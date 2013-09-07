@@ -1819,26 +1819,30 @@ function s4_core_s4_frontpage_blocks() {
   global $user;
   $blocks = array();
   $courses = views_get_view_result('user_courses', 'block_2', $user->uid);
-  
   if($courses) {
-
     $signups = s4_core_get_user_signups($user->uid);
+
     $count = array();
-    $show = (count($signups)) ? false : true;
+    foreach($courses as $course) {
+      $count[$course->nid] = 0;
+    }
+    $show = false;
     foreach ($signups as $signup) {
       $course = field_get_items('node', $signup, 'field_course');
-      $course = node_load($course[0]['nid']);
       if($course) {
-        $count[$course->nid] = ($count[$course->nid]) ? $count[$course->nid] : 0;
-        $max = field_get_items('node', $course, 'field_max_placements');
-        $max = ($max[0]['value'] || $max[0]['value'] == 0)
-               ? $max[0]['value']
-               : 1;
-        $count[$course->nid]++;
-        if ($course->nid == $values->nid && ($max === 0 || $count[$course->nid] < $max)) {
+        $count[$course[0]['nid']] = ($count[$course[0]['nid']]) ? $count[$course[0]['nid']] : 0;
+        $count[$course[0]['nid']]++;
+      }
+    }
+    foreach($courses as $course) {
+      $course = node_load($course->nid);
+      $max = field_get_items('node', $course, 'field_max_placements');
+      $max = (isset($max[0]['value']) && ($max[0]['value'] > 0 || $max[0]['value'] == 0))
+             ? $max[0]['value']
+             : 1;
+      if ($max === 0 || $count[$course->nid] < $max) {
           $show = true;       
         }
-      }
     }
     if($show) {
       $blocks['user_courses'] = array(
