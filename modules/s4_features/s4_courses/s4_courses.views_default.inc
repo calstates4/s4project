@@ -932,6 +932,16 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['footer']['area']['empty'] = TRUE;
   $handler->display->display_options['footer']['area']['content'] = '<a class="btn" href="terms"><i class="icon-list"></i>View all terms</a>';
   $handler->display->display_options['footer']['area']['format'] = 'full_html';
+  $handler->display->display_options['defaults']['empty'] = FALSE;
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = '<div class="alert alert-error">
+<strong>Watch out!</strong> There are no current terms, meaning students or faculty will not see their courses when the log in.
+</div>';
+  $handler->display->display_options['empty']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
@@ -1037,6 +1047,9 @@ function s4_courses_views_default_views() {
     t('<a class="button" href="node/add/course-term">Add new term</a>'),
     t('Term list'),
     t('<a class="btn" href="terms"><i class="icon-list"></i>View all terms</a>'),
+    t('<div class="alert alert-error">
+<strong>Watch out!</strong> There are no current terms, meaning students or faculty will not see their courses when the log in.
+</div>'),
     t('Student Term list'),
   );
   $export['terms'] = $view;
