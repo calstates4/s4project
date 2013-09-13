@@ -42,3 +42,8 @@ function s4_core_update_7100() {
   drupal_load('module', 'features');
   features_revert(array('s4_core' => array('views_view')));
 }
+
+function s4_core_update_7101() {
+  drupal_load('module', 'features');
+  features_revert(array('s4_core' => array('field')));
+}

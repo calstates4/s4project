@@ -1872,3 +1872,13 @@ function s4_core_s4_frontpage_blocks() {
   }
   return $blocks;
 }
+
+
+function s4_core_form_user_multiple_cancel_confirm_alter(&$form) {
+  $form['user_cancel_method']['#access'] = FALSE;
+}
+
+function s4_core_form_user_cancel_confirm_form_alter(&$form) {
+  $form['user_cancel_method']['#access'] = FALSE;
+}
+
