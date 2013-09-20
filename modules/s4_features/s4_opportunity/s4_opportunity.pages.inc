@@ -230,7 +230,7 @@ function s4_opportunity_create_opportunity_form($form, $form_state) {
 	$form = array();
 	$create = $_SESSION['s4_opportunity_create'];
 	$type = s4_opportunity_type_load($create['type']);
-
+	drupal_set_title(t('Create new @type', array('@type' => $type->label)));
 	$site = node_load($_SESSION['s4_opportunity_create']['site']);
 
 	$risk_fields = array('field_health_risk',
