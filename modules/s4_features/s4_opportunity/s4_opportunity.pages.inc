@@ -356,6 +356,10 @@ function s4_opportunities_place_option() {
 	$opportunity = s4_opportunity_load($create['opportunity']);
 	$type = s4_opportunity_type_load($create['type']);
 	$courses = views_get_view_result('user_courses', 'block_2', $user->uid);
+	if(!count($courses)) {
+		drupal_set_message(t('Thank you for submitting this @type.', array('@type' => $type->label)), 'success');
+		drupal_goto('opportunities/create/done');
+	}
 	$results = s4_opportunity_user_can_place($user, $opportunity);
 	drupal_set_title(t('Would you like to sign up for @name?', array('@name' => $opportunity->name)));
 	return theme('s4_opportunity_place_options', array('opportunity' => $opportunity, 'type' => $type, 'courses' => $courses, 'programs' => $results['programs']));
