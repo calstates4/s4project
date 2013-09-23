@@ -183,3 +183,12 @@ function s4_sites_update_7103(&$sandbox) {
   drupal_load('module', 'features');
   features_revert(array('s4_sites' => array('ds_layout_settings')));
 }
+
+
+/**
+ * Add international phone support to site staff.
+ */
+function s4_sites_update_7104(&$sandbox) {
+  drupal_load('module', 'features');
+  features_revert(array('s4_sites' => array('context', 'ds_layout_settings', 'field')));
+}
