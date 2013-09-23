@@ -45,6 +45,26 @@ function s4_courses_views_data() {
       'handler' => 'views_handler_sort',
     ),
   );
+
+  $data['s4_course_user']['table']['group'] = t('Course student');
+  $data['s4_course_user']['table']['join'] = array(
+    'users' => array(
+      'left_field' => 'uid',
+      'field' => 'uid',
+    ),
+  );
+
+  $data['s4_course_user']['faculty_manage_make_placement_link'] = array(
+    'title' => t('Make placement link (for faculty)'),
+    'help' => t('Provides link to make a placement on a user\'s behalf for faculty.'),
+    'field' => array(
+      'handler' => 'views_handler_faculty_manage_make_placement_link',
+      'click sortable' => FALSE,
+    ),
+    'sort' => array(
+      'handler' => 'views_handler_sort',
+    ),
+  );
   
   return $data;
 }
