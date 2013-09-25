@@ -87,7 +87,7 @@ function s4_reporting_block_course_summary() {
 		}
 
 		$items[] = t('<strong>Courses: </strong> @total', array('@total' => $total)); 
-		$items[] = t('<strong>Students: </strong> @students', array('@students' => $students));
+		$items[] = t('<strong>Enrollments: </strong> @students', array('@students' => $students));
 		if ($students) {
 			//Preventing division by zero error
 			$items[] = t('<strong>Total placements: </strong> @placements', array('@placements' => $signups)) . ' (' . round(($signups / $students) * 100, 2) .'%)';
