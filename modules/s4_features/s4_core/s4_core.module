@@ -1809,6 +1809,7 @@ function s4_core_login_destinations() {
   return array('user' => 'user',
                'ldap' => 'user',
                'cas'  => 'cas/login',
+               'simplesamlphp_auth' => 'saml_login'
               );
 }
 
