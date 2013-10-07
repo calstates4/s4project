@@ -27,7 +27,7 @@ function s4_opportunity_place_form($form, $form_state, $type, $user) {
 
 	$form['user'] = array(
 		'#type' => 'value',
-		'#value' => $user->uid,
+		'#value' => ($user->uid) ? $user->uid : $form_state['values']['user'],
 		);
 
 	$form['actions'] = array(
@@ -50,7 +50,6 @@ function s4_opportunity_place_form($form, $form_state, $type, $user) {
 
 	$endpoints = array();
 	$relation = relation_create('opportunity_placement', $endpoints);	
-	field_attach_form('relation', $relation, $form, $form_state, entity_language('relation', $relation));
 	foreach(array('endpoints', 'field_form_signup_sid', 'field_course', 'field_coordinator', 'field_approving_user', 'field_placement_approved', 'field_coordinator') as $field) {
 		$form[$field]['#access'] = FALSE;
 	}
@@ -64,12 +63,16 @@ function s4_opportunity_place_form($form, $form_state, $type, $user) {
 }
 
 function s4_opportunity_place_form_submit($form, $form_state) {
+	watchdog('opportunities', 'Create relation for opportunity with user @user and opportunity @opportunity', array('@user' => $form_state['values']['user'], '@opportunity' => $form_state['values']['opportunities']));
 	$endpoints = array(array('entity_type' => 'user', 'entity_id' => $form_state['values']['user']),
 												 array('entity_type' => 's4_opportunity', 'entity_id' => $form_state['values']['opportunities']));
 	$relation = relation_create('opportunity_placement', $endpoints);
-	field_attach_submit('relation', $relation, $form, $form_state);
-	$relation->field_coordinator[LANGUAGE_NONE][0]['nid'] = $form_state['values']['site-staff'];
-	$relation->field_course[LANGUAGE_NONE][0]['nid'] = $form_state['values']['course'];
+	if($form_state['values']['site-staff']) {
+		$relation->field_coordinator[LANGUAGE_NONE][0]['nid'] = $form_state['values']['site-staff'];
+	}
+	if($form_state['values']['course'] && $form_state['values']['course'] != 'none') {
+		$relation->field_course[LANGUAGE_NONE][0]['nid'] = $form_state['values']['course'];
+	}
 	relation_save($relation);
 
 	if($form_state['values']['modal']) {
