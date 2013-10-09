@@ -1883,3 +1883,6 @@ function s4_core_form_user_cancel_confirm_form_alter(&$form) {
   $form['user_cancel_method']['#access'] = FALSE;
 }
 
+function s4_core_form_gmap_admin_settings_alter(&$form) {
+  $form['initialization']['gmap_api_key']['#description'] = t('An API key is needed to automatically map site addresses to physical locations. !link.', array('!link' => l(t('Sign up for an API key'), 'https://developers.google.com/maps/documentation/javascript/tutorial#api_key', array('attributes' => array('target' => '_blank')))));
+}
