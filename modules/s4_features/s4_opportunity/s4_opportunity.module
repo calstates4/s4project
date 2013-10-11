@@ -1517,7 +1517,14 @@ function _s4_opportunity_place_button($opportunity = false) {
   $type = s4_opportunity_type_load($opportunity->type);
   if($type->data['students_can_place'] && isset($_SESSION['s4_signup_course']) || isset($_SESSION['s4_signup_program'])) {
     $destination = (isset($_SESSION['s4_signup_course'])) ? 'course' : 'program';
-    $destination_id = (isset($_SESSION['s4_signup_course'])) ? $_SESSION['s4_signup_course'] : array_pop($_SESSION['s4_signup_program']);
+    if(isset($_SESSION['s4_signup_program']) && is_array($_SESSION['s4_signup_program'])) {
+      $program = array_pop($_SESSION['s4_signup_program']);
+    }
+    elseif(isset($_SESSION['s4_signup_program'])) {
+      $program = $_SESSION['s4_signup_program'];
+    }
+    dpm($program);
+    $destination_id = (isset($_SESSION['s4_signup_course'])) ? $_SESSION['s4_signup_course'] : $program;
     return l(t('Select this @type', array('@type' => $type->label)),'opportunities/place/self/'. $opportunity->s4_opportunity_id .'/'.  $destination .'/'. $destination_id,
           array('attributes' => array('class' => array('btn', 'btn-success'))));
   }
