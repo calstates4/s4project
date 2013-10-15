@@ -1,4 +1,4 @@
-#branding, #navigation, .tabs, #subscriptions, .workbench-info-block, .clearButton, canvas.pad, .nav-tabs, #s4cloud-environment {
+#branding, #navigation, .tabs, #subscriptions, .workbench-info-block, .clearButton, canvas.pad, .nav-tabs, #s4cloud-environment, .breadcrumb {
   display: none !important;
 }
 
