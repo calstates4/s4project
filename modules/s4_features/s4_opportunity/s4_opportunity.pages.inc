@@ -391,7 +391,12 @@ function s4_opportunities_place_immediately() {
 
 function s4_opportunity_create_done() {
 	unset($_SESSION['s4_opportunity_create']);
-	drupal_goto('<front>');
+	if(isset($_GET['destination'])) {
+		drupal_goto($_GET['destination']);
+	}
+	else {
+		drupal_goto('<front>');
+	}
 }
 
 function s4_opportunity_approve_form($form, $form_state, $relation) {
@@ -553,8 +558,7 @@ function s4_opportunity_placement_approve() {
 
 function s4_opportunity_place_self_confirm($form, $form_state, $opportunity, $placement_type, $entity_id) {
 	$form = array();
-	$type = s4_opportunity_load($opportunity->type);
-
+	$type = s4_opportunity_type_load($opportunity->type);
 	$form['opportunity'] = array(
 		'#type' => 'value',
 		'#value' => $opportunity,
@@ -574,7 +578,7 @@ function s4_opportunity_place_self_confirm($form, $form_state, $opportunity, $pl
     t('Are you sure you want to place with the @type %name?', array('@type' => $type->label, 
       '%name' => $opportunity->name)),
     'admin/content/opportunities/s4_opportunity',
-    '<p>' . t('This action cannot be undone.') . '</p>',
+    '',
     t('Make placement'),
     t('Cancel'),
     'confirm'
@@ -602,5 +606,12 @@ function s4_opportunity_place_self_confirm_submit($form, $form_state) {
 	$id = relation_save($relation);
 	drupal_set_message(t('Your request to be placed with @name has been submitted. Thank you.', array('@name' => $opporutnity->name)), 'success');
 	$_SESSION['s4_opportunity_create'] = FALSE;
+	$type = s4_opportunity_type_load($form_state['values']['opportunity']->type);
+
+	if(isset($type->data['placement_form']) && $type->data['placement_form']) {
+		drupal_goto('opportunities/create/done', array('query' => array('destination' => 'opportunities/form/'. $id)));
+	}
+	else {
 	drupal_goto('opportunities/create/done');
+	}
 }
