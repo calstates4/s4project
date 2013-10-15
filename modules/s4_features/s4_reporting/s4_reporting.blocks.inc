@@ -86,7 +86,7 @@ function s4_reporting_block_course_summary() {
 			$total++;
 		}
 
-		$items[] = t('<strong>Courses: </strong> @total', array('@total' => $total)); 
+		$items[] = t('<strong>Sections: </strong> @total', array('@total' => $total)); 
 		$items[] = t('<strong>Enrollments: </strong> @students', array('@students' => $students));
 		if ($students) {
 			//Preventing division by zero error
