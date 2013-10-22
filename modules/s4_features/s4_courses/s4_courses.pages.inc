@@ -48,3 +48,8 @@ function s4_courses_faculty_signup_student_form($form, $form_state, $student) {
 
 	return $form;
 }
+
+function s4_courses_faculty_signup_student_form_submit($form, $form_state) {
+  module_load_include('inc', 's4_core', 's4_core.pages');
+  s4_core_create_signup_form_submit($form, $form_state);
+}
