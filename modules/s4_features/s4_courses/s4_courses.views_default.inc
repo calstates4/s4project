@@ -750,6 +750,49 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['access']['role'] = array(
     2 => '2',
   );
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: User: Uid */
+  $handler->display->display_options['fields']['uid']['id'] = 'uid';
+  $handler->display->display_options['fields']['uid']['table'] = 'users';
+  $handler->display->display_options['fields']['uid']['field'] = 'uid';
+  $handler->display->display_options['fields']['uid']['relationship'] = 'field_course_students_uid';
+  $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['uid']['hide_alter_empty'] = FALSE;
+  $handler->display->display_options['fields']['uid']['link_to_user'] = FALSE;
+  /* Field: Field: First Name */
+  $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
+  $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
+  $handler->display->display_options['fields']['field_first_name']['field'] = 'field_first_name';
+  $handler->display->display_options['fields']['field_first_name']['relationship'] = 'field_course_students_uid';
+  $handler->display->display_options['fields']['field_first_name']['hide_alter_empty'] = FALSE;
+  /* Field: Field: Last Name */
+  $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
+  $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
+  $handler->display->display_options['fields']['field_last_name']['field'] = 'field_last_name';
+  $handler->display->display_options['fields']['field_last_name']['relationship'] = 'field_course_students_uid';
+  /* Field: User: Last login */
+  $handler->display->display_options['fields']['login']['id'] = 'login';
+  $handler->display->display_options['fields']['login']['table'] = 'users';
+  $handler->display->display_options['fields']['login']['field'] = 'login';
+  $handler->display->display_options['fields']['login']['relationship'] = 'field_course_students_uid';
+  $handler->display->display_options['fields']['login']['date_format'] = 'long';
+  /* Field: Signup: Student placements in a course */
+  $handler->display->display_options['fields']['student_signup_node']['id'] = 'student_signup_node';
+  $handler->display->display_options['fields']['student_signup_node']['table'] = 's4_signup';
+  $handler->display->display_options['fields']['student_signup_node']['field'] = 'student_signup_node';
+  $handler->display->display_options['fields']['student_signup_node']['label'] = 'Site';
+  /* Field: Assessment: Assessment link */
+  $handler->display->display_options['fields']['assessment_link']['id'] = 'assessment_link';
+  $handler->display->display_options['fields']['assessment_link']['table'] = 's4_assessment';
+  $handler->display->display_options['fields']['assessment_link']['field'] = 'assessment_link';
+  $handler->display->display_options['fields']['assessment_link']['label'] = 'Assessment';
+  $handler->display->display_options['fields']['assessment_link']['hide_alter_empty'] = FALSE;
+  /* Field: Course student: Make placement link (for faculty) */
+  $handler->display->display_options['fields']['faculty_manage_make_placement_link']['id'] = 'faculty_manage_make_placement_link';
+  $handler->display->display_options['fields']['faculty_manage_make_placement_link']['table'] = 's4_course_user';
+  $handler->display->display_options['fields']['faculty_manage_make_placement_link']['field'] = 'faculty_manage_make_placement_link';
+  $handler->display->display_options['fields']['faculty_manage_make_placement_link']['relationship'] = 'field_course_students_uid';
+  $handler->display->display_options['fields']['faculty_manage_make_placement_link']['label'] = 'Place';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: Content: Faculty (field_course_faculty) */
   $handler->display->display_options['arguments']['field_course_faculty_uid']['id'] = 'field_course_faculty_uid';
@@ -932,6 +975,16 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['footer']['area']['empty'] = TRUE;
   $handler->display->display_options['footer']['area']['content'] = '<a class="btn" href="terms"><i class="icon-list"></i>View all terms</a>';
   $handler->display->display_options['footer']['area']['format'] = 'full_html';
+  $handler->display->display_options['defaults']['empty'] = FALSE;
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = '<div class="alert alert-error">
+<strong>Watch out!</strong> There are no current terms, meaning students or faculty will not see their courses when the log in.
+</div>';
+  $handler->display->display_options['empty']['area']['format'] = 'full_html';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
@@ -1037,6 +1090,9 @@ function s4_courses_views_default_views() {
     t('<a class="button" href="node/add/course-term">Add new term</a>'),
     t('Term list'),
     t('<a class="btn" href="terms"><i class="icon-list"></i>View all terms</a>'),
+    t('<div class="alert alert-error">
+<strong>Watch out!</strong> There are no current terms, meaning students or faculty will not see their courses when the log in.
+</div>'),
     t('Student Term list'),
   );
   $export['terms'] = $view;

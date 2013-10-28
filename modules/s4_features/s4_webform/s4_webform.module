@@ -37,17 +37,6 @@ function s4_webform_menu_alter(&$items) {
 	$items['node/%webform_menu/webform']['title'] = 'Edit form';
 	$items['node/%webform_menu/webform/components']['title'] = 'Edit questions';
 	$items['node/%webform_menu/webform/components/%webform_menu_component']['title'] = 'Edit/Add question';
-	$items['node/%webform_menu/webform-results']['access callback'] = 's4_webform_hide_results';
-	$items['node/%webform_menu/webform-results/analysis']['access callback'] = 's4_webform_hide_results';
-	$items['node/%webform_menu/webform-results/table']['access callback'] = 's4_webform_hide_results';
-	$items['node/%webform_menu/webform-results/download']['access callback'] = 's4_webform_hide_results';
-	$items['node/%webform_menu/webform-results/clear']['access callback'] = 's4_webform_hide_results';
-	$items['node/%webform_menu/webform/emails']['access callback'] = 's4_webform_hide_results';
-	$items['node/%webform_menu/webform/configure']['access callback'] = 's4_webform_hide_results';
-}
-
-function s4_webform_hide_results() {
-	return user_access('override default field settings');
 }
 
 /**

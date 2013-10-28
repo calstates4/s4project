@@ -32,7 +32,7 @@ function s4_mail_send($key, $to, $subject, $message, $format = FALSE, $tokens = 
 	if(variable_get('s4_mail_debug', FALSE)) {
 		$count = drupal_static(__FUNCTION__);
 		if($count < 3) {
-			drupal_set_message(t('Mail would have been sent to %to subject %subject', array('%to' => $to, '%subject' => $params['subject'])));
+			drupal_set_message(t('<p>Mail would have been sent to %to subject %subject</p><p>%body</p>', array('%to' => $to, '%subject' => $params['subject'], '%body' => $params['message']['value'])));
 			if(function_exists('dpm')) {
 				dpm($params);
 			}

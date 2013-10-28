@@ -50,6 +50,7 @@ function s4_reporting_strongarm() {
     'location_directory' => 0,
     'location_table' => 0,
     'Maillog' => 0,
+    'notifications_content_node_list' => 0,
     's4_search' => 0,
     's4_user_signups' => 0,
     'site_forms' => 0,

@@ -50,8 +50,13 @@ function s4_reporting_block_course_summary() {
 	$terms = _s4_courses_get_current_terms();
 
 	$output = '';
+	foreach(taxonomy_get_vocabularies() as $vocabulary) {
+    if($vocabulary->machine_name == 'site_restrictions') {
+    	$program_vocabulary = $vocabulary;
+    	continue;
+    }
+  }
 	foreach($terms as $term) {
-		$items = array();
 		$nid = db_select('field_data_field_term_code', 'c')
 				 ->condition('field_term_code_value', $term)
 				 ->fields('c', array('entity_id'))
@@ -60,39 +65,44 @@ function s4_reporting_block_course_summary() {
 		$term = node_load($nid);
 
 		$output .= t('<h4>@title</h4>', array('@title' => $term->title ));
+		foreach(taxonomy_get_tree($program_vocabulary->vid) as $program) {
+			$items = array();
+		  $output .= t('<h5>@title</h5>', array('@title' => $program->name));
+			$query = db_select('field_data_field_term', 't');
+			$query->condition('t.entity_type', 'node')
+					  ->condition('t.field_term_nid', $term->nid)
+				    ->fields('t', array('entity_id'))
+				    ->distinct();
+			$query->leftJoin('field_data_field_site_restrict', 'r', 'r.entity_id = t.entity_id AND r.entity_type = t.entity_type');
+			$query->condition('r.field_site_restrict_tid', $program->tid);
+			$result = $query->execute();
+			$total = 0;
+			$signups = 0;
+			$students = 0;
+			while($course = $result->fetchField()) {
+				$query = db_select('field_data_field_course', 'c')
+						 ->condition('c.field_course_nid', $course);
+				$query->addExpression('COUNT(c.entity_id)', 'entity_id');
+				$result_signups = $query->execute();
+				$signups += $result_signups->fetchField();
 
-		$query = db_select('field_data_field_term', 't');
-		$query->condition('entity_type', 'node')
-				  ->condition('field_term_nid', $term->nid)
-			    ->fields('t', array('entity_id'))
-			    ->distinct();
-		$result = $query->execute();
-		$total = 0;
-		$signups = 0;
-		$students = 0;
-		while($course = $result->fetchField()) {
-			$query = db_select('field_data_field_course', 'c')
-					 ->condition('c.field_course_nid', $course);
-			$query->addExpression('COUNT(c.entity_id)', 'entity_id');
-			$result_signups = $query->execute();
-			$signups += $result_signups->fetchField();
+				$query = db_select('field_data_field_course_students', 's')
+						 ->condition('s.entity_id', $course);
+				$query->addExpression('COUNT(s.field_course_students_uid)', 'uid');
+				$result_students = $query->execute();
+				$students += $result_students->fetchField();
 
-			$query = db_select('field_data_field_course_students', 's')
-					 ->condition('s.entity_id', $course);
-			$query->addExpression('COUNT(s.field_course_students_uid)', 'uid');
-			$result_students = $query->execute();
-			$students += $result_students->fetchField();
+				$total++;
+			}
 
-			$total++;
+			$items[] = t('<strong>Sections: </strong> @total', array('@total' => $total)); 
+			$items[] = t('<strong>Enrollments: </strong> @students', array('@students' => $students));
+			if ($students) {
+				//Preventing division by zero error
+				$items[] = t('<strong>Total placements: </strong> @placements', array('@placements' => $signups)) . ' (' . round(($signups / $students) * 100, 2) .'%)';
+			}
+			$output .= theme('item_list', array('items' => $items));
 		}
-
-		$items[] = t('<strong>Courses: </strong> @total', array('@total' => $total)); 
-		$items[] = t('<strong>Students: </strong> @students', array('@students' => $students));
-		if ($students) {
-			//Preventing division by zero error
-			$items[] = t('<strong>Total placements: </strong> @placements', array('@placements' => $signups)) . ' (' . round(($signups / $students) * 100, 2) .'%)';
-		}
-		$output .= theme('item_list', array('items' => $items));
 	}
 	$result =  array('subject' => 'Course overview',
 				 'content' => $output);

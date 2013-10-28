@@ -31,3 +31,12 @@ function s4_courses_update_7103(&$sandbox) {
   drupal_load('module', 'features');
   features_revert(array('s4_courses' => array('views_view')));
 }
+
+
+/**
+* Add empty text for course terms
+*/
+function s4_courses_update_7104(&$sandbox) {
+  drupal_load('module', 'features');
+  features_revert(array('s4_courses' => array('views_view')));
+}

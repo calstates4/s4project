@@ -445,7 +445,23 @@ function s4_courses_menu() {
     'page callback' => 's4_courses_course_manage_redirect',
     'access arguments' => array('create course content'),
     );
+
+  $items['signup/create/faculty/%user'] = array(
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('s4_courses_faculty_signup_student_form', 3),
+    'access callback' => 's4_corses_signup_student_access',
+    'access arguments' => array(3),
+    'file' => 's4_courses.pages.inc'
+    );
   return $items;
+}
+
+function s4_corses_signup_student_access($student) {
+  global $user;
+  if(!s4_courses_user_is_faculty($user) || !user_access('manage course students')) {
+    return;
+  }
+  return true;
 }
 
 function s4_courses_course_manage_redirect() {

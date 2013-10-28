@@ -32,6 +32,21 @@ function s4_sites_ds_field_settings_info() {
 
   $ds_fieldsetting = new stdClass();
   $ds_fieldsetting->api_version = 1;
+  $ds_fieldsetting->id = 'node|coordinator|default';
+  $ds_fieldsetting->entity_type = 'node';
+  $ds_fieldsetting->bundle = 'coordinator';
+  $ds_fieldsetting->view_mode = 'default';
+  $ds_fieldsetting->settings = array(
+    'site_staff_current_students' => array(
+      'weight' => '0',
+      'label' => 'hidden',
+      'format' => 'default',
+    ),
+  );
+  $export['node|coordinator|default'] = $ds_fieldsetting;
+
+  $ds_fieldsetting = new stdClass();
+  $ds_fieldsetting->api_version = 1;
   $ds_fieldsetting->id = 'node|file|default';
   $ds_fieldsetting->entity_type = 'node';
   $ds_fieldsetting->bundle = 'file';
@@ -194,6 +209,21 @@ function s4_sites_ds_custom_fields_info() {
   );
   $export['site_staff'] = $ds_field;
 
+  $ds_field = new stdClass();
+  $ds_field->api_version = 1;
+  $ds_field->field = 'site_staff_current_students';
+  $ds_field->label = 'Site staff current students';
+  $ds_field->field_type = 6;
+  $ds_field->entities = array(
+    'node' => 'node',
+  );
+  $ds_field->ui_limit = 'coordinator|*';
+  $ds_field->properties = array(
+    'block' => 'views|s4_site_staff_students-block',
+    'block_render' => '1',
+  );
+  $export['site_staff_current_students'] = $ds_field;
+
   return $export;
 }
 
@@ -236,6 +266,53 @@ function s4_sites_ds_layout_settings_info() {
     'classes' => array(),
   );
   $export['node|contact_record|default'] = $ds_layout;
+
+  $ds_layout = new stdClass();
+  $ds_layout->api_version = 1;
+  $ds_layout->id = 'node|coordinator|default';
+  $ds_layout->entity_type = 'node';
+  $ds_layout->bundle = 'coordinator';
+  $ds_layout->view_mode = 'default';
+  $ds_layout->layout = 's4_75_25';
+  $ds_layout->settings = array(
+    'regions' => array(
+      'left' => array(
+        0 => 'site_staff_current_students',
+      ),
+      'right' => array(
+        1 => 'field_site',
+        2 => 'field_staff_role',
+        3 => 'field_job_title',
+        4 => 'field_site_staff_active',
+        5 => 'field_signups_max',
+        6 => 'field_staff_signup_available',
+        7 => 'field_email',
+        8 => 'field_phone',
+        9 => 'field_site_staff_user',
+      ),
+    ),
+    'fields' => array(
+      'site_staff_current_students' => 'left',
+      'field_site' => 'right',
+      'field_staff_role' => 'right',
+      'field_job_title' => 'right',
+      'field_site_staff_active' => 'right',
+      'field_signups_max' => 'right',
+      'field_staff_signup_available' => 'right',
+      'field_email' => 'right',
+      'field_phone' => 'right',
+      'field_site_staff_user' => 'right',
+    ),
+    'classes' => array(),
+    'wrappers' => array(
+      'left' => 'div',
+      'right' => 'div',
+    ),
+    'layout_wrapper' => 'div',
+    'layout_attributes' => '',
+    'layout_attributes_merge' => 1,
+  );
+  $export['node|coordinator|default'] = $ds_layout;
 
   $ds_layout = new stdClass();
   $ds_layout->api_version = 1;

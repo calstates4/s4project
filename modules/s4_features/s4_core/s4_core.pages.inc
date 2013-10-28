@@ -29,6 +29,16 @@ function s4_core_signup_evaluation($node) {
 *  to the current user's signup record
 */
 function s4_core_signup($type, $nid) {
+  if(isset($_SESSION['s4_signup_program'])&& !count($_SESSION['s4_signup_program']) && isset($_SESSION['s4_signup_course'])) {
+    $course = node_load($_SESSION['s4_signup_course']);
+    $programs = field_get_items('node', $course, 'field_site_restrict');
+    $program_terms = array();
+    foreach($programs as $program) {
+      $program = taxonomy_term_load($program['tid']);
+      $program_terms[$program->tid] = str_replace(' ', '-', $program->name);
+    }
+    $_SESSION['s4_signup_program'] = $program_terms;
+  }
   module_invoke_all('s4_signup', $type, $nid);
   if ($type == 'program') {
     $_SESSION['s4_signup_program'] = $nid;
@@ -123,7 +133,7 @@ function s4_core_signup($type, $nid) {
         if($_SESSION['s4_signup_program'] == $program['tid'] || (isset($_SESSION['s4_signup_program'][$program['tid']]) && $_SESSION['s4_signup_program'][$program['tid']])) {
           $term = taxonomy_term_load($program['tid']);
           $form = field_get_items('taxonomy_term', $term, 'field_site_form');
-          if($form && count($form)) {
+          if($form && count($form) && node_load($form[0]['nid'])) {
             drupal_goto('node/'. $form[0]['nid']);
             return;
           }

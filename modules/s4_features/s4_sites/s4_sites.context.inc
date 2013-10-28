@@ -493,16 +493,7 @@ function s4_sites_context_default_contexts() {
     ),
   );
   $context->reactions = array(
-    'block' => array(
-      'blocks' => array(
-        'views-s4_site_staff_students-block' => array(
-          'module' => 'views',
-          'delta' => 's4_site_staff_students-block',
-          'region' => 'content_bottom',
-          'weight' => '-10',
-        ),
-      ),
-    ),
+    'menu' => 'site',
   );
   $context->condition_mode = 1;
 
