@@ -2880,13 +2880,6 @@ Fields',
   $handler->display->display_options['fields']['field_csu_org_type']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['field_csu_org_type']['type'] = 'taxonomy_term_reference_plain';
   $handler->display->display_options['fields']['field_csu_org_type']['delta_offset'] = '0';
-  /* Field: Content: Phone number */
-  $handler->display->display_options['fields']['field_phone_1']['id'] = 'field_phone_1';
-  $handler->display->display_options['fields']['field_phone_1']['table'] = 'field_data_field_phone';
-  $handler->display->display_options['fields']['field_phone_1']['field'] = 'field_phone';
-  $handler->display->display_options['fields']['field_phone_1']['label'] = 'Phone number ';
-  $handler->display->display_options['fields']['field_phone_1']['hide_alter_empty'] = FALSE;
-  $handler->display->display_options['fields']['field_phone_1']['click_sort_column'] = 'number';
   /* Field: Content: Risk identification */
   $handler->display->display_options['fields']['field_health_risk']['id'] = 'field_health_risk';
   $handler->display->display_options['fields']['field_health_risk']['table'] = 'field_data_field_health_risk';
@@ -2966,17 +2959,15 @@ Fields',
   $handler->display->display_options['fields']['created']['field'] = 'created';
   $handler->display->display_options['fields']['created']['label'] = 'Date created';
   $handler->display->display_options['fields']['created']['date_format'] = 'short';
-  /* Field: Broken/missing handler */
+  /* Field: Form Evaluation: Total placements */
   $handler->display->display_options['fields']['total_placements']['id'] = 'total_placements';
   $handler->display->display_options['fields']['total_placements']['table'] = 's4_reporting';
   $handler->display->display_options['fields']['total_placements']['field'] = 'total_placements';
-  $handler->display->display_options['fields']['total_placements']['label'] = 'Total placements';
   $handler->display->display_options['fields']['total_placements']['element_label_colon'] = FALSE;
-  /* Field: Broken/missing handler */
+  /* Field: Form Evaluation: Total hours */
   $handler->display->display_options['fields']['total_hours']['id'] = 'total_hours';
   $handler->display->display_options['fields']['total_hours']['table'] = 's4_reporting';
   $handler->display->display_options['fields']['total_hours']['field'] = 'total_hours';
-  $handler->display->display_options['fields']['total_hours']['label'] = 'Total hours';
   /* Field: Content: County */
   $handler->display->display_options['fields']['field_county']['id'] = 'field_county';
   $handler->display->display_options['fields']['field_county']['table'] = 'field_data_field_county';
@@ -3346,7 +3337,6 @@ Fields',
     t('Issues addressed '),
     t('Max students'),
     t('Organization type '),
-    t('Phone number '),
     t('Risk Identification '),
     t('Site has special requirements '),
     t('Site Tour '),
@@ -3360,6 +3350,8 @@ Fields',
     t('Related programs'),
     t('Date created'),
     t('Total placements'),
+    t('.'),
+    t(','),
     t('Total hours'),
     t('County '),
     t('Subject code subject'),

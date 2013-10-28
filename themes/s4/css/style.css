@@ -495,3 +495,6 @@ input.hours-field {
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0077b3', GradientType=0);
 }
+.nav > li > a.btn-success:hover {
+  background-color: #51a351;
+}

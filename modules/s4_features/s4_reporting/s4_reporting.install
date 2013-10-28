@@ -14,3 +14,11 @@ function s4_reporting_schema() {
   
   return $schema;
 }
+
+/**
+ * Fix site phone number format
+ */
+function s4_reporting_update_7101(&$sandbox) {
+  drupal_load('module', 'features');
+  features_revert(array('s4_reporting' => array('views_view')));
+}

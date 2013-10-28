@@ -1809,6 +1809,7 @@ function s4_core_login_destinations() {
   return array('user' => 'user',
                'ldap' => 'user',
                'cas'  => 'cas/login',
+               'simplesamlphp_auth' => 'saml_login'
               );
 }
 
@@ -1819,25 +1820,26 @@ function s4_core_s4_frontpage_blocks() {
   global $user;
   $blocks = array();
   $courses = views_get_view_result('user_courses', 'block_2', $user->uid);
-  
   if($courses) {
 
     $signups = s4_core_get_user_signups($user->uid);
     $count = array();
-    $show = (count($signups)) ? false : true;
-    foreach ($signups as $signup) {
-      $course = field_get_items('node', $signup, 'field_course');
-      $course = node_load($course[0]['nid']);
-      if($course) {
-        $count[$course->nid] = ($count[$course->nid]) ? $count[$course->nid] : 0;
-        $max = field_get_items('node', $course, 'field_max_placements');
-        $max = ($max[0]['value'] || $max[0]['value'] == 0)
-               ? $max[0]['value']
-               : 1;
-        $count[$course->nid]++;
-        if ($course->nid == $values->nid && ($max === 0 || $count[$course->nid] < $max)) {
-          $show = true;       
-        }
+    $show = false;
+    $course_count = array();
+    foreach($signups as $signup) {
+      $signup_course = field_get_items('node', $signup, 'field_course');
+      if($signup_course) {
+        $course_count[$signup_course[0]['nid']] = (isset($course_count[$signup_course[0]['nid']])) ? $course_count[$signup_course[0]['nid']] + 1 : 1;
+      }     
+    }
+    foreach($courses as $course) {
+      $course = node_load($course->nid);
+      $max = field_get_items('node', $course, 'field_max_placements');
+      $max = ($max[0]['value'] || $max[0]['value'] == 0)
+             ? $max[0]['value']
+             : 1;
+      if(!isset($course_count[$course->nid]) || $max === 0 || $course_count[$course->nid] < $max) {
+        $show = true;
       }
     }
     if($show) {
@@ -1849,6 +1851,7 @@ function s4_core_s4_frontpage_blocks() {
             );   
     }
   }
+
   $programs = views_get_view_result('s4_user_programs', 'block', $user->uid);
   if($programs) {
     $blocks['user_programs'] = array(
@@ -1867,4 +1870,17 @@ function s4_core_s4_frontpage_blocks() {
       );
   }
   return $blocks;
+}
+
+
+function s4_core_form_user_multiple_cancel_confirm_alter(&$form) {
+  $form['user_cancel_method']['#access'] = FALSE;
+}
+
+function s4_core_form_user_cancel_confirm_form_alter(&$form) {
+  $form['user_cancel_method']['#access'] = FALSE;
+}
+
+function s4_core_form_gmap_admin_settings_alter(&$form) {
+  $form['initialization']['gmap_api_key']['#description'] = t('An API key is needed to automatically map site addresses to physical locations. !link.', array('!link' => l(t('Sign up for an API key'), 'https://developers.google.com/maps/documentation/javascript/tutorial#api_key', array('attributes' => array('target' => '_blank')))));
 }

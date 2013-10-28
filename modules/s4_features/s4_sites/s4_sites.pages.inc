@@ -290,7 +290,7 @@ function s4_sites_site_log_search() {
     '#options' => array('any' => t('-- Any --'),
                         'file' => t('Form'),
                         'contact_record' => t('Log entry'),
-                        'versions' => t('Versons'),
+                        'versions' => t('Versions'),
                         'approval' => t('Approval'),
                        ),
     '#default_value' => ($settings['type']) ? $settings['type'] : 'any',

@@ -27,7 +27,7 @@ function s4_opportunity_place_form($form, $form_state, $type, $user) {
 
 	$form['user'] = array(
 		'#type' => 'value',
-		'#value' => $user->uid,
+		'#value' => ($user->uid) ? $user->uid : $form_state['values']['user'],
 		);
 
 	$form['actions'] = array(
@@ -50,7 +50,6 @@ function s4_opportunity_place_form($form, $form_state, $type, $user) {
 
 	$endpoints = array();
 	$relation = relation_create('opportunity_placement', $endpoints);	
-	field_attach_form('relation', $relation, $form, $form_state, entity_language('relation', $relation));
 	foreach(array('endpoints', 'field_form_signup_sid', 'field_course', 'field_coordinator', 'field_approving_user', 'field_placement_approved', 'field_coordinator') as $field) {
 		$form[$field]['#access'] = FALSE;
 	}
@@ -64,12 +63,16 @@ function s4_opportunity_place_form($form, $form_state, $type, $user) {
 }
 
 function s4_opportunity_place_form_submit($form, $form_state) {
+	watchdog('opportunities', 'Create relation for opportunity with user @user and opportunity @opportunity', array('@user' => $form_state['values']['user'], '@opportunity' => $form_state['values']['opportunities']));
 	$endpoints = array(array('entity_type' => 'user', 'entity_id' => $form_state['values']['user']),
 												 array('entity_type' => 's4_opportunity', 'entity_id' => $form_state['values']['opportunities']));
 	$relation = relation_create('opportunity_placement', $endpoints);
-	field_attach_submit('relation', $relation, $form, $form_state);
-	$relation->field_coordinator[LANGUAGE_NONE][0]['nid'] = $form_state['values']['site-staff'];
-	$relation->field_course[LANGUAGE_NONE][0]['nid'] = $form_state['values']['course'];
+	if($form_state['values']['site-staff']) {
+		$relation->field_coordinator[LANGUAGE_NONE][0]['nid'] = $form_state['values']['site-staff'];
+	}
+	if($form_state['values']['course'] && $form_state['values']['course'] != 'none') {
+		$relation->field_course[LANGUAGE_NONE][0]['nid'] = $form_state['values']['course'];
+	}
 	relation_save($relation);
 
 	if($form_state['values']['modal']) {
@@ -230,7 +233,7 @@ function s4_opportunity_create_opportunity_form($form, $form_state) {
 	$form = array();
 	$create = $_SESSION['s4_opportunity_create'];
 	$type = s4_opportunity_type_load($create['type']);
-
+	drupal_set_title(t('Create new @type', array('@type' => $type->label)));
 	$site = node_load($_SESSION['s4_opportunity_create']['site']);
 
 	$risk_fields = array('field_health_risk',
@@ -356,6 +359,10 @@ function s4_opportunities_place_option() {
 	$opportunity = s4_opportunity_load($create['opportunity']);
 	$type = s4_opportunity_type_load($create['type']);
 	$courses = views_get_view_result('user_courses', 'block_2', $user->uid);
+	if(!count($courses)) {
+		drupal_set_message(t('Thank you for submitting this @type.', array('@type' => $type->label)), 'success');
+		drupal_goto('opportunities/create/done');
+	}
 	$results = s4_opportunity_user_can_place($user, $opportunity);
 	drupal_set_title(t('Would you like to sign up for @name?', array('@name' => $opportunity->name)));
 	return theme('s4_opportunity_place_options', array('opportunity' => $opportunity, 'type' => $type, 'courses' => $courses, 'programs' => $results['programs']));
@@ -384,7 +391,12 @@ function s4_opportunities_place_immediately() {
 
 function s4_opportunity_create_done() {
 	unset($_SESSION['s4_opportunity_create']);
-	drupal_goto('<front>');
+	if(isset($_GET['destination'])) {
+		drupal_goto($_GET['destination']);
+	}
+	else {
+		drupal_goto('<front>');
+	}
 }
 
 function s4_opportunity_approve_form($form, $form_state, $relation) {
@@ -546,8 +558,7 @@ function s4_opportunity_placement_approve() {
 
 function s4_opportunity_place_self_confirm($form, $form_state, $opportunity, $placement_type, $entity_id) {
 	$form = array();
-	$type = s4_opportunity_load($opportunity->type);
-
+	$type = s4_opportunity_type_load($opportunity->type);
 	$form['opportunity'] = array(
 		'#type' => 'value',
 		'#value' => $opportunity,
@@ -567,7 +578,7 @@ function s4_opportunity_place_self_confirm($form, $form_state, $opportunity, $pl
     t('Are you sure you want to place with the @type %name?', array('@type' => $type->label, 
       '%name' => $opportunity->name)),
     'admin/content/opportunities/s4_opportunity',
-    '<p>' . t('This action cannot be undone.') . '</p>',
+    '',
     t('Make placement'),
     t('Cancel'),
     'confirm'
@@ -595,5 +606,12 @@ function s4_opportunity_place_self_confirm_submit($form, $form_state) {
 	$id = relation_save($relation);
 	drupal_set_message(t('Your request to be placed with @name has been submitted. Thank you.', array('@name' => $opporutnity->name)), 'success');
 	$_SESSION['s4_opportunity_create'] = FALSE;
+	$type = s4_opportunity_type_load($form_state['values']['opportunity']->type);
+
+	if(isset($type->data['placement_form']) && $type->data['placement_form']) {
+		drupal_goto('opportunities/create/done', array('query' => array('destination' => 'opportunities/form/'. $id)));
+	}
+	else {
 	drupal_goto('opportunities/create/done');
+	}
 }

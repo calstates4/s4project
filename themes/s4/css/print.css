@@ -1,3 +1,13 @@
-#branding, #navigation, .tabs, #subscriptions, .workbench-info-block {
+#branding, #navigation, .tabs, #subscriptions, .workbench-info-block, .clearButton, canvas.pad, .nav-tabs, #s4cloud-environment, .breadcrumb {
   display: none !important;
+}
+
+.sigWrapper {
+	border-bottom: #000 2px solid;
+	width: 50%;
+}
+
+.tab-content > .tab-pane {
+	opacity: 1;
+	display: block;
 }

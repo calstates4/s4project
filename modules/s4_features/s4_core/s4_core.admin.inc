@@ -56,7 +56,10 @@ function s4_core_admin_form() {
     $auth_options['ldap'] = t('LDAP');
   }
   if (module_exists('shibboleth')) {
-    $auth_options['ldap'] = t('Shibboleth');
+    $auth_options['shibboleth'] = t('Shibboleth');
+  }
+  if (module_exists('simplesamlphp_auth')) {
+    $auth_options['simplesamlphp_auth'] = t('SimpleSAML Auth');
   }
 
   $form['auth']['s4_core_auth_staff'] = array(
