@@ -20,7 +20,7 @@ before_script:
   - echo "error_reporting=E_ERROR" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
   - echo "memory_limit=200M" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
   - phpenv rehash
-  - drush make https://raw.github.com/calstates4/s4project/master/distro.make student_signup
+  - drush make https://raw.github.com/calstates4/s4project/dev/distro.make student_signup
   - cd student_signup
   - drush si student_signup --db-url=mysql://root:@127.0.0.1/drupal  --yes || true
   - drush cc all --yes
