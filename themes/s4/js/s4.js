@@ -24,7 +24,7 @@
 						trigger : ($(this).hasClass('hover')) ? 'hover' : 'click',
 						placement : ($(this).hasClass('left')) ? 'left' : 'right',
 						content: $(this).parents('.popover-wrapper').find('.popover-content div').html(),
-						title: $(this).parents('.popover-wrapper').find('.popover-content h4').html(),
+						title: $(this).parents('.popover-wrapper').find('.popover-content h4').html()
 					};
 					if($(this).hasClass('map-link')) {
 						var $mapElement = $('<div class="popover-map"></div>');
