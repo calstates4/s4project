@@ -1523,7 +1523,6 @@ function _s4_opportunity_place_button($opportunity = false) {
     elseif(isset($_SESSION['s4_signup_program'])) {
       $program = $_SESSION['s4_signup_program'];
     }
-    dpm($program);
     $destination_id = (isset($_SESSION['s4_signup_course'])) ? $_SESSION['s4_signup_course'] : $program;
     return l(t('Select this @type', array('@type' => $type->label)),'opportunities/place/self/'. $opportunity->s4_opportunity_id .'/'.  $destination .'/'. $destination_id,
           array('attributes' => array('class' => array('btn', 'btn-success'))));
