@@ -159,12 +159,15 @@ function s4_sites_strongarm() {
         'custom_settings' => FALSE,
       ),
       'print' => array(
-        'custom_settings' => FALSE,
+        'custom_settings' => TRUE,
       ),
       'token' => array(
         'custom_settings' => FALSE,
       ),
       'revision' => array(
+        'custom_settings' => FALSE,
+      ),
+      'diff_standard' => array(
         'custom_settings' => FALSE,
       ),
     ),
@@ -186,6 +189,10 @@ function s4_sites_strongarm() {
           'search_index' => array(
             'weight' => '9',
             'visible' => FALSE,
+          ),
+          'print' => array(
+            'weight' => '3',
+            'visible' => TRUE,
           ),
         ),
       ),
