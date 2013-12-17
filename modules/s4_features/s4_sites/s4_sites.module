@@ -727,7 +727,7 @@ function s4_sites_form_site_node_form_alter(&$form, $form_state) {
     $form['actions']['publish_now'] = array(
       '#type' => 'submit',
       '#class' => 'form-submit',
-      '#value' => t('Save and publish'),
+      '#value' => t('Save and make active'),
       '#weight' => '9',
       '#submit' => array('s4_sites_form_site_node_form_alter_submit')
     );
