@@ -93,6 +93,7 @@ function s4_js_alter(&$js) {
   $excludes = _s4_alter(s4_theme_get_info('exclude'), 'js');
   $js = array_diff_key($js, $excludes);
   $js['misc/jquery.js']['data'] = drupal_get_path('theme', 's4') . '/js/jquery-1.10.1.js';
+  $js['misc/jquery.form.js']['data'] = drupal_get_path('theme', 's4') . '/js/jquery.form.js';
 }
 
 function _s4_alter($files, $type) {
@@ -100,9 +101,9 @@ function _s4_alter($files, $type) {
   
   foreach($files as $key => $value) {
     if(isset($files[$key][$type])) {
-	  foreach($files[$key][$type] as $file => $name) {
-		  $output[$name] = FALSE;
-	  }
+  	  foreach($files[$key][$type] as $file => $name) {
+  		  $output[$name] = FALSE;
+  	  }
     }
   }
   return $output;
