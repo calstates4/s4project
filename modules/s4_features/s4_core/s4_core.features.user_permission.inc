@@ -879,6 +879,15 @@ function s4_core_user_default_permissions() {
     'module' => 'view_unpublished',
   );
 
+  // Exported permission: view any unpublished site content
+  $permissions['view any unpublished site content'] = array(
+    'name' => 'view any unpublished site content',
+    'roles' => array(
+      0 => 'faculty',
+    ),
+    'module' => 'view_unpublished',
+  );
+
   // Exported permission: view location directory
   $permissions['view location directory'] = array(
     'name' => 'view location directory',

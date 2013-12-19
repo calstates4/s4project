@@ -479,13 +479,6 @@ function s4_opportunity_menu() {
     'file' => 's4_opportunity.pages.inc',
     );
 
-  $items['opportunities/create/site-form'] = array(
-    'title' => 'Attach forms',
-    'page callback' => 's4_opportunity_create_site_form',
-    'access arguments' => array('start new opportunities'),
-    'file' => 's4_opportunity.pages.inc',
-    );
-
   $items['opportunities/create/site-staff/select/%node'] = array(
     'title' => 'Select site staff',
     'page callback' => 's4_opportunity_create_site_staff_select',
@@ -1100,7 +1093,7 @@ function s4_opportunity_node_insert($node) {
   $_SESSION['s4_opportunity_create']['new_site'] = TRUE;
   $type = s4_opportunity_type_load($_SESSION['s4_opportunity_create']['type']);
   if($type->data['site_form']) {
-    $_GET['destination'] = 'opportunities/create/site-form';
+    $_GET['destination'] = 'node/add/file/'. $node->nid .'?destination=opportunities/create/site-staff/new';
   }
   else {
     $_GET['destination'] = 'opportunities/create/site-staff/new';
@@ -1207,6 +1200,13 @@ function s4_opportunity_form_site_node_form_alter(&$form, $form_state) {
       $form[$name]['#access'] = $form[$name]['#required'] = false;
     }
   }
+}
+
+function s4_opportunity_form_file_node_form_alter(&$form, $form_state) {
+  if(!isset($_SESSION['s4_opportunity_create']['type'])) {
+    return;
+  }
+  $form['field_form_sid']['#access'] = FALSE;
 }
 
 function s4_opportunity_webform_submission_insert($node, $submission) {
