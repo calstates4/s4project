@@ -1206,7 +1206,10 @@ function s4_opportunity_form_file_node_form_alter(&$form, $form_state) {
   if(!isset($_SESSION['s4_opportunity_create']['type'])) {
     return;
   }
+  dpm($form);
   $form['field_form_sid']['#access'] = FALSE;
+  $form['field_expiration_reminder_date']['#access'] = FALSE;
+  $form['field_expiration_reminder']['#access'] = FALSE;
 }
 
 function s4_opportunity_webform_submission_insert($node, $submission) {
