@@ -36,6 +36,7 @@ class views_handler_s4_course_student_signup extends views_handler_field {
         $items[] = $output;
       }
     }
+    drupal_alter('s4_student_signup_list', $list, $values);
     if(!count($items)) {
       return t('Not signed up');
     }

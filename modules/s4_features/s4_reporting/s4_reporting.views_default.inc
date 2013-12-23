@@ -2289,6 +2289,11 @@ Fields',
       'filter_name' => 'field_site_requirements_tid',
       'weight' => '-14',
     ),
+    'group-state' => array(
+      'group' => '0',
+      'filter_name' => 'state',
+      'weight' => '-18',
+    ),
     'group-field_county_value' => array(
       'group' => '2',
       'filter_name' => 'field_county_value',
@@ -2782,6 +2787,12 @@ Fields',
   $handler->display->display_options['fields']['field_location']['type'] = 's4_sites_address';
   $handler->display->display_options['fields']['field_location']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_location']['separator'] = '';
+  /* Field: Workbench Moderation: State */
+  $handler->display->display_options['fields']['state']['id'] = 'state';
+  $handler->display->display_options['fields']['state']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['fields']['state']['field'] = 'state';
+  $handler->display->display_options['fields']['state']['label'] = 'Approval status';
+  $handler->display->display_options['fields']['state']['machine_name'] = 0;
   /* Field: Content: Location(s) */
   $handler->display->display_options['fields']['field_location_1']['id'] = 'field_location_1';
   $handler->display->display_options['fields']['field_location_1']['table'] = 'field_data_field_location';
@@ -2995,7 +3006,7 @@ Fields',
   $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator_id'] = '';
-  $handler->display->display_options['filters']['status']['expose']['label'] = 'Published';
+  $handler->display->display_options['filters']['status']['expose']['label'] = 'Active';
   $handler->display->display_options['filters']['status']['expose']['operator'] = 'status_op';
   $handler->display->display_options['filters']['status']['expose']['identifier'] = 'status';
   /* Filter criterion: Content: Type */
@@ -3089,11 +3100,13 @@ Fields',
     'total_hours' => 'total_hours',
     'field_county' => 'field_county',
     'site_course_subject_codes' => 'site_course_subject_codes',
+    'state' => 'state'
   );
   $handler->display->display_options['filters']['dyfield']['defaults_filterable_fields'] = array(
     'views_bulk_operations' => 'views_bulk_operations',
     'title' => 'title',
-    'field_location' => 'field_location',
+    'state' => 'state',
+    'field_location' => 0,
     'field_csu_facility' => 'field_csu_facility',
     'field_csu_org_type' => 'field_csu_org_type',
     'field_location_1' => 0,
@@ -3268,6 +3281,28 @@ Fields',
   $handler->display->display_options['filters']['field_county_value']['expose']['label'] = 'County';
   $handler->display->display_options['filters']['field_county_value']['expose']['operator'] = 'field_county_value_op';
   $handler->display->display_options['filters']['field_county_value']['expose']['identifier'] = 'field_county_value';
+  /* Filter criterion: Workbench Moderation: State */
+  $handler->display->display_options['filters']['state']['id'] = 'state';
+  $handler->display->display_options['filters']['state']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['filters']['state']['field'] = 'state';
+  $handler->display->display_options['filters']['state']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['state']['expose']['operator_id'] = 'state_op';
+  $handler->display->display_options['filters']['state']['expose']['label'] = 'Approval status';
+  $handler->display->display_options['filters']['state']['expose']['operator'] = 'state_op';
+  $handler->display->display_options['filters']['state']['expose']['identifier'] = 'state';
+  $handler->display->display_options['filters']['state']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['state']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    4 => 0,
+    6 => 0,
+    3 => 0,
+    5 => 0,
+    7 => 0,
+    8 => 0,
+    9 => 0,
+    10 => 0,
+  );
 
   /* Display: Data report page */
   $handler = $view->new_display('page', 'Data report page', 'page');
@@ -3325,6 +3360,7 @@ Fields',
     t('Email'),
     t('Location'),
     t('City'),
+    t('Approval status'),
     t('Phone '),
     t('Legislative District: Federal'),
     t('Legislative District: Lower state district'),
@@ -3349,13 +3385,13 @@ Fields',
     t('Languages'),
     t('Related programs'),
     t('Date created'),
-    t('Total placements'),
+    t('Total placements '),
     t('.'),
     t(','),
-    t('Total hours'),
+    t('Total hours '),
     t('County '),
     t('Subject code subject'),
-    t('Published'),
+    t('Active'),
     t('Issues addressed'),
     t('Org. type'),
     t('Fields'),
