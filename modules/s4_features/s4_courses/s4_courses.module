@@ -937,17 +937,24 @@ function s4_courses_permission() {
   );
 }
 
-function s4_courses_user_is_faculty($user) {
+function s4_courses_user_is_faculty($user, $past = FALSE) {
   $faculty = &drupal_static(__FUNCTION__);
-  if(isset($faculty[$user->uid])) {
-    return $faculty[$user->uid];
+  if(isset($faculty[$user->uid][(int)$past])) {
+    return $faculty[$user->uid][(int)$past];
   }
-  $terms = db_query('SELECT entity_id FROM {field_data_field_term_date_start} WHERE
-             field_term_date_start_value <= NOW()
-             AND field_term_date_start_value2 >= NOW()
-             ORDER BY field_term_date_start_value');
+  if($past) {
+    $terms = db_query('SELECT entity_id FROM {field_data_field_term_date_start} WHERE
+     field_term_date_start_value2 <= NOW()
+     ORDER BY field_term_date_start_value');
+  }
+  else {
+    $terms = db_query('SELECT entity_id FROM {field_data_field_term_date_start} WHERE
+     field_term_date_start_value <= NOW()
+     AND field_term_date_start_value2 >= NOW()
+     ORDER BY field_term_date_start_value');
+  }
   if(!$terms) {
-    $faculty[$user->uid] = FALSE;
+    $faculty[$user->uid][(int)$past] = FALSE;
     return FALSE;
   }
   $term_results = array();
@@ -955,7 +962,7 @@ function s4_courses_user_is_faculty($user) {
     $term_results[] = $term->entity_id;
   }
   if(!$term_results || !count($term_results)) {
-    $faculty[$user->uid] = FALSE;
+    $faculty[$user->uid][(int)$past] = FALSE;
     return FALSE;
   }
   $courses = db_select('field_data_field_course_faculty', 'f')
@@ -963,20 +970,26 @@ function s4_courses_user_is_faculty($user) {
               ->fields('f', array('entity_id'));
   $courses->leftJoin('field_data_field_term', 't', 't.entity_type = f.entity_type AND t.entity_id = f.entity_id');
   $courses->condition('t.field_term_nid', $term_results, 'IN');
-  $faculty[$user->uid] = $courses->execute()->fetchAllKeyed(0,0);
-  return $faculty[$user->uid];
+  $faculty[$user->uid][(int)$past] = $courses->execute()->fetchAllKeyed(0,0);
+  return $faculty[$user->uid][(int)$past];
 }
 
 function s4_courses_s4_frontpage_blocks() {
   $result = array();
   global $user;
   if(s4_courses_user_is_faculty($user)) {
-    $result =  array('courses' => array('subject' => t('Manage your courses'),
+    $result['courses'] = array('subject' => t('Manage your courses'),
                                     'content' => t('See a list of your current courses, manage the sites available to your students, and view enrollment.'),
-                                    'href' => 'faculty/manage/courses'),
-                 'students' => array('subject' => t('Manage your students'),
+                                    'href' => 'faculty/manage/courses');
+    $result['students'] = array('subject' => t('Manage your students'),
                                      'content' => t('See where all your current students are placed.'),
-                                     'href' => 'faculty/manage/students'));
+                                     'href' => 'faculty/manage/students');
   }
+  if(s4_courses_user_is_faculty($user, true)) {
+    $result['past_courses'] = array('subject' => t('View past courses'),
+                                    'content' => t('See a list of your past courses .'),
+                                    'href' => 'faculty/manage/courses/past');
+  }
+  dpm($result);
   return $result;
 }

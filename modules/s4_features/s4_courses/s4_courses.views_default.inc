@@ -1884,6 +1884,184 @@ function s4_courses_views_default_views() {
   $handler->display->display_options['fields']['course_faculty_actions']['table'] = 's4_course';
   $handler->display->display_options['fields']['course_faculty_actions']['field'] = 'course_faculty_actions';
   $handler->display->display_options['path'] = 'faculty/manage/courses';
+
+  /* Display: Faculty past courses */
+  $handler = $view->new_display('page', 'Faculty past courses', 'page_4');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['title'] = 'Manage courses';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['grouping'] = array(
+    0 => array(
+      'field' => 'field_term',
+      'rendered' => 1,
+      'rendered_strip' => 0,
+    ),
+  );
+  $handler->display->display_options['style_options']['columns'] = array(
+    'title' => 'title',
+    'title_1' => 'title_1',
+    'field_site_restrict' => 'field_site_restrict',
+    'course_student_enrollment' => 'course_student_enrollment',
+    'course_student_placements' => 'course_student_placements',
+    'field_sites' => 'field_sites',
+    'course_faculty_actions' => 'course_faculty_actions',
+    'field_term' => 'field_term',
+  );
+  $handler->display->display_options['style_options']['default'] = '-1';
+  $handler->display->display_options['style_options']['info'] = array(
+    'title' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'title_1' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_site_restrict' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'course_student_enrollment' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'course_student_placements' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_sites' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'course_faculty_actions' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_term' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['empty'] = FALSE;
+  /* No results behavior: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['label'] = 'No courses';
+  $handler->display->display_options['empty']['area']['empty'] = TRUE;
+  $handler->display->display_options['empty']['area']['content'] = '<p class="lead">No courses found.</p>
+<p>You are not listed as teaching any courses this semester. Certain courses are not part of this website, if you believe this is an error, please contact your department staff.</p>';
+  $handler->display->display_options['empty']['area']['format'] = 'full_html';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Content: Term (field_term) */
+  $handler->display->display_options['relationships']['field_term_nid']['id'] = 'field_term_nid';
+  $handler->display->display_options['relationships']['field_term_nid']['table'] = 'field_data_field_term';
+  $handler->display->display_options['relationships']['field_term_nid']['field'] = 'field_term_nid';
+  $handler->display->display_options['relationships']['field_term_nid']['required'] = TRUE;
+  $handler->display->display_options['relationships']['field_term_nid']['delta'] = '-1';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Term */
+  $handler->display->display_options['fields']['field_term']['id'] = 'field_term';
+  $handler->display->display_options['fields']['field_term']['table'] = 'field_data_field_term';
+  $handler->display->display_options['fields']['field_term']['field'] = 'field_term';
+  $handler->display->display_options['fields']['field_term']['label'] = '';
+  $handler->display->display_options['fields']['field_term']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_term']['element_type'] = 'h3';
+  $handler->display->display_options['fields']['field_term']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_term']['type'] = 'node_reference_plain';
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = 'Course';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title_1']['id'] = 'title_1';
+  $handler->display->display_options['fields']['title_1']['table'] = 'node';
+  $handler->display->display_options['fields']['title_1']['field'] = 'title';
+  $handler->display->display_options['fields']['title_1']['relationship'] = 'field_term_nid';
+  $handler->display->display_options['fields']['title_1']['label'] = '';
+  $handler->display->display_options['fields']['title_1']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['title_1']['link_to_node'] = FALSE;
+  /* Field: Field: Program(s) */
+  $handler->display->display_options['fields']['field_site_restrict']['id'] = 'field_site_restrict';
+  $handler->display->display_options['fields']['field_site_restrict']['table'] = 'field_data_field_site_restrict';
+  $handler->display->display_options['fields']['field_site_restrict']['field'] = 'field_site_restrict';
+  $handler->display->display_options['fields']['field_site_restrict']['label'] = 'Program';
+  $handler->display->display_options['fields']['field_site_restrict']['delta_offset'] = '0';
+  /* Field: Course: Total course enrollment */
+  $handler->display->display_options['fields']['course_student_enrollment']['id'] = 'course_student_enrollment';
+  $handler->display->display_options['fields']['course_student_enrollment']['table'] = 's4_course';
+  $handler->display->display_options['fields']['course_student_enrollment']['field'] = 'course_student_enrollment';
+  $handler->display->display_options['fields']['course_student_enrollment']['label'] = 'Enrollment';
+  /* Field: Course: Total course placements */
+  $handler->display->display_options['fields']['course_student_placements']['id'] = 'course_student_placements';
+  $handler->display->display_options['fields']['course_student_placements']['table'] = 's4_course';
+  $handler->display->display_options['fields']['course_student_placements']['field'] = 'course_student_placements';
+  $handler->display->display_options['fields']['course_student_placements']['label'] = 'Placements';
+  $handler->display->display_options['fields']['course_student_placements']['display_percentage'] = TRUE;
+  /* Field: Field: Sites */
+  $handler->display->display_options['fields']['field_sites']['id'] = 'field_sites';
+  $handler->display->display_options['fields']['field_sites']['table'] = 'field_data_field_sites';
+  $handler->display->display_options['fields']['field_sites']['field'] = 'field_sites';
+  $handler->display->display_options['fields']['field_sites']['delta_offset'] = '0';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Content: Term dates - end date (field_term_date_start:value2) */
+  $handler->display->display_options['sorts']['field_term_date_start_value2']['id'] = 'field_term_date_start_value2';
+  $handler->display->display_options['sorts']['field_term_date_start_value2']['table'] = 'field_data_field_term_date_start';
+  $handler->display->display_options['sorts']['field_term_date_start_value2']['field'] = 'field_term_date_start_value2';
+  $handler->display->display_options['sorts']['field_term_date_start_value2']['relationship'] = 'field_term_nid';
+  $handler->display->display_options['sorts']['field_term_date_start_value2']['order'] = 'DESC';
+  /* Sort criterion: Content: Post date */
+  $handler->display->display_options['sorts']['created']['id'] = 'created';
+  $handler->display->display_options['sorts']['created']['table'] = 'node';
+  $handler->display->display_options['sorts']['created']['field'] = 'created';
+  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'course' => 'course',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filter criterion: Content: Term dates - end date (field_term_date_start:value2) */
+  $handler->display->display_options['filters']['field_term_date_start_value2']['id'] = 'field_term_date_start_value2';
+  $handler->display->display_options['filters']['field_term_date_start_value2']['table'] = 'field_data_field_term_date_start';
+  $handler->display->display_options['filters']['field_term_date_start_value2']['field'] = 'field_term_date_start_value2';
+  $handler->display->display_options['filters']['field_term_date_start_value2']['relationship'] = 'field_term_nid';
+  $handler->display->display_options['filters']['field_term_date_start_value2']['operator'] = '<=';
+  $handler->display->display_options['filters']['field_term_date_start_value2']['group'] = 1;
+  $handler->display->display_options['filters']['field_term_date_start_value2']['default_date'] = 'now';
+  $handler->display->display_options['path'] = 'faculty/manage/courses/past';
   $translatables['user_courses'] = array(
     t('Master'),
     t('Sign up for service'),
@@ -1951,6 +2129,7 @@ function s4_courses_views_default_views() {
 <p>You are not listed as teaching any courses this semester. Certain courses are not part of this website, if you believe this is an error, please contact your department staff.</p>'),
     t('Program'),
     t('Faculty actions'),
+    t('Faculty past courses'),
   );
   $export['user_courses'] = $view;
 

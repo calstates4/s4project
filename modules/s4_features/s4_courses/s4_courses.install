@@ -40,3 +40,12 @@ function s4_courses_update_7104(&$sandbox) {
   drupal_load('module', 'features');
   features_revert(array('s4_courses' => array('views_view')));
 }
+
+
+/**
+* Add 'past courses' view for faculty
+*/
+function s4_courses_update_7105(&$sandbox) {
+  drupal_load('module', 'features');
+  features_revert(array('s4_courses' => array('views_view')));
+}
