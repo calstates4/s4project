@@ -2214,6 +2214,11 @@ Categories
 Location
 Placements
 Fields',
+    'group-status' => array(
+      'group' => '0',
+      'filter_name' => 'status',
+      'weight' => '-19',
+    ),
     'group-city' => array(
       'group' => '2',
       'filter_name' => 'city',
@@ -2252,7 +2257,7 @@ Fields',
     'group-field_site_restrict_tid' => array(
       'group' => '0',
       'filter_name' => 'field_site_restrict_tid',
-      'weight' => '-16',
+      'weight' => '-17',
     ),
     'group-field_tags_tid' => array(
       'group' => '1',
@@ -2277,27 +2282,27 @@ Fields',
     'group-title' => array(
       'group' => '0',
       'filter_name' => 'title',
-      'weight' => '-15',
+      'weight' => '-16',
     ),
     'group-created' => array(
       'group' => '0',
       'filter_name' => 'created',
-      'weight' => '-14',
+      'weight' => '-15',
     ),
     'group-field_site_requirements_tid' => array(
       'group' => '1',
       'filter_name' => 'field_site_requirements_tid',
       'weight' => '-14',
     ),
-    'group-state' => array(
-      'group' => '0',
-      'filter_name' => 'state',
-      'weight' => '-18',
-    ),
     'group-field_county_value' => array(
       'group' => '2',
       'filter_name' => 'field_county_value',
       'weight' => '-17',
+    ),
+    'group-state' => array(
+      'group' => '0',
+      'filter_name' => 'state',
+      'weight' => '-18',
     ),
   );
   $handler->display->display_options['pager']['type'] = 'full';
@@ -2787,12 +2792,6 @@ Fields',
   $handler->display->display_options['fields']['field_location']['type'] = 's4_sites_address';
   $handler->display->display_options['fields']['field_location']['delta_offset'] = '0';
   $handler->display->display_options['fields']['field_location']['separator'] = '';
-  /* Field: Workbench Moderation: State */
-  $handler->display->display_options['fields']['state']['id'] = 'state';
-  $handler->display->display_options['fields']['state']['table'] = 'workbench_moderation_node_history';
-  $handler->display->display_options['fields']['state']['field'] = 'state';
-  $handler->display->display_options['fields']['state']['label'] = 'Approval status';
-  $handler->display->display_options['fields']['state']['machine_name'] = 0;
   /* Field: Content: Location(s) */
   $handler->display->display_options['fields']['field_location_1']['id'] = 'field_location_1';
   $handler->display->display_options['fields']['field_location_1']['table'] = 'field_data_field_location';
@@ -2800,6 +2799,12 @@ Fields',
   $handler->display->display_options['fields']['field_location_1']['label'] = 'City';
   $handler->display->display_options['fields']['field_location_1']['type'] = 's4_sites_address_city';
   $handler->display->display_options['fields']['field_location_1']['delta_offset'] = '0';
+  /* Field: Workbench Moderation: State */
+  $handler->display->display_options['fields']['state']['id'] = 'state';
+  $handler->display->display_options['fields']['state']['table'] = 'workbench_moderation_node_history';
+  $handler->display->display_options['fields']['state']['field'] = 'state';
+  $handler->display->display_options['fields']['state']['label'] = 'Approval status';
+  $handler->display->display_options['fields']['state']['machine_name'] = 0;
   /* Field: Content: Phone number */
   $handler->display->display_options['fields']['field_phone']['id'] = 'field_phone';
   $handler->display->display_options['fields']['field_phone']['table'] = 'field_data_field_phone';
@@ -2974,11 +2979,13 @@ Fields',
   $handler->display->display_options['fields']['total_placements']['id'] = 'total_placements';
   $handler->display->display_options['fields']['total_placements']['table'] = 's4_reporting';
   $handler->display->display_options['fields']['total_placements']['field'] = 'total_placements';
+  $handler->display->display_options['fields']['total_placements']['label'] = 'Total placements ';
   $handler->display->display_options['fields']['total_placements']['element_label_colon'] = FALSE;
   /* Field: Form Evaluation: Total hours */
   $handler->display->display_options['fields']['total_hours']['id'] = 'total_hours';
   $handler->display->display_options['fields']['total_hours']['table'] = 's4_reporting';
   $handler->display->display_options['fields']['total_hours']['field'] = 'total_hours';
+  $handler->display->display_options['fields']['total_hours']['label'] = 'Total hours ';
   /* Field: Content: County */
   $handler->display->display_options['fields']['field_county']['id'] = 'field_county';
   $handler->display->display_options['fields']['field_county']['table'] = 'field_data_field_county';
@@ -3003,12 +3010,25 @@ Fields',
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
-  $handler->display->display_options['filters']['status']['value'] = '1';
+  $handler->display->display_options['filters']['status']['value'] = 'All';
   $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['exposed'] = TRUE;
   $handler->display->display_options['filters']['status']['expose']['operator_id'] = '';
   $handler->display->display_options['filters']['status']['expose']['label'] = 'Active';
   $handler->display->display_options['filters']['status']['expose']['operator'] = 'status_op';
   $handler->display->display_options['filters']['status']['expose']['identifier'] = 'status';
+  $handler->display->display_options['filters']['status']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    4 => 0,
+    6 => 0,
+    3 => 0,
+    5 => 0,
+    7 => 0,
+    8 => 0,
+    9 => 0,
+    10 => 0,
+  );
   /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
@@ -3066,78 +3086,14 @@ Fields',
   $handler->display->display_options['filters']['dyfield']['expose']['operator'] = 'dyfield_op';
   $handler->display->display_options['filters']['dyfield']['expose']['identifier'] = 'dyfield';
   $handler->display->display_options['filters']['dyfield']['filterable_fields'] = array(
-    'views_bulk_operations' => 'views_bulk_operations',
-    'title' => 'title',
-    'field_location' => 'field_location',
-    'field_location_1' => 'field_location_1',
-    'field_phone' => 'field_phone',
-    'field_district_federal' => 'field_district_federal',
-    'field_district_state_lower' => 'field_district_state_lower',
-    'field_district_state_upper' => 'field_district_state_upper',
-    'field_site_users' => 'field_site_users',
-    'body' => 'body',
-    'field_site_projects' => 'field_site_projects',
-    'field_site_demographics' => 'field_site_demographics',
-    'field_site_email_1' => 'field_site_email_1',
-    'field_site_hours' => 'field_site_hours',
-    'field_csu_facility' => 'field_csu_facility',
-    'field_signups_max' => 'field_signups_max',
-    'field_csu_org_type' => 'field_csu_org_type',
-    'field_phone_1' => 'field_phone_1',
-    'field_health_risk' => 'field_health_risk',
-    'field_site_instructions_required' => 'field_site_instructions_required',
-    'field_site_tour' => 'field_site_tour',
-    'field_site_facebook_page' => 'field_site_facebook_page',
-    'field_site_instructions' => 'field_site_instructions',
-    'field_tags' => 'field_tags',
-    'field_site_health_training' => 'field_site_health_training',
-    'field_website_1' => 'field_website_1',
-    'field_site_hours_minimum' => 'field_site_hours_minimum',
-    'field_site_language' => 'field_site_language',
-    'field_site_restrict' => 'field_site_restrict',
-    'created' => 'created',
     'total_placements' => 'total_placements',
     'total_hours' => 'total_hours',
-    'field_county' => 'field_county',
-    'site_course_subject_codes' => 'site_course_subject_codes',
-    'state' => 'state'
+    'state' => 'state',
   );
   $handler->display->display_options['filters']['dyfield']['defaults_filterable_fields'] = array(
-    'views_bulk_operations' => 'views_bulk_operations',
-    'title' => 'title',
     'state' => 'state',
-    'field_location' => 0,
-    'field_csu_facility' => 'field_csu_facility',
-    'field_csu_org_type' => 'field_csu_org_type',
-    'field_location_1' => 0,
-    'field_phone' => 0,
-    'field_district_federal' => 0,
-    'field_district_state_lower' => 0,
-    'field_district_state_upper' => 0,
-    'field_site_users' => 0,
-    'body' => 0,
-    'field_site_projects' => 0,
-    'field_site_demographics' => 0,
-    'field_site_email_1' => 0,
-    'field_site_hours' => 0,
-    'field_signups_max' => 0,
-    'field_phone_1' => 0,
-    'field_health_risk' => 0,
-    'field_site_instructions_required' => 0,
-    'field_site_tour' => 0,
-    'field_site_facebook_page' => 0,
-    'field_site_instructions' => 0,
-    'field_tags' => 0,
-    'field_site_health_training' => 0,
-    'field_website_1' => 0,
-    'field_site_hours_minimum' => 0,
-    'field_site_language' => 0,
-    'field_site_restrict' => 0,
-    'created' => 0,
     'total_placements' => 0,
     'total_hours' => 0,
-    'field_county' => 0,
-    'site_course_subject_codes' => 0,
   );
   $handler->display->display_options['filters']['dyfield']['sortability'] = 1;
   $handler->display->display_options['filters']['dyfield']['checkboxes'] = 0;
@@ -3610,49 +3566,49 @@ Fields',
       'empty_column' => 0,
     ),
     'field_term' => array(
-      'sortable' => 0,
+      'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
     'field_course_subject' => array(
-      'sortable' => 0,
+      'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
     'field_course_catalog_number' => array(
-      'sortable' => 0,
+      'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
     'field_course_section' => array(
-      'sortable' => 0,
+      'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
     'title' => array(
-      'sortable' => 0,
+      'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
     'field_first_name_1' => array(
-      'sortable' => 0,
+      'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
     'field_last_name_1' => array(
-      'sortable' => 0,
+      'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
@@ -3716,6 +3672,13 @@ Fields',
   $handler->display->display_options['relationships']['field_course_nid']['relationship'] = 'reverse_field_user_node';
   $handler->display->display_options['relationships']['field_course_nid']['label'] = 'field_signup_course';
   $handler->display->display_options['relationships']['field_course_nid']['delta'] = '-1';
+  /* Field: User: Uid */
+  $handler->display->display_options['fields']['uid']['id'] = 'uid';
+  $handler->display->display_options['fields']['uid']['table'] = 'users';
+  $handler->display->display_options['fields']['uid']['field'] = 'uid';
+  $handler->display->display_options['fields']['uid']['label'] = '';
+  $handler->display->display_options['fields']['uid']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['uid']['link_to_user'] = FALSE;
   /* Field: Bulk operations: User */
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'users';
@@ -3854,14 +3817,6 @@ Fields',
       'postpone_processing' => 0,
     ),
   );
-  /* Field: User: Uid */
-  $handler->display->display_options['fields']['uid']['id'] = 'uid';
-  $handler->display->display_options['fields']['uid']['table'] = 'users';
-  $handler->display->display_options['fields']['uid']['field'] = 'uid';
-  $handler->display->display_options['fields']['uid']['label'] = '';
-  $handler->display->display_options['fields']['uid']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['uid']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['uid']['link_to_user'] = FALSE;
   /* Field: Field: Last Name */
   $handler->display->display_options['fields']['field_last_name']['id'] = 'field_last_name';
   $handler->display->display_options['fields']['field_last_name']['table'] = 'field_data_field_last_name';
@@ -4057,46 +4012,10 @@ Fields',
   $handler->display->display_options['filters']['dyfield']['expose']['identifier'] = 'dyfield';
   $handler->display->display_options['filters']['dyfield']['expose']['multiple'] = TRUE;
   $handler->display->display_options['filters']['dyfield']['filterable_fields'] = array(
-    'views_bulk_operations' => 'views_bulk_operations',
-    'field_last_name' => 'field_last_name',
-    'field_first_name' => 'field_first_name',
-    'field_site_restrict' => 'field_site_restrict',
-    'authname' => 'authname',
-    'mail' => 'mail',
-    'login' => 'login',
-    'field_sis_id' => 'field_sis_id',
-    'field_term' => 'field_term',
-    'field_course_subject' => 'field_course_subject',
-    'field_course_catalog_number' => 'field_course_catalog_number',
-    'field_course_section' => 'field_course_section',
-    'title' => 'title',
-    'field_first_name_1' => 'field_first_name_1',
-    'field_last_name_1' => 'field_last_name_1',
-    'field_email' => 'field_email',
-    'field_job_title' => 'field_job_title',
-    'field_phone' => 'field_phone',
-    'field_signup_hours' => 'field_signup_hours',
+    'uid' => 'uid',
   );
   $handler->display->display_options['filters']['dyfield']['defaults_filterable_fields'] = array(
-    'views_bulk_operations' => 'views_bulk_operations',
-    'field_last_name' => 'field_last_name',
-    'field_first_name' => 'field_first_name',
-    'field_site_restrict' => 'field_site_restrict',
-    'authname' => 'authname',
-    'mail' => 'mail',
-    'field_sis_id' => 'field_sis_id',
-    'login' => 0,
-    'field_term' => 0,
-    'field_course_subject' => 0,
-    'field_course_catalog_number' => 0,
-    'field_course_section' => 0,
-    'title' => 0,
-    'field_first_name_1' => 0,
-    'field_last_name_1' => 0,
-    'field_email' => 0,
-    'field_job_title' => 0,
-    'field_phone' => 0,
-    'field_signup_hours' => 0,
+    'uid' => 0,
   );
   $handler->display->display_options['filters']['dyfield']['sortability'] = 1;
   $handler->display->display_options['filters']['dyfield']['checkboxes'] = 0;

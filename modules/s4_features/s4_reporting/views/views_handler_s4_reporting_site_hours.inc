@@ -19,7 +19,7 @@ class views_handler_s4_reporting_site_hours extends views_handler_field_numeric 
     }
     elseif($date['default_date'] && $date['default_to_date']) {
       $query->leftJoin('field_data_field_signup_start_date', 'd', 'd.entity_id = n.nid AND d.revision_id = n.vid AND d.entity_type = :node', array(':node' => 'node'));
-      $query->condition('d.field_signup_start_date_value', date('Y-m-d', strtotime($date['defalut_date'])), '>=');$query->condition('d.field_signup_start_date_value', date('Y-m-d', strtotime($date['defalut_to_date'])), '<=');
+      $query->condition('d.field_signup_start_date_value', date('Y-m-d', strtotime($date['default_date'])), '>=');$query->condition('d.field_signup_start_date_value', date('Y-m-d', strtotime($date['defalut_to_date'])), '<=');
     }
     $query->distinct();
     $query->addExpression('SUM(h.field_signup_hours_value)', 'hours');

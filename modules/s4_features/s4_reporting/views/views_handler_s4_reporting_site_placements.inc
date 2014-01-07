@@ -12,7 +12,10 @@ class views_handler_s4_reporting_site_placements extends views_handler_field_num
     $date = $this->view->exposed_raw_input['field_signup_start_date_value'];
     $term = $this->view->exposed_raw_input['field_term_nid_1'];
     $program = $this->view->exposed_raw_input['field_site_restrict_tid'];
-    
+    if(isset($this->view->exposed_raw_input['field_site_restrict_tid']) && count($this->view->exposed_raw_input['field_site_restrict_tid'])) {
+      $query->leftJoin('field_data_field_site_restrict', 'r', 'r.entity_id = n.nid AND r.revision_id = n.vid AND r.entity_type = :node', array(':node' => 'node'));
+      $query->condition('r.field_site_restrict_tid', $this->view->exposed_raw_input['field_site_restrict_tid'], 'IN');
+    }
     if(is_array($term) && count($term)) {
       $query->leftJoin('field_data_field_course', 'c', 'c.entity_id = n.nid AND c.revision_id = n.vid AND c.entity_type = :node', array(':node' => 'node'));
       $query->leftJoin('field_data_field_term', 't', 't.entity_id = c.field_course_nid AND t.entity_type = :node', array(':node' => 'node'));
