@@ -131,3 +131,17 @@ function s4_opportunity_install() {
     }
   }
 }
+
+
+/**
+ * Reordered site report fields
+ */
+function s4_opportunity_update_7101(&$sandbox) {
+  $fields = field_info_fields();
+  foreach($fields['field_active_date']['bundles']['s4_opportunity'] as $opp) {
+    $field = field_info_instance('s4_opportunity', 'field_active_date', $opp);
+    $field['description'] = 'Select the dates when this opportunity is visible and available for placements.';
+    $field['label'] = t('Published date');
+    field_update_instance($field);
+  }
+}
