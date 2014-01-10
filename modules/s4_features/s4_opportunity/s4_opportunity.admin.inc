@@ -185,7 +185,7 @@ function s4_opportunity_edit_form($form, &$form_state, $s4_opportunity) {
     '#type' => 'checkbox',
     '#title' => t('Active'),
     '#description' => t('Active @types are available for students to be placed with. Inactive @types are only visible to department staff.', array('@types' => check_plain($type->label))),
-    '#default_value' => isset($s4_opportunity->active) ? $s4_opportunity->active : 0,
+    '#default_value' => isset($s4_opportunity->status) ? $s4_opportunity->status : 0,
     '#maxlength' => 255,
     '#weight' => -4,
   );

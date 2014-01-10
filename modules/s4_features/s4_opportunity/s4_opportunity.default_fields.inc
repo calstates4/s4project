@@ -426,7 +426,7 @@ function _s4_opportunity_add_default_fields($type) {
 
   if (empty($instance)) {
     $instance = array(
-		  'label' => t('Active date'),
+		  'label' => t('Published date'),
 		  'widget' => array(
 		    'weight' => '6',
 		    'type' => 'date_popup',
@@ -467,7 +467,7 @@ function _s4_opportunity_add_default_fields($type) {
 		  ),
 		  'required' => 0,
       'field_lock' => 1,
-		  'description' => 'Select the time when this opportunity is available.',
+		  'description' => 'Select the dates when this opportunity is visible and available for placements.',
 		  'display_label' => '',
 		  'field_name' => 'field_active_date',
 		  'entity_type' => 's4_opportunity',
