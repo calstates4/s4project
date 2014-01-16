@@ -778,7 +778,7 @@ function s4_core_webform_submission_insert($node, $submission) {
     drupal_goto('<front>');
   }
   if (isset($_SESSION['s4_core_student_signup_complete'])) {
-    $signup = node_load($_SESSION['s4_core_site_eval_signup']);
+    $signup = node_load($_SESSION['s4_core_student_signup_complete']);
     if ($signup) {
       $signup->field_form_signup_sid[$node->language][0]['value'] = $submission->sid;
       node_save($signup);
@@ -1830,7 +1830,25 @@ function s4_core_s4_frontpage_blocks() {
       $signup_course = field_get_items('node', $signup, 'field_course');
       if($signup_course) {
         $course_count[$signup_course[0]['nid']] = (isset($course_count[$signup_course[0]['nid']])) ? $course_count[$signup_course[0]['nid']] + 1 : 1;
-      }     
+      }
+      $signup_form = field_get_items('node', $signup, 'field_form_signup_sid');
+      $programs = field_get_items('node', $signup, 'field_site_restrict');
+      $site = field_get_items('node', $signup, 'field_site');
+      $site = node_load($site[0]['nid']);
+      if(!$signup_form || !$signup_form[0]['value']) {
+        foreach($programs as $program) {
+          $program = taxonomy_term_load($program['tid']);
+          $signup_form = field_get_items('taxonomy_term', $program, 'field_site_form');
+          if($signup_form[0]['nid']) {
+            $form = node_load($signup_form[0]['nid']);
+            $blocks['user_forms_'. $signup->nid] = array(
+              'subject' => t('Fill out a form for your placement'),
+              'content' => '<p class="lead">'. t('You have a placement at %site that requires completing a form.', array('%site' => $site->title)) .'</p><p>'. l(t('Fill out %form', array('%form' => $form->title)), 'signup/register/'. $signup->nid .'/'. hash('sha256', $signup->nid . drupal_get_hash_salt()) , array('html' => true, 'attributes' => array('class' => array('btn btn-primary'))))  .'</p>',
+              'alert' => TRUE,
+            );  
+          }
+        }
+      } 
     }
     foreach($courses as $course) {
       $course = node_load($course->nid);

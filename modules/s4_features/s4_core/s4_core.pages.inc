@@ -515,8 +515,17 @@ function s4_core_student_signup_complete($signup) {
   $site = node_load($site[0]['nid']);
   $form = field_get_items('node', $site, 'field_site_form');
   $sid = field_get_items('node', $signup, 'field_form_assessment_sid');
-  if (!$sid[0]['value']) {
+  if (!$sid[0]['value'] && $form[0]['nid']) {
     $_SESSION['s4_core_student_signup_complete'] = $signup->nid;
     drupal_goto('node/' . $form[0]['nid']);
+  }
+  $programs = field_get_items('node', $signup, 'field_site_restrict');
+  foreach($programs as $program) {
+    $program = taxonomy_term_load($program['tid']);
+    $signup_form = field_get_items('taxonomy_term', $program, 'field_site_form');
+    if($signup_form[0]['nid']) {
+      $_SESSION['s4_core_student_signup_complete'] = $signup->nid;
+      drupal_goto('node/' . $signup_form[0]['nid']);      
+    }
   }
 }
