@@ -78,6 +78,9 @@ projects[field_collection_table][version] = "1.0-beta1"
 projects[flag][subdir] = "contrib"
 projects[flag][version] = "3.0"
 
+projects[forena][subdir] = "contrib"
+projects[forena][version] = "3.12"
+
 projects[gmap][subdir] = "contrib"
 projects[gmap][version] = "1.x-dev"
 

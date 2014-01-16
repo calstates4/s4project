@@ -1,0 +1,2 @@
+--ACCESS=access s4 reporting
+select distinct field_course_subject_value FROM field_data_field_course_subject ORDER BY field_course_subject_value

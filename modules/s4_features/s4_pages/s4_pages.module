@@ -106,6 +106,12 @@ function _s4_pages_homepage() {
       $alerts[] = $block;
     }
   }
+  if(count($blocks) < 2 && !count($alerts)) {
+   $directions = variable_get('s4_core_no_home_blocks', array('value' => ''));
+   $blocks['no_message'] = array(
+      'content' => check_markup($directions['value'], $directions['format']),
+      );
+  }
   return theme('s4_pages_frontpage', array('title' => $title, 'blocks' => $blocks, 'alerts' => $alerts));
 }
 

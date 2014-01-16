@@ -41,6 +41,7 @@ function s4_core_admin_form() {
     '#default_value' => variable_get('s4_core_collect_service_hours', TRUE),
   );
 
+
   $form['auth'] = array(
     '#type' => 'fieldset',
     '#title' => 'Authentication',
@@ -94,18 +95,37 @@ function s4_core_admin_form() {
   $form['auth']['s4_core_auth_directions'] = array(
     '#type' => 'text_format',
     '#title' => 'Custom message',
-    '#options' => 'Message to appear above the login form. This could include information on who to call if the account does not work.',
-    '#text_format' => FILTER_FORMAT_DEFAULT,
+    '#description' => 'Message to appear above the login form. This could include information on who to call if the account does not work.',
+    '#text_format' => filter_default_format(),
     '#default_value' => $directions['value'],
   );
+
+  $directions = variable_get('s4_core_no_home_blocks', array('value' => ''));
+  $form['auth']['s4_core_no_home_blocks'] = array(
+    '#type' => 'text_format',
+    '#title' => 'Message for users who are logged in but cannot do anything',
+    '#description' => 'This message appears for users who have registered for an account, but are not site staff, students, or faculty.',
+    '#text_format' => filter_default_format(),
+    '#default_value' => $directions['value'],
+  );
+
   $message = variable_get('s4_core_welcome_message', array('value' => ''));
   $form['s4_core_welcome_message'] = array(
     '#type' => 'text_format',
     '#title' => 'Welcome message',
-    '#options' => 'This message appears on your site\'s front page.',
-    '#text_format' => FILTER_FORMAT_DEFAULT,
+    '#description' => 'This message appears on your site\'s front page.',
+    '#text_format' => filter_default_format(),
     '#default_value' => $message['value'],
   );
 
+  $message = variable_get('s4_courses_faculty_help', array('value' => t('You can quickly search for a student below, or manage your courses to the right, where you can edit your course settings. To restrict students to a course, visit the !link, click on a site, and click the "Add to course" button.', array('!link' => l('site listing page', 'site-list'))), 'format' => filter_default_format()));
+  $form['s4_courses_faculty_help'] = array(
+    '#title' => t('Welcome message for faculty'),
+    '#type' => 'text_format',
+    '#description' => t('The number of days before a student\'s service ends where an email should be sent.'),
+    '#default_value' => $message['value'],
+    '#text_format' => $message['format'],
+    );
   return system_settings_form($form);
 }
+

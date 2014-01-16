@@ -108,6 +108,86 @@ function s4_reporting_menu() {
 	return $items;
 }
 
+function s4_reporting_form_forena_layout_form_alter(&$form, $form_state) {
+	$form['body']['#attributes']['style'] = 'font-family: Apple Mondale, monospace;';
+}
+
+function s4_reporting_form_forena_parameter_form_alter(&$form, $form_state) {
+	module_load_include('inc', 's4_reporting', 's4_reporting.forena');
+	$fields = s4_reporting_forena_groups();
+	if(!isset($fields[$form_state['storage']['desc']['name']])) {
+		return;
+	}
+
+	$form['params']['#collapsed'] = FALSE;
+	$form['params']['#collapsible'] = FALSE;
+	$form['params']['#type'] = 'vertical_tabs';
+	foreach($fields[$form_state['storage']['desc']['name']] as $group_name => $group) {
+		$group_values = 0;
+		$form['params'][$group_name] = array(
+			'#type' => 'fieldset',
+			'#title' => $group['title']
+		);
+		if(isset($group['fields'])) {
+			foreach($group['fields'] as $field) {
+				$form['params'][$group_name][$field] = $form['params'][$field];
+				if(isset($form['params'][$field]['#default_value']) &&
+					$form['params'][$field]['#default_value']) {
+					$group_values++;
+				}
+				unset($form['params'][$field]);
+			}
+		}
+		if(isset($group['auto_fields']) && $group['auto_fields']) {
+			foreach($form['params'] as $field_name => $field) {
+				if(strpos($field_name, 'field_') === 0) {
+					$form['params'][$group_name][$field_name] = $field;
+					if(isset($field['#default_value']) &&
+						$field['#default_value']) {
+						$group_values++;
+					}
+					unset($form['params'][$field_name]);
+				}
+			}
+		}
+		if($group_values) {
+			$form['params'][$group_name]['#title'] .= ' ('. $group_values . ')';
+		}
+	}
+	$form['submit'] = $form['params']['submit'];
+	unset($form['params']['submit']);
+	array_unshift($form['#submit'], 's4_reporting_form_forena_parameter_form_alter_submit');
+}
+
+function s4_reporting_form_forena_parameter_form_alter_submit($form, &$form_state) {
+	module_load_include('inc', 's4_reporting', 's4_reporting.forena');
+	$fields = s4_reporting_forena_groups();
+	if(!isset($fields[$form_state['storage']['desc']['name']])) {
+		return;
+	}
+	foreach($fields[$form_state['storage']['desc']['name']] as $group_name => $group) {
+		foreach($form_state['values']['params'][$group_name] as $field_name => $field) {
+			$form_state['values']['params'][$field_name] = $field;
+		}
+		unset($form_state['values']['params'][$group_name]);
+	}
+	unset($form_state['values']['params']['params__active_tab']);
+	unset($form_state['submit']);
+}
+
+function s4_reporting_forena_controls() {
+  $controls[] = array('file' => 'renderers/s4ForenaRenderer.inc',
+                      'class' => 's4ForenaRenderer',
+                     );
+  return $controls;
+}
+
+/**
+ * Implementation of forena_report_directory hook.
+ */
+function s4_reporting_forena_report_directory() {
+  return drupal_get_path('module', 's4_reporting') . '/repos/reports';
+}
 
 function s4_reporting_summary_form_access($key) {
   $keys = variable_get('s4_reporting_summary_form_keys', array());

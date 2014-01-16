@@ -7,7 +7,8 @@ class views_handler_make_opportunity_placement_link extends views_handler_field 
     $uid = (isset($values->uid)) ? $values->uid : $values->users_field_data_field_course_students_uid;
     $destination = drupal_get_destination();
     $destination['modal'] = 'modal';
-    $links[] = l(t('Place with site'), 'signup/create/'. $uid, array('query' => array('modal' => 'modal'), 'attributes' => array('class' => array('iframe-modal'), 'data-modal-title' => t('Place @first @last', array('@first' => $values->field_data_field_first_name_field_first_name_value, '@last' => $values->field_data_field_last_name_field_last_name_value)))));
+  	$prefix = (user_access('create signups for other users')) ? '' : 'faculty/';
+    $links[] = l(t('Place with site'), 'signup/create/' . $prefix . $uid, array('query' => array('modal' => 'modal'), 'attributes' => array('class' => array('iframe-modal'), 'data-modal-title' => t('Place @first @last', array('@first' => $values->field_data_field_first_name_field_first_name_value, '@last' => $values->field_data_field_last_name_field_last_name_value)))));
 
 	  $types = s4_opportunity_get_types();
 	  if(count($types)) {

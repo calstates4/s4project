@@ -384,7 +384,7 @@ function s4_opportunity_admin_form() {
     '#default_value' => variable_get('s4_opportunity_begin_subject', t('Start a new opportunity'))
     );
 
-  $message = variable_get('s4_opportunity_begin_message', array('format' => FILTER_FORMAT_DEFAULT, 'value' => ''));
+  $message = variable_get('s4_opportunity_begin_message', array('format' => filter_default_format(), 'value' => ''));
   $form['s4_opportunity_begin_message'] = array(
     '#type' => 'text_format',
     '#title' => t('Message for users when beginning to create an opportunity.'),
