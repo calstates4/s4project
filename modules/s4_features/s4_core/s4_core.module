@@ -309,7 +309,8 @@ function s4_core_menu() {
     'title' => 'Edit signup',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('s4_core_create_signup_form', 2, 3, 4),
-    'access arguments' => array('create signups for other users'),
+    'access arguments' => array(2, 4),
+    'access callback' => 's4_core_signup_edit_access',
     'file' => 's4_core.pages.inc',
   );
 
@@ -357,6 +358,28 @@ function s4_core_menu() {
   );
 
   return $items;
+}
+
+function s4_core_signup_edit_access($user, $signup) {
+  global $user;
+  if(user_access('create signups for other users')) {
+    return TRUE;
+  }
+  if(!user_access('manage course students')) {
+    return FALSE;
+  }
+  $course = field_get_items('node', $signup, 'field_course');
+  if(!$course || !$course[0]['nid']) {
+    return FALSE;
+  }
+  $course = node_load($course[0]['nid']);
+  $faculty = field_get_items('node', $course, 'field_course_faculty');
+  foreach($faculty as $instructor) {
+    if($instructor['uid'] == $user->uid) {
+      return TRUE;
+    }
+  }
+  return FALSE;
 }
 
 function s4_core_signup_delete_access($node) {
