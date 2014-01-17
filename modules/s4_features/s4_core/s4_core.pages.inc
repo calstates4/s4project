@@ -291,14 +291,14 @@ function s4_core_create_signup_form($form, &$form_state, $uid, $option = 'new', 
     $default_program = field_get_items('node', $course, 'field_site_restrict');
   }
   if($default_program && count($default_program)) {
-  	$programs = array();
-    	foreach($default_program as $program) {
-    		$programs[] = $program['tid'];
-    	}
-  	if(count($programs)) {
-  	  $query->leftJoin('field_data_field_site_restrict', 'r', 'r.entity_id = n.nid AND r.entity_type = :node', array(':node' => 'node'));
-  	  $query->condition('r.field_site_restrict_tid', $programs, 'IN');
-  	}
+    $programs = array();
+      foreach($default_program as $program) {
+        $programs[] = $program['tid'];
+      }
+    if(count($programs)) {
+      $query->leftJoin('field_data_field_site_restrict', 'r', 'r.entity_id = n.nid AND r.entity_type = :node', array(':node' => 'node'));
+      $query->condition('r.field_site_restrict_tid', $programs, 'IN');
+    }
   }
   
   $results = $query->execute();
@@ -407,20 +407,19 @@ function s4_core_create_signup_form($form, &$form_state, $uid, $option = 'new', 
 
   $form['email_student'] = array(
     '#type' => 'checkbox',
-    '#title' => 'Send student email to complete a signup form (if the site has one)',
-    '#default_value' => 1,
+    '#title' => 'If this program has a default confirmation email, send it.',
   );
   
   if(module_exists('s4_courses') && $courses) {
     $form['email_faculty'] = array(
       '#type' => 'checkbox',
-      '#title' => t('Also email faculty about signup'),
+      '#title' => t('CC faculty the placement confirmation.'),
     );
   }
   
   $form['cc_myself'] = array(
     '#type' => 'checkbox',
-    '#title' => t('CC myself a copy of the confirmation email sent to the student'),
+    '#title' => t('CC me on the confirmation emails.'),
   );
   
   if($existing_node) {
