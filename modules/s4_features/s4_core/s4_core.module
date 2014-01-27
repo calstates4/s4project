@@ -672,6 +672,7 @@ function _s4_core_create_signup($uid = 0, $signup = array()) {
            'signup_sid' => 0,
            'hours' => 0,
            'program' => 0,
+           'opportunity' => 0,
            'cc_faculty' => FALSE,
            );
   $node = new stdClass();
@@ -711,6 +712,9 @@ function _s4_core_create_signup($uid = 0, $signup = array()) {
       $start_date[$date['start_date']['weight']] = $date['start_date']['date'];
       $end_date[$date['end_date']['weight']] = $date['end_date']['date'];
     }
+  }
+  if(module_exists('s4_opportunity') && $signup['opportunity']) {
+    $node->field_opportunity[$node->language][0]['target_id'] = $signup['opportunity'];
   }
   ksort($start_date);
   ksort($end_date);

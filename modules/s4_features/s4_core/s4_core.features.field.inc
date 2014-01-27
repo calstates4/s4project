@@ -1093,6 +1093,98 @@ function s4_core_field_default_fields() {
     ),
   );
 
+  // Exported field: 'node-signup-field_opportunity'
+  $fields['node-signup-field_opportunity'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_opportunity',
+      'foreign keys' => array(
+        'node' => array(
+          'columns' => array(
+            'target_id' => 'nid',
+          ),
+          'table' => 'node',
+        ),
+      ),
+      'indexes' => array(
+        'target_id' => array(
+          0 => 'target_id',
+        ),
+      ),
+      'module' => 'entityreference',
+      'settings' => array(
+        'handler' => 'base',
+        'handler_settings' => array(
+          'behaviors' => array(
+            'views-select-list' => array(
+              'status' => 0,
+            ),
+          ),
+          'sort' => array(
+            'type' => 'none',
+          ),
+          'target_bundles' => array(),
+        ),
+        'target_type' => 's4_opportunity',
+      ),
+      'translatable' => '0',
+      'type' => 'entityreference',
+    ),
+    'field_instance' => array(
+      'bundle' => 'signup',
+      'default_value' => NULL,
+      'default_value_function' => '',
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'entityreference',
+          'settings' => array(
+            'link' => FALSE,
+          ),
+          'type' => 'entityreference_label',
+          'weight' => 21,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'display_label' => '',
+      'entity_type' => 'node',
+      'field_lock' => 0,
+      'field_name' => 'field_opportunity',
+      'label' => 'Opportunity',
+      'required' => 0,
+      'settings' => array(
+        'behaviors' => array(
+          'prepopulate' => array(
+            'status' => 0,
+          ),
+        ),
+        'custom_add_another' => '',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'entityreference',
+        'settings' => array(
+          'match_operator' => 'CONTAINS',
+          'path' => '',
+          'size' => '60',
+        ),
+        'type' => 'entityreference_autocomplete',
+        'weight' => '31',
+      ),
+    ),
+  );
+
   // Exported field: 'node-signup-field_signup_hours'
   $fields['node-signup-field_signup_hours'] = array(
     'field_config' => array(
@@ -3203,6 +3295,7 @@ function s4_core_field_default_fields() {
   t('Let us know the last date you will be working on this site. This can be an approximation, and if you are singing up as part of a course, this will be automatically the last day of the semester.');
   t('Location');
   t('Message when not allowing people to submit a site');
+  t('Opportunity');
   t('People can propose sites for this program');
   t('Program');
   t('Programs');
