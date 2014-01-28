@@ -1576,14 +1576,14 @@ function s4_sites_s4_frontpage_blocks() {
                                     'content' => t('View all available sites for your program.'),
                                     'href' => 'site-list'),
     );
-  $sites = db_query('select nid, title FROM node WHERE nid IN (SELECT entity_id FROM field_data_field_site_users WHERE field_site_users_uid = :uid) order by title', array(':uid' => $user->uid));
+  $sites = db_query('select nid, title FROM node WHERE nid IN (SELECT entity_id FROM field_data_field_site_users WHERE field_site_users_uid = :uid) order by title', array(':uid' => $user->uid))->fetchAllAssoc('nid');
   if($sites) {
     $site_list = array();
     foreach($sites as $site) {
       $site_list[] = l($site->title, 'node/'. $site->nid);
     }
     $blocks['site_list'] = array('subject' => t('Manage your sites'),
-                                      'content' => t('You are listed as the primary site coordinator for the following sites:') . '<br/>' . theme('item_list', array('items' => $site_list)));
+                                      'content' => t('You are listed as a site coordinator for the following sites:') . '<br/>' . theme('item_list', array('items' => $site_list)));
   }
   return $blocks;
 }
