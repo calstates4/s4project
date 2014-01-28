@@ -40,6 +40,6 @@ function s4_courses_load_demo_course() {
   $node->field_course_section[$node->language][0]['value'] = 1;
   $node->field_site_restrict[$node->language][0]['tid'] = $tid;
   $node->field_course_title[$node->language][0]['value'] = 'Testing S4';
-  dpm($node);
+  
   node_save($node);
 }
