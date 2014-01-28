@@ -11,13 +11,17 @@ function s4_courses_load_demo_course() {
   foreach($result as $row) {
      $faculty[] = array('uid' => $row->uid);
   }
+  
+  $node = new stdClass();
+  $node->type = 'course';
+  node_object_prepare($node);$node->uid = 1;
+  $node->language = LANGUAGE_NONE;
+  
   $term = db_query('SELECT nid FROM node WHERE type = :type LIMIT 1', array(':type' => 'course_term'));
   foreach($term as $t) {
     $term = $t->nid;
   }
-  $node = new stdClass();
-  $node->type = 'course';
-  node_object_prepare($node);
+  $node->field_term[$node->language][0]['nid'] = $term->nid;
 
   foreach(taxonomy_get_vocabularies() as $vocabulary) {
     if($vocabulary->machine_name == 'site_restrictions') {
@@ -28,8 +32,6 @@ function s4_courses_load_demo_course() {
       }
     }
   }
-  $node->uid = 1;
-  $node->language = LANGUAGE_NONE;
   $node->title = 'TEST 101 (1): Testing S4';
   $node->field_course_catalog_number[$node->language][0]['value'] = '101';
   $node->field_course_faculty[$node->language] = $faculty;
@@ -38,6 +40,6 @@ function s4_courses_load_demo_course() {
   $node->field_course_section[$node->language][0]['value'] = 1;
   $node->field_site_restrict[$node->language][0]['tid'] = $tid;
   $node->field_course_title[$node->language][0]['value'] = 'Testing S4';
-  $node->field_term[$node->language][0]['nid'] = $term->nid;
+  dpm($node);
   node_save($node);
 }
