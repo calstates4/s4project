@@ -1061,14 +1061,6 @@ function s4_opportunity_views_data_alter(&$data) {
       'handler' => 's4_opportunity_handler_s4_opportunity_operations_field',
     ),
   );
-
-  $data['s4_opportunity']['make_placement'] = array(
-    'field' => array(
-      'title' => t('Make placement'),
-      'help' => t('Shows a make placement button by the opportunity.'),
-      'handler' => 's4_opportunity_handler_s4_opportunity_make_placement_field',
-    ),
-  );
 }
 
 function s4_opportunity_node_presave($node) {
