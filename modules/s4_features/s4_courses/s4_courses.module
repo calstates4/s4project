@@ -96,14 +96,14 @@ function s4_courses_s4_signup($type, $nid) {
       $_SESSION['s4_signup_program'] = $program_terms;
       $sites = field_get_items('node', $course, 'field_sites');
       if (!$sites || !count($sites)) {
-        drupal_goto('site-list/all/'. implode('+', $program_terms));
+        drupal_goto('site-list/all/'. implode('+', array_keys($program_terms)));
       }
       else {
         $argument = array();
         foreach ($sites as $site) {
           $argument[] = $site['nid'];
         }
-        drupal_goto('site-list/' . implode('+', $argument) . '/'. implode('+', $program_terms));
+        drupal_goto('site-list/' . implode('+', $argument) . '/'. implode('+', array_keys($program_terms)));
       }
     }
     else {

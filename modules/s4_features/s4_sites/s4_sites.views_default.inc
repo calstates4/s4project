@@ -2369,7 +2369,7 @@ Location',
   $handler->display->display_options['arguments']['tid']['validate_options']['vocabularies'] = array(
     'site_restrictions' => 'site_restrictions',
   );
-  $handler->display->display_options['arguments']['tid']['validate_options']['type'] = 'convert';
+  $handler->display->display_options['arguments']['tid']['validate_options']['type'] = 'tids';
   $handler->display->display_options['arguments']['tid']['validate_options']['transform'] = TRUE;
   $handler->display->display_options['arguments']['tid']['break_phrase'] = TRUE;
   $handler->display->display_options['path'] = 'site-list';

@@ -300,6 +300,16 @@ function s4_opportunity_create_select_student($user, $course) {
 	$create = $_SESSION['s4_opportunity_create'];
 	$endpoints = array(array('entity_type' => 'user', 'entity_id' => $user->uid),
 												 array('entity_type' => 's4_opportunity', 'entity_id' => $create['opportunity']));
+	$opportunity = s4_opportunity_load($create['opportunity']);
+	$site = field_get_items('s4_opportunity', $opportunity, 'field_')
+	$placement = array(
+		'coordinator' => $create['site_staff'],
+		'site' => 0,
+		'course' => $course->nid,
+		'opportunity' => $create['opportunity'],
+
+		)
+
 	$relation = relation_create('opportunity_placement', $endpoints);
 	$relation->field_coordinator[LANGUAGE_NONE][0]['nid'] = $create['site_staff'];
 	$relation->field_course[LANGUAGE_NONE][0]['nid'] = $course->nid;

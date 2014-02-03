@@ -71,15 +71,17 @@ function s4_core_signup($type, $nid) {
       }
       else {
         $_SESSION['s4_signup_site'] = check_plain($nid);
+        $signup_programs = (is_array($_SESSION['s4_signup_program'])) ? array_keys($_SESSION['s4_signup_program']) : array($_SESSION['s4_signup_program']);
+
         if (variable_get('s4_core_collect_service_hours', TRUE) && !$_SESSION['s4_signup_hours']) {
            drupal_set_title(t('Service hours'));
            return drupal_get_form('s4_core_student_signup_hours');
         }
         if (($program_forms || $form_terms) && !$_SESSION['s4_core_viewed_downloadable_forms']) {
           $_SESSION['s4_core_viewed_downloadable_forms'] = TRUE;
-          $signup_programs = (is_array($_SESSION['s4_signup_program'])) ? array_keys($_SESSION['s4_signup_program']) : array($_SESSION['s4_signup_program']);
           drupal_goto('forms/download/' . implode('+', $signup_programs));
         }
+
         $form = field_get_items('node', $site, 'field_site_form');
         if ($form) {
           drupal_set_message(t('This site requires an additional form to be completed after you select your coordinator'));
@@ -87,6 +89,12 @@ function s4_core_signup($type, $nid) {
         drupal_set_message(t('Site @site selected.', array('@site' => $site->title)));
         if (module_exists('views')) {
           $site_coordinators = views_get_view_result('site_coordinators', 'block_1', $site->nid);
+          if(module_exists('s4_opportunity') && !$_SESSION['s4_signup_opportunity']) {
+            $opportunities = views_get_view_result('s4_opportunity_site_opportunities', 'page_2', $site->nid, implode('+', $signup_programs));
+            if(count($opportunities)) {
+              drupal_goto('site/'. $site->nid .'/opportunities/'. implode('+', $signup_programs));
+            }
+          }
           if (!count($site_coordinators)) {
             drupal_set_message(t('This site does not have any coordinators, so we\'re skipping this step.'));
             $site_skip_coordinator = TRUE;
@@ -98,7 +106,10 @@ function s4_core_signup($type, $nid) {
       }
     }
   }
-
+  if($type == 'opportunity') {
+    $_SESSION['s4_signup_opportunity'] = $nid;
+    drupal_goto('s4/signup/site/' . check_plain(arg(4)));
+  }
   if ($type == 'location') {
     $_SESSION['s4_signup_location'] = check_plain($nid);
     drupal_goto('s4/signup/site/' . check_plain(arg(4)));

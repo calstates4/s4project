@@ -54,7 +54,8 @@ function s4_sites_user_default_permissions() {
   $permissions['create file content'] = array(
     'name' => 'create file content',
     'roles' => array(
-      0 => 'staff',
+      0 => 'faculty',
+      1 => 'staff',
     ),
     'module' => 'node',
   );
