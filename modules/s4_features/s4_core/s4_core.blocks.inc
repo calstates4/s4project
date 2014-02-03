@@ -428,3 +428,18 @@ function s4_core_block_s4_signup_forms() {
              'attributes' => array('class' => array('btn', 'btn-primary', 'btn-large', 'btn-block')))));
 
 }
+
+function s4_core_block_s4_signup_opportunity() {
+  $node = menu_get_object();
+  if(!module_exists('s4_opportunity') || !$node || $node->type != 'signup') {
+    return;
+  }
+  $opportunity = field_get_items('node', $node, 'field_opportunity');
+  if(!$opportunity[0]['target_id']) {
+    return;
+  }
+  $opportunity = s4_opportunity_load($opportunity[0]['target_id']);
+  $controller = entity_get_controller('s4_opportunity');
+  $content = $controller->view(array($opportunity->s4_opportunity_id => $opportunity));
+  return array('subject' => t('Opportunity'), 'content' => drupal_render($content));
+}

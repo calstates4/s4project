@@ -40,6 +40,12 @@ function s4_core_strongarm() {
       'token' => array(
         'custom_settings' => FALSE,
       ),
+      'diff_standard' => array(
+        'custom_settings' => FALSE,
+      ),
+      'revision' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -53,7 +59,7 @@ function s4_core_strongarm() {
       'display' => array(
         's4_core_signup_submission' => array(
           'default' => array(
-            'weight' => '10',
+            'weight' => '11',
             'visible' => TRUE,
           ),
         ),
@@ -65,7 +71,7 @@ function s4_core_strongarm() {
         ),
         's4_core_assessment_submission' => array(
           'default' => array(
-            'weight' => '10',
+            'weight' => '4',
             'visible' => TRUE,
           ),
         ),

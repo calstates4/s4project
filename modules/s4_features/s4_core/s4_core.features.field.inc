@@ -910,7 +910,7 @@ function s4_core_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '16',
+          'weight' => '23',
         ),
         'full' => array(
           'label' => 'above',
@@ -980,7 +980,7 @@ function s4_core_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '17',
+          'weight' => '24',
         ),
         'full' => array(
           'label' => 'above',
@@ -1050,7 +1050,7 @@ function s4_core_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '19',
+          'weight' => '26',
         ),
         'full' => array(
           'label' => 'above',
@@ -1142,12 +1142,9 @@ function s4_core_field_default_fields() {
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'entityreference',
-          'settings' => array(
-            'link' => FALSE,
-          ),
-          'type' => 'entityreference_label',
-          'weight' => 21,
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '28',
         ),
         'teaser' => array(
           'label' => 'above',
@@ -1219,7 +1216,7 @@ function s4_core_field_default_fields() {
             'thousand_separator' => ' ',
           ),
           'type' => 'number_decimal',
-          'weight' => '5',
+          'weight' => '7',
         ),
         'full' => array(
           'label' => 'above',
@@ -1308,10 +1305,9 @@ function s4_core_field_default_fields() {
             'multiple_from' => '',
             'multiple_number' => '',
             'multiple_to' => '',
-            'show_repeat_rule' => 'show',
           ),
           'type' => 'date_default',
-          'weight' => '7',
+          'weight' => '9',
         ),
         'full' => array(
           'label' => 'above',
@@ -1559,10 +1555,9 @@ function s4_core_field_default_fields() {
             'multiple_from' => '',
             'multiple_number' => '',
             'multiple_to' => '',
-            'show_repeat_rule' => 'show',
           ),
           'type' => 'date_default',
-          'weight' => '6',
+          'weight' => '8',
         ),
         'full' => array(
           'label' => 'above',
@@ -1812,7 +1807,7 @@ function s4_core_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '20',
+          'weight' => '27',
         ),
         'full' => array(
           'label' => 'above',
@@ -1928,7 +1923,7 @@ function s4_core_field_default_fields() {
           'label' => 'above',
           'settings' => array(),
           'type' => 'hidden',
-          'weight' => '18',
+          'weight' => '25',
         ),
         'full' => array(
           'label' => 'above',

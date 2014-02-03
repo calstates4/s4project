@@ -89,10 +89,10 @@ function s4_core_signup($type, $nid) {
         drupal_set_message(t('Site @site selected.', array('@site' => $site->title)));
         if (module_exists('views')) {
           $site_coordinators = views_get_view_result('site_coordinators', 'block_1', $site->nid);
-          if(module_exists('s4_opportunity')) {
-            $opportunities = views_get_view_result('s4_opportunity_site_opportunities', 'page_1', $site->nid, implode('+', $signup_programs));
+          if(module_exists('s4_opportunity') && !$_SESSION['s4_signup_opportunity']) {
+            $opportunities = views_get_view_result('s4_opportunity_site_opportunities', 'page_2', $site->nid, implode('+', $signup_programs));
             if(count($opportunities)) {
-              drupal_goto('place/opportunities/'. $site->nid .'/'. implode('+', $signup_programs));
+              drupal_goto('site/'. $site->nid .'/opportunities/'. implode('+', $signup_programs));
             }
           }
           if (!count($site_coordinators)) {
@@ -106,7 +106,10 @@ function s4_core_signup($type, $nid) {
       }
     }
   }
-
+  if($type == 'opportunity') {
+    $_SESSION['s4_signup_opportunity'] = $nid;
+    drupal_goto('s4/signup/site/' . check_plain(arg(4)));
+  }
   if ($type == 'location') {
     $_SESSION['s4_signup_location'] = check_plain($nid);
     drupal_goto('s4/signup/site/' . check_plain(arg(4)));
