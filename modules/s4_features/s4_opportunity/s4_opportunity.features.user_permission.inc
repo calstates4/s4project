@@ -15,7 +15,6 @@ function s4_opportunity_user_default_permissions() {
     'name' => 'access active opportunities',
     'roles' => array(
       0 => 'anonymous user',
-      1 => 'authenticated user',
     ),
     'module' => 's4_opportunity',
   );
@@ -65,10 +64,7 @@ function s4_opportunity_user_default_permissions() {
   // Exported permission: start new opportunities
   $permissions['start new opportunities'] = array(
     'name' => 'start new opportunities',
-    'roles' => array(
-      0 => 'authenticated user',
-    ),
-    'module' => 's4_opportunity',
+    'roles' => array(),
   );
 
   return $permissions;

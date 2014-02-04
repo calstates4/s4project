@@ -785,7 +785,7 @@ function s4_opportunity_field_default_fields() {
     'field_instance' => array(
       'bundle' => 'internship',
       'deleted' => '0',
-      'description' => 'Select the time when this opportunity is available.',
+      'description' => 'Select the dates when this opportunity is visible and available for placements.',
       'display' => array(
         'default' => array(
           'label' => 'above',
@@ -805,7 +805,7 @@ function s4_opportunity_field_default_fields() {
       'entity_type' => 's4_opportunity',
       'field_lock' => 1,
       'field_name' => 'field_active_date',
-      'label' => 'Active date',
+      'label' => 'Published date',
       'required' => 0,
       's4_opportunity_risk' => 0,
       'settings' => array(
@@ -816,6 +816,7 @@ function s4_opportunity_field_default_fields() {
         'default_value_code2' => '+1 year',
         'user_register_form' => FALSE,
       ),
+      'title' => 'Published date',
       'widget' => array(
         'active' => 1,
         'module' => 'date',
@@ -1443,7 +1444,6 @@ function s4_opportunity_field_default_fields() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Active date');
   t('Approved');
   t('Approving department');
   t('Category');
@@ -1454,7 +1454,8 @@ function s4_opportunity_field_default_fields() {
   t('Enter the maximum number of placements that can be made at any given time.');
   t('Maximum placements');
   t('Program(s)');
-  t('Select the time when this opportunity is available.');
+  t('Published date');
+  t('Select the dates when this opportunity is visible and available for placements.');
   t('Select which programs can access this site.');
   t('Signature');
   t('Signup Form Results');

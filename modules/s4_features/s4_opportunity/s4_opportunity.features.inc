@@ -44,6 +44,11 @@ function s4_opportunity_default_s4_opportunity_type() {
     "data" : {
       "students_can_place" : 1,
       "programs" : { "135" : 0, "2" : 0, "1" : 0, "139" : 0, "138" : 0 },
+      "site_form" : 1,
+      "site_form_message" : {
+        "value" : "\\u003Cp\\u003E\\u003Cstrong\\u003EThis is the message that would appear on the top of the form screen\\u003C\\/strong\\u003E\\u003C\\/p\\u003E\\r\\n\\r\\n\\u003Cp\\u003EWe need some text here.\\u0026nbsp;Enthusiastically brand worldwide alignments and world-class interfaces. Proactively evisculate B2C e-tailers rather than holistic internal or \\u0026quot;organic\\u0026quot; sources. Holisticly communicate customized supply chains with corporate experiences.\\u0026nbsp;\\u003C\\/p\\u003E\\r\\n",
+        "format" : "filtered_html"
+      },
       "placement_form" : "810",
       "faculty_approve" : 1,
       "site_staff_approve" : 1,
