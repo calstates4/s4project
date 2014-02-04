@@ -64,16 +64,16 @@ function s4_opportunity_place_form($form, $form_state, $type, $user) {
 
 function s4_opportunity_place_form_submit($form, $form_state) {
 	watchdog('opportunities', 'Create relation for opportunity with user @user and opportunity @opportunity', array('@user' => $form_state['values']['user'], '@opportunity' => $form_state['values']['opportunities']));
-	$endpoints = array(array('entity_type' => 'user', 'entity_id' => $form_state['values']['user']),
-												 array('entity_type' => 's4_opportunity', 'entity_id' => $form_state['values']['opportunities']));
-	$relation = relation_create('opportunity_placement', $endpoints);
-	if($form_state['values']['site-staff']) {
-		$relation->field_coordinator[LANGUAGE_NONE][0]['nid'] = $form_state['values']['site-staff'];
-	}
-	if($form_state['values']['course'] && $form_state['values']['course'] != 'none') {
-		$relation->field_course[LANGUAGE_NONE][0]['nid'] = $form_state['values']['course'];
-	}
-	relation_save($relation);
+
+	$placement = array('user' => $form_state['values']['user'],
+	           'site' => $form_state['values']['site'],
+	           'course' => $form_state['values']['course'],
+	           'coordinator' => $form_state['values']['site-staff'],
+	           'program' => $form_state['values']['program'],
+	           'opportunity' => $form_state['values']['opportunities']
+	           );
+	dpm($placement); dpm($form_state['values']);
+	_s4_core_create_signup(0, $placement);
 
 	if($form_state['values']['modal']) {
     s4_core_modal_close(true);
@@ -301,14 +301,14 @@ function s4_opportunity_create_select_student($user, $course) {
 	$endpoints = array(array('entity_type' => 'user', 'entity_id' => $user->uid),
 												 array('entity_type' => 's4_opportunity', 'entity_id' => $create['opportunity']));
 	$opportunity = s4_opportunity_load($create['opportunity']);
-	$site = field_get_items('s4_opportunity', $opportunity, 'field_')
+	$site = field_get_items('s4_opportunity', $opportunity, 'field_site');
 	$placement = array(
 		'coordinator' => $create['site_staff'],
 		'site' => 0,
 		'course' => $course->nid,
 		'opportunity' => $create['opportunity'],
 
-		)
+		);
 
 	$relation = relation_create('opportunity_placement', $endpoints);
 	$relation->field_coordinator[LANGUAGE_NONE][0]['nid'] = $create['site_staff'];
