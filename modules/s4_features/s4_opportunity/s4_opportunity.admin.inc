@@ -253,7 +253,6 @@ function s4_opportunity_edit_form_validate(&$form, &$form_state) {
  * @todo remove hard-coded link
  */
 function s4_opportunity_edit_form_submit(&$form, &$form_state) {
-  
   $s4_opportunity = entity_ui_controller('s4_opportunity')->entityFormSubmitBuildEntity($form, $form_state);
   // Save the s4_opportunity and go back to the list of opportunities
   $s4_opportunity->status = $form_state['values']['status'];
@@ -275,7 +274,7 @@ function s4_opportunity_edit_form_submit(&$form, &$form_state) {
  * @todo Remove hard-coded path
  */
 function s4_opportunity_form_submit_delete(&$form, &$form_state) {
-  $form_state['redirect'] = 'admin/content/opportunities/s4_opportunity/' . $form_state['s4_opportunity']->s4_opportunity_id . '/delete';
+  $form_state['redirect'] = 'opportunity/' . $form_state['s4_opportunity']->s4_opportunity_id . '/delete';
 }
 
 
@@ -296,7 +295,7 @@ function s4_opportunity_delete_form($form, &$form_state, $s4_opportunity) {
   $form = confirm_form($form,
     t('Are you sure you want to delete %type %name?', array('%type' => $type->label, 
       '%name' => $s4_opportunity->name)),
-    'admin/content/opportunities/s4_opportunity',
+    'opportunities',
     '<p>' . t('This action cannot be undone.') . '</p>',
     t('Delete'),
     t('Cancel'),
@@ -317,7 +316,7 @@ function s4_opportunity_delete_form_submit($form, &$form_state) {
   drupal_set_message(t('%name has been deleted.', array('%name' => $s4_opportunity->name)));
   watchdog('s4_opportunity', 'Deleted opportunity %name.', array('%name' => $s4_opportunity->name));
 
-  $form_state['redirect'] = 'admin/content/opportunities';
+  $form_state['redirect'] = 'opportunities';
 }
 
 
