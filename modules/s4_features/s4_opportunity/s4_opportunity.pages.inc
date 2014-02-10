@@ -67,8 +67,8 @@ function s4_opportunity_place_form_submit($form, $form_state) {
 
 	$placement = array('user' => $form_state['values']['user'],
 	           'site' => $form_state['values']['site'],
-	           'course' => $form_state['values']['course'],
-	           'coordinator' => $form_state['values']['site-staff'],
+	           'course' => ($form_state['values']['course'] !== 'none') ? $form_state['values']['course'] : 0,
+	           'coordinator' => ($form_state['values']['site-staff']) ? $form_state['values']['site-staff'] : 0,
 	           'program' => $form_state['values']['program'],
 	           'opportunity' => $form_state['values']['opportunities']
 	           );

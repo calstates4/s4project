@@ -440,6 +440,14 @@ function s4_sites_node_access($node, $op,  $account) {
         }
       }
     }
+    if($op == 'update') {
+      $user = field_get_items('node', $node, 'field_site_users');
+      foreach($users as $site_user) {
+        if($site_user['uid'] == $user->uid) {
+          return NODE_ACCESS_ALLOW;
+        }
+      }
+    }
     return NODE_ACCESS_DENY;
   }
   if(is_object($node) && $node->type == 'coordinator' && $op == 'delete') {
