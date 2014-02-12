@@ -4,8 +4,6 @@
  * @file
  * S4 two column template
  */
-
-
 ?>
 <div class="s4-2col row <?php print $classes;?> clearfix">
 
@@ -59,7 +57,7 @@
           <div class="span3">
             <ul class="nav nav-stacked nav-details">
               <?php s4_even_odd(TRUE); ?>
-              <?php if($details_1): ?>
+              <?php if($details_1 && preg_match('/[a-zA-Z0-1]/', html_entity_decode($details_1))): ?>
                 <li class="<?php print s4_even_odd(); ?>">
                   <?php print $details_1; ?>
                 </li>

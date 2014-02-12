@@ -583,10 +583,12 @@ function s4_courses_bulk_signup_students_action($entity, $context) {
     return;
   }
   global $user;
+  $program = field_get_items('node', node_load($context['course']), 'field_site_restrict');
   $signup = array('user' => $entity->uid,
            'site' => $context['site'],
            'course' => $context['course'],
            'coordinator' => ($context['site-staff']) ? $context['site-staff'] : 0,
+           'program' => ($program) ? $program[0]['tid'] : 0,
            'hours' => $context['hours']
           );
   $signup = _s4_core_create_signup($user->uid, $signup);
