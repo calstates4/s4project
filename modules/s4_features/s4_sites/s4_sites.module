@@ -414,6 +414,9 @@ function s4_sites_node_view($node, $view_mode, $language) {
  */
 function s4_sites_node_access($node, $op,  $account) {
   if(is_object($node) && $node->type == 'site') {
+    if(user_access('moderate site information', $account)) {
+      return NODE_ACCESS_ALLOW;
+    }
     if($op == 'delete') {
       $count = db_select('field_data_field_site', 's')
                  ->condition('field_site_nid', $node->nid)

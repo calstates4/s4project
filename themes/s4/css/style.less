@@ -349,13 +349,17 @@ a:hover .nohover {
 	.block {
 		float: right;
 	}
+
+	label {
+	  position: absolute !important;
+		clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+		clip: rect(1px, 1px, 1px, 1px);
+		overflow: hidden;
+		height: 1px;
+	}
 	
 	.block.block-views {
 		margin-top: 0;
-	}
-	
-	label {
-		display: none;
 	}
 	
 	.control-group, input {
