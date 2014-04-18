@@ -182,7 +182,7 @@ function _s4_courses_reporting_course_summary($report_criteria) {
 				$query->fields('n', array('title'));
 				$site = $query->execute()
 									    ->fetchAssoc();
-				$site_discipline_rows[$signup->field_site_nid] = array($site['title'], $site['city'], 1, array());
+				$site_discipline_rows[$signup->field_site_nid] = array($site['title'], $site['city'], 1, array($course->field_course_subject_value => $course->field_course_subject_value));
 			}
 			else {
 				$site_discipline_rows[$signup->field_site_nid][2]++;
