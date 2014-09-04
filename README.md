@@ -1,4 +1,7 @@
-[![Build Status](https://secure.travis-ci.org/kevee/csu_student_signup.png?branch=master)](http://travis-ci.org/kevee/csu_student_signup)
+Warning
+=======
+
+This project is no longer being maintained. For more information on the newer, hosted version of S4, visit the [Cal State S4 website](http://calstates4.com).
 
 Introduction 
 ============
